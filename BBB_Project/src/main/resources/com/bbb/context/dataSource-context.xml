@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
 
 	<context:property-placeholder 
-		location="classpath:com/spring/properties/dataSource.properties"/>
+		location="classpath:com/bbb/properties/dataSource.properties"/>
 		
 	<bean id="dataSource"
 	      class="org.apache.commons.dbcp2.BasicDataSource"
@@ -21,8 +21,8 @@
 	<bean id="sqlSessionFactory"
 		  class="org.mybatis.spring.SqlSessionFactoryBean"
 		  p:dataSource-ref="dataSource"
-		  p:configLocation="classpath:com/spring/sqlConfig/sqlConfig.xml"
-		  p:mapperLocations="classpath:com/spring/sqlMaps/*-Mapper.xml"
+		  p:configLocation="classpath:com/bbb/sqlConfig/sqlConfig.xml"
+		  p:mapperLocations="classpath:com/bbb/sqlMaps/*-Mapper.xml"
 		  />
 	<bean id="sqlSession"
 	      class="org.mybatis.spring.SqlSessionTemplate"
