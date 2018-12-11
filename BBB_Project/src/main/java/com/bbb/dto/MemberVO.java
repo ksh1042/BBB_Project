@@ -1,4 +1,4 @@
-package com.bbb.test.dataSource;
+package com.bbb.dto;
 
 import java.util.Date;
 
