@@ -11,10 +11,10 @@ public interface MemberService {
 	
 	MemberVO getMemberById(String id)throws SQLException;
 	
-	void registerMember(MemberVO member)throws SQLException;
+	void register(MemberVO member)throws SQLException;
 	
-	void modifyMember(MemberVO member)throws SQLException;
+	void modify(MemberVO member)throws SQLException;
 	
-	void removeMember(String id)throws SQLException;
+	void remove(String id)throws SQLException;
 	
 }

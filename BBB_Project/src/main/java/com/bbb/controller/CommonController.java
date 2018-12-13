@@ -33,7 +33,7 @@ public class CommonController {
 	@RequestMapping(value = "/register/post", method = RequestMethod.POST)
 	public void register(MemberVO member,HttpServletResponse response,HttpServletRequest request) throws Exception {
 
-		service.registerMember(member);
+		service.register(member);
 		
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();

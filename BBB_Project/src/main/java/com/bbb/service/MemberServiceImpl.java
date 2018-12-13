@@ -26,19 +26,19 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void registerMember(MemberVO member) throws SQLException {
+	public void register(MemberVO member) throws SQLException {
 		memberDAO.insertMember(member);
 
 	}
 
 	@Override
-	public void modifyMember(MemberVO member) throws SQLException {
+	public void modify(MemberVO member) throws SQLException {
 		memberDAO.updateMember(member);
 
 	}
 
 	@Override
-	public void removeMember(String id) throws SQLException {
+	public void remove(String id) throws SQLException {
 		memberDAO.deleteMember(id);
 
 	}

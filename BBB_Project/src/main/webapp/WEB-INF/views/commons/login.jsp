@@ -8,13 +8,13 @@
     <title>LOGIN PAGE</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
-    <link href="<%=request.getContextPath()%>/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="<%=request.getContextPath()%>/resources/login/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- Font Awesome Icons -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
-    <link href="<%=request.getContextPath()%>/resources/dist/css/adminlte.min.css" rel="stylesheet" type="text/css" />
+    <link href="<%=request.getContextPath()%>/resources/login/dist/css/adminlte.min.css" rel="stylesheet" type="text/css" />
     <!-- iCheck -->
-    <link href="<%=request.getContextPath()%>/resources/plugins/iCheck/square/blue.css" rel="stylesheet" type="text/css" />
+    <link href="<%=request.getContextPath()%>/resources/login/plugins/iCheck/square/blue.css" rel="stylesheet" type="text/css" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,7 +24,7 @@
     <![endif]-->
   	<style>
   		#body_bng{
-  			background-image:url("<%=request.getContextPath()%>/resources/dist/img/main_background_img.jpg");
+  			background-image:url("<%=request.getContextPath()%>/resources/login/dist/img/main_background_img.jpg");
   			background-position:center;
   			background-repeat:no-repeat;
   			background-size:cover;
@@ -35,7 +35,7 @@
   <body id="body_bng" class="login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="<%=request.getContextPath()%>/resources/index2.html"><b>Zerock</b>Project</a>
+        <a href="<%=request.getContextPath()%>/resources/login/index2.html"><b>Project</b>Management</a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
@@ -61,17 +61,15 @@
       </div>                        
     </div><!-- /.col -->
     <div class="col-xs-4">
-      <button type="button" onclick="login_go();" 
-      	class="btn btn-primary btn-block btn-flat">Sign In(ajax)</button>
-      <button type="submit" 
-        class="btn btn-primary btn-block btn-flat">Sign In(html)</button>
+      <button type="button" onclick="login_go();" class="btn btn-primary btn-block btn-flat">Sign In(ajax)</button>
+      <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In(html)</button>
     </div><!-- /.col -->
   </div>
 </form>
 
 
         <a href="#">I forgot my password</a><br>
-        <a href="register" class="text-center">Register a new membership</a>
+        <a href="/register/post" class="text-center">Register a new membership</a>
 
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
@@ -83,8 +81,8 @@
 	</c:if>
 	<script
   src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-    <script src="<%=request.getContextPath() %>/resources/bootstrap/js/bootstrap.min.js"></script>	
-	<script>
+    <script src="<%=request.getContextPath() %>/resources/login/bootstrap/js/bootstrap.min.js"></script>	
+<%-- 	<script>
 		function login_go(){			
 			$.ajax({
 				url:"<%=request.getContextPath()%>/commons/login",
@@ -110,7 +108,7 @@
 				
 			});
 		};
-	</script>
+	</script> --%>
    
     
  </body>
