@@ -17,7 +17,7 @@
 	
 	<bean id="projectPartakeService" 
 		  class="com.bbb.service.ProjectPartakeServiceImpl"
-		  p:sqlSession-ref="projectPartakeDAO"
+		  p:projectPartakeDAO-ref="projectPartakeDAO"
 		  />
 	
 </beans>

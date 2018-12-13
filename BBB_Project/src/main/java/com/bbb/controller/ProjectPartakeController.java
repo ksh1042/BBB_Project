@@ -18,7 +18,7 @@ public class ProjectPartakeController {
 	@Autowired
 	private ProjectPartakeService service;
 	
-	@RequestMapping(value="/projectList", method=RequestMethod.GET)
+	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public void list(Model model) throws Exception{
 		List<ProjectPartakeVO> projectList = service.getProjectList();
 		model.addAttribute("projectlist", projectList);

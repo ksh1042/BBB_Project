@@ -9,11 +9,6 @@ import com.bbb.dao.ProjectPartakeDAO;
 import com.bbb.dto.ProjectPartakeVO;
 
 public class ProjectPartakeServiceImpl implements ProjectPartakeService {
-
-	private SqlSession session;
-	public void setSqlSession(SqlSession session) {
-		this.session = session;
-	}
 	
 	private ProjectPartakeDAO projectPartakeDAO;
 	public void setProjectPartakeDAO(ProjectPartakeDAO projectPartakeDAO){
