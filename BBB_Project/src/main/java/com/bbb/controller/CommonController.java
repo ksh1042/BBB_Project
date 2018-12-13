@@ -36,9 +36,9 @@ public class CommonController {
 		service.registerMember(member);
 		
 		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out=response.getWriter();
+		PrintWriter out = response.getWriter();
 		out.println("<script>");
-		out.println("alert('È¸¿ø°¡ÀÔÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.');location.href='<%=request.getContextPath%>/commons/loginForm';");
+		out.println("alert('íšŒì›ê°€ì…ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.');location.href='/index.jsp';");
 		out.println("</script>");
 
 	}
