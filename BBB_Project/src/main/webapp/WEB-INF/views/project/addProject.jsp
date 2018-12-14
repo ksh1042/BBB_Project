@@ -82,6 +82,9 @@
 			$.ajax({
 				
 			});
+			$(this).css({ borderColor : 'green' });
+			$('#pNameHelp').css({ color : 'green'; fontWeight : 'bold' });
+			$('#pNameHelp').html('사용 가능한 프로젝트명입니다.');
 		});
 		/* 버튼 */
 		$('#create_btn').on('click', function(e){
