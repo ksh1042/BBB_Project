@@ -9,6 +9,7 @@
 		<typeAlias type="java.lang.String" alias="str" />
 		<typeAlias type="com.bbb.dto.MemberVO" alias="member" />
 		<typeAlias type="com.bbb.dto.ProjectPartakeVO" alias="projectPartake"/>
+		<typeAlias type="com.bbb.dto.ProjectVO" alias="project"/>
 	</typeAliases>
 	
 	
