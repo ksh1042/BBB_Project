@@ -6,4 +6,5 @@ import com.bbb.dto.ProjectVO;
 
 public interface ProjectService {
 	public void addProject(ProjectVO project) throws SQLException;
+	public String readVerifyProjectName(String name) throws SQLException;
 }

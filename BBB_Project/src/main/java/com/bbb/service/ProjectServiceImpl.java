@@ -17,4 +17,9 @@ public class ProjectServiceImpl implements ProjectService {
 		dao.insertProject(project);
 	}
 
+	@Override
+	public String readVerifyProjectName(String name) throws SQLException {
+		return dao.verifyProjectName(name);
+	}
+
 }

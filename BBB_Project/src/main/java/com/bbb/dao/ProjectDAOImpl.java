@@ -15,8 +15,12 @@ public class ProjectDAOImpl implements ProjectDAO {
 	
 	@Override
 	public void insertProject(ProjectVO project) throws SQLException {
-		// TODO Auto-generated method stub
 		session.update("Project.insertProject", project);
+	}
+
+	@Override
+	public String verifyProjectName(String name) throws SQLException {
+		return session.selectOne("Project.verifyProjectName", name);
 	}
 
 }
