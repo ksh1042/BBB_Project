@@ -1,6 +1,7 @@
 package com.bbb.controller;
 
 import java.io.PrintWriter;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,6 +41,6 @@ public class CommonController {
 		out.println("<script>");
 		out.println("alert('회원가입이 완료되었습니다.');location.href='/index.jsp';");
 		out.println("</script>");
-
+		;
 	}
 }

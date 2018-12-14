@@ -23,6 +23,10 @@ public class ProjectPartakeController {
 		List<ProjectPartakeVO> projectList = service.getProjectList();
 		model.addAttribute("projectlist", projectList);
 	}
+	@RequestMapping(value="/addProject")
+	public void addProject() throws Exception {
+		
+	}
 	@RequestMapping(value="/partake")
 	public void partake() throws Exception {
 		
