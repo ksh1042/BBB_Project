@@ -28,13 +28,14 @@
 		<div class="form-group has-feedback col-md-9" style="margin">
 			<form action="" method="POST">			
 				<%-- <input type="hidden" name="creator" value="${ loginUser.name }"> --%>
-				<label>프로젝트 이름</label>
+				<label class="control-label">프로젝트 이름</label>
 				<input class="form-control " type="text" name="name" placeholder="프로젝트 이름">
+				<span class="help-block" id="pNameHelp"><i class=""></i></span>
 				<span class="glyphicon glyphicon-pencil form-control-feedback"></span><br/>
-				<label>프로젝트 설명</label>
+				<label class="control-label">프로젝트 설명</label>
 				<textarea class="form-control" style="resize:none;" rows="10" placeholder="프로젝트 설명"></textarea><br/>
-				<label>공개</label><input type="radio" name="visibility" checked="checked">
-				<label>비공개</label><input type="radio" name="visibility"><br/><br/>
+				<label class="control-label">공개</label><input type="radio" name="visibility" checked="checked">
+				<label class="control-label">비공개</label><input type="radio" name="visibility"><br/><br/>
 				
 				<!-- 프로젝트 기간  -->
 				<div class="box">
@@ -46,9 +47,9 @@
 				        </div>
 				    </div>
 				    <div class="box-body">
-				    	<label>시작일</label>
+				    	<label class="control-label">시작일</label>
 				    	<input class="form-control" type="date" name="startDate"> <br/>
-				    	<label>종료일</label>
+				    	<label class="control-label">종료일</label>
 				    	<input class="form-control" type="date" name="endDate"> <br/>
 				    </div>
 				    <div class="box-footer">
@@ -62,8 +63,27 @@
 		</div>
 			
 	</div>
+	
 	<!-- content.end -->
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script>
+		/* 유효성  */
+		$('input[name="name"]').on('blur', function(e){
+			$(this).css({ borderColor : 'red' });
+			var pName = $(this).val();
+			
+			if(pName == null || pName == ''){
+				$('#pNameHelp').css({ color : 'red' });
+				$('#pNameHelp').html('프로젝트명을 입력하지 않으셨습니다.');
+				$(this).focus();
+				return;
+			}
+			
+			$.ajax({
+				
+			});
+		});
+		/* 버튼 */
 		$('#create_btn').on('click', function(e){
 			
 		});
