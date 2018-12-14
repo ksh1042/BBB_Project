@@ -19,5 +19,13 @@
 		  class="com.bbb.service.ProjectPartakeServiceImpl"
 		  p:projectPartakeDAO-ref="projectPartakeDAO"
 		  />
+		  
+	<!-- Project -->
+	<bean id="projectDAO"
+		  class="com.bbb.dao.ProjectDAOImpl"
+		  p:sqlSession-ref="sqlSession"/>
+	<bean id="projectService"
+		  class="com.bbb.service.ProjectServiceImpl"
+		  p:projectDAO-ref="projectDAO"/>
 	
 </beans>
