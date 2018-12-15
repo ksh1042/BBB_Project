@@ -5,7 +5,7 @@
    
    <select id="selectMemberList" resultType="member">
       select * from tbl_member
-      order by regdate desc
+      order by indate desc
    </select>
    <select id="selectMemberById" resultType="member">
       select * from tbl_member

@@ -53,13 +53,13 @@
 									<td>${member.name }</td>
 									<td>${member.email }</td>
 									<td><fmt:formatDate var="now" value="<%=new Date()%>" pattern="yyyy-MM-dd" /> 
-									    <fmt:formatDate var="regDate" value="${member.inDate }" pattern="yyyy-MM-dd" /> <c:choose>
-											<c:when test="${now eq inDate }">
-												<fmt:formatDate value="${member.inDate }"
+									    <fmt:formatDate var="regDate" value="${member.indate }" pattern="yyyy-MM-dd" /> <c:choose>
+											<c:when test="${now eq indate }">
+												<fmt:formatDate value="${member.indate }"
 													pattern="HH:mm:ss" />
 											</c:when>
 											<c:otherwise>
-												<fmt:formatDate value="${member.inDate }"
+												<fmt:formatDate value="${member.indate }"
 													pattern="yyyy-MM-dd" />
 											</c:otherwise>
 										</c:choose></td>

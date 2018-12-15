@@ -10,14 +10,22 @@
 		p:memberDAO-ref="memberDAO" />
 	
 	<!-- 이병수  프로젝트 리스트 페이지-->	
+	
+	<bean id="projectDAO" 
+		  class="com.bbb.dao.ProjectDAOImpl"
+		  p:sqlSession-ref="sqlSession"
+		  />
+		  
 	<bean id="projectPartakeDAO" 
 		  class="com.bbb.dao.ProjectPartakeDAOImpl"
 		  p:sqlSession-ref="sqlSession"
 		  />
 	
-	<bean id="projectPartakeService" 
-		  class="com.bbb.service.ProjectPartakeServiceImpl"
+	<bean id="projectService" 
+		  class="com.bbb.service.ProjectServiceImpl"
+		  p:projectDAO-ref="projectDAO"
 		  p:projectPartakeDAO-ref="projectPartakeDAO"
 		  />
+	
 	
 </beans>
