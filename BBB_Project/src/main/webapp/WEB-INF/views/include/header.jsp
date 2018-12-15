@@ -264,11 +264,11 @@ desired effect
       </div>
 
       <!-- search form (Optional) -->
-      <form action="#" method="get" class="sidebar-form">
+      <form action="<%=request.getContextPath()%>/project/searchList" method="get" class="sidebar-form">
         <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <input type="text" id="keywordInput" name="keyword" class="form-control" placeholder="프로젝트명 검색">
           <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+              <button type="submit" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
               </button>
             </span>
         </div>

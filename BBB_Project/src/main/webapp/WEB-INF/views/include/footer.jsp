@@ -101,7 +101,8 @@
 <script src="<%=request.getContextPath()%>/resources/main/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<%=request.getContextPath()%>/resources/main/dist/js/adminlte.min.js"></script>
-
+<!-- criteria paging -->
+<script src="<%=request.getContextPath()%>/resources/main/dist/js/searchjs.js"></script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->

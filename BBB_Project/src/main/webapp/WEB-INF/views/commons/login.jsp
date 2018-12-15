@@ -82,7 +82,7 @@
 	<script
   src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
     <script src="<%=request.getContextPath() %>/resources/login/bootstrap/js/bootstrap.min.js"></script>	
-<%-- 	<script>
+<script>
 		function login_go(){			
 			$.ajax({
 				url:"<%=request.getContextPath()%>/commons/login",
@@ -108,7 +108,7 @@
 				
 			});
 		};
-	</script> --%>
+	</script>
    
     
  </body>

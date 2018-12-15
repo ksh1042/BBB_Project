@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="Project">
+
+   <select id="ProjectSearchList" resultType="project">
+   	select * from tbl_project
+   	where name like '%'||#{keyword}||'%'
+   	order by pjnum desc
+   </select>
+   
+   <select id="ProjectSearchCount" resultType="int">
+   	select count(*) from tbl_project
+   	where name like '%'||#{keyword}||'%'
+   </select>
+   
+</mapper>
+
+
+
+
+
+
+   

@@ -8,5 +8,11 @@
 
 	<bean id="memberService" class="com.bbb.service.MemberServiceImpl"
 		p:memberDAO-ref="memberDAO" />
+	
+	<bean id="projectDAO" class="com.bbb.dao.ProjectDAOImpl"
+		p:sqlSession-ref="sqlSession" />
+	
+	<bean id="projectService" class="com.bbb.service.ProjectServiceImpl"
+		p:projectDAO-ref="projectDAO" />
 		
 </beans>
