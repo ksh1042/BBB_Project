@@ -11,7 +11,6 @@
 		<config>src/main/resources/com/bbb/context/root-context.xml</config>
 		<config>src/main/resources/com/bbb/context/application-context.xml</config>
 		<config>src/main/resources/com/bbb/context/security-context.xml</config>
-		<config>src/main/resources/com/bbb/sqlMaps/ProjectPartake-Mapper.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
