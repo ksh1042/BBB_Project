@@ -34,8 +34,8 @@
 				<span class="glyphicon glyphicon-pencil form-control-feedback"></span><br/>
 				<label class="control-label">프로젝트 설명</label>
 				<textarea class="form-control" style="resize:none;" rows="10" placeholder="프로젝트 설명"></textarea><br/>
-				<label class="control-label">공개</label><input type="radio" name="visibility" checked="checked">
-				<label class="control-label">비공개</label><input type="radio" name="visibility"><br/><br/>
+				<label class="control-label">공개</label><input type="radio" name="visibility" value="0" checked="checked">
+				<label class="control-label">비공개</label><input type="radio" name="visibility" value="1"><br/><br/>
 				
 				<!-- 프로젝트 기간  -->
 				<div class="box">
@@ -48,9 +48,11 @@
 				    </div>
 				    <div class="box-body">
 				    	<label class="control-label">시작일</label>
-				    	<input class="form-control" type="date" name="startDate"> <br/>
-				    	<label class="control-label">종료일</label>
-				    	<input class="form-control" type="date" name="endDate"> <br/>
+				    	<input class="form-control" type="date" name="startDate">
+				    	<span class="help-block" id="startDateHelp"><i class=""></i></span> <br/>
+				    	<label class="control-label">마감일</label>
+				    	<input class="form-control" type="date" name="endDate">
+				    	<span class="help-block" id="endDateHelp"><i class=""></i></span> <br/>
 				    </div>
 				    <div class="box-footer">
 				     	tip) 프로젝트 시작일, 마감일을 입력해보세요.
@@ -78,14 +80,87 @@
 				$(this).focus();
 				return;
 			}
-			
+			/* 유효성 ajax */			
 			$.ajax({
-				
+				url : '<%=request.getContextPath()%>/verify/pName/'+pName,
+				type : 'GET',
+				success : function(data){
+					if(data=='OK'){
+						$('input[name="name"]').css({ borderColor : 'green' });
+						$('#pNameHelp').css({ color : 'green', fontWeight : 'bold' });
+						$('#pNameHelp').html('사용 가능한 프로젝트명입니다.');
+					}
+					if(data=='OVERLAPED'){
+						$('#pNameHelp').css({ color : 'red' });
+						$('#pNameHelp').html('이미 사용중인 프로젝트 이름입니다');
+						$('input[name="name"]').focus();
+					}
+				},
+				error : function(error){
+					alert('전송 중 에러가 발생했습니다. 자세한 사항은 관리자에게 문의 바랍니다.');
+				}
 			});
-			$(this).css({ borderColor : 'green' });
-			$('#pNameHelp').css({ color : 'green'; fontWeight : 'bold' });
-			$('#pNameHelp').html('사용 가능한 프로젝트명입니다.');
+			/* 유효성 ajax.end */
+			
 		});
+		
+		//	프로젝트 시작일, 마감일 유효성 
+		var startDate;
+		var endDate;
+		var currentDateNumber = new Date().toISOString().substr(0,10).replace('/\-/gi','');
+		alert(currentDateNumber);
+		$('input[name=startDate]').on('blur', function(e){
+			//	alert($('input[name=startDate]').val());
+			// alert(new Date().toISOString('yyyy-MM-dd').substr(0,10));
+			if( $(this).val() == null || $(this).val() == '' ){
+				$('span#startDate').css({ color : 'red', fontWeight : 'bold' });
+				$('span#startDate').html('프로젝트 시작일을 입력해주세요.');
+				$('input[name=startDate]').css({ borderColor : 'red'});
+				return;
+			}
+			startDate = $(this).val().split("-");
+			var startDateNumber = Number(startDate[0]+(startDate[1])+startDate[2]);
+			
+			
+			if( startDate <= new Date() ){
+				$(this).css({ borderColor : 'red'});
+				$('span#startDateHelp').css({ color : 'red', fontWeight : 'bold' });
+				$('span#startDateHelp').html('프로젝트 생성일보다 빠를 수 없습니다');
+				return;
+			}else{
+				$(this).css({ borderColor : 'green'});
+				$('span#startDateHelp').html('');
+			}
+		});
+		$('input[name=endDate]').on('blur', function(e){
+			if( startDate == null || startDate=='' ){
+				$(this).val('');
+				$('span#endDateHelp').css({ color : 'red', fontWeight : 'bold' });
+				$('span#endDateHelp').html('프로젝트 시작일을 먼저 입력해주세요');
+				$('input[name=startDate]').css({ borderColor : 'red'});
+				return;
+			}
+			if( $(this).val() == null || $(this).val() == '' ){
+				$('span#endDateHelp').css({ color : 'red', fontWeight : 'bold' });
+				$('span#endDateHelp').html('프로젝트 마감일을 입력해주세요.');
+				$('input[name=endDate]').css({ borderColor : 'red'});
+				return;
+			}
+			endDate = $(this).val().split('-');
+			endDate = new Date(endDate[0], endDate[1]-1, endDate[2]);
+			
+			if( endDate < startDate ){
+				$('span#endDateHelp').css({ color : 'red', fontWeight : 'bold' });
+				$('span#endDateHelp').html('프로젝트 마감일이 시작일보다 빠를 수 없습니다.');
+				$('input[name=endDate]').css({ borderColor : 'red'});
+				return;
+			} else {
+				$('input[name=endDate]').css({ borderColor : 'green'});
+				$('span#endDateHelp').html('');
+			}
+		});
+		//	프로젝트 시작일, 마감일 유효성.end
+		
 		/* 버튼 */
 		$('#create_btn').on('click', function(e){
 			
