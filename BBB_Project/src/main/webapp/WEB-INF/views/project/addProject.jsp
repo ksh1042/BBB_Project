@@ -31,10 +31,10 @@
 				<label class="control-label">프로젝트 이름</label>
 				<input class="form-control " type="text" name="name" placeholder="프로젝트 이름">
 				<span class="help-block" id="pNameHelp"><i class=""></i></span>
-				<span class="glyphicon glyphicon-pencil form-control-feedback"></span><br/>
+				<span class="glyphicon glyphicon-pencil form-control-feedback" id="pjNameIcon"></span><br/>
 				<label class="control-label">프로젝트 설명</label>
 				<textarea class="form-control" style="resize:none;" rows="10" placeholder="프로젝트 설명" name ="disc"></textarea><br/>
-				<label class="control-label">공개</label><input type="radio" name="visibility" value="0">
+				<label class="control-label">공개</label><input type="radio" name="visibility" value="0" checked>
 				<label class="control-label">비공개</label><input type="radio" name="visibility" value="1"><br/><br/>
 				
 				<!-- 프로젝트 기간  -->
@@ -98,11 +98,18 @@
 						$('input[name="name"]').css({ borderColor : 'green' });
 						$('#pNameHelp').css({ color : 'green', fontWeight : 'bold' });
 						$('#pNameHelp').html('사용 가능한 프로젝트명입니다.');
+						$('span#pjNameIcon').removeClass('glyphicon-ok');
+						$('span#pjNameIcon').removeClass('glyphicon-pencil');
+						$('span#pjNameIcon').addClass('glyphicon-ok');
+						
 						pNameFlag = true;
 					}
 					if(data=='OVERLAPED'){
 						$('#pNameHelp').css({ color : 'red' });
 						$('#pNameHelp').html('이미 사용중인 프로젝트 이름입니다');
+						$('span#pjNameIcon').removeClass('glyphicon-ok');
+						$('span#pjNameIcon').removeClass('glyphicon-pencil');
+						$('span#pjNameIcon').addClass('glyphicon-pencil');
 						pNameFlag = false;
 						$('input[name="name"]').focus();
 					}
@@ -116,10 +123,6 @@
 			verifyCheck();
 		});
 		// 프로젝트명 유효성.end
-		
-		$('textarea[name=disc]').on('blur', function(e){
-			if( $(this).val().length <  )
-		});
 		
 		//	프로젝트 시작일, 마감일 유효성 
 		var startDate;
