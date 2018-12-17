@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
-	</div>
-	  <!-- /.content-wrapper -->
-	</body>
-	<!-- Main Footer -->
+   </div>
+     <!-- /.content-wrapper -->
+   </body>
+   <!-- Main Footer -->
   <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
@@ -96,13 +96,14 @@
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
-<script src="<%=request.getContextPath()%>/resources/main/jquery/dist/jquery.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="<%=request.getContextPath()%>/resources/main/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
-<script src="<%=request.getContextPath()%>/resources/main/dist/js/adminlte.min.js"></script>
-<!-- criteria paging -->
-<script src="<%=request.getContextPath()%>/resources/main/dist/js/searchjs.js"></script>
+<script src="<%=request.getContextPath()%>/resources/dist/js/adminlte.min.js"></script>
+
+<script src="<%=request.getContextPath()%>/resources/dist/js/searchjs.js"></script>
+
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->

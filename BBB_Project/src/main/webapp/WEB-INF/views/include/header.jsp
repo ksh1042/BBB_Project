@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="decorator"
-	uri="http://www.opensymphony.com/sitemesh/decorator"%>
+   uri="http://www.opensymphony.com/sitemesh/decorator"%>
 <%
-	response.setHeader("Pragma", "No-cache");
-	response.setHeader("Cache-Control", "no-cache");
-	response.addHeader("Cache-Control", "no-store");
-	response.setDateHeader("Expires", 1L);
+   response.setHeader("Pragma", "No-cache");
+   response.setHeader("Cache-Control", "no-cache");
+   response.addHeader("Cache-Control", "no-store");
+   response.setDateHeader("Expires", 1L);
 %>
 <!DOCTYPE html>
 <!--
@@ -21,17 +21,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>Project Management System</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/main/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/main/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/main/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/main/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/main/dist/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/dist/css/skins/skin-blue.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,6 +43,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+        <decorator:head />
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -103,7 +104,7 @@ desired effect
                     <a href="#">
                       <div class="pull-left">
                         <!-- User Image -->
-                        <img src="<%=request.getContextPath()%>/resources/main/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                       </div>
                       <!-- Message title and timestamp -->
                       <h4>
@@ -254,7 +255,7 @@ desired effect
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<%=request.getContextPath()%>/resources/main/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>Alexander Pierce</p>
@@ -307,17 +308,17 @@ desired effect
         </li>
         
         <li>
-        	<a href="#">
-        		<i class="fa fa-link" ></i> 
-        		<span>예산관리</span>
-        	</a>
+           <a href="#">
+              <i class="fa fa-link" ></i> 
+              <span>예산관리</span>
+           </a>
         </li>
         
         <li>
-        	<a href="#">
-        		<i class="fa fa-link"></i> 
-        		<span>캘린더</span>
-        	</a>
+           <a href="#">
+              <i class="fa fa-link"></i> 
+              <span>캘린더</span>
+           </a>
         </li>
         
         <li class="treeview">
@@ -335,10 +336,10 @@ desired effect
         
         
          <li>
-        	<a href="#">
-        		<i class="fa fa-link"></i> 
-        		<span>ISSUE</span>
-        	</a>
+           <a href="#">
+              <i class="fa fa-link"></i> 
+              <span>ISSUE</span>
+           </a>
         </li>
         
       </ul>
