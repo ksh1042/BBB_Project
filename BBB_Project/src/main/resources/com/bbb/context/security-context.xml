@@ -30,6 +30,7 @@
 		<intercept-url pattern="/member/remove*" access="hasAuthority('ROLE_ADMIN')" />
 		<intercept-url pattern="/member/**" access="isAuthenticated()" />
 		<intercept-url pattern="/**" access="permitAll" />
+		<intercept-url pattern="/project/my*" access="permitAll" />
 
 
 		<form-login login-page="/commons/loginForm"
@@ -43,7 +44,7 @@
 
 	<beans:bean id="loginSuccessSecurityHandler"
 		class="com.bbb.security.LoginSuccessSecurityHandler"
-		p:defaultTargetUrl="/member/list" />
+		p:defaultTargetUrl="/project/myPartakeList" />
 	<beans:bean id="loginFailureSecurityHandler"
 		class="com.bbb.security.LoginFailureSecurityHandler"
 		p:defaultFailureUrl="/commons/loginForm" p:useForward="true" />

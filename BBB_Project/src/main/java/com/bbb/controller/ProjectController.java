@@ -16,11 +16,6 @@ import com.bbb.service.ProjectService;
 @RequestMapping("/project")
 public class ProjectController {
 	
-	private HttpSession session;
-	public void getSession(HttpSession session){
-		this.session = session;
-	}
-
 	
 	@Autowired
 	private ProjectService service;
@@ -30,10 +25,10 @@ public class ProjectController {
 	@RequestMapping(value="/myPartakeList", method=RequestMethod.GET)
 	public void partakeList(Model model, HttpServletRequest request) throws Exception{
 		
+		HttpSession session=request.getSession();
 		//로그인 유저의 아이디
-		/*MemberVO loginUser = (MemberVO)request.getSession().getAttribute("loginUser");*/
-			
-		model.addAttribute("myPartakeList",service.readMyProjectList("admin11"));
+		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
+		model.addAttribute("myPartakeList",service.readMyProjectList(loginUser.getId()));
 	}
 	
 	
