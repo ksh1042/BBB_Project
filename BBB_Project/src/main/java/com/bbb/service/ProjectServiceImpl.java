@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.bbb.controller.SearchCriteria;
 import com.bbb.dao.ProjectDAO;
+import com.bbb.dto.ProjectPartakeVO;
 import com.bbb.dto.ProjectVO;
 
 public class ProjectServiceImpl implements ProjectService{
@@ -24,6 +25,12 @@ public class ProjectServiceImpl implements ProjectService{
 	public int searchProjectCount(SearchCriteria cri) throws Exception {
 		int count = projectDAO.searchProjectCount(cri);
 		return count;
+	}
+
+	@Override
+	public void joinProject(ProjectPartakeVO takeVO) throws Exception {
+		projectDAO.searchProjectJoin(takeVO);
+		
 	}
 
 }

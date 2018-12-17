@@ -4,33 +4,38 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
 <div class="box">
 	<div class="box-header with-border">
 		<h3 class="box-title">LIST PAGING</h3>
 	</div>
 <div class="container">
+
       <table class="searchResult">
-    <c:if test="${empty searchPList }">
-		<tr>
-			<td style="text-align: center;">검색된 프로젝트가 없습니다.</td>
-		</tr>
-	</c:if>
-	<c:if test="${!empty searchPList }">
-		<c:forEach items="${searchPList }" var="ProjectVO">
-	        <tr class="trd">
-	          <td class="inner">${ProjectVO.name }</td>
-	          <td>${ProjectVO.creator }</td>
-	        </tr>
-	        <tr>
-	          <td>${ProjectVO.indate }</td>
-	          <td>인원수</td>
-	        </tr>
-	      <button type="button" value="신청"></button>
-	      <button type="button" value="취소"></button>
-	    </c:forEach>
-    </c:if>
+      	
+	    <c:if test="${empty searchPList }">
+			<tr>
+				<td style="text-align: center;">검색된 프로젝트가 없습니다.</td>
+			</tr>
+		</c:if>
+		<c:if test="${!empty searchPList }">
+			<c:forEach items="${searchPList }" var="ProjectVO">
+			<form>
+				<input type="hidden" name="pjNum" value="${ProjectVO.pjNum }" >
+		        <tr class="trd">
+		        	<td class="inner">${ProjectVO.name }</td>
+		        	<td>${ProjectVO.creator }</td>
+		      		<td rowspan="2"><input id="joinPro" type="button" value="신청" ></td>
+		        </tr>
+		        <tr>
+		        	<td>생성일자<fmt:formatDate value="${ProjectVO.indate }" pattern="yyyy-MM-dd"/></td>
+		        	<td>인원수</td>
+		        </tr>
+			</form>
+		    </c:forEach>
+	    </c:if>
       </table>
-    </div>
+</div>
     <div class="box-footer">
 		<div class="text-center">
 			<ul class="pagination link">
@@ -60,8 +65,42 @@
 
 	</div>
 </div>
+
 		<form id="jobForm">
 			  <input type='hidden' name="page" value="${pageMaker.cri.page}"/>
 			  <input type='hidden' name="perPageNum" value="${pageMaker.cri.perPageNum}"/>
 			  <input type='hidden' name="keyword" value="${cri.keyword}"/>
 		</form>
+		
+<script>
+	
+	var id = ${loginUser.id};
+	
+	$('#joinPro').on("click",function(e){
+		$.ajax({
+			type:"post",
+			url:"<%=request.getContextPath()%>/project/joinProject",
+			data:JSON.stringify({
+				"pjNum":pjNum,
+				"id":id
+		}),
+			headers:{
+				"Content-Type":"application/json",
+				"X-HTTP-Method-Override":"post"
+			},
+			success:function(data){
+				if(data="SUCCESS"){
+					alert('신청이 완료되었습니다.');
+				}		
+				
+				getPage("<%=request.getContextPath()%>/replies/"+bno+"/1");
+				
+			},
+			error:function(error){
+				alert("댓글등록에 실패했습니다.");
+			}
+		});
+	});
+	
+
+</script>

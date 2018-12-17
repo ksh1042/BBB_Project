@@ -15,6 +15,11 @@
    	where name like '%'||#{keyword}||'%'
    </select>
    
+   <update id="ProjectSearchJoin">
+   	insert into tbl_project(pjNum, id, assignyn)
+   	values(#{pjNum}, #{id}, 0)
+   </update>
+   
 </mapper>
 
 

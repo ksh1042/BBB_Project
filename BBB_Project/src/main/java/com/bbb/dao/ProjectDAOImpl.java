@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.bbb.controller.SearchCriteria;
+import com.bbb.dto.ProjectPartakeVO;
 import com.bbb.dto.ProjectVO;
 
 public class ProjectDAOImpl implements ProjectDAO{
@@ -31,6 +32,11 @@ public class ProjectDAOImpl implements ProjectDAO{
 	public int searchProjectCount(SearchCriteria cri) throws Exception {
 		int rowCount = session.selectOne("Project.ProjectSearchCount",cri);
 		return rowCount;
+	}
+
+	@Override
+	public void searchProjectJoin(ProjectPartakeVO takeVO) throws Exception {
+		session.insert("Project.ProjectSearchJoin", takeVO);
 	}
 
 	
