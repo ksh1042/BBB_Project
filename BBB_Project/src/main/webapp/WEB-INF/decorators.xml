@@ -4,9 +4,16 @@
 	<decorator name="main" page="decorator.jsp">		
 		<pattern>/**</pattern>
 	</decorator>
-	
-	<excludes>
+	<exclude>
 		<pattern>/commons/**</pattern>
-	</excludes>
+		<pattern>/postbox/**</pattern>
+	</exclude>
+	
+	<decoratr name="postbox" page="postboxDecorator.jsp">
+		<pattern>/postbox/**</pattern>
+	</decoratr>
+	<exclude>
+		<pattern>/**</pattern>
+	</exclude>
 	
 </decorators>
