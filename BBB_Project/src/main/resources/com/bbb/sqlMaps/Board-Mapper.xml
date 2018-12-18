@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Board">
+   
+	<update id="insertBoard">
+		insert into tbl_board(bnum,pjnum,title,content,writer,kind)
+		values(#{bnum},#{pjnum},#{title},#{content},#{writer},#{kind})
+	</update>
+	<update id="updateBoard">
+		update
+		tbl_board set
+		titlt=#{titlt}, content=#{content}
+		where bnum=#{bnum}
+	</update>
+	<update id="deleteBoard">
+		delete
+		from tbl_board
+		where bnum=#{bnum}
+	</update>
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and title like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'w'.toString()">
+				and writer like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'k'.toString()">
+				and kind like '%'||#{keyword}||'%'
+			</if>
+		</if>
+	</sql>
+	<select id="selectSearchBoardList" resultType="board">
+		select *
+		from tbl_board
+		where bnum is not null
+		<include refid="search" />
+		order by indate desc
+	</select>
+	<select id="selectSearchBoardListCount" resultType="int">
+		select count(*)
+		from tbl_board
+		where bnum is not null
+		<include refid="search"/>
+	</select>
+	<select id="selectBoardByBum" parameterType="int" resultType="board">
+		select *
+		from tbl_board
+		where bnum=#{bnum}
+	</select>
+	  
+
+</mapper>
+
+
+
+
+
+
+   

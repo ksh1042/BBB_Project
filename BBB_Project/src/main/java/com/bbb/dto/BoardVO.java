@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class BoardVO {
 	
-	// 보드 번호
+	// 게시판 번호
 	private int bNum;
 	
 	// 프로젝트 번호
@@ -22,10 +22,13 @@ public class BoardVO {
 	// 게시글 등록일
 	private Date indate;
 	
+	//게시글 수정일
 	private Date updateDate;
 	
+	//글 구분
 	private int kind;
 	
+	//조회수
 	private int count;
 	
 	public int getbNum() {
