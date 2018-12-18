@@ -20,12 +20,13 @@
 		</c:if>
 		<c:if test="${!empty searchPList }">
 			<c:forEach items="${searchPList }" var="ProjectVO">
-			<form>
+			<form id="form${ProjectVO.pjNum }">
+				<input type="hidden" name="id" value="${loginUser.id }" >
 				<input type="hidden" name="pjNum" value="${ProjectVO.pjNum }" >
 		        <tr class="trd">
 		        	<td class="inner">${ProjectVO.name }</td>
 		        	<td>${ProjectVO.creator }</td>
-		      		<td rowspan="2"><input id="joinPro" type="button" value="신청" ></td>
+		      		<td rowspan="2"><input class="join" id="${ProjectVO.pjNum }" type="button" value="신청" ></td>
 		        </tr>
 		        <tr>
 		        	<td>생성일자<fmt:formatDate value="${ProjectVO.indate }" pattern="yyyy-MM-dd"/></td>
@@ -72,18 +73,20 @@
 			  <input type='hidden' name="keyword" value="${cri.keyword}"/>
 		</form>
 		
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
 	
 	var id = ${loginUser.id};
-	
-	$('#joinPro').on("click",function(e){
+	$('.join').on("click",function(){
+		var form = $(this).attr('id');
+		
 		$.ajax({
 			type:"post",
 			url:"<%=request.getContextPath()%>/project/joinProject",
 			data:JSON.stringify({
-				"pjNum":pjNum,
-				"id":id
-		}),
+				"id":id,
+				"pjNum":form,
+			}),
 			headers:{
 				"Content-Type":"application/json",
 				"X-HTTP-Method-Override":"post"
@@ -92,8 +95,6 @@
 				if(data="SUCCESS"){
 					alert('신청이 완료되었습니다.');
 				}		
-				
-				getPage("<%=request.getContextPath()%>/replies/"+bno+"/1");
 				
 			},
 			error:function(error){

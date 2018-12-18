@@ -35,6 +35,7 @@ public class projectController {
 		
 		HttpSession session = request.getSession();
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
+		
 		int totalCount = service.searchProjectCount(cri);
 		pageMaker.setTotalCount(totalCount);
 		model.addAttribute("searchPList",searchPList);
@@ -45,7 +46,10 @@ public class projectController {
 	@RequestMapping(value="/joinProject", method=RequestMethod.POST)
 	public ResponseEntity<String> joinProject(@RequestBody ProjectPartakeVO takeVO){
 		
+		System.out.println("bbb");
 		ResponseEntity<String> entity = null;
+		
+		
 		
 		try {
 			service.joinProject(takeVO);
@@ -56,6 +60,17 @@ public class projectController {
 		}
 		return entity;
 	}
+	
+	//branch lee
+	// 로그인 후 나의 프로젝트 참여 목록을 보여준다.
+		@RequestMapping(value="/myPartakeList", method=RequestMethod.GET)
+		public void partakeList(Model model, HttpServletRequest request) throws Exception{
+			
+			HttpSession session=request.getSession();
+			//로그인 유저의 아이디
+			MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
+			model.addAttribute("myPartakeList",service.readMyProjectList(loginUser.getId()));
+		}
 }
 
 
