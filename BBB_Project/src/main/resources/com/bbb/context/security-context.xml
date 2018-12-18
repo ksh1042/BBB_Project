@@ -43,7 +43,7 @@
 
 	<beans:bean id="loginSuccessSecurityHandler"
 		class="com.bbb.security.LoginSuccessSecurityHandler"
-		p:defaultTargetUrl="/member/list" />
+		p:defaultTargetUrl="/main/mainForm" />
 	<beans:bean id="loginFailureSecurityHandler"
 		class="com.bbb.security.LoginFailureSecurityHandler"
 		p:defaultFailureUrl="/commons/loginForm" p:useForward="true" />
