@@ -6,7 +6,7 @@
 	<section class="content-header">
 		<h1><a href="#">내</a> 사서함</h1>
 		<ol class="breadcrumb">
-			<li>postbox</li>
+			<li><a href="<%= request.getContextPath() %>/postbox/search">postbox</a></li>
 			<li><a href="<%= request.getContextPath() %>/postbox/list"><b>list</b></a></li>
 		</ol>
 	</section>
@@ -61,6 +61,16 @@
 					</li>
 					<!-- input-sample.end -->
 				</ul>
+				
+				<div class="box-footer">
+					<ul class="pagination pagination-sm no-margin pull-right">
+						<li><a href="#">&lt;&lt;</a></li>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">&gt;&gt;</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</section>

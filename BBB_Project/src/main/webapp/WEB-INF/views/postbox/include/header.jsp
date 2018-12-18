@@ -58,7 +58,7 @@
 			<nav class="navbar navbar-static-top">
 				<div class="container">
 					<div class="navbar-header">
-						<a href="<%= request.getContextPath() %>/postbox/list" class="navbar-brand"><b>PMS</b>사서함</a>
+						<a href="<%= request.getContextPath() %>/postbox/list" class="navbar-brand"><b>PMS</b>&nbsp;사서함</a>
 						<button type="button" class="navbar-toggle collapsed"
 							data-toggle="collapse" data-target="#navbar-collapse">
 							<i class="fa fa-bars"></i>
