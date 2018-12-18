@@ -17,6 +17,11 @@ public class ProjectServiceImpl implements ProjectService{
 		this.projectDAO = projectDAO;
 	}
 	
+	private ProjectPartakeDAO projectPartakeDAO;
+	public void setProjectPartakeDAO(ProjectPartakeDAO projectPartakeDAO){
+		this.projectPartakeDAO = projectPartakeDAO;
+	}
+	
 	@Override
 	public List<ProjectVO> searchProjectList(SearchCriteria cri) throws SQLException {
 		List<ProjectVO> searchPList = projectDAO.searchProjectList(cri);
@@ -33,36 +38,36 @@ public class ProjectServiceImpl implements ProjectService{
 	public void joinProject(ProjectPartakeVO takeVO) throws Exception {
 		projectDAO.searchProjectJoin(takeVO);
 		
-	}
-	
-	private ProjectPartakeDAO projectPartakeDAO;
-	public void setProjectPartakeDAO(ProjectPartakeDAO projectPartakeDAO){
-		this.projectPartakeDAO = projectPartakeDAO;
-	}
-	
+	}	
 	
 	// 내가 참여하고있는 프로젝트 목록을 가져오기 위한 비교
-		@Override
-		public List<ProjectVO> readMyProjectList(String id) throws SQLException {
-			
-			// 내가 참여하고있는 프로젝트의 리스트를 pjNum으로 비교하기 위하여 사용
-			List<Integer> myPartakeList = projectPartakeDAO.selectProjectPartakeList(id);
-			// DB에 저장되어있는 모든 프로젝트 목록
-			List<ProjectVO> projectList = projectDAO.selectProjectList();
-			// pjNum으로 비교한 값을 저장하기 위한 배열
-			List<ProjectVO> myProjectList = new ArrayList<ProjectVO>();
-			
-			for(ProjectVO project : projectList){
-				for(int myPartake : myPartakeList){
-					if(project.getPjNum() == myPartake){
-						myProjectList.add(project);
-					}
+	@Override
+	public List<ProjectVO> readMyProjectList(String id) throws SQLException {
+		
+		// 내가 참여하고있는 프로젝트의 리스트를 pjNum으로 비교하기 위하여 사용
+		List<Integer> myPartakeList = projectPartakeDAO.selectProjectPartakeList(id);
+		// DB에 저장되어있는 모든 프로젝트 목록
+		List<ProjectVO> projectList = projectDAO.selectProjectList();
+		// pjNum으로 비교한 값을 저장하기 위한 배열
+		List<ProjectVO> myProjectList = new ArrayList<ProjectVO>();
+		
+		for(ProjectVO project : projectList){
+			for(int myPartake : myPartakeList){
+				if(project.getPjNum() == myPartake){
+					myProjectList.add(project);
 				}
 			}
-			
-			return myProjectList;
-			
 		}
 		
+		return myProjectList;
+		
+	}
+
+	@Override
+	public List<ProjectPartakeVO> getBindingProject(String id) throws SQLException {
+		List<ProjectPartakeVO> bindList = projectPartakeDAO.selectBindingProject(id);
+		return bindList;
+	}
+	
 
 }

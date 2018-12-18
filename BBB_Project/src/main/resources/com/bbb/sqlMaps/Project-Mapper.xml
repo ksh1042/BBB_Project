@@ -20,9 +20,15 @@
 	values(#{pjNum}, #{id}, 0)
 	</update>
    
-	<select resultType="project" id="selectProjectList"> select * from tbl_project order by indate desc </select>
+	<select resultType="project" id="selectProjectList"> 
+	select * from tbl_project order by indate desc 
+	</select>
 
-	<select resultType="project" id="selectProjectByPjNum"> select pjnum from tbl_project </select>	
+	<select resultType="project" id="selectProjectByPjNum"> 
+	select pjnum from tbl_project 
+	</select>	
+	
+	
 </mapper>
 
 

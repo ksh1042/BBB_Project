@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.bbb.dto.ProjectPartakeVO;
+
 public class ProjectPartakeDAOImpl implements ProjectPartakeDAO {
 
 	
@@ -16,6 +18,11 @@ public class ProjectPartakeDAOImpl implements ProjectPartakeDAO {
 	@Override
 	public List<Integer> selectProjectPartakeList(String id) throws SQLException {
 		return session.selectList("ProjectPartake.selectProjectPartakeList", id);
+	}
+
+	@Override
+	public List<ProjectPartakeVO> selectBindingProject(String id) throws SQLException {
+		return session.selectList("ProjectPartake.selectBindingProject",id);
 	}
 
 }

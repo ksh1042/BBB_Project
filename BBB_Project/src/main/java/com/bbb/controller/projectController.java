@@ -1,5 +1,6 @@
 package com.bbb.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,18 +30,23 @@ public class projectController {
 	
 	@RequestMapping(value="/searchList", method=RequestMethod.GET)
 	public void searchList(@ModelAttribute("cri")SearchCriteria cri,Model model,HttpServletRequest request) throws Exception{
-		List<ProjectVO> searchPList = service.searchProjectList( cri);
+		List<ProjectVO> searchPList = service.searchProjectList(cri);
+		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		
 		HttpSession session = request.getSession();
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
+		String id = loginUser.getId();
+		
+		List<ProjectPartakeVO> bindList = service.getBindingProject(id);
 		
 		int totalCount = service.searchProjectCount(cri);
 		pageMaker.setTotalCount(totalCount);
 		model.addAttribute("searchPList",searchPList);
 		model.addAttribute("pageMaker",pageMaker);
 		model.addAttribute("loginUser",loginUser);
+		model.addAttribute("bindList",bindList);
 	}
 	
 	@RequestMapping(value="/joinProject", method=RequestMethod.POST)
@@ -48,7 +54,7 @@ public class projectController {
 		
 		System.out.println("bbb");
 		ResponseEntity<String> entity = null;
-		
+		String id = takeVO.getId();
 		
 		
 		try {
