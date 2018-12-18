@@ -91,9 +91,16 @@ desired effect
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
             <!-- Menu toggle button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="#" onclick="postbox_go();"><!-- class="dropdown-toggle" data-toggle="dropdown" -->
+            <script>
+	            function postbox_go(){
+	            	var url="/postbox/list";
+	            	window.open( url, "_blank_1",
+	            		"toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=1270, height=800, top=300, left=300, ");	            	
+	            }
+            </script>
               <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">4</span>
+              <span class="label label-success"></span>
             </a>
             <ul class="dropdown-menu">
               <li class="header">You have 4 messages</li>
