@@ -96,7 +96,7 @@ desired effect
 	            function postbox_go(){
 	            	var url="/postbox/list";
 	            	window.open( url, "_blank_1",
-	            		"toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=1270, height=800, top=300, left=300, ");	            	
+	            		"toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=900, height=800, top=300, left=300, ");	            	
 	            }
             </script>
               <i class="fa fa-envelope-o"></i>
