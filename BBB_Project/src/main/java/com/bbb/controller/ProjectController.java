@@ -32,11 +32,5 @@ public class ProjectController {
 	}
 	
 	
-	@RequestMapping(value="/partake")
-	public void partake() throws Exception {
-		
-	}
-	
-	
 	
 }

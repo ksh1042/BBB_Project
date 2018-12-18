@@ -9,4 +9,9 @@
 		order by indate desc
 	</select>
 	
+	<select id="selectProjectByPjNum" resultType="project">
+		select pjnum
+		from tbl_project
+	</select>
+	
 </mapper>
