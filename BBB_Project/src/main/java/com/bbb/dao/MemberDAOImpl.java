@@ -3,8 +3,11 @@ package com.bbb.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
+import com.bbb.controller.Criteria;
+import com.bbb.controller.SearchCriteria;
 import com.bbb.dto.MemberVO;
 
 public class MemberDAOImpl implements MemberDAO {
@@ -16,7 +19,10 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public List<MemberVO> selectMemberList() throws SQLException {
+	public List<MemberVO> selectMemberList(Criteria cri) throws SQLException {
+		int offset=cri.getPageStart();
+		int limit= cri.getPerPageNum();
+		RowBounds rowBounds=new RowBounds(offset, limit);
 		List<MemberVO> memberList=session.selectList("Member.selectMemberList",null);
 		
 		return memberList;
@@ -44,6 +50,12 @@ public class MemberDAOImpl implements MemberDAO {
 	public void deleteMember(String id) throws SQLException {
 		session.update("Member.deleteMember",id);
 
+	}
+
+	@Override
+	public int selectSearchMemberListCount(Criteria cri) throws SQLException {
+		int count = session.selectOne("Member.selectSearchMemberListCount",(SearchCriteria)cri);
+		return 0;
 	}
 
 }
