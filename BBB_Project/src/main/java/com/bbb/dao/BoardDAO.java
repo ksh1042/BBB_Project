@@ -12,11 +12,11 @@ public interface BoardDAO {
 	
 	void updateBoard(BoardVO board)throws SQLException;
 	
-	void deleteBoard(int bnum)throws SQLException;
+	void deleteBoard(int bNum)throws SQLException;
 	
 	List<BoardVO> selectSearchBoardList(Criteria cri)throws SQLException;
 	
 	int selectSearchBoardListCount(Criteria cri)throws SQLException;
 	
-	BoardVO selectBoardByBum(int bnum) throws SQLException;
+	BoardVO selectBoardByBum(int bNum) throws SQLException;
 }

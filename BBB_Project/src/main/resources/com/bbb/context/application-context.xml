@@ -16,9 +16,18 @@
 	
 	<bean id="boardService"
 		class="com.bbb.service.BoardServiceImpl"
-		p:boardDAO-ref="boardDAO" />
+		p:boardDAO-ref="boardDAO" 
+	/>
+	<bean id="noticeDAO"
+		class="com.bbb.dao.NoticeDAOImpl"
+		p:session-ref="sqlSession"
+	/>
+	<bean id="noticeService"
+		class="com.bbb.service.NoticeServiceImpl"
+		p:noticeDAO-ref="noticeDAO"
+	/>
 	
-	<bean id="boardAttachDAO"
+	<!-- <bean id="boardAttachDAO"
 		class="com.bbb.dao.BoardAttachDAOImpl"
 		p:session-ref="sqlSession"
 	/>
@@ -27,5 +36,12 @@
 		class="com.bbb.service.BoardAttachServiceImpl"
 		p:boardAttachDAO-ref="boardAttachDAO" />
 	
+	<bean id="boardReviewDAO"
+		class="com.bbb.dao.BoardReviewDAOImpl"
+		p:session-ref="sqlSession"
+	/>
+	<bean id="boardReviewService"
+		class="com.bbb.service.BoardReviewServiceImpl"
+		p:boardAttachDAO-ref="BoardReviewDAO" /> -->
 		
 </beans>

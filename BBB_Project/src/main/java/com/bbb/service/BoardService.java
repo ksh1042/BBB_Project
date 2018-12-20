@@ -10,7 +10,7 @@ public interface BoardService {
 	
 	List<BoardVO> getSearchBoardList(Criteria cri) throws SQLException;
 	
-	BoardVO getBoardByBnum(int bnum) throws SQLException;
+	BoardVO getBoardByBnum(int bNum) throws SQLException;
 	//조회
 	
 	void register(BoardVO board) throws SQLException;
@@ -19,6 +19,6 @@ public interface BoardService {
 	void modify(BoardVO board) throws SQLException;
 	//수정
 	
-	void remove(int bnum) throws SQLException;
+	void remove(int bNum) throws SQLException;
 	//삭제
 }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Notice">
+   
+   <update id="insertNotice">
+   	insert into tbl_notice(nNum,title,content,indate,expiredate)
+   	value(#{nNum},#{titl},#{content},#{indate},#{expireDate})
+   </update>
+   <update id="updateNotice">
+   	update
+   	tbl_notice set 
+   	titlt=#{title},content=#{content},expiredate=#{expireDate}
+   	where nNum=#{nNum}
+   </update>
+   <update id="deleteNotice">
+   	delete
+   	from tbl_notice
+   	where nNum=#{nNum}
+   </update>
+   
+   <select id="selectNoticeByNnum" resultType="Notice">
+   	select *
+   	from tbl_notice
+   	where nNum=#{nNum}
+   </select>
+   <select id="selectNoticeList" resultType="Notice">
+	   select *
+	   from tbl_notice
+   </select>
+   <select id="selectNoticeListCount" resultType="int">
+   		select *
+   		from tbl_notice
+   </select>
+
+</mapper>
+
+
+
+
+
+
+   

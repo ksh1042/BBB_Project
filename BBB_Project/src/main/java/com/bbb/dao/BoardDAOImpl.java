@@ -30,8 +30,8 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public void deleteBoard(int bnum) throws SQLException {
-		session.update("Board.deleteBoard",bnum);
+	public void deleteBoard(int bNum) throws SQLException {
+		session.update("Board.deleteBoard",bNum);
 
 	}
 
@@ -51,8 +51,8 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public BoardVO selectBoardByBum(int bnum) throws SQLException {
-		BoardVO board = session.selectOne("Board.selectBoardByBum", bnum);
+	public BoardVO selectBoardByBum(int bNum) throws SQLException {
+		BoardVO board = session.selectOne("Board.selectBoardByBum", bNum);
 		return board;
 	}
 

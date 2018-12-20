@@ -22,8 +22,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardVO getBoardByBnum(int bnum) throws SQLException {
-		BoardVO board = boardDAO.selectBoardByBum(bnum);
+	public BoardVO getBoardByBnum(int bNum) throws SQLException {
+		BoardVO board = boardDAO.selectBoardByBum(bNum);
 		return board;
 	}
 
@@ -38,8 +38,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void remove(int bnum) throws SQLException {
-		boardDAO.deleteBoard(bnum);
+	public void remove(int bNum) throws SQLException {
+		boardDAO.deleteBoard(bNum);
 	}
 
 }

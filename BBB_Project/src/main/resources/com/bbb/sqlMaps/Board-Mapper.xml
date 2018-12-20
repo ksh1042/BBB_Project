@@ -6,18 +6,18 @@
    
 	<update id="insertBoard">
 		insert into tbl_board(bnum,pjnum,title,content,writer,kind)
-		values(#{bnum},#{pjnum},#{title},#{content},#{writer},#{kind})
+		values(#{bNum},#{pjNum},#{title},#{content},#{writer},#{kind})
 	</update>
 	<update id="updateBoard">
 		update
 		tbl_board set
 		titlt=#{titlt}, content=#{content}
-		where bnum=#{bnum}
+		where bnum=#{bNum}
 	</update>
 	<update id="deleteBoard">
 		delete
 		from tbl_board
-		where bnum=#{bnum}
+		where bnum=#{bNum}
 	</update>
 	
 	<sql id="search">
@@ -27,9 +27,6 @@
 			</if>
 			<if test="searchType == 'w'.toString()">
 				and writer like '%'||#{keyword}||'%'
-			</if>
-			<if test="searchType == 'k'.toString()">
-				and kind like '%'||#{keyword}||'%'
 			</if>
 		</if>
 	</sql>
@@ -46,10 +43,10 @@
 		where bnum is not null
 		<include refid="search"/>
 	</select>
-	<select id="selectBoardByBum" parameterType="int" resultType="board">
+	<select id="selectBoardByBum" resultType="board">
 		select *
 		from tbl_board
-		where bnum=#{bnum}
+		where bnum=#{bNum}
 	</select>
 	  
 
