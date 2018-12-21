@@ -9,6 +9,13 @@ public class ProjectPartakeVO {
 		private Date lastDate;
 		private int assignYn;
 		
+		public ProjectPartakeVO(){}
+		public ProjectPartakeVO(String id, int pjNum, int assignYn) {
+			super();
+			this.id = id;
+			this.pjNum = pjNum;
+			this.assignYn = assignYn;
+		}
 		public String getId() {
 			return id;
 		}

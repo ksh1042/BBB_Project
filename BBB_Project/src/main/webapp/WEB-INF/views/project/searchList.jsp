@@ -27,23 +27,18 @@
 			        	<td class="inner">${ProjectVO.name }</td>
 			        	<td>${ProjectVO.creator }</td>
 						<c:forEach items="${bindList }" var="PartakeVO">
-							<c:choose>
-					        	<c:when test="${PartakeVO.assignYn eq 1}">
-					        		<c:if test="${PartakeVO.pjNum eq ProjectVO.pjNum }">
-					      				<td rowspan="2"><input class="join" id="${ProjectVO.pjNum }" type="button" value="참여중" ></td>
+				        		<c:if test="${PartakeVO.pjNum eq ProjectVO.pjNum }">
+						        	<c:if test="${PartakeVO.assignYn eq 1}">
+					      				<td rowspan="2"><input class="join" id="${ProjectVO.pjNum }" type="button" value="참여중" disabled="disabled"></td>
 					      			</c:if>
-					      		</c:when>
-					      		<c:when test="${PartakeVO.assignYn eq 0}">
-					      			<c:if test="${PartakeVO.pjNum eq ProjectVO.pjNum }">
-					      				<td rowspan="2"><input class="join" id="${ProjectVO.pjNum }" type="button" value="신청중" ></td>
+						        	<c:if test="${PartakeVO.assignYn eq 0}">
+					      				<td rowspan="2"><input class="join" id="${ProjectVO.pjNum }" type="button" value="신청중" disabled="disabled"></td>
 					      			</c:if>
-					      		</c:when>
-					      		<c:otherwise>
-					      		<c:if test="${PartakeVO.pjNum ne ProjectVO.pjNum }">
-									<td rowspan="2"><input class="join" id="${ProjectVO.pjNum }" type="button" value="신청" ></td>
-									</c:if>
-						      	</c:otherwise> 
-						    </c:choose>
+					      			<c:if test="${PartakeVO.assignYn eq 2 }">
+				      					<td rowspan="2"><input class="join" id="${ProjectVO.pjNum }" type="button" value="신청하기" ></td>
+				      				</c:if>
+					      		</c:if>
+					      		
 						</c:forEach>
 			        </tr>
 			        <tr>
@@ -114,11 +109,10 @@
 					alert('신청이 완료되었습니다.');
 				}
 				
-				
-				
+				location.reload();
 			},
 			error:function(error){
-				alert("신청에 실패했습니다. 잠시후 다시 시도해주세요.");
+				alert("신청이실패했습니다. 잠시후 다시 시도해주세요.");
 			}
 		});
 	});

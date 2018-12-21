@@ -68,6 +68,8 @@ public class ProjectServiceImpl implements ProjectService{
 		List<ProjectPartakeVO> bindList = projectPartakeDAO.selectBindingProject(id);
 		return bindList;
 	}
+
+	
 	
 
 }

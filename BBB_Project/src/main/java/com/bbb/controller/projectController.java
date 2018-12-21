@@ -1,6 +1,7 @@
 package com.bbb.controller;
 
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +31,6 @@ public class projectController {
 	
 	@RequestMapping(value="/searchList", method=RequestMethod.GET)
 	public void searchList(@ModelAttribute("cri")SearchCriteria cri,Model model,HttpServletRequest request) throws Exception{
-		List<ProjectVO> searchPList = service.searchProjectList(cri);
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
@@ -39,7 +39,26 @@ public class projectController {
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
 		String id = loginUser.getId();
 		
-		List<ProjectPartakeVO> bindList = service.getBindingProject(id);
+		List<ProjectVO> searchPList = service.searchProjectList(cri);
+		List<ProjectPartakeVO> sampleList = service.getBindingProject(id);
+		List<ProjectPartakeVO> bindList = new ArrayList<ProjectPartakeVO>();
+		boolean copy = false;
+		
+		
+		for(ProjectVO project : searchPList){
+			copy = false;
+			for(ProjectPartakeVO partake : sampleList){
+				if(project.getPjNum() == partake.getPjNum()){
+					bindList.add(partake);
+					copy =true;
+				}
+			}
+			if(!copy){
+				bindList.add(new ProjectPartakeVO(id,project.getPjNum(),2));
+			}
+		}
+		
+		
 		
 		int totalCount = service.searchProjectCount(cri);
 		pageMaker.setTotalCount(totalCount);
@@ -47,36 +66,44 @@ public class projectController {
 		model.addAttribute("pageMaker",pageMaker);
 		model.addAttribute("loginUser",loginUser);
 		model.addAttribute("bindList",bindList);
+		
 	}
 	
 	@RequestMapping(value="/joinProject", method=RequestMethod.POST)
 	public ResponseEntity<String> joinProject(@RequestBody ProjectPartakeVO takeVO){
 		
-		System.out.println("bbb");
 		ResponseEntity<String> entity = null;
 		String id = takeVO.getId();
-		
-		
-		try {
-			service.joinProject(takeVO);
-			entity=new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity=new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+					
+			try {
+				service.joinProject(takeVO);
+				entity=new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+				entity=new ResponseEntity<String>(e1.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+			
 		return entity;
 	}
 	
 	//branch lee
 	// 로그인 후 나의 프로젝트 참여 목록을 보여준다.
-		@RequestMapping(value="/myPartakeList", method=RequestMethod.GET)
-		public void partakeList(Model model, HttpServletRequest request) throws Exception{
-			
-			HttpSession session=request.getSession();
-			//로그인 유저의 아이디
-			MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
-			model.addAttribute("myPartakeList",service.readMyProjectList(loginUser.getId()));
-		}
+	@RequestMapping(value="/myPartakeList", method=RequestMethod.GET)
+	public void partakeList(Model model, HttpServletRequest request) throws Exception{
+		
+		HttpSession session=request.getSession();
+		//로그인 유저의 아이디
+		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
+		model.addAttribute("myPartakeList",service.readMyProjectList(loginUser.getId()));
+	}
+	
+	//프로젝트 계획서
+	@RequestMapping(value="", method=RequestMethod.GET)
+	public void projectPlan() throws Exception{
+		
+	}
+		
+		
 }
 
 

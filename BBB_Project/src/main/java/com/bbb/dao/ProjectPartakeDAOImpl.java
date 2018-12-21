@@ -25,4 +25,5 @@ public class ProjectPartakeDAOImpl implements ProjectPartakeDAO {
 		return session.selectList("ProjectPartake.selectBindingProject",id);
 	}
 
+
 }

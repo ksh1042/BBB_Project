@@ -12,7 +12,7 @@
 	<select id="selectBindingProject" resultType="projectPartake">
 		select *
 		from tbl_project_partake
-		where id=#{id} and assignyn=0 or assignyn=1
+		where id=#{id}
 	</select>
 	
 </mapper>
