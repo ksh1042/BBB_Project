@@ -4,7 +4,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bbb.controller.Criteria;
+import com.bbb.dao.MemberDAO;
 import com.bbb.dao.PostboxDAO;
+import com.bbb.dto.MemberVO;
 import com.bbb.dto.PostboxVO;
 
 public class PostboxServiceImpl implements PostboxService {
@@ -13,6 +16,13 @@ public class PostboxServiceImpl implements PostboxService {
 	public void setPostboxDAO(PostboxDAO postboxDAO){
 		this.postboxDAO = postboxDAO;
 	}
+	
+	/*
+	private MemberDAO memberDAO;
+	public void setMemberDAO(MemberDAO memberDAO){
+		this.memberDAO = memberDAO;
+	}
+	*/
 	
 	@Override
 	public List<PostboxVO> readPostboxList(String id) throws SQLException {
@@ -39,6 +49,16 @@ public class PostboxServiceImpl implements PostboxService {
 	@Override
 	public void createPostbox(PostboxVO postbox) throws SQLException {
 		postboxDAO.insertPostbox(postbox);
+	}
+
+	@Override
+	public List<MemberVO> readMemberList(Criteria cri) throws SQLException {
+		return postboxDAO.selectSearchMemberList(cri);
+	}
+
+	@Override
+	public int readMemberListCount(Criteria cri) throws SQLException {
+		return postboxDAO.selectSearchMemberListCount(cri);
 	}
 
 }

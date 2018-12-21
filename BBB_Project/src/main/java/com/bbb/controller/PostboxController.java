@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.bbb.dto.MemberVO;
 import com.bbb.dto.PostboxVO;
 import com.bbb.service.PostboxService;
 
@@ -25,5 +26,14 @@ public class PostboxController {
 		model.addAttribute("postList", postList);
 	}
 	@RequestMapping(value="/search", method=RequestMethod.GET)
-	public void postboxSearch() throws Exception { }
+	public void postboxSearch(SearchCriteria cri, Model model) throws Exception { 
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(postboxService.readMemberListCount(cri));
+		
+		List<MemberVO> memberList = postboxService.readMemberList(cri);
+		
+		model.addAttribute("memberList", memberList);
+		model.addAttribute("pageMaker", pageMaker);
+	}
 }
