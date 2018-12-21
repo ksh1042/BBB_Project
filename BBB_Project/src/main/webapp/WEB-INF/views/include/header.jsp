@@ -94,7 +94,7 @@ desired effect
             <a href="#" onclick="postbox_go();"><!-- class="dropdown-toggle" data-toggle="dropdown" -->
             <script>
 	            function postbox_go(){
-	            	var url="/postbox/list";
+	            	var url="/postbox/list?id=${ loginUser.id }";
 	            	window.open( url, "_blank_1",
 	            		"toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=900, height=800, top=300, left=300, ");	            	
 	            }

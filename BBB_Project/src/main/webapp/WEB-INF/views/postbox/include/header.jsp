@@ -70,7 +70,7 @@
 						id="navbar-collapse">
 						<ul class="nav navbar-nav">
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">내 프로젝트 <span class="caret"></span></a>
+								data-toggle="dropdown">참여 프로젝트 <span class="caret"></span></a>
 								<ul class="dropdown-menu" role="menu">
 									<li><a href="#">프로젝트 1</a></li>
 									<li><a href="#">프로젝트 2</a></li>
@@ -79,7 +79,7 @@
 									<li><a href="#">사서함 관리</a></li>
 								</ul>
 							</li>
-							<li><a href="#">내 사서함</a></li>
+							<li><a href="<%= request.getContextPath() %>/postbox/list?id=${ loginUser.id }">내 사서함</a></li>
 						</ul>
 						
 					</div>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Postbox">
+
+	<select id="selectPostboxReplyList" parameterType="int" resultType="post">
+		SELECT *
+		FROM tbl_postbox
+		WHERE pbfNum=#{pbNum}
+	</select>
+	<select id="selectPostboxListById" parameterType="str" resultType="post">
+		SELECT *
+		FROM tbl_postbox
+		WHERE id=#{id} AND pbfNum IS NULL
+	</select>
+	<update id="insertPostbox" parameterType="post">
+		INSERT INTO tbl_postbox(pbNum, pbfNum, id, content, writer, visibility)
+		VALUES(pbNum_seq.nextval, #{pbfNum}, #{id}, #{content}, #{writer}, #{visibility})
+	</update>
+
+</mapper>
+
+
+
+
+
+
+   
