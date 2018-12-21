@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class PostboxController {
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public void postboxMain() throws Exception { }
-	@RequestMapping(value="/search", method=RequestMethod.GET)
+	@RequestMapping(value="/search/{keyword}", method=RequestMethod.GET)
 	public void postboxSearch() throws Exception { }
 }
