@@ -11,7 +11,7 @@
 	<authentication-manager id="memberAuthManager">
 		<authentication-provider>
 			<jdbc-user-service data-source-ref="dataSource"
-				users-by-username-query="select id as username,pwd as password,enabled
+				users-by-username-query="select id as username, pwd as password, enabled
 					 from tbl_member
 					 where id=?"
 				authorities-by-username-query="select id as username, authority
@@ -41,7 +41,7 @@
 
 	<beans:bean id="loginSuccessSecurityHandler"
 		class="com.bbb.security.LoginSuccessSecurityHandler"
-		p:defaultTargetUrl="/main/mainForm" />
+		p:defaultTargetUrl="/main" />
 		<!--  -->
 	<beans:bean id="loginFailureSecurityHandler"
 		class="com.bbb.security.LoginFailureSecurityHandler"
