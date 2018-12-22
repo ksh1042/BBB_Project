@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.bbb.criteria.PageMaker;
-import com.bbb.criteria.SearchCriteria;
 import com.bbb.dao.QnaDAO;
 import com.bbb.dto.QnaVO;
 import com.bbb.service.QnaService;

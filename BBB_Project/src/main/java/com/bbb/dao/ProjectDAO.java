@@ -3,7 +3,6 @@ package com.bbb.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.bbb.criteria.Criteria;
 import com.bbb.dto.ProjectVO;
 
 public interface ProjectDAO {

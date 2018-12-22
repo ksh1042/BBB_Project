@@ -8,8 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.bbb.criteria.PageMaker;
-import com.bbb.criteria.SearchCriteria;
 import com.bbb.dao.MemberDAO;
 import com.bbb.dto.MemberVO;
 import com.bbb.service.MemberService;

@@ -3,7 +3,7 @@ package com.bbb.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.bbb.criteria.Criteria;
+import com.bbb.controller.Criteria;
 import com.bbb.dao.MemberDAO;
 import com.bbb.dto.MemberVO;
 

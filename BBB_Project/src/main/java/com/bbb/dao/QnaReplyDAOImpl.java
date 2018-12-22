@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
-import com.bbb.criteria.Criteria;
+import com.bbb.controller.Criteria;
 import com.bbb.dto.QnaReplyVO;
 
 public class QnaReplyDAOImpl implements QnaReplyDAO{

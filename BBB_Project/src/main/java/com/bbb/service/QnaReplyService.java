@@ -2,7 +2,7 @@ package com.bbb.service;
 
 import java.util.List;
 
-import com.bbb.criteria.Criteria;
+import com.bbb.controller.Criteria;
 import com.bbb.dto.QnaReplyVO;
 
 public interface QnaReplyService {

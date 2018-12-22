@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bbb.criteria.Criteria;
-import com.bbb.criteria.PageMaker;
 import com.bbb.dto.QnaReplyVO;
 import com.bbb.service.QnaReplyService;
 
