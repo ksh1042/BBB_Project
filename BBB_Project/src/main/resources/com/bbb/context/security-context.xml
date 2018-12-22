@@ -57,9 +57,10 @@
 	</http>
 	
 	<beans:bean id="loginSuccessSecurityHandler"
-				class="com.bbb.security.LoginSuccessSecurityHandler"
-				p:defaultTargetUrl="/main/mainForm"
-				/>
+
+		class="com.bbb.security.LoginSuccessSecurityHandler"
+		p:defaultTargetUrl="/main/mainForm" />
+		
 	<beans:bean id="loginFailureSecurityHandler"
 				class="com.bbb.security.LoginFailureSecurityHandler"
 				p:defaultFailureUrl="/commons/loginForm"
