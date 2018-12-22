@@ -42,4 +42,14 @@ public class CommonController {
 		out.println("</script>");
 
 	}
+	@RequestMapping(value = "/logout", method = RequestMethod.POST)
+	public void logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.getSession().invalidate();
+		
+		PrintWriter out = response.getWriter();
+		out.print("<script>");
+		out.print("alert('정상적으로 로그아웃 되었습니다');");
+		out.print("location.href='"+ request.getContextPath()+"';");
+		out.print("</script>");
+	}
 }
