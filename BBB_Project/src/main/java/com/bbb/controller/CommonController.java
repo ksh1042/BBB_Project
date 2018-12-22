@@ -40,6 +40,22 @@ public class CommonController {
 		out.println("<script>");
 		out.println("alert('회원가입이 완료되었습니다.');location.href='/index.jsp';");
 		out.println("</script>");
+		out.flush();
+		out.close();
+		
 
+	}
+	@RequestMapping(value = "/logout", method = RequestMethod.POST)
+	public void logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.getSession().invalidate();
+		
+		PrintWriter out = response.getWriter();
+		out.print("<script>");
+		out.print("alert('정상적으로 로그아웃 되었습니다');");
+		out.print("location.href='"+ request.getContextPath()+"';");
+		out.print("</script>");
+		
+		out.flush();
+		out.close();
 	}
 }

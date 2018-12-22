@@ -4,11 +4,14 @@
 	<excludes>
 		<pattern>/commons/**</pattern>
 	</excludes>
-	<decorator name="main" page="decorator.jsp">		
-		<pattern>/**</pattern>
+	
+	<decorator name="main" page="maindecorator.jsp">		
+		<pattern>/main/**</pattern>
 	</decorator>
-	<decorator name="postbox" page="postboxDecorator.jsp">		
-		<pattern>/postbox/**</pattern>
+	<decorator name="project" page="decorator.jsp">		
+		<pattern>/project/**</pattern>
 	</decorator>
+	
+	
 	
 </decorators>
