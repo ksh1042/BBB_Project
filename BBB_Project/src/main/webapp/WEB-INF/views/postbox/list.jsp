@@ -8,8 +8,8 @@
 	<style>
 		li.post-reply div.timeline-item {
 			width :85%;
-			margin : 0 auto;
-			position : relative;
+			background-color: #FBFBFF;
+			float : right;
 		}
 	</style>
 </head>
@@ -91,16 +91,6 @@
 					</li>
 					<!-- input-sample.end -->
 				</ul>
-				
-				<div class="box-footer">
-					<ul class="pagination pagination-sm no-margin pull-right">
-						<li><a href="#">&lt;&lt;</a></li>
-						<li><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">&gt;&gt;</a></li>
-					</ul>
-				</div>
 			</div>
 		</div>
 	</section>
