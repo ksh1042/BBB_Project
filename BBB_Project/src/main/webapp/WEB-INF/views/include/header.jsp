@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="decorator"
 	uri="http://www.opensymphony.com/sitemesh/decorator"%>
 <%
@@ -239,13 +240,17 @@ desired effect
           
           <!-- ------------------------------------------------- -->
           <!-- Control Sidebar Toggle Button -->
+          <sec:authorize access="hasAuthority('ROLE_ADMIN')">
           <li>
             <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
           </li>
+          </sec:authorize>
         </ul>
       </div>
     </nav>
   </header>
+  
+  
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
 
@@ -258,7 +263,7 @@ desired effect
           <img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>${loginUser.name}</p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
@@ -280,6 +285,7 @@ desired effect
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
+        <sec:authorize access="hasAuthority('ROLE_USER')">
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>계획설계</span>
             <span class="pull-right-container">
@@ -291,7 +297,7 @@ desired effect
             <li><a href="#"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i>단위업무 정의서</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i>간트차트</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>use-case</a></li>
+            <li><a href="<%=request.getContextPath()%>/project/usecase"><i class="fa fa-circle-o"></i>use-case</a></li>
           </ul>
         </li>
         
@@ -341,12 +347,29 @@ desired effect
         		<span>ISSUE</span>
         	</a>
         </li>
+        </sec:authorize>
         
+        <sec:authorize access="hasAuthority('ROLE_ADMIN')">
+        <li class="treeview">
+          <a href="#"><i class="fa fa-link"></i> <span>관리자 게시판</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i>공지사항</a></li>
+            <li><a href="<%=request.getContextPath()%>/question/qnaList"><i class="fa fa-circle-o"></i>QnA</a></li>
+            <li><a href="<%=request.getContextPath()%>/admin/memberList"><i class="fa fa-circle-o"></i>회원관리</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>프로젝트 관리</a></li>
+          </ul>
+        </li>
+        </sec:authorize>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
   </aside>
+  
   <body>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

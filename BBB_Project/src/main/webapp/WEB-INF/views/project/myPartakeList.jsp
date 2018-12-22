@@ -19,11 +19,13 @@
 
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+      
+                  <input type="text"  class="form-control pull-right" placeholder="Search">
 
                   <div class="input-group-btn">
                     <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                   </div>
+   
                 </div>
               </div>
             </div>
@@ -71,19 +73,7 @@
             </div>
             <!-- /.box-body -->
             <!-- / 나의 참여목록 리스트 테이블 끝 -->
-            
-            <!-- 페이지번호 -->
-            <div class="box-footer clearfix">
-              <ul class="pagination pagination-sm no-margin pull-right">
-                <li><a href="#">&laquo;</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">&raquo;</a></li>
-              </ul>
-            </div>
-            <!-- 페이지 번호 끝 -->
-            
+                  
           </div>
           <!-- /.box -->
 

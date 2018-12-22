@@ -32,6 +32,12 @@
 		<intercept-url pattern="/**" access="permitAll" />
 		<intercept-url pattern="/project/my*" access="permitAll" />
 
+		<intercept-url pattern="/commons/**" access="permitAll" />
+		<intercept-url pattern="/**" access="isAuthenticated()" />
+		
+		
+
+
 
 		<form-login login-page="/commons/loginForm"
 			login-processing-url="/commons/login" username-parameter="id"
@@ -44,7 +50,7 @@
 
 	<beans:bean id="loginSuccessSecurityHandler"
 		class="com.bbb.security.LoginSuccessSecurityHandler"
-		p:defaultTargetUrl="/project/myPartakeList" />
+		/>
 	<beans:bean id="loginFailureSecurityHandler"
 		class="com.bbb.security.LoginFailureSecurityHandler"
 		p:defaultFailureUrl="/commons/loginForm" p:useForward="true" />

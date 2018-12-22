@@ -3,6 +3,7 @@ package com.bbb.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.bbb.criteria.Criteria;
 import com.bbb.dao.MemberDAO;
 import com.bbb.dto.MemberVO;
 
@@ -14,8 +15,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public List<MemberVO> getMemberList() throws SQLException {
-		List<MemberVO> memberList=memberDAO.selectMemberList();
+	public List<MemberVO> getMemberList(Criteria cri) throws SQLException {
+		List<MemberVO> memberList=memberDAO.selectMemberList(cri);
 		return memberList;
 	}
 

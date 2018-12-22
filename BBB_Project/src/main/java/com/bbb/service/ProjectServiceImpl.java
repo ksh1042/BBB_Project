@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bbb.criteria.Criteria;
 import com.bbb.dao.ProjectDAO;
 import com.bbb.dao.ProjectPartakeDAO;
 import com.bbb.dto.ProjectVO;
@@ -43,6 +44,14 @@ public class ProjectServiceImpl implements ProjectService {
 		
 		return myProjectList;
 		
+	}
+
+
+	@Override
+	public List<ProjectVO> allProjectList() throws SQLException {
+		
+		
+		return null;
 	}
 
 

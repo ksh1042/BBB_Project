@@ -2,13 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Project">
-	
+
 	<select id="selectProjectList" resultType="project">
-   		select *
-   		from tbl_project
-		order by indate desc
+		select *
+		from tbl_project
 	</select>
-	
+
 	<select id="selectProjectByPjNum" resultType="project">
 		select pjnum
 		from tbl_project

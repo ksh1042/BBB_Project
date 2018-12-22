@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="QuestionReply">
+
+	<select id="selectReplyList" resultType="questionReply">
+		select *
+		from tbl_question_reply
+		where qanum=#{qaNum}
+		order by qarnum desc
+	</select>
+	<select id="countReply" resultType="int">
+		select count(qanum) 
+		from tbl_question_reply
+		where qanum=#{qaNum}
+	</select>
+	
+	<update id="insertReply" >
+		insert tbl_question_reply(qarnum,qanum,rcontents,writer)
+		values(tbl_question_reply_seq.nextval,#{qanum},#{rcontents},#{writer})
+	</update>
+	
+	<update id="updateReply">
+		update tbl_question_reply
+		set 
+		rcontents=#{rContents},
+		updatedate=sysdate
+		where qarnum=#{qarNum}		
+	</update>
+	
+	<update id="deleteReply">
+		delete from tbl_reply
+		where qarnum=#{qarNum}		
+	</update>
+	
+
+</mapper>

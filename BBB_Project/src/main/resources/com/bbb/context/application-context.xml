@@ -26,6 +26,22 @@
 		  p:projectDAO-ref="projectDAO"
 		  p:projectPartakeDAO-ref="projectPartakeDAO"
 		  />
+	<bean id="qnaDAO"
+	      class="com.bbb.dao.QnaDAOImpl"
+	      p:session-ref="sqlSession"
+	      />
+	<bean id="qnaService"
+		  class="com.bbb.service.QnaServiceImpl"
+		  p:qnaDAO-ref="qnaDAO"
+		  />
+	<bean id="qnaReplyDAO"
+	      class="com.bbb.dao.QnaReplyDAOImpl"
+	      p:session-ref="sqlSession" 
+	      />
+	<bean id="qnaReplyService"
+		  class="com.bbb.service.QnaReplyServiceImpl"
+		  p:qnaReplyDAO-ref="qnaReplyDAO"
+		  />
 	
 	
 </beans>

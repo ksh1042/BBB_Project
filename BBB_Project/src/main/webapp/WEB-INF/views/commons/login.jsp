@@ -61,7 +61,7 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="button" onclick="login_go();" class="btn btn-primary btn-block btn-flat">SignIn(A)</button>
+          <button type="button" onclick="login_go();" class="btn btn-primary btn-block btn-flat">Sign In</button>
 
         </div>
         <!-- /.col -->

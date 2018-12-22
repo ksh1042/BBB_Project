@@ -31,6 +31,10 @@ public class ProjectController {
 		model.addAttribute("myPartakeList",service.readMyProjectList(loginUser.getId()));
 	}
 	
+	@RequestMapping("/usecase")
+	public String usecase() throws Exception{
+		return "/project/usecase";
+	}
 	
 	
 }
