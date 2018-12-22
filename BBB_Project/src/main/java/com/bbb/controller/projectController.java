@@ -98,9 +98,9 @@ public class projectController {
 	}
 	
 	//프로젝트 계획서
-	@RequestMapping(value="", method=RequestMethod.GET)
-	public void projectPlan() throws Exception{
-		
+	@RequestMapping(value="/projectPlan", method=RequestMethod.GET)
+	public String projectPlan() throws Exception{
+		return "PDFviewer/viewer.jsp?file=compressed.tracemonkey-pldi-09.pdf";
 	}
 		
 		
