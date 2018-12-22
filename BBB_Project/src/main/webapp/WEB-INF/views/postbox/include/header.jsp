@@ -93,7 +93,13 @@
 							<div class="form-group">
 								<input type="text" class="form-control" id="navbar-search-input"
 									placeholder="회원 검색...">
-								<button type="button" class="btn btn-default">검색</button>
+								<button type="button" class="btn btn-default" onclick="search_go();">검색</button>
+								<script>
+									function search_go(){
+										var keyword = $('input#navbar-search-input').val();
+										location.href='<%= request.getContextPath() %>/postbox/search/?searchType=i&keyword='+keyword;
+									}
+								</script>
 							</div>
 						</form>
 					</div>

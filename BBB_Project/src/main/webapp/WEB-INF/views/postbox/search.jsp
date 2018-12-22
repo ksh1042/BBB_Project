@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <head>
 	<style>
 		table.table th {
@@ -23,16 +25,16 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">'??'건의 내용이 검색되었습니다</h3>
+					<h3 class="box-title">'${ fn:length(memberList) }'건의 내용이 검색되었습니다</h3>
 					<div class="box-tools">
-						<div class="input-group input-group-sm" style="width: 150px;">
+						<!-- <div class="input-group input-group-sm" style="width: 150px;">
 							<input type="text" name="keyword" class="form-control pull-right" placeholder="검색...">
 							<div class="input-group-btn">
 								<button type="submit" class="btn btn-default">
 									<i class="fa fa-search"></i>
 								</button>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 				<!-- table -->
@@ -43,21 +45,36 @@
 							<th>이름</th>
 							<th>이메일</th>
 						</tr>
-						<tr>
-							<td><a href="#">nicosara</a></td>
-							<td>김형민</td>
-							<td>nicosara@gmail.com</td>
-						</tr>
+						<c:if test="${ empty memberList }">
+							<tr>
+								<td colspan="3">표시할 내용이 없습니다.</td>
+							</tr>
+						</c:if>
+						<c:forEach var="member" items="${ memberList }">
+							<tr>
+								<td><a href="<%= request.getContextPath() %>/postbox/list?id=${ member.id }">${ member.id }</a></td>
+								<td>${ member.name }</td>
+								<td>${ member.email }</td>
+							</tr>
+						</c:forEach>
 					</table>
 				</div>
 				<!-- table.end -->
 				<div class="box-footer">
 					<ul class="pagination pagination-sm no-margin pull-right">
-						<li><a href="#">&lt;&lt;</a></li>
-						<li><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">&gt;&gt;</a></li>
+						<c:if test="${pageMaker.prev}">
+							<li><a href="${pageMaker.startPage - 1}">&laquo;</a></li>
+						</c:if>
+						<c:forEach begin="${pageMaker.startPage }"
+							end="${pageMaker.endPage }" var="idx">
+							<li <c:out value="${pageMaker.cri.page == idx ? 'class=active':''}"/>>
+								<a href="${idx}">${idx}</a>
+							</li>
+						</c:forEach>
+						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+							<li><a
+								href="${pageMaker.endPage +1}">&raquo;</a></li>
+						</c:if>
 					</ul>
 				</div>
 			</div>

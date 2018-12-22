@@ -29,9 +29,15 @@ public class PostboxController {
 	public void postboxSearch(SearchCriteria cri, Model model) throws Exception { 
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(postboxService.readMemberListCount(cri));
+		
+		int totalCount = postboxService.readMemberListCount(cri);
+		System.out.println("totalCount : " + totalCount);
+		
+		pageMaker.setTotalCount(totalCount);
 		
 		List<MemberVO> memberList = postboxService.readMemberList(cri);
+		
+		System.out.println("memberList : " + memberList);
 		
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("pageMaker", pageMaker);
