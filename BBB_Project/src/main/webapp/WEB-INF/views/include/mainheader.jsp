@@ -84,11 +84,7 @@
 									<script>
 										function postbox_go() {
 											var url = "/postbox/list?id=${ loginUser.id }";
-											window
-													.open(
-															url,
-															"_blank_1",
-															"toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=900, height=800, top=300, left=300, ");
+											window.open(url,"_blank_1","toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=900, height=800, top=300, left=300, ");
 										}
 									</script><i class="fa fa-envelope-o"></i><span class="label label-success"></span>
 								</a>
@@ -110,22 +106,17 @@
 								</form>
 							</li>
 							<!-- Usermenu  -->
-							<li class="dropdown user user-menu"><a href="#"
-								class="dropdown-toggle" data-toggle="dropdown"> <img
-									src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="user-image"
-									alt="User Image"> <span class="hidden-xs">Alexander
-										Pierce</span>
-							</a>
+							<li class="dropdown user user-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+									<img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> 
+									<span class="hidden-xs">Alexander Pierce</span>
+								</a>
 								<ul class="dropdown-menu">
 									<!-- User image -->
-									<li class="user-header"><img
-										src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="img-circle"
-										alt="User Image">
-	
-										<p>
-											Alexander Pierce - Web Developer <small>Member since
-												Nov. 2012</small>
-										</p></li>
+									<li class="user-header">
+										<img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+										<p>Alexander Pierce - Web Developer <small>Member sinceNov. 2012</small></p>
+									</li>
 									<!-- Menu Body -->
 									<li class="user-body">
 										<div class="row">
