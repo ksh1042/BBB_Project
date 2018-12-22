@@ -76,22 +76,83 @@
 					<!-- /.navbar-collapse -->
 					<!-- Navbar Right Menu -->
 					<div class="navbar-custom-menu">
+						<!-- TODO --- header 우측 메뉴바 -->
 						<ul class="nav navbar-nav">
-							<!-- TODO --- header 우측 메뉴바 -->
+							<li class="dropdown messages-menu">
+								<!-- Menu toggle button --> 
+								<a href="#" onclick="postbox_go();">
+									<script>
+										function postbox_go() {
+											var url = "/postbox/list?id=${ loginUser.id }";
+											window
+													.open(
+															url,
+															"_blank_1",
+															"toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=900, height=800, top=300, left=300, ");
+										}
+									</script><i class="fa fa-envelope-o"></i><span class="label label-success"></span>
+								</a>
+							</li>
+							
+							<li>
+								<form class="navbar-form navbar-left" role="search">
+									<div class="form-group">
+										<input type="text" class="form-control" id="navbar-search-input"
+											placeholder="프로젝트 검색...">
+										<button type="button" class="btn btn-default" onclick="search_go();">검색</button>
+										<script>
+											function search_go(){
+												var keyword = $('input#navbar-search-input').val();
+												location.href='<%= request.getContextPath() %>/main/searchPList/?searchType=&keyword='+keyword;
+											}
+										</script>
+									</div>
+								</form>
+							</li>
+							<!-- Usermenu  -->
+							<li class="dropdown user user-menu"><a href="#"
+								class="dropdown-toggle" data-toggle="dropdown"> <img
+									src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="user-image"
+									alt="User Image"> <span class="hidden-xs">Alexander
+										Pierce</span>
+							</a>
+								<ul class="dropdown-menu">
+									<!-- User image -->
+									<li class="user-header"><img
+										src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="img-circle"
+										alt="User Image">
+	
+										<p>
+											Alexander Pierce - Web Developer <small>Member since
+												Nov. 2012</small>
+										</p></li>
+									<!-- Menu Body -->
+									<li class="user-body">
+										<div class="row">
+											<div class="col-xs-4 text-center">
+												<a href="#">Followers</a>
+											</div>
+											<div class="col-xs-4 text-center">
+												<a href="#">Sales</a>
+											</div>
+											<div class="col-xs-4 text-center">
+												<a href="#">Friends</a>
+											</div>
+										</div> <!-- /.row -->
+									</li>
+									<!-- Menu Footer-->
+									<li class="user-footer">
+										<div class="pull-left">
+											<a href="#" class="btn btn-default btn-flat">Profile</a>
+										</div>
+										<div class="pull-right">
+											<a href="#" class="btn btn-default btn-flat">Sign out</a>
+										</div>
+									</li>
+								</ul>
+							</li>
 						</ul>
-						<form class="navbar-form navbar-left" role="search">
-							<div class="form-group">
-								<input type="text" class="form-control" id="navbar-search-input"
-									placeholder="프로젝트 검색...">
-								<button type="button" class="btn btn-default" onclick="search_go();">검색</button>
-								<script>
-									function search_go(){
-										var keyword = $('input#navbar-search-input').val();
-										location.href='<%= request.getContextPath() %>/main/searchPList/?searchType=&keyword='+keyword;
-									}
-								</script>
-							</div>
-						</form>
+						
 					</div>
 					<!-- /.navbar-custom-menu -->
 				</div>
