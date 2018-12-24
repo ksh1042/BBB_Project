@@ -22,7 +22,7 @@
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
-
+	<button onclick="location.href='<%=request.getContextPath() %>/resources/web/viewer.html?file=sample.pdf'">아아아</button>
     </section>
     <!-- /.content -->
   
