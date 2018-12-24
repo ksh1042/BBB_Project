@@ -35,7 +35,7 @@ public class PostboxDAOImpl implements PostboxDAO {
 
 	@Override
 	public List<MemberVO> selectSearchMemberList(Criteria cri) throws SQLException {
-		int offset = cri.getPageStart();
+		int offset = cri.getPageStartRowNum();
 		int limit = cri.getPerPageNum();
 		RowBounds bound = new RowBounds(offset, limit);
 		
