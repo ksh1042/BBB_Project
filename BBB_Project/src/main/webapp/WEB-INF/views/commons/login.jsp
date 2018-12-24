@@ -45,7 +45,7 @@
 	<security:authorize access="isAuthenticated()">
 		<!-- 합칠때 경로 바꿀 것! -->
 		<script>
-			location.href="<%=request.getContextPath()%>/main/mainForm";
+			location.href="<%=request.getContextPath()%>/main/myPartakeList";
 		</script>
 	</security:authorize>
 	<div class="login-box">

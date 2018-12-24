@@ -1,6 +1,7 @@
 package com.bbb.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,21 @@ public class MainController {
 
 	@Autowired
 	private ProjectService service;
+	
+	
+	@RequestMapping(value="" ,method=RequestMethod.GET)
+	public String memberTurningPoint(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		MemberVO loginUser = (MemberVO)request.getSession().getAttribute("loginUser");
+		
+		String url = "redirect:/main/myPartakeList";
+		if(loginUser.getOperatoryn() == 1 ){
+			url = "redirect:/admin/mainForm";
+		}
+		
+		return url;
+	}
+	
 
-	
-	
 	// 로그인 후 나의 프로젝트 참여 목록을 보여준다.
 	@RequestMapping(value="/myPartakeList", method=RequestMethod.GET)
 	public void partakeList(Model model, HttpServletRequest request) throws Exception{

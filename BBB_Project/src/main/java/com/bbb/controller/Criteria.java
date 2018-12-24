@@ -2,7 +2,7 @@ package com.bbb.controller;
 
 public class Criteria {
 	
-	private int page 		= 1;
+	private int page 		= 0;
 	private int perPageNum 	= 10;
 	
 	public int getPage() {
