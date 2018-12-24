@@ -20,9 +20,9 @@ public class MemberController {
 	
 	
 	@RequestMapping(value="/list",method=RequestMethod.GET)
-	public void list(Model model)throws Exception{
-		/*List<MemberVO> memberList=service.getMemberList();*/
-		/*model.addAttribute("memberList",memberList);	*/	
+	public void list(Model model, Criteria cri)throws Exception{
+		List<MemberVO> memberList=service.getMemberList(cri);
+		model.addAttribute("memberList",memberList);	
 	}
 	
 	@RequestMapping(value="/register",method=RequestMethod.GET)

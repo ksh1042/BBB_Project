@@ -20,7 +20,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public List<MemberVO> selectMemberList(Criteria cri) throws SQLException {
-		int offset=cri.getPageStart();
+		int offset=cri.getPageStartRowNum();
 		int limit= cri.getPerPageNum();
 		RowBounds rowBounds=new RowBounds(offset, limit);
 		List<MemberVO> memberList=session.selectList("Member.selectMemberList",null);

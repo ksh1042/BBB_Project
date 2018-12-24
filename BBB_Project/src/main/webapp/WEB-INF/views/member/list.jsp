@@ -11,7 +11,8 @@
 <meta charset="UTF-8">
 <title>회원리스트</title>
 </head>
-<body>
+
+ <body>
 	<div class="content-header">
 		<div class="container-fluid">
 			<div class="row mb-2">
@@ -78,7 +79,7 @@
 		});
 	</script>
 </body>
-</html>
+</html> 
 
 
 

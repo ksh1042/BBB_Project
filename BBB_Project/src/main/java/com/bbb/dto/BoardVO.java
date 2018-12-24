@@ -4,30 +4,14 @@ import java.util.Date;
 
 public class BoardVO {
 	
-	// 보드 번호
 	private int bNum;
-	
-	// 프로젝트 번호
 	private int pjNum;
-	
-	// 게시글 제목
 	private String title;
-	
-	// 게시글 내용
 	private String content;
-	
-	// 게시글 작성자
-	private String writer;
-	
-	// 게시글 등록일
-	private Date indate;
-	
+	private Date inDate;
 	private Date updateDate;
-	
 	private int kind;
-	
 	private int count;
-	
 	public int getbNum() {
 		return bNum;
 	}
@@ -52,17 +36,11 @@ public class BoardVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getWriter() {
-		return writer;
+	public Date getInDate() {
+		return inDate;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
-	}
-	public Date getIndate() {
-		return indate;
-	}
-	public void setIndate(Date indate) {
-		this.indate = indate;
+	public void setInDate(Date inDate) {
+		this.inDate = inDate;
 	}
 	public Date getUpdateDate() {
 		return updateDate;
@@ -84,13 +62,9 @@ public class BoardVO {
 	}
 	@Override
 	public String toString() {
-		return "BoardVO [bNum=" + bNum + ", pjNum=" + pjNum + ", title=" + title + ", content=" + content + ", writer="
-				+ writer + ", indate=" + indate + ", updateDate=" + updateDate + ", kind=" + kind + ", count=" + count
-				+ "]";
+		return "BoardVO [bNum=" + bNum + ", pjNum=" + pjNum + ", title=" + title + ", content=" + content + ", inDate="
+				+ inDate + ", updateDate=" + updateDate + ", kind=" + kind + ", count=" + count + "]";
 	}
-	
-	
-	
 	
 	
 }

@@ -1,30 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Board">
 
-<!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-    
-<mapper namespace="FileBoard">
-
-<select id="selectMemberList" resultType="member">
-      select * from tbl_member
-      order by indate desc
-   </select>
-   <select id="selectMemberById" resultType="member">
-      select * from tbl_member
-      where id=#{id}
-   </select>
-   <update id="insertMember">
-      insert into tbl_member(id,pwd,name,phone,email)
-      values(#{id},#{pwd},#{name},#{phone},#{email})      
-   </update>
-   <update id="updateMember">
-      update tbl_member set
-      pwd=#{pwd},name=#{name},phone=#{phone},email=#{email}
-      where id=#{id}
-   </update>
-   <update id="deleteMember">
-      delete from tbl_member
-      where id=#{id}   
-   </update>   
-</mapper>
+<update id="insertBoard" parameterType="board">
+	insert into board(bnum,title,content,writer,indate,updatedate,kind)
+	values(#{bnum},#{title},#{content},#{writer},#{indate},#{updatedate},#{kind})
+	</update>
+	<update id="updateBoard">
+		update board title=#{title},content=#{content}
+		where bnum=#{bnum}
+	</update>
+	<update id="deleteBoard">
+		delete from board 
+		where bnum=#{bnum}
+	</update>
+	
+	<sql id="search">
+		<if test="searchType !=null">
+			<if test="searchType == 'i'.toString()">
+			and id like '%' || #{keyword} ||'%'
+			</if>
+			<if test="searchType == 'n'.toString()">
+			and name like '%' || #{keyword} ||'%'
+			</if>
+			<if test="searchType == 'p'.toString()">
+			and phone like '%' || #{keyword} ||'%'
+			</if>
+			<if test="searchType == 'e'.toString()">
+			and email like '%' || #{keyword} ||'%'
+			</if>
+		</if>
+	</sql>
+	<select id="selectSearchMemberList" resultType="member">
+		select *
+		from member
+		where id is not null
+		<include refid="search" />
+		order by indate desc
+	</select>
+	<select id="selectSearchMemberListCount" resultType="int">
+	
+		select count(*)
+		from member
+		where id is not null
+		<include refid="search"/>
+		
+	</select>
+	<select id="selectMemberById" parameterType="str" resultType="member">
+		select *
+		from member
+		where id=#{id}
+	</select>
+	</mapper>
