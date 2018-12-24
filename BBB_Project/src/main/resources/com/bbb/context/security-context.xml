@@ -12,9 +12,8 @@
 	<authentication-manager id="memberAuthManager">
 		<authentication-provider>
 			<jdbc-user-service data-source-ref="dataSource"
-				users-by-username-query=
-					"select id as username, pwd as password,
-					operatoryn as enabled 
+
+				users-by-username-query="select id as username, pwd as password, enabled
 					 from tbl_member
 					 where id=?"			
 				authorities-by-username-query=
@@ -24,43 +23,31 @@
 			/>		
 		</authentication-provider>
 	</authentication-manager>
-	
-	<http  pattern="/**" use-expressions="true" 
-		  authentication-manager-ref="memberAuthManager">
-		   
-		<access-denied-handler error-page="/security/accessDenied"/>		
-		<intercept-url pattern="/commons/log*" access="permitAll"/>
-		<intercept-url pattern="/member/list" access="isAuthenticated()"/>
-		<intercept-url pattern="/member/detail" access="isAuthenticated()"/>
-		<intercept-url pattern="/member/**" access="hasAuthority('ROLE_ADMIN')"/>
-		<intercept-url pattern="/log/**" access="isAuthenticated()"/>
-		<intercept-url pattern="/**" access="permitAll"/>		
-	
-	
-		<form-login		
-			login-page="/commons/loginForm" 
-			login-processing-url="/commons/login"			
-			username-parameter="id"
-			password-parameter="pwd"
-			authentication-success-handler-ref=
-						"loginSuccessSecurityHandler"
-			authentication-failure-handler-ref=
-						"loginFailureSecurityHandler"				
-		/>
-		<logout 
+
+	<http pattern="/**" use-expressions="true"
+		authentication-manager-ref="memberAuthManager">
+
+		<access-denied-handler error-page="/security/accessDenied" />
+		<intercept-url pattern="/commons/**" access="permitAll" />
+		<intercept-url pattern="/**" access="isAuthenticated()" />
 		
-			logout-url="/commons/logout"
-			invalidate-session="true"
-			logout-success-url="/commons/loginForm"
-		/>
 		
+
+
+		<form-login login-page="/commons/loginForm"
+			login-processing-url="/commons/login" username-parameter="id"
+			password-parameter="pwd" authentication-success-handler-ref="loginSuccessSecurityHandler"
+			authentication-failure-handler-ref="loginFailureSecurityHandler" />
+		<logout logout-url="/commons/logout" invalidate-session="true"
+			logout-success-url="/commons/loginForm" />
+
 	</http>
 	
 	<beans:bean id="loginSuccessSecurityHandler"
 
 		class="com.bbb.security.LoginSuccessSecurityHandler"
-		p:defaultTargetUrl="/main/mainForm" />
-		
+		p:defaultTargetUrl="/main" />
+		<!--  -->
 	<beans:bean id="loginFailureSecurityHandler"
 				class="com.bbb.security.LoginFailureSecurityHandler"
 				p:defaultFailureUrl="/commons/loginForm"

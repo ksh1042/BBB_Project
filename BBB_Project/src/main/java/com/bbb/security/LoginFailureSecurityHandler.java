@@ -18,6 +18,8 @@ public class LoginFailureSecurityHandler
 		
 		String accept=request.getHeader("accept");
 		
+		System.out.println(accept);
+		
 		if(accept.indexOf("json")>-1){ //ajax request
 			response.setContentType("application/json;charset=utf-8");
 			String data ="{"
