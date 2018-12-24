@@ -11,7 +11,7 @@
 	<authentication-manager id="memberAuthManager">
 		<authentication-provider>
 			<jdbc-user-service data-source-ref="dataSource"
-				users-by-username-query="select id as username,pwd as password,enabled
+				users-by-username-query="select id as username, pwd as password, enabled
 					 from tbl_member
 					 where id=?"
 				authorities-by-username-query="select id as username, authority
@@ -24,12 +24,10 @@
 		authentication-manager-ref="memberAuthManager">
 
 		<access-denied-handler error-page="/security/accessDenied" />
-		<intercept-url pattern="/commons/log*" access="permitAll" />
-		<intercept-url pattern="/member/register*" access="hasAuthority('ROLE_ADMIN')" />
-		<intercept-url pattern="/member/modify*" access="hasAuthority('ROLE_ADMIN')" />
-		<intercept-url pattern="/member/remove*" access="hasAuthority('ROLE_ADMIN')" />
-		<intercept-url pattern="/member/**" access="isAuthenticated()" />
-		<intercept-url pattern="/**" access="permitAll" />
+		<intercept-url pattern="/commons/**" access="permitAll" />
+		<intercept-url pattern="/**" access="isAuthenticated()" />
+		
+		
 
 
 		<form-login login-page="/commons/loginForm"
@@ -43,7 +41,8 @@
 
 	<beans:bean id="loginSuccessSecurityHandler"
 		class="com.bbb.security.LoginSuccessSecurityHandler"
-		p:defaultTargetUrl="/main/mainForm" />
+		p:defaultTargetUrl="/main" />
+		<!--  -->
 	<beans:bean id="loginFailureSecurityHandler"
 		class="com.bbb.security.LoginFailureSecurityHandler"
 		p:defaultFailureUrl="/commons/loginForm" p:useForward="true" />

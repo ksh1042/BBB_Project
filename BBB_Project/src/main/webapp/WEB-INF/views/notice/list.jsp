@@ -63,17 +63,15 @@
 							<tr>
 								<th style="width: 10px">글 번호</th>
 								<th>제목</th>
-								<th>내용</th>
 								<th>작성일</th>
 								<th style="width: 40px">공지만료일</th>
 							</tr>
-
+							<c:if test="${!empty list }">
 							<c:forEach items="${noticeList}" var="notice">
 
 								<tr>
 									<td>${notice.nNum}</td>
 									<td>${notice.title}</td>
-									<td>${notice.content}</td>
 									<td><fmt:formatDate pattern="yyyy-MM-dd"
 											value="${notice.indate}" /></td>
 									<td><fmt:formatDate pattern="yyyy-MM-dd"
@@ -81,6 +79,12 @@
 								</tr>
 
 							</c:forEach>
+							</c:if>
+						<c:if test="${empty list }">
+							<tr>
+								<td style="text-align:center;" colspan="4">내용이 없습니다.</td>
+							</tr>
+						</c:if>
 
 						</table>
 					</div>

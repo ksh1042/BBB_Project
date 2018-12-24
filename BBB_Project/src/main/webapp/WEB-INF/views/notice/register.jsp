@@ -12,6 +12,9 @@
 		
 		<table>
 			<tr>
+				<td><input type="hidden" name="nNum"/></td>
+			</tr>
+			<tr>
 				<td>제목</td>
 				<td><input type="text" name="title"/></td>
 			</tr>
@@ -34,7 +37,7 @@
 				<input type="radio"name="gener"/> <span class="up">기본</span></td>
 			</tr>
 		</table>
-		<input type="submit" value="등록"/>
+		<input type="submit" value="등록" onclick="list_go();"/>
 		<input type="button" value="목록으로" onclick="list_go();" />
 	</form>
 	<form id="jobForm">

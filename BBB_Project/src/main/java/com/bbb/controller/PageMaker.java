@@ -2,18 +2,14 @@ package com.bbb.controller;
 
 public class PageMaker {
 	private int totalCount;
-	// 총 리스트 갯수
-	private int startPage;
-	// 계산된 시작페이지
-	private int endPage;
-	// 계산된 끝페이지
-	private boolean prev;
-	// 이전 button
-	private boolean next;
-	// 다음 button
 
+	private int startPage;
+	private int endPage;
+	private boolean prev;
+	private boolean next;
+	
 	private int displayPageNum = 10;
-	// 페이지num 갯수
+	
 	private Criteria cri;
 
 	public int getTotalCount() {
@@ -22,7 +18,6 @@ public class PageMaker {
 
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
-
 		calcData();
 	}
 
@@ -79,19 +74,21 @@ public class PageMaker {
 		return "PageMaker [totalCount=" + totalCount + ", startPage=" + startPage + ", endPage=" + endPage + ", prev="
 				+ prev + ", next=" + next + ", displayPageNum=" + displayPageNum + ", cri=" + cri + "]";
 	}
-
-	public void calcData() {
-
+	
+	private void calcData(){
 		endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
+
 		startPage = (endPage - displayPageNum) + 1;
-		
-		int tempEndPage = (int) (Math.ceil(totalCount /(double) cri.getPerPageNum()));
-		if(endPage > tempEndPage){
+
+		int tempEndPage = (int) (Math.ceil(totalCount / (double) cri.getPerPageNum()));
+
+		if (endPage > tempEndPage) {
 			endPage = tempEndPage;
 		}
-		
+
 		prev = startPage == 1 ? false : true;
+
 		next = endPage * cri.getPerPageNum() >= totalCount ? false : true;
 	}
-
+	
 }
