@@ -23,9 +23,6 @@ public class AdminController {
 	@Autowired
 	private MemberDAO memberDAO;
 	
-	@Autowired
-	private ProjectService projectService;
-	
 	@RequestMapping(value="/mainForm",method=RequestMethod.GET)
 	public void mainGET()throws Exception{}
 	

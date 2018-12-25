@@ -16,6 +16,7 @@ public class MemberController {
 
 	@Autowired
 	private MemberService service;
+
 	
 	@Autowired
 	private MemberDAO memberDAO;
@@ -29,7 +30,7 @@ public class MemberController {
 	@RequestMapping(value="/register",method=RequestMethod.POST)
 	public String register(MemberVO member)throws Exception{
 	
-		String view="redirect:/project/partakeList";
+		String view="redirect:/main/myPartakeList";
 		
 		service.register(member);
 			
@@ -62,6 +63,7 @@ public class MemberController {
 		service.remove(id);
 		return view;
 	}
+
 	
 	
 }
