@@ -4,67 +4,84 @@
 <head>
 <meta charset="UTF-8">
 <title>프로젝트 생성</title>
+<style>
+	duv.wrapperAddProject {
+		width : 100%;
+		position : absolute;
+	}
+	div.addProjectDiv {
+		width : 70%;
+		margin-left : auto;
+		margin-right : auto;
+		display : block;
+	}
+ </style>
 </head>
 <body>
-	<section class="content-header">
-		<div class="container-fluid">
-			<div class="row mb-2">
-				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">프로젝트 생성</h1>
+	<div class="wrapperAddProject">
+		<div class="addProjectDiv">
+			<section class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1 class="m-0 text-dark">프로젝트 생성</h1>
+						</div>
+						<div class="col-sm-6">
+							<ol class="breadcrumb float-sm-left">
+								<li class="breadcrumb-item">
+									
+								</li>
+							</ol>
+						</div>
+						<!-- /.col -->
+					</div>
 				</div>
-				<div class="col-sm-6">
-					<ol class="breadcrumb float-sm-left">
-						<li class="breadcrumb-item">
-							
-						</li>
-					</ol>
+			</section>
+			<br />
+			<section class="content">
+				<div class="form-group has-feedback col-md-9" style="margin">
+					<form action="" method="POST">			
+						<input type="hidden" name="creator" value="${ loginUser.name }">
+						<label class="control-label">프로젝트 이름</label>
+						<input class="form-control " type="text" name="name" placeholder="프로젝트 이름">
+						<span class="help-block" id="pNameHelp"><i class=""></i></span>
+						<span class="glyphicon glyphicon-pencil form-control-feedback" id="pjNameIcon"></span><br/>
+						<label class="control-label">프로젝트 설명</label>
+						<textarea class="form-control" style="resize:none;" rows="10" placeholder="프로젝트 설명" name ="disc"></textarea><br/>
+						<label class="control-label">공개</label><input type="radio" name="visibility" value="0" checked>
+						<label class="control-label">비공개</label><input type="radio" name="visibility" value="1"><br/><br/>
+						
+						<!-- 프로젝트 기간  -->
+						<div class="box">
+					        <div class="box-header with-border">
+						    	<h3 class="box-title">프로젝트 기간</h3>
+								<div class="box-tools pull-right">
+						            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+						            <i class="fa fa-minus"></i></button>
+						        </div>
+						    </div>
+						    <div class="box-body">
+						    	<label class="control-label">시작일</label>
+						    	<input class="form-control" type="date" name="startDate">
+						    	<span class="help-block" id="startDateHelp"><i class=""></i></span> <br/>
+						    	<label class="control-label">마감일</label>
+						    	<input class="form-control" type="date" name="endDate">
+						    	<span class="help-block" id="endDateHelp"><i class=""></i></span> <br/>
+						    </div>
+						    <div class="box-footer">
+						     	tip) 프로젝트 시작일, 마감일을 입력해보세요.
+						    </div>
+				    	</div>
+					</form>
+					<!-- 프로젝트 기간.end -->
+					<button type="button" id="create_btn" class="btn btn-block btn-success btn-lg" disabled>생성</button>
+					<button type="button" id="cancel_btn" class="btn btn-block btn-danger btn-lg">취소</button>
 				</div>
-				<!-- /.col -->
-			</div>
+					
+			</section>
 		</div>
-	</section>
-	<br />
-	<section class="content">
-		<div class="form-group has-feedback col-md-9" style="margin">
-			<form action="" method="POST">			
-				<input type="hidden" name="creator" value="${ loginUser.name }">
-				<label class="control-label">프로젝트 이름</label>
-				<input class="form-control " type="text" name="name" placeholder="프로젝트 이름">
-				<span class="help-block" id="pNameHelp"><i class=""></i></span>
-				<span class="glyphicon glyphicon-pencil form-control-feedback" id="pjNameIcon"></span><br/>
-				<label class="control-label">프로젝트 설명</label>
-				<textarea class="form-control" style="resize:none;" rows="10" placeholder="프로젝트 설명" name ="disc"></textarea><br/>
-				<label class="control-label">공개</label><input type="radio" name="visibility" value="0" checked>
-				<label class="control-label">비공개</label><input type="radio" name="visibility" value="1"><br/><br/>
-				
-				<!-- 프로젝트 기간  -->
-				<div class="box">
-			        <div class="box-header with-border">
-				    	<h3 class="box-title">프로젝트 기간</h3>
-						<div class="box-tools pull-right">
-				            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
-				            <i class="fa fa-minus"></i></button>
-				        </div>
-				    </div>
-				    <div class="box-body">
-				    	<label class="control-label">시작일</label>
-				    	<input class="form-control" type="date" name="startDate">
-				    	<span class="help-block" id="startDateHelp"><i class=""></i></span> <br/>
-				    	<label class="control-label">마감일</label>
-				    	<input class="form-control" type="date" name="endDate">
-				    	<span class="help-block" id="endDateHelp"><i class=""></i></span> <br/>
-				    </div>
-				    <div class="box-footer">
-				     	tip) 프로젝트 시작일, 마감일을 입력해보세요.
-				    </div>
-		    	</div>
-			</form>
-			<!-- 프로젝트 기간.end -->
-			<button type="button" id="create_btn" class="btn btn-block btn-success btn-lg" disabled>생성</button>
-			<button type="button" id="cancel_btn" class="btn btn-block btn-danger btn-lg">취소</button>
-		</div>
-			
-	</section>
+	</div>
+	
 	
 	<!-- content.end -->
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
