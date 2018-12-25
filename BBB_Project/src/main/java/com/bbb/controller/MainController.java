@@ -51,10 +51,6 @@ public class MainController {
 	public ResponseEntity<String> addProject(@RequestBody ProjectVO project, HttpServletRequest request) throws Exception {
 		ResponseEntity<String> entity = null;
 		
-		// MemberVO loginUser = (MemberVO)request.getSession().getAttribute("loginUser");
-		
-		project.setCreator("ksh1042");
-		
 		System.out.println(project.toString());
 		
 		
