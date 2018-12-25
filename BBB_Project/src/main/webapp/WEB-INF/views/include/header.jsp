@@ -11,10 +11,6 @@
 	response.setDateHeader("Expires", 1L);
 %>
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html>
 <head>
   <meta charset="utf-8">
@@ -46,26 +42,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
         <decorator:head />
 </head>
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
@@ -189,11 +165,11 @@ desired effect
           
           <!-- ----------------상단 헤더 사용자 정보창 ----------------- -->
           <!-- User Account Menu -->
-       <%--    <li class="dropdown user user-menu">
+      		<li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="<%=request.getContextPath()%>/resources/main/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               
               <!-- 접속한 사람의 아이디 혹은 이름 노출 -->
@@ -204,8 +180,7 @@ desired effect
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="<%=request.getContextPath()%>/resources/main/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
+                <img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 <p>
                   Alexander Pierce - Web Developer
                   <small>Member since Nov. 2012</small>
@@ -232,11 +207,11 @@ desired effect
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<%= request.getContextPath() %>/commons/logout" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
-          </li> --%>
+          </li>
           
           <!-- ------------------------------------------------- -->
           <!-- Control Sidebar Toggle Button -->

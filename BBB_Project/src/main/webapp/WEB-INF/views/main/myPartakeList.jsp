@@ -48,6 +48,7 @@
               <table class="table table-bordered">
                 <tr>
                   <th>#</th>
+                  <th>개설번호</th>
                   <th>프로젝트 명</th>
                   <th>개설자</th>
                   <th>진행도</th>
@@ -59,6 +60,9 @@
 						
 				<tr>	
              	  <td>${num.index+1 }</td>
+             	  <td>
+             	  	<a href="<%=request.getContextPath() %>/project/projectMain?${partake.pjNum}">${partake.pjNum }</a>
+             	  </td>
                   <td>${partake.name}</td>
                   <td>${partake.creator}</td>
                   <td>

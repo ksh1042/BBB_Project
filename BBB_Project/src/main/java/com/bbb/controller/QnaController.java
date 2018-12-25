@@ -54,7 +54,7 @@ public class QnaController {
 	public void readPage(@ModelAttribute("cri")SearchCriteria cri,
 						 int qaNum, Model model)throws Exception{
 		QnaVO qna=service.readByQaNum(qaNum);
-		model.addAttribute(qna);
+		model.addAttribute("qna", qna);
 	}
 
 }

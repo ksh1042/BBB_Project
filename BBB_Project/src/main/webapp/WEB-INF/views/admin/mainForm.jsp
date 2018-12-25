@@ -10,12 +10,12 @@
  <!-- Main content -->
     <section class="content">
     
-    <!-- 나의 참여목록 검색바 -->
+<!--     검색버튼
      <div class="row">
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">참여 프로젝트 검색</h3>
+              <h3 class="box-title"></h3>
 
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
@@ -33,56 +33,8 @@
           </div>
         </div>
       </div>
-      <!-- /나의 참여목록 검색바 끝 -->
+      검색바 끝 -->
       
-      <!-- 나의 참여목록 리스트 테이블 -->
-      <div class="row">
-        <!-- <div class="col-md-6"> -->
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title">My ProjectPartake List</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table class="table table-bordered">
-                <tr>
-                  <th>#</th>
-                  <th>프로젝트 명</th>
-                  <th>개설자</th>
-                  <th>진행도</th>
-                </tr>
-                
-                
-             
-				<c:forEach var="partake" items="${myPartakeList }" varStatus="num">
-						
-				<tr>	
-             	  <td>${num.index+1 }</td>
-                  <td>${partake.name}</td>
-                  <td>${partake.creator}</td>
-                  <td>
-                   <div class="progress progress-xs">
-                      <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                    </div>
-                    <span class="badge bg-red">55%</span>
-                  </td>
-				</c:forEach>
-						  
-              </table>
-            </div>
-            <!-- /.box-body -->
-            <!-- / 나의 참여목록 리스트 테이블 끝 -->
-                  
-          </div>
-          <!-- /.box -->
-
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-     
-      <!-- /.box -->
     </section>
     <!-- /.content -->
     

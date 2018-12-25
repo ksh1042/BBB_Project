@@ -18,9 +18,11 @@ public class ProjectDAOImpl implements ProjectDAO {
 	@Override
 	public List<ProjectVO> selectProjectList() throws SQLException {
 		
-		List<ProjectVO> projectList=session.selectList("Project.selectProjectList");
+		List<ProjectVO> projectList = session.selectList("Project.selectProjectList");
 		return projectList;
 	}
+
+
 
 
 }

@@ -116,8 +116,6 @@ $(document).ready(
     </div>
 </li>
 </script>
-<%@ include file="/WEB-INF/views/question/attach.jsp" %>
-<%@ include file="/WEB-INF/views/question/readAttach.jsp" %>
 
 <script>
 var form=$('form[role="form"]');

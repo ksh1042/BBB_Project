@@ -61,7 +61,7 @@ a#modifyReplyBtn{
 				
 				
 	<div class="box-footer">
-		<sec:authorize access="hasAuthority('ROLE_ADMIN')">
+		<sec:authorize access="hasAuthority('ROLE_USER')">
 			<c:if test="${loginUser.id eq qna.writer }">
 			<button type="submit" class="btn btn-warning" id="modifyBtn">Modify</button>
 			</c:if>
@@ -73,7 +73,7 @@ a#modifyReplyBtn{
 			<button type="submit" class="btn btn-danger"  id="removeBtn">REMOVE</button>
 		</c:if>
 		</sec:authorize>
-		<button type="submit" class="btn btn-primary" id="listBtn">GO LIST</button>
+		<button type="submit" class="btn btn-primary" id="listBtn">QnA 목록</button>
 	</div>
 				
 <script>	
@@ -98,7 +98,6 @@ a#modifyReplyBtn{
 			$.post('<%=request.getContextPath()%>/deleteAllFiles',
 					{files:arr},function(){});				
 		}
-		
 		
 		formObj.attr("action", "removePage");
 		formObj.submit();
@@ -173,9 +172,6 @@ a#modifyReplyBtn{
 <!-- /.content -->
 
 <%@ include file="/WEB-INF/views/question/replyQna.jsp" %>
-<%@ include file="/WEB-INF/views/question/readAttach.jsp" %>
-
-
 
 </body>
 

@@ -9,8 +9,9 @@
 	</select>
 
 	<select id="selectProjectByPjNum" resultType="project">
-		select pjnum
+		select *
 		from tbl_project
+		where pjnum=#{pjNum}
 	</select>
 	
 </mapper>

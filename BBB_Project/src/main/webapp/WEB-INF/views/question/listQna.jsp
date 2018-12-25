@@ -90,7 +90,7 @@
 					</table>
 				</div>
 				<!-- /.box-body -->
-				<!-- / 나의 참여목록 리스트 테이블 끝 -->
+				
 
 				<!-- 페이지번호 -->
 				<div class="box-footer clearfix">
@@ -119,6 +119,7 @@
 		<!-- /.col -->
 	</div>
 	<!-- /.row -->
+	<!-- / end QnA List -->
 	<form id="jobForm">
 		<input type="hidden" name="page" value="${pageMaker.cri.page }">
 		<input type="hidden" name="perPageNum" value="${pageMaker.cri.perPageNum }"> 

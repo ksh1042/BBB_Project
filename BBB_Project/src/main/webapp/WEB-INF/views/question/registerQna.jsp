@@ -71,7 +71,6 @@
 </section>
 <!-- /.content -->
 
-<%@ include file="/WEB-INF/views/question/attach.jsp" %>
 
 <script>
 	var form = $('form[role="form"]');

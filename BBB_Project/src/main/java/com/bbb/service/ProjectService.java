@@ -13,4 +13,5 @@ public interface ProjectService {
 	
 	// 어드민에서 프로젝트 관리를 위해 사용
 	List<ProjectVO> allProjectList() throws SQLException;
+	
 }
