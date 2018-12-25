@@ -6,7 +6,7 @@
 <title>프로젝트 생성</title>
 </head>
 <body>
-	<div class="content-header">
+	<section class="content-header">
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
@@ -22,12 +22,12 @@
 				<!-- /.col -->
 			</div>
 		</div>
-	</div>
+	</section>
 	<br />
-	<div class="content">
+	<section class="content">
 		<div class="form-group has-feedback col-md-9" style="margin">
 			<form action="" method="POST">			
-				<%-- <input type="hidden" name="creator" value="${ loginUser.name }"> --%>
+				<input type="hidden" name="creator" value="${ loginUser.name }">
 				<label class="control-label">프로젝트 이름</label>
 				<input class="form-control " type="text" name="name" placeholder="프로젝트 이름">
 				<span class="help-block" id="pNameHelp"><i class=""></i></span>
@@ -64,7 +64,7 @@
 			<button type="button" id="cancel_btn" class="btn btn-block btn-danger btn-lg">취소</button>
 		</div>
 			
-	</div>
+	</section>
 	
 	<!-- content.end -->
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -232,7 +232,7 @@
 				},
 				success : function(data){
 					alert('프로젝트가 생성되었습니다.');
-					// location.href='';
+					location.href="<%= request.getContextPath()%>/main/myPartakeList"
 				},
 				error : function(error){
 					alert('서버 내부오류가 발생했습니다. 자세한 사항은 관리자에게 문의바랍니다.');
