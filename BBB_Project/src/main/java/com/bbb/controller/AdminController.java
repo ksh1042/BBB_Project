@@ -26,6 +26,9 @@ public class AdminController {
 	@Autowired
 	private ProjectService projectService;
 	
+	@RequestMapping(value="/mainForm",method=RequestMethod.GET)
+	public void mainGET()throws Exception{}
+	
 	@RequestMapping(value="/memberList",method=RequestMethod.GET)
 	public void memberList(SearchCriteria cri, Model model)throws Exception{
 		

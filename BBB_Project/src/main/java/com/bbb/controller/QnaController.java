@@ -25,15 +25,15 @@ public class QnaController {
 	private QnaDAO qnaDAO;
 
 	
-	@RequestMapping(value="/qnaList", method=RequestMethod.GET)
+	@RequestMapping(value="/listQna", method=RequestMethod.GET)
 	public void listPage(SearchCriteria cri, Model model) throws Exception{
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(qnaDAO.selectSearchQnaListCount(cri));
-		List<QnaVO> qnaList = service.getSearchQnaList(cri);
+		List<QnaVO> listQna = service.getSearchQnaList(cri);
 		
-		model.addAttribute("qnaList", qnaList);
+		model.addAttribute("listQna", listQna);
 		model.addAttribute("pageMaker", pageMaker);
 	}
 	
@@ -50,7 +50,7 @@ public class QnaController {
 		return "redirect:/Qna/list";
 	}
 	
-	@RequestMapping(value="/readPage",method=RequestMethod.GET)
+	@RequestMapping(value="/readQna",method=RequestMethod.GET)
 	public void readPage(@ModelAttribute("cri")SearchCriteria cri,
 						 int qaNum, Model model)throws Exception{
 		QnaVO qna=service.readByQaNum(qaNum);

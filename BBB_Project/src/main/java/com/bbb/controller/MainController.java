@@ -25,9 +25,11 @@ public class MainController {
 	public String memberTurningPoint(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		MemberVO loginUser = (MemberVO)request.getSession().getAttribute("loginUser");
 		
-		String url = "redirect:/main/myPartakeList";
+		String url = "";
 		if(loginUser.getOperatoryn() == 1 ){
 			url = "redirect:/admin/mainForm";
+		}else{
+			url = "redirect:/main/myPartakeList";
 		}
 		
 		return url;

@@ -4,7 +4,7 @@
 <mapper namespace="Question">
 	
 	<select id="getQnaSeqNextValue" resultType="int">
-		select tbl_question_seq.nextval from dual
+		select question_seq.nextval from dual
 	</select>
 	
 
@@ -34,12 +34,14 @@
 		from tbl_question
 		where qanum is not null
 		<include refid="search"></include>
+		order by qanum desc
 	</select>
 	<select id="selectSearchQnaCount" resultType="int">
 		select count(*)
 		from tbl_question
 		where qanum is not null
 		<include refid="search"></include>
+		order by qanum desc
 	</select>
 	
 	<update id="increaseViewCnt">
@@ -47,4 +49,10 @@
 		where
 		qanum=#{qaNum}
 	</update>
+	
+	<select id="selectQnaByQaNum" resultType="question">
+		select *
+		from tbl_question
+		where qanum=#{qaNum}
+	</select>
 </mapper>

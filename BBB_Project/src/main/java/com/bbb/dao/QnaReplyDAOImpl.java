@@ -42,7 +42,7 @@ public class QnaReplyDAOImpl implements QnaReplyDAO{
 
 	@Override
 	public List<QnaReplyVO> selectReplyListPage(int qaNum, Criteria cri) throws SQLException {
-		int offset = cri.getPageStart();
+		int offset = cri.getPageStartRowNum();
 		int limit = cri.getPerPageNum();
 		RowBounds rowBounds = new RowBounds(offset, limit);
 			

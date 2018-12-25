@@ -358,7 +358,7 @@ desired effect
           </a>
           <ul class="treeview-menu">
             <li><a href="#"><i class="fa fa-circle-o"></i>공지사항</a></li>
-            <li><a href="<%=request.getContextPath()%>/question/qnaList"><i class="fa fa-circle-o"></i>QnA</a></li>
+            <li><a href="<%=request.getContextPath()%>/question/listQna"><i class="fa fa-circle-o"></i>QnA</a></li>
             <li><a href="<%=request.getContextPath()%>/admin/memberList"><i class="fa fa-circle-o"></i>회원관리</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i>프로젝트 관리</a></li>
           </ul>

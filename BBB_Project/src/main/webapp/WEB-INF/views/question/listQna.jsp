@@ -10,7 +10,7 @@
 <!-- Main content -->
 <section class="content">
 
-	<!-- 회원 검색창 -->
+	<!-- QnA 검색창 -->
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
@@ -19,7 +19,7 @@
 					<div class="box-tools">
 						<div class="input-group input-group-sm" >
 							<div>
-								<form action="qnaList">
+								<form action="listQna">
 									<select name="searchType">
 										<option value="" ${cri.searchType==null?'selected':'' }>----</option>
 										<option value="t" ${cri.searchType eq 't'?'selected':'' }>Title</option>
@@ -39,9 +39,9 @@
 			</div>
 		</div>
 	</div>
-	<!-- /회원검색 끝 -->
+	<!-- /검색 끝 -->
 
-	<!-- 회원 리스트 -->
+	<!-- QnA 리스트 -->
 	<div class="row">
 		<!-- <div class="col-md-6"> -->
 		<div class="col-xs-12">
@@ -58,16 +58,20 @@
 							<th>제목</th>
 							<th>작성자</th>
 							<th>등록일</th>
-							<th style="width: 40px">VIEWCNT</th>
+							<th style="width: 40px">VIEW</th>
 						</tr>
 						
-					
-						<c:forEach var="qna" items="${qnaList }" varStatus="status">
+						<c:if test="${!empty listQna }">
+						<c:forEach var="qna" items="${listQna }" varStatus="status">
 
 							<tr>
 								<td>${status.count }</td>
 								<td>${qna.qaNum}</td>
-								<td>${qna.title}</td>
+								<td>
+									<a href='readQna${pageMaker.makeSearch(pageMaker.cri.page) }&qaNum=${qna.qaNum}'>
+										${qna.title}
+									</a>
+								</td>
 								<td>${qna.writer}</td>
 								<td>
 									<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${qna.indate}" />
@@ -77,7 +81,12 @@
 								</td>
 							</tr>
 						</c:forEach>
-						
+						</c:if>
+						<c:if test="${empty listQna }">
+							<tr>
+								<td style="text-align:center;" colspan="5">등록된 QnA가 존재하지 않습니다.</td>
+							</tr>
+						</c:if>
 					</table>
 				</div>
 				<!-- /.box-body -->
@@ -128,7 +137,7 @@
 		var targetPage = $(this).attr("href");
 		var jobForm = $("#jobForm");
 		jobForm.find("[name='page']").val(targetPage);
-		jobForm.attr("action", "listPage").attr("method","get");
+		jobForm.attr("action", "listQna").attr("method","get");
 		jobForm.submit();
 	});
 	

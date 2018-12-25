@@ -44,9 +44,17 @@
 <body class="hold-transition login-page">
 	<security:authorize access="isAuthenticated()">
 		<!-- 합칠때 경로 바꿀 것! -->
-		<script>
-			location.href="<%=request.getContextPath()%>/main/myPartakeList";
-		</script>
+		<security:authorize access="hasAuthority('ROLE_USER')">
+			<script>
+				location.href="<%=request.getContextPath()%>/main/myPartakeList";
+			</script>
+		</security:authorize>
+		<security:authorize access="hasAuthority('ROLE_ADMIN')">
+			<script>
+				location.href="<%=request.getContextPath()%>/admin/mainForm";
+			</script>
+		</security:authorize>
+	
 	</security:authorize>
 	<div class="login-box">
 		<div class="login-logo">
