@@ -20,7 +20,7 @@ public class ProjectDAOImpl implements ProjectDAO{
 	
 	@Override
 	public List<ProjectVO> searchProjectList(SearchCriteria cri) throws SQLException {
-		int offset = cri.getPageStart();
+		int offset = cri.getPageStartRowNum();
 		int limit = cri.getPerPageNum();
 		RowBounds rowBounds = new RowBounds(offset,limit);
 		
