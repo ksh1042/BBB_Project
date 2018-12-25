@@ -15,9 +15,16 @@
 </head>
 <body>
 	<section class="content-header">
-		<h1><a href="#">내</a> 사서함</h1>
+	
+		<c:if test="${ loginUser.id == param.id }">
+			<h1><a href="#">내</a> 사서함</h1>
+		</c:if>
+		<c:if test="${ loginUser.id != param.id }">
+			<h1><a href="#">${ param.id }</a>님의 사서함</h1>
+		</c:if>
+		
 		<ol class="breadcrumb">
-			<li><a href="<%= request.getContextPath() %>/postbox/search">postbox</a></li>
+			<li>postbox</li>
 			<li><a href="<%= request.getContextPath() %>/postbox/list"><b>list</b></a></li>
 		</ol>
 	</section>
@@ -25,7 +32,7 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-9">
-				<ul class="timeline">
+				<ul class="timeline" id="timelineDiv">	<!-- timeline id -->
 					<!-- sample-column -->
 					<c:if test="${ empty postList }">
 						<li>
@@ -40,10 +47,10 @@
 						</li>
 					</c:if>
 					<c:forEach var="post" items="${ postList }" varStatus="stat">
-						<c:if test="${ post.pbfNum eq '0' }">
+						<c:if test="${ post.pbfNum eq 0 }">
 							<li class="divider"></li>
 						</c:if>
-						<li class="${ post.pbfNum != '0' ? 'post-reply' : 'post-main' }">
+						<li class="${ post.pbfNum != 0 ? 'post-reply' : 'post-main' }">
 							<i class="fa fa-user ${ post.writer eq loginUser.id ? 'bg-aqua' : 'bg-green' }"></i>
 							<div class="timeline-item">
 								
@@ -52,15 +59,15 @@
 								</span>
 								<h3 class="timeline-header">
 									<c:if test="${ post.writer eq loginUser.id }">
-										<a href="#">내</a> 메세지
+										<a href="<%= request.getContextPath() %>/postbox/list?id=${ loginUser.id }">내</a> 메세지
 									</c:if>
 									<c:if test="${ post.writer != loginUser.id }">
-										<a href="#">${ post.writer }</a>님의 메세지
+										<a href="<%= request.getContextPath() %>/postbox/list?id=${ post.writer }">${ post.writer }</a>님의 메세지
 									</c:if>
 								</h3>
 								<div class="timeline-body">${ post.content }</div>
 								<div class="timeline-footer">
-									<c:if test="${ post.pbfNum eq '0' }">
+									<c:if test="${ post.pbfNum eq 0 }">
 										<a href="#">댓글달기</a>
 									</c:if>
 								</div>
@@ -81,11 +88,12 @@
 						<i class="fa fa-user fa-user bg-aqua"></i>
 						<div class="timeline-item">
 							<h3 class="timeline-header">글 쓰기</h3>
-							<div class="timeline-body"><label>내용</label><textarea class="form-control" type="text" name="comment" placeholder="내용을 입력..." style="resize:vertical;"></textarea></div>
+							<div class="timeline-body"><label>내용</label><textarea class="form-control" name="comment" placeholder="내용을 입력..." style="resize:vertical;"></textarea></div>
 							<div class="timeline-footer">
 								<button class="btn btn-primary btn-xs" onclick="write_go();">입력</button>
+								<button class="btn btn-primary btn-xs" onclick="test_go();">테스트</button>
 								<button type="reset" class="btn btn-danger btn-xs">취소</button>
-								
+								숨김<input type="checkbox" name="visibility" >
 							</div>
 						</div>
 					</li>
@@ -96,8 +104,13 @@
 	</section>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script>
+		function test_go(){
+			var x = $('input[name=visibility]').is(':checked', true)? 1 : 0;
+			alert(x);
+		}
 		function write_go(){
 			var content = $('textarea[name=comment]').val();
+			var visible = $('input[name=visibility]').is(':checked', true)? 1 : 0;
 			
 			if(content == ''){
 				alert('내용을 입력하셔야 합니다');
@@ -106,23 +119,28 @@
 			}
 			
 			// TODO --- 글자 길이수 제한
-			if(content.length < 99999){
+			if(content.length > 99999){
 				alert('글자 수 초과');
 				return;
 			}
 			$.ajax({
 				url : '<%= request.getContextPath() %>/postbox/write',
-				method : 'post',
-				data : {
+				type : 'post',
+				data : JSON.stringify({
 					content : content,
 					id : '${param.id}',
-					page : '${param.page}'
+					writer : '${loginUser.id}',
+					visibility : visible
+				}),
+				headers:{
+					"Content-Type":"application/json",
+					"X-HTTP-Method-Override":"post"
 				},
 				success : function(data){	
 					if(data == 'SUCCESS'){
 						alert('글이 정상적으로 등록되었습니다.');
 						$('textarea[name=content]').val('');
-						//refreshPage('<%= request.getContextPath() %>/postbox/list/');
+						// refreshPage('<%= request.getContextPath() %>/postbox/list/');
 					}
 				},
 				error : function(error){

@@ -1,12 +1,17 @@
 package com.bbb.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bbb.dto.MemberVO;
 import com.bbb.dto.PostboxVO;
@@ -25,6 +30,7 @@ public class PostboxController {
 		//System.out.println(postList);
 		model.addAttribute("postList", postList);
 	}
+	
 	@RequestMapping(value="/search", method=RequestMethod.GET)
 	public void postboxSearch(SearchCriteria cri, Model model) throws Exception { 
 		PageMaker pageMaker = new PageMaker();
@@ -42,4 +48,21 @@ public class PostboxController {
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("pageMaker", pageMaker);
 	}
+	
+	@RequestMapping(value="/write", method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> poseboxWrite(@RequestBody PostboxVO postbox) throws Exception {
+		ResponseEntity<String> entity = null;
+		System.out.println(postbox);
+		try {
+			postboxService.createPostbox(postbox);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		}catch(SQLException e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return entity;
+	}
+	
 }

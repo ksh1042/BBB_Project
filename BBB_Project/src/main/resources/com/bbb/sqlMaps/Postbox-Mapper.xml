@@ -11,7 +11,7 @@
 	<select id="selectPostboxListById" parameterType="str" resultType="post">
 		SELECT *
 		FROM tbl_postbox
-		WHERE id=#{id} AND pbfNum IS NULL
+		WHERE id=#{id} AND pbfNum=0
 	</select>
 	<update id="insertPostbox" parameterType="post">
 		INSERT INTO tbl_postbox(pbNum, pbfNum, id, content, writer, visibility)
@@ -33,12 +33,15 @@
 		SELECT *
 		FROM tbl_member
 		WHERE id IS NOT NULL
+		AND operatoryn=0
 		<include refid="member_search"/>
+		ORDER BY id DESC
 	</select>
 	<select id="selectSearchMemberListCount" resultType="int">
 		SELECT count(*)
 		FROM tbl_member
 		WHERE id IS NOT NULL
+		AND operatoryn=0
 		<include refid="member_search" />
 	</select>
 

@@ -97,7 +97,22 @@
 								<script>
 									function search_go(){
 										var keyword = $('input#navbar-search-input').val();
-										location.href='<%= request.getContextPath() %>/postbox/search/?searchType=i&keyword='+keyword;
+										
+										if(keyword == ''){
+											self.location="search?"
+												   //+"${pageMaker.makeQuery(1)}"
+												   +"searchType=i"
+												   +"&keyword="
+												   +'${ pageMaker.cri.keyword}';
+										}else {
+											self.location="search?"
+												   //+"${pageMaker.makeQuery(1)}"
+												   +"searchType=i"
+												   +"&keyword="
+												   +keyword;
+										}										
+										// location.href='<%= request.getContextPath() %>/postbox/search/?searchType=i&keyword='+keyword;
+										
 									}
 								</script>
 							</div>

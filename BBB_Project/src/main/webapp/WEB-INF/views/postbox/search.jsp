@@ -61,23 +61,42 @@
 				</div>
 				<!-- table.end -->
 				<div class="box-footer">
-					<ul class="pagination pagination-sm no-margin pull-right">
+					<ul class="pagination link pagination-sm no-margin pull-right">
 						<c:if test="${pageMaker.prev}">
-							<li><a href="${pageMaker.startPage - 1}">&laquo;</a></li>
+								<li><a href="${pageMaker.startPage - 1}">&laquo;</a></li>
 						</c:if>
-						<c:forEach begin="${pageMaker.startPage }"
-							end="${pageMaker.endPage }" var="idx">
-							<li <c:out value="${pageMaker.cri.page == idx ? 'class=active':''}"/>>
+
+						<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+							<li
+								<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
 								<a href="${idx}">${idx}</a>
 							</li>
 						</c:forEach>
+
 						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-							<li><a
-								href="${pageMaker.endPage +1}">&raquo;</a></li>
+							<li><a href="${pageMaker.endPage +1}">&raquo;</a></li>
 						</c:if>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</section>
+	<form id="jobForm">
+	  <input type='hidden' name="page" value="${pageMaker.cri.page}"/>
+	  <input type='hidden' name="perPageNum" value="${pageMaker.cri.perPageNum}"/>
+	  <input type='hidden' name="searchType" value="${pageMaker.cri.searchType}"/>
+	  <input type='hidden' name="keyword" value="${pageMaker.cri.keyword}"/>
+	</form>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script>
+		$(".link li a").on("click", function(event){
+			event.preventDefault(); 
+			var targetPage = $(this).attr("href");
+			
+			var jobForm = $("#jobForm");
+	 		jobForm.find("[name='page']").val(targetPage);
+			jobForm.attr("action","search").attr("method", "get");		
+			jobForm.submit();
+		});
+	</script>
 </body>
