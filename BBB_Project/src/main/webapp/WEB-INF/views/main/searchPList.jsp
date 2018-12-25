@@ -89,7 +89,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
 	
-	var id = ${loginUser.id};
+	var id = '${loginUser.id}';
 	$('.join').on("click",function(){
 		var form = $(this).attr('id');
 		
