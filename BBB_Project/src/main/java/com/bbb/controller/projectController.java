@@ -30,6 +30,10 @@ public class projectController {
 	private ProjectService service;
 	
 	
+	@RequestMapping(value="/test", method=RequestMethod.GET)
+	public void test(){
+		
+	}
 	
 	@RequestMapping(value="/joinProject", method=RequestMethod.POST)
 	public ResponseEntity<String> joinProject(@RequestBody ProjectPartakeVO takeVO){
@@ -59,11 +63,12 @@ public class projectController {
 		model.addAttribute("myPartakeList",service.readMyProjectList(loginUser.getId()));
 	}
 	
-	//프로젝트 계획서
 	@RequestMapping(value="/projectPlan", method=RequestMethod.GET)
 	public String projectPlan() throws Exception{
-		return "PDFviewer/viewer.jsp?file=compressed.tracemonkey-pldi-09.pdf";
+		
+		return "/resources/web/viewer.html";
 	}
+	
 		
 		
 }
