@@ -1,6 +1,7 @@
 package com.bbb.controller;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +38,8 @@ public class PostboxController {
 		pageMaker.setCri(cri);
 		
 		int totalCount = postboxService.readMemberListCount(cri);
-		System.out.println("totalCount : " + totalCount);
-		
 		pageMaker.setTotalCount(totalCount);
-		
 		List<MemberVO> memberList = postboxService.readMemberList(cri);
-		
-		System.out.println("memberList : " + memberList);
 		
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("pageMaker", pageMaker);
@@ -64,5 +60,18 @@ public class PostboxController {
 		
 		return entity;
 	}
-	
+	/*
+	@RequestMapping(value="/write", method=RequestMethod.POST)
+	public String poseboxWrite(PostboxVO postbox) throws Exception {
+		System.out.println(postbox);
+		try {
+			postboxService.createPostbox(postbox);
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		
+		}
+		return "redirect:/postbox/list";
+	}
+	*/
 }

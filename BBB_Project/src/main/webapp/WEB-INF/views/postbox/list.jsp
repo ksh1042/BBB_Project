@@ -87,14 +87,23 @@
 					<li>
 						<i class="fa fa-user fa-user bg-aqua"></i>
 						<div class="timeline-item">
-							<h3 class="timeline-header">글 쓰기</h3>
-							<div class="timeline-body"><label>내용</label><textarea class="form-control" name="comment" placeholder="내용을 입력..." style="resize:vertical;"></textarea></div>
-							<div class="timeline-footer">
-								<button class="btn btn-primary btn-xs" onclick="write_go();">입력</button>
-								<button class="btn btn-primary btn-xs" onclick="test_go();">테스트</button>
-								<button type="reset" class="btn btn-danger btn-xs">취소</button>
-								숨김<input type="checkbox" name="visibility" >
-							</div>
+							<form id="write">
+								<h3 class="timeline-header">글 쓰기</h3>
+								<div class="timeline-body">
+									<input type="hidden" name="pbNum" value="0">
+									<input type="hidden" name="pbfNum" value="0">
+									<input type="hidden" name="id" value="${ param.id }">
+									<input type="hidden" name="writer" value="${ loginUser.id }">
+									<label>내용</label>
+									<textarea class="form-control" name="content" placeholder="내용을 입력..." style="resize:vertical;"></textarea>
+								</div>
+								<div class="timeline-footer">
+									<button class="btn btn-primary btn-xs" onclick="write_go();">입력</button>
+									<button class="btn btn-primary btn-xs" onclick="test_go();">테스트</button>
+									<button type="reset" class="btn btn-danger btn-xs">취소</button>
+									숨김<input type="checkbox" name="visibility" >
+								</div>
+							</form>
 						</div>
 					</li>
 					<!-- input-sample.end -->
@@ -109,7 +118,9 @@
 			alert(x);
 		}
 		function write_go(){
-			var content = $('textarea[name=comment]').val();
+			var flag = false;
+			
+			var content = $('textarea[name=content]').val();
 			var visible = $('input[name=visibility]').is(':checked', true)? 1 : 0;
 			
 			if(content == ''){
@@ -127,6 +138,8 @@
 				url : '<%= request.getContextPath() %>/postbox/write',
 				type : 'post',
 				data : JSON.stringify({
+					pbNum : 0,
+					pbfNum : 0,
 					content : content,
 					id : '${param.id}',
 					writer : '${loginUser.id}',
@@ -139,19 +152,28 @@
 				success : function(data){	
 					if(data == 'SUCCESS'){
 						alert('글이 정상적으로 등록되었습니다.');
-						$('textarea[name=content]').val('');
-						// refreshPage('<%= request.getContextPath() %>/postbox/list/');
+						flag = true;
 					}
 				},
 				error : function(error){
 					alert('통신 오류가 발생하였습니다. 잠시후 다시 시도해주시기 바랍니다. 증상이 지속될 경우 자세한 사항은 관리자에게 문의 바랍니다.');
+					flag = false;
 				}
+				
 			});
+			
 		}
 		
-		function refreshPage(pageInfo){
-			$.getJSON(pageInfo, function(data){
-				
+		var printData=function(replyArr,target,templateObject){
+			var template=Handlebars.compile(templateObject.html());
+			var html=template(replyArr);
+			$('.timeline-item').remove();
+			target.after(html);
+		};
+		
+		function refreshPage(pageUrl){
+			$.getJSON(pageUrl, function(data){
+				printData(data.list,$('#timelineDiv'),$('#template'));
 			});
 		}
 	</script>
