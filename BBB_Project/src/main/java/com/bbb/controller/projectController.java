@@ -39,9 +39,8 @@ public class projectController {
 	public ResponseEntity<String> joinProject(@RequestBody ProjectPartakeVO takeVO){
 		
 		ResponseEntity<String> entity = null;
-		String id = takeVO.getId();
-					
-			try {
+
+		try {
 				service.joinProject(takeVO);
 				entity=new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
 			} catch (Exception e1) {
@@ -64,10 +63,18 @@ public class projectController {
 	}
 	
 	@RequestMapping(value="/projectPlan", method=RequestMethod.GET)
-	public String projectPlan() throws Exception{
+	public void projectPlan(int pjNum, HttpServletRequest request) throws Exception{
 		
-		return "/resources/web/viewer.html";
+		
+		
 	}
+	
+	@RequestMapping(value="/requirement", method=RequestMethod.GET)
+	public void requirementDefinition() throws Exception{
+		
+	}
+	
+	
 	
 		
 		
