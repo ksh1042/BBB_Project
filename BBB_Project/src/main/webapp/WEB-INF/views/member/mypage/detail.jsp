@@ -8,12 +8,12 @@
 </head>
 <body>
 	<form>
-		아이디 : <input type ="text" name="name" readonly value="${member.id }"/><br/>
-		패스워드 : <input type ="password" name="pwd" value="${member.pwd }"/><br/>
-		이름 : <input type="text" name="name" value="${member.name }"/><br/>
-		이메일 : <input type="email" name="email" value="${member.email }"/><br/>
-		핸드폰 : <input type="text" name="phone" value="${member.phone }"/><br/>
-	
+		아이디 : <input type ="text" name="id" readonly value="${loginUser.id }"/><br/>
+		패스워드 : <input type ="password" name="pwd" value="${loginUser.pwd }"/><br/>
+		이름 : <input type="text" name="name" value="${loginUser.name }"/><br/>
+		이메일 : <input type="email" name="email" value="${loginUser.email }"/><br/>
+		핸드폰 : <input type="text" name="phone" value="${loginUser.phone }"/><br/> 
+
 	</form>
 </body>
 </html>
