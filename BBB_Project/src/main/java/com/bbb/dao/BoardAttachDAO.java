@@ -11,7 +11,7 @@ public interface BoardAttachDAO {
 
 	public void deleteAttach(String uUid) throws SQLException;
 
-	public List<BoardAttachVO> selectAttachesByBno(int bNum)throws SQLException;
+	public List<BoardAttachVO> selectAttachesBybNum(int bNum)throws SQLException;
 
 	public void deleteAllAttach(int bNum)throws SQLException;
 }

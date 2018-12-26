@@ -11,5 +11,7 @@
   		<typeAlias type="com.bbb.dto.MemberVO" alias="member"/>
   		<typeAlias type="com.bbb.dto.BoardVO" alias="board"/>
   		<typeAlias type="com.bbb.dto.BoardAttachVO" alias="boardAttach"/>
+  		<typeAlias type="com.bbb.dto.ProjectPartakeVO" alias="projectPartake"/>
+		<typeAlias type="com.bbb.dto.ProjectVO" alias="project"/>
   	</typeAliases>
   </configuration>

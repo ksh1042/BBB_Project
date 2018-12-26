@@ -27,7 +27,7 @@ public class BoardAttachDAOImpl implements BoardAttachDAO {
 	}
 
 	@Override
-	public List<BoardAttachVO> selectAttachesByBno(int bNum) throws SQLException {
+	public List<BoardAttachVO> selectAttachesBybNum(int bNum) throws SQLException {
 		List<BoardAttachVO> attachList =
 				session.selectList("Board.selectAttachBybNum",bNum);
 		return attachList;
@@ -36,7 +36,7 @@ public class BoardAttachDAOImpl implements BoardAttachDAO {
 	@Override
 	public void deleteAllAttach(int bNum) throws SQLException {
 		session.update("Board.deleteAllAttach", bNum);
-
+		
 	}
 	
 }
