@@ -9,7 +9,7 @@
 	<bean id="memberService" class="com.bbb.service.MemberServiceImpl"
 		p:memberDAO-ref="memberDAO" />
 	
-		  
+
 	<!-- Project -->
 	<bean id="projectDAO"
 		  class="com.bbb.dao.ProjectDAOImpl"
@@ -18,4 +18,12 @@
 		  class="com.bbb.service.ProjectServiceImpl"
 		  p:projectDAO-ref="projectDAO"/>
 	
+
+	<bean id="mailNotifier"
+	  class="com.bbb.mail.MimeAttachNotifier"
+	  p:mailSender-ref="mailSender"
+	  />
+		
+		
+
 </beans>

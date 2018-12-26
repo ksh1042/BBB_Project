@@ -24,6 +24,38 @@
       delete from tbl_member
       where id=#{id}   
    </update>   
+   <select id="idCheck" parameterType="str" resultType="int" >
+	    select COUNT(*) FROM tbl_member
+		where id = #{id}
+	</select>
+	<select id="emailCheck" parameterType="str" resultType="int" >
+	    select COUNT(*) FROM tbl_member
+		where email = #{email}
+	</select>
+	<select id="findID" parameterType="member" resultType="str">
+		select
+			id
+		from
+			tbl_member
+		where
+			name=#{name} 
+		and
+			email=#{email}
+	</select>
+	<update id="resetPwd" parameterType="member">
+		update
+			tbl_member
+		set
+			pwd = #{pwd}
+		where
+			id = #{id}
+	</update>
+	<!-- email-auth -->
+	<update id="updateEmailyn" parameterType="member">
+		UPDATE tbl_member
+		SET emailyn=1
+		WHERE id = #{id}
+	</update>
 </mapper>
 
 

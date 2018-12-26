@@ -87,8 +87,8 @@
 				</div>
 			</form>
 
-			<a href="#">I forgot my password</a><br> <a href="register.html"
-				class="text-center">Register a new membership</a>
+			 <a href="findIdPwd">I forgot my id/password.</a><br>
+  			 <a href="register" class="text-center">Register a new membership</a>
 
 		</div>
 		<!-- /.login-box-body -->
@@ -111,6 +111,11 @@
 	<script
 		src="<%=request.getContextPath()%>/resources/plugins/iCheck/icheck.min.js"></script>
 	<script>
+	
+	if(!${newMember eq null }){
+			alert("${newMember }님 회원가입을 축하합니다.");
+	}
+	
   $(function () {
     $('input').iCheck({
       checkboxClass: 'icheckbox_square-blue',

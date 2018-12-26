@@ -3,7 +3,8 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 
-
+<body>
+	
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -18,13 +19,14 @@
 
     <!-- Main content -->
     <section class="content container-fluid">
-
+	
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
 
     </section>
     <!-- /.content -->
+</body>
   
 
   

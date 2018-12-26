@@ -17,4 +17,14 @@ public interface MemberService {
 	
 	void remove(String id)throws SQLException;
 	
+	int idCheckSer(String id)throws SQLException;
+	
+	int emailCheckSer(String email)throws SQLException;
+	
+	String findID(MemberVO member)throws SQLException;
+	
+	void resetMemberPwd(MemberVO member)throws SQLException;
+	
+	public void updateAssignEmail(String id) throws SQLException;
+	
 }
