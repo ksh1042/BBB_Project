@@ -7,9 +7,11 @@
 	<typeAliases>
 		<typeAlias type="java.lang.Integer" alias="int" />
 		<typeAlias type="java.lang.String" alias="str" />
-		<typeAlias type="com.bbb.dto.MemberVO" alias="member" />
-		<typeAlias type="com.bbb.dto.ProjectPartakeVO" alias="projectPartake"/>
+		<typeAlias type="com.bbb.dto.MemberVO" alias="member"/>
 		<typeAlias type="com.bbb.dto.ProjectVO" alias="project"/>
+		<typeAlias type="com.bbb.dto.ProjectPartakeVO" alias="projectPartake"/>
+		<typeAlias type="com.bbb.dto.QnaVO" alias="question"/>
+		<typeAlias type="com.bbb.dto.QnaReplyVO" alias="questionReply"/>
 	</typeAliases>
 	
 	
