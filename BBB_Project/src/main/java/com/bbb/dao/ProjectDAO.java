@@ -15,6 +15,12 @@ public interface ProjectDAO {
 	public int searchProjectCount(SearchCriteria cri) throws Exception;
 	public void searchProjectJoin(ProjectPartakeVO takeVO) throws Exception;
 	
+	
+
 	// 프로젝트의 모든 정보를 가져옴.
-		List<ProjectVO> selectProjectList() throws SQLException;
+	List<ProjectVO> selectProjectList() throws SQLException;
+	
+	public void insertProject(ProjectVO project) throws SQLException;
+	public String verifyProjectName(String name) throws SQLException;
+
 }

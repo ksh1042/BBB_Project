@@ -68,8 +68,23 @@ public class ProjectServiceImpl implements ProjectService{
 		List<ProjectPartakeVO> bindList = projectPartakeDAO.selectBindingProject(id);
 		return bindList;
 	}
-
 	
+	@Override
+	public void addProject(ProjectVO project) throws SQLException {
+		projectDAO.insertProject(project);
+	}
+
+	@Override
+	public String readVerifyProjectName(String name) throws SQLException {
+		return projectDAO.verifyProjectName(name);
+	}
+
+	@Override
+	public List<ProjectVO> allProjectList() throws SQLException {
+		
+		
+		return null;
+	}
 	
 
 }

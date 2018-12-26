@@ -3,10 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Member">
    
-   <select id="selectMemberList" resultType="member">
-      select * from tbl_member
-      order by regdate desc
-   </select>
+  
    <select id="selectMemberById" resultType="member">
       select * from tbl_member
       where id=#{id}
@@ -23,7 +20,38 @@
    <update id="deleteMember">
       delete from tbl_member
       where id=#{id}   
-   </update>   
+   </update> 
+   
+   <sql id="search">
+		<if test="searchType !=null">
+			<if test="searchType =='i'.toString()">
+				and id like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType =='n'.toString()">
+				and name like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType =='p'.toString()">
+				and phone like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType =='e'.toString()">
+				and email like '%'||#{keyword}||'%'
+			</if>
+		</if>
+   </sql> 
+	
+   <select id="selectMemberList" resultType="member">
+      select * from tbl_member
+      where id is not null
+      <include refid="search" />
+   </select>
+   
+   <select id="selectMemberListCount" resultType="int">
+		select count(*) 
+		from tbl_member
+		where id is not null
+		<include refid="search" />
+	</select>
+   
 </mapper>
 
 
