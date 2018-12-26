@@ -12,13 +12,13 @@
 	name="viewport">
 <!-- Bootstrap 3.3.7 -->
 <link rel="stylesheet"
-	href="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css">
+	href="/resources/bootstrap/dist/css/bootstrap.min.css">
 <!-- Font Awesome -->
 <link rel="stylesheet"
-	href="/resources/bower_components/font-awesome/css/font-awesome.min.css">
+	href="/resources/font-awesome/css/font-awesome.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet"
-	href="/resources/bower_components/Ionicons/css/ionicons.min.css">
+	href="/resources/Ionicons/css/ionicons.min.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="/resources/dist/css/AdminLTE.min.css">
 <!-- iCheck -->
@@ -64,8 +64,8 @@
               </div>
               <!-- /.box-body -->
 
-              <div class="box-footer">
-                <button type="button" class="btn btn-primary" onclick="back_go();" style="margin-left:60px;padding-left:20px;padding-right:20px;">취소</button>
+              <div class="box-footer" style="text-align:center;">
+                <button type="button" class="btn btn-primary" onclick="back_go();" style="margin-left:18px;padding-left:20px;padding-right:20px;">취소</button>
                 <button type="button" class="btn btn-primary"  style="margin-left:63px;" id="findButton" disabled="disabled" onclick="findID();">아이디 찾기</button>
               </div>
               
@@ -77,9 +77,9 @@
 	<!-- /.register-box -->
 
 	<!-- jQuery 3 -->
-	<script src="/resources/bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="/resources/jquery/dist/jquery.min.js"></script>
 	<!-- Bootstrap 3.3.7 -->
-	<script src="/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="/resources/bootstrap/dist/js/bootstrap.min.js"></script>
 	<!-- iCheck -->
 	<script src="/resources/plugins/iCheck/icheck.min.js"></script>
 

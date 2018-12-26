@@ -12,13 +12,13 @@
 	name="viewport">
 <!-- Bootstrap 3.3.7 -->
 <link rel="stylesheet"
-	href="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css">
+	href="/resources/bootstrap/dist/css/bootstrap.min.css">
 <!-- Font Awesome -->
 <link rel="stylesheet"
-	href="/resources/bower_components/font-awesome/css/font-awesome.min.css">
+	href="/resources/font-awesome/css/font-awesome.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet"
-	href="/resources/bower_components/Ionicons/css/ionicons.min.css">
+	href="/resources/Ionicons/css/ionicons.min.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="/resources/dist/css/AdminLTE.min.css">
 <!-- iCheck -->
@@ -44,7 +44,7 @@
 			<p class="login-box-msg" style="font-size: 11pt;">Try PMS right
 				now !</p>
 
-			<form action="register" method="post" name="registerForm" id="registerForm" enctype="multipart/form-data">
+			<form action="register" method="post" name="registerForm" id="registerForm" > <!--enctype="multipart/form-data"  -->
 				<div>
 				<img class="profile-user-img img-responsive img-circle" src="/resources/images/profile.png" alt="User profile picture" id="profile" onclick="profile_go();"><br/>
 				<input type="file" name="image" id="uploadProfile" style="display:none;"/>
@@ -99,9 +99,9 @@
 	<!-- /.register-box -->
 
 	<!-- jQuery 3 -->
-	<script src="/resources/bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="/resources/jquery/dist/jquery.min.js"></script>
 	<!-- Bootstrap 3.3.7 -->
-	<script	src="/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script	src="/resources/bootstrap/dist/js/bootstrap.min.js"></script>
 	<!-- iCheck -->
 	<script src="/resources/plugins/iCheck/icheck.min.js"></script>
 
@@ -199,7 +199,7 @@
 		location.href="/commons/loginForm";
 	};
 	
-	function profile_go(){
+	<%-- function profile_go(){
 		$("#uploadProfile").click();
 		
 		$("#uploadProfile").change(function(){
@@ -228,7 +228,7 @@
 				
 			});
 		});
-	};
+	}; --%>
 	 
   
   

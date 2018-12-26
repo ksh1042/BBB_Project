@@ -23,8 +23,14 @@ public class MimeAttachNotifier {
 			MimeMessageHelper messageHelper=new MimeMessageHelper(message,true,"utf-8");
 			
 			for (int i = 0; i < 10; i++) {
+				
 				char tmp = (char)(Math.random()*74+48);
-				tempKey += tmp;
+				
+				if((tmp >= 48 && tmp <= 57) || (tmp >= 65 && tmp <= 90) || (tmp >= 97 && tmp <= 122)){
+				
+					tempKey += tmp;
+					
+				}
 			}
 			messageHelper.setSubject("[PMS]사이트에서 인증 코드가 발송되었습니다."); 
 			String content="<h2>[PMS]사이트에서 인증 코드가 발송되었습니다.</h2>"

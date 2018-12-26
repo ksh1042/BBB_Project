@@ -111,6 +111,11 @@
 	<script
 		src="<%=request.getContextPath()%>/resources/plugins/iCheck/icheck.min.js"></script>
 	<script>
+	
+	if(!${newMember eq null }){
+			alert("${newMember }님 회원가입을 축하합니다.");
+	}
+	
   $(function () {
     $('input').iCheck({
       checkboxClass: 'icheckbox_square-blue',

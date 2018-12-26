@@ -46,7 +46,7 @@ public class CommonController {
 		service.register(member);
 		model.addAttribute("newMember", member.getName());
 		
-		return "commons/login";
+		return "redirect:commons/login";
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
