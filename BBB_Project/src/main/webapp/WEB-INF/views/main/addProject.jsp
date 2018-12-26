@@ -26,14 +26,6 @@
 						<div class="col-sm-6">
 							<h1 class="m-0 text-dark">프로젝트 생성</h1>
 						</div>
-						<div class="col-sm-6">
-							<ol class="breadcrumb float-sm-left">
-								<li class="breadcrumb-item">
-									
-								</li>
-							</ol>
-						</div>
-						<!-- /.col -->
 					</div>
 				</div>
 			</section>
@@ -240,7 +232,7 @@
 			}
 			
 			$.ajax({
-				url : '<%=request.getContextPath()%>/project/addProject',
+				url : '<%=request.getContextPath()%>/main/addProject',
 				method : 'POST',
 				data : JSON.stringify(json),
 				headers:{

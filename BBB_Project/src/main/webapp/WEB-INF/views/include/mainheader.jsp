@@ -14,30 +14,21 @@
 <head>
 <meta charset="UTF-8">
 <title><decorator:title default="내 사서함"></decorator:title></title>
-<meta
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-	name="viewport">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <!-- Bootstrap 3.3.7 -->
 <!-- Tell the browser to be responsive to screen width -->
-<meta
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-	name="viewport">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/bootstrap/dist/css/bootstrap.min.css">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/dist/css/bootstrap.min.css">
 <!-- Font Awesome -->
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/font-awesome/css/font-awesome.min.css">
 <!-- Ionicons -->
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/Ionicons/css/ionicons.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/Ionicons/css/ionicons.min.css">
 <!-- Theme style -->
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/dist/css/AdminLTE.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/dist/css/AdminLTE.min.css">
 <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
 	        page. However, you can choose any other skin. Make sure you
 	        apply the skin class to the body tag so the changes take effect. -->
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/dist/css/skins/skin-blue.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/dist/css/skins/skin-blue.min.css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -84,11 +75,7 @@
 									<script>
 										function postbox_go() {
 											var url = "/postbox/list?id=${ loginUser.id }";
-											window
-													.open(
-															url,
-															"_blank_1",
-															"toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=900, height=800, top=300, left=300, ");
+											window.open(url,"_blank_1","toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=900, height=800, top=300, left=300, ");
 										}
 									</script><i class="fa fa-envelope-o"></i><span class="label label-success"></span>
 								</a>
@@ -110,22 +97,17 @@
 								</form>
 							</li>
 							<!-- Usermenu  -->
-							<li class="dropdown user user-menu"><a href="#"
-								class="dropdown-toggle" data-toggle="dropdown"> <img
-									src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="user-image"
-									alt="User Image"> <span class="hidden-xs">Alexander
-										Pierce</span>
-							</a>
+							<li class="dropdown user user-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+									<img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> 
+									<span class="hidden-xs">${loginUser.name } 님 환영합니다.</span>
+								</a>
 								<ul class="dropdown-menu">
 									<!-- User image -->
-									<li class="user-header"><img
-										src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="img-circle"
-										alt="User Image">
-	
-										<p>
-											Alexander Pierce - Web Developer <small>Member since
-												Nov. 2012</small>
-										</p></li>
+									<li class="user-header">
+										<img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+										<p>${loginUser.name } <small>Member sinceNov. 2012</small></p>
+									</li>
 									<!-- Menu Body -->
 									<li class="user-body">
 										<div class="row">

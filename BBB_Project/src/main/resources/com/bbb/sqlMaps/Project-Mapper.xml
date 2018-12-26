@@ -3,6 +3,17 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Project">
 
+	<select id="selectProjectList" resultType="project">
+		select *
+		from tbl_project
+	</select>
+
+	<select id="selectProjectByPjNum" resultType="project">
+		select *
+		from tbl_project
+		where pjnum=#{pjNum}
+	</select>
+	
 	<select id="verifyProjectName" parameterType="str" resultType="str">
 		SELECT name
 		FROM tbl_project
@@ -12,7 +23,6 @@
 		INSERT INTO tbl_project(pjNum, name, disc, creator, visibility, startDate, endDate)
 		VALUES(pjnum_seq.nextval, #{name}, #{disc}, #{creator}, #{visibility}, #{startDate}, #{endDate})
 	</update>
-
 	
-
+	
 </mapper>

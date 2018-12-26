@@ -20,12 +20,19 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public List<MemberVO> selectMemberList(Criteria cri) throws SQLException {
-		int offset=cri.getPageStartRowNum();
-		int limit= cri.getPerPageNum();
-		RowBounds rowBounds=new RowBounds(offset, limit);
-		List<MemberVO> memberList=session.selectList("Member.selectMemberList",null);
+		
+		int offset = cri.getPageStartRowNum();
+		int limit = cri.getPerPageNum();
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<MemberVO> memberList=session.selectList("Member.selectMemberList",(SearchCriteria)cri, rowBounds);
 		
 		return memberList;
+	}
+	
+	@Override
+	public int selectMemberListCount(Criteria cri) throws SQLException {
+		int count = session.selectOne("Member.selectMemberListCount", (SearchCriteria)cri);
+		return count;
 	}
 
 	@Override
@@ -52,10 +59,6 @@ public class MemberDAOImpl implements MemberDAO {
 
 	}
 
-	@Override
-	public int selectSearchMemberListCount(Criteria cri) throws SQLException {
-		int count = session.selectOne("Member.selectSearchMemberListCount",(SearchCriteria)cri);
-		return 0;
-	}
+
 
 }

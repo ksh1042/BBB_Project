@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 
 <!DOCTYPE html>
@@ -45,9 +44,17 @@
 <body class="hold-transition login-page">
 	<security:authorize access="isAuthenticated()">
 		<!-- 합칠때 경로 바꿀 것! -->
-		<script>
-			location.href="<%=request.getContextPath()%>/main/mainForm";
-		</script>
+		<security:authorize access="hasAuthority('ROLE_USER')">
+			<script>
+				location.href="<%=request.getContextPath()%>/main/myPartakeList";
+			</script>
+		</security:authorize>
+		<security:authorize access="hasAuthority('ROLE_ADMIN')">
+			<script>
+				location.href="<%=request.getContextPath()%>/admin/mainForm";
+			</script>
+		</security:authorize>
+	
 	</security:authorize>
 	<div class="login-box">
 		<div class="login-logo">

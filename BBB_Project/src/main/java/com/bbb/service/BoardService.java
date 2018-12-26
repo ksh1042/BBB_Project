@@ -27,6 +27,5 @@ public interface BoardService {
 
 	int readSearchBoardCount(SearchCriteria cri) throws Exception;
 	
-	
 	public List<BoardAttachVO> getAttach(int bNum) throws Exception;
 }
