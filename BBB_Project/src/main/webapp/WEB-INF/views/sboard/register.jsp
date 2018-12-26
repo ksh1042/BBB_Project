@@ -13,9 +13,12 @@
 					<h3 class="box-title">REGISTER BOARD</h3>
 				</div>
 				<!-- /.box-header -->
-
 <form role="form" method="post" action="register">
-	<div class="box-body">
+<table border="1">
+		<label for="exampleInputEmail1">PROJECT NO</label> 
+		<input type="text"
+			name='pjNum' class="form-control" placeholder="Enter Title">
+		
 		<div class="form-group">
 			<label for="exampleInputEmail1">Title</label> 
 			<input type="text"
@@ -26,17 +29,19 @@
 			<textarea class="form-control" name="content" rows="3"
 				placeholder="Enter ..."></textarea>
 		</div>
-		
-			<td><input type="hidden" name="writer" value="${loginUser.id }" readonly="readonly" class="form-control" placeholder="Enter Title"></td>
-		
+		<div class="form-group">
+			<label for="exampleInputEmail1">Writer</label> 
+			<input type="text" readonly="readonly" value="${loginUser.id }"
+				name="writer" class="form-control" placeholder="Enter Writer">
+		</div>
 	</div>
 	<!-- /.box-body -->
+	</table>
 
 	<div class="box-footer">
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</div>
 </form>
-
 
 			</div>
 			<!-- /.box -->
@@ -51,8 +56,3 @@
 <!-- /.content-wrapper -->
 
 </body>
-
-<!--
-
-//-->
-</script>

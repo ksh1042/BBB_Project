@@ -5,8 +5,8 @@
 <mapper namespace="Notice">
    
    <update id="insertNotice">
-   	insert into tbl_notice(nNum,title,content,indate,expiredate)
-   	value(#{nNum},#{titl},#{content},#{indate},#{expireDate})
+   	insert into tbl_notice(nNum,title,content)
+   	values(nnum_seq.nextval,#{title},#{content})
    </update>
    <update id="updateNotice">
    	update

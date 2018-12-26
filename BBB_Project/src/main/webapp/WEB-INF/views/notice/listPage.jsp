@@ -59,12 +59,12 @@
 						<h3 class="box-title">LIST PAGING</h3>
 					</div>
 					<div class="box-body">
-						<table class="table table-bordered">
+						<table border="1" class="table table-bordered">
 							<tr>
-								<th style="width: 10px">글 번호</th>
-								<th>제목</th>
-								<th>작성일</th>
-								<th style="width: 40px">공지만료일</th>
+								<th style="width: 10px">N_NUM</th>
+								<th>TITLE</th>
+								<th>IN_DATE</th>
+								<th style="width: 40px">END_DATE</th>
 							</tr>
 							<c:if test="${!empty list }">
 							<c:forEach items="${noticeList}" var="notice">

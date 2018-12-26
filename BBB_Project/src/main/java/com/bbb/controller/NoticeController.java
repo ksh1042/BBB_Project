@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.bbb.dao.NoticeDAO;
 import com.bbb.dto.NoticeVO;
 import com.bbb.service.NoticeService;
 
@@ -19,15 +20,15 @@ public class NoticeController {
 	@Autowired
 	private NoticeService service;
 	
+	@Autowired
+	private NoticeDAO dao;
+	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public void list(Model model) throws Exception{
-		
+	
 		List<NoticeVO> noticeList = service.getNoticeList();
-		
 		model.addAttribute("noticeList",noticeList);
 	}
-	
-	
 	
 	@RequestMapping(value="/register", method=RequestMethod.GET)
 	public void registerGet(@ModelAttribute("cri")SearchCriteria cri){}

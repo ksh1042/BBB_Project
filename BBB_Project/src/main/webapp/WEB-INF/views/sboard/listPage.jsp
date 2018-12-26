@@ -48,7 +48,6 @@ button#searchBtn{
 		<div class="col-md-12">
 			<!-- general form elements -->
 			<div class='box'>
-				
 				<div class="box-header with-border">
 					<h3 class="box-title">Board List</h3>
 				</div>
@@ -79,40 +78,36 @@ button#searchBtn{
 					<h3 class="box-title">LIST PAGING</h3>
 				</div>
 				<div class="box-body">
-					<table class="table table-bordered">
+					<table class="table table-bordered" border="1">
 						<tr>
-							<th style="width: 10px">B NUM</th>
-							<th>PROJECT NUM</th>
+							<th style="width: 10px">BNO</th>
+							<th>PROJECT NO</th>
 							<th>TITLE</th>
 							<th>WRITER</th>
 							<th>INDATE</th>
 							<th>UPDATE DATE</th>
 							<th style="width: 40px">COUNT</th>
-						</tr>
-						<c:if test="${!empty list }">
-						<c:forEach items="${boardList}" var="board">
+					</tr>
+						
+						<c:forEach items="${list}" var="board">
 
 							<tr>
 								<td>${board.bNum}</td>
+								<td>${board.pjNum }</td>
 								<td><a
-									href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&bNum=${board.Bnum}'>
-										${board.pjNum}</a></td>
-								<td>${board.title }</td>
+									href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&bno=${board.bNum}'>
+										${board.title}</a></td>
 								<td>${board.writer}</td>
-								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+								<td><fmt:formatDate pattern="yyyy-MM-dd"
 										value="${board.indate}" /></td>
-								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+								<td><fmt:formatDate pattern="yyyy-MM-dd"
 										value="${board.updateDate}" /></td>
 								<td><span class="badge bg-red">${board.count }</span></td>
 							</tr>
 
 						</c:forEach>
-						</c:if>
-						<c:if test="${empty list }">
-							<tr>
-								<td style="text-align:center;" colspan="7">내용이 없습니다.</td>
-							</tr>
-						</c:if>
+						
+						
 
 					</table>
 				</div>

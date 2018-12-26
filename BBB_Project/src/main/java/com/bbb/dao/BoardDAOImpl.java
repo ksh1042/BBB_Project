@@ -18,42 +18,70 @@ public class BoardDAOImpl implements BoardDAO {
 		this.session = session;
 	}
 
-
 	@Override
 	public void insertBoard(BoardVO board) throws SQLException {
 		session.update("Board.insertBoard",board);
 	}
 
 	@Override
+	public BoardVO selectBoardByBnum(int bNum) throws SQLException {
+		BoardVO board = (BoardVO)session.selectOne("Board.selectBoardByBnum",bNum);
+		return board;
+	}
+
+	@Override
 	public void updateBoard(BoardVO board) throws SQLException {
 		session.update("Board.updateBoard",board);
+		
 	}
 
 	@Override
 	public void deleteBoard(int bNum) throws SQLException {
 		session.update("Board.deleteBoard",bNum);
-
 	}
 
 	@Override
-	public List<BoardVO> selectSearchBoardList(Criteria cri) throws SQLException {
-		int offset=cri.getPageStart();
-		int limit=cri.getPerPageNum();
+	public void increaseCount(int bNum) throws SQLException {
+		session.update("Board.increaseCount",bNum);
+		
+	}
+
+	
+
+	@Override
+	public List<BoardVO> selectSearchBoardList(SearchCriteria cri) throws SQLException {
+		int offset = cri.getPageStartRowNum();
+		int limit = cri.getPerPageNum();
 		RowBounds rowBounds = new RowBounds(offset,limit);
-		List<BoardVO> boardlist = session.selectList("Board.selectSearchBoardList", (SearchCriteria)cri, rowBounds);
-		return boardlist;
+		
+		List<BoardVO> boardList = session.selectList("Board.selectSearchBoardList",cri,rowBounds);
+		return boardList;
 	}
 
 	@Override
-	public int selectSearchBoardListCount(Criteria cri) throws SQLException {
-		int count = session.selectOne("Board.selectSearchBoardListCount", cri);
-		return count;
+	public List<BoardVO> selectBoardAll() throws SQLException {
+		List<BoardVO> boardList = session.selectList("Board.selectBoardAll");
+		return boardList;
 	}
 
 	@Override
-	public BoardVO selectBoardByBum(int bNum) throws SQLException {
-		BoardVO board = session.selectOne("Board.selectBoardByBum", bNum);
-		return board;
+	public List<BoardVO> selectBoardCriteria(Criteria cri) throws SQLException {
+		int offset = cri.getPageStartRowNum();
+		int limit = cri.getPerPageNum();
+		
+		RowBounds bounds = new RowBounds(offset,limit);
+		
+		List<BoardVO> boardList = session.selectList("Board.selectBoardAll",null,bounds);
+		
+		return boardList;
 	}
+
+	@Override
+	public int selectSearchBoardCount(SearchCriteria cri) throws SQLException {
+		int rowCount = session.selectOne("Board.selectSearchBoardCount",cri);
+		return rowCount;
+	}
+
+
 
 }

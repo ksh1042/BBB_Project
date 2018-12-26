@@ -8,6 +8,7 @@
 
 	<bean id="memberService" class="com.bbb.service.MemberServiceImpl"
 		p:memberDAO-ref="memberDAO" />
+		
 	<bean id="boardDAO"
 		class="com.bbb.dao.BoardDAOImpl"
 		p:session-ref="sqlSession"

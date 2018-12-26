@@ -10,34 +10,35 @@
 <body>
 	<form action="register" method="post">
 		
-		<table>
 			<tr>
 				<td><input type="hidden" name="nNum"/></td>
 			</tr>
+		<table border="1">
 			<tr>
-				<td>제목</td>
+				<td>TITLE</td>
 				<td><input type="text" name="title"/></td>
 			</tr>
 			<tr>
-				<td>내용</td>
-				<td><input type="text" name="content"/></td>
+				<td>CONTENT</td>
+				<td><textarea class="form-control" name="content" rows="6"
+				placeholder="Enter ..."></textarea></td>
 			</tr>
 			<tr>
-				<td>작성일</td>
+				<td>IN_DATE</td>
 				<td><input type="date" name="indate" /></td>
 			</tr>
 			<tr>
-				<td>공지만료일</td>
-				<td><input type="date" name="email" /></td>
+				<td>END_DATE</td>
+				<td><input type="date" name="expireDate" /></td>
 			</tr>
 			<tr>
-				<td>공지구분</td>
-				<td><input type="radio" name="gener" checked="checked" /> <span class="up">이슈</span>&nbsp;&nbsp; 
-				<input type="radio"name="gener"/> <span class="up">이벤트</span><input type="radio" name="gener" checked="checked" /> <span class="up">점검</span>&nbsp;&nbsp; 
-				<input type="radio"name="gener"/> <span class="up">기본</span></td>
+				<td>KIND</td>
+				<td><input type="radio" name="kind" checked="checked" value="1" /> <span class="up">이슈</span>&nbsp;&nbsp; 
+				<input type="radio"name="kind" value="2"/> <span class="up">이벤트</span><input type="radio" name="kind" checked="checked" value="3" /> <span class="up">점검</span>&nbsp;&nbsp; 
+				<input type="radio"name="kind" value="4"/> <span class="up">기본</span></td>
 			</tr>
 		</table>
-		<input type="submit" value="등록" onclick="list_go();"/>
+		<input type="submit" value="등록"/>
 		<input type="button" value="목록으로" onclick="list_go();" />
 	</form>
 	<form id="jobForm">
