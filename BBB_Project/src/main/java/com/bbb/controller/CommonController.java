@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -165,9 +166,12 @@ public class CommonController {
 	
 	@RequestMapping(value="/emailAuth", method=RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<String> emailAuthPOST(HttpServletRequest request, String authKey) throws Exception {
+	public ResponseEntity<String> emailAuthPOST(HttpServletRequest request, @RequestParam(value="authKey")String authKey) throws Exception {
 		ResponseEntity<String> entity = null;
 		MemberVO loginUser = (MemberVO)request.getSession().getAttribute("loginUser");
+		
+		System.out.println("notifier.getTempKey() : " + notifier.getTempKey());
+		System.out.println("authKey : " + authKey);
 		
 		if(notifier.getTempKey().equals(authKey)){
 			try {

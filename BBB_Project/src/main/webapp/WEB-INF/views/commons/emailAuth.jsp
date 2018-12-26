@@ -50,10 +50,9 @@
 
 			<form> <!--enctype="multipart/form-data"  -->
 				<div class="form-group has-feedback">
-					<input type="text" name="authKey" class="form-control" placeholder="인증코드를 입력..."
-						oninput="checkId();"> <span
-						class="glyphicon glyphicon-envelope form-control-feedback"></span> <label
-						id="idState" style="font-size: 0.8em;"></label>
+					<input type="text" name="authKey" class="form-control" placeholder="인증코드를 입력..."> 
+					<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+					<label id="idState" style="font-size: 0.8em;"></label>
 				</div>
 				
 				<div class="row">
@@ -64,6 +63,8 @@
 					<div class="box-footer" style="text-align:center;">
 						<button type="button" class="btn btn-warning btn-flat"
 							onclick="reissue_go();" style="margin-left:20px;padding-left:20px;padding-right:20px;">코드 재발급</button>
+						<button type="button" class="btn btn-warning btn-flat"
+							onclick="logout_go();" style="margin-left:20px;padding-left:20px;padding-right:20px;">로그아웃</button>
 						<button type="button" class="btn btn-primary btn-flat"
 							onclick="confirm_go();"style="margin-left:55px;">확인</button>
 					
@@ -90,21 +91,21 @@
 		function reissue_go() {
 			location.href = '<%=request.getContextPath()%>/commons/emailAuth';
 		}
+		function logout_go() {
+			location.href = '<%=request.getContextPath()%>/commons/logout';
+		}
 		function confirm_go() {
 			
 			if($('input[name=authKey]').val().length != 8){
 				alert('인증키는 8자리입니다. 다시 확인해주세요.');
 				return;
 			}
-			
+			var authKey = $('input[name=authKey]').val();
+			alert('authKey : ' + authKey);
 			$.ajax({
 				url : '<%= request.getContextPath() %>/commons/emailAuth',
 				type : 'POST',
-				data : JSON.stringify({ authKey : $('input[name=authKey]').val() }),
-				headers:{
-					"Content-Type":"application/json",
-					"X-HTTP-Method-Override":"post"
-				},
+				data : { authKey : authKey },
 				success : function(data) {
 					if( data == 'SUCCESS' ){
 						alert('인증이 정상적으로 완료되었습니다.');

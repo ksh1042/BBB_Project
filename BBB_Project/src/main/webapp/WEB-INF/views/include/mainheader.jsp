@@ -44,6 +44,7 @@
 </head>
 
 <body class="hold-transition skin-blue layout-top-nav">
+	<%@ include file="/WEB-INF/views/commons/include/emailyn.jsp" %>
 	<div class="wrapper">
 		<header class="main-header">
 			<nav class="navbar navbar-static-top">

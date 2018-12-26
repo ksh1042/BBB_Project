@@ -85,7 +85,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public void updateEmailynById(String id) throws SQLException {
-		session.update("Member.updateEmailynById", id);
+		session.update("Member.updateEmailyn", id);
 	}
 
 
