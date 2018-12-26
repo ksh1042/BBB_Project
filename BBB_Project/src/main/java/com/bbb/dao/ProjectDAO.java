@@ -12,10 +12,10 @@ import com.bbb.dto.ProjectVO;
 public interface ProjectDAO {
 
 	public List<ProjectVO> searchProjectList(SearchCriteria cri) throws SQLException;
-	public int searchProjectCount(SearchCriteria cri) throws Exception;
-	public void searchProjectJoin(ProjectPartakeVO takeVO) throws Exception;
+	public int searchProjectCount(SearchCriteria cri) throws SQLException;
+	public void searchProjectJoin(ProjectPartakeVO takeVO) throws SQLException;
 	
-	
+	public ProjectVO getProjectMain(int pjNum) throws SQLException;
 
 	// 프로젝트의 모든 정보를 가져옴.
 	List<ProjectVO> selectProjectList() throws SQLException;

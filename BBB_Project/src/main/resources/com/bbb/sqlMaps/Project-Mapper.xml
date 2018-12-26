@@ -35,11 +35,11 @@
 		FROM tbl_project
 		WHERE name=#{name}
 	</select>
+	
 	<update id="insertProject" parameterType="project">
 		INSERT INTO tbl_project(pjNum, name, disc, creator, visibility, startDate, endDate)
 		VALUES(pjnum_seq.nextval, #{name}, #{disc}, #{creator}, #{visibility}, #{startDate}, #{endDate})
-	</update>
-	
+	</update>	
 	
 </mapper>
 

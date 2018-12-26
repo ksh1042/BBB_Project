@@ -6,7 +6,7 @@
 	<select id="selectProjectPartakeList" resultType="int">
    		select pjnum
    		from tbl_project_partake
-   		where id=#{id}
+   		where id=#{id} and assignyn=1
 	</select>
 	
 	<select id="selectBindingProject" resultType="projectPartake">
@@ -14,5 +14,6 @@
 		from tbl_project_partake
 		where id=#{id}
 	</select>
+	
 	
 </mapper>

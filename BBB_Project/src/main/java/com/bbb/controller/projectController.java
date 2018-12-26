@@ -1,24 +1,17 @@
 package com.bbb.controller;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bbb.dto.MemberVO;
-import com.bbb.dto.ProjectPartakeVO;
 import com.bbb.dto.ProjectVO;
 import com.bbb.service.ProjectService;
 
@@ -33,23 +26,7 @@ public class projectController {
 	@RequestMapping(value="/test", method=RequestMethod.GET)
 	public void test(){
 		
-	}
-	
-	@RequestMapping(value="/joinProject", method=RequestMethod.POST)
-	public ResponseEntity<String> joinProject(@RequestBody ProjectPartakeVO takeVO){
-		
-		ResponseEntity<String> entity = null;
-
-		try {
-				service.joinProject(takeVO);
-				entity=new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
-			} catch (Exception e1) {
-				e1.printStackTrace();
-				entity=new ResponseEntity<String>(e1.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-			}
-			
-		return entity;
-	}
+	}	
 	
 	//branch lee
 	// 로그인 후 나의 프로젝트 참여 목록을 보여준다.
@@ -72,6 +49,12 @@ public class projectController {
 	@RequestMapping(value="/requirement", method=RequestMethod.GET)
 	public void requirementDefinition() throws Exception{
 		
+	}
+	
+	@RequestMapping(value="/main", method=RequestMethod.GET)
+	public void projectMain(int pjNum, HttpServletRequest request) throws Exception{
+		ProjectVO project = service.projectMain(pjNum);
+		request.getSession().setAttribute("logonProject", project);
 	}
 	
 	

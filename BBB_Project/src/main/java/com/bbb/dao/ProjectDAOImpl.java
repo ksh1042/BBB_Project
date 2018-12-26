@@ -28,13 +28,13 @@ public class ProjectDAOImpl implements ProjectDAO{
 	}
 
 	@Override
-	public int searchProjectCount(SearchCriteria cri) throws Exception {
+	public int searchProjectCount(SearchCriteria cri) throws SQLException {
 		int rowCount = session.selectOne("Project.ProjectSearchCount",cri);
 		return rowCount;
 	}
 
 	@Override
-	public void searchProjectJoin(ProjectPartakeVO takeVO) throws Exception {
+	public void searchProjectJoin(ProjectPartakeVO takeVO) throws SQLException {
 		session.insert("Project.ProjectSearchJoin", takeVO);
 	}	
 	
@@ -56,6 +56,10 @@ public class ProjectDAOImpl implements ProjectDAO{
 		return session.selectOne("Project.verifyProjectName", name);
 	}
 
-
+	@Override
+	public ProjectVO getProjectMain(int pjNum) throws SQLException {
+		ProjectVO project = session.selectOne("Project.selectProjectByPjNum", pjNum);
+		return project;
+	}
 
 }

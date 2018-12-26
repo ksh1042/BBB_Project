@@ -95,7 +95,7 @@
 		
 		$.ajax({
 			type:"post",
-			url:"<%=request.getContextPath()%>/project/joinProject",
+			url:"<%=request.getContextPath()%>/main/joinProject",
 			data:JSON.stringify({
 				"id":id,
 				"pjNum":form,
