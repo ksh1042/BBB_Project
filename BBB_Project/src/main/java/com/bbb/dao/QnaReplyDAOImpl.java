@@ -52,7 +52,7 @@ public class QnaReplyDAOImpl implements QnaReplyDAO{
 
 	@Override
 	public int countReply(int qaNum) throws SQLException {
-		int count = session.selectOne("QuestionReply.countReply", qaNum);
+		int count = (Integer)session.selectOne("QuestionReply.countReply", qaNum);
 		return count;
 	}
 

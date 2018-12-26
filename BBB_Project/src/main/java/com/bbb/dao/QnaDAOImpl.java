@@ -21,7 +21,16 @@ public class QnaDAOImpl implements QnaDAO{
 	public void insertQna(QnaVO qna) throws SQLException {
 		session.update("Question.insertQna", qna);
 	}
-
+	
+	@Override
+	public void modifyQna(QnaVO qna) throws SQLException {
+		session.update("Question.updateQna", qna);
+	}
+	
+	@Override
+	public void deleteQna(int qaNum) throws SQLException{
+		session.update("Question.deleteQna", qaNum);
+	}
 
 	@Override
 	public List<QnaVO> selectSearchQnaList(Criteria cri) throws SQLException {
@@ -58,5 +67,7 @@ public class QnaDAOImpl implements QnaDAO{
 		session.update("Question.increaseViewCnt", qaNum);
 		
 	}
+
+
 
 }

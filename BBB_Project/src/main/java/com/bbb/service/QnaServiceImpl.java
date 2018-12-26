@@ -20,6 +20,18 @@ public class QnaServiceImpl implements QnaService{
 		qnaDAO.insertQna(qna);
 		
 	}
+	
+	@Override
+	public void update(QnaVO qna) throws Exception {
+		qnaDAO.modifyQna(qna);
+	
+	}
+
+	@Override
+	public void remove(int qaNum) throws Exception {
+		qnaDAO.deleteQna(qaNum);
+		
+	}
 
 	@Override
 	public List<QnaVO> getSearchQnaList(Criteria cri) throws Exception {
@@ -39,5 +51,7 @@ public class QnaServiceImpl implements QnaService{
 		QnaVO qna = qnaDAO.selectQnaByQaNum(qaNum);
 		return qna;
 	}
+
+
 
 }

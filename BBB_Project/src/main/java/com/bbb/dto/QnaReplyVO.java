@@ -5,7 +5,7 @@ import java.util.Date;
 public class QnaReplyVO {
 	private int qarNum;
 	private int qaNum;
-	private String rContents;
+	private String rContent;
 	private String writer;
 	private Date indate;
 	
@@ -21,11 +21,11 @@ public class QnaReplyVO {
 	public void setQaNum(int qaNum) {
 		this.qaNum = qaNum;
 	}
-	public String getrContents() {
-		return rContents;
+	public String getrContent() {
+		return rContent;
 	}
-	public void setrContents(String rContents) {
-		this.rContents = rContents;
+	public void setrContent(String rContent) {
+		this.rContent = rContent;
 	}
 	public String getWriter() {
 		return writer;
@@ -41,7 +41,7 @@ public class QnaReplyVO {
 	}
 	@Override
 	public String toString() {
-		return "QnaReplyVO [qarNum=" + qarNum + ", qaNum=" + qaNum + ", rContents=" + rContents + ", writer=" + writer
+		return "QnaReplyVO [qarNum=" + qarNum + ", qaNum=" + qaNum + ", rContent=" + rContent + ", writer=" + writer
 				+ ", indate=" + indate + "]";
 	}
 	

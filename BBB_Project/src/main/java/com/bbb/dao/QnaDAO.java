@@ -20,6 +20,12 @@ public interface QnaDAO {
 	// 새로운 QnA 를 작성한다.
 	void insertQna(QnaVO qna) throws SQLException;
 	
+	// 자신이 작성한 QnA를 수정한다.
+	void modifyQna(QnaVO qna) throws SQLException;
+	
+	// 자신이 작성한 QnA를 삭제한다.
+	void deleteQna(int qaNum) throws SQLException;
+	
 	// 번호 자동삽입을 위한 시퀀스
 	int getQnaSeqNextValue() throws SQLException;
 	

@@ -48,11 +48,6 @@ a#modifyReplyBtn{
 						<label for="exampleInputEmail1">Writer</label> 
 						<input type="text" name="writer" class="form-control" value="${qna.writer}" readonly="readonly">
 					</div>
-					<!-- attach list -->
-					<div class="form-group">
-						<label for="exampleInputEmail1">Attach File</label>
-						<ul class="mailbox-attachments clearfix uploadedList"></ul>
-					</div>
 				</div>
 				<!-- /.box-body -->
 			</div>
@@ -64,18 +59,13 @@ a#modifyReplyBtn{
 		<sec:authorize access="hasAuthority('ROLE_USER')">
 			<c:if test="${loginUser.id eq qna.writer }">
 			<button type="submit" class="btn btn-warning" id="modifyBtn">Modify</button>
+			<button type="submit" class="btn btn-danger"  id="removeBtn">REMOVE</button>
 			</c:if>
-			<button type="submit" class="btn btn-danger"  id="removeBtn">REMOVE</button>
 		</sec:authorize>
-		<sec:authorize access="!hasAuthority('ROLE_ADMIN')">
-			<c:if test="${loginUser.id eq qna.writer }">
-			<button type="submit" class="btn btn-warning" id="modifyBtn">Modify</button>
-			<button type="submit" class="btn btn-danger"  id="removeBtn">REMOVE</button>
-		</c:if>
-		</sec:authorize>
-		<button type="submit" class="btn btn-primary" id="listBtn">QnA 목록</button>
+		<button type="button" class="btn btn-warning" onclick="list_go();">QnAList</button>
 	</div>
-				
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.js"></script>		
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>	
 	var formObj = $("form[role='form']");
 	
@@ -89,64 +79,59 @@ a#modifyReplyBtn{
 	
 	$("#removeBtn").on("click", function() {
 		
-		var arr=[];
-		$('.uploadedList li').each(function(event){
-			arr.push($(this).attr("data-src"));			
-		});
-		
-		if(arr.length>0){
-			$.post('<%=request.getContextPath()%>/deleteAllFiles',
-					{files:arr},function(){});				
+		var flag = confirm("삭제하시겠습니까?");
+		if(flag){
+		formObj.attr("action", "removeQna");
+		formObj.attr("method", "post");
+		formObj.submit();	
 		}
-		
-		formObj.attr("action", "removePage");
-		formObj.submit();
 	});
 	
-	$("#listBtn").on("click", function() {
-		formObj.attr("method", "get");
-		formObj.attr("action", "listQna");
-		formObj.submit();
-	});
+	function list_go(){
+		location.href="<%=request.getContextPath()%>/question/listQna";
+	}
 </script>
 
 <div class="row">
 	<div class="col-md-12">
 		<div class="box box-success">
 			<div class="box-header">
-				<h3 class="box-title">ADD NEW REPLY</h3>
+				<h3 class="box-title">QnA 답변</h3>
 			</div>
+			<sec:authorize access="hasAuthority('ROLE_ADMIN')">
 			<div class="box-body">
 				<label for="exampleInputEmail1">Writer</label>
-				<input class="form-control" type="text" placeholder="USER ID" id="newReplyWriter"> 
+				<input readonly value="관리자" class="form-control" type="text" placeholder="USER ID" id="newReplyWriter"> 
 				<label for="exampleInputEmail1">Reply Text</label>
-				<input class="form-control" type="text"	placeholder="REPLY TEXT" id="newReplyText">
+				<input class="form-control" type="text"	placeholder="REPLY TEXT" id="newReplyContent">
 			</div>
-			<!-- /.box-body -->
-				
-			
 			<div class="box-footer">
 				<button type="button" class="btn btn-primary" id="replyAddBtn">ADD REPLY</button>
 			</div>
+			</sec:authorize>
+			<!-- /.box-body -->
+				
+			
 		</div>
 
 
 		<!-- The time line -->
 		<ul class="timeline">
 			<!-- timeline time label -->
-			<li class="time-label" id="repliesDiv"><span class="bg-green">
-					Replies List </span></li>
+			<li class="time-label" id="repliesDiv">
+				<span class="bg-green">Replies List </span>
+			</li>
 		</ul>
 
-			<div class='text-center'>
-				<ul id="pagination" class="pagination pagination-sm no-margin ">
-				</ul>
-			</div>
-
+		<div class='text-center'>
+			<ul id="pagination" class="pagination pagination-sm no-margin ">
+			</ul>
 		</div>
-		<!-- /.col -->
+
 	</div>
-	<!-- /.row -->
+	<!-- /.col -->
+</div>
+<!-- /.row -->
 	
 <!-- Modal -->
 <div id="modifyModal" class="modal modal-primary fade" role="dialog">
@@ -158,7 +143,7 @@ a#modifyReplyBtn{
         <button type="button" class="close" data-dismiss="modal">&times;</button>        
       </div>
       <div class="modal-body" data-rno>
-        <p><input type="text" id="replytext" class="form-control"></p>
+        <p><input type="text" id="rContent" class="form-control"></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-info" id="replyModBtn">Modify</button>

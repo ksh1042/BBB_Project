@@ -16,6 +16,12 @@ public interface QnaService {
 	// 새 QnA 작성
 	void create(QnaVO qna) throws Exception;
 	
+	// QnA 수정
+	void update(QnaVO qna) throws Exception;
+	
+	// QnA 삭제
+	void remove(int qaNum) throws Exception;
+	
 	// 조회수 
 	int readSearchQnaCount(Criteria cri) throws Exception;
 

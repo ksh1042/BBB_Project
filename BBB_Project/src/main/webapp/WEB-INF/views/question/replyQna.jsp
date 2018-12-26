@@ -4,20 +4,20 @@
 
 
 <script>
-	var bno=${boardVO.bno};
+	var qaNum=${qna.qaNum};
 
 	$('#replyAddBtn').on('click',function(e){
-		var replyer=$('#newReplyWriter').val();
-		var replytext=$('#newReplyText').val();
+		var writer=$('#newReplyWriter').val();
+		var rContent=$('#newReplyContent').val();
 		
-		if(replyer==""){
-			alert('댓글 작성자는 필수입니다.');
+		if(writer==""){
+			alert('답변 작성자는 필수입니다.');
 			$('#newReplyWriter').focus();
 			return;
 		}
-		if(replytext==""){
-			alert('댓글 내용은 필수입니다.');
-			$('#newReplyText').focus();
+		if(rContent==""){
+			alert('답변 내용은 필수입니다.');
+			$('#newReplyContent').focus();
 			return;
 		}
 		
@@ -25,9 +25,9 @@
 			type:"post",
 			url:"<%=request.getContextPath()%>/replies",
 			data:JSON.stringify({
-				"bno":bno,
-				"replyer":replyer,
-				"replytext":replytext
+				"qaNum":qaNum,
+				"writer":writer,
+				"rContent":rContent
 			}),
 			headers:{
 				"Content-Type":"application/json",
@@ -38,13 +38,12 @@
 					alert('등록되었습니다.');
 				}		
 				
-				getPage("<%=request.getContextPath()%>/replies/"+bno+"/1");
-				
-				$('#newReplyWriter').val("");
-				$('#newReplyText').val("");
+				getPage("<%=request.getContextPath()%>/replies/"+qaNum+"/1");
+			
+				$('#newReplyContent').val("");
 			},
 			error:function(error){
-				alert("댓글등록에 실패했습니다.");
+				alert("답글 등록에 실패했습니다.");
 			}
 		});
 	});
@@ -54,16 +53,16 @@
 
 <script id="template" type="text/x-handlebars-template">
 {{#each .}}
-<li class="replyLi" data-rno={{rno}}>
+<li class="replyLi" data-qarnum={{qarNum}}>
 <i class="fa fa-comments bg-blue"></i>
  <div class="timeline-item" >
   <span class="time">
-    <i class="fa fa-clock-o"></i>{{prettifyDate regdate}}
+    <i class="fa fa-clock-o"></i>{{prettifyDate indate}}
 	 <a class="btn btn-primary btn-xs" id="modifyReplyBtn"
 	    data-toggle="modal" data-target="#modifyModal">Modify</a>
   </span>
-  <h3 class="timeline-header"><strong>{{rno}}</strong> -{{replyer}}</h3>
-  <div class="timeline-body">{{replytext}} </div>
+  <h3 class="timeline-header"><strong>{{qarNum}}</strong> -{{writer}}</h3>
+  <div class="timeline-body">{{rContent}} </div>
 </li>
 {{/each}}
 </script>
@@ -86,7 +85,7 @@ var printData=function(replyArr,target,templateObject){
 
 var replyPage=1;
 
-getPage("<%=request.getContextPath()%>/replies/"+bno+"/"+replyPage);
+getPage("<%=request.getContextPath()%>/replies/"+qaNum+"/"+replyPage);
 
 function getPage(pageInfo){	
 	$.getJSON(pageInfo,function(data){
@@ -116,36 +115,36 @@ var printPaging=function(pageMaker,target){
 $('.pagination').on('click','li a',function(event){		
 	event.preventDefault();		
 	replyPage=$(this).attr("href");
-	getPage("<%=request.getContextPath()%>/replies/"+bno+"/"+replyPage);
+	getPage("<%=request.getContextPath()%>/replies/"+qaNum+"/"+replyPage);
 });
 
 $('.timeline').on('click','.replyLi',function(event){
 	var reply=$(this);
 	$('#replytext').val(reply.find('.timeline-body').text());
-	$('.modal-title').html(reply.attr('data-rno'));
+	$('.modal-title').html(reply.attr('data-qarnum'));
 });
 
 $('#replyModBtn').on('click',function(event){
-	var rno=$('.modal-title').html();
-	var replytext=$('#replytext').val();
+	var qarNum=$('.modal-title').html();
+	var rContent=$('#rContent').val();
 	
 	$.ajax({
 		method:'put',
-		url:"<%=request.getContextPath()%>/replies/"+rno,
+		url:"<%=request.getContextPath()%>/replies/"+qarNum,
 		headers:{
 			"Content-Type":"application/json",
 			"X-HTTP-Method-Override":"PUT"
 		},
-		data:JSON.stringify({replytext:replytext}),
+		data:JSON.stringify({rContent:rContent}),
 		dataType:'text',
 		success:function(result){
 			if(result=="SUCCESS"){
 				alert("수정되었습니다.");			
-				getPage("<%=request.getContextPath()%>/replies/"+bno+"/"+replyPage);
+				getPage("<%=request.getContextPath()%>/replies/"+qarNum+"/"+replyPage);
 			}
 		},
 		error:function(error){
-			alert("댓글 수정에 실패했습니다.");
+			alert("답변 수정에 실패했습니다.");
 		},
 		complete:function(){
 			$('#modifyModal').modal('hide');
@@ -154,11 +153,11 @@ $('#replyModBtn').on('click',function(event){
 });
 
 $('#replyDelBtn').on('click',function(event){
-	var rno=$('.modal-title').html();
+	var qarNum=$('.modal-title').html();
 	
 	$.ajax({
 		method:'delete',
-		url:"<%=request.getContextPath()%>/replies/"+rno,
+		url:"<%=request.getContextPath()%>/replies/"+qarNum,
 		headers:{
 			"Content-Type":"application/json",
 			"X-HTTP-Override":"delete"
@@ -167,7 +166,7 @@ $('#replyDelBtn').on('click',function(event){
 		success:function(result){
 			if(result="SUCCESS"){
 				alert("삭제되었습니다.");				
-				getPage("<%=request.getContextPath()%>/replies/"+bno+"/"+replyPage);
+				getPage("<%=request.getContextPath()%>/replies/"+qaNum+"/"+replyPage);
 			}
 		},
 		error:function(error){

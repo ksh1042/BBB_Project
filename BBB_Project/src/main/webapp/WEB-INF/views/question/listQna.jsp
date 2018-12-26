@@ -94,6 +94,7 @@
 
 				<!-- 페이지번호 -->
 				<div class="box-footer clearfix">
+				<button id='newBtn' class="btn btn-primary" onclick="javascript:location.href='registerQna';">New QnA</button>
 					<ul class="pagination link pagination-sm no-margin pull-right">
 						<c:if test="${pageMaker.prev}">
 							<li><a href="${pageMaker.startPage - 1}">&laquo;</a></li>
@@ -120,6 +121,7 @@
 	</div>
 	<!-- /.row -->
 	<!-- / end QnA List -->
+	
 	<form id="jobForm">
 		<input type="hidden" name="page" value="${pageMaker.cri.page }">
 		<input type="hidden" name="perPageNum" value="${pageMaker.cri.perPageNum }"> 

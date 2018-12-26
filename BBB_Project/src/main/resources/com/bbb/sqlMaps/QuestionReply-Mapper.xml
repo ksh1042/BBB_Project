@@ -16,20 +16,20 @@
 	</select>
 	
 	<update id="insertReply" >
-		insert tbl_question_reply(qarnum,qanum,rcontents,writer)
-		values(tbl_question_reply_seq.nextval,#{qanum},#{rcontents},#{writer})
+		insert into tbl_question_reply(qarnum,qanum,rcontent,writer)
+		values(qarnum_seq.nextval,#{qaNum},#{rContent},#{writer})
 	</update>
 	
 	<update id="updateReply">
 		update tbl_question_reply
 		set 
-		rcontents=#{rContents},
-		updatedate=sysdate
+		rcontent=#{rContent},
+		indate=sysdate
 		where qarnum=#{qarNum}		
 	</update>
 	
 	<update id="deleteReply">
-		delete from tbl_reply
+		delete from tbl_question_reply
 		where qarnum=#{qarNum}		
 	</update>
 	

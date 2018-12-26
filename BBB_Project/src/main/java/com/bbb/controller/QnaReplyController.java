@@ -48,7 +48,6 @@ public class QnaReplyController {
 		ResponseEntity<String> entity = null;
 
 		try {
-
 			service.createReply(reply);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
@@ -87,11 +86,9 @@ public class QnaReplyController {
 		return entity;
 	}
 
-	@RequestMapping(value = "/{qarNum}", method = { RequestMethod.PUT, 
-												 RequestMethod.PATCH })
-	public ResponseEntity<String> update(@PathVariable("qarNum") int qarNum,
-										 @RequestBody QnaReplyVO reply) 
-												 	throws Exception {
+	@RequestMapping(value = "/{qarNum}", method = { RequestMethod.PUT, RequestMethod.PATCH })
+	public ResponseEntity<String> update(@PathVariable("qarNum") int qarNum, @RequestBody QnaReplyVO reply) throws Exception {
+		
 		ResponseEntity<String> entity = null;
 
 		reply.setQarNum(qarNum);
@@ -108,8 +105,7 @@ public class QnaReplyController {
 	
 	
 	@RequestMapping(value="/{qarNum}",method=RequestMethod.DELETE)
-	public ResponseEntity<String> remove(@PathVariable("qarNum") int qarNum)
-									throws Exception{
+	public ResponseEntity<String> remove(@PathVariable("qarNum") int qarNum) throws Exception{
 		
 		ResponseEntity<String> entity=null;
 		try{
