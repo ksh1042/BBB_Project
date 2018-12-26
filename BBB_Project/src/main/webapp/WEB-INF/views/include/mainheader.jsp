@@ -100,13 +100,13 @@
 							<li class="dropdown user user-menu">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
 									<img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> 
-									<span class="hidden-xs">Alexander Pierce</span>
+									<span class="hidden-xs">${loginUser.name } 님 환영합니다.</span>
 								</a>
 								<ul class="dropdown-menu">
 									<!-- User image -->
 									<li class="user-header">
 										<img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-										<p>Alexander Pierce - Web Developer <small>Member sinceNov. 2012</small></p>
+										<p>${loginUser.name } <small>Member sinceNov. 2012</small></p>
 									</li>
 									<!-- Menu Body -->
 									<li class="user-body">

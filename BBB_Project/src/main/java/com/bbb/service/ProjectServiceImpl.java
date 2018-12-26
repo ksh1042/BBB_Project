@@ -21,7 +21,15 @@ public class ProjectServiceImpl implements ProjectService {
 		this.projectPartakeDAO = projectPartakeDAO;
 	}
 	
-	
+	@Override
+	public void addProject(ProjectVO project) throws SQLException {
+		projectDAO.insertProject(project);
+	}
+
+	@Override
+	public String readVerifyProjectName(String name) throws SQLException {
+		return projectDAO.verifyProjectName(name);
+	}
 	// 내가 참여하고있는 프로젝트 목록을 가져오기 위한 비교
 	@Override
 	public List<ProjectVO> readMyProjectList(String id) throws SQLException {

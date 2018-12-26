@@ -68,13 +68,15 @@ public class ProjectVO {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
+	
 	@Override
 	public String toString() {
 		return "ProjectVO [pjNum=" + pjNum + ", name=" + name + ", disc=" + disc + ", creator=" + creator
 				+ ", visibility=" + visibility + ", lastDate=" + lastDate + ", indate=" + indate + ", startDate="
-				+ startDate + ", endDate=" + endDate + "]";
+				+ startDate + ", endDate=" + endDate + ", getPjNum()=" + getPjNum() + ", getName()=" + getName()
+				+ ", getDisc()=" + getDisc() + ", getCreator()=" + getCreator() + ", getVisibility()=" + getVisibility()
+				+ ", getLastDate()=" + getLastDate() + ", getIndate()=" + getIndate() + ", getStartDate()="
+				+ getStartDate() + ", getEndDate()=" + getEndDate() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + ", toString()=" + super.toString() + "]";
 	}
-	
-	
-	
 }

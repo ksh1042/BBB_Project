@@ -7,11 +7,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/project")
 public class ProjectController {
 	
-	@RequestMapping("/usecase")
-	public String usecase() throws Exception{
-		return "/project/usecase";
-	}
-	
-
 	
 }

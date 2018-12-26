@@ -17,5 +17,6 @@ public class ProjectPartakeDAOImpl implements ProjectPartakeDAO {
 	public List<Integer> selectProjectPartakeList(String id) throws SQLException {
 		return session.selectList("ProjectPartake.selectProjectPartakeList", id);
 	}
+	
 
 }

@@ -74,14 +74,18 @@
 				</c:forEach>
 						  
               </table>
+              
             </div>
+            
             <!-- /.box-body -->
             <!-- / 나의 참여목록 리스트 테이블 끝 -->
                   
           </div>
           <!-- /.box -->
+          <button type="button" class="btn btn-warning" onclick="newProject_go();">새 프로젝트</button>
 
         </div>
+        
         <!-- /.col -->
       </div>
       <!-- /.row -->
@@ -92,7 +96,11 @@
     
 
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-
+	<script>
+		function newProject_go(){
+			location.href="<%=request.getContextPath()%>/main/addProject"
+		}
+	</script>
 </body>
 </html>
 
