@@ -10,6 +10,12 @@
 		p:memberDAO-ref="memberDAO" />
 	
 
+		
+	<bean id="mailNotifier"
+	  class="com.bbb.mail.MimeAttachNotifier"
+	  p:mailSender-ref="mailSender"
+	  />
+		
 	<!-- 이병수  프로젝트 리스트 페이지-->	
 	
 	<bean id="projectDAO"
@@ -44,14 +50,5 @@
 		  p:qnaReplyDAO-ref="qnaReplyDAO"
 		  />
 	
-	
-	
-
-	<bean id="mailNotifier"
-	  class="com.bbb.mail.MimeAttachNotifier"
-	  p:mailSender-ref="mailSender"
-	  />
-		
-		
 
 </beans>

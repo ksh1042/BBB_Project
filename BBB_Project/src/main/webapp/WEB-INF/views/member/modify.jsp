@@ -45,7 +45,7 @@
 	<script>
 		function list_go(){
 			self.location="list";
-		}
+		};
 	</script>
 </body>
 </html>

@@ -29,4 +29,6 @@ public interface MemberDAO {
 	void resetPwd(MemberVO member)throws SQLException;
 	
 	public void updateEmailynById(String id) throws SQLException;
+	
+	void modifyEmail(MemberVO member)throws SQLException;
 }

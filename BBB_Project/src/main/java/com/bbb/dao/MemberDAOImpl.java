@@ -80,7 +80,11 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public void resetPwd(MemberVO member) throws SQLException {
 		session.update("Member.resetPwd",member);
-		
+	}
+
+	@Override
+	public void modifyEmail(MemberVO member) throws SQLException {
+		session.update("Member.resetEmail",member);
 	}
 
 	@Override
