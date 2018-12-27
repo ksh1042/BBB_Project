@@ -44,6 +44,7 @@
 </head>
 
 <body class="hold-transition skin-blue layout-top-nav">
+	<%@ include file="/WEB-INF/views/commons/include/emailyn.jsp" %>
 	<div class="wrapper">
 		<header class="main-header">
 			<nav class="navbar navbar-static-top">
@@ -104,12 +105,13 @@
 								</a>
 								<ul class="dropdown-menu">
 									<!-- User image -->
+
 									<li class="user-header">
 										<img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 										<p>${loginUser.name } <small>Member sinceNov. 2012</small></p>
 									</li>
 									<!-- Menu Body -->
-									<li class="user-body">
+									<!-- <li class="user-body">
 										<div class="row">
 											<div class="col-xs-4 text-center">
 												<a href="#">Followers</a>
@@ -120,12 +122,12 @@
 											<div class="col-xs-4 text-center">
 												<a href="#">Friends</a>
 											</div>
-										</div> <!-- /.row -->
-									</li>
+										</div> /.row
+									</li> -->
 									<!-- Menu Footer-->
 									<li class="user-footer">
 										<div class="pull-left">
-											<a href="/WEB-INF/views/member/modify.jsp" class="btn btn-default btn-flat">Profile</a>
+											<a href="/member/mypage?id=${ loginUser.id }" class="btn btn-default btn-flat">Mypage</a>
 										</div>
 										<div class="pull-right">
 											<a href="<%= request.getContextPath() %>/commons/logout" class="btn btn-default btn-flat">Sign out</a>

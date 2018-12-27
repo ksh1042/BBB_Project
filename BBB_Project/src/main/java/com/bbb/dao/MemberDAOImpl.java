@@ -58,6 +58,35 @@ public class MemberDAOImpl implements MemberDAO {
 		session.update("Member.deleteMember",id);
 
 	}
+	
+	@Override
+	public int idCheck(String id) throws SQLException {
+		int count = session.selectOne("Member.idCheck", id);
+		return count;
+	}
+
+	@Override
+	public int emailCheck(String email) throws SQLException {
+		int count = session.selectOne("Member.emailCheck", email);
+		return count;
+	}
+
+	@Override
+	public String findID(MemberVO member) throws SQLException {
+		String id = session.selectOne("Member.findID",member);
+		return id;
+	}
+
+	@Override
+	public void resetPwd(MemberVO member) throws SQLException {
+		session.update("Member.resetPwd",member);
+		
+	}
+
+	@Override
+	public void updateEmailynById(String id) throws SQLException {
+		session.update("Member.updateEmailyn", id);
+	}
 
 
 

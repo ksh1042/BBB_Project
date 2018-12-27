@@ -21,9 +21,7 @@
 	<aop:config>
 		<aop:pointcut expression="execution(public * com.spring.service..*(..))"
 					  id="servicePublicMethod"/>
-		<aop:advisor advice-ref="txAdvice" 
-		             pointcut-ref="servicePublicMethod"/>	
-		
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="servicePublicMethod"/>
 	</aop:config>
 	
 </beans:beans>

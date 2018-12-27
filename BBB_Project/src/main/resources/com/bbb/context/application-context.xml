@@ -7,9 +7,12 @@
 		p:sqlSession-ref="sqlSession" />
 
 	<bean id="memberService" class="com.bbb.service.MemberServiceImpl"
-		p:memberDAO-ref="memberDAO" />	
+		p:memberDAO-ref="memberDAO" />
 	
-	<bean id="projectDAO" 
+
+	<!-- 이병수  프로젝트 리스트 페이지-->	
+	
+	<bean id="projectDAO"
 		  class="com.bbb.dao.ProjectDAOImpl"
 		  p:sqlSession-ref="sqlSession"
 		  />
@@ -43,4 +46,12 @@
 	
 	
 	
+
+	<bean id="mailNotifier"
+	  class="com.bbb.mail.MimeAttachNotifier"
+	  p:mailSender-ref="mailSender"
+	  />
+		
+		
+
 </beans>

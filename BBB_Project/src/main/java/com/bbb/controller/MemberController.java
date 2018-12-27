@@ -65,6 +65,14 @@ public class MemberController {
 	}
 
 	
+	@RequestMapping("/mypage")
+	public String myPageForm(String id, Model model)throws Exception{
+		MemberVO member=service.getMemberById(id);
+		model.addAttribute("member",member);
+		
+		return "member/mypage/detail";
+	}
+	
 	
 }
 
