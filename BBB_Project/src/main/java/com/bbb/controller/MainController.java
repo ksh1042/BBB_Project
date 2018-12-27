@@ -126,7 +126,6 @@ public class MainController {
 	public ResponseEntity<String> addProject(@RequestBody ProjectVO project, HttpServletRequest request) throws Exception {
 		ResponseEntity<String> entity = null;
 		
-		System.out.println(project.toString());
 		
 		
 		try{
