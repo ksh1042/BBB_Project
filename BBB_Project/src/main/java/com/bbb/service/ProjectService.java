@@ -15,4 +15,6 @@ public interface ProjectService {
 	
 	public void addProject(ProjectVO project) throws SQLException;
 	public String readVerifyProjectName(String name) throws SQLException;
+
+	public ProjectVO projectMain(int pjNum) throws SQLException;
 }

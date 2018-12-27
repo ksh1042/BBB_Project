@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Finanace">
+	
+	<select id="getFinanceDetailSeqNextValue" resultType="int">
+		select fnum_seq.nextval from dual
+	</select>
+	
+	<select id="selectFinanceDetailList" resultType="finance">
+		select *
+		from tbl_finance_detail
+		order by indate asc
+	</select>
+	
+	<sql id="search">
+		<if test="searchType !=null">
+			<if test="searchType =='n'.toString()">
+				and targetname like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType =='p'.toString()">
+				and content like '%'||#{keyword}||'%'
+			</if>
+		</if>
+   </sql> 
+	<select id="selectFinanceDetailListCount" resultType="int">
+   		select count(*) 
+		from tbl_finance_detail
+		where fnum is not null
+		<include refid="search" />
+	</select>
+	
+	<select id="selectFinanceDetailByFnum" >
+		select *
+		from tbl_finance_detail
+		where fnum=#{fNum}
+	</select>
+	
+	<update id="insertFinanceDetail" parameterType="financeDetail">
+		insert into tbl_finance_detail(fnum, targetname, content, price, writer, deposityn)
+		values(fnum_seq.nextval, #{targetName}, #{content}, #{price}, #{writer}, #{depositYn})
+	</update>
+	
+	<update id="updateFinanceDetail" parameterType="financeDetail">
+		update tbl_finance_detail 
+		set targetname=#{targetName}, content=#{content}, price=#{price}, writer=#{writer}, deposityn=#{depositYn}
+		where writer=#{writer}
+	</update>
+		
+</mapper>

@@ -60,7 +60,12 @@ public class ProjectServiceImpl implements ProjectService {
 		
 		return null;
 	}
-
+	
+	@Override
+	public ProjectVO projectMain(int pjNum) throws SQLException {
+		ProjectVO project = projectDAO.getProjectMain(pjNum);
+		return project;
+	}
 
 
 }

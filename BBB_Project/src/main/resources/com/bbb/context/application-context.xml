@@ -42,7 +42,31 @@
 		  class="com.bbb.service.QnaReplyServiceImpl"
 		  p:qnaReplyDAO-ref="qnaReplyDAO"
 		  />
-	
+	<bean id="financeDAO"
+		  class="com.bbb.dao.FinanceDAOImpl"
+		  p:session-ref="sqlSession"
+		  />
+	<bean id="financeDetailDAO"
+	 	  class="com.bbb.dao.FinanceDetailDAOImpl"
+	 	  p:session-ref="sqlSession"
+	 	  />
+	<bean id="financeService"
+		  class="com.bbb.service.FinanceServiceImpl"
+		  p:financeDAO-ref="financeDAO"
+		  p:financeDetailDAO-ref="financeDetailDAO"
+		  />
 	
 	
 </beans>
+
+
+
+
+
+
+
+
+
+
+
+

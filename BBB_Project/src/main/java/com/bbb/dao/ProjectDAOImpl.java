@@ -32,6 +32,10 @@ public class ProjectDAOImpl implements ProjectDAO {
 		return session.selectOne("Project.verifyProjectName", name);
 	}
 
-
+	@Override
+	public ProjectVO getProjectMain(int pjNum) throws SQLException {
+		ProjectVO project = session.selectOne("Project.selectProjectByPjNum", pjNum);
+		return project;
+	}
 
 }
