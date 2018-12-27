@@ -35,7 +35,7 @@ public class BoardAttachDAOImpl implements BoardAttachDAO {
 
 	@Override
 	public List<BoardAttachVO> selectSearchBoardAttachList(Criteria cri) throws SQLException {
-		int offset = cri.getPageStart(); 
+		int offset = cri.getPageStartRowNum(); 
 		int limit = cri.getPerPageNum();
 		RowBounds rowBounds = new RowBounds(offset,limit);
 		List<BoardAttachVO> boardAttachlist = session.selectList("BoardAttach.selectSearchBoardAttachList",(SearchCriteria)cri,rowBounds);
