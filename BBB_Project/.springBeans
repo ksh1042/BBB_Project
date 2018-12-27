@@ -10,11 +10,7 @@
 		<config>src/main/resources/com/bbb/context/servlet-context.xml</config>
 		<config>src/main/resources/com/bbb/context/root-context.xml</config>
 		<config>src/main/resources/com/bbb/context/application-context.xml</config>
-<<<<<<< HEAD
-		<config>src/main/resources/com/bbb/sqlMaps/ProjectPartake-Mapper.xml</config>
-=======
-		<config>src/main/resources/com/bbb/context/security-context.xml</config>
->>>>>>> refs/remotes/origin/develop
+		<config>src/main/resources/com/bbb/context/aop-context.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

@@ -13,6 +13,7 @@ public class ProjectVO {
 	private Date indate;
 	private Date startDate;
 	private Date endDate;
+	private String puuid;
 	public int getPjNum() {
 		return pjNum;
 	}
@@ -67,17 +68,20 @@ public class ProjectVO {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	
-	
+	public String getPuuid() {
+		return puuid;
+	}
+	public void setPuuid(String puuid) {
+		this.puuid = puuid;
+	}
 	
 	@Override
 	public String toString() {
 		return "ProjectVO [pjNum=" + pjNum + ", name=" + name + ", disc=" + disc + ", creator=" + creator
 				+ ", visibility=" + visibility + ", lastDate=" + lastDate + ", indate=" + indate + ", startDate="
-				+ startDate + ", endDate=" + endDate + ", getPjNum()=" + getPjNum() + ", getName()=" + getName()
-				+ ", getDisc()=" + getDisc() + ", getCreator()=" + getCreator() + ", getVisibility()=" + getVisibility()
-				+ ", getLastDate()=" + getLastDate() + ", getIndate()=" + getIndate() + ", getStartDate()="
-				+ getStartDate() + ", getEndDate()=" + getEndDate() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + ", toString()=" + super.toString() + "]";
+				+ startDate + ", endDate=" + endDate + ", puuid=" + puuid + "]";
 	}
+	
+
+
 }

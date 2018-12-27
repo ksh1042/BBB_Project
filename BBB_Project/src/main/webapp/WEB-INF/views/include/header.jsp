@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="decorator"
    uri="http://www.opensymphony.com/sitemesh/decorator"%>
@@ -268,8 +269,12 @@
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=request.getContextPath() %>/resources/web/viewer.html?file=./dummy/sample.pdf" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
-            <li><a href="/project/registPlan" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+          	<c:if test="${empty logonProject.puuid }">
+            	<li><a href="<%=request.getContextPath() %>/resources/web/sample.pdf" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+            </c:if>
+            <c:if test="${!empty logonProject.puuid }">
+            	<li><a href="/project/registPlan"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+            </c:if>
             <li><a href="/project/requirement"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i>단위업무 정의서</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i>간트차트</a></li>

@@ -78,7 +78,7 @@
 	
 	<script>
 		function back_go() {
-			
+			history.go(-1);
 		}
 		function submit_go() {
 			
