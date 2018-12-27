@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bbb.dto.MemberVO;
-import com.bbb.service.MemberService;
 import com.bbb.dto.ProjectVO;
+import com.bbb.service.MemberService;
 import com.bbb.service.ProjectService;
 
 @Controller
@@ -28,6 +28,8 @@ public class MainController {
 
 	@Autowired
 	private MemberService service;
+	
+	@Autowired
 	private ProjectService projectService;
 	
 	
@@ -80,7 +82,35 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/mypage/modify",method=RequestMethod.POST)
-	public void myPageModify(String id, Model model)throws Exception{
+	public String mypageModify(MemberVO member, RedirectAttributes rttr, HttpServletRequest request)throws Exception{
+		
+		service.modify(member);
+		MemberVO loginUser=service.getMemberById(member.getId());
+		request.getSession().setAttribute("loginUser", loginUser);
+		rttr.addFlashAttribute("member",member);
+		
+		return "redirect:/main/myPartakeList";
+	}
+	
+	@RequestMapping("/mypage/resetPwd")
+	public String resetPwd()throws Exception{
+		return "member/mypage/resetPwd";
+	}
+	
+	@RequestMapping(value="/mypage/resetPwd",method=RequestMethod.POST)
+	public String resetPwdPost(MemberVO member,String newPwd)throws Exception{
+		
+/*		MemberVO loginUser=(MemberVO)request.getSession().getAttribute("loginUser");
+		if((loginUser.getPwd()).equals(member.getPwd())){
+			member.setPwd(newPwd);
+			service.resetMemberPwd(member);
+			return "redirect:/main/myPartakeList";
+		}else{
+			return "redirect:/member/mypage/resetPwd";
+		}*/
+		member.setPwd(newPwd);
+		service.resetMemberPwd(member);
+		return "redirect:/main/myPartakeList";
 		
 	}
 }

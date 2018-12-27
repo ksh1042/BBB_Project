@@ -42,6 +42,7 @@
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition login-page">
+<c:if test="${!empty loginUser }" >
 	<security:authorize access="isAuthenticated()">
 		<!-- 합칠때 경로 바꿀 것! -->
 		<security:authorize access="hasAuthority('ROLE_USER')">
@@ -54,8 +55,8 @@
 				location.href="<%=request.getContextPath()%>/admin/mainForm";
 			</script>
 		</security:authorize>
-	
 	</security:authorize>
+</c:if>	
 	<div class="login-box">
 		<div class="login-logo">
 			<b>Project</b>Management
@@ -119,9 +120,7 @@
 		src="<%=request.getContextPath()%>/resources/plugins/iCheck/icheck.min.js"></script>
 	<script>
 	
-	if(!${newMember eq null }){
-			alert("${newMember }님 회원가입을 축하합니다.");
-	}
+	
 	
   $(function () {
     $('input').iCheck({
@@ -155,7 +154,11 @@
 				}
 
 			});
-		};
+		}
+  
+  if(!${newMember eq null }){
+		alert("${newMember }님 회원가입을 축하합니다.");
+	}
 	</script>
 </body>
 </html>

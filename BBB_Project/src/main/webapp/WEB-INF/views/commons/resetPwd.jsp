@@ -94,20 +94,35 @@
 <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
 <script type="text/javascript">
 	function login_go(){
-		location.href="<%=request.getContextPath() %>/commons/loginForm";
-	};
+		location.href="<%=request.getContextPath() %>/commons/login";
+	}
 	
 	function findPwd_go(){
 		var newPwd=$("#newPwd").val();
 		var reNewPwd=$("#reNewPwd").val();
 		
-		if(newPwd==reNewPwd){
-			alert("비밀번호가 변경되었습니다.");
-			document.resetPwdForm.submit();
+		if(newPwd==null || reNewPwd==null){
+			alert("패스워드를 입력해주세요.");
+			
 		}else{
-			alert("비밀번호가 일치하지 않습니다.");
+
+			if(newPwd.length < 8 || newPwd.length > 16) {  
+				alert("패스워드는  8~15자를 입력해주세요.");
+			}else{
+				if (!newPwd.match(/([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~,-])|([!,@,#,$,%,^,&,*,?,_,~,-].*[a-zA-Z0-9])/)) {
+					alert("패스워드는 영문(대소문자구분),숫자,특수문자(~!@#$%^&*()-_? 만 허용)를 혼용하여 입력해주세요.");
+				}else{
+					if(newPwd==reNewPwd){
+						alert("패스워드가 변경되었습니다.");
+						document.resetPwdForm.submit();
+					}else{
+						alert("패스워드가 일치하지 않습니다.");
+					}
+				}
+			}
+
 		}
-	};
+	}
 	
 	
 </script>

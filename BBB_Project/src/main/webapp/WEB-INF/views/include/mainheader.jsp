@@ -3,6 +3,7 @@
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="decorator"
 	uri="http://www.opensymphony.com/sitemesh/decorator"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	response.setHeader("Pragma", "No-cache");
 	response.setHeader("Cache-Control", "no-cache");
@@ -106,7 +107,8 @@
 									<!-- User image -->
 									<li class="user-header">
 										<img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-										<p>${loginUser.name } <small>Member sinceNov. 2012</small></p>
+										<p><strong>${loginUser.id }</strong>(${loginUser.name }) <small>Member since <fmt:formatDate value="${loginUser.indate }" pattern="yyyy-MM"/>
+										</small></p>
 									</li>
 									<!-- Menu Body -->
 									<!-- <li class="user-body">
@@ -143,8 +145,9 @@
 		</header>
 		<body>
 			<!-- Content Wrapper. Contains page content -->
-			<div class="content-wrapper">
 			
+	              
+            <form action="/main/mypage/modify" method="post" name="mypageForm">
 			<div class="modal fade in" id="modal-default" style="display: none; padding-right: 16px;height: auto;">
 	          <div class="modal-dialog">
 	            <div class="modal-content">
@@ -153,14 +156,14 @@
 	                  <span aria-hidden="true">×</span></button>
 	                <h4 class="modal-title">내 정보</h4>
 	              </div>
+	             
 	              <div class="modal-body" >
-	              
 					<div class="box-body">
 		                <div class="form-group" >
 		                  <label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
 		
 		                  <div class="col-sm-10">
-		                    <input type="text" class="form-control" id="inputEmail3" name="id" readonly value="${loginUser.id }"/><br/>
+		                    <input type="text" class="form-control"  name="id" readonly value="${loginUser.id }"/><br/>
 		                  </div>
 		                </div>
 		                
@@ -169,7 +172,7 @@
 		
 		                  <div class="col-sm-10">
 		                    <!-- <input type="password" class="form-control" id="inputPassword3" placeholder="Password"> -->
-		                    <button type="button" class="btn btn-block btn-warning" style="width:150px;">패스워드 변경</button><br/>
+		                    <button type="button" class="btn btn-block btn-warning" style="width:150px;" onclick="location.href='<%=request.getContextPath()%>/main/mypage/resetPwd'">패스워드 변경</button><br/>
 		                  </div>
 		                </div>
 		                
@@ -177,7 +180,7 @@
 		                  <label for="inputEmail3" class="col-sm-2 control-label">이름</label>
 		
 		                  <div class="col-sm-10">
-		                    <input type="text" class="form-control" id="inputEmail3" name="name" value="${loginUser.name }"/><br/>
+		                    <input type="text" class="form-control" name="name" value="${loginUser.name }"/><br/>
 		                  </div>
 		                </div>
 		                
@@ -185,7 +188,7 @@
 		                  <label for="inputEmail3" class="col-sm-2 control-label">이메일</label>
 		
 		                  <div class="col-sm-10" >
-		                    <input type="email" class="form-control" id="inputEmail3" name="email" readonly value="${loginUser.email }" style="margin-bottom:10px;"/>
+		                    <input type="email" class="form-control"  name="email" readonly value="${loginUser.email }" style="margin-bottom:10px;"/>
 		                    <button type="button" class="btn btn-block btn-warning" style="width:150px;">이메일 변경</button><br/>
 		                  </div>
 		                </div>
@@ -194,7 +197,7 @@
 		                  <label for="inputEmail3" class="col-sm-2 control-label">핸드폰</label>
 		
 		                  <div class="col-sm-10">
-		                    <input type="text" class="form-control" id="inputEmail3" name="phone"  value="${loginUser.phone }">
+		                    <input type="text" class="form-control" name="phone"  value="${loginUser.phone }">
 		                  </div>
 		                </div>
 		                
@@ -207,13 +210,21 @@
 	              </div>
 	              
 	              <div class="modal-footer">
-	                <button type="button" class="btn btn-primary">수정</button>
+	                <button onclick="profileModify_go(); "type="button" class="btn btn-primary">수정</button>
 	              </div>
 	            </div>
 	            <!-- /.modal-content -->
 	          </div>
 	          <!-- /.modal-dialog -->
 	        </div>
+	        </form>
         
-        
+        <script>
+        	function profileModify_go(){
+        		document.mypageForm.submit();
+        		alert("회원정보가 수정되었습니다.");
+        	}
+        </script>
+      
+        <div class="content-wrapper">
       

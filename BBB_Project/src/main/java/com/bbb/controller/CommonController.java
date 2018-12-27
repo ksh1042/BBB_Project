@@ -41,12 +41,12 @@ public class CommonController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String register(MemberVO member, Model model) throws Exception {
+	public String register(MemberVO member, RedirectAttributes rttr) throws Exception {
 		
 		service.register(member);
-		model.addAttribute("newMember", member.getName());
+		rttr.addFlashAttribute("newMember", member.getName());
 		
-		return "redirect:commons/login";
+		return "redirect:loginForm";
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
@@ -127,7 +127,7 @@ public class CommonController {
 	public String resetPwd(MemberVO member,RedirectAttributes rttr)throws Exception{
 		
 		service.resetMemberPwd(member);
-		rttr.addAttribute("id",member.getId());
+		rttr.addFlashAttribute("id",member.getId());
 		
 		return "redirect:loginForm";
 	}

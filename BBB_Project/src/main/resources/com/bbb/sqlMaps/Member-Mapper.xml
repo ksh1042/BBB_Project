@@ -16,9 +16,10 @@
    
    <update id="updateMember">
       update tbl_member set
-      pwd=#{pwd},name=#{name},phone=#{phone},email=#{email}
+      name=#{name},phone=#{phone}
       where id=#{id}
    </update>
+   
    
    <update id="deleteMember">
       delete from tbl_member
