@@ -3,6 +3,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Unitwork">
 	<select id="slectUnitworkListByRdNum" parameterType="int" resultType="unitwork">
+		SELECT *
+		FROM  	
 	</select>
 </mapper>
 
