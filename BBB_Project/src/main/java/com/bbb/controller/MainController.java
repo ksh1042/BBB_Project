@@ -1,6 +1,8 @@
 package com.bbb.controller;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bbb.dto.MemberVO;
 import com.bbb.dto.ProjectVO;
+import com.bbb.mail.MimeAttachNotifier;
 import com.bbb.service.MemberService;
 import com.bbb.service.ProjectService;
 
@@ -31,6 +34,9 @@ public class MainController {
 	
 	@Autowired
 	private ProjectService projectService;
+	
+	@Autowired
+	private MimeAttachNotifier notifier;
 	
 	
 	@RequestMapping(value="" ,method=RequestMethod.GET)
@@ -82,13 +88,11 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/mypage/modify",method=RequestMethod.POST)
-	public String mypageModify(MemberVO member, RedirectAttributes rttr, HttpServletRequest request)throws Exception{
+	public String mypageModify(MemberVO member, HttpServletRequest request)throws Exception{
 		
 		service.modify(member);
 		MemberVO loginUser=service.getMemberById(member.getId());
 		request.getSession().setAttribute("loginUser", loginUser);
-		rttr.addFlashAttribute("member",member);
-		
 		return "redirect:/main/myPartakeList";
 	}
 	
@@ -98,9 +102,12 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/mypage/resetPwd",method=RequestMethod.POST)
-	public String resetPwdPost(MemberVO member,String newPwd)throws Exception{
+	public String resetPwdPOST(MemberVO member,String newPwd)throws Exception{
 		
-/*		MemberVO loginUser=(MemberVO)request.getSession().getAttribute("loginUser");
+		member.setPwd(newPwd);
+		service.resetMemberPwd(member);
+		return "redirect:/main/myPartakeList";
+		/*MemberVO loginUser=(MemberVO)request.getSession().getAttribute("loginUser");
 		if((loginUser.getPwd()).equals(member.getPwd())){
 			member.setPwd(newPwd);
 			service.resetMemberPwd(member);
@@ -108,9 +115,36 @@ public class MainController {
 		}else{
 			return "redirect:/member/mypage/resetPwd";
 		}*/
-		member.setPwd(newPwd);
-		service.resetMemberPwd(member);
-		return "redirect:/main/myPartakeList";
-		
 	}
+	
+	@RequestMapping("/mypage/resetEmail")
+	public String resetEmail()throws Exception{
+		return "member/mypage/resetEmail";
+	}
+	
+	@RequestMapping(value="/getEmailCode")
+    @ResponseBody
+    public Map<Object, Object> getEmailCode(@RequestBody String email) throws Exception {
+		
+		String tempKey = notifier.sendMail(email);
+		
+        Map<Object, Object> map = new HashMap<Object, Object>();
+        map.put("tempKey", tempKey);
+ 
+        return map;
+    }
+	
+	@RequestMapping(value="/mypage/resetEmail" ,method=RequestMethod.POST)
+	public String resetEmailPOST(MemberVO member,String newEmail,HttpServletRequest request)throws Exception{
+		
+		member.setEmail(newEmail);
+		service.modifyEmail(member);
+		MemberVO loginUser=service.getMemberById(member.getId());
+		request.getSession().setAttribute("loginUser", loginUser);
+		
+		return "redirect:/main/myPartakeList";
+	}
+	
+	
+	
 }

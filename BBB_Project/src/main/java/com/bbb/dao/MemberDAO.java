@@ -27,4 +27,6 @@ public interface MemberDAO {
 	String findID(MemberVO member)throws SQLException;
 	
 	void resetPwd(MemberVO member)throws SQLException;
+	
+	void modifyEmail(MemberVO member)throws SQLException;
 }

@@ -26,4 +26,5 @@ public interface MemberService {
 	
 	void resetMemberPwd(MemberVO member)throws SQLException;
 	
+	void modifyEmail(MemberVO member)throws SQLException;
 }

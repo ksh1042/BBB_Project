@@ -20,7 +20,7 @@
               <input type="password" class="form-control" placeholder="새 패스워드입력" id="newPwd" name="newPwd"/>
             </div>
             <div class="form-group">
-              <label for="exampleInputPassword1">새 패스워드재입력</label>
+              <label for="exampleInputPassword1">새 패스워드 재입력</label>
               <input type="password" class="form-control" placeholder="새 패스워드 확인" id="reNewPwd" name="reNewPwd"/>
             </div>
           </div>

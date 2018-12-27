@@ -189,7 +189,7 @@
 		
 		                  <div class="col-sm-10" >
 		                    <input type="email" class="form-control"  name="email" readonly value="${loginUser.email }" style="margin-bottom:10px;"/>
-		                    <button type="button" class="btn btn-block btn-warning" style="width:150px;">이메일 변경</button><br/>
+		                    <button type="button" class="btn btn-block btn-warning" style="width:150px;" onclick="location.href='<%=request.getContextPath()%>/main/mypage/resetEmail'">이메일 변경</button><br/>
 		                  </div>
 		                </div>
 		                

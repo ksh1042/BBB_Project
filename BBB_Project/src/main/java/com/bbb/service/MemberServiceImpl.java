@@ -64,7 +64,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void resetMemberPwd(MemberVO member) throws SQLException {
 		memberDAO.resetPwd(member);
-		
+	}
+
+	@Override
+	public void modifyEmail(MemberVO member) throws SQLException {
+		memberDAO.modifyEmail(member);
 	}
 
 }
