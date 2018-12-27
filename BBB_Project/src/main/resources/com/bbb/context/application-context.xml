@@ -10,11 +10,8 @@
 	<bean id="memberService" class="com.bbb.service.MemberServiceImpl"
 		p:memberDAO-ref="memberDAO" />
 	
-	<bean id="boardDAO" class="com.bbb.dao.BoardDAOImpl"
-		p:session-ref="sqlSession" />
-
-	<bean id="boardAttachDAO" class="com.bbb.dao.BoardAttachDAOImpl"
-		p:session-ref="sqlSession" />
+	
+	
 
 
 	<bean id="projectDAO" class="com.bbb.dao.ProjectDAOImpl"
@@ -49,6 +46,13 @@
 		  p:qnaReplyDAO-ref="qnaReplyDAO"
 		  />
 	
+	<bean id="boardDAO" class="com.bbb.dao.BoardDAOImpl"
+		p:session-ref="sqlSession" />
+
+	<bean id="boardAttachDAO" class="com.bbb.dao.BoardAttachDAOImpl"
+		p:session-ref="sqlSession" />
 	
+	<bean id="boardService" class="com.bbb.service.BoardServiceImpl"
+		p:boardDAO-ref="boardDAO" />
 
 </beans>

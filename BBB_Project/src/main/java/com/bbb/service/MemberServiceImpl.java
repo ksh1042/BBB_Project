@@ -29,7 +29,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void register(MemberVO member) throws SQLException {
 		memberDAO.insertMember(member);
-
+		
 	}
 
 	@Override

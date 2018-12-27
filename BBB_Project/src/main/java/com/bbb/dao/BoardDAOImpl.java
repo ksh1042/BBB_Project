@@ -38,13 +38,13 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<MemberVO> selectSearchBoardList(Criteria cri) throws SQLException {
+	public List<BoardVO> selectSearchBoardList(SearchCriteria cri) throws SQLException {
 		int offset=cri.getPageStartRowNum();
 		int limit = cri.getPerPageNum();
 		RowBounds rowBounds=new RowBounds(offset, limit);
-		List<MemberVO> memberList=
+		List<BoardVO> boardList=
 				session.selectList("Board.selectSearchBoardList",(SearchCriteria)cri,rowBounds);
-		return memberList;
+		return boardList;
 		
 	}
 
@@ -67,7 +67,7 @@ public class BoardDAOImpl implements BoardDAO {
 		
 	}
 	@Override
-	public List<BoardVO> selectBoardCriteria(SearchCriteria cri) throws SQLException {
+	public List<BoardVO> selectBoardCriteria(Criteria cri) throws SQLException {
 		int offset=cri.getPageStartRowNum();
 		int limit=cri.getPerPageNum();
 		RowBounds rowBounds=new RowBounds(offset,limit);

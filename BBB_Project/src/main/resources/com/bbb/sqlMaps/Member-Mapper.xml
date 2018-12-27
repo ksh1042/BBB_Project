@@ -3,14 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Member">
    
-<<<<<<< HEAD
-   <select id="selectMemberList" resultType="member">
-      select * from tbl_member
-      order by indate desc
-   </select>
-=======
-  
->>>>>>> refs/remotes/origin/lee
+
    <select id="selectMemberById" resultType="member">
       select * from tbl_member
       where id=#{id}

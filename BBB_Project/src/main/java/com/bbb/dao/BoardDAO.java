@@ -20,13 +20,15 @@ public interface BoardDAO {
 
 	void increaseViewcnt(int bNum) throws Exception;
 	
-	List<MemberVO> selectSearchBoardList(Criteria cri) throws SQLException;
+	List<BoardVO> selectSearchBoardList(SearchCriteria cri) throws SQLException;
 	
-	List<BoardVO> selectBoardCriteria(SearchCriteria cri) throws SQLException;
+	List<BoardVO> selectBoardCriteria(Criteria cri) throws SQLException;
 	
 	int selectSearchBoardListCount(SearchCriteria cri) throws SQLException;
 	
 	List<BoardVO> selectBoardAll() throws Exception;
 	
 	int getSeqNextvalue() throws Exception;
+
+	
 }
