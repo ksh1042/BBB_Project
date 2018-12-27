@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="decorator"
 	uri="http://www.opensymphony.com/sitemesh/decorator"%>
 <%
@@ -10,10 +11,6 @@
 	response.setDateHeader("Expires", 1L);
 %>
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html>
 <head>
   <meta charset="utf-8">
@@ -45,26 +42,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
         <decorator:head />
 </head>
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
@@ -188,11 +165,11 @@ desired effect
           
           <!-- ----------------상단 헤더 사용자 정보창 ----------------- -->
           <!-- User Account Menu -->
-       <%--    <li class="dropdown user user-menu">
+      		<li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="<%=request.getContextPath()%>/resources/main/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               
               <!-- 접속한 사람의 아이디 혹은 이름 노출 -->
@@ -203,8 +180,7 @@ desired effect
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="<%=request.getContextPath()%>/resources/main/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
+                <img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 <p>
                   Alexander Pierce - Web Developer
                   <small>Member since Nov. 2012</small>
@@ -231,21 +207,25 @@ desired effect
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<%= request.getContextPath() %>/commons/logout" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
-          </li> --%>
+          </li>
           
           <!-- ------------------------------------------------- -->
           <!-- Control Sidebar Toggle Button -->
+          <sec:authorize access="hasAuthority('ROLE_ADMIN')">
           <li>
             <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
           </li>
+          </sec:authorize>
         </ul>
       </div>
     </nav>
   </header>
+  
+  
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
 
@@ -258,7 +238,7 @@ desired effect
           <img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>${loginUser.name}</p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
@@ -280,6 +260,7 @@ desired effect
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
+        <sec:authorize access="hasAuthority('ROLE_USER')">
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>계획설계</span>
             <span class="pull-right-container">
@@ -291,7 +272,7 @@ desired effect
             <li><a href="#"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i>단위업무 정의서</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i>간트차트</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>use-case</a></li>
+            <li><a href="<%=request.getContextPath()%>/project/usecase"><i class="fa fa-circle-o"></i>use-case</a></li>
           </ul>
         </li>
         
@@ -328,9 +309,9 @@ desired effect
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=request.getContextPath()%>/notice/list"><i class="fa fa-circle-o"></i>공지사항</a></li>
-            <li><a href="<%=request.getContextPath()%>/atta/list""><i class="fa fa-circle-o"></i>자료실</a></li>
-            <li><a href="<%=request.getContextPath()%>/board/list""><i class="fa fa-circle-o"></i>자유게시판</a></li>
+            <li><a href="<%=request.getContextPath()%>/notice/listPage"><i class="fa fa-circle-o"></i>공지사항</a></li>
+            <li><a href="<%=request.getContextPath()%>/atta/list"><i class="fa fa-circle-o"></i>자료실</a></li>
+            <li><a href="<%=request.getContextPath()%>/board/listPage"><i class="fa fa-circle-o"></i>자유게시판</a></li>
           </ul>
         </li>
         
@@ -341,12 +322,29 @@ desired effect
         		<span>ISSUE</span>
         	</a>
         </li>
+        </sec:authorize>
         
+        <sec:authorize access="hasAuthority('ROLE_ADMIN')">
+        <li class="treeview">
+          <a href="#"><i class="fa fa-link"></i> <span>관리자 게시판</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i>공지사항</a></li>
+            <li><a href="<%=request.getContextPath()%>/question/listQna"><i class="fa fa-circle-o"></i>QnA</a></li>
+            <li><a href="<%=request.getContextPath()%>/admin/memberList"><i class="fa fa-circle-o"></i>회원관리</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>프로젝트 관리</a></li>
+          </ul>
+        </li>
+        </sec:authorize>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
   </aside>
+  
   <body>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

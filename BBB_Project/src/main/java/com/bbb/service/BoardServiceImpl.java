@@ -17,7 +17,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void register(BoardVO board) throws SQLException {
+	public void create(BoardVO board) throws SQLException {
 		boardDAO.insertBoard(board);
 	}
 

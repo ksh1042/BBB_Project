@@ -3,6 +3,7 @@ package com.bbb.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.bbb.controller.Criteria;
@@ -36,7 +37,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 
 	@Override
 	public NoticeVO selectNoticeByNnum(int nNum) throws SQLException {
-		NoticeVO notice = session.selectOne("Notice.selectNoticeByNnum", nNum);
+		NoticeVO notice = (NoticeVO)session.selectOne("Notice.selectNoticeByNnum", nNum);
 		return notice;
 	}
 
@@ -47,10 +48,30 @@ public class NoticeDAOImpl implements NoticeDAO {
 	}
 
 	@Override
-	public int selectNoticeListCount(Criteria cri) throws SQLException {
-		int count = session.selectOne("Notice.selectNoticeListCount",(SearchCriteria)cri);
-		return count;
+	public List<NoticeVO> selectNoticeCriteria(Criteria cri) throws SQLException {
+		int offset = cri.getPageStartRowNum();
+		int limit = cri.getPerPageNum();
+		RowBounds bounds = new RowBounds(offset,limit);
+		
+		List<NoticeVO> noticeList = session.selectList("Notice.selectNoticeCriteria",null,bounds);
+		return noticeList;
 	}
-	
+
+	@Override
+	public List<NoticeVO> selectSearchNoticeList(SearchCriteria cri) throws SQLException {
+		int offset = cri.getPageStartRowNum();
+		int limit = cri.getPerPageNum();
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		
+		List<NoticeVO> noticeList = session.selectList("Notice.selectSearchNoticeList",cri,rowBounds);
+		return noticeList;
+	}
+
+	@Override
+	public List<NoticeVO> selectNoticeAll() throws SQLException {
+		List<NoticeVO> noticeList = session.selectList("Notice.selectNoticeAll");
+		return noticeList;
+	}
+
 
 }

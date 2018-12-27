@@ -28,8 +28,8 @@
 
  <form role="form" action="modifyPage" method="post">
     
-    <input type='hidden' name='bno' value ="${board.bNum}">
-    <input type='hidden' name='bno' value ="${board.pjNum}">
+    <input type='hidden' name='bNum' value ="${board.bNum}">
+    <input type='hidden' name='pjNum' value ="${board.pjNum}">
     <input type='hidden' name='page' value ="${cri.page}">
     <input type='hidden' name='perPageNum' value ="${cri.perPageNum}">
     
@@ -54,12 +54,12 @@
   </div><!-- /.box-body -->
 
   <div class="box-footer">
-    <button type="submit" id="modifyBtn" class="btn btn-warning">Modify</button>
-    <button type="submit" id="removeBtn" class="btn btn-danger">REMOVE</button>
-    <button type="submit" id="listBtn" class="btn btn-primary">GO LIST </button>
+    <button type="submit" id="modifyBtn" class="btn btn-warning">Modify</button>&nbsp;
+    <button type="submit" id="removeBtn" class="btn btn-danger">REMOVE</button>&nbsp;
+    <button type="submit" id="listBtn" class="btn btn-primary">LIST</button>
   </div>
 
-
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
 
 

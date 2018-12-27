@@ -4,20 +4,26 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.bbb.controller.Criteria;
+import com.bbb.controller.SearchCriteria;
 import com.bbb.dto.NoticeVO;
 
 public interface NoticeDAO {
 	
-	void insertNotice(NoticeVO notice)throws SQLException;
+	public void insertNotice(NoticeVO notice)throws SQLException;
 	
-	void updateNotice(NoticeVO notice)throws SQLException;
+	public void updateNotice(NoticeVO notice)throws SQLException;
 	
-	void deleteNotice(int nNum)throws SQLException;
+	public void deleteNotice(int nNum)throws SQLException;
 	
-	NoticeVO selectNoticeByNnum(int nNum)throws SQLException;
+	public NoticeVO selectNoticeByNnum(int nNum)throws SQLException;
 	
-	List<NoticeVO> selectNoticeList()throws SQLException;
+	public List<NoticeVO> selectNoticeList()throws SQLException;
 	
-	int selectNoticeListCount(Criteria cri)throws SQLException;
+	List<NoticeVO> selectNoticeCriteria(Criteria cri) throws SQLException;
+	
+	List<NoticeVO> selectSearchNoticeList(SearchCriteria cri)throws SQLException;
+	
+	public List<NoticeVO> selectNoticeAll () throws SQLException;
+	
 	
 }

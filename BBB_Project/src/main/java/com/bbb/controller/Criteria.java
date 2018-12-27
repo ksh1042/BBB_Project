@@ -5,11 +5,11 @@ public class Criteria {
 	private int page; // 현재 페이지 번호
 	private int perPageNum; // 한페이지당 보여줄 행수
 	
-	public Criteria(){
+	public Criteria() {
 		this.page = 1;
 		this.perPageNum = 10;
 	}
-	
+
 	public int getPage() {
 		return page;
 	}

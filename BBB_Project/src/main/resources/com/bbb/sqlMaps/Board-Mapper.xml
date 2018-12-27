@@ -11,7 +11,8 @@
 	
 	<update id="updateBoard">
 		update
-		tbl_board set
+		tbl_board 
+		set
 		title=#{title}, content=#{content}, updatedate=#{updateDate}
 		where bnum=#{bNum}
 	</update>
@@ -29,11 +30,13 @@
 	</update>
 	
 	<sql id="search">
-			<if test="searchType == 't'.toString()">
-				and title like '%'||#{keyword}||'%'
-			</if>
-			<if test="searchType == 'w'.toString()">
-				and writer like '%'||#{keyword}||'%'
+			<if test="searchType !=null">
+				<if test="searchType == 't'.toString()">
+					and title like '%'||#{keyword}||'%'
+				</if>
+				<if test="searchType == 'w'.toString()">
+					and writer like '%'||#{keyword}||'%'
+				</if>
 			</if>
 	</sql>
 	<select id="selectSearchBoardList" resultType="board">
@@ -42,7 +45,7 @@
 		where bnum >0
 		]]>
 		<include refid="search" ></include>
-		order by indate desc
+		order by bnum desc
 	</select>
 	<select id="selectSearchBoardCount" resultType="int">
 		<![CDATA[
@@ -53,7 +56,7 @@
 		<include refid="search"></include>
 	</select>
 	
-	<select id="selectBoardByBum" resultType="board">
+	<select id="selectBoardByBnum" resultType="board">
 		select *
 		from tbl_board
 		where bnum=#{bNum}

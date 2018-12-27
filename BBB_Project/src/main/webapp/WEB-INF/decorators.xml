@@ -12,6 +12,17 @@
 		<pattern>/project/**</pattern>
 	</decorator>
 	
+	<decorator name="admin" page="decorator.jsp">		
+		<pattern>/admin/**</pattern>
+		<pattern>/question/**</pattern>
+	</decorator>
 	
+	<decorator name="notice" page="decorator.jsp">		
+		<pattern>/notice/**</pattern>
+	</decorator>
+	
+	<decorator name="board" page="decorator.jsp">		
+		<pattern>/board/**</pattern>
+	</decorator>
 	
 </decorators>

@@ -1,60 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page trimDirectiveWhitespaces="true" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>글 등록</title>
-</head>
+	pageEncoding="UTF-8"%>
+
 <body>
-	<form action="register" method="post">
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<!-- left column -->
+		<div class="col-md-12">
+			<!-- general form elements -->
+			<div class="box box-primary">
+				<div class="box-header">
+					<h3 class="box-title">REGISTER BOARD</h3>
+				</div>
+				<!-- /.box-header -->
+<form role="form" method="post" action="register">
+<table border="1">
+		<div class="form-group">
+			<label for="exampleInputEmail1">Title</label> 
+			<input type="text"
+				name='title' class="form-control" placeholder="Enter Title">
+		</div>
+		<div class="form-group">
+			<label for="exampleInputPassword1">Content</label>
+			<textarea class="form-control" name="content" rows="3"
+				placeholder="Enter ..."></textarea>
+		</div>
+		<div class="form-group">
+			<label for="exampleInputEmail1">INDATE</label> 
+			<input type="date" pattern="yyyy-MM-dd" value="${notice.indate}"/>
+		</div>
+		<div class="form-group">
+			<label for="exampleInputEmail1">EXPIREDATE</label> 
+			<input type="date" pattern="yyyy-MM-dd" value="${notice.expireDate}"/>
+		</div>
+		<div class="form-group">
+			<label for="exampleInputEmail1">KIND</label>
+			<select name="kind">
+				<option value="3" selected>기본</option>
+				<option value="0">이슈</option>
+				<option value="1">이벤트</option>
+				<option value="2">점검</option>
+			</select> 
+			
+		</div>
+	</div>
+	<!-- /.box-body -->
+	</table>
+
+	<div class="box-footer">
+		<button type="submit" class="btn btn-primary">Submit</button>
 		
-			<tr>
-				<td><input type="hidden" name="nNum"/></td>
-			</tr>
-		<table border="1">
-			<tr>
-				<td>TITLE</td>
-				<td><input type="text" name="title"/></td>
-			</tr>
-			<tr>
-				<td>CONTENT</td>
-				<td><textarea class="form-control" name="content" rows="6"
-				placeholder="Enter ..."></textarea></td>
-			</tr>
-			<tr>
-				<td>IN_DATE</td>
-				<td><input type="date" name="indate" /></td>
-			</tr>
-			<tr>
-				<td>END_DATE</td>
-				<td><input type="date" name="expireDate" /></td>
-			</tr>
-			<tr>
-				<td>KIND</td>
-				<td><input type="radio" name="kind" checked="checked" value="1" /> <span class="up">이슈</span>&nbsp;&nbsp; 
-				<input type="radio"name="kind" value="2"/> <span class="up">이벤트</span><input type="radio" name="kind" checked="checked" value="3" /> <span class="up">점검</span>&nbsp;&nbsp; 
-				<input type="radio"name="kind" value="4"/> <span class="up">기본</span></td>
-			</tr>
-		</table>
-		<input type="submit" value="등록"/>
-		<input type="button" value="목록으로" onclick="list_go();" />
-	</form>
-	<form id="jobForm">
-	<input type="hidden" name="page" value="${cri.page }">
-		<input type="hidden" name="perPageNum" value="${cri.perPageNum }">
-		<input type="hidden" name="searchType" value="${cri.searchType }"/>
-		<input type="hidden" name="keyword" value="${cri.keyword }" />
-	</form>
-	
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script>
-	function list_go(){
-		var jobForm=$("#jobForm");
-		jobForm.attr("action","list").attr("method","get");
-		jobForm.submit();
-	}
-</script>
+	</div>
+</form>
+
+			</div>
+			<!-- /.box -->
+		</div>
+		<!--/.col (left) -->
+
+	</div>
+	<!-- /.row -->
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
 </body>
-</html>
