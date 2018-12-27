@@ -4,14 +4,8 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="memberDAO" class="com.bbb.dao.MemberDAOImpl"
-		p:sqlSession-ref="sqlSession" />
-
-	<bean id="memberService" class="com.bbb.service.MemberServiceImpl"
-		p:memberDAO-ref="memberDAO" />
-	
-	
-	
+	<bean id="memberDAO" class="com.bbb.dao.MemberDAOImpl" p:sqlSession-ref="sqlSession" />
+	<bean id="memberService" class="com.bbb.service.MemberServiceImpl" p:memberDAO-ref="memberDAO" />
 
 
 	<bean id="projectDAO" class="com.bbb.dao.ProjectDAOImpl"

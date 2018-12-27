@@ -4,17 +4,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bbb.controller.SearchCriteria;
 import com.bbb.dao.ProjectDAO;
 import com.bbb.dao.ProjectPartakeDAO;
+import com.bbb.dto.ProjectPartakeVO;
 import com.bbb.dto.ProjectVO;
 
-public class ProjectServiceImpl implements ProjectService {
-	
+public class ProjectServiceImpl implements ProjectService{
+
 	private ProjectDAO projectDAO;
 	public void setProjectDAO(ProjectDAO projectDAO){
 		this.projectDAO = projectDAO;
 	}
-	
 	
 	private ProjectPartakeDAO projectPartakeDAO;
 	public void setProjectPartakeDAO(ProjectPartakeDAO projectPartakeDAO){
@@ -22,14 +23,23 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	@Override
-	public void addProject(ProjectVO project) throws SQLException {
-		projectDAO.insertProject(project);
+	public List<ProjectVO> searchProjectList(SearchCriteria cri) throws SQLException {
+		List<ProjectVO> searchPList = projectDAO.searchProjectList(cri);
+		return searchPList;
 	}
 
 	@Override
-	public String readVerifyProjectName(String name) throws SQLException {
-		return projectDAO.verifyProjectName(name);
+	public int searchProjectCount(SearchCriteria cri) throws Exception {
+		int count = projectDAO.searchProjectCount(cri);
+		return count;
 	}
+
+	@Override
+	public void joinProject(ProjectPartakeVO takeVO) throws Exception {
+		projectDAO.searchProjectJoin(takeVO);
+		
+	}	
+	
 	// 내가 참여하고있는 프로젝트 목록을 가져오기 위한 비교
 	@Override
 	public List<ProjectVO> readMyProjectList(String id) throws SQLException {
@@ -53,6 +63,21 @@ public class ProjectServiceImpl implements ProjectService {
 		
 	}
 
+	@Override
+	public List<ProjectPartakeVO> getBindingProject(String id) throws SQLException {
+		List<ProjectPartakeVO> bindList = projectPartakeDAO.selectBindingProject(id);
+		return bindList;
+	}
+	
+	@Override
+	public void addProject(ProjectVO project) throws SQLException {
+		projectDAO.insertProject(project);
+	}
+
+	@Override
+	public String readVerifyProjectName(String name) throws SQLException {
+		return projectDAO.verifyProjectName(name);
+	}
 
 	@Override
 	public List<ProjectVO> allProjectList() throws SQLException {
@@ -61,6 +86,11 @@ public class ProjectServiceImpl implements ProjectService {
 		return null;
 	}
 
-
+	@Override
+	public ProjectVO projectMain(int pjNum) throws SQLException {
+		ProjectVO project = projectDAO.getProjectMain(pjNum);
+		return project;
+	}
+	
 
 }

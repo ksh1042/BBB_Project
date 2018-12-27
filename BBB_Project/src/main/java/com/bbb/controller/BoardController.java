@@ -26,6 +26,7 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 	
+	
 	@RequestMapping(value="/listAll", method = RequestMethod.GET)
 	public void listAll(Model model) throws Exception{
 		List<BoardVO> boardList = service.listAll();

@@ -39,6 +39,7 @@ public class LoginSuccessSecurityHandler
 		try {
 			MemberVO member=service.getMemberById(successID);
 			session.setAttribute("loginUser", member);
+			
 		} catch (SQLException e) {			
 			e.printStackTrace();
 		}

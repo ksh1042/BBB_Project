@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="decorator"
-	uri="http://www.opensymphony.com/sitemesh/decorator"%>
+   uri="http://www.opensymphony.com/sitemesh/decorator"%>
 <%
-	response.setHeader("Pragma", "No-cache");
-	response.setHeader("Cache-Control", "no-cache");
-	response.addHeader("Cache-Control", "no-store");
-	response.setDateHeader("Expires", 1L);
+   response.setHeader("Pragma", "No-cache");
+   response.setHeader("Cache-Control", "no-cache");
+   response.addHeader("Cache-Control", "no-store");
+   response.setDateHeader("Expires", 1L);
 %>
 <!DOCTYPE html>
 <html>
@@ -49,7 +49,7 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="/main/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>P</b>MS</span>
       <!-- logo for regular state and mobile devices -->
@@ -245,11 +245,11 @@
       </div>
 
       <!-- search form (Optional) -->
-      <form action="#" method="get" class="sidebar-form">
+      <form action="<%=request.getContextPath()%>/main/searchPList" method="get" class="sidebar-form">
         <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <input type="text" id="keywordInput" name="keyword" class="form-control" placeholder="프로젝트명 검색">
           <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+              <button type="submit" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
               </button>
             </span>
         </div>
@@ -268,8 +268,9 @@
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
+            <li><a href="<%=request.getContextPath() %>/resources/web/viewer.html?file=./dummy/sample.pdf" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+            <li><a href="/project/registPlan" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+            <li><a href="/project/requirement"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i>단위업무 정의서</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i>간트차트</a></li>
             <li><a href="<%=request.getContextPath()%>/project/usecase"><i class="fa fa-circle-o"></i>use-case</a></li>
@@ -289,17 +290,17 @@
         </li>
         
         <li>
-        	<a href="#">
-        		<i class="fa fa-link" ></i> 
-        		<span>예산관리</span>
-        	</a>
+           <a href="#">
+              <i class="fa fa-link" ></i> 
+              <span>예산관리</span>
+           </a>
         </li>
         
         <li>
-        	<a href="#">
-        		<i class="fa fa-link"></i> 
-        		<span>캘린더</span>
-        	</a>
+           <a href="#">
+              <i class="fa fa-link"></i> 
+              <span>캘린더</span>
+           </a>
         </li>
         
         <li class="treeview">
@@ -317,10 +318,10 @@
         
         
          <li>
-        	<a href="#">
-        		<i class="fa fa-link"></i> 
-        		<span>ISSUE</span>
-        	</a>
+           <a href="#">
+              <i class="fa fa-link"></i> 
+              <span>ISSUE</span>
+           </a>
         </li>
         </sec:authorize>
         
@@ -344,7 +345,6 @@
     </section>
     <!-- /.sidebar -->
   </aside>
-  
   <body>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

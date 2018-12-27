@@ -1,0 +1,109 @@
+package com.bbb.controller;
+
+import java.io.PrintWriter;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.bbb.dto.BoardVO;
+import com.bbb.service.BoardService;
+
+@Controller
+@RequestMapping("/fileboard")
+public class FileBoardController {
+
+	
+		
+		@Autowired
+		private BoardService service;
+		
+		
+		/*@RequestMapping(value="/listAll", method = RequestMethod.GET)
+		public void listAll(Model model) throws Exception{
+			List<BoardVO> boardList = service.listAll();
+			model.addAttribute("boardList", boardList);
+		}
+		@RequestMapping(value="/listCri", method = RequestMethod.GET)
+		public void listCri(Criteria cri,Model model) throws Exception{
+			List<BoardVO> boardList = service.listCriteria(cri);
+			model.addAttribute("list",boardList);
+		}*/
+		
+		@RequestMapping (value="/fileboardlist", method= RequestMethod.GET)
+		public void listPage(Criteria cri, Model model) throws Exception{
+			List<BoardVO> boardList = service.listCriteria(cri);
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(cri);
+			int totalCount = service.listAll().size();
+			pageMaker.setTotalCount(totalCount);
+			
+			model.addAttribute("list",boardList);
+			model.addAttribute("pageMaker",pageMaker);
+		}
+		
+		/*@RequestMapping(value="/readPage", method = RequestMethod.GET)
+		public void readPage(@ModelAttribute("cri") Criteria cri, int bNum, Model model) throws Exception {
+			BoardVO board = service.read(bNum);
+			model.addAttribute(board);
+		}*/
+		
+		@RequestMapping(value="/fileboardmodify", method=RequestMethod.GET)
+		public void modifyPage(@ModelAttribute("cri") Criteria cri,
+				@RequestParam(value = "bNum",defaultValue = "-1") int bNum, Model model, HttpServletRequest request,HttpServletResponse response) throws Exception{
+			
+			if (bNum > 0){
+				BoardVO board = service.readByBno(bNum);
+				request.setAttribute("boardVO", board);
+				request.setAttribute("cri", cri);
+				request.getRequestDispatcher("/WEB-INF/views/board/fileboardmodify.jsp").forward(request,response);
+			}else{
+				response.setContentType("text/html; charset=utf-8");
+				PrintWriter out= response.getWriter();
+				out.write("<script>");
+				out.write("alert('게시물이 존재하지않습니다.');");
+				out.println("history.go(-1);");
+				out.write("</script>");
+				
+			}
+			
+		}
+
+		@RequestMapping(value="/fileboardmodify", method=RequestMethod.POST)
+		public String modifyPagePOST(BoardVO board, Criteria cri, RedirectAttributes rttr) throws Exception{
+			board.setUpdateDate(new Date());
+			
+			service.update(board);
+			
+			rttr.addAttribute("page", cri.getPage());
+			rttr.addAttribute("perPageNum", cri.getPerPageNum());
+			rttr.addFlashAttribute("msg","SUCCESS");
+			
+			return "redirect:/board/listPage";
+		
+			
+		}
+		
+		@RequestMapping(value="/fileboarddelete",method=RequestMethod.POST)
+		public String removePage(int bNum,RedirectAttributes rttr,
+								 Criteria cri) throws Exception{
+			service.delete(bNum);
+			
+			rttr.addAttribute("page",cri.getPage());
+			rttr.addAttribute("perPageNum",cri.getPerPageNum());
+			rttr.addFlashAttribute("msg","SUCCESS");
+			
+			return "redirect:/board/fileboardlist";		
+		}
+
+}

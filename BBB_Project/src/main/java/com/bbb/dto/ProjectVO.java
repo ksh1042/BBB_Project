@@ -13,7 +13,6 @@ public class ProjectVO {
 	private Date indate;
 	private Date startDate;
 	private Date endDate;
-	
 	public int getPjNum() {
 		return pjNum;
 	}
@@ -68,6 +67,8 @@ public class ProjectVO {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
+	
+	
 	
 	@Override
 	public String toString() {

@@ -61,7 +61,7 @@
 				<tr>	
              	  <td>${num.index+1 }</td>
              	  <td>
-             	  	<a href="<%=request.getContextPath() %>/project/projectMain?${partake.pjNum}">${partake.pjNum }</a>
+             	  	<a href="<%=request.getContextPath() %>/project/main?pjNum=${partake.pjNum}">${partake.pjNum }</a>
              	  </td>
                   <td>${partake.name}</td>
                   <td>${partake.creator}</td>

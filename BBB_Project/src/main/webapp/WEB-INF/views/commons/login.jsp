@@ -64,6 +64,7 @@
 		<div class="login-box-body">
 			<p class="login-box-msg">Sign in to start your session</p>
 
+
 			<form role="form"
 				action="<%=request.getContextPath()%>/project/partakeList"
 				method="post">
@@ -101,6 +102,7 @@
 		<!-- /.login-box-body -->
 	</div>
 
+
 	<c:if test="${!empty msg}">
 		<script>
 			alert('${msg}');
@@ -126,6 +128,7 @@
     });
   });
   
+
   function login_go(){			
 		$.ajax({
 			url:"<%=request.getContextPath()%>/commons/login",

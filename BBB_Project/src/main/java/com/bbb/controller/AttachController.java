@@ -20,32 +20,99 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.spring.utils.MediaUtils;
-import com.spring.utils.UploadFileUtils;
+import com.bbb.utils.MediaUtils;
+import com.bbb.utils.UploadFileUtils;
 
 @RestController
 public class AttachController {
-
+	
+	/*@Resource(name="uploadPath")
+	private String uploadPath;
+	
+	@RequestMapping(value="/upload", method=RequestMethod.POST, produces="text/plain;charset=utf-8")
+	public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception {
+		ResponseEntity<String> entity = null;
+		
+		String result = null;
+		
+		UUID uid = UUID.randomUUID();
+		String saveName = uid.toString().replace("-","") + "$$" + file.getOriginalFilename();
+		
+		File target = new File(uploadPath, saveName);
+		FileCopyUtils.copy(file.getBytes(), target);
+		
+		
+		return new ResponseEntity<String>(saveName, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value="/displayFile", method=RequestMethod.GET)
+	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception {
+		InputStream in = null;
+		
+		ResponseEntity<byte []> entity = null;
+		
+		
+		try {
+			String formatName = fileName.substring(fileName.lastIndexOf('.')+1);
+			HttpHeaders headers = new HttpHeaders();
+			
+			fileName = fileName.replace('/', File.separatorChar);
+			
+			in = new FileInputStream(uploadPath+fileName);
+			
+			fileName = fileName.substring(fileName.indexOf("_")+1);
+			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+			headers.add("Content-Disposition", "attachment;filename=\""
+						+ new String(fileName.getBytes("utf-8"), "ISO-8859-1") + "\"");
+			
+			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+		}catch(IOException e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<byte[]>(HttpStatus.INTERNAL_SERVER_ERROR);
+		} finally {
+			if(in !=null)
+				in.close();
+		}
+		
+		return entity;
+	}
+	
+	@RequestMapping(value="/deleteFile", method=RequestMethod.POST)
+	public ResponseEntity<String> deleteFile(String fileName) throws Exception {
+		ResponseEntity<String> entity = null;
+		// 파일 삭제
+		try {
+			new File(uploadPath + fileName.replace('/', File.separatorChar)).delete();
+			entity = new ResponseEntity<String>("DELETED", HttpStatus.OK);
+		} catch( Exception e ) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return entity;
+	}*/
+	
 	private static final Logger logger=
 			LoggerFactory.getLogger(AttachController.class);
 	
 	@Resource(name="uploadPath")
 	private String uploadPath=null;
 	
-	@RequestMapping(value="/uploadAjax", method=RequestMethod.POST,produces="text/plain;charset=utf-8")
-	
+	@RequestMapping(value="/uploadAjax", method=RequestMethod.POST,
+			produces="text/plain;charset=utf-8")
 	public ResponseEntity<String> uploadAjax(MultipartFile file)
-	throws Exception{
-	logger.info("originalName : "+file.getOriginalFilename());
-	logger.info("size : " +file.getSize());
-	logger.info("contentType : " +file.getContentType());
-	
-	return new ResponseEntity<String>(
-			UploadFileUtils.uploadFile(uploadPath,file.getOriginalFilename(),file.getBytes()),
-			HttpStatus.CREATED);
-	
-	
+							throws Exception{
+		logger.info("originalName : "+file.getOriginalFilename());
+		logger.info("size : "+file.getSize());
+		logger.info("contentType : "+file.getContentType());
+		
+		return new ResponseEntity<String>(
+							UploadFileUtils.uploadFile(uploadPath, 
+									file.getOriginalFilename(), 
+									file.getBytes()),
+							HttpStatus.CREATED);
 	}
+	
 	@RequestMapping(value="/displayFile",method=RequestMethod.GET)
 	public ResponseEntity<byte[]> displayFile(String fileName)
 										throws Exception{
@@ -134,5 +201,4 @@ public class AttachController {
 		}
 		return new ResponseEntity<String>("deleted",HttpStatus.OK);
 	}
-	
 }

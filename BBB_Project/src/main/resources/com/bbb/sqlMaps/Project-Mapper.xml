@@ -3,6 +3,22 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Project">
 
+	<select id="ProjectSearchList" resultType="project">
+		select * from tbl_project
+		where name like '%'||#{keyword}||'%'
+		order by pjnum desc
+	</select>
+	   
+	<select id="ProjectSearchCount" resultType="int">
+		select count(*) from tbl_project
+		where name like '%'||#{keyword}||'%'
+	</select>
+	   
+	<update id="ProjectSearchJoin">
+		insert into tbl_project_partake(pjNum, id, assignyn)
+		values(#{pjNum}, #{id}, 0)
+	</update>
+	
 	<select id="selectProjectList" resultType="project">
 		select *
 		from tbl_project
@@ -19,10 +35,16 @@
 		FROM tbl_project
 		WHERE name=#{name}
 	</select>
+	
 	<update id="insertProject" parameterType="project">
 		INSERT INTO tbl_project(pjNum, name, disc, creator, visibility, startDate, endDate)
 		VALUES(pjnum_seq.nextval, #{name}, #{disc}, #{creator}, #{visibility}, #{startDate}, #{endDate})
-	</update>
-	
+	</update>	
 	
 </mapper>
+
+
+
+
+
+   
