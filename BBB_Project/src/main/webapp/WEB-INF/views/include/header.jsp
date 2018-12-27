@@ -245,7 +245,7 @@
       </div>
 
       <!-- search form (Optional) -->
-      <form action="<%=request.getContextPath()%>/project/searchList" method="get" class="sidebar-form">
+      <form action="<%=request.getContextPath()%>/main/searchPList" method="get" class="sidebar-form">
         <div class="input-group">
           <input type="text" id="keywordInput" name="keyword" class="form-control" placeholder="프로젝트명 검색">
           <span class="input-group-btn">
@@ -268,7 +268,8 @@
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=request.getContextPath() %>/resources/web/viewer.html" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+            <li><a href="<%=request.getContextPath() %>/resources/web/viewer.html?file=./dummy/sample.pdf" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+            <li><a href="/project/registPlan" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
             <li><a href="/project/requirement"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i>단위업무 정의서</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i>간트차트</a></li>

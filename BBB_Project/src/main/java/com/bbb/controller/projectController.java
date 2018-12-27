@@ -57,6 +57,11 @@ public class projectController {
 		request.getSession().setAttribute("logonProject", project);
 	}
 	
+	@RequestMapping(value="/registPlan", method=RequestMethod.GET)
+	public void registPlan() throws Exception{
+		
+	}
+	
 	
 	
 		
