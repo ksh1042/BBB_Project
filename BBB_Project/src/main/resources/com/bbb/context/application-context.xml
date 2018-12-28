@@ -9,8 +9,6 @@
 	<bean id="memberService" class="com.bbb.service.MemberServiceImpl"
 		p:memberDAO-ref="memberDAO" />
 	
-
-		
 	<bean id="mailNotifier"
 	  class="com.bbb.mail.MimeAttachNotifier"
 	  p:mailSender-ref="mailSender"
@@ -49,6 +47,13 @@
 		  class="com.bbb.service.QnaReplyServiceImpl"
 		  p:qnaReplyDAO-ref="qnaReplyDAO"
 		  />
-	
+	<bean id="issueDAO"
+	      class="com.bbb.dao.IssueDAOImpl"
+	      p:session-ref="sqlSession"
+	      />
+	<bean id="issueService"
+		  class="com.bbb.service.IssueServiceImpl"
+		  p:issueDAO-ref="issueDAO"
+		  />  
 
 </beans>

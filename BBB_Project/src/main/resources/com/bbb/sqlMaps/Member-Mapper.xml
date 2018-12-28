@@ -20,19 +20,11 @@
       where id=#{id}
    </update>
    
-   
    <update id="deleteMember">
       delete from tbl_member
       where id=#{id}   
    </update> 
-   <select id="idCheck" parameterType="str" resultType="int" >
-	    select COUNT(*) FROM tbl_member
-		where id = #{id}
-	</select>
-	<select id="emailCheck" parameterType="str" resultType="int" >
-	    select COUNT(*) FROM tbl_member
-		where email = #{email}
-	</select>
+  
 	<update id="resetPwd" parameterType="member">
 		update
 			tbl_member
