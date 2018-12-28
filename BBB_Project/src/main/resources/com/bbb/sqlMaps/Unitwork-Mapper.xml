@@ -2,10 +2,50 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Unitwork">
-	<select id="slectUnitworkListByRdNum" parameterType="int" resultType="unitwork">
+	<!-- view 권한 풀리면 주석해제. -->
+	<!-- <select id="selectUnitworkListByRdNum" parameterType="int" resultType="unitwork">
 		SELECT *
-		FROM  	
+		FROM view_unitwork_definition
+		WHERE udid=#{udid}
+	</select> -->
+	
+	<!-- view 권한 풀리면 삭제 -->
+	<select id="selectUnitworkListByRdNum" parameterType="int" resultType="unitwork">
+		SELECT tud.udnum as udNum, tud.indate as indate, udid, udname, rdid, rdname, udmanager, extdate, intdate, pddate, devdate, estmate
+		FROM tbl_unitwork_definition tud, tbl_unitwork_definition_detail tudd, tbl_project tp
+		WHERE tp.udNum=#{udNum} AND tp.udNum = tud.udNum AND tud.udNum = tudd.udNum
 	</select>
+	<select id="selectUnitworkHistoryByRdNum" parameterType="int" resultType="unitworkHist">
+		SELECT *
+		FROM tbl_unitwork_definition_hist
+		WHERE udNum=#{udNum}
+	</select>
+	<select id="selectUdNumSeqNextval" resultType="int">
+		SELECT udNum_seq.nextval
+		FROM dual
+	</select>
+	<update id="insertUD" parameterType="int">
+		INSERT INTO tbl_unitwork_definition(udNum)
+		VALUES(#{udNum})
+	</update>
+	<update id="insertUDD" parameterType="unitwork">
+		INSERT INTO tbl_unitwork_definition_detail(udNum, udId, udName, rdId, rdName, udManager, extDate, intDate, pdDate, devDate, extmate)
+		VALUES(#{udNum}, #{udId}, #{udName}, #{rdId}, #{rdName}, #{udManager}, #{extDate}, #{intDate}, #{pdDate}, #{devDate}, #{extmate})
+	</update>
+	<update id="insertUDH" parameterType="unitworkHist">
+		INSERT INTO tbl_unitwork_definition_hist(udNum, comm)
+		VALUES(#{udNum}, #{comm})
+	</update>
+	<update id="updateUDD" parameterType="unitworkHist">
+		UPDATE tbl_unitwork_definition
+		SET udId=#{udId}, udName=#{udName}, rdId=#{rdId}, rdName=#{rdName}, udManager=#{udManager}, extDate=#{extDate}, intDate=#{intDate}, pdDate=#{pdDate}, devDate=#{devDate}, extmate=#{extmate}
+		WHERE udNum=#{udNum} 
+	</update>
+	<update id="deleteUDD" parameterType="unitwork">
+		DELETE FROM tbl_unitwork_definition_detail
+		WHERE udNum=#{udNum} AND udId=#{udId}
+	</update>
+	
 </mapper>
 
 
