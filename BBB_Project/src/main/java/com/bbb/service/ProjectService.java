@@ -5,10 +5,13 @@ import java.util.List;
 
 import com.bbb.controller.SearchCriteria;
 import com.bbb.dto.ProjectPartakeVO;
+import com.bbb.dto.ProjectPlanVO;
 import com.bbb.dto.ProjectVO;
 
 public interface ProjectService {
 
+	public int getSeq() throws SQLException;
+	
 	public List<ProjectVO> searchProjectList(SearchCriteria cri) throws SQLException;
 	public int searchProjectCount(SearchCriteria cri) throws Exception;
 	public void joinProject(ProjectPartakeVO takeVO) throws Exception;
@@ -21,6 +24,9 @@ public interface ProjectService {
 	
 	public ProjectVO projectMain(int pjNum) throws SQLException;
 	
+	public void create(ProjectPlanVO planVO) throws SQLException;
+	
 	public void addProject(ProjectVO project) throws SQLException;
+	public void addProjectake(ProjectPartakeVO takeVO) throws SQLException;
 	public String readVerifyProjectName(String name) throws SQLException;
 }

@@ -1,5 +1,7 @@
 package com.bbb.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bbb.dto.MemberVO;
+import com.bbb.dto.ProjectPlanVO;
 import com.bbb.dto.ProjectVO;
 import com.bbb.service.ProjectService;
 
@@ -36,11 +40,24 @@ public class ProjectController {
 		model.addAttribute("myPartakeList",service.readMyProjectList(loginUser.getId()));
 	}
 	
-	@RequestMapping(value="/projectPlan", method=RequestMethod.GET)
-	public void projectPlan(int pjNum, HttpServletRequest request) throws Exception{
+	@RequestMapping(value="/registerPlan", method=RequestMethod.GET)
+	public void projectPlanGET() throws Exception{
 		
+	}
+	
+	@RequestMapping(value="/registerPlan", method=RequestMethod.POST)
+	public String projectPlanPOST(ProjectPlanVO planVO, RedirectAttributes rtts, HttpServletRequest request) throws Exception{
+		HttpSession session = request.getSession();
 		
-		
+		ProjectVO project = (ProjectVO)session.getAttribute("logonProject");
+		int pjNum = project.getPjNum();
+		List<ProjectPlanVO> attachList = planVO.getAttachList();
+		for(ProjectPlanVO plan : attachList){
+			service.create(plan);
+			System.out.println(planVO.toString());
+		}
+		rtts.addFlashAttribute("msg","SUCCESS");
+		return "redirect:/project/main?pjNum="+pjNum;
 	}
 	
 	@RequestMapping(value="/requirement", method=RequestMethod.GET)
@@ -52,12 +69,10 @@ public class ProjectController {
 	public void projectMain(int pjNum, HttpServletRequest request) throws Exception{
 		ProjectVO project = service.projectMain(pjNum);
 		request.getSession().setAttribute("logonProject", project);
+		System.out.println(project.toString());
 	}
 	
-	@RequestMapping(value="/registPlan", method=RequestMethod.GET)
-	public void registPlan() throws Exception{
-		
-	}
+	
 	
 	
 	

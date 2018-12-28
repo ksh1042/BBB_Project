@@ -8,6 +8,7 @@ import com.bbb.controller.SearchCriteria;
 import com.bbb.dao.ProjectDAO;
 import com.bbb.dao.ProjectPartakeDAO;
 import com.bbb.dto.ProjectPartakeVO;
+import com.bbb.dto.ProjectPlanVO;
 import com.bbb.dto.ProjectVO;
 
 public class ProjectServiceImpl implements ProjectService{
@@ -22,6 +23,12 @@ public class ProjectServiceImpl implements ProjectService{
 		this.projectPartakeDAO = projectPartakeDAO;
 	}
 	
+	//pjNum_seq.nextval을 먼저 가져오기
+	@Override
+	public int getSeq() throws SQLException {
+		return projectDAO.pjNumSeq();
+	}
+
 	@Override
 	public List<ProjectVO> searchProjectList(SearchCriteria cri) throws SQLException {
 		List<ProjectVO> searchPList = projectDAO.searchProjectList(cri);
@@ -75,6 +82,11 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 
 	@Override
+	public void addProjectake(ProjectPartakeVO takeVO) throws SQLException {
+		projectDAO.insertProjectake(takeVO);
+	}
+	
+	@Override
 	public String readVerifyProjectName(String name) throws SQLException {
 		return projectDAO.verifyProjectName(name);
 	}
@@ -91,6 +103,13 @@ public class ProjectServiceImpl implements ProjectService{
 		ProjectVO project = projectDAO.getProjectMain(pjNum);
 		return project;
 	}
+
+	@Override
+	public void create(ProjectPlanVO planVO) throws SQLException {
+		projectDAO.insertAttach(planVO);
+		
+	}
+
 	
 
 }
