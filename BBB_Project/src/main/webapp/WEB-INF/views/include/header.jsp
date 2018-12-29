@@ -271,7 +271,7 @@
             <li><a href="<%=request.getContextPath() %>/resources/web/viewer.html?file=./dummy/sample.pdf" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
             <li><a href="/project/registPlan" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
             <li><a href="/project/requirement"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>단위업무 정의서</a></li>
+            <li><a href="<%=request.getContextPath()%>/project/unitwork/list"><i class="fa fa-circle-o"></i>단위업무 정의서</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i>간트차트</a></li>
             <li><a href="<%=request.getContextPath()%>/project/usecase"><i class="fa fa-circle-o"></i>use-case</a></li>
           </ul>

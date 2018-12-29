@@ -16,13 +16,13 @@ public class UnitworkDAOImpl implements UnitworkDAO {
 	}
 	
 	@Override
-	public List<UnitworkVO> selectUnitworkListByRdNum(int rdNum) throws SQLException {
-		return session.selectList("Unitwork.selectUnitworkListByRdNum", rdNum);
+	public List<UnitworkVO> selectUnitworkListByRdNum(int udNum) throws SQLException {
+		return session.selectList("Unitwork.selectUnitworkListByRdNum", udNum);
 	}
 
 	@Override
-	public List<UnitworkHistVO> selectUnitworkHistoryByRdNum(int rdNum) throws SQLException {
-		return session.selectList("Unitwork.selectUnitworkHistoryByRdNum", rdNum);
+	public List<UnitworkHistVO> selectUnitworkHistoryByRdNum(int udNum) throws SQLException {
+		return session.selectList("Unitwork.selectUnitworkHistoryByRdNum", udNum);
 	}
 
 	@Override

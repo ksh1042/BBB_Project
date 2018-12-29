@@ -8,8 +8,8 @@ import com.bbb.dto.UnitworkVO;
 
 public interface UnitworkDAO {
 
-	public List<UnitworkVO> selectUnitworkListByRdNum(int rdNum) throws SQLException;
-	public List<UnitworkHistVO> selectUnitworkHistoryByRdNum(int rdNum) throws SQLException;
+	public List<UnitworkVO> selectUnitworkListByRdNum(int udNum) throws SQLException;
+	public List<UnitworkHistVO> selectUnitworkHistoryByRdNum(int udNum) throws SQLException;
 	public int selectUdNumSeqNextval() throws SQLException;
 	public void insertUD(UnitworkVO unit) throws SQLException;
 	public void insertUDD(UnitworkVO unit) throws SQLException;

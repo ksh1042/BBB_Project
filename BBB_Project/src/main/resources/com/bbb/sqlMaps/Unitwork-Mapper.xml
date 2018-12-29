@@ -20,7 +20,7 @@
 		FROM tbl_unitwork_definition_hist
 		WHERE udNum=#{udNum}
 	</select>
-	<select id="selectUdNumSeqNextval" resultType="int">
+	<select id="selectUdNum" resultType="int">
 		SELECT udNum_seq.nextval
 		FROM dual
 	</select>

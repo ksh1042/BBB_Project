@@ -43,6 +43,13 @@
 		  class="com.bbb.service.QnaReplyServiceImpl"
 		  p:qnaReplyDAO-ref="qnaReplyDAO"
 		  />
+	<bean id="unitworkDAO"
+		class="com.bbb.dao.UnitworkDAOImpl"
+		p:sqlSession-ref="sqlSession"/>
+	<bean id="unitworkService"
+		class="com.bbb.service.UnitworkServiceImpl"
+		p:unitworkDAO-ref="unitworkDAO"
+		p:projectPartakeDAO-ref="projectPartakeDAO"/>
 	
 	
 	
