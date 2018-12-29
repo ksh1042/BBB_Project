@@ -10,10 +10,11 @@
   		<typeAlias type="java.lang.Integer" alias="int"/>
   		<typeAlias type="com.bbb.dto.MemberVO" alias="member"/>
   		<typeAlias type="com.bbb.dto.BoardVO" alias="board"/>
-  		<typeAlias type="com.bbb.dto.BoardAttachVO" alias="boardAttach"/>
+  		<typeAlias type="com.bbb.dto.BoardAttachVO" alias="Attach"/>
   		<typeAlias type="com.bbb.dto.ProjectPartakeVO" alias="projectPartake"/>
 		<typeAlias type="com.bbb.dto.ProjectVO" alias="project"/>
 		<typeAlias type="com.bbb.dto.QnaVO" alias="question"/>
 		<typeAlias type="com.bbb.dto.QnaReplyVO" alias="questionReply"/>
+		
   	</typeAliases>
   </configuration>

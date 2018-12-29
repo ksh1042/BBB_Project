@@ -1,5 +1,6 @@
 package com.bbb.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class BoardVO {
 	private int kind;
 	private int count;
 	
-	private List<BoardAttachVO> attachList;
+	private List<BoardAttachVO> attachList=new ArrayList<BoardAttachVO>();
 
 	public int getbNum() {
 		return bNum;

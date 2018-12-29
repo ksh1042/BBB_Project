@@ -17,4 +17,8 @@
 		<pattern>/question/**</pattern>
 	</decorator>
 	
+	<decorator name="fileboard" page="decorator.jsp">		
+		<pattern>/fileboard/**</pattern>
+		
+	</decorator>
 </decorators>

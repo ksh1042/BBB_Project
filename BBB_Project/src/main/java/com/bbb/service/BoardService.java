@@ -13,11 +13,11 @@ public interface BoardService {
 
 	public BoardVO read(int bNum) throws Exception;
 
-	public BoardVO readByBno(int bNum) throws Exception;
+	public BoardVO readBybNum(int bNum) throws Exception;
 
-	public void update(BoardVO board) throws Exception;
+	public void modify(BoardVO board) throws Exception;
 
-	public void delete(int bNum) throws Exception;
+	public void remove(int bNum) throws Exception;
 
 	public List<BoardVO> listAll() throws Exception;
 

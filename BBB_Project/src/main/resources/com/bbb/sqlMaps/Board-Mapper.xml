@@ -3,53 +3,99 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Board">
 
-<update id="insertBoard" parameterType="board">
-	insert into board(bnum,title,content,writer,indate,updatedate,kind)
-	values(#{bnum},#{title},#{content},#{writer},#{indate},#{updatedate},#{kind})
-	</update>
-	<update id="updateBoard">
-		update board title=#{title},content=#{content}
-		where bnum=#{bnum}
-	</update>
-	<update id="deleteBoard">
-		delete from board 
-		where bnum=#{bnum}
-	</update>
 	
+	<select id="getSeqNextValue" resultType="int" >
+		select bnum_seq.nextval from dual
+	</select>
+	
+	<update id="insertBoard">
+		insert into tbl_board (bnum, title, content, writer,pjnum )
+		values(bnum_seq.nextval,#{title},#{content},#{writer},#{pjNum})
+	</update>
+
+	<select id="selectBoardBybNum" resultType="board">
+		select *
+		from
+		tbl_board
+		where bnum=#{bNum}
+	</select>
+
+	<update id="updateBoard">
+		update tbl_board
+		set title=#{title}, content=#{content}, updatedate=#{updatedate}
+		where
+		bnum=#{bNum}
+	</update>
+
+	<update id="deleteBoard">
+		delete
+		from tbl_board
+		where bnum=#{bNum}
+	</update>
+
+	<update id="increaseViewCnt">
+		update tbl_board set count=count+1
+		where
+		bnum=#{bNum}
+	</update>
+
 	<sql id="search">
-		<if test="searchType !=null">
-			<if test="searchType == 'i'.toString()">
-			and id like '%' || #{keyword} ||'%'
-			</if>
-			<if test="searchType == 'n'.toString()">
-			and name like '%' || #{keyword} ||'%'
-			</if>
-			<if test="searchType == 'p'.toString()">
-			and phone like '%' || #{keyword} ||'%'
-			</if>
-			<if test="searchType == 'e'.toString()">
-			and email like '%' || #{keyword} ||'%'
-			</if>
+		<if test="searchType == 't'.toString()">
+			and title like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'c'.toString()">
+			and content like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'w'.toString()">
+			and writer like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'tc'.toString()">
+			and (
+			title like '%'||#{keyword}||'%'
+			or
+			content like '%'||#{keyword}||'%'
+			)
+		</if>
+		<if test="searchType == 'cw'.toString()">
+			and (
+			content like '%'||#{keyword}||'%'
+			or
+			writer like '%'||#{keyword}||'%'
+			)
+		</if>
+		<if test="searchType == 'tcw'.toString()">
+			and (
+			title like '%'||#{keyword}||'%'
+			or
+			content like '%'||#{keyword}||'%'
+			or
+			writer like '%'||#{keyword}||'%'
+			)
 		</if>
 	</sql>
-	<select id="selectSearchMemberList" resultType="member">
-		select *
-		from member
-		where id is not null
-		<include refid="search" />
-		order by indate desc
+
+	<select id="selectSearchBoardList" resultType="board">
+		<![CDATA[
+			select * 
+			from tbl_board
+			where bnum>0
+		]]>
+		<include refid="search"></include>
+		order by bnum desc
 	</select>
-	<select id="selectSearchMemberListCount" resultType="int">
-	
-		select count(*)
-		from member
-		where id is not null
-		<include refid="search"/>
-		
+	<select id="selectSearchBoardCount" resultType="int">
+		<![CDATA[
+			select count(*)
+			from tbl_board
+			where bnum>0
+		]]>
+		<include refid="search"></include>
 	</select>
-	<select id="selectMemberById" parameterType="str" resultType="member">
+
+
+	<select id="selectBoardAll" resultType="board">
 		select *
-		from member
-		where id=#{id}
+		from tbl_board
+		order by bnum desc,inDate desc
 	</select>
 	</mapper>

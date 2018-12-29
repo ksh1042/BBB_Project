@@ -1,23 +1,28 @@
 package com.bbb.controller;
 
-import java.io.PrintWriter;
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.bbb.dto.BoardAttachVO;
 import com.bbb.dto.BoardVO;
+import com.bbb.dto.ProjectVO;
 import com.bbb.service.BoardService;
+import com.bbb.utils.MediaUtils;
 
 @Controller
 @RequestMapping("/fileboard")
@@ -25,85 +30,110 @@ public class FileBoardController {
 
 	
 		
-		@Autowired
-		private BoardService service;
+	@Autowired
+	private BoardService service;
+	
+	@RequestMapping(value="/fileboardlist",method=RequestMethod.GET)
+	public void listPage(@ModelAttribute("cri")SearchCriteria cri,
+						 Model model) throws Exception{
+		List<BoardVO> boardList=service.listSearch(cri);
+		model.addAttribute("list",boardList);
+		
+		PageMaker pageMaker=new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.readSearchBoardCount(cri));
+		model.addAttribute(pageMaker);
 		
 		
-		/*@RequestMapping(value="/listAll", method = RequestMethod.GET)
-		public void listAll(Model model) throws Exception{
-			List<BoardVO> boardList = service.listAll();
-			model.addAttribute("boardList", boardList);
-		}
-		@RequestMapping(value="/listCri", method = RequestMethod.GET)
-		public void listCri(Criteria cri,Model model) throws Exception{
-			List<BoardVO> boardList = service.listCriteria(cri);
-			model.addAttribute("list",boardList);
-		}*/
+	}
+	
+	@RequestMapping(value="/fileboardinsert",method=RequestMethod.GET)
+	public void registerGET()throws Exception{}
+	
+	
+	@RequestMapping(value="/fileboardinsert",method=RequestMethod.POST)
+	public String registerPOST(BoardVO board,RedirectAttributes rtts,HttpServletRequest request)
+								throws Exception{
+		ProjectVO project  = (ProjectVO)request.getSession().getAttribute("logonProject");
+		board.setPjNum(project.getPjNum());
+		System.out.println(board);
+		service.create(board);
+		rtts.addFlashAttribute("msg","SUCCESS");
+		return "redirect:/fileboard/fileboardlist";
+	}
+	
+	
+	@RequestMapping(value="/fileboardread",method=RequestMethod.GET)
+	public void readPage(@ModelAttribute("cri")SearchCriteria cri,
+						 int bNum, Model model)throws Exception{
+		BoardVO board=service.read(bNum);
+		model.addAttribute(board);
+	} 
+	
+	@RequestMapping(value="/fileboardmodify",method=RequestMethod.GET)
+	public void modifyPage(@ModelAttribute("cri")SearchCriteria cri,
+							int bNum, Model model)throws Exception{
+		 BoardVO board=service.readBybNum(bNum);
+		 model.addAttribute(board);
+	}
+	
+	@Resource(name="uploadPath")
+	String uploadPath;
+	
+	@RequestMapping(value="/fileboardmodify",method=RequestMethod.POST)
+	public String modifyPagePOST(String oldAttach,BoardVO board,SearchCriteria cri,
+								RedirectAttributes rttr)
+									throws Exception{
 		
-		@RequestMapping (value="/fileboardlist", method= RequestMethod.GET)
-		public void listPage(Criteria cri, Model model) throws Exception{
-			List<BoardVO> boardList = service.listCriteria(cri);
-			PageMaker pageMaker = new PageMaker();
-			pageMaker.setCri(cri);
-			int totalCount = service.listAll().size();
-			pageMaker.setTotalCount(totalCount);
+		
+		String[] fileNames=oldAttach.split(",");
+		for(String fileName : fileNames){
+			String formatName=fileName.substring(fileName.lastIndexOf(".")+1);
+			MediaType mType=MediaUtils.getMediaType(formatName);
 			
-			model.addAttribute("list",boardList);
-			model.addAttribute("pageMaker",pageMaker);
-		}
-		
-		/*@RequestMapping(value="/readPage", method = RequestMethod.GET)
-		public void readPage(@ModelAttribute("cri") Criteria cri, int bNum, Model model) throws Exception {
-			BoardVO board = service.read(bNum);
-			model.addAttribute(board);
-		}*/
-		
-		@RequestMapping(value="/fileboardmodify", method=RequestMethod.GET)
-		public void modifyPage(@ModelAttribute("cri") Criteria cri,
-				@RequestParam(value = "bNum",defaultValue = "-1") int bNum, Model model, HttpServletRequest request,HttpServletResponse response) throws Exception{
-			
-			if (bNum > 0){
-				BoardVO board = service.readByBno(bNum);
-				request.setAttribute("boardVO", board);
-				request.setAttribute("cri", cri);
-				request.getRequestDispatcher("/WEB-INF/views/board/fileboardmodify.jsp").forward(request,response);
-			}else{
-				response.setContentType("text/html; charset=utf-8");
-				PrintWriter out= response.getWriter();
-				out.write("<script>");
-				out.write("alert('게시물이 존재하지않습니다.');");
-				out.println("history.go(-1);");
-				out.write("</script>");
-				
+			if(mType!=null){
+				String front=fileName.substring(0, 12);
+				String end=fileName.substring(14);
+				new File(uploadPath+(front+end).replace('/', File.separatorChar))
+					.delete();			
 			}
-			
-		}
-
-		@RequestMapping(value="/fileboardmodify", method=RequestMethod.POST)
-		public String modifyPagePOST(BoardVO board, Criteria cri, RedirectAttributes rttr) throws Exception{
-			board.setUpdateDate(new Date());
-			
-			service.update(board);
-			
-			rttr.addAttribute("page", cri.getPage());
-			rttr.addAttribute("perPageNum", cri.getPerPageNum());
-			rttr.addFlashAttribute("msg","SUCCESS");
-			
-			return "redirect:/board/listPage";
-		
-			
+			new File(uploadPath+fileName.replace('/', File.separatorChar)).delete();
 		}
 		
-		@RequestMapping(value="/fileboarddelete",method=RequestMethod.POST)
-		public String removePage(int bNum,RedirectAttributes rttr,
-								 Criteria cri) throws Exception{
-			service.delete(bNum);
-			
-			rttr.addAttribute("page",cri.getPage());
-			rttr.addAttribute("perPageNum",cri.getPerPageNum());
-			rttr.addFlashAttribute("msg","SUCCESS");
-			
-			return "redirect:/board/fileboardlist";		
-		}
-
+		board.setUpdateDate(new Date());
+		
+		service.modify(board);
+		
+		rttr.addAttribute("page",cri.getPage());
+		rttr.addAttribute("perPageNum",cri.getPerPageNum());
+		rttr.addAttribute("searchType",cri.getSearchType());
+		rttr.addAttribute("keyword",cri.getKeyword());
+		
+		rttr.addFlashAttribute("msg","SUCCESS");
+		
+		return "redirect:/fileboard/fileboardlist";
+	}
+	
+	@RequestMapping(value="/fileboardremove",method=RequestMethod.POST)
+	public String removePage(int bNum,SearchCriteria cri,
+							RedirectAttributes rttr)
+							throws Exception{
+		service.remove(bNum);
+		
+		rttr.addAttribute("page",cri.getPage());
+		rttr.addAttribute("perPageNum",cri.getPerPageNum());
+		rttr.addAttribute("searchType",cri.getSearchType());
+		rttr.addAttribute("keyword",cri.getKeyword());
+		
+		rttr.addFlashAttribute("msg","SUCCESS");
+		
+		return "redirect:/fileboard/fileboardlist";
+	}
+	
+	@RequestMapping(value="/getAttach/{bNum}",method=RequestMethod.GET)
+	@ResponseBody
+	public List<BoardAttachVO> getAttach(@PathVariable("bNum")int bNum)
+									throws Exception{
+		return service.getAttach(bNum);
+	}
 }

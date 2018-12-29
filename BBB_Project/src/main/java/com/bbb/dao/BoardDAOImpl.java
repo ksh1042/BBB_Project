@@ -22,7 +22,7 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public void insertBoard(BoardVO board) throws SQLException {
 		session.update("Board.insertBoard",board);
-
+		
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public int selectSearchBoardListCount(SearchCriteria cri) throws SQLException {
-		int count = session.selectOne("Board.selectSearchBoardListCount",(SearchCriteria)cri);
+		int count = session.selectOne("Board.selectSearchBoardCount",(SearchCriteria)cri);
 		return count;
 		
 	}

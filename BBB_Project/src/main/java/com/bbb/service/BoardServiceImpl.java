@@ -43,13 +43,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardVO readByBno(int bNum) throws Exception {
+	public BoardVO readBybNum(int bNum) throws Exception {
 		BoardVO board=boardDAO.selectBoardBybNum(bNum);
 		
 		return board;
 	}
 	@Override
-	public void update(BoardVO board) throws Exception {
+	public void modify(BoardVO board) throws Exception {
 		int bNum = board.getbNum();
 		
 		boardDAO.updateBoard(board);
@@ -63,7 +63,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void delete(int bNum) throws Exception {
+	public void remove(int bNum) throws Exception {
 		boardDAO.deleteBoard(bNum);
 
 	}

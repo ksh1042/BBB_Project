@@ -49,33 +49,33 @@ button#searchBtn{
 			<!-- general form elements -->
 			<div class='box'>
 				<div class="box-header with-border">
-					<h3 class="box-title">Board List</h3>
+					<h3 class="box-title">자료실</h3>
 				</div>
 				<div class='box-body'>
 					<ul>
 						<li>
-							<button id='newBtn' class="btn btn-primary" onclick="javascript:location.href='register';">New Board</button>
+							<button id='newBtn' class="btn btn-primary" onclick="javascript:location.href='fileboardinsert';">New Board</button>
 						</li>
 						<li>
 							<select name="searchType">
-								<option value="" ${cri.searchType==null?'selected':'' }>
+								<option value="" ${pageMaker.cri.searchType==null?'selected':'' }>
 								------</option>
-								<option value="t" ${cri.searchType eq 't'?'selected':'' }>
+								<option value="t" ${pageMaker.cri.searchType eq 't'?'selected':'' }>
 								Title</option>
-								<option value="c" ${cri.searchType eq 'c'?'selected':'' }>
+								<option value="c" ${pageMaker.cri.searchType eq 'c'?'selected':'' }>
 								Content</option>
-								<option value="w" ${cri.searchType eq 'w'?'selected':'' }>
+								<option value="w" ${pageMaker.cri.searchType eq 'w'?'selected':'' }>
 								Writer</option>
-								<option value="tc" ${cri.searchType eq 'tc'?'selected':'' }>
+								<option value="tc" ${pageMaker.cri.searchType eq 'tc'?'selected':'' }>
 								Title + Content</option>
-								<option value="cw" ${cri.searchType eq 'cw'?'selected':'' }>
+								<option value="cw" ${pageMaker.cri.searchType eq 'cw'?'selected':'' }>
 								Content + Writer</option>
-								<option value="tcw" ${cri.searchType eq 'tcw'?'selected':'' }>
+								<option value="tcw" ${pageMaker.cri.searchType eq 'tcw'?'selected':'' }>
 								Title + Content + Writer</option>
 							</select>
 							<input id="keywordInput"
 								   name="keyword"
-								   type="text"  value="${cri.keyword}"/>
+								   type="text"  value="${pageMaker.cri.keyword}"/>
 							<button id="searchBtn" ></button>
 						</li>
 					</ul>
@@ -100,12 +100,12 @@ button#searchBtn{
 							<tr>
 								<td>${boardVO.bNum}</td>
 								<td><a
-									href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&bno=${boardVO.bNum}'>
+									href='fileboardread${pageMaker.makeSearch(pageMaker.cri.page) }&bNum=${boardVO.bNum}'>
 										${boardVO.title}</a></td>
 								<td>${boardVO.writer}</td>
 								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 										value="${boardVO.inDate}" /></td>
-								<td><span class="badge bg-red">${boardVO.viewcnt }</span></td>
+								<td><span class="badge bg-red">${boardVO.count }</span></td>
 							</tr>
 
 						</c:forEach>
@@ -138,8 +138,7 @@ button#searchBtn{
 							</c:forEach>
 
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li><a
-									href="${pageMaker.endPage +1}">&raquo;</a></li>
+								<li><a href="${pageMaker.endPage +1}">&raquo;</a></li>
 							</c:if>
 
 						</ul>
@@ -155,18 +154,18 @@ button#searchBtn{
 		<!--/.col (left) -->
 
 	</div>
-	<!-- /.row -->
-</section>
-<!-- /.content -->
 
 <form id="jobForm">
   <input type='hidden' name="page" value="${pageMaker.cri.page}"/>
   <input type='hidden' name="perPageNum" value="${pageMaker.cri.perPageNum}"/>
-  <input type='hidden' name="searchType" value="${cri.searchType}"/>
-  <input type='hidden' name="keyword" value="${cri.keyword}"/>
+  <input type='hidden' name="searchType" value="${pageMaker.cri.searchType}"/>
+  <input type='hidden' name="keyword" value="${pageMaker.cri.keyword}"/>
 </form>
+	<!-- /.row -->
+</section>
+<!-- /.content -->
 
-
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
 		
 	$(".link li a").on("click", function(event){
