@@ -12,6 +12,7 @@
 		<typeAlias type="com.bbb.dto.ProjectPartakeVO" alias="projectPartake"/>
 		<typeAlias type="com.bbb.dto.QnaVO" alias="question"/>
 		<typeAlias type="com.bbb.dto.QnaReplyVO" alias="questionReply"/>
+		<typeAlias type="com.bbb.dto.ProjectPlanVO" alias="projectPlan"/>
 	</typeAliases>
 	
 	

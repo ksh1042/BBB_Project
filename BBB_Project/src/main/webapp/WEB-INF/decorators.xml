@@ -17,4 +17,8 @@
 		<pattern>/question/**</pattern>
 	</decorator>
 	
+	<decorator name="plan" page="decorator.jsp">		
+		<pattern>/plan/**</pattern>
+	</decorator>
+	
 </decorators>

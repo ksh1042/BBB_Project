@@ -1,14 +1,15 @@
 package com.bbb.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.bbb.controller.SearchCriteria;
 import com.bbb.dto.ProjectPartakeVO;
-import com.bbb.dto.ProjectPlanVO;
 import com.bbb.dto.ProjectVO;
 
 public class ProjectDAOImpl implements ProjectDAO{
@@ -74,9 +75,11 @@ public class ProjectDAOImpl implements ProjectDAO{
 	}
 
 	@Override
-	public void insertAttach(ProjectPlanVO planVO) throws SQLException {
-		session.update("Project.insertPlan",planVO);
+	public void insertPlan(ProjectVO project) throws SQLException {
+		session.update("Project.updateProjectPlan",project);
 	}
+
+	
 
 	
 

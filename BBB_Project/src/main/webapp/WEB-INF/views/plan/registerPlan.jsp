@@ -80,10 +80,7 @@
 	
 	<script>
 		function back_go() {
-			
-		}
-		function submit_go() {
-			
+			history.go(-1);
 		}
 		var form = $('form[role="form"]');
 		$("button[type='submit']").on("click", function(e){
@@ -207,7 +204,7 @@
 			return fileName.match(pattern);
 		}
 		
-		$('.uploadedList').on('click','.thumbnail',function(e){
+		$('.uploadedList').on('click','.thumbnail',function(e){ 
 			e.preventDefault();
 			
 			var form =$('<form>').attr({action:"<%=request.getContextPath()%>/displayFile",method:"get"});

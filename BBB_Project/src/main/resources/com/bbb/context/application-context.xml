@@ -40,6 +40,14 @@
 		  class="com.bbb.service.QnaReplyServiceImpl"
 		  p:qnaReplyDAO-ref="qnaReplyDAO"
 		  />
+	<bean id="projectPlanDAO"
+		  class="com.bbb.dao.ProjectPlanDAOImpl"
+		  p:sqlSession-ref="sqlSession"
+		  />
+	<bean id="projectPlanService"
+		  class="com.bbb.service.ProjectPlanServiceImpl"
+		  p:projectDAO-ref="projectPlanDAO"
+		  />
 	
 	
 	

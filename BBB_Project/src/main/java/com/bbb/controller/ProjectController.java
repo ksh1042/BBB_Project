@@ -40,25 +40,7 @@ public class ProjectController {
 		model.addAttribute("myPartakeList",service.readMyProjectList(loginUser.getId()));
 	}
 	
-	@RequestMapping(value="/registerPlan", method=RequestMethod.GET)
-	public void projectPlanGET() throws Exception{
-		
-	}
 	
-	@RequestMapping(value="/registerPlan", method=RequestMethod.POST)
-	public String projectPlanPOST(ProjectPlanVO planVO, RedirectAttributes rtts, HttpServletRequest request) throws Exception{
-		HttpSession session = request.getSession();
-		
-		ProjectVO project = (ProjectVO)session.getAttribute("logonProject");
-		int pjNum = project.getPjNum();
-		List<ProjectPlanVO> attachList = planVO.getAttachList();
-		for(ProjectPlanVO plan : attachList){
-			service.create(plan);
-			System.out.println(planVO.toString());
-		}
-		rtts.addFlashAttribute("msg","SUCCESS");
-		return "redirect:/project/main?pjNum="+pjNum;
-	}
 	
 	@RequestMapping(value="/requirement", method=RequestMethod.GET)
 	public void requirementDefinition() throws Exception{

@@ -105,10 +105,11 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 
 	@Override
-	public void create(ProjectPlanVO planVO) throws SQLException {
-		projectDAO.insertAttach(planVO);
-		
+	public void insertPlan(ProjectVO project) throws SQLException {
+		projectDAO.insertPlan(project);
 	}
+
+	
 
 	
 

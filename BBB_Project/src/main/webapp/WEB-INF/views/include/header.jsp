@@ -272,14 +272,19 @@
           	<c:choose>
           	<c:when test="${loginUser.id eq logonProject.creator }">
 	          	<c:if test="${empty logonProject.puuid }">
-	            	<li><a href="/project/registerPlan"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+	            	<li><a href="/plan/registerPlan"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
 	            </c:if>
 	            <c:if test="${!empty logonProject.puuid }">
-	            	<li><a href="<%=request.getContextPath() %>/resources/web/sample.pdf" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+	            	<li><a href="" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
 	            </c:if>
 	        </c:when>
             <c:otherwise>
-            	<li><a href="<%=request.getContextPath() %>/resources/web/sample.pdf" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+            	<c:if test="${empty logonProject.puuid }">
+            		<li><a href="empty"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+            	</c:if>
+            	<c:if test="${!empty logonProject.puuid }">
+            		<li><a href="/plan/viewPlan" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+            	</c:if>
             </c:otherwise>
             </c:choose>
             <li><a href="/project/requirement"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
@@ -357,6 +362,13 @@
     </section>
     <!-- /.sidebar -->
   </aside>
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script>
+  	$("a[href='empty']").on("click",function(e){
+  		e.preventDefault();
+  		alert("아직 계획서가 등록되지 않았습니다.");
+  	});
+  </script>
   <body>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

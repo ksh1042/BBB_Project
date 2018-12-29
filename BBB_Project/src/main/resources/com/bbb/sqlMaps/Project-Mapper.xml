@@ -51,9 +51,10 @@
 		values(#{id}, #{pjNum}, 1)
 	</update>
 	
-	<update id="insertPlan">
-		insert into tbl_plan(puuid, filename, savepath)
-		values(#{puuid}, #{fileName}, #{savePath})
+	<update id="updateProjectPlan" parameterType="project">
+		update tbl_project
+		set puuid = #{puuid}
+		where pjnum = #{pjNum}
 	</update>
 </mapper>
 

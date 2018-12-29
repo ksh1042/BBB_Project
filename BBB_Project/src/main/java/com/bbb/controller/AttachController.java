@@ -134,6 +134,7 @@ public class AttachController {
 				headers.setContentType(mType);
 			}else{
 				fileName=fileName.substring(fileName.indexOf("_")+1);
+				fileName = fileName.substring(fileName.lastIndexOf("$$")+2);
 				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 				headers.add("Content-Disposition","attachment;filename=\""
 							+new String(fileName.getBytes("utf-8"),"ISO-8859-1")
@@ -192,7 +193,7 @@ public class AttachController {
 				String front=fileName.substring(0, 12);
 				String end=fileName.substring(14);
 				new File(uploadPath+(front+end).replace('/',File.separatorChar))
-											   .delete();				
+											   .delete();			
 			}
 			
 			new File(uploadPath+fileName.replace('/',File.separatorChar))
