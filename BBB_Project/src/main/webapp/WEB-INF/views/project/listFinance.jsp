@@ -131,12 +131,12 @@
 					<h4 class="modal-title">예산 입력 폼</h4>
 				</div>
 				<div class="modal-body">
-					<form action="" method="POST">
+					<form action="registerFinance" method="POST">
 						<input type="hidden" name="writer" value="${ loginUser.name }">
 						<label class="control-label">사용처</label> 
-						<input class="form-control " type="text" name="name" placeholder="사용처 /수입 이름"> 
+						<input class="form-control " type="text" name="targetName" placeholder="사용처 /수입 이름"> 
 						<span class="help-block" id="targetNameHelp"></span> 
-						<span class="glyphicon glyphicon-pencil form-control-feedback" id="pjNameIcon"></span> 
+						<span class="glyphicon glyphicon-pencil form-control-feedback" id="fNameIcon"></span> 
 						<br/> 
 						<label class="control-label">수입/지출 내용</label>
 						<textarea class="form-control" style="resize: none;" rows="10" placeholder="수입/지출 내용 입력" name="content"></textarea>
@@ -150,10 +150,10 @@
 							<input class="form-control" type="number" name="price"> 
 							<br/>
 							<label class="control-label">수입</label> 
-							<input type="radio" name="visibility" value="1" checked>
+							<input type="radio" name="depositYn" value="1" checked>
 							&nbsp;&nbsp;&nbsp;
 							<label class="control-label">지출</label> 
-							<input type="radio" name="visibility" value="0"> 
+							<input type="radio" name="depositYn" value="0"> 
 						</div>
 					</form>
 				</div>
@@ -176,7 +176,7 @@ var targetNameFlag = false;
 var regDateFlag = false;
 
 /* 유효성  */
-$('input[name="name"]').on('blur', function(e){
+$('input[name="targetName"]').on('blur', function(e){
 	$(this).css({ borderColor : 'red' });
 	var targetName = $(this).val();
 	
@@ -196,7 +196,7 @@ $('input[name="name"]').on('blur', function(e){
 	
 	verifyCheck();
 });
-// 프로젝트명 유효성.end
+// 사용처 유효성.end
 
 //	예산 등록일
 var regDate;
@@ -228,7 +228,6 @@ $('input[name=regDate]').on('blur', function(e){
 	
 	verifyCheck();
 });
-
 //	예산 등록일 end
 
 /* 버튼 */
@@ -248,11 +247,12 @@ $('#create_btn').on('click', function(e){
 		return;
 	}
 	var json = {
-			targetName : $('input[name=name]').val(),
+			writer : $('input[name=writer]').val(),
+			targetName : $('input[name=targetName]').val(),
 			content : $('textarea[name=content]').val(),
-			visibility : $('input[name=visibility]:checked').val(),
-			regDate : $('input[name=regDate]').val()
-			
+			depositYn : $('input[name=depositYn]:checked').val(),
+			price : $('input[name=price]').val(),
+			regDate : $('input[name=regDate]').val()		
 	}
 	
 	$.ajax({
@@ -265,7 +265,7 @@ $('#create_btn').on('click', function(e){
 		},
 		success : function(data){
 			alert('예산 내역이 등록되었습니다.');
-			location.href="<%=request.getContextPath()%>/main/myPartakeList"
+			location.href="<%=request.getContextPath()%>/project/listFinance"
 		},
 		error : function(error) {
 			alert('서버 내부오류가 발생했습니다. 자세한 사항은 관리자에게 문의바랍니다.');
@@ -284,7 +284,7 @@ $('#create_btn').on('click', function(e){
 				fontWeight : 'bold'
 			});
 			$('span#targetNameHelp').html('');
-			$('input[name=name]').css({
+			$('input[name=]').css({
 				borderColor : 'red'
 			});
 			return;
