@@ -3,28 +3,22 @@ package com.bbb.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.bbb.controller.Criteria;
 import com.bbb.dto.FinanceDetailVO;
 import com.bbb.dto.FinanceVO;
 
 public interface FinanceService {
 	
+	void create(FinanceDetailVO financeDetail) throws SQLException;
 	
-	List<FinanceDetailVO> readFinanceDetailList(Criteria cri) throws SQLException;
-
-	List<FinanceVO> readFinanceList(Criteria cri) throws SQLException;
+	int createTotal(int fNum) throws SQLException;
 	
-	FinanceVO readByFnum(int fNum) throws Exception;
+	List<FinanceDetailVO> readFinanceDetailList(int fNum) throws SQLException;
+
+	List<FinanceVO> readFinanceList() throws SQLException;
 	
-	void create(FinanceDetailVO financeDetail) throws Exception;
+	FinanceVO readFnumByFinance(int fNum) throws SQLException;
 	
+	FinanceDetailVO readFnumByFinanceDetail(int fNum) throws SQLException;
 	
-
-
-
-
-
-
-
-
+	List<FinanceDetailVO> readRegdateByFnum(int fNum) throws SQLException;
 }

@@ -13,7 +13,15 @@ public class ProjectVO {
 	private Date indate;
 	private Date startDate;
 	private Date endDate;
-	
+	private int cNum;
+	private int fNum;
+	private String uUuid;
+	private String pUuid;
+	private int rdNum;
+	private int udNum;
+	private int gcNum;
+	private int pkNum;
+
 	public int getPjNum() {
 		return pjNum;
 	}
@@ -68,15 +76,63 @@ public class ProjectVO {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	
+	public int getcNum() {
+		return cNum;
+	}
+	public void setcNum(int cNum) {
+		this.cNum = cNum;
+	}
+	public int getfNum() {
+		return fNum;
+	}
+	public void setfNum(int fNum) {
+		this.fNum = fNum;
+	}
+	public String getuUuid() {
+		return uUuid;
+	}
+	public void setuUuid(String uUuid) {
+		this.uUuid = uUuid;
+	}
+	public String getpUuid() {
+		return pUuid;
+	}
+	public void setpUuid(String pUuid) {
+		this.pUuid = pUuid;
+	}
+	public int getRdNum() {
+		return rdNum;
+	}
+	public void setRdNum(int rdNum) {
+		this.rdNum = rdNum;
+	}
+	public int getUdNum() {
+		return udNum;
+	}
+	public void setUdNum(int udNum) {
+		this.udNum = udNum;
+	}
+	public int getGcNum() {
+		return gcNum;
+	}
+	public void setGcNum(int gcNum) {
+		this.gcNum = gcNum;
+	}
+	public int getPkNum() {
+		return pkNum;
+	}
+	public void setPkNum(int pkNum) {
+		this.pkNum = pkNum;
+	}
 	@Override
 	public String toString() {
 		return "ProjectVO [pjNum=" + pjNum + ", name=" + name + ", disc=" + disc + ", creator=" + creator
 				+ ", visibility=" + visibility + ", lastDate=" + lastDate + ", indate=" + indate + ", startDate="
-				+ startDate + ", endDate=" + endDate + ", getPjNum()=" + getPjNum() + ", getName()=" + getName()
-				+ ", getDisc()=" + getDisc() + ", getCreator()=" + getCreator() + ", getVisibility()=" + getVisibility()
-				+ ", getLastDate()=" + getLastDate() + ", getIndate()=" + getIndate() + ", getStartDate()="
-				+ getStartDate() + ", getEndDate()=" + getEndDate() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + ", toString()=" + super.toString() + "]";
+				+ startDate + ", endDate=" + endDate + ", cNum=" + cNum + ", fNum=" + fNum + ", uUuid=" + uUuid
+				+ ", pUuid=" + pUuid + ", rdNum=" + rdNum + ", udNum=" + udNum + ", gcNum=" + gcNum + ", pkNum=" + pkNum
+				+ "]";
 	}
+	
+	
+
 }

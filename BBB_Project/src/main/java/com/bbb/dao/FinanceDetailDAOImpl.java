@@ -3,11 +3,8 @@ package com.bbb.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
-import com.bbb.controller.Criteria;
-import com.bbb.controller.SearchCriteria;
 import com.bbb.dto.FinanceDetailVO;
 
 public class FinanceDetailDAOImpl implements FinanceDetailDAO {
@@ -18,20 +15,16 @@ public class FinanceDetailDAOImpl implements FinanceDetailDAO {
 	}
 	
 	@Override
-	public List<FinanceDetailVO> selectFinanceDetailList(Criteria cri) throws SQLException {
-		int offset = cri.getPageStartRowNum();
-		int limit = cri.getPerPageNum();
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		
-		List<FinanceDetailVO> financeDetailList = session.selectList("FinanceDetail.selectFinanceDetailList", (SearchCriteria)cri, rowBounds);
+	public int getFinanceDetailSeqNextValue() throws SQLException {
+		return session.selectOne("FinanceDetail.getFinanceDetailSeqNextValue");
+	}
+	
+	@Override
+	public List<FinanceDetailVO> selectFinanceDetailList(int fNum) throws SQLException {
+		List<FinanceDetailVO> financeDetailList = session.selectList("FinanceDetail.selectFinanceDetailList", fNum);
 		return financeDetailList;
 	}
 
-	@Override
-	public int selectFinanceDetailListCount(Criteria cri) throws SQLException {
-		int rowCount = session.selectOne("FinanceDetail.selectFinanceDetailListCount", cri);
-		return rowCount;
-	}
 
 	@Override
 	public FinanceDetailVO selectFinanceDetailByFnum(int fNum) throws SQLException {
@@ -46,9 +39,27 @@ public class FinanceDetailDAOImpl implements FinanceDetailDAO {
 	}
 
 	@Override
-	public int getFinanceDetailSeqNextValue() throws SQLException {
-		return session.selectOne("FinanceDetail.getFinanceDetailSeqNextValue");
+	public List<FinanceDetailVO> selectRegdateByFnum(int fNum) throws SQLException {
+		List<FinanceDetailVO> financeDetailRegList = session.selectList("FinanceDetail.selectRegdateByFnum", fNum);
+		return financeDetailRegList;
 	}
+
+	@Override
+	public int selectFinanceDetailByPricePlus(int fNum) throws SQLException {
+		return session.selectOne("FinanceDetail.selectFinanceByPricePlus", fNum);
+		
+	}
+
+	@Override
+	public int selectFinanceDetailByPriceMinus(int fNum) throws SQLException {
+		return session.selectOne("FinanceDetail.selectFinanceByPriceMinus", fNum);
+		
+	}
+
+
+	
+	
+
 
 
 

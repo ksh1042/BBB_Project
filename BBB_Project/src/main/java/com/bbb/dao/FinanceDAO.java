@@ -8,8 +8,11 @@ import com.bbb.dto.FinanceVO;
 
 public interface FinanceDAO {
 	
-	// 프로젝트에 포함되어있는 예산관리챠트의 목록을 가져온다.
-	List<Integer> selectFinanceList(Criteria cri) throws SQLException;
+	// 예산관리 테이블의 모든 정보를 가져온다.
+	List<FinanceVO> selectFinanceList() throws SQLException;
 	
+	// 예산의 잔여 금액을 가져온다.
 	FinanceVO selectFinanceTotalByFnum(int fNum) throws SQLException;
+	
+
 }

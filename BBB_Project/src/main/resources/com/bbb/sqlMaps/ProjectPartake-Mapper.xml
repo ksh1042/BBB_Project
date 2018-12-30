@@ -9,4 +9,11 @@
    		where id=#{id} and assignyn=1
 	</select>
 	
+	<select id="selectBindingProject" resultType="projectPartake">
+		select *
+		from tbl_project_partake
+		where id=#{id}
+	</select>
+	
+	
 </mapper>

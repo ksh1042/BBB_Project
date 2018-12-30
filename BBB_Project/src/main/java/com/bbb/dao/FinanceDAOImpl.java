@@ -19,12 +19,8 @@ public class FinanceDAOImpl implements FinanceDAO {
 	}
 	
 	@Override
-	public List<Integer> selectFinanceList(Criteria cri) throws SQLException {
-		
-		int offset = cri.getPageStartRowNum();
-		int limit = cri.getPerPageNum();
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		List<Integer> finList = session.selectList("Finance.selectFinanceDetailList", (SearchCriteria)cri, rowBounds);
+	public List<FinanceVO> selectFinanceList() throws SQLException {
+		List<FinanceVO> finList = session.selectList("Finance.selectFinanceList");
 		return finList;
 	}
 
@@ -33,6 +29,7 @@ public class FinanceDAOImpl implements FinanceDAO {
 		FinanceVO finance = session.selectOne("Finance.selectFinanceTotalByFnum", fNum);
 		return finance;
 	}
+
 
 	
 

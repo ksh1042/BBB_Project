@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
-	</div>
-	  <!-- /.content-wrapper -->
-	</body>
-	<!-- Main Footer -->
+   </div>
+     <!-- /.content-wrapper -->
+   </body>
+   <!-- Main Footer -->
   <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
@@ -101,6 +101,8 @@
 <script src="<%=request.getContextPath()%>/resources/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<%=request.getContextPath()%>/resources/dist/js/adminlte.min.js"></script>
+
+<script src="<%=request.getContextPath()%>/resources/dist/js/searchjs.js"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

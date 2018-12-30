@@ -11,6 +11,7 @@ public class FinanceDetailVO {
 	private String writer;
 	private int depositYn;
 	private Date indate;
+	private Date regDate;
 	
 	public int getfNum() {
 		return fNum;
@@ -54,11 +55,20 @@ public class FinanceDetailVO {
 	public void setIndate(Date indate) {
 		this.indate = indate;
 	}
+	
+	public Date getRegDate() {
+		return regDate;
+	}
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
 	@Override
 	public String toString() {
 		return "FinanceDetailVO [fNum=" + fNum + ", targetName=" + targetName + ", content=" + content + ", price="
-				+ price + ", writer=" + writer + ", depositYn=" + depositYn + ", indate=" + indate + "]";
+				+ price + ", writer=" + writer + ", depositYn=" + depositYn + ", indate=" + indate + ", regDate="
+				+ regDate + "]";
 	}
+
 	
 	
 }
