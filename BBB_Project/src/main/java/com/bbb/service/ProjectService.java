@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.bbb.controller.SearchCriteria;
 import com.bbb.dto.ProjectPartakeVO;
+import com.bbb.dto.ProjectPlanVO;
 import com.bbb.dto.ProjectVO;
 
 public interface ProjectService {
@@ -22,6 +23,7 @@ public interface ProjectService {
 	List<ProjectVO> allProjectList() throws SQLException;
 	public ProjectVO projectMain(int pjNum) throws SQLException;
 	public void insertPlan(ProjectVO project)throws SQLException;
+	public List<ProjectPlanVO> getAttach(String puuid) throws SQLException;
 	
 	public void addProject(ProjectVO project) throws SQLException;
 	public void addProjectake(ProjectPartakeVO takeVO) throws SQLException;

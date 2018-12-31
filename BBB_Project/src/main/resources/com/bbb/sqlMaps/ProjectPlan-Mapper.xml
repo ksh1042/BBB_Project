@@ -14,4 +14,9 @@
 		where puuid = #{puuid}
 	</select>
 	
+	<select id="selectPlansByPjnum" resultType="projectPlan">
+		select *
+		from tbl_plan
+		where puuid = #{puuid}
+	</select>
 </mapper>

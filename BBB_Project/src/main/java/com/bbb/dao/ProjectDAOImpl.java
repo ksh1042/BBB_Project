@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.bbb.controller.SearchCriteria;
 import com.bbb.dto.ProjectPartakeVO;
+import com.bbb.dto.ProjectPlanVO;
 import com.bbb.dto.ProjectVO;
 
 public class ProjectDAOImpl implements ProjectDAO{
@@ -77,6 +78,12 @@ public class ProjectDAOImpl implements ProjectDAO{
 	@Override
 	public void insertPlan(ProjectVO project) throws SQLException {
 		session.update("Project.updateProjectPlan",project);
+	}
+
+	@Override
+	public List<ProjectPlanVO> selectPlansByPjnum(String puuid) throws SQLException {
+		List<ProjectPlanVO> planList = session.selectList("projectPlan.selectPlansByPjnum", puuid);
+		return planList;
 	}
 
 	
