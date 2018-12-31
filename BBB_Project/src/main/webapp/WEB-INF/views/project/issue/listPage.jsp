@@ -29,7 +29,7 @@
 							<div class="box-tools">
 								<div class="input-group input-group-sm" >
 										<form action="list" style="width:300px;">
-											<input type="hidden" name="pjNum" value="${logonProject.pjNum }"/>
+											<%-- <input type="hidden" name="pjNum" value="${logonProject.pjNum }"/> --%>
 											<div style="margin-top:5px;margin-left:35px;">
 											<select name="searchType">
 												<option value="" ${cri.searchType==null?'selected':'' }>----</option>
@@ -66,10 +66,8 @@
 								<tr>
 									<td>${status.count }</td>
 									<td style="display:none;">${issue.iNum}</td>
-									<td>
-										<a href='readIssue${pageMaker.makeSearch(pageMaker.cri.page) }&bNum=${issue.iNum}'>
-											${issue.title}
-										</a>
+									<td onclick="readIssue_go()">
+										${issue.title}
 									</td>
 									<td>${issue.writer}</td>
 									<td>
@@ -152,6 +150,9 @@
 	function registerIssue_go(){
 		location.href="<%=request.getContextPath()%>/project/issue/register"
 		
+	}
+	function readIssue_go(){
+		location.href="<%=request.getContextPath()%>/project/issue/read${pageMaker.makeSearch(pageMaker.cri.page) }&iNum=${issue.iNum}";
 	}
 
 

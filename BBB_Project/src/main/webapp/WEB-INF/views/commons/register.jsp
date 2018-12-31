@@ -51,7 +51,7 @@
 				</div>
 				<div class="form-group has-feedback">
 					<input type="text" name="id" class="form-control" placeholder="아이디"
-						oninput="checkId();" id="id"> <span
+						onblur="checkId();" id="id"> <span
 						class="glyphicon glyphicon-log-in form-control-feedback"></span> <label
 						id="idState" style="font-size: 0.8em;"></label>
 				</div>

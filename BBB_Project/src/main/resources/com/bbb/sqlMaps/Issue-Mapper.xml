@@ -46,5 +46,11 @@
 		values(inum_seq.nextval, #{title}, #{content}, #{writer},0,#{pjNum})
 	</update>
 	
+	
+	<select id="selectIssueByINum" resultType="issue">
+		select *
+		from tbl_issue
+		where inum=#{iNum}
+	</select>
 
 </mapper>

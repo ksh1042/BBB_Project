@@ -59,4 +59,12 @@ public class IssueController {
 		return "redirect:/project/issue/list";
 	}
 	
+	@RequestMapping(value="/read",method=RequestMethod.GET)
+	public void readIssue(@ModelAttribute("cri")SearchCriteria cri, int iNum, Model model)throws Exception{
+		IssueVO issue=service.readIssueByINum(iNum);
+		model.addAttribute("issue",issue);
+		
+		
+	}
+	
 }

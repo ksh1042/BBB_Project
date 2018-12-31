@@ -33,7 +33,7 @@
 		where
 			id = #{id}
 	</update>
-	<!-- email-auth -->
+
 	<update id="updateEmailyn" parameterType="member">
 		UPDATE tbl_member
 		SET emailyn=1

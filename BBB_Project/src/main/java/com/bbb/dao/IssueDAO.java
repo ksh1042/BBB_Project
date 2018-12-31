@@ -14,4 +14,5 @@ public interface IssueDAO {
 	// inum 자동삽입 시퀀스
 	int getQnaSeqNextValue() throws SQLException;
 	void insertIssue(IssueVO issue) throws SQLException; 
+	IssueVO selectIssueByINum(int iNum)throws SQLException;
 }

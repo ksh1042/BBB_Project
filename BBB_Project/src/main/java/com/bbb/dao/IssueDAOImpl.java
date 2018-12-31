@@ -53,4 +53,10 @@ public class IssueDAOImpl implements IssueDAO{
 		
 	}
 
+	@Override
+	public IssueVO selectIssueByINum(int iNum) throws SQLException {
+		IssueVO issue=session.selectOne("Issue.selectIssueByINum",iNum);
+		return issue;
+	}
+
 }
