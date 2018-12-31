@@ -19,4 +19,16 @@ public interface MemberDAO {
 	void updateMember(MemberVO member)throws SQLException;
 	
 	void deleteMember(String id)throws SQLException;
+	
+	int idCheck(String id)throws SQLException;
+	
+	int emailCheck(String email)throws SQLException;
+	
+	String findID(MemberVO member)throws SQLException;
+	
+	void resetPwd(MemberVO member)throws SQLException;
+	
+	public void updateEmailynById(String id) throws SQLException;
+	
+	void modifyEmail(MemberVO member)throws SQLException;
 }

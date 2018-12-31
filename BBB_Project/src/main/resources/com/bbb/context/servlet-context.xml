@@ -17,6 +17,7 @@
 	
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources  mapping="/SE2/**" location="/SE2/"/>
 
 	<beans:bean id="multipartResolver"
 	 class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
@@ -29,6 +30,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.bbb.controller" />
+	
 	
 	<beans:bean id="uploadPath" class="java.lang.String">
 		<beans:constructor-arg value="c:\\upload" />

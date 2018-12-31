@@ -9,7 +9,6 @@ import org.apache.ibatis.session.SqlSession;
 import com.bbb.controller.Criteria;
 import com.bbb.controller.SearchCriteria;
 import com.bbb.dto.BoardVO;
-import com.bbb.dto.MemberVO;
 
 public class BoardDAOImpl implements BoardDAO {
 

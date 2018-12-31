@@ -48,8 +48,17 @@
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Content</label>
-      <textarea class="form-control"  name="content" rows="3" 
-      readonly="readonly">${boardVO.content}</textarea>
+      <div class="box">
+      	<div class="box-header">
+      		${ boardVO.title }
+      	</div>
+      	<div id="content-area" class="box-body">
+      		${ boardVO.content }
+      	</div>
+      	<div class="box-footer">
+      		${ boardVO.writer }
+      	</div>
+      </div>
     </div>
     <div class="form-group">
       <label for="exampleInputEmail1" >Writer</label>
@@ -64,7 +73,7 @@
     <button type="submit" id="listBtn" class="btn btn-primary">GO LIST </button>
   </div>
 
-
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
 
 

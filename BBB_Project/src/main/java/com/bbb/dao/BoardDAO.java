@@ -6,7 +6,6 @@ import java.util.List;
 import com.bbb.controller.Criteria;
 import com.bbb.controller.SearchCriteria;
 import com.bbb.dto.BoardVO;
-import com.bbb.dto.MemberVO;
 
 public interface BoardDAO {
 

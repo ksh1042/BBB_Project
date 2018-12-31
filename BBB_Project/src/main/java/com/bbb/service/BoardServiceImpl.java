@@ -8,7 +8,6 @@ import com.bbb.dao.BoardAttachDAO;
 import com.bbb.dao.BoardDAO;
 import com.bbb.dto.BoardAttachVO;
 import com.bbb.dto.BoardVO;
-import com.bbb.dto.MemberVO;
 
 public class BoardServiceImpl implements BoardService {
 

@@ -43,6 +43,12 @@
 	<bean id="boardDAO" class="com.bbb.dao.BoardDAOImpl"
 		p:session-ref="sqlSession" />
 
+	
+	<bean id="mailNotifier"
+	  class="com.bbb.mail.MimeAttachNotifier"
+	  p:mailSender-ref="mailSender"
+	  />
+	  
 	<bean id="boardAttachDAO" class="com.bbb.dao.BoardAttachDAOImpl"
 		p:session-ref="sqlSession" />
 	

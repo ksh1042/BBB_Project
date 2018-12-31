@@ -55,7 +55,8 @@ public class FileBoardController {
 	public String registerPOST(BoardVO board,RedirectAttributes rtts,HttpServletRequest request)
 								throws Exception{
 		ProjectVO project  = (ProjectVO)request.getSession().getAttribute("logonProject");
-		board.setPjNum(project.getPjNum());
+		int pjNum=project.getPjNum();
+		board.setPjNum(pjNum);
 		System.out.println(board);
 		service.create(board);
 		rtts.addFlashAttribute("msg","SUCCESS");
@@ -136,4 +137,6 @@ public class FileBoardController {
 									throws Exception{
 		return service.getAttach(bNum);
 	}
+	
+	
 }

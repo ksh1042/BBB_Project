@@ -43,6 +43,38 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.deleteMember(id);
 
 	}
+	@Override
+	public int idCheckSer(String id) throws SQLException {
+		int count=memberDAO.idCheck(id);
+		return count;
+	}
+
+	@Override
+	public int emailCheckSer(String email) throws SQLException {
+		int count=memberDAO.emailCheck(email);
+		return count;
+	}
+
+	@Override
+	public String findID(MemberVO member) throws SQLException {
+		String id = memberDAO.findID(member);
+		return id;
+	}
+
+	@Override
+	public void resetMemberPwd(MemberVO member) throws SQLException {
+		memberDAO.resetPwd(member);
+	}
+
+	@Override
+	public void modifyEmail(MemberVO member) throws SQLException {
+		memberDAO.modifyEmail(member);
+	}
+
+	@Override
+	public void updateAssignEmail(String id) throws SQLException {
+		memberDAO.updateEmailynById(id);
+	}
 
 
 }
