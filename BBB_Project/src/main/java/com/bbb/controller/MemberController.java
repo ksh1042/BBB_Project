@@ -1,5 +1,7 @@
 package com.bbb.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -64,7 +66,11 @@ public class MemberController {
 		return view;
 	}
 
-	
+	@RequestMapping(value="/list",method=RequestMethod.GET)
+	public void list(Model model, Criteria cri)throws Exception{
+		List<MemberVO> memberList=service.getMemberList(cri);
+		model.addAttribute("memberList",memberList);	
+	}
 	
 	
 	

@@ -80,6 +80,11 @@
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>${org.springframework.security-version}</version>
 		</dependency>
+		<dependency> 
+		<groupId>commons-io</groupId> 
+		<artifactId>commons-io</artifactId> 
+		<version>2.4</version> 
+		</dependency>
 
 		<!-- ojdbc6 -->
 		<dependency>

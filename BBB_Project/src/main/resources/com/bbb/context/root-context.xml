@@ -7,6 +7,7 @@
 	<import resource="classpath:com/bbb/context/dataSource-context.xml" />	
 	<import resource="classpath:com/bbb/context/application-context.xml"/>
 	<import resource="classpath:com/bbb/context/security-context.xml"/>
+	<import resource="classpath:com/bbb/context/servlet-context.xml"/>
 	<import resource="classpath:com/bbb/context/aop-context.xml"/>
 	<import resource="classpath:com/bbb/context/mail-context.xml"/>
 	
