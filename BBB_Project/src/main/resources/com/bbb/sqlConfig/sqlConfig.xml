@@ -13,7 +13,7 @@
 		<typeAlias type="com.bbb.dto.QnaVO" alias="question"/>
 		<typeAlias type="com.bbb.dto.QnaReplyVO" alias="questionReply"/>
 		<typeAlias type="com.bbb.dto.IssueVO" alias="issue"/>
-		
+		<typeAlias type="com.bbb.dto.PostboxVO" alias="post" />
 	</typeAliases>
 	
 	

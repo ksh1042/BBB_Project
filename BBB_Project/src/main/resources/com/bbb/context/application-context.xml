@@ -13,6 +13,11 @@
 	  class="com.bbb.mail.MimeAttachNotifier"
 	  p:mailSender-ref="mailSender"
 	  />
+	<bean id="postboxDAO" class="com.bbb.dao.PostboxDAOImpl"
+		p:sqlSession-ref="sqlSession" />
+		
+	<bean id="postboxService" class="com.bbb.service.PostboxServiceImpl"
+		p:postboxDAO-ref="postboxDAO" />
 		
 	<!-- 이병수  프로젝트 리스트 페이지-->	
 	

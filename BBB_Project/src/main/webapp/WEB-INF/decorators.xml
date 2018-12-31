@@ -11,6 +11,9 @@
 	<decorator name="project" page="decorator.jsp">		
 		<pattern>/project/**</pattern>
 	</decorator>
+	<decorator name="postbox" page="postboxDecorator.jsp">		
+		<pattern>/postbox/**</pattern>
+	</decorator>
 	
 	<decorator name="admin" page="decorator.jsp">		
 		<pattern>/admin/**</pattern>
