@@ -59,13 +59,11 @@
 					</div>
 
 					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse pull-left"
-						id="navbar-collapse">
+					<div class="collapse navbar-collapse pull-left" id="navbar-collapse">
 						<ul class="nav navbar-nav">
 							<li class="dropdown"><a href="<%= request.getContextPath() %>/main/myPartakeList">프로젝트 리스트 </a></li>
 						</ul>
-						
-					</div>
+					</div> 
 					<!-- /.navbar-collapse -->
 					<!-- Navbar Right Menu -->
 					<div class="navbar-custom-menu">

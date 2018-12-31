@@ -3,8 +3,8 @@
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="decorator"
-   uri="http://www.opensymphony.com/sitemesh/decorator"%>
+<%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
    response.setHeader("Pragma", "No-cache");
    response.setHeader("Cache-Control", "no-cache");
@@ -66,48 +66,21 @@
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <!-- Messages: style can be found in dropdown.less-->
+          
+          <!-- 사서함 버튼 -->
           <li class="dropdown messages-menu">
             <!-- Menu toggle button -->
-            <a href="#" onclick="postbox_go();"><!-- class="dropdown-toggle" data-toggle="dropdown" -->
-            <script>
-	            function postbox_go(){
-	            	var url="/postbox/list?id=${ loginUser.id }";
-	            	window.open( url, "_blank_1",
-	            		"toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=900, height=800, top=300, left=300, ");	            	
-	            }
-            </script>
-              <i class="fa fa-envelope-o"></i>
-              <span class="label label-success"></span>
+            <a href="#" onclick="postbox_go();">
+	            <script>
+		            function postbox_go(){
+		            	var url="/postbox/list?id=${ loginUser.id }";
+		            	window.open( url, "_blank_1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=900, height=800, top=300, left=300, ");	            	
+		            }
+	            </script>
+            <i class="fa fa-envelope-o"></i>
             </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have 4 messages</li>
-              <li>
-                <!-- inner menu: contains the messages -->
-                <ul class="menu">
-                  <li><!-- start message -->
-                    <a href="#">
-                      <div class="pull-left">
-                        <!-- User Image -->
-                        <img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <!-- Message title and timestamp -->
-                      <h4>
-                        Support Team
-                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                      </h4>
-                      <!-- The message -->
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <!-- end message -->
-                </ul>
-                <!-- /.menu -->
-              </li>
-              <li class="footer"><a href="#">See All Messages</a></li>
-            </ul>
           </li>
-          <!-- /.messages-menu -->
+          <!-- /.사서함 버튼 -->
 
           <!-- Notifications Menu -->
           <li class="dropdown notifications-menu">
@@ -181,7 +154,7 @@
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               
               <!-- 접속한 사람의 아이디 혹은 이름 노출 -->
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs">${loginUser.name }</span>
               
             </a>
             
@@ -190,12 +163,12 @@
               <li class="user-header">
                 <img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  ${loginUser.name }
+                  <small>Member since&nbsp; <fmt:formatDate pattern="yyyy-MM-dd" value="${loginUser.indate}" /></small>
                 </p>
               </li>
               <!-- Menu Body -->
-              <li class="user-body">
+           <!--    <li class="user-body">
                 <div class="row">
                   <div class="col-xs-4 text-center">
                     <a href="#">Followers</a>
@@ -207,13 +180,12 @@
                     <a href="#">Friends</a>
                   </div>
                 </div>
-                <!-- /.row -->
-              </li>
+              </li> -->
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-                </div>
+					<button id="profileBtn" type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#modal-default">내정보</button>
+				</div>
                 <div class="pull-right">
                   <a href="<%= request.getContextPath() %>/commons/logout" class="btn btn-default btn-flat">Sign out</a>
                 </div>
@@ -232,9 +204,90 @@
       </div>
     </nav>
   </header>
-  
-  
-  <!-- Left side column. contains the logo and sidebar -->
+
+<!-- 마이페이지 modal -->
+<form action="/main/mypage/modify" method="post" name="mypageForm">
+	<div class="modal fade in" id="modal-default" style="display: none; padding-right: 16px; height: auto;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title">내 정보</h4>
+				</div>
+
+				<div class="modal-body">
+					<div class="box-body">
+					
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" name="id" readonly value="${loginUser.id }" /><br />
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label for="inputPassword3" class="col-sm-2 control-label">패스워드</label>
+							<div class="col-sm-10">
+								<!-- <input type="password" class="form-control" id="inputPassword3" placeholder="Password"> -->
+								<button type="button" class="btn btn-block btn-warning" style="width: 150px;" onclick="location.href='<%=request.getContextPath()%>/main/mypage/resetPwd'">패스워드 변경</button>
+								<br/>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-2 control-label">이름</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" name="name" value="${loginUser.name }" />
+								<br />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-2 control-label">이메일</label>
+							<div class="col-sm-10">
+								<input type="email" class="form-control" name="email" readonly
+									value="${loginUser.email }" style="margin-bottom: 10px;" />
+								<button type="button" class="btn btn-block btn-warning" style="width: 150px;" onclick="location.href='<%=request.getContextPath()%>/main/mypage/resetEmail'">이메일 변경</button>
+								<br />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-2 control-label">핸드폰</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" name="phone" value="${loginUser.phone }">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button onclick="profileModify_go(); " type="button"
+						class="btn btn-primary">수정</button>
+				</div>
+				
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+</form>
+
+<script>
+	function profileModify_go() {
+		document.mypageForm.submit();
+		alert("회원정보가 수정되었습니다.");
+	}
+</script>
+<!-- /.마이페이지 modal -->
+
+<!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
 
     <!-- sidebar: style can be found in sidebar.less -->
