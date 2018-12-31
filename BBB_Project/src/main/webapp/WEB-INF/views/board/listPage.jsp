@@ -99,7 +99,7 @@ button#searchBtn{
 										${board.title}</a></td>
 								<td>${board.writer}</td>
 								<td><fmt:formatDate pattern="yyyy-MM-dd"
-										value="${board.indate}" /></td>
+										value="${board.inDate}" /></td>
 								<td><fmt:formatDate pattern="yyyy-MM-dd"
 										value="${board.updateDate}" /></td>
 								<td><span class="badge bg-red">${board.count }</span></td>
