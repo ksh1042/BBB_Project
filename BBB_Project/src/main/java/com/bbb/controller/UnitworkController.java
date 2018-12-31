@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bbb.dto.ProjectPartakeVO;
 import com.bbb.dto.ProjectVO;
+import com.bbb.dto.RequirementVO;
 import com.bbb.dto.UnitworkVO;
 import com.bbb.service.UnitworkService;
 
@@ -37,9 +38,11 @@ public class UnitworkController {
 		
 		List<UnitworkVO> unitList = unitworkService.readUnitworkList(udNum);
 		List<ProjectPartakeVO> partakeList = unitworkService.readBindingMemberList(selectProject.getPjNum());
+		List<RequirementVO> requireList = unitworkService.readRequirementList(selectProject.getRdNum());
 		
 		model.addAttribute("unitList", unitList);
 		model.addAttribute("partakeList", partakeList);
+		model.addAttribute("requireList", requireList);
 		
 		return "project/unitwork/ModifyList";
 	}

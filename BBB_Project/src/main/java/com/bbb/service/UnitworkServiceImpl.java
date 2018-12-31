@@ -4,9 +4,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.bbb.dao.ProjectPartakeDAO;
+import com.bbb.dao.RequirementDAO;
 import com.bbb.dao.UnitworkDAO;
-import com.bbb.dto.MemberVO;
 import com.bbb.dto.ProjectPartakeVO;
+import com.bbb.dto.RequirementVO;
 import com.bbb.dto.UnitworkHistVO;
 import com.bbb.dto.UnitworkVO;
 
@@ -20,6 +21,11 @@ public class UnitworkServiceImpl implements UnitworkService {
 	private UnitworkDAO unitworkDAO;
 	public void setUnitworkDAO(UnitworkDAO unitworkDAO){
 		this.unitworkDAO = unitworkDAO;
+	}
+	
+	private RequirementDAO requirementDAO;
+	public void setRequirementDAO(RequirementDAO requirementDAO){
+		this.requirementDAO = requirementDAO;
 	}
 	
 	@Override
@@ -58,6 +64,11 @@ public class UnitworkServiceImpl implements UnitworkService {
 	@Override
 	public List<ProjectPartakeVO> readBindingMemberList(int pjNum) throws SQLException {
 		return projectPartakeDAO.selectBindingMember(pjNum);
+	}
+
+	@Override
+	public List<RequirementVO> readRequirementList(int rdNum) throws SQLException {
+		return requirementDAO.selectRequirementListById(rdNum);
 	}
 
 }
