@@ -33,7 +33,7 @@
 			<section class="content">
 				<div class="form-group has-feedback col-md-9" style="margin">
 					<form action="" method="POST">			
-						<input type="hidden" name="creator" value="${ loginUser.name }">
+						<input type="hidden" name="creator" value="${ loginUser.id }">
 						<label class="control-label">프로젝트 이름</label>
 						<input class="form-control " type="text" name="name" placeholder="프로젝트 이름">
 						<span class="help-block" id="pNameHelp"><i class=""></i></span>
@@ -226,6 +226,7 @@
 			var json = {
 					name : $('input[name=name]').val(),
 					disc : $('textarea[name=disc]').val(),
+					creator : $('input[name=creator]').val(),
 					visibility : $('input[name=visibility]:checked').val(),
 					startDate : $('input[name=startDate]').val(),
 					endDate : $('input[name=endDate]').val()

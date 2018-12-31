@@ -16,6 +16,7 @@
 		<typeAlias type="com.bbb.dto.PostboxVO" alias="post" />
 		<typeAlias type="com.bbb.dto.FinanceVO" alias="finance"/>
 		<typeAlias type="com.bbb.dto.FinanceDetailVO" alias="financeDetail"/>
+		<typeAlias type="com.bbb.dto.ProjectPlanVO" alias="projectPlan"/>
 	</typeAliases>
 	
 	

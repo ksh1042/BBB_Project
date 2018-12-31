@@ -36,6 +36,7 @@
 			<div class="form-group">
 				<label class="control-label">파일 등록</label>
 			</div>
+			<form role="form" method="post" action="registerPlan">
 			<div class="form-group">
 				<div class="box">
 					<div class="box-body dropzone" style="text-align : center;">
@@ -57,6 +58,7 @@
 					</div>
 				</div>
 			</div>
+			</form>
 		</div>
 	</section>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
@@ -78,10 +80,7 @@
 	
 	<script>
 		function back_go() {
-			
-		}
-		function submit_go() {
-			
+			history.go(-1);
 		}
 		var form = $('form[role="form"]');
 		$("button[type='submit']").on("click", function(e){
@@ -89,24 +88,24 @@
 			/* alert("submit"); */
 			$(".uploadedList .delbtn").each(function(i, obj){
 				var fullName=$(this).attr('href');
-				var uuid="";
+				var puuid="";
 				var fileName="";
 				if(checkImageType(fullName)){
-					uuid=fullName.substring(14).split('$$')[0];
+					puuid=fullName.substring(14).split('$$')[0];
 					fileName=fullName.substring(14).split('$$')[1];
 					fileType="1";
 				}else{
-					uuid=fullName.substring(12).split('$$')[0];
+					puuid=fullName.substring(12).split('$$')[0];
 					fileName=fullName.substring(12).split('$$')[1];
 					fileType="0";
 				}
 				
 				var uploadPath=fullName.substring(0,12).replace(/\//g,"\\");
 						
-				var input1=$('<input>').attr('type','hidden').attr('name','attachList['+i+'].uuid').val(uuid);
+				var input1=$('<input>').attr('type','hidden').attr('name','attachList['+i+'].puuid').val(puuid);
 				var input2=$('<input>').attr('type','hidden').attr('name','attachList['+i+'].fileName').val(fileName);
 				var input3=$('<input>').attr('type','hidden').attr('name','attachList['+i+'].fileType').val(fileType);
-				var input4=$('<input>').attr('type','hidden').attr('name','attachList['+i+'].uploadPath').val(uploadPath);
+				var input4=$('<input>').attr('type','hidden').attr('name','attachList['+i+'].savePath').val(uploadPath);
 				
 				form.append(input1).append(input2).append(input3).append(input4);
 			});
@@ -141,16 +140,16 @@
 			e.preventDefault();
 
 			var files = e.originalEvent.dataTransfer.files;
-			var extend = files[0].name.substr(files[0].name.lastIndexOf('.')+1);
+			/* var extend = files[0].name.substr(files[0].name.lastIndexOf('.')+1); */
 			
 			if(files.length > 1){
 				alert('파일 업로드는 한 개만 가능합니다');
 				return;
 			}
-			if(extend != 'pdf' && extend != 'PDF'){
-				alert('PDF파일만 업로드가 가능합니다');
+			/* if(extend != 'zip' && extend != 'ZIP'){
+				alert('zip 압축파일만 업로드가 가능합니다');
 				return;
-			}
+			} */
 			
 			var formData = new FormData();
 			formData.append('file', files[0]);
@@ -205,7 +204,7 @@
 			return fileName.match(pattern);
 		}
 		
-		$('.uploadedList').on('click','.thumbnail',function(e){
+		$('.uploadedList').on('click','.thumbnail',function(e){ 
 			e.preventDefault();
 			
 			var form =$('<form>').attr({action:"<%=request.getContextPath()%>/displayFile",method:"get"});

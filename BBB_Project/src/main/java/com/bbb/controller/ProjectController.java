@@ -20,7 +20,6 @@ public class ProjectController {
 	@Autowired
 	private ProjectService service;
 	
-
 	@RequestMapping(value="/test", method=RequestMethod.GET)
 	public void test(){
 		
@@ -37,12 +36,7 @@ public class ProjectController {
 		model.addAttribute("myPartakeList",service.readMyProjectList(loginUser.getId()));
 	}
 	
-	@RequestMapping(value="/projectPlan", method=RequestMethod.GET)
-	public void projectPlan(int pjNum, HttpServletRequest request) throws Exception{
-		
-		
-		
-	}
+	
 	
 	@RequestMapping(value="/requirement", method=RequestMethod.GET)
 	public void requirementDefinition() throws Exception{
@@ -53,12 +47,10 @@ public class ProjectController {
 	public void projectMain(int pjNum, HttpServletRequest request) throws Exception{
 		ProjectVO project = service.projectMain(pjNum);
 		request.getSession().setAttribute("logonProject", project);
+		System.out.println(project.toString());
 	}
 	
-	@RequestMapping(value="/registPlan", method=RequestMethod.GET)
-	public void registPlan() throws Exception{
-		
-	}
+	
 	
 
 	

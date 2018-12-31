@@ -70,6 +70,15 @@
 		  p:financeDAO-ref="financeDAO"
 		  p:financeDetailDAO-ref="financeDetailDAO"
 		  />
+	<bean id="projectPlanDAO"
+		  class="com.bbb.dao.ProjectPlanDAOImpl"
+		  p:sqlSession-ref="sqlSession"
+		  />
+	<bean id="projectPlanService"
+		  class="com.bbb.service.ProjectPlanServiceImpl"
+		  p:projectDAO-ref="projectPlanDAO"
+		  />
+	
 </beans>
 
 

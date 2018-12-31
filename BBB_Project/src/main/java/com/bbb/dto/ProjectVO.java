@@ -15,13 +15,12 @@ public class ProjectVO {
 	private Date endDate;
 	private int cNum;
 	private int fNum;
-	private String uUuid;
-	private String pUuid;
+	private String uuuid;
+	private String puuid;
 	private int rdNum;
 	private int udNum;
 	private int gcNum;
 	private int pkNum;
-
 	public int getPjNum() {
 		return pjNum;
 	}
@@ -88,17 +87,17 @@ public class ProjectVO {
 	public void setfNum(int fNum) {
 		this.fNum = fNum;
 	}
-	public String getuUuid() {
-		return uUuid;
+	public String getUuuid() {
+		return uuuid;
 	}
-	public void setuUuid(String uUuid) {
-		this.uUuid = uUuid;
+	public void setUuuid(String uuuid) {
+		this.uuuid = uuuid;
 	}
-	public String getpUuid() {
-		return pUuid;
+	public String getPuuid() {
+		return puuid;
 	}
-	public void setpUuid(String pUuid) {
-		this.pUuid = pUuid;
+	public void setPuuid(String puuid) {
+		this.puuid = puuid;
 	}
 	public int getRdNum() {
 		return rdNum;
@@ -128,11 +127,9 @@ public class ProjectVO {
 	public String toString() {
 		return "ProjectVO [pjNum=" + pjNum + ", name=" + name + ", disc=" + disc + ", creator=" + creator
 				+ ", visibility=" + visibility + ", lastDate=" + lastDate + ", indate=" + indate + ", startDate="
-				+ startDate + ", endDate=" + endDate + ", cNum=" + cNum + ", fNum=" + fNum + ", uUuid=" + uUuid
-				+ ", pUuid=" + pUuid + ", rdNum=" + rdNum + ", udNum=" + udNum + ", gcNum=" + gcNum + ", pkNum=" + pkNum
+				+ startDate + ", endDate=" + endDate + ", cNum=" + cNum + ", fNum=" + fNum + ", uuuid=" + uuuid
+				+ ", puuid=" + puuid + ", rdNum=" + rdNum + ", udNum=" + udNum + ", gcNum=" + gcNum + ", pkNum=" + pkNum
 				+ "]";
 	}
 	
-	
-
 }

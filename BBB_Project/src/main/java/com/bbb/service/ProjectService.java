@@ -9,6 +9,8 @@ import com.bbb.dto.ProjectVO;
 
 public interface ProjectService {
 
+	public int getSeq() throws SQLException;
+	
 	public List<ProjectVO> searchProjectList(SearchCriteria cri) throws SQLException;
 	public int searchProjectCount(SearchCriteria cri) throws Exception;
 	public void joinProject(ProjectPartakeVO takeVO) throws Exception;
@@ -18,10 +20,11 @@ public interface ProjectService {
 	List<ProjectPartakeVO> getBindingProject(String id) throws SQLException;
 	// 어드민에서 프로젝트 관리를 위해 사용
 	List<ProjectVO> allProjectList() throws SQLException;
-
+	
+	public ProjectVO projectMain(int pjNum) throws SQLException;
+	public void insertPlan(ProjectVO project)throws SQLException;
 	
 	public void addProject(ProjectVO project) throws SQLException;
+	public void addProjectake(ProjectPartakeVO takeVO) throws SQLException;
 	public String readVerifyProjectName(String name) throws SQLException;
-
-	public ProjectVO projectMain(int pjNum) throws SQLException;
 }
