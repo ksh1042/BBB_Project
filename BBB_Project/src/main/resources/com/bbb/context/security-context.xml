@@ -31,6 +31,7 @@
 		
 		<intercept-url pattern="/project/my*" access="isAuthenticated()" />
 		<intercept-url pattern="/project/*" access="isAuthenticated()" />
+		<intercept-url pattern="/finance/*" access="isAuthenticated()" />
 		<intercept-url pattern="/admin/**" access="hasAuthority('ROLE_ADMIN')" />
 		<intercept-url pattern="/question/**" access="permitAll" />
 		

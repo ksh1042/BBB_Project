@@ -10,6 +10,7 @@
 	</decorator>
 	<decorator name="project" page="decorator.jsp">		
 		<pattern>/project/**</pattern>
+		<pattern>/finance/**</pattern>
 	</decorator>
 	<decorator name="postbox" page="postboxDecorator.jsp">		
 		<pattern>/postbox/**</pattern>

@@ -297,7 +297,7 @@
         </li>
         
         <li>
-           <a href="#">
+           <a href="<%=request.getContextPath() %>/project/listFinance?fNum=${logonProject.fNum}">
               <i class="fa fa-link" ></i> 
               <span>예산관리</span>
            </a>

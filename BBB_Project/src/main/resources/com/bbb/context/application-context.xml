@@ -8,11 +8,9 @@
 
 	<bean id="memberService" class="com.bbb.service.MemberServiceImpl"
 		p:memberDAO-ref="memberDAO" />
-	
 	<bean id="mailNotifier"
 	  class="com.bbb.mail.MimeAttachNotifier"
-	  p:mailSender-ref="mailSender"
-	  />
+	  p:mailSender-ref="mailSender" />
 	<bean id="postboxDAO" class="com.bbb.dao.PostboxDAOImpl"
 		p:sqlSession-ref="sqlSession" />
 		
@@ -20,11 +18,10 @@
 		p:postboxDAO-ref="postboxDAO" />
 		
 	<!-- 이병수  프로젝트 리스트 페이지-->	
-	
+
 	<bean id="projectDAO"
-		  class="com.bbb.dao.ProjectDAOImpl"
-		  p:sqlSession-ref="sqlSession"
-		  />
+		class="com.bbb.dao.ProjectDAOImpl"
+		p:sqlSession-ref="sqlSession"/>
 		  
 	<bean id="projectPartakeDAO" 
 		  class="com.bbb.dao.ProjectPartakeDAOImpl"
@@ -60,5 +57,29 @@
 		  class="com.bbb.service.IssueServiceImpl"
 		  p:issueDAO-ref="issueDAO"
 		  />  
-
+	<bean id="financeDAO"
+		  class="com.bbb.dao.FinanceDAOImpl"
+		  p:session-ref="sqlSession"
+		  />
+	<bean id="financeDetailDAO"
+	 	  class="com.bbb.dao.FinanceDetailDAOImpl"
+	 	  p:session-ref="sqlSession"
+	 	  />
+	<bean id="financeService"
+		  class="com.bbb.service.FinanceServiceImpl"
+		  p:financeDAO-ref="financeDAO"
+		  p:financeDetailDAO-ref="financeDetailDAO"
+		  />
 </beans>
+
+
+
+
+
+
+
+
+
+
+
+

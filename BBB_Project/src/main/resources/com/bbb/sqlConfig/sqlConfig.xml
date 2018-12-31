@@ -14,6 +14,8 @@
 		<typeAlias type="com.bbb.dto.QnaReplyVO" alias="questionReply"/>
 		<typeAlias type="com.bbb.dto.IssueVO" alias="issue"/>
 		<typeAlias type="com.bbb.dto.PostboxVO" alias="post" />
+		<typeAlias type="com.bbb.dto.FinanceVO" alias="finance"/>
+		<typeAlias type="com.bbb.dto.FinanceDetailVO" alias="financeDetail"/>
 	</typeAliases>
 	
 	
