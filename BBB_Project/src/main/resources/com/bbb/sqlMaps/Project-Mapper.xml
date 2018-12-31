@@ -3,6 +3,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Project">
 
+	<select id="pjNumSeq" resultType="int">
+		select pjnum_seq.nextval
+		from dual
+	</select>
+	
 	<select id="ProjectSearchList" resultType="project">
 		select * from tbl_project
 		where name like '%'||#{keyword}||'%'
@@ -38,9 +43,19 @@
 	
 	<update id="insertProject" parameterType="project">
 		INSERT INTO tbl_project(pjNum, name, disc, creator, visibility, startDate, endDate)
-		VALUES(pjnum_seq.nextval, #{name}, #{disc}, #{creator}, #{visibility}, #{startDate}, #{endDate})
-	</update>	
+		VALUES(#{pjNum}, #{name}, #{disc}, #{creator}, #{visibility}, #{startDate}, #{endDate})
+	</update>
 	
+	<update id="insertProjectake" parameterType="projectPartake">
+		insert into tbl_project_partake(id, pjnum, assignyn)
+		values(#{id}, #{pjNum}, 1)
+	</update>
+	
+	<update id="updateProjectPlan" parameterType="project">
+		update tbl_project
+		set puuid = #{puuid}
+		where pjnum = #{pjNum}
+	</update>
 </mapper>
 
 

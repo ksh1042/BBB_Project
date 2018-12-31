@@ -161,7 +161,7 @@ public class CommonController {
 		
 		String authKey = notifier.sendMail(loginUser.getEmail());
 		
-		model.addAttribute("authKey", "authKey");
+		model.addAttribute("authKey", authKey);
 	}
 	
 	@RequestMapping(value="/emailAuth", method=RequestMethod.POST)

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="decorator"
    uri="http://www.opensymphony.com/sitemesh/decorator"%>
@@ -68,9 +69,16 @@
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
             <!-- Menu toggle button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="#" onclick="postbox_go();"><!-- class="dropdown-toggle" data-toggle="dropdown" -->
+            <script>
+	            function postbox_go(){
+	            	var url="/postbox/list?id=${ loginUser.id }";
+	            	window.open( url, "_blank_1",
+	            		"toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=900, height=800, top=300, left=300, ");	            	
+	            }
+            </script>
               <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">4</span>
+              <span class="label label-success"></span>
             </a>
             <ul class="dropdown-menu">
               <li class="header">You have 4 messages</li>
@@ -268,10 +276,26 @@
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=request.getContextPath() %>/resources/web/viewer.html?file=./dummy/sample.pdf" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
-            <li><a href="/project/registPlan" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+          	<c:choose>
+          	<c:when test="${loginUser.id eq logonProject.creator }">
+	          	<c:if test="${empty logonProject.puuid }">
+	            	<li><a href="/plan/registerPlan"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+	            </c:if>
+	            <c:if test="${!empty logonProject.puuid }">
+	            	<li><a href="" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+	            </c:if>
+	        </c:when>
+            <c:otherwise>
+            	<c:if test="${empty logonProject.puuid }">
+            		<li><a href="empty"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+            	</c:if>
+            	<c:if test="${!empty logonProject.puuid }">
+            		<li><a href="/plan/viewPlan" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+            	</c:if>
+            </c:otherwise>
+            </c:choose>
             <li><a href="/project/requirement"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>단위업무 정의서</a></li>
+            <li><a href="<%=request.getContextPath()%>/project/unitwork/list"><i class="fa fa-circle-o"></i>단위업무 정의서</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i>간트차트</a></li>
             <li><a href="<%=request.getContextPath()%>/project/usecase"><i class="fa fa-circle-o"></i>use-case</a></li>
           </ul>
@@ -290,7 +314,7 @@
         </li>
         
         <li>
-           <a href="#">
+           <a href="<%=request.getContextPath() %>/project/listFinance?fNum=${logonProject.fNum}">
               <i class="fa fa-link" ></i> 
               <span>예산관리</span>
            </a>
@@ -310,9 +334,9 @@
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>공지사항</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>자료실</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>자유게시판</a></li>
+            <li><a href="<%=request.getContextPath()%>/fileboard/fileboardlist"><i class="fa fa-circle-o"></i>자료실</a></li>
+            <li><a href="<%=request.getContextPath()%>/notice/listPage"><i class="fa fa-circle-o"></i>공지사항</a></li>
+            <li><a href="<%=request.getContextPath()%>/board/listPage"><i class="fa fa-circle-o"></i>자유게시판</a></li>
           </ul>
         </li>
         
@@ -345,6 +369,13 @@
     </section>
     <!-- /.sidebar -->
   </aside>
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script>
+  	$("a[href='empty']").on("click",function(e){
+  		e.preventDefault();
+  		alert("아직 계획서가 등록되지 않았습니다.");
+  	});
+  </script>
   <body>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

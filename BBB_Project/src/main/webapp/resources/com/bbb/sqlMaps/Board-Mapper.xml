@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapper namespace="BoardMapper">
+	
+	<update id="insertBoard">
+		insert into tbl_board (bnum, title, content, writer)
+		values(board_seq.nextval,#{title},#{content},#{writer})
+	</update>
+	
+	<select id="selectBoardByBnum" resultType="board">
+		select *
+		from tbl_board
+		where bnum=#{bnum}
+	</select>
+	
+	<update id="updateBoard">
+		update tbl_board
+		set title=#{title}, content=#{content}, updatedate=#{updatedate}
+		where bnum=#{bnum}
+	</update>
+	
+	<update id="deleteBoard">
+		delete
+		from tbl_board
+		where bnum=#{bnum}
+	</update>
+
+</mapper>

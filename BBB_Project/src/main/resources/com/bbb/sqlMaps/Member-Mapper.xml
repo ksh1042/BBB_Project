@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Member">
+<<<<<<< HEAD
    
   
    <select id="selectMemberById" resultType="member">
@@ -45,30 +46,64 @@
 		where id = #{id}
 	</select>
 	
-	<select id="emailCheck" parameterType="str" resultType="int" >
-	    select COUNT(*) FROM tbl_member
+	<select id="emailCheck" parameterType="str" resultType="int">
+		select COUNT(*) FROM tbl_member
 		where email = #{email}
 	</select>
-	
+
+	<update id="insertMember">
+		insert into tbl_member(id,pwd,name,phone,email)
+		values(#{id},#{pwd},#{name},#{phone},#{email})
+	</update>
+
+	<update id="updateMember">
+		update tbl_member set
+		name=#{name},phone=#{phone}
+		where id=#{id}
+	</update>
+
+	<update id="deleteMember">
+		delete from tbl_member where id=#{id}
+	</update>
+
+	<update id="resetPwd" parameterType="member">
+		update
+		tbl_member
+		set
+		pwd =
+		#{pwd}
+		where
+		id = #{id}
+	</update>
+
+	<update id="updateEmailyn" parameterType="member">
+		UPDATE tbl_member
+		SET
+		emailyn=1
+		WHERE id = #{id}
+	</update>
+
 	<select id="findID" parameterType="member" resultType="str">
 		select id
 		from tbl_member
 		where name=#{name} and email=#{email}
 	</select>
-	
+
 	<update id="modifyPwd" parameterType="member">
 		update tbl_member
-		set	pwd = #{pwd}
+		set pwd =
+		#{pwd}
 		where id = #{id}
 	</update>
-   
+
 	<update id="resetEmail" parameterType="member">
 		update tbl_member
-		set email = #{email}
+		set email
+		= #{email}
 		where id = #{id}
 	</update>
-	
-   <sql id="search">
+
+	<sql id="search">
 		<if test="searchType !=null">
 			<if test="searchType =='i'.toString()">
 				and id like '%'||#{keyword}||'%'
@@ -83,16 +118,15 @@
 				and email like '%'||#{keyword}||'%'
 			</if>
 		</if>
-   </sql> 
-	
-   <select id="selectMemberList" resultType="member">
-      select * from tbl_member
-      where id is not null
-      <include refid="search" />
-   </select>
-   
-   <select id="selectMemberListCount" resultType="int">
-		select count(*) 
+	</sql>
+
+	<select id="selectMemberList" resultType="member">
+		select * from tbl_member
+		where id is not null
+		<include refid="search" />
+	</select>
+	<select id="selectMemberListCount" resultType="int">
+		select count(*)
 		from tbl_member
 		where id is not null
 		<include refid="search" />

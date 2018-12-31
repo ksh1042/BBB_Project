@@ -5,6 +5,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 public class PageMaker {
 	private int totalCount;
+
 	private int startPage;
 	private int endPage;
 	private boolean prev;

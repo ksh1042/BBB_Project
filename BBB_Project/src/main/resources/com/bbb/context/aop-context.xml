@@ -15,6 +15,7 @@
 			<method name="create*" rollback-for="Exception"  />
 			<method name="update*" rollback-for="Exception"  />
 			<method name="delete*" rollback-for="Exception"  />
+			<method name="remove*" rollback-for="Exception"  />
 		</attributes>
 	</advice>
 	
