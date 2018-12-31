@@ -12,7 +12,7 @@
 			<!-- general form elements -->
 			<div class="box box-primary">
 				<div class="box-header">
-					<h3 class="box-title">MODIFY BOARD</h3>
+					<h3 class="box-title">MODIFY NOTICE</h3>
 				</div>
 				<!-- /.box-header -->
 
@@ -20,32 +20,25 @@
 
 					<input type='hidden' name='page' value="${cri.page}">
 					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
-
+					<input type='hidden' name='searchType' value="${cri.searchType}">
+					<input type='hidden' name='keyword' value="${cri.keyword}">
+					
 					<div class="box-body">
 
 						<div class="form-group">
-							<label for="exampleInputEmail1">BNO</label> 
-							<input type="text" name='bNum' class="form-control" value="${board.bNum}"
-								readonly="readonly">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">PROJECT NO</label> 
-							<input type="text" name='pjNum' class="form-control" value="${board.pjNum}"
+							<label for="exampleInputEmail1">NNO</label> 
+							<input type="text" name='nNum' class="form-control" value="${notice.nNum}"
 								readonly="readonly">
 						</div>
 
 						<div class="form-group">
 							<label for="exampleInputEmail1">Title</label> 
-							<input type="text" name='title' class="form-control" value="${board.title}">
+							<input type="text" name='title' class="form-control" value="${notice.title}">
 						</div>
+						
 						<div class="form-group">
 							<label for="exampleInputPassword1">Content</label>
-							<textarea class="form-control" name="content" rows="3">${board.content}</textarea>
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">Writer</label> 
-							<input readonly	type="text" name="writer" class="form-control"
-								value="${loginUser.id}">
+							<textarea class="form-control" name="content" rows="3">${notice.content}</textarea>
 						</div>
 					</div>
 					<!-- /.box-body -->

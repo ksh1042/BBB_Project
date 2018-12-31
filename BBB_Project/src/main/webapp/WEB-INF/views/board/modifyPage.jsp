@@ -20,7 +20,9 @@
 
 					<input type='hidden' name='page' value="${cri.page}">
 					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
-
+					<input type='hidden' name='searchType' value="${cri.searchType}">
+					<input type='hidden' name='keyword' value="${cri.keyword}">
+					
 					<div class="box-body">
 
 						<div class="form-group">
@@ -52,7 +54,7 @@
 				</form>
 				<div class="box-footer">
 					<button type="submit" id="saveBtn" class="btn btn-warning">SAVE</button>
-					<button type="submit" id="cancelBtn" class="btn btn-primary">CANCEL</button>
+					<button type="submit" id="listBtn" class="btn btn-primary">CANCEL</button>
 				</div>
 				
 				<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>

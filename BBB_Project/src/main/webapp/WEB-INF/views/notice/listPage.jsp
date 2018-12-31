@@ -99,12 +99,27 @@ button#searchBtn{
 										value="${notice.indate}" /></td>
 								<td><fmt:formatDate pattern="yyyy-MM-dd"
 										value="${notice.expireDate}" /></td>
-								<td>${notice.kind }</td>
+								<c:if test="${notice.kind == 0}">
+								<td>이슈</td>
+								</c:if>
+								<c:if test="${notice.kind == 1}">
+								<td>이벤트</td>
+								</c:if>
+								<c:if test="${notice.kind == 2}">
+								<td>점검</td>
+								</c:if>
+								<c:if test="${notice.kind == 3}">
+								<td>기본</td>
+								</c:if>
 							</tr>
 
 						</c:forEach>
 						</c:if>
-						
+						<c:if test="${empty noticeList }">
+							<tr>
+								<td style="text-align:center;" colspan="5">내용이 없습니다.</td>
+							</tr>
+						</c:if>
 
 					</table>
 				</div>

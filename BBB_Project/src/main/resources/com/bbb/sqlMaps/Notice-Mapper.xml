@@ -6,12 +6,12 @@
    
    <update id="insertNotice">
 	   	insert into tbl_notice(nNum,title,content,kind)
-	   	values(nnum_seq.nextval,#{title},#{content},#{kind})
+	   	values(nNum_seq.nextval,#{title},#{content},#{kind})
    </update>
    <update id="updateNotice">
 	   	update
 	   	tbl_notice set 
-	   	titlt=#{title},content=#{content},expiredate=#{expireDate}
+	   	title=#{title},content=#{content},expiredate=#{expireDate}
 	   	where nNum=#{nNum}
    </update>
    <update id="deleteNotice">

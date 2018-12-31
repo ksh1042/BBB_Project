@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="Reply">
+	<select id="selectReplyList" resultType="reply">
+		select *
+		from tbl_board_review
+		where bNum=#{bNum}
+		order by rnum desc
+	</select>
+	<select id="countReply" resultType="int">
+		select count(rNum) 
+		from tbl_board_review
+		where rnum=#{rNum}
+	</select>
+	
+	<update id="insertReply" >
+		insert into tbl_board_review(rnum,bnum,content,writer)
+		values(rnum_seq.nextval,#{bNum},#{content},#{writer})
+	</update>
+	
+	<update id="updateReply">
+		update tbl_board_review 
+		set 
+		content=#{content}
+		where rnum=#{rNum}		
+	</update>
+	
+	<update id="deleteReply">
+		delete from tbl_board_review
+		where rnum=#{rNum}	
+	</update>
+</mapper>
+
+
+

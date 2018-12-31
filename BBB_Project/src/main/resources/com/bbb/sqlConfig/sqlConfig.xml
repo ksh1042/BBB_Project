@@ -14,7 +14,8 @@
 		<typeAlias type="com.bbb.dto.ProjectPartakeVO" alias="projectPartake"/>
 		<typeAlias type="com.bbb.dto.QnaVO" alias="question"/>
 		<typeAlias type="com.bbb.dto.QnaReplyVO" alias="questionReply"/>
-		<typeAlias type="com.bbb.dto.BoardAttachVO" alias="BoardAttach"/>	
+		<typeAlias type="com.bbb.dto.BoardAttachVO" alias="BoardAttach"/>
+		<typeAlias type="com.bbb.dto.ReplyVO" alias="Reply"/>	
 	</typeAliases>
 	
 </configuration>

@@ -59,4 +59,14 @@
 		p:noticeDAO-ref="noticeDAO"
 	/>
 	
+	<bean id="replyDAO"
+		class="com.bbb.dao.ReplyDAOImpl"
+		p:sqlSession-ref="sqlSession"
+	/>
+	
+	<bean id="replyService"
+		class="com.bbb.service.ReplyServiceImpl"
+		p:replyDAO-ref="replyDAO"
+	/>
+	
 </beans>

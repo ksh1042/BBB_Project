@@ -22,7 +22,7 @@
 				name='pjNum' class="form-control" placeholder="Enter Title">
 		</div>
 		<div class="form-group">
-			<label for="exampleInputEmail1">Titlbe</label> 
+			<label for="exampleInputEmail1">Title</label> 
 			<input type="text"
 				name='title' class="form-control" placeholder="Enter Title">
 		</div>
