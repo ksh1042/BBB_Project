@@ -99,6 +99,24 @@
 	<bean id="boardService" class="com.bbb.service.BoardServiceImpl"
 		p:boardDAO-ref="boardDAO" />
 		
+	<bean id="noticeDAO"
+		class="com.bbb.dao.NoticeDAOImpl"
+		p:session-ref="sqlSession"
+	/>
+	<bean id="noticeService"
+		class="com.bbb.service.NoticeServiceImpl"
+		p:noticeDAO-ref="noticeDAO"
+	/>
+	<bean id="replyDAO"
+		class="com.bbb.dao.ReplyDAOImpl"
+		p:sqlSession-ref="sqlSession"
+	/>
+	
+	<bean id="replyService"
+		class="com.bbb.service.ReplyServiceImpl"
+		p:replyDAO-ref="replyDAO"
+	/>
+		
 </beans>
 
 

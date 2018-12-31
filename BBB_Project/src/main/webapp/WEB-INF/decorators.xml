@@ -27,4 +27,11 @@
 	<decorator name="fileboard" page="decorator.jsp">		
 		<pattern>/fileboard/**</pattern>
 	</decorator>
+	<decorator name="notice" page="decorator.jsp">		
+		<pattern>/notice/**</pattern>
+	</decorator>
+	
+	<decorator name="board" page="decorator.jsp">		
+		<pattern>/board/**</pattern>
+	</decorator>
 </decorators>

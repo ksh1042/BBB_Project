@@ -48,7 +48,7 @@ public class BoardServiceImpl implements BoardService {
 		return board;
 	}
 	@Override
-	public void modify(BoardVO board) throws Exception {
+	public void update(BoardVO board) throws Exception {
 		int bNum = board.getbNum();
 		
 		boardDAO.updateBoard(board);
@@ -62,25 +62,25 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void remove(int bNum) throws Exception {
+	public void delete(int bNum) throws Exception {
 		boardDAO.deleteBoard(bNum);
 
 	}
 
 	@Override
-	public List<BoardVO> listAll() throws Exception {
+	public List<BoardVO> readListAll() throws Exception {
 		List<BoardVO> boardList= boardDAO.selectBoardAll();
 		return boardList;
 	}
 
 	@Override
-	public List<BoardVO> listCriteria(Criteria cri) throws Exception {
+	public List<BoardVO> readListCriteria(Criteria cri) throws Exception {
 		List<BoardVO> boardList = boardDAO.selectBoardCriteria(cri);
 		return boardList;
 	}
 
 	@Override
-	public List<BoardVO> listSearch(SearchCriteria cri) throws Exception {
+	public List<BoardVO> readListSearch(SearchCriteria cri) throws Exception {
 		List<BoardVO> boardList=boardDAO.selectSearchBoardList(cri);
 		
 		return boardList;
@@ -97,5 +97,4 @@ public class BoardServiceImpl implements BoardService {
 		List<BoardAttachVO> attachList=attachDAO.selectAttachesBybNum(bNum);
 		return attachList;
 	}
-
 }

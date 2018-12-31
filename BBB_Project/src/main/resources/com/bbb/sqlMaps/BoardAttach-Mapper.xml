@@ -24,11 +24,3 @@
 		delete tbl_board_attach where bnum = #{bNum}
 	</update>
 </mapper>
-
-
-
-
-
-
-
-

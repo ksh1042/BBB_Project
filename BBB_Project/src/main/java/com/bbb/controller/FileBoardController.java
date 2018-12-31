@@ -36,7 +36,7 @@ public class FileBoardController {
 	@RequestMapping(value="/fileboardlist",method=RequestMethod.GET)
 	public void listPage(@ModelAttribute("cri")SearchCriteria cri,
 						 Model model) throws Exception{
-		List<BoardVO> boardList=service.listSearch(cri);
+		List<BoardVO> boardList=service.readListSearch(cri);
 		model.addAttribute("list",boardList);
 		
 		PageMaker pageMaker=new PageMaker();
@@ -103,7 +103,7 @@ public class FileBoardController {
 		
 		board.setUpdateDate(new Date());
 		
-		service.modify(board);
+		service.update(board);
 		
 		rttr.addAttribute("page",cri.getPage());
 		rttr.addAttribute("perPageNum",cri.getPerPageNum());
@@ -119,7 +119,7 @@ public class FileBoardController {
 	public String removePage(int bNum,SearchCriteria cri,
 							RedirectAttributes rttr)
 							throws Exception{
-		service.remove(bNum);
+		service.delete(bNum);
 		
 		rttr.addAttribute("page",cri.getPage());
 		rttr.addAttribute("perPageNum",cri.getPerPageNum());

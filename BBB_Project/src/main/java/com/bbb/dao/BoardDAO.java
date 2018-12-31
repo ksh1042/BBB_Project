@@ -8,7 +8,6 @@ import com.bbb.controller.SearchCriteria;
 import com.bbb.dto.BoardVO;
 
 public interface BoardDAO {
-
 	public void insertBoard(BoardVO board) throws SQLException;
 
 	BoardVO selectBoardBybNum(int bNum) throws SQLException;
@@ -28,6 +27,4 @@ public interface BoardDAO {
 	List<BoardVO> selectBoardAll() throws Exception;
 	
 	int getSeqNextvalue() throws Exception;
-
-	
 }

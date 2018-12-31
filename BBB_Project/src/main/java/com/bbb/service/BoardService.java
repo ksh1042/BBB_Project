@@ -15,17 +15,18 @@ public interface BoardService {
 
 	public BoardVO readBybNum(int bNum) throws Exception;
 
-	public void modify(BoardVO board) throws Exception;
+	public void update(BoardVO board) throws Exception;
 
-	public void remove(int bNum) throws Exception;
+	public void delete(int bNum) throws Exception;
 
-	public List<BoardVO> listAll() throws Exception;
+	public List<BoardVO> readListAll() throws Exception;
 
-	public List<BoardVO> listCriteria(Criteria cri) throws Exception;
+	public List<BoardVO> readListCriteria(Criteria cri) throws Exception;
 
-	public List<BoardVO> listSearch(SearchCriteria cri) throws Exception;
+	public List<BoardVO> readListSearch(SearchCriteria cri) throws Exception;
 
 	int readSearchBoardCount(SearchCriteria cri) throws Exception;
 	
 	public List<BoardAttachVO> getAttach(int bNum) throws Exception;
+
 }
