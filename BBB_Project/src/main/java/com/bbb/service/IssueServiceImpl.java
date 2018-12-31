@@ -14,9 +14,17 @@ public class IssueServiceImpl implements IssueService{
 	}
 	
 	@Override
-	public List<IssueVO> getSearchIssueList(Criteria cri) throws Exception {
-		List<IssueVO> issueList=issueDAO.selectSearchIssueList(cri);
+	public List<IssueVO> getSearchIssueList(Criteria cri,int pjNum) throws Exception {
+		List<IssueVO> issueList=issueDAO.selectSearchIssueList(cri, pjNum);
 		return issueList;
+	}
+
+	@Override
+	public void createIssue(IssueVO issue) throws Exception {
+		int iNum=issueDAO.getQnaSeqNextValue();
+		issue.setiNum(iNum);
+		issueDAO.insertIssue(issue);
+		
 	}
 	
 }

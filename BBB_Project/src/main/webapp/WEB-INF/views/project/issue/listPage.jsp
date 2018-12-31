@@ -12,7 +12,7 @@
 </style>
 
 	<div class="container">
-      <section class="content-header">
+      <section class="content-header" style="cursor:pointer;" onclick="javascript:location.href='<%=request.getContextPath()%>/project/issue/list';">
 			<h3>이슈 게시판</h3>
       </section>
       
@@ -28,7 +28,8 @@
 						<h3 class="box-title">&nbsp;이슈 리스트</h3>
 							<div class="box-tools">
 								<div class="input-group input-group-sm" >
-										<form action="listIssue" style="width:300px;">
+										<form action="list" style="width:300px;">
+											<input type="hidden" name="pjNum" value="${logonProject.pjNum }"/>
 											<div style="margin-top:5px;margin-left:35px;">
 											<select name="searchType">
 												<option value="" ${cri.searchType==null?'selected':'' }>----</option>
@@ -98,7 +99,7 @@
 					<!-- 페이지번호 -->
 					<div class="box-footer clearfix">
 						<div style="float:right;">
-							<button id='newBtn' class="btn btn-primary" onclick="javascript:location.href='registerQna';">이슈 등록</button>
+							<button id='newBtn' class="btn btn-primary" onclick="registerIssue_go()">이슈 등록</button>
 						</div><br/>
 						<c:if test="${!empty listIssue }">
 							<div style="text-align:center;">
@@ -148,7 +149,10 @@
 
 <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
 <script>
-
+	function registerIssue_go(){
+		location.href="<%=request.getContextPath()%>/project/issue/register"
+		
+	}
 
 
 

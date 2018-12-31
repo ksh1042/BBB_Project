@@ -8,17 +8,17 @@
 	</select>
 
 	<sql id="search">
-		<if test="searchType == 't'.toString()">
-			and title like '%'||#{keyword}||'%'
+		<if test="cri.searchType == 't'.toString()">
+			and title like '%'||#{cri.keyword}||'%'
 		</if>
-		<if test="searchType == 'w'.toString()">
-			and writer like '%'||#{keyword}||'%'
+		<if test="cri.searchType == 'w'.toString()">
+			and writer like '%'||#{cri.keyword}||'%'
 		</if>
-		<if test="searchType == 'tw'.toString()">
+		<if test="cri.searchType == 'tw'.toString()">
 			and (
-			title like '%'||#{keyword}||'%'
+			title like '%'||#{cri.keyword}||'%'
 			or
-			writer like '%'||#{keyword}||'%'
+			writer like '%'||#{cri.keyword}||'%'
 			)
 		</if>
 	</sql>
@@ -27,6 +27,7 @@
 		select * 
 		from tbl_issue
 		where inum is not null
+		and pjnum=#{pjNum}
 		<include refid="search"></include>
 		order by inum desc
 	</select>
@@ -35,9 +36,15 @@
 		select count(*)
 		from tbl_issue
 		where inum is not null
+		and pjnum=#{pjNum}
 		<include refid="search"></include>
 		order by inum desc
 	</select>
+	
+	<update id="insertIssue" >
+		insert into tbl_issue(inum, title, content, writer,openyn,pjnum)
+		values(inum_seq.nextval, #{title}, #{content}, #{writer},0,#{pjNum})
+	</update>
 	
 
 </mapper>

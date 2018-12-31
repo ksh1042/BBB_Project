@@ -318,7 +318,7 @@
         
         
          <li>
-           <a href="<%=request.getContextPath()%>/project/issue/listIssue">
+           <a href="<%=request.getContextPath()%>/project/issue/list">
               <i class="fa fa-link"></i> 
               <span>ISSUE</span>
            </a>

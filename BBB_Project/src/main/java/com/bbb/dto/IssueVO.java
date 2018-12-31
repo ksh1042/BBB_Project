@@ -5,8 +5,10 @@ import java.util.Date;
 public class IssueVO {
 
 	private int iNum;
+	private int pjNum;
 	private int openyn;
 	private String title;
+	private String content;
 	private String writer;
 	private Date indate;
 	private Date updateDate;
@@ -16,6 +18,12 @@ public class IssueVO {
 	}
 	public void setiNum(int iNum) {
 		this.iNum = iNum;
+	}
+	public int getPjNum() {
+		return pjNum;
+	}
+	public void setPjNum(int pjNum) {
+		this.pjNum = pjNum;
 	}
 	public int getOpenyn() {
 		return openyn;
@@ -28,6 +36,12 @@ public class IssueVO {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
 	}
 	public String getWriter() {
 		return writer;
@@ -50,9 +64,13 @@ public class IssueVO {
 	
 	@Override
 	public String toString() {
-		return "IssueVO [iNum=" + iNum + ", openyn=" + openyn + ", title=" + title + ", writer=" + writer + ", indate="
-				+ indate + ", updateDate=" + updateDate + "]";
+		return "IssueVO [iNum=" + iNum + ", pjNum=" + pjNum + ", openyn=" + openyn + ", title=" + title + ", content="
+				+ content + ", writer=" + writer + ", indate=" + indate + ", updateDate=" + updateDate + "]";
 	}
+	
+	
+	
+	
 	
 	
 	
