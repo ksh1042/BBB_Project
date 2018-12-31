@@ -17,7 +17,9 @@
 		<typeAlias type="com.bbb.dto.FinanceVO" alias="finance"/>
 		<typeAlias type="com.bbb.dto.FinanceDetailVO" alias="financeDetail"/>
 		<typeAlias type="com.bbb.dto.ProjectPlanVO" alias="projectPlan"/>
+		<typeAlias type="com.bbb.dto.UnitworkVO" alias="unitwork"/>
+		<typeAlias type="com.bbb.dto.UnitworkHistVO" alias="unitworkHist"/>
+		<typeAlias type="com.bbb.dto.RequirementVO" alias="requirement" />
+		<typeAlias type="com.bbb.dto.RequirementHistVO" alias="requirementHist" />
 	</typeAliases>
-	
-	
 </configuration>

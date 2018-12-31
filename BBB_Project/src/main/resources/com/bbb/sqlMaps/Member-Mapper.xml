@@ -93,14 +93,12 @@
 		where id is not null
 		<include refid="search" />
 	</select>
-
 	<select id="selectMemberListCount" resultType="int">
 		select count(*)
 		from tbl_member
 		where id is not null
 		<include refid="search" />
 	</select>
-
 </mapper>
 
 

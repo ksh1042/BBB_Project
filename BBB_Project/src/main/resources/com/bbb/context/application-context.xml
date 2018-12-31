@@ -78,7 +78,21 @@
 		  class="com.bbb.service.ProjectPlanServiceImpl"
 		  p:projectDAO-ref="projectPlanDAO"
 		  />
-	
+		  
+	<bean id="requirementDAO"
+		class="com.bbb.dao.RequirementDAOImpl"
+		p:sqlSession-ref="sqlSession" />
+		
+	<bean id="unitworkDAO"
+		class="com.bbb.dao.UnitworkDAOImpl"
+		p:sqlSession-ref="sqlSession"/>
+	<bean id="unitworkService"
+		class="com.bbb.service.UnitworkServiceImpl"
+		p:unitworkDAO-ref="unitworkDAO"
+		p:projectPartakeDAO-ref="projectPartakeDAO"
+		p:requirementDAO-ref="requirementDAO"/>
+		
+		
 </beans>
 
 
