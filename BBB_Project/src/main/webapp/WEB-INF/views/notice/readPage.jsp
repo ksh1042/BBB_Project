@@ -24,7 +24,7 @@
         <!-- general form elements -->
         <div class="box box-primary">
         <div class="box-header">
-          <h3 class="box-title">READ NOTICE</h3>
+          <h3 class="box-title">공지글 상세보기</h3>
         </div><!-- /.box-header -->
 
  <form role="form" action="modifyPage" method="post">
@@ -50,7 +50,7 @@
 
   <div class="box-footer">
     <button type="submit" id="listBtn" class="btn btn-primary">LIST</button>
-  	<sec:authorize access="hasAuthority('ROLE_MANAGER')">
+  	<sec:authorize access="hasAuthority('ROLE_ADMIN')">
 	    <button type="submit" id="modifyBtn" class="btn btn-warning">Modify</button>
 	    <button type="submit" id="removeBtn" class="btn btn-danger">REMOVE</button>
 	</sec:authorize>

@@ -10,8 +10,7 @@
 <style>
 button#searchBtn{	
 	width:27px;
-	height:27px;
-	background-image:url('<%=request.getContextPath()%>/resources/dist/img/search.png');	
+	height:27px;	
 	background-position:center;
 	background-size:contain;	
 	background-color:white;	
@@ -54,9 +53,10 @@ button#searchBtn{
 				<div class='box-body'>
 					<ul>
 						<li>
-							<button id='newBtn' class="btn btn-primary" onclick="javascript:location.href='register';">New Board</button>
+							<button id='newBtn' class="btn btn-primary" onclick="javascript:location.href='register';" >New Board</button>
 						</li>
 						<li>
+						<form action="listPage">
 							<select name="searchType">
 								<option value="" ${cri.searchType==null?'selected':'' }>
 								------</option>
@@ -64,11 +64,14 @@ button#searchBtn{
 								Title</option>
 								<option value="w" ${cri.searchType eq 'w'?'selected':'' }>
 								Writer</option>
+								<option value="w" ${cri.searchType eq 'tw'?'selected':'' }>
+								Title+Writer</option>
 							</select>
 							<input id="keywordInput"
 								   name="keyword"
 								   type="text"  value="${pageMaker.cri.keyword}"/>
-							<button id="searchBtn" ></button>
+							<button id="searchBtn" type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+						</form>
 						</li>
 					</ul>
 				</div>
@@ -81,7 +84,6 @@ button#searchBtn{
 					<table class="table table-bordered" border="1">
 						<tr>
 							<th style="width: 10px">BNO</th>
-							<th style="width: 10px">PROJECT NO</th>
 							<th>TITLE</th>
 							<th>WRITER</th>
 							<th>INDATE</th>
@@ -93,7 +95,6 @@ button#searchBtn{
 
 							<tr>
 								<td>${board.bNum}</td>
-								<td>${board.pjNum }</td>
 								<td><a
 									href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&bNum=${board.bNum}'>
 										${board.title}</a></td>
@@ -113,7 +114,6 @@ button#searchBtn{
 							</tr>
 						</c:if>
 						
-
 					</table>
 				</div>
 				<!-- /.box-body -->
@@ -169,7 +169,6 @@ button#searchBtn{
 <script>
 		
 	$(".link li a").on("click", function(event){
-		
 		event.preventDefault(); 
 		
 		var targetPage = $(this).attr("href");
@@ -178,6 +177,7 @@ button#searchBtn{
 		jobForm.find("[name='page']").val(targetPage);
 		jobForm.attr("action","listPage").attr("method", "get");		
 		jobForm.submit();
+		
 	});
 	
 	$('#searchBtn').on('click',function(){

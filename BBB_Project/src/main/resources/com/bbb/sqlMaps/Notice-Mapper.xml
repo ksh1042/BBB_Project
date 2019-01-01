@@ -48,7 +48,7 @@
    <select id="selectBoardAll" resultType="notice">
 	   	select *
 	   	from tbl_notice
-	   	order by nnum desc, indate desc
+	   	order by nnum desc, inDate desc
    </select>
 
 </mapper>

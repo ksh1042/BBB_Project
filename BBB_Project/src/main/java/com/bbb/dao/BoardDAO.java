@@ -8,23 +8,22 @@ import com.bbb.controller.SearchCriteria;
 import com.bbb.dto.BoardVO;
 
 public interface BoardDAO {
-	public void insertBoard(BoardVO board) throws SQLException;
-
-	BoardVO selectBoardBybNum(int bNum) throws SQLException;
 	
-	public void updateBoard(BoardVO board) throws SQLException;
+	void insertBoard(BoardVO board)throws SQLException;
 
-	public void deleteBoard(int bNum) throws SQLException;
-
-	void increaseViewcnt(int bNum) throws Exception;
+	BoardVO selectBoardByBnum(int bNum) throws SQLException;
 	
-	List<BoardVO> selectSearchBoardList(SearchCriteria cri) throws SQLException;
+	void updateBoard(BoardVO board)throws SQLException;
+	
+	void deleteBoard(int bNum)throws SQLException;
+		
+	void increaseCount(int bNum)throws SQLException;
 	
 	List<BoardVO> selectBoardCriteria(Criteria cri) throws SQLException;
 	
-	int selectSearchBoardListCount(SearchCriteria cri) throws SQLException;
+	List<BoardVO> selectSearchBoardList(SearchCriteria cri)throws SQLException;
 	
-	List<BoardVO> selectBoardAll() throws Exception;
+	int selectSearchBoardCount(SearchCriteria cri)throws SQLException;
 	
-	int getSeqNextvalue() throws Exception;
+	List<BoardVO> selectBoardAll() throws SQLException;
 }

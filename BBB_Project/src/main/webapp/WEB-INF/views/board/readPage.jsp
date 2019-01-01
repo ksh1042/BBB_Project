@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <head>
 	<title>자유게시판</title>
@@ -54,8 +55,12 @@
   </div><!-- /.box-body -->
 
   <div class="box-footer">
-    <button type="submit" id="modifyBtn" class="btn btn-warning">Modify</button>&nbsp;
-    <button type="submit" id="removeBtn" class="btn btn-danger">REMOVE</button>&nbsp;
+  	<sec:authorize access="hasAuthority('ROLE_USER')">
+  	<c:if test="${loginUser.id eq board.writer }">
+    	<button type="submit" id="modifyBtn" class="btn btn-warning">Modify</button>&nbsp;
+    	<button type="submit" id="removeBtn" class="btn btn-danger">REMOVE</button>&nbsp;
+    </c:if>
+    </sec:authorize>
     <button type="submit" id="listBtn" class="btn btn-primary">LIST</button>
   </div>
 
@@ -127,6 +132,7 @@ $("#listBtn").on("click", function(){
 					<!-- /.row -->
 
 					<!-- Modal -->
+					
 					<div id="modifyModal" class="modal modal-primary fade"
 						role="dialog">
 						<div class="modal-dialog">
@@ -142,13 +148,18 @@ $("#listBtn").on("click", function(){
 									</p>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-info" id="replyModBtn">Modify</button>
-									<button type="button" class="btn btn-danger" id="replyDelBtn">DELETE</button>
+									
+  									<c:if test="${loginUser.id eq board.writer }">
+											<button type="button" class="btn btn-info" id="replyModBtn">Modify</button>
+											<button type="button" class="btn btn-danger" id="replyDelBtn">DELETE</button>
+									</c:if>
+									
 									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 								</div>
 							</div>
 						</div>
 					</div>
+					
 	</section>
 	<!-- /.content -->
 	<script>
@@ -181,8 +192,7 @@ $("#listBtn").on("click", function(){
 			success:function(data){
 				if(data="SUCCESS"){
 					alert('등록되었습니다.');
-				}		
-				
+				}
 				getPage("replies/"+bNum+"/1");
 				
 		

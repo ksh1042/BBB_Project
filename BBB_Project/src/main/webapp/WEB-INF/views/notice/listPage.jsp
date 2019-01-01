@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 
 
@@ -11,8 +12,7 @@
 
 button#searchBtn{	
 	width:27px;
-	height:27px;
-	background-image:url('<%=request.getContextPath()%>/resources/dist/img/search.png');	
+	height:27px;	
 	background-position:center;
 	background-size:contain;	
 	background-color:white;	
@@ -50,26 +50,26 @@ button#searchBtn{
 			<!-- general form elements -->
 			<div class='box'>
 				<div class="box-header with-border">
-					<h3 class="box-title">Notice List</h3>
+					<h3 class="box-title">공지사항리스트</h3>
 				</div>
 				<div class='box-body'>
 					<ul>
 						<li>
+							<sec:authorize access="hasAuthority('ROLE_ADMIN')">
 							<button id='newNtn' class="btn btn-primary" onclick="javascript:location.href='register';">New Notice</button>
+							</sec:authorize>
 						</li>
 						<li>
+						<form action="listPage">
 							<select name="searchType">
-								<option value="" ${cri.searchType==null?'selected':'' }>
-								------</option>
 								<option value="t" ${cri.searchType eq 't'?'selected':'' }>
 								Title</option>
-								<option value="k" ${cri.searchType eq 'k'?'selected':'' }>
-								Kind</option>
 							</select>
 							<input id="keywordInput"
 								   name="keyword"
 								   type="text"  value="${pageMaker.cri.keyword}"/>
-							<button id="searchBtn" ></button>
+							<button id="searchBtn" type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+							</form>
 						</li>
 					</ul>
 				</div>
@@ -96,7 +96,7 @@ button#searchBtn{
 									href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&nNum=${notice.nNum}'>
 										${notice.title}</a></td>
 								<td><fmt:formatDate pattern="yyyy-MM-dd"
-										value="${notice.indate}" /></td>
+										value="${notice.inDate}" /></td>
 								<td><fmt:formatDate pattern="yyyy-MM-dd"
 										value="${notice.expireDate}" /></td>
 								<c:if test="${notice.kind == 0}">

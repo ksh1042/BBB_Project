@@ -19,10 +19,10 @@
 		<div class="form-group">
 			<label for="exampleInputEmail1">PROJECT NO</label> 
 			<input type="text"
-				name='pjNum' class="form-control" placeholder="Enter Title">
+				name='pjNum' class="form-control" placeholder="Project 번호를 입력해주세요">
 		</div>
 		<div class="form-group">
-			<label for="exampleInputEmail1">Title</label> 
+			<label for="exampleInputEmail1">Titlbe</label> 
 			<input type="text"
 				name='title' class="form-control" placeholder="Enter Title">
 		</div>
@@ -41,7 +41,8 @@
 	</table>
 
 	<div class="box-footer">
-		<button type="submit" class="btn btn-primary">Submit</button>
+		<button type="submit" class="btn btn-primary">Submit</button>&nbsp;
+		<button type="submit" id="listBtn" class="btn btn-primary">LIST</button>
 	</div>
 </form>
 
@@ -55,6 +56,19 @@
 </section>
 <!-- /.content -->
 </div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+var formObj = $("form[role='form']");
+
+console.log(formObj);
+
+$("#listBtn").on("click", function(){
+	formObj.attr("method", "get");
+	formObj.attr("action", "listPage");
+	formObj.submit();
+});
+</script>
 <!-- /.content-wrapper -->
 
 </body>
