@@ -84,7 +84,6 @@ public class ProjectPlanController {
 	@RequestMapping(value="/modifyPlan", method=RequestMethod.POST)
 	public void readPlan(ProjectPlanVO planVO, RedirectAttributes rtts, HttpServletRequest request,HttpServletResponse response) throws Exception{
 		HttpSession session = request.getSession();
-		
 		ProjectVO project = (ProjectVO)session.getAttribute("logonProject");
 		int pjNum = project.getPjNum();
 		String puuid = project.getPuuid();
