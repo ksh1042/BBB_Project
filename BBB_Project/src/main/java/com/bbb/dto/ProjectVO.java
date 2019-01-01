@@ -21,7 +21,6 @@ public class ProjectVO {
 	private int udNum;
 	private int gcNum;
 	private int pkNum;
-	
 	public int getPjNum() {
 		return pjNum;
 	}
@@ -124,7 +123,6 @@ public class ProjectVO {
 	public void setPkNum(int pkNum) {
 		this.pkNum = pkNum;
 	}
-	
 	@Override
 	public String toString() {
 		return "ProjectVO [pjNum=" + pjNum + ", name=" + name + ", disc=" + disc + ", creator=" + creator
@@ -133,6 +131,5 @@ public class ProjectVO {
 				+ ", puuid=" + puuid + ", rdNum=" + rdNum + ", udNum=" + udNum + ", gcNum=" + gcNum + ", pkNum=" + pkNum
 				+ "]";
 	}
-	
 	
 }

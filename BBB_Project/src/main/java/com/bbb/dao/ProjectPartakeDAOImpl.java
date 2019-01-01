@@ -25,5 +25,10 @@ public class ProjectPartakeDAOImpl implements ProjectPartakeDAO {
 		return session.selectList("ProjectPartake.selectBindingProject",id);
 	}
 
+	@Override
+	public List<ProjectPartakeVO> selectBindingMember(int pjNum) throws SQLException {
+		return session.selectList("ProjectPartake.selectBindingMember", pjNum);
+	}
+
 
 }

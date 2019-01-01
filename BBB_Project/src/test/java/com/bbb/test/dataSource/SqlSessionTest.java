@@ -2,8 +2,6 @@ package com.bbb.test.dataSource;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertEquals;
 
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Assert;

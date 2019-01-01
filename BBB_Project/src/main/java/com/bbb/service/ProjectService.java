@@ -21,10 +21,12 @@ public interface ProjectService {
 	List<ProjectPartakeVO> getBindingProject(String id) throws SQLException;
 	// 어드민에서 프로젝트 관리를 위해 사용
 	List<ProjectVO> allProjectList() throws SQLException;
+	
 	public ProjectVO projectMain(int pjNum) throws SQLException;
 	public void insertPlan(ProjectVO project)throws SQLException;
 	public void deletePlan(int pjNum) throws SQLException;
 	public List<ProjectPlanVO> getAttach(String puuid) throws SQLException;
+
 	
 	public void addProject(ProjectVO project) throws SQLException;
 	public void addProjectake(ProjectPartakeVO takeVO) throws SQLException;

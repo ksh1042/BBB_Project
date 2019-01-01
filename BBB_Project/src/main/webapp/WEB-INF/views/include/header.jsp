@@ -45,7 +45,7 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-
+	<%@ include file="/WEB-INF/views/commons/include/emailyn.jsp" %>
   <!-- Main Header -->
   <header class="main-header">
 
@@ -69,9 +69,16 @@
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
             <!-- Menu toggle button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="#" onclick="postbox_go();"><!-- class="dropdown-toggle" data-toggle="dropdown" -->
+            <script>
+	            function postbox_go(){
+	            	var url="/postbox/list?id=${ loginUser.id }";
+	            	window.open( url, "_blank_1",
+	            		"toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=900, height=800, top=300, left=300, ");	            	
+	            }
+            </script>
               <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">4</span>
+              <span class="label label-success"></span>
             </a>
             <ul class="dropdown-menu">
               <li class="header">You have 4 messages</li>
@@ -288,7 +295,7 @@
             </c:otherwise>
             </c:choose>
             <li><a href="/project/requirement"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>단위업무 정의서</a></li>
+            <li><a href="<%=request.getContextPath()%>/project/unitwork/list"><i class="fa fa-circle-o"></i>단위업무 정의서</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i>간트차트</a></li>
             <li><a href="<%=request.getContextPath()%>/project/usecase"><i class="fa fa-circle-o"></i>use-case</a></li>
           </ul>
@@ -307,7 +314,7 @@
         </li>
         
         <li>
-           <a href="#">
+           <a href="<%=request.getContextPath() %>/project/listFinance?fNum=${logonProject.fNum}">
               <i class="fa fa-link" ></i> 
               <span>예산관리</span>
            </a>
@@ -327,15 +334,15 @@
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>공지사항</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>자료실</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>자유게시판</a></li>
+            <li><a href="<%=request.getContextPath()%>/fileboard/fileboardlist"><i class="fa fa-circle-o"></i>자료실</a></li>
+            <li><a href="<%=request.getContextPath()%>/notice/listPage"><i class="fa fa-circle-o"></i>공지사항</a></li>
+            <li><a href="<%=request.getContextPath()%>/board/listPage"><i class="fa fa-circle-o"></i>자유게시판</a></li>
           </ul>
         </li>
         
         
          <li>
-           <a href="#">
+           <a href="<%=request.getContextPath()%>/project/issue/list">
               <i class="fa fa-link"></i> 
               <span>ISSUE</span>
            </a>

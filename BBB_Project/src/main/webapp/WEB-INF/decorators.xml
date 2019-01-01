@@ -10,6 +10,10 @@
 	</decorator>
 	<decorator name="project" page="decorator.jsp">		
 		<pattern>/project/**</pattern>
+		<pattern>/finance/**</pattern>
+	</decorator>
+	<decorator name="postbox" page="postboxDecorator.jsp">		
+		<pattern>/postbox/**</pattern>
 	</decorator>
 	
 	<decorator name="admin" page="decorator.jsp">		
@@ -20,5 +24,14 @@
 	<decorator name="plan" page="decorator.jsp">		
 		<pattern>/plan/**</pattern>
 	</decorator>
+	<decorator name="fileboard" page="decorator.jsp">		
+		<pattern>/fileboard/**</pattern>
+	</decorator>
+	<decorator name="notice" page="decorator.jsp">		
+		<pattern>/notice/**</pattern>
+	</decorator>
 	
+	<decorator name="board" page="decorator.jsp">		
+		<pattern>/board/**</pattern>
+	</decorator>
 </decorators>

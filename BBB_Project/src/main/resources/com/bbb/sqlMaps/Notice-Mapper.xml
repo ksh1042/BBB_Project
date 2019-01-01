@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Notice">
+   
+   <update id="insertNotice">
+	   	insert into tbl_notice(nNum,title,content,kind)
+	   	values(nNum_seq.nextval,#{title},#{content},#{kind})
+   </update>
+   <update id="updateNotice">
+	   	update
+	   	tbl_notice set 
+	   	title=#{title},content=#{content},expiredate=#{expireDate}
+	   	where nNum=#{nNum}
+   </update>
+   <update id="deleteNotice">
+	   	delete
+	   	from tbl_notice
+	   	where nNum=#{nNum}
+   </update>
+   
+   <sql id="search">
+   	<if test="searchType == 't'.toString()">
+   		and title like '%'||#{keyword}||'%'
+   	</if>
+   	<if test="searchType == 'k'.toString()">
+   		and kind like '%'||#{keyword}||'%'
+   	</if>
+   </sql>
+   
+   <select id="selectNoticeByNnum" resultType="notice">
+	   	select *
+	   	from tbl_notice
+	   	where nNum=#{nNum}
+   </select>
+
+   <select id="selectSearchNoticeList" resultType="notice">
+   	<![CDATA[
+   		select *
+   		from tbl_notice
+   		where nNum>0
+   	]]>
+   	<include refid="search"></include>
+   	order by nNum desc
+   </select>
+   
+   <select id="selectBoardAll" resultType="notice">
+	   	select *
+	   	from tbl_notice
+	   	order by nnum desc, indate desc
+   </select>
+
+</mapper>
+
+
+
+
+
+
+   
