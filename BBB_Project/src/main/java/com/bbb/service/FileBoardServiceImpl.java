@@ -9,7 +9,7 @@ import com.bbb.dao.BoardDAO;
 import com.bbb.dto.BoardAttachVO;
 import com.bbb.dto.BoardVO;
 
-public class BoardServiceImpl implements BoardService {
+public class FileBoardServiceImpl implements FileBoardService {
 
 	private BoardDAO boardDAO;
 	public void setBoardDAO(BoardDAO boardDAO){
@@ -24,10 +24,12 @@ public class BoardServiceImpl implements BoardService {
 		int bNum = boardDAO.getSeqNextvalue();
 		board.setbNum(bNum);
 		boardDAO.insertBoard(board);
+		System.out.println("ㅇㄹㄴㅇㄹㄴㅇㄹ"+board);
 		
 		List<BoardAttachVO> attachList=board.getAttachList();
 		for(BoardAttachVO attach : attachList){
 			attach.setbNum(bNum);
+			
 			System.out.println(attach);
 			attachDAO.insertAttach(attach);
 		}

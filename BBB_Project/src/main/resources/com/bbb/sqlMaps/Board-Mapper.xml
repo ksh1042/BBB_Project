@@ -3,14 +3,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Board">
 
+	<select id="getSeqNextvalue" resultType="int">
+		select board_seq.nextval from dual
 	
-	<select id="getSeqNextValue" resultType="int" >
-		select bnum_seq.nextval from dual
-	</select>
+	</select>	
+	
 	
 	<update id="insertBoard">
 		insert into tbl_board (bnum, title, content, writer,pjnum )
-		values(bnum_seq.nextval,#{title},#{content},#{writer},#{pjNum})
+		values(#{bNum},#{title},#{content},#{writer},#{pjNum})
 	</update>
 
 	<select id="selectBoardBybNum" resultType="board">

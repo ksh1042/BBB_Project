@@ -61,17 +61,12 @@ button#searchBtn{
 								<option value="" ${pageMaker.cri.searchType==null?'selected':'' }>
 								------</option>
 								<option value="t" ${pageMaker.cri.searchType eq 't'?'selected':'' }>
-								Title</option>
+								제목</option>
 								<option value="c" ${pageMaker.cri.searchType eq 'c'?'selected':'' }>
-								Content</option>
+								내용</option>
 								<option value="w" ${pageMaker.cri.searchType eq 'w'?'selected':'' }>
-								Writer</option>
-								<option value="tc" ${pageMaker.cri.searchType eq 'tc'?'selected':'' }>
-								Title + Content</option>
-								<option value="cw" ${pageMaker.cri.searchType eq 'cw'?'selected':'' }>
-								Content + Writer</option>
-								<option value="tcw" ${pageMaker.cri.searchType eq 'tcw'?'selected':'' }>
-								Title + Content + Writer</option>
+								작성자</option>
+								
 							</select>
 							<input id="keywordInput"
 								   name="keyword"
@@ -158,8 +153,8 @@ button#searchBtn{
 <form id="jobForm">
   <input type='hidden' name="page" value="${pageMaker.cri.page}"/>
   <input type='hidden' name="perPageNum" value="${pageMaker.cri.perPageNum}"/>
-  <input type='hidden' name="searchType" value="${pageMaker.cri.searchType}"/>
-  <input type='hidden' name="keyword" value="${pageMaker.cri.keyword}"/>
+  <input type='hidden' name="searchType" value="${cri.searchType}"/>
+  <input type='hidden' name="keyword" value="${cri.keyword}"/>
 </form>
 	<!-- /.row -->
 </section>

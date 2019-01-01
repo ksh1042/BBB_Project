@@ -6,18 +6,18 @@
 
 <mapper namespace="BoardAttachMapper">
 
-	<select id="selectAttachBybNum" resultType="attach">
+	<select id="selectAttachBybNum" resultType="Attach">
 		select * from tbl_board_attach where bnum = #{bNum}
 	</select>
 	
 	<update id="insertAttach">
 		insert into 
 		tbl_board_attach (uuid, savepath, filename, kind, bnum)
-		values (#{uUid}, #{savePath}, #{fileName},#{kind}, #{bNum} )
+		values (#{uuid}, #{savePath}, #{fileName},#{kind}, #{bNum} )
 	</update>
 	
 	<update id="deleteAttach">
-		delete from tbl_board_attach where uuid = #{uUid}
+		delete from tbl_board_attach where uuid = #{uuid}
 	</update>
 	
 	<update id="deleteAllAttach">

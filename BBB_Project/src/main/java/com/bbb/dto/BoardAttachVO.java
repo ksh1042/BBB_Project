@@ -2,23 +2,22 @@ package com.bbb.dto;
 
 public class BoardAttachVO {
 
-	private String uUid;
+	private String uuid;
 	private String savePath;
 	private String fileName;
 	private int kind;
 	private int bNum;
-	
-	public String getuUid() {
-		return uUid;
+	public String getUuid() {
+		return uuid;
 	}
-	public void setuUid(String uUid) {
-		this.uUid = uUid;
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
-	public int getbNum() {
-		return bNum;
+	public String getSavePath() {
+		return savePath;
 	}
-	public void setbNum(int bNum) {
-		this.bNum = bNum;
+	public void setSavePath(String savePath) {
+		this.savePath = savePath;
 	}
 	public String getFileName() {
 		return fileName;
@@ -32,17 +31,19 @@ public class BoardAttachVO {
 	public void setKind(int kind) {
 		this.kind = kind;
 	}
-	public String getSavePath() {
-		return savePath;
+	public int getbNum() {
+		return bNum;
 	}
-	public void setSavePath(String savePath) {
-		this.savePath = savePath;
+	public void setbNum(int bNum) {
+		this.bNum = bNum;
 	}
 	@Override
 	public String toString() {
-		return "BoardAttachVO [uUid=" + uUid + ", bNum=" + bNum + ", fileName=" + fileName + ", kind=" + kind
-				+ ", savePath=" + savePath + "]";
+		return "BoardAttachVO [uuid=" + uuid + ", savePath=" + savePath + ", fileName=" + fileName + ", kind=" + kind
+				+ ", bNum=" + bNum + "]";
 	}
+	
+	
 	
 	
 }

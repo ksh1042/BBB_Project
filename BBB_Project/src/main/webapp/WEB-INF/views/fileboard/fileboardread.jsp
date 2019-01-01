@@ -65,6 +65,14 @@
       <input type="text" name="writer" class="form-control" 
         value="${boardVO.writer}" readonly="readonly">
     </div>
+    
+    <!-- attach list -->
+	<div class="form-group">
+		<label for="exampleInputEmail1">Attach File</label>
+		<ul class="mailbox-attachments clearfix uploadedList"></ul>
+	</div>
+</div>
+    
   </div><!-- /.box-body -->
 
   <div class="box-footer">
@@ -73,28 +81,28 @@
     <button type="submit" id="listBtn" class="btn btn-primary">GO LIST </button>
   </div>
 
+
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
 
 
 var formObj = $("form[role='form']");
 
-console.log(formObj);
 
 $("#modifyBtn").on("click", function(){
-	formObj.attr("action", "modifyPage");
+	formObj.attr("action", "fileboardmodify");
 	formObj.attr("method", "get");		
 	formObj.submit();
 });
 
 $("#removeBtn").on("click", function(){
-	formObj.attr("action", "removePage");
+	formObj.attr("action", "fileboardremove");
 	formObj.submit();
 });
 
 $("#listBtn").on("click", function(){
 	formObj.attr("method", "get");
-	formObj.attr("action", "listPage");
+	formObj.attr("action", "fileboardlist");
 	formObj.submit();
 });
 
@@ -112,3 +120,13 @@ $("#listBtn").on("click", function(){
     </div><!-- /.content-wrapper -->
     
 </body>
+
+<%@ include file="/WEB-INF/views/fileboard/fileboardreadattach.jsp" %>
+
+
+
+
+
+
+
+

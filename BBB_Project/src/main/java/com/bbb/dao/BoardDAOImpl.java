@@ -84,7 +84,7 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public int getSeqNextvalue() throws Exception {
 		
-		return session.selectOne("Board.getSeqNextValue");
+		return session.selectOne("Board.getSeqNextvalue");
 	}
 
 }

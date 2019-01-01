@@ -16,26 +16,26 @@ public class BoardAttachDAOImpl implements BoardAttachDAO {
 	
 	@Override
 	public void insertAttach(BoardAttachVO attach) throws SQLException {
-		session.update("Board.insertAttach",attach);
+		session.update("BoardAttachMapper.insertAttach",attach);
 
 	}
 
 	@Override
-	public void deleteAttach(String uUid) throws SQLException {
-		session.update("Board.deleteAttach",uUid);
+	public void deleteAttach(String uuid) throws SQLException {
+		session.update("BoardAttachMapper.deleteAttach",uuid);
 
 	}
 
 	@Override
 	public List<BoardAttachVO> selectAttachesBybNum(int bNum) throws SQLException {
 		List<BoardAttachVO> attachList =
-				session.selectList("Board.selectAttachBybNum",bNum);
+				session.selectList("BoardAttachMapper.selectAttachBybNum",bNum);
 		return attachList;
 	}
 
 	@Override
 	public void deleteAllAttach(int bNum) throws SQLException {
-		session.update("Board.deleteAllAttach", bNum);
+		session.update("BoardAttachMapper.deleteAllAttach", bNum);
 		
 	}
 	

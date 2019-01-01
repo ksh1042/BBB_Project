@@ -73,6 +73,7 @@
 	</section>
 	<!-- /.content -->
 
+	<!-- 에디터 시작 -->
 	<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery-ui.min.js"></script>	
 	<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/SE2/js/HuskyEZCreator.js"></script>
@@ -109,6 +110,8 @@ $('#submitBtn').on('click',function(e){
 
 
 	</script>
+	<!-- 에디터 끝 -->
+	
 	<%@ include file="/WEB-INF/views/fileboard/fileboardattach.jsp"%>
 	
 	<script>
@@ -134,8 +137,8 @@ $('#submitBtn').on('click',function(e){
 					
 			var input1=$('<input>').attr('type','hidden').attr('name','attachList['+i+'].uuid').val(uuid);
 			var input2=$('<input>').attr('type','hidden').attr('name','attachList['+i+'].fileName').val(fileName);
-			var input3=$('<input>').attr('type','hidden').attr('name','attachList['+i+'].fileType').val(fileType);
-			var input4=$('<input>').attr('type','hidden').attr('name','attachList['+i+'].uploadPath').val(uploadPath);
+			var input3=$('<input>').attr('type','hidden').attr('name','attachList['+i+'].kind').val(fileType);
+			var input4=$('<input>').attr('type','hidden').attr('name','attachList['+i+'].savePath').val(uploadPath);
 			
 			form.append(input1).append(input2).append(input3).append(input4);
 		});

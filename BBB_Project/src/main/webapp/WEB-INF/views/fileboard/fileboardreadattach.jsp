@@ -18,12 +18,13 @@
 
 <script>
 
-var bNum=${boardVO.bNum};
+var bNum=${BoardVO.bNum};
 var template=Handlebars.compile($('#templateAttach').html());
 
-
-$.getJSON("getAttach/"+bNum,function(list){
+$.getJSON("<%=request.getContextPath()%>/fileboard/getAttach/"+bNum ,function(list){
+	
 	$(list).each(function(){
+
 		var fileInfo=getFileInfo(this,"<%=request.getContextPath()%>");
 		var html=template(fileInfo);
 		$('.uploadedList').append(html);
@@ -32,23 +33,25 @@ $.getJSON("getAttach/"+bNum,function(list){
 });
 
 function getFileInfo(attachJson,contextPath){
+	alert("!!!");
 	var fileName,imgsrc,getLink;
 	var fullName;
-	if(attachJson.fileType=="1"){
-		fullName=attachJson.uploadPath.replace(/\\/g,"/")
-				 +"s_"+attachJson.uUid+"$$"+attachJson.fileName;
+	if(attachJson.kind=="1"){
+		fullName=attachJson.savePath.replace(/\\/g,"/")
+				 +"s_"+attachJson.uuid+"$$"+attachJson.fileName;
 		imgsrc=contextPath+"/displayFile?fileName="+fullName;				
 	}else{
-		fullName=attachJson.uploadPath.replace(/\\/g,"/")
-				 +attachJson.uUid+"$$"+attachJson.fileName;
+		fullName=attachJson.savePath.replace(/\\/g,"/")
+				 +attachJson.uuid+"$$"+attachJson.fileName;
 		imgsrc=contextPath+"/resources/dist/img/file.png";		
 	}
-	getLink=attachJson.uploadPath.replace(/\\/g,"/")
-		    +attachJson.uUid+"$$"+attachJson.fileName;
+	getLink=attachJson.savePath.replace(/\\/g,"/")
+		    +attachJson.uuid+"$$"+attachJson.fileName;
 	fileName=attachJson.fileName;
 	
 	return {fileName:fileName,imgsrc:imgsrc,getLink:getLink,fullName:fullName};
 }
+
 $('.uploadedList').on('click','.thumbnail',function(e){
 	e.preventDefault();
 	

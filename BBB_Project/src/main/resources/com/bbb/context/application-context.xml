@@ -52,7 +52,15 @@
 	<bean id="boardAttachDAO" class="com.bbb.dao.BoardAttachDAOImpl"
 		p:session-ref="sqlSession" />
 	
-	<bean id="boardService" class="com.bbb.service.BoardServiceImpl"
-		p:boardDAO-ref="boardDAO" />
+	<bean id="boardService" class="com.bbb.service.FileBoardServiceImpl"
+		p:boardDAO-ref="boardDAO"
+		p:attachDAO-ref="boardAttachDAO"
+		/>
 
 </beans>
+
+
+
+
+
+

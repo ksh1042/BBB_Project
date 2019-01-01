@@ -7,7 +7,7 @@ import com.bbb.controller.SearchCriteria;
 import com.bbb.dto.BoardAttachVO;
 import com.bbb.dto.BoardVO;
 
-public interface BoardService {
+public interface FileBoardService {
 
 	public void create(BoardVO board) throws Exception ;
 
