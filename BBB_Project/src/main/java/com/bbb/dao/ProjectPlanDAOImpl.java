@@ -24,4 +24,9 @@ public class ProjectPlanDAOImpl implements ProjectPlanDAO {
 		return plan;
 	}
 
+	@Override
+	public void deletePlan(String puuid) throws SQLException {
+		session.delete("projectPlan.deletePlan",puuid);
+	}
+
 }

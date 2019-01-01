@@ -19,4 +19,9 @@
 		from tbl_plan
 		where puuid = #{puuid}
 	</select>
+	
+	<delete id="deletePlan">
+		delete from tbl_plan
+		where puuid = #{puuid}
+	</delete>
 </mapper>

@@ -86,6 +86,11 @@ public class ProjectDAOImpl implements ProjectDAO{
 		return planList;
 	}
 
+	@Override
+	public void deletePlan(int pjNum) throws SQLException {
+		session.update("Project.deletePlan", pjNum);
+	}
+
 	
 
 	

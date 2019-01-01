@@ -24,4 +24,9 @@ public class ProjectPlanServiceImpl implements ProjectPlanService {
 		return plan;
 	}
 
+	@Override
+	public void deletePlan(String puuid) throws SQLException {
+		projectPlanDAO.deletePlan(puuid);
+	}
+
 }

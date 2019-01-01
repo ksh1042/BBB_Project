@@ -56,6 +56,12 @@
 		set puuid = #{puuid}
 		where pjnum = #{pjNum}
 	</update>
+	
+	<update id="deletePlan">
+		update tbl_project
+		set puuid = null
+		where pjnum = #{pjNum}
+	</update>
 </mapper>
 
 

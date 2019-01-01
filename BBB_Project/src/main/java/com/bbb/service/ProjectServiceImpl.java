@@ -115,6 +115,11 @@ public class ProjectServiceImpl implements ProjectService{
 		return planList;
 	}
 
+	@Override
+	public void deletePlan(int pjNum) throws SQLException {
+		projectDAO.deletePlan(pjNum);
+	}
+
 	
 
 	

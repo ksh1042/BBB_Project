@@ -36,7 +36,7 @@
 			<div class="form-group">
 				<label class="control-label">파일 등록</label>
 			</div>
-			<form role="form" method="post" action="registerPlan">
+			<form role="form" method="post" action="modifyPlan">
 			<div class="form-group">
 				<div class="box">
 					<div class="box-body dropzone" style="text-align : center;">
@@ -51,9 +51,8 @@
 			<div class="form-group">
 				<div class="box">
 					<div class="box-body">
-						<button type="submit" class="btn btn-primary" style="float:right;" 
-							onclick="submit_go();">수정</button>
-						<button type="submit" class="btn btn-warning"
+						<button type="submit" class="btn btn-primary" style="float:right;">수정</button>
+						<button type="button" class="btn btn-warning"
 							onclick="back_go();">돌아가기</button>
 					</div>
 				</div>
