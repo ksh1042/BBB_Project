@@ -135,8 +135,7 @@
 			//$('#udList tbody').append(row);
 			$('.addRdPoint').before(row);
 		});
-		$('a.deleteRow').on('click', function(e){
-			alert('asdf');
+		$(document).on('click','a.deleteRow', function(e){
 			$(this).parent().parent().remove();
 		});
 		
