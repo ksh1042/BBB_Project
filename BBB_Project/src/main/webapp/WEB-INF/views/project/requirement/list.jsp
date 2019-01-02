@@ -49,7 +49,7 @@
 											aria-label="Rendering engine: activate to sort column ascending">프로젝트 명</th>
 										<th class="sorting" tabindex="0" aria-controls="example2"
 											rowspan="1" colspan="2"
-											aria-label="Rendering engine: activate to sort column ascending"></th>
+											aria-label="Rendering engine: activate to sort column ascending">${logonProject.name }</th>
 										<th class="sorting" tabindex="0" aria-controls="example2"
 											rowspan="1" colspan="1"
 											aria-label="Rendering engine: activate to sort column ascending">작성일</th>
@@ -61,7 +61,7 @@
 											aria-label="Rendering engine: activate to sort column ascending">작성자</th>
 										<th class="sorting" tabindex="0" aria-controls="example2"
 											rowspan="1" colspan="2"
-											aria-label="Rendering engine: activate to sort column ascending"></th>
+											aria-label="Rendering engine: activate to sort column ascending">${logonProject.creator }</th>
 									</tr>
 									<tr role="row">
 										<th class="sorting" tabindex="0" aria-controls="example2"
@@ -91,22 +91,22 @@
 											aria-label="CSS grade: activate to sort column ascending">담당자</th>
 											
 									</tr>
-									<c:if test="${ empty unitList }">
+									<c:if test="${ empty requireList }">
 										<tr role="row" class="odd"><td colspan="11">표시할 내용이 없습니다</td></tr>
 									</c:if>
-									<c:forEach var="unit" items="${ unitList }" varStatus="stat">
+									<c:forEach var="unit" items="${ requireList }" varStatus="stat">
 										<tr role="row" class="${ (stat.count mod 2)==0 ? 'even':'odd' }">
 											<td>${ stat.count }</td>
-											<td>${ unit.udId }</td>
-											<td>${ unit.udName }</td>
-											<td><a href="#">${ unit.rdId }</a></td>
-											<td>${ unit.rdName }</td>
-											<td>${ unit.udManager }</td>
-											<td><fmt:formatDate value="${ unit.extDate }" pattern="yyyy-MM-dd"/></td>
-											<td><fmt:formatDate value="${ unit.intDate }" pattern="yyyy-MM-dd"/></td>
+											<td>${ require.rdId }</td>
+											<td>${ require.rdName }</td>
+											<td><a href="#">${ require.rdContent }</a></td>
+											<td>${ require.limit }</td>
+											<td>${ require.interf }</td>
+											<td>${ require.acceptyn }</td>
+											<td>${ require.manager }</td>
 										</tr>
 									</c:forEach>
-									<tr>
+									<!-- <tr>
 										<th rowspan="1" colspan="1">번호</th>
 										<th rowspan="1" colspan="1">단위업무ID</th>
 										<th rowspan="1" colspan="1">단위업무명</th>
@@ -115,14 +115,14 @@
 										<th rowspan="1" colspan="1">담당자</th>
 										<th rowspan="1" colspan="1">외부설계<br>완료일자</th>
 										<th rowspan="1" colspan="1">내부설계<br>완료일자</th>
-									</tr>
+									</tr> -->
 								</table>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-sm-5">
 								<div class="dataTables_info" id="example2_info" role="status"
-									aria-live="polite">Showing <b>${ f:length(unitList) }</b> entries</div>
+									aria-live="polite">Showing <b>${ f:length(requireList) }</b> entries</div>
 							</div>
 						</div>
 					</div>

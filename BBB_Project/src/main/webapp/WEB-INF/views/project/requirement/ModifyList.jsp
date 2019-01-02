@@ -19,7 +19,7 @@
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">단위업무 정의목록</h1>
+					<h1 class="m-0 text-dark">요구사항 정의목록</h1>
 				</div>
 			</div>
 		</div>
@@ -28,7 +28,7 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">단위업무 리스트</h3>
+					<h3 class="box-title">요구사항 리스트</h3>
 					<span style="float:right;">
 						<label class="control-label validateAlertMsg red hidden" style="color:red;"></label>
 						<button type="button" class="btn btn-primary" onclick="submit_go();" style="margin-left:20px;">완료</button>
@@ -45,7 +45,7 @@
 						<div class="row" style="overflow:scroll;overflow-y:hidden;">
 							<div class="col-sm-12">
 								<form id="frm" method="POST">
-									<table id="udList"
+									<table id="rdList"
 										class="table table-bordered table-hover dataTable" role="grid"
 										aria-describedby="example2_info">
 										<tr role="row">
@@ -76,43 +76,22 @@
 												rowspan="1" colspan="1"
 												aria-label="CSS grade: activate to sort column ascending">담당자</th>
 										</tr>
-										<c:forEach var="unit" items="${ unitList }" varStatus="stat">
+										<c:forEach var="require" items="${ requireList }" varStatus="stat">
 											<tr role="row" class="${ (stat.count mod 2)==0 ? 'even':'odd' }">
-												<td style="font-weight:bold;"><a href="#" class="deleteRow" style="color:red;" ><span class="glyphicon glyphicon-minus-sign "></span></a></td>
-												<td><input type="text" class="form-control" name="udId" value="${ unit.udId }"></td>
-												<td><input type="text" class="form-control" name="udName" value="${ unit.udName }"></td>
-												<td><!-- 요구사항 아이디 -->
-													<select name="rdId" class="form-control">
-														<option value="${ unit.rdId }" selected hidden>${ unit.rdId }</option>
-														<c:forEach var="require" items="${ requireList }">
-															<option value="${ require.rdId }">${ require.rdId }</option>
-														</c:forEach>
-													</select>
-												</td>	
-												<td>	<!-- 요구사항 명 -->								<!--  -->
-													<select name="rdName" class="form-control">
-														<option value="${ unit.rdName }" selected hidden>${ unit.rdName }</option>
-														<c:forEach var="require" items="${ requireList }">
-															<option value="${ require.rdName }">${ require.rdName }</option>
-														</c:forEach>
-													</select>
-												</td>
-												<td>
-													<select name="udManager" class="form-control">
-														<option value="${ unit.udManager }" selected hidden>${ unit.udManager }</option>
-														<c:forEach var="partake" items="${ partakeList }">
-															<option class="form-control" value="${ partake.id }">${ partake.id }</option>
-														</c:forEach>
-													</select>
-												</td>
-												<td><input type="date" class="form-control" name="extDate" value="${ unit.extDate }"></td>
-												<td><input type="date" class="form-control" name="intDate" value="${ unit.intDate }"></td>
+												<td>${ stat.count }</td>
+												<td>${ require.rdId }</td>
+												<td>${ require.rdName }</td>
+												<td><a href="#">${ require.rdContent }</a></td>
+												<td>${ require.limit }</td>
+												<td>${ require.interf }</td>
+												<td>${ require.acceptyn }</td>
+												<td>${ require.manager }</td>
 											</tr>
 										</c:forEach>
 										
-										<!-- 단위업무 추가하기 -->
-										<tr class="addUdPoint">
-											<td colspan="11" style="font-weight:bold;"><a href="#" class="addRow"><span class="glyphicon glyphicon-plus-sign "></span>&nbsp;단위업무 추가하기</a></td>
+										<!-- 요구사항 추가하기 -->
+										<tr class="addRdPoint">
+											<td colspan="11" style="font-weight:bold;"><a href="#" class="addRow"><span class="glyphicon glyphicon-plus-sign "></span>&nbsp;요구사항 추가하기</a></td>
 										</tr>
 										
 									</table>
@@ -122,7 +101,7 @@
 						<div class="row">
 							<div class="col-sm-5">
 								<div class="dataTables_info" id="example2_info" role="status"
-									aria-live="polite">Showing <b>${ f:length(unitList) }</b> entries</div>
+									aria-live="polite">Showing <b>${ f:length(requireList) }</b> entries</div>
 							</div>
 						</div>
 					</div>
@@ -136,34 +115,13 @@
 	<script id="templateList" type="text/x-handlebars-template">
 	<tr role="row" class="${ (stat.count mod 2)==0 ? 'even':'odd' }">
 		<td style="font-weight:bold;"><a href="#" class="deleteRow" style="color:red;" ><span class="glyphicon glyphicon-minus-sign"></span></a></td>
-		<td><input type="text" class="form-control" name="udId"></td>
-		<td><input type="text" class="form-control" name="udName"></td>
-		<td><!-- 요구사항 아이디 -->
-			<select name="rdId" class="form-control">
-				<option value="${ unit.rdId }">${ unit.rdId }</option>
-				<c:forEach var="require" items="${ requireList }">
-					<option value="${ require.rdId }">${ require.rdId }</option>
-				</c:forEach>
-			</select>
-		</td>	
-		<td>
-			<select name="rdName" class="form-control">
-				<option value="${ unit.rdName }">${ unit.rdName }</option>
-				<c:forEach var="require" items="${ requireList }">
-					<option value="${ require.rdName }">${ require.rdName }</option>
-				</c:forEach>
-			</select>
-		</td>
-		<td>
-			<select name="udManager" class="form-control">
-				<option class="form-control" value="${ unit.udManager }">${ unit.udManager }</option>
-				<c:forEach var="partake" items="${ partakeList }">
-					<option class="form-control" value="${ partake.id }">${ partake.id }</option>
-				</c:forEach>
-			</select>
-		</td>
-		<td><input type="date" name="extDate" class="form-control"></td>
-		<td><input type="date" name="intDate" class="form-control"></td>
+		<td><input type="text" class="form-control" name="rdId"></td>
+		<td><input type="text" class="form-control" name="rdName"></td>
+		<td><input type="text" class="form-control" name="rdContent"></td>
+		<td><input type="text" class="form-control" name="limit"></td>
+		<td><input type="text" class="form-control" name="interf"></td>
+		<td><input type="text" name="acceptyn" class="form-control"></td>
+		<td><input type="text" name="manager" class="form-control"></td>
 	</tr>
 	</script>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -174,15 +132,15 @@
 		$('a.addRow').on('click', function(e){
 			var row = template();
 			//$('#udList tbody').append(row);
-			$('.addUdPoint').before(row);
+			$('.addRdPoint').before(row);
 		});
-		$('a.deleteRow').on('click', function(e){
-			$(this);
-			alert('자네 아직 내가 삭제 이벤트를 만들지 않았다는 것을 모르는가 보군');
+		$('.deleteRow').on('click', function(e){
+			$(this).parent('td').parent('tr').remove();
+			/* alert('자네 아직 내가 삭제 이벤트를 만들지 않았다는 것을 모르는가 보군'); */
 		});
 		
 		function submit_go() {
-			$('input[name=udId]').each(function(e){
+			$('input[name=rdId]').each(function(e){
 				if( $(this).val() == '' ) {
 					$('.validateAlertMsg').html(errorIcon+' 요구사항 ID 항목에 비어있는 값이 존재합니다');
 					$('.validateAlertMsg').removeClass('hidden');
@@ -190,13 +148,13 @@
 					return;
 				}
 			});
-			$('input[name=udName]').each(function(e){
+			$('input[name=rdName]').each(function(e){
 				
 			});
 		}
 		
 		// estmate 숫자 유효성 검증
-		$('#udList').on('blur', 'input[name=estmate]', function(e){
+		$('#rdList').on('blur', 'input[name=acceptyn]', function(e){
 			var pattern = /[^0-9]/;
 
 			if($(this).val().match(pattern) || $(this).val() == ''){
@@ -207,14 +165,14 @@
 				$(this).removeClass('validateAlert');
 			}
 		});
-		// udId 유효성 검증
-		$('#udList').on('blur', 'input[name=udId], input[name=udName]', function(e){
+		// reId 유효성 검증
+		$('#rdList').on('blur', 'input[name=rdId], input[name=rdName]', function(e){
 			$(this).removeClass('validateAlert');
 		});
-		$('#udList').on('change', 'select[name=rdId], select[name=rdName], select[name="udManager"]', function(e){
+		$('#rdList').on('change', 'select[name=rdId], select[name=rdName], select[name="manager"]', function(e){
 			$(this).removeClass('validateAlert');
 		});
 		
-		// udList
+		// requireList
 	</script>
 </body>
