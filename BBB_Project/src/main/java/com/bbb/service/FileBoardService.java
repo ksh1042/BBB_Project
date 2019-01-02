@@ -15,9 +15,9 @@ public interface FileBoardService {
 
 	public BoardVO readBybNum(int bNum) throws Exception;
 
-	public void modify(BoardVO board) throws Exception;
+	public void update(BoardVO board) throws Exception;
 
-	public void remove(int bNum) throws Exception;
+	public void delete(int bNum) throws Exception;
 
 	public List<BoardVO> listAll() throws Exception;
 

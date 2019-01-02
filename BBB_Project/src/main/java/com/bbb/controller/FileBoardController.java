@@ -74,8 +74,8 @@ public class FileBoardController {
 		model.addAttribute(board);
 	} 
 	
-	@RequestMapping(value="/fileboardmodify",method=RequestMethod.GET)
-	public void modifyPage(@ModelAttribute("cri")SearchCriteria cri,
+	@RequestMapping(value="/fileboardupdate",method=RequestMethod.GET)
+	public void updatePage(@ModelAttribute("cri")SearchCriteria cri,
 							int bNum, Model model)throws Exception{
 		 BoardVO board=service.readBybNum(bNum);
 		 model.addAttribute(board);
@@ -84,12 +84,12 @@ public class FileBoardController {
 	@Resource(name="uploadPath")
 	String uploadPath;
 	
-	@RequestMapping(value="/fileboardmodify",method=RequestMethod.POST)
-	public String modifyPagePOST(String oldAttach,BoardVO board,SearchCriteria cri,
+	@RequestMapping(value="/fileboardupdate",method=RequestMethod.POST)
+	public String updatePagePOST(String oldAttach,BoardVO board,SearchCriteria cri,
 								RedirectAttributes rttr)
 									throws Exception{
 		
-		
+		if(oldAttach != null){
 		String[] fileNames=oldAttach.split(",");
 		for(String fileName : fileNames){
 			String formatName=fileName.substring(fileName.lastIndexOf(".")+1);
@@ -103,10 +103,10 @@ public class FileBoardController {
 			}
 			new File(uploadPath+fileName.replace('/', File.separatorChar)).delete();
 		}
-		
+		}
 		board.setUpdateDate(new Date());
 		
-		service.modify(board);
+		service.update(board);
 		
 		rttr.addAttribute("page",cri.getPage());
 		rttr.addAttribute("perPageNum",cri.getPerPageNum());
@@ -118,11 +118,11 @@ public class FileBoardController {
 		return "redirect:/fileboard/fileboardlist";
 	}
 	
-	@RequestMapping(value="/fileboardremove",method=RequestMethod.POST)
-	public String removePage(int bNum,SearchCriteria cri,
+	@RequestMapping(value="/fileboarddelete",method=RequestMethod.POST)
+	public String deletePage(int bNum,SearchCriteria cri,
 							RedirectAttributes rttr)
 							throws Exception{
-		service.remove(bNum);
+		service.delete(bNum);
 		
 		rttr.addAttribute("page",cri.getPage());
 		rttr.addAttribute("perPageNum",cri.getPerPageNum());

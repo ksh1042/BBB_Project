@@ -6,6 +6,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
+
 <script id="templateAttach" type="text/x-handlebars-template">
 <li style="width:10%;font-size:0.8em;position:relative;">
 	<a href="{{fullName}}" class="btn btn-default btn-xs pull-right delbtn"
@@ -101,3 +102,15 @@ $('.uploadedList').on('click','.thumbnail',function(e){
 	form.submit();
 });
 </script>
+
+
+
+
+
+
+
+
+
+
+
+

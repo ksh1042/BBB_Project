@@ -70,7 +70,7 @@ button#searchBtn{
 							</select>
 							<input id="keywordInput"
 								   name="keyword"
-								   type="text"  value="${pageMaker.cri.keyword}"/>
+								   type="text"  value="${cri.keyword}"/>
 							<button id="searchBtn" ></button>
 						</li>
 					</ul>
@@ -83,11 +83,11 @@ button#searchBtn{
 				<div class="box-body">
 					<table class="table table-bordered">
 						<tr>
-							<th style="width: 10px">BNO</th>
-							<th>TITLE</th>
-							<th>WRITER</th>
-							<th>INDATE</th>
-							<th style="width: 40px">VIEWCNT</th>
+							<th>번호</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>등록일</th>
+							<th>조회수</th>
 						</tr>
 						<c:if test="${!empty list }">
 						<c:forEach items="${list}" var="boardVO">
@@ -171,17 +171,17 @@ button#searchBtn{
 		
 		var jobForm = $("#jobForm");
 		jobForm.find("[name='page']").val(targetPage);
-		jobForm.attr("action","listPage").attr("method", "get");		
+		jobForm.attr("action","fileboardlist").attr("method", "get");		
 		jobForm.submit();
 	});
 	
 	$('#searchBtn').on('click',function(){
-		self.location="listPage"
+		self.location="fileboardlist"
 					   +"${pageMaker.makeQuery(1)}"
 					   +"&searchType="
 					   +$("select option:selected").val()
 					   +"&keyword="
-					   +$('#keywordInput').val();
+					   +encodeURIComponent($('#keywordInput').val());
 	});
 	
 	

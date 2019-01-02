@@ -24,7 +24,7 @@ public class FileBoardServiceImpl implements FileBoardService {
 		int bNum = boardDAO.getSeqNextvalue();
 		board.setbNum(bNum);
 		boardDAO.insertBoard(board);
-		System.out.println("ㅇㄹㄴㅇㄹㄴㅇㄹ"+board);
+		
 		
 		List<BoardAttachVO> attachList=board.getAttachList();
 		for(BoardAttachVO attach : attachList){
@@ -50,7 +50,7 @@ public class FileBoardServiceImpl implements FileBoardService {
 		return board;
 	}
 	@Override
-	public void modify(BoardVO board) throws Exception {
+	public void update(BoardVO board) throws Exception {
 		int bNum = board.getbNum();
 		
 		boardDAO.updateBoard(board);
@@ -64,7 +64,7 @@ public class FileBoardServiceImpl implements FileBoardService {
 	}
 
 	@Override
-	public void remove(int bNum) throws Exception {
+	public void delete(int bNum) throws Exception {
 		boardDAO.deleteBoard(bNum);
 
 	}

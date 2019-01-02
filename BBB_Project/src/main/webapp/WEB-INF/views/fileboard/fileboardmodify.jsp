@@ -21,7 +21,7 @@
 			<!-- general form elements -->
 			<div class="box box-primary">
 				<div class="box-header">
-					<h3 class="box-title">MODIFY BOARD</h3>
+					<h3 class="box-title">글 수정</h3>
 				</div>
 				<!-- /.box-header -->
 
@@ -35,26 +35,26 @@
 					<div class="box-body">
 
 						<div class="form-group">
-							<label for="exampleInputEmail1">BNUM</label> <input type="text"
+							<label for="exampleInputEmail1">글번호</label> <input type="text"
 								name='bno' class="form-control" value="${boardVO.bNum}"
 								readonly="readonly">
 						</div>
 
 						<div class="form-group">
-							<label for="exampleInputEmail1">Title</label> <input type="text"
+							<label for="exampleInputEmail1">제목</label> <input type="text"
 								name='title' class="form-control" value="${boardVO.title}">
 						</div>
 						<div class="form-group">
-							<label for="exampleInputPassword1">Content</label>
+							<label for="exampleInputPassword1">내용</label>
 							<textarea class="form-control" name="content" id="content" rows="3">${boardVO.content}</textarea>
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Writer</label> 
+							<label for="exampleInputEmail1">작성자</label> 
 							<input readonly type="text" name="writer" class="form-control"
 								value="${boardVO.writer}">
 						</div>
 						<div class="form-group">
-							<label>File DROP Here</label>
+							<label>파일을 이곳에 드래그 해주세요.</label>
 							<div class="fileDrop"></div>
 						</div>						
 					</div>
