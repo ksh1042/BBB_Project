@@ -205,7 +205,7 @@
 			//$('#udList tbody').append(row);
 			$('.addUdPoint').before(row);
 		});
-		$(documenta).on('click', 'a.deleteRow', function(e){
+		$(document).on('click', 'a.deleteRow', function(e){
 			$(this).parent().parent().remove()
 			//alert(  );
 			// alert('자네 아직 내가 삭제 이벤트를 만들지 않았다는 것을 모르는가 보군');
