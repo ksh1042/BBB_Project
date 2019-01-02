@@ -102,8 +102,6 @@
 <!-- AdminLTE App -->
 <script src="<%=request.getContextPath()%>/resources/dist/js/adminlte.min.js"></script>
 
-<script src="<%=request.getContextPath()%>/resources/dist/js/searchjs.js"></script>
-
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->

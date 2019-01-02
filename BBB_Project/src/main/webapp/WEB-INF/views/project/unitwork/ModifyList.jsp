@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
@@ -31,6 +32,7 @@
 					<h3 class="box-title">단위업무 리스트</h3>
 					<span style="float:right;">
 						<label class="control-label validateAlertMsg red hidden" style="color:red;"></label>
+						<button type="button" class="btn btn-alert" onclick="back_go();" style="margin-left:20px;">뒤로</button>
 						<button type="button" class="btn btn-primary" onclick="submit_go();" style="margin-left:20px;">완료</button>
 					</span>
 				</div>
@@ -90,7 +92,11 @@
 										</c:if>
 										<c:forEach var="unit" items="${ unitList }" varStatus="stat">
 											<tr role="row" class="${ (stat.count mod 2)==0 ? 'even':'odd' }">
-												<td style="font-weight:bold;"><a href="#" class="deleteRow" style="color:red;" ><span class="glyphicon glyphicon-minus-sign "></span></a></td>
+												<td style="font-weight:bold;">
+													<a href="#" class="deleteRow" style="color:red;" >
+														<span class="glyphicon glyphicon-minus-sign "></span>
+													</a>
+												</td>
 												<td><input type="text" class="form-control" name="udId" value="${ unit.udId }"></td>
 												<td><input type="text" class="form-control" name="udName" value="${ unit.udName }"></td>
 												<td><!-- 요구사항 아이디 -->
@@ -117,19 +123,17 @@
 														</c:forEach>
 													</select>
 												</td>
-												<td><input type="date" class="form-control" name="extDate" value="${ unit.extDate }"></td>
-												<td><input type="date" class="form-control" name="intDate" value="${ unit.intDate }"></td>
-												<td><input type="date" class="form-control" name="pdDate" value="${ unit.pdDate }"></td>
-												<td><input type="date" class="form-control" name="devDate" value="${ unit.devDate }"></td>
+												<td><input type="date" class="form-control" name="extDate" value='<fmt:formatDate value="${ unit.extDate }" pattern="yyyy-MM-dd"/>'></td>
+												<td><input type="date" class="form-control" name="intDate" value='<fmt:formatDate value="${ unit.intDate }" pattern="yyyy-MM-dd"/>'></td>
+												<td><input type="date" class="form-control" name="pdDate" value='<fmt:formatDate value="${ unit.pdDate }" pattern="yyyy-MM-dd"/>'></td>
+												<td><input type="date" class="form-control" name="devDate" value='<fmt:formatDate value="${ unit.devDate }" pattern="yyyy-MM-dd"/>'></td>
 												<td><input type="text" class="form-control" name="estmate" value="${ unit.estmate }" size="3"></td>
 											</tr>
 										</c:forEach>
-										
 										<!-- 단위업무 추가하기 -->
 										<tr class="addUdPoint">
 											<td colspan="11" style="font-weight:bold;"><a href="#" class="addRow"><span class="glyphicon glyphicon-plus-sign "></span>&nbsp;단위업무 추가하기</a></td>
 										</tr>
-										
 									</table>
 								</form>
 							</div>
@@ -143,6 +147,13 @@
 					</div>
 				</div>
 				<!-- /.box-body -->
+				
+				<div class="box-footer">
+					<div class="form-group">
+						<label>*코멘트</label>
+						<textarea class="form-control" name="comm" style="resize:none;" placeholder="수정사항 내용 및 설명을 입력하세요..."></textarea>
+					</div>
+				</div>
 			</div>
 			<!-- /.box -->
 		</div>
@@ -177,10 +188,10 @@
 				</c:forEach>
 			</select>
 		</td>
-		<td><input type="date" name="extDate" class="form-control"></td>
-		<td><input type="date" name="intDate" class="form-control"></td>
-		<td><input type="date" name="pdDate" class="form-control"></td>
-		<td><input type="date" name="devDate" class="form-control"></td>
+		<td><input type="date" name="extDate" class="form-control" value=""></td>
+		<td><input type="date" name="intDate" class="form-control" value=""></td>
+		<td><input type="date" name="pdDate" class="form-control" value=""></td>
+		<td><input type="date" name="devDate" class="form-control" value=""></td>
 		<td><input type="text" name="estmate" class="form-control" size="3" value="0"></td>
 	</tr>
 	</script>
@@ -195,23 +206,94 @@
 			$('.addUdPoint').before(row);
 		});
 		$('a.deleteRow').on('click', function(e){
-			$(this);
-			alert('자네 아직 내가 삭제 이벤트를 만들지 않았다는 것을 모르는가 보군');
+			$(this).parent().parent().remove()
+			//alert(  );
+			// alert('자네 아직 내가 삭제 이벤트를 만들지 않았다는 것을 모르는가 보군');
 		});
 		
+		function back_go(){
+			history.go(-1);
+		}
 		function submit_go() {
-			$('input[name=udId]').each(function(e){
-				if( $(this).val() == '' ) {
-					$('.validateAlertMsg').html(errorIcon+' 단위업무 ID 항목에 비어있는 값이 존재합니다');
-					$('.validateAlertMsg').removeClass('hidden');
-					$(this).addClass('validateAlert');
-					return;
+			var flag = true;
+			var errorMsg = '입력하지 않은 필수 항목이 존재합니다';
+			var unitList = ['udId','udName'];
+			var requList = ['rdId','rdName', 'udManager'];
+			unitList.forEach( function(item) {
+				$('input[name='+item+']').each(function(e){
+					if( $(this).val() == '' ) {
+						$(this).addClass('validateAlert');
+						flag = false;
+					}
+				});	
+			});
+			requList.forEach( function(item) {
+				$('select[name='+item+']').each(function(e){
+					if( $(this).val() == '' ) {
+						$(this).addClass('validateAlert');
+						flag = false;
+					}
+				});
+			});
+			if(!flag){
+				$('.validateAlertMsg').html(errorIcon + ' ' + errorMsg);
+				$('.validateAlertMsg').removeClass('hidden');
+				flag = true;
+				return;
+			}
+			
+			if( $('textarea[name=comm]').val() == '' ) {
+				$('.validateAlertMsg').html(errorIcon + ' 코멘트를 입력하시지 않았습니다.');
+				$('.validateAlertMsg').removeClass('hidden');
+				$('textarea[name=comm]').addClass('validateAlert');
+				return;
+			}
+			
+			$('input[type=date]').each(function(e) {
+				if( $(this).val() == '' ){
+					$(this).val('1959-01-01');
 				}
 			});
-			$('input[name=udName]').each(function(e){
-				
+			
+			var data = [];
+			
+			for(var i=0; i<document.getElementsByName('udId').length; i++){
+				var temp = {
+					rdId : document.getElementsByName('rdId')[i].value,
+					rdName : document.getElementsByName('rdName')[i].value,
+					udName : document.getElementsByName('udName')[i].value,
+					udId : document.getElementsByName('udId')[i].value,
+					udManager : document.getElementsByName('udManager')[i].value,
+					extDate : document.getElementsByName('extDate')[i].value,
+					intDate : document.getElementsByName('intDate')[i].value,
+					pdDate : document.getElementsByName('pdDate')[i].value,
+					devDate : document.getElementsByName('devDate')[i].value,
+					estmate : document.getElementsByName('estmate')[i].value 
+				};
+				data.push(temp);
+			}
+			 
+			jQuery.ajaxSettings.traditional = true;
+			
+			$.ajax({
+				url : '<%=request.getContextPath()%>/project/unitwork/update',
+				type : 'POST',
+				data : JSON.stringify( { unitList : data, comm : $('textarea[name=comm]').val() } ),
+				headers:{
+					"Content-Type":"application/json;charset=utf8",
+					"X-HTTP-Method-Override":"post"
+				},
+		        success : function(data){
+					if(data == 'SUCCESS'){
+						alert('업데이트 성공!');
+						location.href='<%=request.getContextPath()%>/project/unitwork/list';
+					}
+				},
+				error : function(error){
+					alert('통신 오류가 발생하였습니다. 잠시후 다시 시도해주시기 바랍니다. 증상이 지속될 경우 자세한 사항은 관리자에게 문의 바랍니다.');
+				}
 			});
-		}
+		} 
 		
 		// estmate 숫자 유효성 검증
 		$('#udList').on('blur', 'input[name=estmate]', function(e){
@@ -232,7 +314,9 @@
 		$('#udList').on('change', 'select[name=rdId], select[name=rdName], select[name="udManager"]', function(e){
 			$(this).removeClass('validateAlert');
 		});
-		
-		// udList
+		$('textarea[name=comm]').on('blur', function(e) {
+			$(this).removeClass('validateAlert');
+		});
+
 	</script>
 </body>
