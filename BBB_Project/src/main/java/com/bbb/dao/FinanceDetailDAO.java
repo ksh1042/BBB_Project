@@ -7,8 +7,7 @@ import com.bbb.dto.FinanceDetailVO;
 
 public interface FinanceDetailDAO {
 
-	// 입력시 시퀀스등록을 위한 메서드
-	int getFinanceDetailSeqNextValue() throws SQLException;
+	
 	
 	// 예산관리 디테일 테이블의 모든 정보를 가져온다
 	List<FinanceDetailVO> selectFinanceDetailList(int fNum) throws SQLException;

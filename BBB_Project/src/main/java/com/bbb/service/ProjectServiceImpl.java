@@ -109,6 +109,12 @@ public class ProjectServiceImpl implements ProjectService{
 		projectDAO.insertPlan(project);
 	}
 
+	@Override
+	public void createFnum(int pjNum, int fNum) throws SQLException {
+		projectDAO.updateFnum(pjNum, fNum);
+		
+	}
+
 	
 
 	

@@ -27,4 +27,7 @@ public interface ProjectService {
 	public void addProject(ProjectVO project) throws SQLException;
 	public void addProjectake(ProjectPartakeVO takeVO) throws SQLException;
 	public String readVerifyProjectName(String name) throws SQLException;
+	
+	public void createFnum(int pjNum, int fNum) throws SQLException;
+
 }

@@ -23,15 +23,15 @@ public class BoardController {
 	private BoardService service;
 	
 	@RequestMapping(value="/listPage",method=RequestMethod.GET)
-	public void listPage(@ModelAttribute("cri")SearchCriteria cri, Model model) throws Exception{
-		
-		List<BoardVO> boardList = service.readListSearch(cri);
-		model.addAttribute("boardList",boardList);
+	public void listPage(SearchCriteria cri, Model model) throws Exception{
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.readSearchBoardCount(cri));
-		model.addAttribute(pageMaker);
+		List<BoardVO> boardList = service.readListSearch(cri);
+		
+		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("boardList",boardList);
 	}
 	
 	@RequestMapping(value="/register",method=RequestMethod.GET)

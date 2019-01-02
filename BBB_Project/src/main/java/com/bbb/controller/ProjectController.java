@@ -50,7 +50,10 @@ public class ProjectController {
 		System.out.println(project.toString());
 	}
 	
-	
+	@RequestMapping(value="/listUsecase", method=RequestMethod.GET)
+	public void getUsecase() throws Exception{
+		
+	}
 	
 
 	

@@ -20,8 +20,8 @@
 	<!-- 이병수  프로젝트 리스트 페이지-->	
 
 	<bean id="projectDAO"
-		class="com.bbb.dao.ProjectDAOImpl"
-		p:sqlSession-ref="sqlSession"/>
+	      class="com.bbb.dao.ProjectDAOImpl"
+		  p:sqlSession-ref="sqlSession"/>
 		  
 	<bean id="projectPartakeDAO" 
 		  class="com.bbb.dao.ProjectPartakeDAOImpl"
@@ -69,6 +69,7 @@
 		  class="com.bbb.service.FinanceServiceImpl"
 		  p:financeDAO-ref="financeDAO"
 		  p:financeDetailDAO-ref="financeDetailDAO"
+		  p:projectDAO-ref="projectDAO"
 		  />
 	<bean id="projectPlanDAO"
 		  class="com.bbb.dao.ProjectPlanDAOImpl"

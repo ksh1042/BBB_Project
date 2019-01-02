@@ -24,7 +24,7 @@
 										<option value="" ${cri.searchType==null?'selected':'' }>----</option>
 										<option value="t" ${cri.searchType eq 't'?'selected':'' }>Title</option>
 										<option value="w" ${cri.searchType eq 'w'?'selected':'' }>Writer</option>
-										<option value="tc" ${cri.searchType eq 'tw'?'selected':'' }>Tiltle + Writer</option>
+										<option value="tc" ${cri.searchType eq 'tw'?'selected':'' }>Title + Writer</option>
 									</select>
 									<input type="text" name="keyword" value="${pageMaker.cri.keyword }">
 									<button type="submit" >

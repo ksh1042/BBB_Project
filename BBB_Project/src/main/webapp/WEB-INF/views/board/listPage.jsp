@@ -57,6 +57,7 @@ button#searchBtn{
 							<button id='newBtn' class="btn btn-primary" onclick="javascript:location.href='register';">New Board</button>
 						</li>
 						<li>
+							<form action="listPage" >
 							<select name="searchType">
 								<option value="" ${cri.searchType==null?'selected':'' }>
 								------</option>
@@ -65,10 +66,9 @@ button#searchBtn{
 								<option value="w" ${cri.searchType eq 'w'?'selected':'' }>
 								Writer</option>
 							</select>
-							<input id="keywordInput"
-								   name="keyword"
-								   type="text"  value="${pageMaker.cri.keyword}"/>
+							<input id="keywordInput" name="keyword" type="text"  value="${pageMaker.cri.keyword}"/>
 							<button id="searchBtn" ></button>
+							</form>
 						</li>
 					</ul>
 				</div>
@@ -121,7 +121,7 @@ button#searchBtn{
 
 				<div class="box-footer">
 					<div class="text-center">
-						<ul class="pagination link">
+						<ul class="pagination link pagination-sm no-margin pull-right">
  
 							<c:if test="${pageMaker.prev}">
 								<li><a href="${pageMaker.startPage - 1}">&laquo;</a></li>

@@ -37,7 +37,7 @@
 				<div class="box-footer">
 					<ul class="mailbox-attachments clearfix uploadedList"></ul>	
 					<button type="submit" class="btn btn-primary">Submit</button>
-					<button type="button" class="btn btn-warning" onclick="list_go();">QnAList</button>
+					<button type="button" class="btn btn-warning" onclick="history.go(-1);">Cancel</button>
 				</div>
 			</form>
 			</div>
@@ -51,11 +51,7 @@
 
 </body>
 
-<script>
-	function list_go(){
-		location.href="<%=request.getContextPath()%>/question/listQna";
-	}
-</script>
+
 
 
 

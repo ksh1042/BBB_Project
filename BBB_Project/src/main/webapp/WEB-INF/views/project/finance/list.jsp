@@ -3,18 +3,19 @@
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
 
 <body>
+	
+	<!-- 예산 잔액 구역 -->
 	<div class="info-box">
 		<span class="info-box-icon bg-aqua">
 			<i class="glyphicon glyphicon-piggy-bank"></i>
 		</span>
 		<div class="info-box-content">
 			<span class="info-box-text">예산 잔액</span>
-			<button style="float: right;" type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">예산입력</button>
+			<button style="float: right;" type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-finance">예산입력</button>
 			<span class="info-box-number">
 				<h3>
 					<fmt:formatNumber pattern="###,###" value="${financeTotal }" /><small> won</small>
@@ -42,19 +43,22 @@
 			<div class="col-md-12">
 				<!-- The time line -->
 				<ul class="timeline">
-					<!-- timeline time label -->
-					<c:if test="${!empty financeDetailList }">
+				
 						<c:forEach var="detailList" items="${financeRegList}">
+							<!-- timeline time label -->
 							<li class="time-label" style="margin-top: 10px;">
 								<span class="bg-red"> 
 									<fmt:formatDate pattern="yyyy-MM-dd" value="${detailList.regDate}" />
 								</span>
 							</li>
 							<!-- /.timeline-label -->
+							
 							<c:forEach var="financeList" items="${financeDetailList }">
-								<!-- timeline item -->
-								<c:if test="${financeList.depositYn==1 and financeList.regDate == detailList.regDate}">
-									<li><i class="fa fa-krw bg-blue"></i>
+							
+								<c:if test="${financeList.depositYn==1 and financeList.regDate == detailList.regDate}" >
+									<!-- timeline item -->
+									<li>
+										<i class="fa fa-krw bg-blue"></i>
 										<div class="timeline-item" style="border: 1px solid blue">
 											<span class="time"><i class="fa fa-user"></i>
 												${financeList.writer } &nbsp;&nbsp;&nbsp; 
@@ -74,7 +78,9 @@
 											</div>
 										</div>
 									</li>
-								</c:if>
+									<!-- /.timeline item -->
+								</c:if> 
+								
 								<c:if test="${financeList.depositYn==0 and financeList.regDate == detailList.regDate}">
 									<li>
 										<i class="fa fa-krw bg-red"></i>
@@ -100,20 +106,20 @@
 										</div>
 									</li>
 								</c:if>
-								<!-- END timeline item -->
 							</c:forEach>
+							<!-- END timeline item -->
 							&nbsp;	
 						</c:forEach>
 						<li><i class="fa fa-clock-o bg-gray"></i></li>
-					</c:if>
+				
 				</ul>
-				<c:if test="${empty financeDetailList }">
+		<%-- 		<c:if test="${empty financeDetailList}">
 					<tr>
 						<td style="text-align: center;" colspan="5">
 						등록된 예산정보가 존재하지않습니다.
 						</td>
 					</tr>
-				</c:if>
+				</c:if> --%>
 			</div>
 			<!-- /.col -->
 		</div>
@@ -121,7 +127,7 @@
 	</section>
 	<!-- /.content -->
 
-	<div class="modal fade" id="modal-default">
+	<div class="modal fade" id="modal-finance">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -192,6 +198,9 @@ $('input[name="targetName"]').on('blur', function(e){
 		$(this).focus();
 		return;
 	}
+	
+	$(this).css({ borderColor : 'green' });
+	targetNameFlag = true;
 	/* 유효성 ajax */			
 	
 	verifyCheck();
@@ -202,8 +211,6 @@ $('input[name="targetName"]').on('blur', function(e){
 var regDate;
 var regDateNumber;
 $('input[name=regDate]').on('blur', function(e){
-	//	alert($('input[name=regDate]').val());
-	// alert(new Date().toISOString('yyyy-MM-dd').substr(0,10));
 	if( $(this).val() == null || $(this).val() == '' ){
 		$('span#regDate').css({ color : 'red', fontWeight : 'bold' });
 		$('span#regDate').html('예산의 수입/지출 날짜를 입력해주세요.');
@@ -223,7 +230,7 @@ $('input[name=regDate]').on('blur', function(e){
 	}else{
 		$(this).css({ borderColor : 'green'});
 		$('span#regDateHelp').html('');
-		startDateFlag = true;
+		regDateFlag = true;
 	}
 	
 	verifyCheck();
@@ -250,13 +257,13 @@ $('#create_btn').on('click', function(e){
 			writer : $('input[name=writer]').val(),
 			targetName : $('input[name=targetName]').val(),
 			content : $('textarea[name=content]').val(),
-			depositYn : $('input[name=depositYn]:checked').val(),
+			regDate : $('input[name=regDate]').val(),		
 			price : $('input[name=price]').val(),
-			regDate : $('input[name=regDate]').val()		
+			depositYn : $('input[name=depositYn]:checked').val()
 	}
 	
 	$.ajax({
-		url : '<%=request.getContextPath()%>/main/ListFinance',
+		url : '<%=request.getContextPath()%>/project/finance/register',
 		method : 'POST',
 		data : JSON.stringify(json),
 		headers:{
@@ -265,7 +272,7 @@ $('#create_btn').on('click', function(e){
 		},
 		success : function(data){
 			alert('예산 내역이 등록되었습니다.');
-			location.href="<%=request.getContextPath()%>/project/listFinance"
+			location.href="<%=request.getContextPath()%>/project/finance/list"
 		},
 		error : function(error) {
 			alert('서버 내부오류가 발생했습니다. 자세한 사항은 관리자에게 문의바랍니다.');
@@ -279,28 +286,17 @@ $('#create_btn').on('click', function(e){
 	function verifyCheck() {
 		if (!targetNameFlag) {
 			$('button#create_btn').prop('disabled', true);
-			$('span#targetNameHelp').css({
-				color : 'red',
-				fontWeight : 'bold'
-			});
+			$('span#targetNameHelp').css({ color : 'red', fontWeight : 'bold' });
 			$('span#targetNameHelp').html('');
-			$('input[name=]').css({
-				borderColor : 'red'
-			});
+			$('input[name=targetName]').css({ borderColor : 'red'});
 			return;
 		}
 		if (!regDateFlag) {
 			$('button#create_btn').prop('disabled', true);
-			$('span#regDateHelp').css({
-				color : 'red',
-				fontWeight : 'bold'
-			});
+			$('span#regDateHelp').css({color : 'red',fontWeight : 'bold'});
 			$('span#regDateHelp').html('');
-			$('input[name=regDate]').css({
-				borderColor : 'red'
-			});
+			$('input[name=regDate]').css({borderColor : 'red'});
 			return;
-		
 		}
 		$('button#create_btn').prop('disabled', false);
 	}

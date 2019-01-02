@@ -56,6 +56,12 @@
 		set puuid = #{puuid}
 		where pjnum = #{pjNum}
 	</update>
+	
+	<update id="updateFnum" >
+		update tbl_project
+		set fnum = #{fNum}
+		where pjnum = #{pjNum}
+	</update>
 </mapper>
 
 
