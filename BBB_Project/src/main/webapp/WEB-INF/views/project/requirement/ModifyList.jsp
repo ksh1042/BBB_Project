@@ -78,6 +78,7 @@
 										</tr>
 										<c:forEach var="require" items="${ requireList }" varStatus="stat">
 											<tr role="row" class="${ (stat.count mod 2)==0 ? 'even':'odd' }">
+												<td style="font-weight:bold;"><a href="#" class="deleteRow" style="color:red;" ><span class="glyphicon glyphicon-minus-sign"></span></a></td>
 												<td>${ stat.count }</td>
 												<td>${ require.rdId }</td>
 												<td>${ require.rdName }</td>
@@ -134,9 +135,9 @@
 			//$('#udList tbody').append(row);
 			$('.addRdPoint').before(row);
 		});
-		$('.deleteRow').on('click', function(e){
-			$(this).parent('td').parent('tr').remove();
-			/* alert('자네 아직 내가 삭제 이벤트를 만들지 않았다는 것을 모르는가 보군'); */
+		$('a.deleteRow').on('click', function(e){
+			alert('asdf');
+			$(this).parent().parent().remove();
 		});
 		
 		function submit_go() {
