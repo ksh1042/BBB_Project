@@ -94,7 +94,7 @@
 									<c:if test="${ empty requireList }">
 										<tr role="row" class="odd"><td colspan="11">표시할 내용이 없습니다</td></tr>
 									</c:if>
-									<c:forEach var="unit" items="${ requireList }" varStatus="stat">
+									<c:forEach var="require" items="${ requireList }" varStatus="stat">
 										<tr role="row" class="${ (stat.count mod 2)==0 ? 'even':'odd' }">
 											<td>${ stat.count }</td>
 											<td>${ require.rdId }</td>

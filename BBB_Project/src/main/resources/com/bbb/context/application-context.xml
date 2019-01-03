@@ -114,9 +114,12 @@
 		p:replyDAO-ref="replyDAO"
 	/>
 		
-	<bean id="boardService" class="com.bbb.service.FileBoardServiceImpl"
+	<bean id="fileBoardService" class="com.bbb.service.FileBoardServiceImpl"
 		p:boardDAO-ref="boardDAO"
 		p:attachDAO-ref="boardAttachDAO"
-		/>
-
+	/>
+	
+	<bean id="boardService" class="com.bbb.service.BoardServiceImpl"
+		p:boardDAO-ref="boardDAO"
+	/>
 </beans>

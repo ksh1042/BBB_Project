@@ -8,6 +8,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/project")
 public class RequireController {
 	
+	/*@Autowired
+	private RequirementService service;*/
+	
+	@RequestMapping(value="/requirement/create", method=RequestMethod.GET)
+	public String createRequire() throws Exception{
+		
+		return "redirect:project/requirement/list";
+	}
+	
 	@RequestMapping(value="/requirement/list", method=RequestMethod.GET)
 	public void requireListGET() throws Exception{
 		

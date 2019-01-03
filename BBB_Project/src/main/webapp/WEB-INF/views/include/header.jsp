@@ -277,24 +277,41 @@
           </a>
           <ul class="treeview-menu">
           	<c:choose>
-          	<c:when test="${loginUser.id eq logonProject.creator }">
-	          	<c:if test="${empty logonProject.puuid }">
-	            	<li><a href="/plan/registerPlan"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
-	            </c:if>
-	            <c:if test="${!empty logonProject.puuid }">
-	            	<li><a href="/plan/modifyPlan?puuid=${logonProject.puuid }"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
-	            </c:if>
-	        </c:when>
-            <c:otherwise>
-            	<c:if test="${empty logonProject.puuid }">
-            		<li><a href="empty"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
-            	</c:if>
-            	<c:if test="${!empty logonProject.puuid }">
-            		<li><a href="/plan/viewPlan" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
-            	</c:if>
-            </c:otherwise>
+	          	<c:when test="${loginUser.id eq logonProject.creator }">
+		          	<c:if test="${empty logonProject.puuid }">
+		            	<li><a href="/plan/registerPlan"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+		            </c:if>
+		            <c:if test="${!empty logonProject.puuid }">
+		            	<li><a href="/plan/modifyPlan?puuid=${logonProject.puuid }"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+		            </c:if>
+		        </c:when>
+	            <c:otherwise>
+	            	<c:if test="${empty logonProject.puuid }">
+	            		<li><a href="empty"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+	            	</c:if>
+	            	<c:if test="${!empty logonProject.puuid }">
+	            		<li><a href="/plan/viewPlan" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+	            	</c:if>
+	            </c:otherwise>
             </c:choose>
-            <li><a href="/project/requirement/list"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
+            <c:choose>
+	            <c:when test="${loginUser.id = logonProject.creator }">
+	            	<c:if test="${logonProject.rdNum eq null }">
+	            		<li><a href="/project/requirement/create"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
+	            	</c:if>
+	            	<c:if test="${logonProject.rdNum ne null }">
+	            		<li><a href="/project/requirement/list"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
+	            	</c:if>
+	            </c:when>
+	            <c:otherwise>
+	            	<c:if test="${logonProject.rdNum eq null }">
+	            		<li><a href="empty"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
+	            	</c:if>
+	            	<c:if test="${logonProject.rdNum ne null }">
+	            		<li><a href="/project/requirement/list"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
+	            	</c:if>
+	            </c:otherwise>
+            </c:choose>
             <li><a href="<%=request.getContextPath()%>/project/unitwork/list"><i class="fa fa-circle-o"></i>단위업무 정의서</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i>간트차트</a></li>
             <li><a href="<%=request.getContextPath()%>/project/usecase"><i class="fa fa-circle-o"></i>use-case</a></li>
