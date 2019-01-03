@@ -25,29 +25,29 @@
 				<!-- general form elements -->
 				<div class="box box-primary">
 					<div class="box-header">
-						<h3 class="box-title">REGISTER BOARD</h3>
+						<h3 class="box-title">자료 등록</h3>
 					</div>
 					<!-- /.box-header -->
 
 					<form role="form" method="post" action="fileboardinsert">
 						<div class="box-body">
 							<div class="form-group">
-								<label for="exampleInputEmail1">Title</label> <input type="text"
+								<label for="exampleInputEmail1">제목</label> <input type="text"
 									name='title' class="form-control" placeholder="Enter Title">
 							</div>
 							<div class="form-group">
-								<label for="exampleInputPassword1">Content</label>
+								<label for="exampleInputPassword1">내용</label>
 								<textarea class="form-control" name="content" id="content" rows="10" cols="100"
 									placeholder="Enter ..."></textarea>
 							</div>
 							<div class="form-group">
-								<label for="exampleInputEmail1">Writer</label> <input
+								<label for="exampleInputEmail1">작성자</label> <input
 									type="text" readonly name="writer" class="form-control"
 									value="${loginUser.id }">
 							</div>
 
 							<div class="form-group">
-								<label>File DROP Here</label>
+								<label>파일을 드래그하세요.</label>
 								<div class="fileDrop"></div>
 							</div>
 						</div>
@@ -58,7 +58,7 @@
 								<hr />
 							</div>
 							<ul class="mailbox-attachments clearfix uploadedList"></ul>
-							<button type="submit" id="submitBtn" class="btn btn-primary">Submit</button>
+							<button type="submit" id="submitBtn" class="btn btn-primary">등록</button>
 						</div>
 					</form>
 

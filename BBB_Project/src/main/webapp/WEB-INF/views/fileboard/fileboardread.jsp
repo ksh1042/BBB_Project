@@ -69,7 +69,7 @@
   </div><!-- /.box-body -->
 
   <div class="box-footer">
-    <button type="submit" id="modifyBtn" class="btn btn-warning">수정</button>
+    <button type="submit" id="modifyBtn" class="hidden btn btn-warning" >수정</button>
     <button type="submit" id="removeBtn" class="btn btn-danger">삭제</button>
     <button type="submit" id="listBtn" class="btn btn-primary">목록으로 </button>
   </div>
@@ -114,12 +114,4 @@ $("#listBtn").on("click", function(){
     </div><!-- /.content-wrapper -->
     
 </body>
-
-
-
-
-
-
-
-
 

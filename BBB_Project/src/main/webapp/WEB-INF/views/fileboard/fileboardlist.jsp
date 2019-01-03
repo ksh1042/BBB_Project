@@ -54,7 +54,7 @@ button#searchBtn{
 				<div class='box-body'>
 					<ul>
 						<li>
-							<button id='newBtn' class="btn btn-primary" onclick="javascript:location.href='fileboardinsert';">New Board</button>
+							<button id='newBtn' class="btn btn-primary" onclick="javascript:location.href='fileboardinsert';">자료 등록</button>
 						</li>
 						<li>
 							<select name="searchType">
@@ -68,9 +68,9 @@ button#searchBtn{
 								작성자</option>
 								
 							</select>
-							<input id="keywordInput"
+							<input id="keyword"
 								   name="keyword"
-								   type="text"  value="${cri.keyword}"/>
+								   type="text" value="${cri.keyword}"/>
 							<button id="searchBtn" ></button>
 						</li>
 					</ul>
@@ -78,7 +78,7 @@ button#searchBtn{
 			</div>
 			<div class="box">
 				<div class="box-header with-border">
-					<h3 class="box-title">LIST PAGING</h3>
+					<h3 class="box-title"></h3>
 				</div>
 				<div class="box-body">
 					<table class="table table-bordered">
@@ -181,7 +181,7 @@ button#searchBtn{
 					   +"&searchType="
 					   +$("select option:selected").val()
 					   +"&keyword="
-					   +encodeURIComponent($('#keywordInput').val());
+					   +$('#keyword').val();
 	});
 	
 	
@@ -192,8 +192,6 @@ button#searchBtn{
 
 
 </body>
-
-
 
 
 

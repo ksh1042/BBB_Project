@@ -82,8 +82,8 @@ public class FileBoardServiceImpl implements FileBoardService {
 	}
 
 	@Override
-	public List<BoardVO> listSearch(SearchCriteria cri) throws Exception {
-		List<BoardVO> boardList=boardDAO.selectSearchBoardList(cri);
+	public List<BoardVO> listSearch(SearchCriteria cri,int pjNum) throws Exception {
+		List<BoardVO> boardList=boardDAO.selectSearchBoardList(cri,pjNum);
 		
 		return boardList;
 	}

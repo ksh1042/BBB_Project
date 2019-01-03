@@ -23,7 +23,7 @@
 
 	<update id="updateBoard">
 		update tbl_board
-		set title=#{title}, content=#{content}, updatedate=#{updatedate}
+		set title=#{title}, content=#{content}
 		where
 		bnum=#{bNum}
 	</update>

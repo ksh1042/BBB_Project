@@ -19,7 +19,7 @@ public interface BoardDAO {
 
 	void increaseViewcnt(int bNum) throws Exception;
 	
-	List<BoardVO> selectSearchBoardList(SearchCriteria cri) throws SQLException;
+	List<BoardVO> selectSearchBoardList(SearchCriteria cri , int pjNum) throws SQLException;
 	
 	List<BoardVO> selectBoardCriteria(Criteria cri) throws SQLException;
 	

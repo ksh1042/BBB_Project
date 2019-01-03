@@ -1,11 +1,11 @@
 package com.bbb.controller;
 
 import java.io.File;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -37,8 +37,9 @@ public class FileBoardController {
 	
 	@RequestMapping(value="/fileboardlist",method=RequestMethod.GET)
 	public void listPage(@ModelAttribute("cri")SearchCriteria cri,
-						 Model model) throws Exception{
-		List<BoardVO> boardList=service.listSearch(cri);
+						 Model model, HttpSession session) throws Exception{
+		int pjNum= ((ProjectVO)(session.getAttribute("logonProject"))).getPjNum();
+		List<BoardVO> boardList=service.listSearch(cri,pjNum);
 		model.addAttribute("list",boardList);
 		
 		PageMaker pageMaker=new PageMaker();
@@ -74,8 +75,8 @@ public class FileBoardController {
 		model.addAttribute(board);
 	} 
 	
-	@RequestMapping(value="/fileboardupdate",method=RequestMethod.GET)
-	public void updatePage(@ModelAttribute("cri")SearchCriteria cri,
+	@RequestMapping(value="/fileboardmodify",method=RequestMethod.GET)
+	public void modifyPage(@ModelAttribute("cri")SearchCriteria cri,
 							int bNum, Model model)throws Exception{
 		 BoardVO board=service.readBybNum(bNum);
 		 model.addAttribute(board);
@@ -84,8 +85,8 @@ public class FileBoardController {
 	@Resource(name="uploadPath")
 	String uploadPath;
 	
-	@RequestMapping(value="/fileboardupdate",method=RequestMethod.POST)
-	public String updatePagePOST(String oldAttach,BoardVO board,SearchCriteria cri,
+	@RequestMapping(value="/fileboardmodify",method=RequestMethod.POST)
+	public String modifyPagePOST(String oldAttach,BoardVO board,SearchCriteria cri,
 								RedirectAttributes rttr)
 									throws Exception{
 		
@@ -102,9 +103,9 @@ public class FileBoardController {
 					.delete();			
 			}
 			new File(uploadPath+fileName.replace('/', File.separatorChar)).delete();
+			}
 		}
-		}
-		board.setUpdateDate(new Date());
+		
 		
 		service.update(board);
 		
@@ -118,8 +119,8 @@ public class FileBoardController {
 		return "redirect:/fileboard/fileboardlist";
 	}
 	
-	@RequestMapping(value="/fileboarddelete",method=RequestMethod.POST)
-	public String deletePage(int bNum,SearchCriteria cri,
+	@RequestMapping(value="/fileboardremove",method=RequestMethod.POST)
+	public String removePage(int bNum,SearchCriteria cri,
 							RedirectAttributes rttr)
 							throws Exception{
 		service.delete(bNum);

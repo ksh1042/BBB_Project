@@ -4,7 +4,7 @@
 <mapper namespace="FileBoard">
 
 	<select id="getSeqNextvalueFile" resultType="int">
-		select board_seq.nextval from dual
+		select bnum_seq.nextval from dual
 	
 	</select>	
 	
@@ -20,10 +20,10 @@
 		tbl_board
 		where bnum=#{bNum}
 	</select>
-
+	
 	<update id="updateBoard">
 		update tbl_board
-		set title=#{title}, content=#{content}, updatedate=#{updatedate}
+		set title=#{title}, content=#{content}
 		where
 		bnum=#{bNum}
 	</update>
@@ -53,20 +53,33 @@
 		
 	</sql>
 
-	<select id="selectSearcheBoardList" resultType="board">
+	<sql id="searchFile">
+		<if test="cri.searchType == 't'.toString()">
+			and title like '%'||#{cri.keyword}||'%'
+		</if>
+		<if test="cri.searchType == 'c'.toString()">
+			and content like '%'||#{cri.keyword}||'%'
+		</if>
+		<if test="cri.searchType == 'w'.toString()">
+			and writer like '%'||#{cri.keyword}||'%'
+		</if>
+		
+	</sql>
+	
+	<select id="selectSearchBoardList" resultType="board">
 		<![CDATA[
 			select * 
 			from tbl_board
-			where bnum>0
+			where bnum>0 and pjnum = #{pjNum}
 		]]>
-		<include refid="search"></include>
+		<include refid="searchFile"></include>
 		order by bnum desc
 	</select>
 	<select id="selectSearchBoardCount" resultType="int">
 		<![CDATA[
 			select count(*)
 			from tbl_board
-			where bnum>0
+			where bnum>0 
 		]]>
 		<include refid="search"></include>
 	</select>

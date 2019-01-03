@@ -23,7 +23,7 @@ public interface FileBoardService {
 
 	public List<BoardVO> listCriteria(Criteria cri) throws Exception;
 
-	public List<BoardVO> listSearch(SearchCriteria cri) throws Exception;
+	public List<BoardVO> listSearch(SearchCriteria cri,int pjNum) throws Exception;
 
 	int readSearchBoardCount(SearchCriteria cri) throws Exception;
 	

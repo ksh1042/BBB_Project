@@ -59,7 +59,6 @@
 						</div>						
 					</div>
 					<!-- /.box-body -->
-				</form>
 				<div class="box-footer">
 					<div>
 						<hr/>
@@ -68,6 +67,8 @@
 					<button type="submit" class="btn btn-warning">수정</button>
 					<button type="submit" class="btn btn-primary">취소</button>
 				</div>
+			
+				</form>
 	
 	<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery-ui.min.js"></script>	
 	<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
@@ -85,6 +86,8 @@
 	sSkinURI : "<%=request.getContextPath()%>/resources/SE2/SmartEditor2Skin.html", // Editor HTML
 	fCreator : "createSEditor2", // SE2BasicCreator.js 메소드명이니 변경 금지 X
 	htParams : {
+		
+		fOnBeforeUnload : function(){},
 		// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
 		bUseToolbar : true,
 		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
@@ -94,15 +97,12 @@
 	}
 	});
 
-$('#submitBtn').on('click',function(e){
-	var form = $('form[role="form"]');
 	
-	// id가 smarteditor인 textarea에 에디터에서 대입			
-	oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-	
-	form.submit();
-		});
-</script>
+		
+
+			
+		
+	</script>
 <script>
 $(document).ready(
 	function() {
