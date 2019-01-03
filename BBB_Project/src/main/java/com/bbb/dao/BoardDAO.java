@@ -23,7 +23,7 @@ public interface BoardDAO {
 	
 	List<BoardVO> selectBoardCriteria(Criteria cri) throws SQLException;
 	
-	int selectSearchBoardListCount(SearchCriteria cri) throws SQLException;
+	int selectSearchBoardListCount(SearchCriteria cri , int pjNum) throws SQLException;
 	
 	List<BoardVO> selectBoardAll() throws Exception;
 	

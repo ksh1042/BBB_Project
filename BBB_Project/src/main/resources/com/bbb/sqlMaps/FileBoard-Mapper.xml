@@ -18,34 +18,34 @@
 		select *
 		from
 		tbl_board
-		where bnum=#{bNum}
+		where bnum=#{bNum} 
 	</select>
 	
 	<update id="updateBoard">
 		update tbl_board
 		set title=#{title}, content=#{content}
 		where
-		bnum=#{bNum}
+		bnum=#{bNum} 
 	</update>
 
 	<update id="deleteBoard">
 		delete
 		from tbl_board
-		where bnum=#{bNum}
+		where bnum=#{bNum} 
 	</update>
 
 	<update id="increaseViewCnt">
 		update tbl_board set count=count+1
 		where
-		bnum=#{bNum}
+		bnum=#{bNum} 
 	</update>
 
 	<sql id="search">
 		<if test="searchType == 't'.toString()">
-			and title like '%'||#{keyword}||'%'
+			and title like '%'||#{keyword}||'%' 
 		</if>
 		<if test="searchType == 'c'.toString()">
-			and content like '%'||#{keyword}||'%'
+			and content like '%'||#{keyword}||'%' 
 		</if>
 		<if test="searchType == 'w'.toString()">
 			and writer like '%'||#{keyword}||'%'
@@ -55,13 +55,13 @@
 
 	<sql id="searchFile">
 		<if test="cri.searchType == 't'.toString()">
-			and title like '%'||#{cri.keyword}||'%'
+			and title like '%'||#{cri.keyword}||'%' 
 		</if>
 		<if test="cri.searchType == 'c'.toString()">
-			and content like '%'||#{cri.keyword}||'%'
+			and content like '%'||#{cri.keyword}||'%' 
 		</if>
-		<if test="cri.searchType == 'w'.toString()">
-			and writer like '%'||#{cri.keyword}||'%'
+		<if test="cri.searchType == 'w'.toString()"> 
+			and writer like '%'||#{cri.keyword}||'%' 
 		</if>
 		
 	</sql>
@@ -79,7 +79,7 @@
 		<![CDATA[
 			select count(*)
 			from tbl_board
-			where bnum>0 
+			where bnum>0  and pjnum = #{pjNum}
 		]]>
 		<include refid="search"></include>
 	</select>

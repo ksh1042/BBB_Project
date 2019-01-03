@@ -57,7 +57,7 @@
 		<![CDATA[
 			select * 
 			from tbl_board
-			where bnum>0
+			where bnum>0 and pjnum = #{pjNum}
 		]]>
 		<include refid="search"></include>
 		order by bnum desc
@@ -66,7 +66,7 @@
 		<![CDATA[
 			select count(*)
 			from tbl_board
-			where bnum>0
+			where bnum>0 and pjnum = #{pjNum}
 		]]>
 		<include refid="search"></include>
 	</select>

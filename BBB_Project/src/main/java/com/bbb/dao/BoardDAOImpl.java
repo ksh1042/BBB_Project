@@ -47,14 +47,19 @@ public class BoardDAOImpl implements BoardDAO {
 		paramMap.put("cri",cri );
 		paramMap.put("pjNum", pjNum);
 		List<BoardVO> boardList=
-				session.selectList("Board.selectSearchBoardList",(SearchCriteria)cri,rowBounds);
+				session.selectList("Board.selectSearchBoardList",paramMap,rowBounds);
 		return boardList;
 		
 	}
 
 	@Override
-	public int selectSearchBoardListCount(SearchCriteria cri) throws SQLException {
-		int count = session.selectOne("Board.selectSearchBoardCount",(SearchCriteria)cri);
+	public int selectSearchBoardListCount(SearchCriteria cri, int pjNum) throws SQLException {
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("cri", cri);
+		paramMap.put("pjNum", pjNum);
+		
+		int count = session.selectOne("Board.selectSearchBoardCount", paramMap);
+		
 		return count;
 		
 	}
