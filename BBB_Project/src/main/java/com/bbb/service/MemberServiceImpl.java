@@ -35,6 +35,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void modify(MemberVO member) throws SQLException {
 		memberDAO.updateMember(member);
+		
 
 	}
 

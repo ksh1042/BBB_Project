@@ -41,6 +41,7 @@
       <label for="exampleInputEmail1">Title</label>
       <input type="text" name='title' class="form-control" 
          value="${board.title}" readonly="readonly">
+      <span class="glyphicon glyphicon-ok form-control-feedback" id="okIcon"></span>
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Content</label>
@@ -101,7 +102,8 @@ $("#listBtn").on("click", function(){
 								</div>
 								<div class="box-body">
 									<label for="exampleInputEmail1">Writer</label> 
-									<input class="form-control" readonly value="${loginUser.id}" type="text"  id="newReplyWriter"> 
+									<input class="form-control" readonly value="${loginUser.id}" type="text"  id="newReplyWriter">
+									<span class="glyphicon glyphicon-pencil form-control-feedback" id="pNameIcon"></span> 
 									<label for="exampleInputEmail1">Reply Text</label> 
 									<input class="form-control" type="text" placeholder="REPLY TEXT" id="newReplyText">
 

@@ -52,7 +52,7 @@
 
 	<div class="box-footer">
 		<button type="button" id="create_btn" class="btn btn-primary">Submit</button>
-		<button type="button" id="list_Btn" class="btn btn-primary">LIST</button>
+		<button type="button" id="list_btn" class="btn btn-primary">LIST</button>
 		
 	</div>
 </form>

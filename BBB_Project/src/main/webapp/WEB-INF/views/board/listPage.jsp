@@ -53,10 +53,11 @@ button#searchBtn{
 				<div class='box-body'>
 					<ul>
 						<li>
-							<button id='newBtn' class="btn btn-primary" onclick="javascript:location.href='register';" >New Board</button>
+							<div></div>	
 						</li>
 						<li>
 						<form action="listPage">
+						 <span class="glyphicon glyphicon-th-list form-control-feedback" id="listIcon"></span>
 							<select name="searchType">
 								<option value="" ${cri.searchType==null?'selected':'' }>
 								------</option>
@@ -78,32 +79,33 @@ button#searchBtn{
 			</div>
 			<div class="box">
 				<div class="box-header with-border">
+					
 					<h3 class="box-title">LIST PAGING</h3>
 				</div>
 				<div class="box-body">
 					<table class="table table-bordered" border="1">
 						<tr>
-							<th style="width: 10px">BNO</th>
-							<th>TITLE</th>
-							<th>WRITER</th>
-							<th>INDATE</th>
-							<th>UPDATE DATE</th>
-							<th style="width: 40px">COUNT</th>
+							<th style="width: 10px; text-align: center";>BNO</th>
+							<th style="text-align: center";>TITLE</th>
+							<th style="text-align: center";>WRITER</th>
+							<th style="text-align: center";>INDATE</th>
+							<th style="text-align: center";>UPDATE DATE</th>
+							<th style="width: 40px; text-align: center";>COUNT</th>
 					</tr>
 						<c:if test="${!empty boardList }">
 						<c:forEach items="${boardList}" var="board">
 
 							<tr>
-								<td>${board.bNum}</td>
-								<td><a
+								<td style="text-align: center";>${board.bNum}</td>
+								<td style="text-align: center";><a
 									href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&bNum=${board.bNum}'>
 										${board.title}</a></td>
-								<td>${board.writer}</td>
-								<td><fmt:formatDate pattern="yyyy-MM-dd"
+								<td style="text-align: center";>${board.writer}</td>
+								<td style="text-align: center";><fmt:formatDate pattern="yyyy-MM-dd"
 										value="${board.inDate}" /></td>
-								<td><fmt:formatDate pattern="yyyy-MM-dd"
+								<td style="text-align: center";><fmt:formatDate pattern="yyyy-MM-dd"
 										value="${board.updateDate}" /></td>
-								<td><span class="badge bg-red">${board.count }</span></td>
+								<td style="text-align: center";><span class="badge bg-red">${board.count }</span></td>
 							</tr>
 
 						</c:forEach>
@@ -120,6 +122,9 @@ button#searchBtn{
 
 
 				<div class="box-footer">
+					<div style="float:right";>
+					<button id='newBtn' class="btn btn-primary" onclick="javascript:location.href='register';" >New Board</button>
+					</div>
 					<div class="text-center">
 						<ul class="pagination link">
  

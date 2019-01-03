@@ -20,5 +20,9 @@
   		FROM tbl_project_partake
   		where pjNum=#{pjNum}
    </select>
+   
+   <update id="deleteProjectPartakeById">
+		delete from tbl_project_partake where id=#{id}
+	</update>
 	
 </mapper>

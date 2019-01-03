@@ -77,9 +77,7 @@
 								
 								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${member.indate}" /></td>
 								<td style="width: 120px;">
-									<button type="button" onclick="modify_go(${member.id});">수정</button>
-									&nbsp;
-									<button type="button" onclick="remove_go(${member.id});">삭제</button>
+									<button type="button" onclick="remove_go('${member.id}');">삭제</button>
 								</td>
 						</c:forEach>
 					</table>
@@ -130,19 +128,25 @@
 <script>
 	$(".link li a").on("click", function(event){
 		event.preventDefault();
+		
 		var targetPage = $(this).attr("href");
+		
 		var jobForm = $("#jobForm");
 		jobForm.find("[name='page']").val(targetPage);
 		jobForm.attr("action", "memberList").attr("method","get");
 		jobForm.submit();
 	});
 	
-	function modify_go(id){
-		
-	}
-	
 	function remove_go(id){
+		var jobForm = $("#jobForm");
 		
+		var input = $('<input>').attr({
+			name : 'id',
+			value : id
+		});
+		jobForm.append(input);
+		jobForm.attr("action","remove").attr("method","post");
+		jobForm.submit();
 	}
 </script>
 </body>

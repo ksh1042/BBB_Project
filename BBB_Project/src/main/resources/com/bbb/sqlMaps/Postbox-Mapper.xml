@@ -13,10 +13,13 @@
 		FROM tbl_postbox
 		WHERE id=#{id} AND pbfNum=0
 	</select>
+	
 	<update id="insertPostbox" parameterType="post">
 		INSERT INTO tbl_postbox(pbNum, pbfNum, id, content, writer, visibility)
 		VALUES(pbNum_seq.nextval, #{pbfNum}, #{id}, #{content}, #{writer}, #{visibility})
 	</update>
+	
+	
 	
 	<sql id="member_search">
 		<if test="searchType != null">
@@ -44,6 +47,10 @@
 		AND operatoryn=0
 		<include refid="member_search" />
 	</select>
+	
+	<update id="deletePostboxById">
+		delete from tbl_postbox where id=#{id}
+	</update>
 
 </mapper>
 

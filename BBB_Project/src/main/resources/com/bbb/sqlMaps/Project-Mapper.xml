@@ -18,7 +18,7 @@
 		select count(*) from tbl_project
 		where name like '%'||#{keyword}||'%'
 	</select>
-	   
+	
 	<update id="ProjectSearchJoin">
 		insert into tbl_project_partake(pjNum, id, assignyn)
 		values(#{pjNum}, #{id}, 0)
@@ -56,6 +56,8 @@
 		set puuid = #{puuid}
 		where pjnum = #{pjNum}
 	</update>
+	
+	
 </mapper>
 
 

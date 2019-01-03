@@ -54,13 +54,10 @@ button#searchBtn{
 				</div>
 				<div class='box-body'>
 					<ul>
-						<li>
-							<sec:authorize access="hasAuthority('ROLE_ADMIN')">
-							<button id='newNtn' class="btn btn-primary" onclick="javascript:location.href='register';">New Notice</button>
-							</sec:authorize>
-						</li>
+					<div></div>
 						<li>
 						<form action="listPage">
+						<span class="glyphicon glyphicon-th-list form-control-feedback" id="listIcon"></span>
 							<select name="searchType">
 								<option value="t" ${cri.searchType eq 't'?'selected':'' }>
 								Title</option>
@@ -76,40 +73,41 @@ button#searchBtn{
 			</div>
 			<div class="box">
 				<div class="box-header with-border">
+					
 					<h3 class="box-title">LIST PAGING</h3>
 				</div>
 				<div class="box-body">
 					<table class="table table-bordered" border="1">
 						<tr>
-							<th style="width: 10px">NNO</th>
-							<th>TITLE</th>
-							<th>INDATE</th>
-							<th>EXPIRE DATE</th>
-							<th>KIND</th>
+							<th style="width: 10px; text-align: center";>NNO</th>
+							<th style="text-align: center";>TITLE</th>
+							<th style="text-align: center";>INDATE</th>
+							<th style="text-align: center";>EXPIRE DATE</th>
+							<th style="text-align: center";>KIND</th>
 					</tr>
 						<c:if test="${!empty noticeList }">
 						<c:forEach items="${noticeList}" var="notice">
 
 							<tr>
-								<td>${notice.nNum}</td>
-								<td><a
+								<td style="text-align: center";>${notice.nNum}</td>
+								<td style="text-align: center";><a
 									href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&nNum=${notice.nNum}'>
 										${notice.title}</a></td>
-								<td><fmt:formatDate pattern="yyyy-MM-dd"
+								<td style="text-align: center";><fmt:formatDate pattern="yyyy-MM-dd"
 										value="${notice.inDate}" /></td>
-								<td><fmt:formatDate pattern="yyyy-MM-dd"
+								<td style="text-align: center";><fmt:formatDate pattern="yyyy-MM-dd"
 										value="${notice.expireDate}" /></td>
 								<c:if test="${notice.kind == 0}">
-								<td>이슈</td>
+								<td style="text-align: center; color: red";>이슈</td>
 								</c:if>
 								<c:if test="${notice.kind == 1}">
-								<td>이벤트</td>
+								<td style="text-align: center; color: blue";>이벤트</td>
 								</c:if>
 								<c:if test="${notice.kind == 2}">
-								<td>점검</td>
+								<td style="text-align: center; color: purple";>점검</td>
 								</c:if>
 								<c:if test="${notice.kind == 3}">
-								<td>기본</td>
+								<td style="text-align: center";>기본</td>
 								</c:if>
 							</tr>
 
@@ -127,6 +125,11 @@ button#searchBtn{
 
 
 				<div class="box-footer">
+					<div style="float:right";>
+						<sec:authorize access="hasAuthority('ROLE_ADMIN')">
+							<button id='newNtn' class="btn btn-primary" onclick="javascript:location.href='register';">New Notice</button>
+						</sec:authorize>
+					</div>
 					<div class="text-center">
 						<ul class="pagination link">
  

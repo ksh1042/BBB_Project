@@ -40,6 +40,7 @@
       <label for="exampleInputEmail1">Title</label>
       <input type="text" name='title' class="form-control" 
          value="${notice.title}" readonly="readonly">
+      <span class="glyphicon glyphicon-ok form-control-feedback" id="okIcon"></span>
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Content</label>
@@ -48,10 +49,10 @@
     </div>
   </div><!-- /.box-body -->
 
-  <div class="box-footer">
-    <button type="submit" id="listBtn" class="btn btn-primary">LIST</button>
+  <div class="box-footer" style="float: right";>
+    <button type="submit" id="listBtn" class="btn btn-primary">LIST</button>&nbsp;
   	<sec:authorize access="hasAuthority('ROLE_ADMIN')">
-	    <button type="submit" id="modifyBtn" class="btn btn-warning">Modify</button>
+	    <button type="submit" id="modifyBtn" class="btn btn-warning">Modify</button>&nbsp;
 	    <button type="submit" id="removeBtn" class="btn btn-danger">REMOVE</button>
 	</sec:authorize>
   </div>

@@ -33,6 +33,11 @@
 	<update id="deleteMember">
 		delete from tbl_member where id=#{id}
 	</update>
+	
+	<update id="deleteAuthorities">
+		delete from tbl_authorities where id=#{id}
+	</update>
+	
 
 	<update id="resetPwd" parameterType="member">
 		update
