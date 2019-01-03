@@ -103,6 +103,69 @@
 			
 		
 	</script>
+	<script>
+					var titleFlag = false;
+					
+					$('input[name="title"]').on('blur',function(e){
+						$(this).css({borderColor : 'red'});
+						var title = $(this).val();
+						
+						if(title == null || title == ''){
+							$('#titleHelp').css({color:'red'});
+							$('#titleHelp').html('제목을 입력하세요.');
+							$(this).focus();
+							return;
+						}
+						if(title.length > 20){
+							$('#titleHelp').css({color:'red'});
+							$('#titleHelp').html('제목은 20자를 넘지 않습니다.');
+							$(this).focus();
+							return;
+						}else{
+							$(this).css({borderColor : 'green'});
+							$('span#titleHelp').html('');
+							titleFlag = true;
+						}
+						
+						verifyCheck();
+					});
+					
+					
+					var formObj = $("form[role='form']");
+
+					console.log(formObj);
+
+					$("#cancelBtn").on("click",function() {
+						self.location = "listPage?page=${cri.page}&perPageNum=${cri.perPageNum}";
+					});
+
+					$("#saveBtn").on("click", function() {
+						if(!titleFlag){
+							$('button#saveBtn').prop('disable',true);
+							$('span#titleHelp').css({color:'red',fontWeight:'bold'});
+							$('span#titleHelp').html('');
+							$('input[name=title]').css({borderColor:'red'});
+							return;
+						}
+						formObj.submit();
+					});
+					
+					function verifyCheck(){
+						if(!titleFlag){
+							$('button#saveBtn').prop('disabled',true);
+							$('span#titleHelp').css({
+								color:'red',
+								fontWeight:'bold'
+							});
+							$('span#titleHelp').html('');
+							$('input[name=]').css({
+								borderColor : 'red'
+							});
+							return;
+						}
+						$('button#saveBtn').prop('disabled',false);
+					}
+				</script>
 <script>
 $(document).ready(
 	function() {
