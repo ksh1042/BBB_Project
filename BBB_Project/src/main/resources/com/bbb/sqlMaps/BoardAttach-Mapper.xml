@@ -23,10 +23,5 @@
 	<update id="deleteAllAttach">
 		delete tbl_board_attach where bNum = #{bNum}
 	</update>
-<<<<<<< HEAD
-</mapper>
-=======
-</mapper>
 
-
->>>>>>> refs/remotes/origin/IMC
+</mapper>
