@@ -54,28 +54,23 @@ button#searchBtn{
 				<div class='box-body'>
 					<ul>
 						<li>
-							<button id='newBtn' class="btn btn-primary" onclick="javascript:location.href='fileboardinsert';">New Board</button>
+							<button id='newBtn' class="btn btn-primary" onclick="javascript:location.href='fileboardinsert';">자료 등록</button>
 						</li>
 						<li>
 							<select name="searchType">
 								<option value="" ${pageMaker.cri.searchType==null?'selected':'' }>
 								------</option>
 								<option value="t" ${pageMaker.cri.searchType eq 't'?'selected':'' }>
-								Title</option>
+								제목</option>
 								<option value="c" ${pageMaker.cri.searchType eq 'c'?'selected':'' }>
-								Content</option>
+								내용</option>
 								<option value="w" ${pageMaker.cri.searchType eq 'w'?'selected':'' }>
-								Writer</option>
-								<option value="tc" ${pageMaker.cri.searchType eq 'tc'?'selected':'' }>
-								Title + Content</option>
-								<option value="cw" ${pageMaker.cri.searchType eq 'cw'?'selected':'' }>
-								Content + Writer</option>
-								<option value="tcw" ${pageMaker.cri.searchType eq 'tcw'?'selected':'' }>
-								Title + Content + Writer</option>
+								작성자</option>
+								
 							</select>
-							<input id="keywordInput"
+							<input id="keyword"
 								   name="keyword"
-								   type="text"  value="${pageMaker.cri.keyword}"/>
+								   type="text" value="${cri.keyword}"/>
 							<button id="searchBtn" ></button>
 						</li>
 					</ul>
@@ -83,16 +78,16 @@ button#searchBtn{
 			</div>
 			<div class="box">
 				<div class="box-header with-border">
-					<h3 class="box-title">LIST PAGING</h3>
+					<h3 class="box-title"></h3>
 				</div>
 				<div class="box-body">
 					<table class="table table-bordered">
 						<tr>
-							<th style="width: 10px">BNO</th>
-							<th>TITLE</th>
-							<th>WRITER</th>
-							<th>INDATE</th>
-							<th style="width: 40px">VIEWCNT</th>
+							<th>번호</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>등록일</th>
+							<th>조회수</th>
 						</tr>
 						<c:if test="${!empty list }">
 						<c:forEach items="${list}" var="boardVO">
@@ -158,8 +153,8 @@ button#searchBtn{
 <form id="jobForm">
   <input type='hidden' name="page" value="${pageMaker.cri.page}"/>
   <input type='hidden' name="perPageNum" value="${pageMaker.cri.perPageNum}"/>
-  <input type='hidden' name="searchType" value="${pageMaker.cri.searchType}"/>
-  <input type='hidden' name="keyword" value="${pageMaker.cri.keyword}"/>
+  <input type='hidden' name="searchType" value="${cri.searchType}"/>
+  <input type='hidden' name="keyword" value="${cri.keyword}"/>
 </form>
 	<!-- /.row -->
 </section>
@@ -176,17 +171,17 @@ button#searchBtn{
 		
 		var jobForm = $("#jobForm");
 		jobForm.find("[name='page']").val(targetPage);
-		jobForm.attr("action","listPage").attr("method", "get");		
+		jobForm.attr("action","fileboardlist").attr("method", "get");		
 		jobForm.submit();
 	});
 	
 	$('#searchBtn').on('click',function(){
-		self.location="listPage"
+		self.location="fileboardlist"
 					   +"${pageMaker.makeQuery(1)}"
 					   +"&searchType="
 					   +$("select option:selected").val()
 					   +"&keyword="
-					   +$('#keywordInput').val();
+					   +$('#keyword').val();
 	});
 	
 	
@@ -197,8 +192,6 @@ button#searchBtn{
 
 
 </body>
-
-
 
 
 
