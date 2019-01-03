@@ -116,6 +116,10 @@
 		class="com.bbb.service.ReplyServiceImpl"
 		p:replyDAO-ref="replyDAO"
 	/>
+	
+	<bean id="ganttService"
+		class="com.bbb.service.GanttServiceImpl"
+		p:projectDAO-ref="projectDAO" />
 		
 </beans>
 
