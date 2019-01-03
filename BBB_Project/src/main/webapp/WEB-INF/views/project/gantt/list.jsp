@@ -113,6 +113,12 @@ td.gantt-cell {
 					</div> --%>
 					<div class="box-body">
 						<div id="chart_div"></div>
+						<div class="row">
+							<div class="col-sm-5">
+								<div class="dataTables_info" id="example2_info" role="status"
+									aria-live="polite">Showing <b></b> entries</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<!-- /.box-body -->

@@ -5,10 +5,12 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bbb.dto.ProjectVO;
 import com.bbb.dto.UnitworkVO;
@@ -30,15 +32,25 @@ public class GanttController {
 		ProjectVO selectProject = (ProjectVO)session.getAttribute("logonProject");
 		
 		List<UnitworkVO> unitList = unitworkService.readUnitworkList( selectProject.getUdNum() );
-		long ganttSize = ganttService.getMinusDateCount( selectProject.getPjNum() );
-		System.out.println("ganttSize : " + ganttSize);
 		
 		model.addAttribute("unitList", unitList);
-		model.addAttribute("ganttSize", ganttSize);
 	}
 	
 	@RequestMapping(value="/list", method=RequestMethod.POST)
-	public String ganttModify(Model model) throws Exception {
+	public String ganttListPOST(HttpSession session, Model model) throws Exception {
+		ProjectVO selectProject = (ProjectVO)session.getAttribute("logonProject");
+		
+		List<UnitworkVO> unitList = unitworkService.readUnitworkList( selectProject.getUdNum() );
+		
+		model.addAttribute("unitList", unitList);
 		return "project/gantt/modify";
+	}
+	@RequestMapping(value="/modify", method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> ganttModifyPOST(HttpSession session) throws Exception {
+		ResponseEntity<String> entity = null;
+		
+		
+		return entity;
 	}
 }
