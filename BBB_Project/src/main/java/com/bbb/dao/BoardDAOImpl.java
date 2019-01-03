@@ -1,7 +1,9 @@
 package com.bbb.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -37,10 +39,13 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardVO> selectSearchBoardList(SearchCriteria cri) throws SQLException {
+	public List<BoardVO> selectSearchBoardList(SearchCriteria cri ,int pjNum ) throws SQLException {
+		Map<String,Object> paramMap = new HashMap<String,Object>();
 		int offset=cri.getPageStartRowNum();
 		int limit = cri.getPerPageNum();
 		RowBounds rowBounds=new RowBounds(offset, limit);
+		paramMap.put("cri",cri );
+		paramMap.put("pjNum", pjNum);
 		List<BoardVO> boardList=
 				session.selectList("Board.selectSearchBoardList",(SearchCriteria)cri,rowBounds);
 		return boardList;
@@ -84,7 +89,7 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public int getSeqNextvalue() throws Exception {
 		
-		return session.selectOne("Board.getSeqNextValue");
+		return session.selectOne("Board.getSeqNextvalue");
 	}
 
 }
