@@ -17,8 +17,6 @@
 	<bean id="postboxService" class="com.bbb.service.PostboxServiceImpl"
 		p:postboxDAO-ref="postboxDAO" />
 		
-	<!-- 이병수  프로젝트 리스트 페이지-->	
-
 	<bean id="projectDAO"
 	      class="com.bbb.dao.ProjectDAOImpl"
 		  p:sqlSession-ref="sqlSession"/>
@@ -117,6 +115,15 @@
 		class="com.bbb.service.ReplyServiceImpl"
 		p:replyDAO-ref="replyDAO"
 	/>
+	
+	<bean id="usecaseDAO"
+		  class="com.bbb.dao.UseCaseDAOImpl"
+		  p:session-ref="sqlSession"
+		  />
+	<bean id="usecaseService"
+		  class="com.bbb.service.UseCaseServiceImpl"
+		  p:useCaseDAO-ref="usecaseDAO"
+		  />
 		
 </beans>
 

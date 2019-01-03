@@ -37,12 +37,7 @@ public class FinanceController {
 	}
 	@RequestMapping(value="/create", method=RequestMethod.POST)
 	public String createFinancePOST(int pjNum, HttpServletRequest request) throws Exception{
-		/*HttpSession session = request.getSession();
-		ProjectVO project = (ProjectVO)session.getAttribute("logonProject");
-		int pjNum = project.getPjNum();*/
-		
-		System.out.println(pjNum);
-		
+
 		int fNum = financeService.createFinance(pjNum);
 		
 	return "redirect:/project/finance/list?fNum"+fNum;
