@@ -31,4 +31,6 @@ public interface MemberDAO {
 	public void updateEmailynById(String id) throws SQLException;
 	
 	void modifyEmail(MemberVO member)throws SQLException;
+	
+	void removeEmailynById(String id)throws SQLException;
 }

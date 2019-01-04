@@ -65,8 +65,6 @@ button#searchBtn{
 								Title</option>
 								<option value="w" ${cri.searchType eq 'w'?'selected':'' }>
 								Writer</option>
-								<option value="w" ${cri.searchType eq 'tw'?'selected':'' }>
-								Title+Writer</option>
 							</select>
 							<input id="keywordInput"
 								   name="keyword"

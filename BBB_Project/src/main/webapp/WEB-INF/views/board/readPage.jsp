@@ -54,7 +54,7 @@
         value="${board.writer}" readonly="readonly">
     </div>
   </div><!-- /.box-body -->
-
+<form role="form" action="" method="post">
   <div class="box-footer">
   	<sec:authorize access="hasAuthority('ROLE_USER')">
   	<c:if test="${loginUser.id eq board.writer }">
@@ -62,8 +62,9 @@
     	<button type="submit" id="removeBtn" class="btn btn-danger">REMOVE</button>&nbsp;
     </c:if>
     </sec:authorize>
-    <button type="submit" id="listBtn" class="btn btn-primary">LIST</button>
+   		<button type="submit" id="listBtn" class="btn btn-primary">LIST</button>
   </div>
+  </form>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
@@ -150,11 +151,12 @@ $("#listBtn").on("click", function(){
 									</p>
 								</div>
 								<div class="modal-footer">
-									
-  									<c:if test="${loginUser.id eq board.writer }">
+									<sec:authorize access="hasAuthority('ROLE_USER')">
+  									<c:if test="${loginUser.id eq reply.writer }">
 											<button type="button" class="btn btn-info" id="replyModBtn">Modify</button>
 											<button type="button" class="btn btn-danger" id="replyDelBtn">DELETE</button>
 									</c:if>
+									</sec:authorize>
 									
 									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 								</div>

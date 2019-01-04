@@ -25,4 +25,6 @@ public interface NoticeService {
 	
 	List<NoticeVO> listCriteria(Criteria cri)throws SQLException;
 	
+	int readSearchNoticeCount(SearchCriteria cri)throws SQLException;
+	
 }

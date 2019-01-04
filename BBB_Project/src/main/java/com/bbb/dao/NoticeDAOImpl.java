@@ -73,5 +73,11 @@ public class NoticeDAOImpl implements NoticeDAO {
 		return noticeList;
 	}
 
+	@Override
+	public int selectSearchNoticeCount(SearchCriteria cri) throws SQLException {
+		int rowCount = session.selectOne("Notice.selectSearchNoticeCount",cri);
+		return rowCount;
+	}
+
 
 }

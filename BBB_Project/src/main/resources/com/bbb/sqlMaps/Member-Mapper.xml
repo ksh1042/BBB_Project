@@ -34,10 +34,6 @@
 		delete from tbl_member where id=#{id}
 	</update>
 	
-	<update id="deleteAuthorities">
-		delete from tbl_authorities where id=#{id}
-	</update>
-	
 
 	<update id="resetPwd" parameterType="member">
 		update
@@ -98,12 +94,22 @@
 		where id is not null
 		<include refid="search" />
 	</select>
+	
 	<select id="selectMemberListCount" resultType="int">
 		select count(*)
 		from tbl_member
 		where id is not null
 		<include refid="search" />
 	</select>
+	
+	<update id="removeEmailynById" parameterType="member">
+		UPDATE tbl_member
+		SET
+		emailyn=0
+		WHERE id = #{id}
+	</update>
+	
+	
 </mapper>
 
 

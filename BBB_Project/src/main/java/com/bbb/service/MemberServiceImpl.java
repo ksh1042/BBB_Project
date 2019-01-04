@@ -77,5 +77,11 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.updateEmailynById(id);
 	}
 
+	@Override
+	public void removeEmailyn(String id) throws SQLException {
+		memberDAO.removeEmailynById(id);
+		
+	}
+
 
 }

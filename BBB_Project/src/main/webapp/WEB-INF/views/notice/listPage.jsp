@@ -59,6 +59,8 @@ button#searchBtn{
 						<form action="listPage">
 						<span class="glyphicon glyphicon-th-list form-control-feedback" id="listIcon"></span>
 							<select name="searchType">
+								<option value="" ${cri.searchType==null?'selected':'' }>
+								------</option>
 								<option value="t" ${cri.searchType eq 't'?'selected':'' }>
 								Title</option>
 							</select>

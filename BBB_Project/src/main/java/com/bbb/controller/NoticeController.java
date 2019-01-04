@@ -30,6 +30,7 @@ public class NoticeController {
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.readSearchNoticeCount(cri));
 		model.addAttribute(pageMaker);
 	}
 	

@@ -61,4 +61,10 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeList;
 	}
 
+	@Override
+	public int readSearchNoticeCount(SearchCriteria cri) throws SQLException {
+		int count = dao.selectSearchNoticeCount(cri);
+		return count;
+	}
+
 }

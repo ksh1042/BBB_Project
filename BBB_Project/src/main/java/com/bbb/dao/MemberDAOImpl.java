@@ -96,6 +96,12 @@ public class MemberDAOImpl implements MemberDAO {
 		session.update("Member.updateEmailyn", id);
 	}
 
+	@Override
+	public void removeEmailynById(String id) throws SQLException {
+		session.update("Member.removeEmailynById",id);
+	}
+	
+
 
 
 }
