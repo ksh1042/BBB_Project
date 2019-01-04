@@ -295,19 +295,19 @@
 	            </c:otherwise>
             </c:choose>
             <c:choose>
-	            <c:when test="${loginUser.id = logonProject.creator }">
-	            	<c:if test="${logonProject.rdNum eq null }">
+	            <c:when test="${loginUser.id eq logonProject.creator }">
+	            	<c:if test="${logonProject.rdNum eq 0 }">
 	            		<li><a href="/project/requirement/create"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
 	            	</c:if>
-	            	<c:if test="${logonProject.rdNum ne null }">
+	            	<c:if test="${logonProject.rdNum ne 0 }">
 	            		<li><a href="/project/requirement/list"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
 	            	</c:if>
 	            </c:when>
 	            <c:otherwise>
-	            	<c:if test="${logonProject.rdNum eq null }">
+	            	<c:if test="${logonProject.rdNum eq 0 }">
 	            		<li><a href="empty"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
 	            	</c:if>
-	            	<c:if test="${logonProject.rdNum ne null }">
+	            	<c:if test="${logonProject.rdNum ne 0 }">
 	            		<li><a href="/project/requirement/list"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
 	            	</c:if>
 	            </c:otherwise>

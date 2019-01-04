@@ -122,4 +122,9 @@
 	<bean id="boardService" class="com.bbb.service.BoardServiceImpl"
 		p:boardDAO-ref="boardDAO"
 	/>
+	
+	<bean id="requireService"
+		class="com.bbb.service.RequirementServiceImpl"
+		p:requirementDAO-ref="requirementDAO"
+	/>
 </beans>

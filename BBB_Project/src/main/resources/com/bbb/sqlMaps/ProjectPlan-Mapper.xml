@@ -14,7 +14,7 @@
 		where puuid = #{puuid}
 	</select>
 	
-	<select id="selectPlansByPjnum" resultType="projectPlan">
+	<select id="selectPlansByPuuid" resultType="projectPlan">
 		select *
 		from tbl_plan
 		where puuid = #{puuid}

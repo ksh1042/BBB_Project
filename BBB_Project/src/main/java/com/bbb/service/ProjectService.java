@@ -25,8 +25,6 @@ public interface ProjectService {
 	public ProjectVO projectMain(int pjNum) throws SQLException;
 	public void insertPlan(ProjectVO project)throws SQLException;
 	public void deletePlan(int pjNum) throws SQLException;
-	public List<ProjectPlanVO> getAttach(String puuid) throws SQLException;
-
 	
 	public void addProject(ProjectVO project) throws SQLException;
 	public void addProjectake(ProjectPartakeVO takeVO) throws SQLException;

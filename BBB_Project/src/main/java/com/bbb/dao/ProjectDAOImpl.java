@@ -80,11 +80,7 @@ public class ProjectDAOImpl implements ProjectDAO{
 		session.update("Project.updateProjectPlan",project);
 	}
 
-	@Override
-	public List<ProjectPlanVO> selectPlansByPjnum(String puuid) throws SQLException {
-		List<ProjectPlanVO> planList = session.selectList("projectPlan.selectPlansByPjnum", puuid);
-		return planList;
-	}
+	
 
 	@Override
 	public void deletePlan(int pjNum) throws SQLException {

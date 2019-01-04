@@ -118,6 +118,6 @@ public class ProjectPlanController {
 	@ResponseBody
 	public List<ProjectPlanVO> getAttach(@PathVariable("puuid")String puuid) throws Exception{
 		
-		return service.getAttach(puuid);
+		return pservice.getAttach(puuid);
 	}
 }

@@ -107,13 +107,7 @@ public class ProjectServiceImpl implements ProjectService{
 	@Override
 	public void insertPlan(ProjectVO project) throws SQLException {
 		projectDAO.insertPlan(project);
-	}
-
-	@Override
-	public List<ProjectPlanVO> getAttach(String puuid) throws SQLException {
-		List<ProjectPlanVO> planList = projectDAO.selectPlansByPjnum(puuid);
-		return planList;
-	}
+	}	
 
 	@Override
 	public void deletePlan(int pjNum) throws SQLException {

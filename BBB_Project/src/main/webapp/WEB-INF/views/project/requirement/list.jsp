@@ -6,9 +6,10 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
 <head>
 	<style>
-		th {
+		th, td {
 			text-align: center;
 		}
+		
 	</style>
 </head>
 <body>
@@ -99,7 +100,7 @@
 											<td>${ stat.count }</td>
 											<td>${ require.rdId }</td>
 											<td>${ require.rdName }</td>
-											<td><a href="#">${ require.rdContent }</a></td>
+											<td>${ require.rdContent }</td>
 											<td>${ require.limit }</td>
 											<td>${ require.interf }</td>
 											<td>${ require.acceptyn }</td>

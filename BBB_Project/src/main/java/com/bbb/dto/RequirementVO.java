@@ -3,6 +3,7 @@ package com.bbb.dto;
 import java.util.Date;
 
 public class RequirementVO {
+	private int 	 rddNum;		// 요구사항 구분 번호
 	private int 	 rdNum;			// 요구사항 문서 번호
 	private Date 	 indate;		// 요구사항 문서 작성일
 	private String 	 rdId;			// 요구사항 아이디
@@ -12,6 +13,13 @@ public class RequirementVO {
 	private String 	 interf;		// 요구사항 인터페이스(View, 화면 등...)
 	private int		 acceptyn;		// 요구사항 수용여부
 	private String	 manager;		// 요구사항 담당자
+	
+	public int getRddNum() {
+		return rddNum;
+	}
+	public void setRddNum(int rddNum) {
+		this.rddNum = rddNum;
+	}
 	public int getRdNum() {
 		return rdNum;
 	}
