@@ -104,7 +104,7 @@
 											<td>${ unit.estmate }</td>
 										</tr>
 									</c:forEach>
-									<tr>
+									<!-- <tr>
 										<th rowspan="1" colspan="1">번호</th>
 										<th rowspan="1" colspan="1">단위업무ID</th>
 										<th rowspan="1" colspan="1">단위업무명</th>
@@ -116,7 +116,7 @@
 										<th rowspan="1" colspan="1">프로그램설계<br>완료일자</th>
 										<th rowspan="1" colspan="1">개발<br>완료일자</th>
 										<th rowspan="1" colspan="1">예상Step수</th>
-									</tr>
+									</tr> -->
 								</table>
 							</div>
 						</div>

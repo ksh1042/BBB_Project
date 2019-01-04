@@ -107,6 +107,11 @@ public class ProjectServiceImpl implements ProjectService{
 	@Override
 	public void insertPlan(ProjectVO project) throws SQLException {
 		projectDAO.insertPlan(project);
+	}	
+
+	@Override
+	public void deletePlan(int pjNum) throws SQLException {
+		projectDAO.deletePlan(pjNum);
 	}
 
 	

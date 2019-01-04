@@ -90,15 +90,13 @@
 		class="com.bbb.service.UnitworkServiceImpl"
 		p:unitworkDAO-ref="unitworkDAO"
 		p:projectPartakeDAO-ref="projectPartakeDAO"
-		p:requirementDAO-ref="requirementDAO"/>
+		p:requirementDAO-ref="requirementDAO"
+		p:projectDAO-ref="projectDAO" />
 	<bean id="boardDAO" class="com.bbb.dao.BoardDAOImpl"
 		p:session-ref="sqlSession" />
 	<bean id="boardAttachDAO" class="com.bbb.dao.BoardAttachDAOImpl"
 		p:session-ref="sqlSession" />
 	
-	<bean id="boardService" class="com.bbb.service.BoardServiceImpl"
-		p:boardDAO-ref="boardDAO" />
-		
 	<bean id="noticeDAO"
 		class="com.bbb.dao.NoticeDAOImpl"
 		p:session-ref="sqlSession"
@@ -121,16 +119,17 @@
 		class="com.bbb.service.GanttServiceImpl"
 		p:projectDAO-ref="projectDAO" />
 		
+	<bean id="fileBoardService" class="com.bbb.service.FileBoardServiceImpl"
+		p:boardDAO-ref="boardDAO"
+		p:attachDAO-ref="boardAttachDAO"
+	/>
+	
+	<bean id="boardService" class="com.bbb.service.BoardServiceImpl"
+		p:boardDAO-ref="boardDAO"
+	/>
+	
+	<bean id="requireService"
+		class="com.bbb.service.RequirementServiceImpl"
+		p:requirementDAO-ref="requirementDAO"
+	/>
 </beans>
-
-
-
-
-
-
-
-
-
-
-
-

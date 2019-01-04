@@ -1,6 +1,7 @@
 package com.bbb.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.bbb.dao.ProjectPlanDAO;
 import com.bbb.dto.ProjectPlanVO;
@@ -24,4 +25,14 @@ public class ProjectPlanServiceImpl implements ProjectPlanService {
 		return plan;
 	}
 
+	@Override
+	public void deletePlan(String puuid) throws SQLException {
+		projectPlanDAO.deletePlan(puuid);
+	}
+
+	@Override
+	public List<ProjectPlanVO> getAttach(String puuid) throws SQLException {
+		List<ProjectPlanVO> planList = projectPlanDAO.selectPlansByPuuid(puuid);
+		return planList;
+	}
 }

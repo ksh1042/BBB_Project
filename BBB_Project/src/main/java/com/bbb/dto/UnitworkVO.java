@@ -8,6 +8,8 @@ public class UnitworkVO {
 	private int			udNum;					// 단위업무 문서 ID
 	private Date		indate;					// 단위업무 문서 생성일
 	// tb_requirement_definition_detail
+	private int 		uddNum;					// 단위업무 상세 ID
+	private int 		rddNum;					// 요구사항 상세 참조 ID
 	private String		udId;					// 단위업무 ID
 	private String 		udName;					// 단위업무 명
 	private String 		rdId;					// (이전문서 참조) 요구사항 ID
@@ -29,6 +31,18 @@ public class UnitworkVO {
 	}
 	public void setIndate(Date indate) {
 		this.indate = indate;
+	}
+	public int getUddNum() {
+		return uddNum;
+	}
+	public void setUddNum(int uddNum) {
+		this.uddNum = uddNum;
+	}
+	public int getRddNum() {
+		return rddNum;
+	}
+	public void setRddNum(int rddNum) {
+		this.rddNum = rddNum;
 	}
 	public String getUdId() {
 		return udId;
@@ -92,9 +106,11 @@ public class UnitworkVO {
 	}
 	@Override
 	public String toString() {
-		return "UnitworkVO [udNum=" + udNum + ", indate=" + indate + ", udId=" + udId + ", udName=" + udName + ", rdId="
-				+ rdId + ", rdName=" + rdName + ", udManager=" + udManager + ", extDate=" + extDate + ", intDate="
-				+ intDate + ", pdDate=" + pdDate + ", devDate=" + devDate + ", estmate=" + estmate + "]";
+		return "UnitworkVO [udNum=" + udNum + ", indate=" + indate + ", uddNum=" + uddNum + ", rddNum=" + rddNum
+				+ ", udId=" + udId + ", udName=" + udName + ", rdId=" + rdId + ", rdName=" + rdName + ", udManager="
+				+ udManager + ", extDate=" + extDate + ", intDate=" + intDate + ", pdDate=" + pdDate + ", devDate="
+				+ devDate + ", estmate=" + estmate + "]";
 	}
+	
 	
 }

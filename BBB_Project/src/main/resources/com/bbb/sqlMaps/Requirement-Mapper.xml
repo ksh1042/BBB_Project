@@ -7,6 +7,49 @@
 		FROM tbl_requirement_definition trd, tbl_requirement_dfntn_detail trdd
 		WHERE trd.rdNum=#{rdNum} AND trd.rdNum=trdd.rdNum
 	</select>
+	
+	<select id="seqNextRdNum" resultType="int">
+		select rdNum_seq.nextval
+		from dual
+	</select>
+	
+	<update id="createRdNum" parameterType="project">
+		update tbl_project
+		set rdNum = #{rdNum}
+		where pjNum = #{pjNum}
+	</update>
+	
+	<select id="selectRequirementListByRdNum" parameterType="int" resultType="Requirement">
+		select *
+		from tbl_requirement_dfntn_detail
+		where rdNum = #{rdNum}
+	</select>
+	
+	<insert id="createRequirementRdNum" parameterType="int">
+		insert into tbl_requirement_definition(rdnum)
+		values(#{rdNum})
+	</insert>
+	
+	<delete id="deleteRequirement" parameterType="int">
+		delete from tbl_requirement_dfntn_detail
+		where rddnum = #{delNum}
+	</delete>
+	
+	<update id="updateRequirement">
+		update tbl_requirement_dfntn_detail
+		set rdid = #{rdId}, rdname = #{rdName}, rdcontent = #{rdContent}, limit = #{limit}, interf = #{interf}, acceptyn = #{acceptyn}, manager = #{manager}
+		where rddnum = #{rddNum}
+	</update>
+	
+	<insert id="createRequirementBySetRddNum">
+		insert into tbl_requirement_dfntn_detail(rddnum, rdnum, rdid, rdname, rdcontent, limit, interf, acceptyn, manager )
+		values(rddnum_seq.nextval, #{rdNum}, #{rdId}, #{rdName}, #{rdContent}, #{limit}, #{interf}, #{acceptyn}, #{manager})
+	</insert>
+	
+	<insert id="insertReqHist">
+		insert into tbl_requirement_dfntn_hstr(rdnum, comm)
+		values(#{rdNum}, #{comm})
+	</insert>
 </mapper>
 
 

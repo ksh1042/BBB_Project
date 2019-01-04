@@ -36,13 +36,6 @@ public class ProjectController {
 		model.addAttribute("myPartakeList",service.readMyProjectList(loginUser.getId()));
 	}
 	
-	
-	
-	@RequestMapping(value="/requirement", method=RequestMethod.GET)
-	public void requirementDefinition() throws Exception{
-		
-	}
-	
 	@RequestMapping(value="/main", method=RequestMethod.GET)
 	public void projectMain(int pjNum, HttpServletRequest request) throws Exception{
 		ProjectVO project = service.projectMain(pjNum);

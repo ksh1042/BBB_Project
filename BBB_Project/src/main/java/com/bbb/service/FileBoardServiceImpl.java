@@ -9,7 +9,7 @@ import com.bbb.dao.BoardDAO;
 import com.bbb.dto.BoardAttachVO;
 import com.bbb.dto.BoardVO;
 
-public class BoardServiceImpl implements BoardService {
+public class FileBoardServiceImpl implements FileBoardService {
 
 	private BoardDAO boardDAO;
 	public void setBoardDAO(BoardDAO boardDAO){
@@ -25,9 +25,11 @@ public class BoardServiceImpl implements BoardService {
 		board.setbNum(bNum);
 		boardDAO.insertBoard(board);
 		
+		
 		List<BoardAttachVO> attachList=board.getAttachList();
 		for(BoardAttachVO attach : attachList){
 			attach.setbNum(bNum);
+			
 			System.out.println(attach);
 			attachDAO.insertAttach(attach);
 		}
@@ -68,20 +70,20 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> readListAll() throws Exception {
+	public List<BoardVO> listAll() throws Exception {
 		List<BoardVO> boardList= boardDAO.selectBoardAll();
 		return boardList;
 	}
 
 	@Override
-	public List<BoardVO> readListCriteria(Criteria cri) throws Exception {
+	public List<BoardVO> listCriteria(Criteria cri) throws Exception {
 		List<BoardVO> boardList = boardDAO.selectBoardCriteria(cri);
 		return boardList;
 	}
 
 	@Override
-	public List<BoardVO> readListSearch(SearchCriteria cri, int pjNum) throws Exception {
-		List<BoardVO> boardList=boardDAO.selectSearchBoardList(cri, pjNum);
+	public List<BoardVO> listSearch(SearchCriteria cri,int pjNum) throws Exception {
+		List<BoardVO> boardList=boardDAO.selectSearchBoardList(cri,pjNum);
 		
 		return boardList;
 	}
@@ -97,4 +99,5 @@ public class BoardServiceImpl implements BoardService {
 		List<BoardAttachVO> attachList=attachDAO.selectAttachesBybNum(bNum);
 		return attachList;
 	}
+
 }

@@ -11,6 +11,10 @@
 		<config>src/main/resources/com/bbb/context/root-context.xml</config>
 		<config>src/main/resources/com/bbb/context/application-context.xml</config>
 		<config>src/main/resources/com/bbb/context/aspects-context.xml</config>
+<<<<<<< HEAD
+		<config>src/main/resources/com/bbb/context/mail-context.xml</config>
+=======
+>>>>>>> refs/remotes/origin/develop
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
