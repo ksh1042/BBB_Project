@@ -62,6 +62,11 @@
 		set puuid = null
 		where pjnum = #{pjNum}
 	</update>
+	<update id="insertUdNum" parameterType="project">
+		UPDATE tbl_project
+		set udNum = #{udNum}
+		WHERE pjNum = #{pjNum}
+	</update>
 </mapper>
 
 

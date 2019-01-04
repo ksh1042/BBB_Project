@@ -40,35 +40,33 @@ public class UnitworkDAOImpl implements UnitworkDAO {
 
 	@Override
 	public int selectUdNumSeqNextval() throws SQLException {
-		return (Integer)session.selectOne("Unitwork.selectUdNumSeqNextval");
+		return (Integer)session.selectOne("Unitwork.selectUdNum");
+	}
+	@Override
+	public int selectUddNumSeqNextval() throws SQLException {
+		// TODO Auto-generated method stub
+		return (Integer)session.selectOne("Unitwork.selectUdNum");
 	}
 
 	@Override
-	public void insertUD(UnitworkVO unit) throws SQLException {
-		session.update("Unitwork.insertUD", unit);
+	public void insertUD(int udNum) throws SQLException {
+		session.update("Unitwork.insertUD", udNum);
 	}
 
 	@Override
-	public void insertUDD(UnitworkVO unit) throws SQLException {
-		session.update("Unitwork.insertUDD", unit);
-
-	}
-
-	@Override
-	public void insertUDH(UnitworkHistVO unitHist) throws SQLException {
-		session.update("Unitwork.insertUDH", unitHist);
-
+	public void deleteUDD(int uddNum) throws SQLException {
+		session.update("Unitwork.deleteUDD", uddNum);
 	}
 
 	@Override
 	public void updateUDD(UnitworkVO unit) throws SQLException {
 		session.update("Unitwork.updateUDD", unit);
-
 	}
 
 	@Override
-	public void deleteUDD(int udNum) throws SQLException {
-		session.update("Unitwork.deleteUDD", udNum);
+	public void insertUDD(UnitworkVO unit) throws SQLException {
+		session.update("Unitwork.insertUDD", unit);
+		
 	}
 
 	

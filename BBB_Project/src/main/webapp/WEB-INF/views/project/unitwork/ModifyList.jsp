@@ -96,24 +96,21 @@
 													<a href="#" class="deleteRow" style="color:red;" >
 														<span class="glyphicon glyphicon-minus-sign "></span>
 													</a>
+													<input type="hidden" class="form-control" name="uddNum" value="${ unit.uddNum }">
 												</td>
 												<td><input type="text" class="form-control" name="udId" value="${ unit.udId }"></td>
 												<td><input type="text" class="form-control" name="udName" value="${ unit.udName }"></td>
 												<td><!-- 요구사항 아이디 -->
+													<input type="hidden" name="rddNum" value="${ unit.rddNum }">
 													<select name="rdId" class="form-control">
 														<option value="${ unit.rdId }" selected hidden>${ unit.rdId }</option>
 														<c:forEach var="require" items="${ requireList }">
-															<option value="${ require.rdId }">${ require.rdId }</option>
+															<option value="${ require.rddNum }">${ require.rdId }</option>
 														</c:forEach>
 													</select>
 												</td>	
-												<td>	<!-- 요구사항 명 -->								<!--  -->
-													<select name="rdName" class="form-control">
-														<option value="${ unit.rdName }" selected hidden>${ unit.rdName }</option>
-														<c:forEach var="require" items="${ requireList }">
-															<option value="${ require.rdName }">${ require.rdName }</option>
-														</c:forEach>
-													</select>
+												<td>	<!-- 요구사항 명 -->	
+													<input type="text" name="rdName" class="form-control" value="${ unit.rdName }" readonly>
 												</td>
 												<td>
 													<select name="udManager" class="form-control">
@@ -123,16 +120,30 @@
 														</c:forEach>
 													</select>
 												</td>
-												<td><input type="date" class="form-control" name="extDate" value='<fmt:formatDate value="${ unit.extDate }" pattern="yyyy-MM-dd"/>'></td>
-												<td><input type="date" class="form-control" name="intDate" value='<fmt:formatDate value="${ unit.intDate }" pattern="yyyy-MM-dd"/>'></td>
-												<td><input type="date" class="form-control" name="pdDate" value='<fmt:formatDate value="${ unit.pdDate }" pattern="yyyy-MM-dd"/>'></td>
-												<td><input type="date" class="form-control" name="devDate" value='<fmt:formatDate value="${ unit.devDate }" pattern="yyyy-MM-dd"/>'></td>
-												<td><input type="text" class="form-control" name="estmate" value="${ unit.estmate }" size="3"></td>
+												<fmt:parseDate value="19600101" pattern="yyyyMMdd" var="checkDate" />
+												<td><input type="date" class="form-control" name="extDate" value='<fmt:formatDate value="${ unit.extDate > checkDate ? unit.extDate : '' }" pattern="yyyy-MM-dd"/>'></td>
+												<td><input type="date" class="form-control" name="intDate" value='<fmt:formatDate value="${ unit.intDate > checkDate ? unit.intDate : '' }" pattern="yyyy-MM-dd"/>'></td>
+												<td><input type="date" class="form-control" name="pdDate" value='<fmt:formatDate value="${ unit.pdDate > checkDate ? unit.pdDate : '' }" pattern="yyyy-MM-dd"/>'></td>
+												<td><input type="date" class="form-control" name="devDate" value='<fmt:formatDate value="${ unit.devDate > checkDate ? unit.devDate : '' }" pattern="yyyy-MM-dd"/>'></td>
+												<td><input type="text" class="form-control" name="estmate" value="${ unit.estmate }" size="1"></td>
 											</tr>
+											<select name="rddNumT" class="form-control hidden">
+												<option value="${ unit.rddNum }" selected hidden>${ unit.rddNum }</option>
+												<c:forEach var="require" items="${ requireList }">
+													<option value="${ require.rddNum }">${ require.rddNum }</option>
+												</c:forEach>
+											</select>
+											<select name="rdNameT" class="form-control hidden">
+												<option value="${ unit.rdName }" selected hidden>${ unit.rdName }</option>
+												<c:forEach var="require" items="${ requireList }">
+													<option value="${ require.rdName }">${ require.rdName }</option>
+												</c:forEach>
+											</select>
+											
 										</c:forEach>
 										<!-- 단위업무 추가하기 -->
 										<tr class="addUdPoint">
-											<td colspan="11" style="font-weight:bold;"><a href="#" class="addRow"><span class="glyphicon glyphicon-plus-sign "></span>&nbsp;단위업무 추가하기</a></td>
+											<td colspan="11" style="font-weight:bold;"><a href="#" class="addRow"><span class="glyphicon glyphicon-plus-sign "></span>&nbsp;단위업무 행 추가</a></td>
 										</tr>
 									</table>
 								</form>
@@ -141,7 +152,7 @@
 						<div class="row">
 							<div class="col-sm-5">
 								<div class="dataTables_info" id="example2_info" role="status"
-									aria-live="polite">Showing <b>${ f:length(unitList) }</b> entries</div>
+									aria-live="polite">Showing <b id="entryCount">${ f:length(unitList) }</b> entries</div>
 							</div>
 						</div>
 					</div>
@@ -161,10 +172,13 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 	<script id="templateList" type="text/x-handlebars-template">
 	<tr role="row" class="${ (stat.count mod 2)==0 ? 'even':'odd' }">
-		<td style="font-weight:bold;"><a href="#" class="deleteRow" style="color:red;" ><span class="glyphicon glyphicon-minus-sign"></span></a></td>
+		<td style="font-weight:bold;"><a href="#" class="deleteRow" style="color:red;" ><span class="glyphicon glyphicon-minus-sign"></span></a>
+			<input type="hidden" class="form-control" name="uddNum" value="">
+		</td>
 		<td><input type="text" class="form-control" name="udId"></td>
 		<td><input type="text" class="form-control" name="udName"></td>
 		<td><!-- 요구사항 아이디 -->
+			<input type="hidden" name="rddNum" value="">
 			<select name="rdId" class="form-control">
 				<option value="${ unit.rdId }">${ unit.rdId }</option>
 				<c:forEach var="require" items="${ requireList }">
@@ -173,12 +187,7 @@
 			</select>
 		</td>	
 		<td>
-			<select name="rdName" class="form-control">
-				<option value="${ unit.rdName }">${ unit.rdName }</option>
-				<c:forEach var="require" items="${ requireList }">
-					<option value="${ require.rdName }">${ require.rdName }</option>
-				</c:forEach>
-			</select>
+			<input type="text" name="rdName" class="form-control" value="" readonly>
 		</td>
 		<td>
 			<select name="udManager" class="form-control">
@@ -192,23 +201,26 @@
 		<td><input type="date" name="intDate" class="form-control" value=""></td>
 		<td><input type="date" name="pdDate" class="form-control" value=""></td>
 		<td><input type="date" name="devDate" class="form-control" value=""></td>
-		<td><input type="text" name="estmate" class="form-control" size="3" value="0"></td>
+		<td><input type="text" name="estmate" class="form-control" size="1" value="0"></td>
 	</tr>
 	</script>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script>
 		var template = Handlebars.compile($('#templateList').html());
 		var errorIcon = '<i class="fa fa-times-circle-o"></i>';		// 버튼 옆의 에러메세지 발생시 표현되는 x 아이콘
-		
+		var entryCount = document.getElementById('entryCount');
+		var removeUddNumList = new Array();
 		$('a.addRow').on('click', function(e){
 			var row = template();
-			//$('#udList tbody').append(row);
 			$('.addUdPoint').before(row);
+			$(entryCount).html(Number($(entryCount).html())+1);
 		});
 		$(document).on('click', 'a.deleteRow', function(e){
-			$(this).parent().parent().remove()
-			//alert(  );
-			// alert('자네 아직 내가 삭제 이벤트를 만들지 않았다는 것을 모르는가 보군');
+			$(this).parent().parent().remove();
+			$(entryCount).html(Number($(entryCount).html())-1);
+			if( !($(this).next().val() == 0 ||  $(this).next().val() == undefined || $(this).next().val() == null) ){				
+				removeUddNumList.push($(this).next().val());
+			}
 		});
 		
 		function back_go(){
@@ -258,11 +270,16 @@
 			var data = [];
 			
 			for(var i=0; i<document.getElementsByName('udId').length; i++){
+				if(contains(removeUddNumList, document.getElementsByName('uddNum')[i].value)){
+					continue;
+				}
 				var temp = {
+					uddNum : document.getElementsByName('uddNum')[i].value,
 					rdId : document.getElementsByName('rdId')[i].value,
 					rdName : document.getElementsByName('rdName')[i].value,
-					udName : document.getElementsByName('udName')[i].value,
+					rddNum : document.getElementsByName('rddNum')[i].value,
 					udId : document.getElementsByName('udId')[i].value,
+					udName : document.getElementsByName('udName')[i].value,
 					udManager : document.getElementsByName('udManager')[i].value,
 					extDate : document.getElementsByName('extDate')[i].value,
 					intDate : document.getElementsByName('intDate')[i].value,
@@ -278,7 +295,7 @@
 			$.ajax({
 				url : '<%=request.getContextPath()%>/project/unitwork/update',
 				type : 'POST',
-				data : JSON.stringify( { unitList : data, comm : $('textarea[name=comm]').val() } ),
+				data : JSON.stringify( { unitList : data, comm : $('textarea[name=comm]').val(), removeUddNumList : removeUddNumList } ),
 				headers:{
 					"Content-Type":"application/json;charset=utf8",
 					"X-HTTP-Method-Override":"post"
@@ -317,6 +334,36 @@
 		$('textarea[name=comm]').on('blur', function(e) {
 			$(this).removeClass('validateAlert');
 		});
-
+		
+		$(document).on('change', 'select[name=rdId]', function(e){
+			var selectedIndex = $('option:selected',this).index();
+			
+			// rdId 아이템 선택을 통한 rdName 자동선택
+			var targetSelect = $('select[name=rdNameT]');
+			$('option:eq('+selectedIndex+')', targetSelect).removeAttr('selected');	
+			$('option:eq('+selectedIndex+')', targetSelect).attr('selected','selected');
+			var temp = targetSelect.val();
+			
+			$(this).parent().next().children('input').val(temp);
+			
+			// rdId 아이템 선택을 통한  rddNum 자동선택 
+			targetSelect = $('select[name=rddNumT]');
+			$('option:eq('+selectedIndex+')', targetSelect).removeAttr('selected');	
+			$('option:eq('+selectedIndex+')', targetSelect).attr('selected','selected');
+			temp = targetSelect.val();
+			$(this).prev().val(temp);
+			
+		});
+		
+		function contains(data, keyword){
+			for(var i=0; i<data.length; i++){
+				for(var j=0; j<keyword.length; j++){
+					if(data[i] == keyword[j]){
+						return true;
+					}
+				}
+			}
+			return false;
+		}
 	</script>
 </body>

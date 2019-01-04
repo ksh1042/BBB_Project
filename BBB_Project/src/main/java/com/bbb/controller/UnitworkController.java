@@ -1,6 +1,8 @@
 package com.bbb.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +34,17 @@ public class UnitworkController {
 	
 	@Autowired
 	private UnitworkService unitworkService;
+	
+	@RequestMapping(value="/create", method=RequestMethod.GET)
+	public String unitworkRegist(HttpSession session) throws Exception {
+		ProjectVO selectProject = (ProjectVO)session.getAttribute("logonProject");
+		
+		int udNum = unitworkService.createUD(selectProject);
+		
+		selectProject.setUdNum(udNum);
+		
+		return "redirect:list";
+	}
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public void unitworkListGET(HttpServletRequest request, Model model) throws Exception {
@@ -66,14 +79,47 @@ public class UnitworkController {
 		ObjectMapper mapper = new ObjectMapper();
 		List<UnitworkVO> unitList = mapper.convertValue(paramMap.get("unitList"), new TypeReference<List<UnitworkVO>>() {
 		});
+		List<Integer> removeUddNumList = mapper.convertValue(paramMap.get("removeUddNumList"), new TypeReference<List<Integer>>() {
+		});
 		String comm = (String)paramMap.get("comm");
 		
 		for(int i=0; i<unitList.size(); i++){
 			unitList.get(i).setUdNum( selectProject.getUdNum() );
 		}
+		
+		List<UnitworkVO> createList = new ArrayList<UnitworkVO>();
+		
+		Iterator<UnitworkVO> it = unitList.iterator();
+		while( it.hasNext() ){
+			UnitworkVO unit = it.next();
+			if(unit.getUddNum() <= 0){
+				createList.add(unit);
+				it.remove();
+			}
+		}
+		
 		System.out.println("unitList : " + unitList);
+		System.out.println("createList : " + createList);
+		System.out.println("removeUddNumList : " + removeUddNumList);
 		System.out.println("comm : " + comm);
 		
+		try{
+			UnitworkHistVO unitHist = new UnitworkHistVO();
+			unitHist.setUdNum( selectProject.getUdNum() );
+			unitHist.setComm( comm );
+			unitHist.setUpdateDate( new Date() );
+			
+			unitworkService.deleteUDDbyUddNum(removeUddNumList);		// JSP에서 삭제된 리스트를 삭제하고
+			unitworkService.updateUDDbyList(unitList);					// 기존의 데이터를 갱신하고
+			unitworkService.createUDDbyList(createList, selectProject.getUdNum());				// 새로 들어온 데이터를 입력한다.
+			
+			
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		}catch(Exception e){
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		/*
 		try{
 			UnitworkHistVO unitHist = new UnitworkHistVO();
 			unitHist.setUdNum( selectProject.getUdNum() );
@@ -84,7 +130,7 @@ public class UnitworkController {
 		}catch(Exception e){
 			e.printStackTrace();
 			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		}*/
 		return entity;
 	}
 	
