@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bbb.dto.BoardVO;
-import com.bbb.service.BoardService;
+import com.bbb.service.FileBoardService;
 
 @Controller
 @RequestMapping("/board")
 public class BoardController {
 	
 	@Autowired
-	private BoardService service;
+	private FileBoardService service;
 	
 	
 	@RequestMapping(value="/listAll", method = RequestMethod.GET)
@@ -62,7 +62,7 @@ public class BoardController {
 			@RequestParam(value = "bNum",defaultValue = "-1") int bNum, Model model, HttpServletRequest request,HttpServletResponse response) throws Exception{
 		
 		if (bNum > 0){
-			BoardVO board = service.readByBno(bNum);
+			BoardVO board = service.readBybNum(bNum);
 			request.setAttribute("boardVO", board);
 			request.setAttribute("cri", cri);
 			request.getRequestDispatcher("/WEB-INF/views/board/modifyPage.jsp").forward(request,response);

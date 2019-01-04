@@ -44,7 +44,8 @@ public class BoardDAOImpl implements BoardDAO {
 		int offset=cri.getPageStartRowNum();
 		int limit = cri.getPerPageNum();
 		RowBounds rowBounds=new RowBounds(offset, limit);
-		paramMap.put("cri",cri );
+		paramMap.put("searchType", cri.getSearchType());
+		paramMap.put("keyword", cri.getKeyword());
 		paramMap.put("pjNum", pjNum);
 		List<BoardVO> boardList=
 				session.selectList("Board.selectSearchBoardList",paramMap,rowBounds);
