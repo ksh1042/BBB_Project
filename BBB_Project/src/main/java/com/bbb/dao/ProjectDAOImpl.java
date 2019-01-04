@@ -79,6 +79,11 @@ public class ProjectDAOImpl implements ProjectDAO{
 		session.update("Project.updateProjectPlan",project);
 	}
 
+	@Override
+	public void insertUdNum(ProjectVO project) throws SQLException {
+		session.update("Project.insertUdNum", project);
+	}
+
 	
 
 	

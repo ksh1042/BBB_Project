@@ -27,4 +27,6 @@ public interface ProjectDAO {
 	public String verifyProjectName(String name) throws SQLException;
 
 	public ProjectVO getProjectMain(int pjNum) throws SQLException;
+	
+	public void insertUdNum(ProjectVO project) throws SQLException;
 }

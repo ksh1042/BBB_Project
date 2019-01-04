@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class RequirementVO {
 	private int 	 rdNum;			// 요구사항 문서 번호
+	private int		 rddNum;		// 요구사항 상세 번호
 	private Date 	 indate;		// 요구사항 문서 작성일
 	private String 	 rdId;			// 요구사항 아이디
 	private	String 	 rdName;		// 요구사항 이름
@@ -17,6 +18,12 @@ public class RequirementVO {
 	}
 	public void setRdNum(int rdNum) {
 		this.rdNum = rdNum;
+	}
+	public int getRddNum() {
+		return rddNum;
+	}
+	public void setRddNum(int rddNum) {
+		this.rddNum = rddNum;
 	}
 	public Date getIndate() {
 		return indate;
@@ -68,8 +75,9 @@ public class RequirementVO {
 	}
 	@Override
 	public String toString() {
-		return "RequirementVO [rdNum=" + rdNum + ", indate=" + indate + ", rdId=" + rdId + ", rdName=" + rdName
-				+ ", rdContent=" + rdContent + ", limit=" + limit + ", interf=" + interf + ", acceptyn=" + acceptyn
-				+ ", manager=" + manager + "]";
+		return "RequirementVO [rdNum=" + rdNum + ", rddNum=" + rddNum + ", indate=" + indate + ", rdId=" + rdId
+				+ ", rdName=" + rdName + ", rdContent=" + rdContent + ", limit=" + limit + ", interf=" + interf
+				+ ", acceptyn=" + acceptyn + ", manager=" + manager + "]";
 	}
+	
 }
