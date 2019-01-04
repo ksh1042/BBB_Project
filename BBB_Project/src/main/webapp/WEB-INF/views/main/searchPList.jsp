@@ -27,18 +27,17 @@
 			        	<td class="inner">${ProjectVO.name }</td>
 			        	<td>${ProjectVO.creator }</td>
 						<c:forEach items="${bindList }" var="PartakeVO">
-				        		<c:if test="${PartakeVO.pjNum eq ProjectVO.pjNum }">
-						        	<c:if test="${PartakeVO.assignYn eq 1}">
-					      				<td rowspan="2"><input class="join" id="${ProjectVO.pjNum }" type="button" value="참여중" disabled="disabled"></td>
-					      			</c:if>
-						        	<c:if test="${PartakeVO.assignYn eq 0}">
-					      				<td rowspan="2"><input class="join" id="${ProjectVO.pjNum }" type="button" value="신청중" disabled="disabled"></td>
-					      			</c:if>
-					      			<c:if test="${PartakeVO.assignYn eq 2 }">
-				      					<td rowspan="2"><input class="join" id="${ProjectVO.pjNum }" type="button" value="신청하기" ></td>
-				      				</c:if>
-					      		</c:if>
-					      		
+			        		<c:if test="${PartakeVO.pjNum eq ProjectVO.pjNum }">
+					        	<c:if test="${PartakeVO.assignYn eq 1}">
+				      				<td rowspan="2"><input class="join" id="${ProjectVO.pjNum }" type="button" value="참여중" disabled="disabled"></td>
+				      			</c:if>
+					        	<c:if test="${PartakeVO.assignYn eq 0}">
+				      				<td rowspan="2"><input class="join" id="${ProjectVO.pjNum }" type="button" value="신청중" disabled="disabled"></td>
+				      			</c:if>
+				      			<c:if test="${PartakeVO.assignYn eq 2 }">
+			      					<td rowspan="2"><input class="join" id="${ProjectVO.pjNum }" type="button" value="신청하기" ></td>
+			      				</c:if>
+				      		</c:if>
 						</c:forEach>
 			        </tr>
 			        <tr>
@@ -70,22 +69,15 @@
 					<li><a
 								href="${pageMaker.endPage +1}">&raquo;</a></li>
 				</c:if>
-
 			</ul>
-					
-					
 		</div>
-
-
 	</div>
 </div>
-
 		<form id="jobForm">
 			  <input type='hidden' name="page" value="${pageMaker.cri.page}"/>
 			  <input type='hidden' name="perPageNum" value="${pageMaker.cri.perPageNum}"/>
 			  <input type='hidden' name="keyword" value="${cri.keyword}"/>
 		</form>
-		
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
 	
@@ -116,6 +108,19 @@
 			}
 		});
 	});
+	
+$(".link li a").on("click", function(event){
+		
+		event.preventDefault(); 
+		
+		var targetPage = $(this).attr("href");
+		
+		var jobForm = $("#jobForm");
+		jobForm.find("[name='page']").val(targetPage);
+		jobForm.attr("action","").attr("method", "get");		
+		jobForm.submit();
+	});
+	
 	
 
 </script>
