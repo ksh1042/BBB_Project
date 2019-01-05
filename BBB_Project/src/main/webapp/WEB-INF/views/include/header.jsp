@@ -51,10 +51,7 @@
 
     <!-- Logo -->
     <a href="/main/" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>P</b>MS</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Project</b>MS</span>
+      <span class="logo-lg"><b>${logonProject.name }</b></span>
     </a>
 
     <!-- Header Navbar -->
@@ -105,45 +102,35 @@
               <li class="footer"><a href="#">View all</a></li>
             </ul>
           </li>
-          <!-- Tasks Menu -->
-          <li class="dropdown tasks-menu">
-            <!-- Menu Toggle Button -->
+          
+          <!-- Domain Menu -->
+          <li class="dropdown notifications-menu">
+            <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-flag-o"></i>
-              <span class="label label-danger">9</span>
+              <i class="fa fa-gear"></i>
+              <span class="label label-warning">10</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 9 tasks</li>
+              <li class="header">You have 10 notifications</li>
               <li>
-                <!-- Inner menu: contains the tasks -->
+                <!-- Inner Menu: contains the notifications -->
                 <ul class="menu">
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <!-- Task title and progress text -->
-                      <h3>
-                        Design some buttons
-                        <small class="pull-right">20%</small>
-                      </h3>
-                      <!-- The progress bar -->
-                      <div class="progress xs">
-                        <!-- Change the css width attribute to simulate progress -->
-                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
-                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">20% Complete</span>
-                        </div>
-                      </div>
+                  <li><!-- start notification -->
+                    <a href="<%=request.getContextPath()%>/question/listQna">
+                      <i class="glyphicon glyphicon-question-sign"></i>QnA
+                    </a>
+                    <a href="<%=request.getContextPath()%>/notice/listPage">
+                      <i class="glyphicon glyphicon-exclamation-sign"></i>Notice
                     </a>
                   </li>
-                  <!-- end task item -->
+                  <!-- end notification -->
                 </ul>
               </li>
-              <li class="footer">
-                <a href="#">View all tasks</a>
-              </li>
+              <li class="footer"></li>
             </ul>
           </li>
-          
-          
+             
+              
           <!-- ----------------상단 헤더 사용자 정보창 ----------------- -->
           <!-- User Account Menu -->
       		<li class="dropdown user user-menu">
@@ -350,11 +337,11 @@
             <li><a href="/project/requirement"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
             <li><a href="<%=request.getContextPath()%>/project/unitwork/list"><i class="fa fa-circle-o"></i>단위업무 정의서</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i>간트차트</a></li>
-            <li><a href="<%=request.getContextPath()%>/project/usecase/view"><i class="fa fa-circle-o"></i>use-case</a></li>
+            <li><a href="<%=request.getContextPath()%>/project/usecase/view"><i class="fa fa-circle-o"></i>U-C Diagram</a></li>
           </ul>
         </li>
         
-        <li class="treeview">
+    <!--     <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>스마트 WIKI</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -364,7 +351,7 @@
             <li><a href="#"><i class="fa fa-circle-o"></i>Wiki</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i>URL</a></li>
           </ul>
-        </li>
+        </li> -->
         
 		<li>
 			<a href="<%=request.getContextPath() %>/project/finance/list?fNum=${logonProject.fNum}">
@@ -400,6 +387,7 @@
               <span>ISSUE</span>
            </a>
         </li>
+        
         </sec:authorize>
         
         <sec:authorize access="hasAuthority('ROLE_ADMIN')">
