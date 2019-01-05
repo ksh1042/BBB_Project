@@ -65,6 +65,17 @@
 	<update id="deletePlan">
 		update tbl_project
 		set puuid = null
+	</update>
+	
+	<update id="updateUseCase">
+		update tbl_project
+		set uuuid = #{uuuid}
+		where pjnum = #{pjNum}
+	</update>
+	
+	<update id="updateFnum" >
+		update tbl_project
+		set fnum = #{fNum}
 		where pjnum = #{pjNum}
 	</update>
 </mapper>

@@ -31,4 +31,8 @@ public interface ProjectDAO {
 	public void deletePlan(int pjNum) throws SQLException;
 
 	public ProjectVO getProjectMain(int pjNum) throws SQLException;
+	
+	public void updateFnum(int pjNum, int fNum) throws SQLException;
+
+	public void insertUsecase(ProjectVO project) throws SQLException;
 }

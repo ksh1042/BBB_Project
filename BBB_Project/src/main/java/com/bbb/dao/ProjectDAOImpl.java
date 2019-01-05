@@ -86,6 +86,25 @@ public class ProjectDAOImpl implements ProjectDAO{
 		session.update("Project.updateProjectPlan",project);
 	}
 
+	@Override
+	public void updateFnum(int pjNum, int fNum) throws SQLException {
+		
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("fNum", fNum);
+		map.put("pjNum", pjNum);
+	
+		session.update("Project.updateFnum", map);
+		
+		
+		
+	}
+
+	@Override
+	public void insertUsecase(ProjectVO project) throws SQLException {
+		session.update("Project.updateUseCase", project);
+		
+	}
+
 	
 
 	@Override

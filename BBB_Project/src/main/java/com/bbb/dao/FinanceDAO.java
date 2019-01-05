@@ -8,8 +8,15 @@ import com.bbb.dto.FinanceVO;
 
 public interface FinanceDAO {
 	
+	// 입력시 시퀀스등록을 위한 메서드
+	int getFinanceSeqNextValue() throws SQLException;
+	
+	void insertFinance(int fNum) throws SQLException;
+	
+	void updateFinanceTotal(int fNum, int total) throws SQLException;
+		
 	// 예산관리 테이블의 모든 정보를 가져온다.
-	List<FinanceVO> selectFinanceList() throws SQLException;
+	List<FinanceVO> selectFinanceList(int fNum) throws SQLException;
 	
 	// 예산의 잔여 금액을 가져온다.
 	FinanceVO selectFinanceTotalByFnum(int fNum) throws SQLException;

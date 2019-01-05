@@ -3,13 +3,28 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Finance">
 	
+	<select id="getFinanceSeqNextValue" resultType="int">
+		select fnum_seq.nextval from dual
+	</select>
+	
 	<select id="selectFinanceTotalByFnum" resultType="int">
 		select total
 		from tbl_finance
 		where fnum=#{fNum}
 	</select>
 	
-	<select id="selectFinanceList" resultType="finance">
+	<update id="insertFinance" parameterType="int">
+		insert into tbl_finance(fnum)
+		values(#{fNum})
+	</update>
+	
+	<update id="updateFinanceTotal" >
+		update tbl_finance
+		set total = #{total}
+		where fnum = #{fNum}
+	</update>
+	
+	<select id="selectFinanceList" >
 		select *
 		from tbl_finance
 		where fnum=#{fNum}

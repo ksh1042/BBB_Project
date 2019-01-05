@@ -12,13 +12,16 @@ public interface FinanceService {
 	
 	int createTotal(int fNum) throws SQLException;
 	
+	
 	List<FinanceDetailVO> readFinanceDetailList(int fNum) throws SQLException;
 
-	List<FinanceVO> readFinanceList() throws SQLException;
+	List<FinanceVO> readFinanceList(int fNum) throws SQLException;
 	
 	FinanceVO readFnumByFinance(int fNum) throws SQLException;
 	
 	FinanceDetailVO readFnumByFinanceDetail(int fNum) throws SQLException;
 	
 	List<FinanceDetailVO> readRegdateByFnum(int fNum) throws SQLException;
+	
+	int createFinance(int pjNum) throws SQLException;
 }
