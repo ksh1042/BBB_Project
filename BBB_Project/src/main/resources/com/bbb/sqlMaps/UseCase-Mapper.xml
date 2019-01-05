@@ -9,17 +9,17 @@
 	<select id="selectUseCaseByuUuid" resultType="usecase">
 		select * 
 		from tbl_usecase 
-		where uuuid = #{uUuid}
+		where uuuid = #{uuuid}
 	</select>
 	
 	<update id="insertUseCase">
 		insert into 
-		tbl_usecase (uuuid, savepath, filename, content)
-		values (#{uUuid}, #{savePath}, #{fileName},#{content} )
+		tbl_usecase (uuuid, savepath, filename, writer)
+		values (#{uuuid}, #{savePath}, #{fileName},#{writer} )
 	</update>
 	
 	<update id="deleteUseCase">
-		delete from tbl_usecase where uuuid = #{uUuid}
+		delete from tbl_usecase where uuuid = #{uuuid}
 	</update>
 	
 

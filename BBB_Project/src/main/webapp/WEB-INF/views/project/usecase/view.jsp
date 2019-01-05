@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 <body>
 	<section class="content-header">
 		<h1>Use Case Diagram</h1>
@@ -24,13 +27,22 @@
 			
 				<div class="box-header with-border">
 					<!-- 작성자 정보 -->
+					<c:if test="${!empty usecaseList }" >
+					<c:forEach var="usecase" items="${usecaseList }">
 					<div class="user-block">
 						<img class="img-circle" src="<%=request.getContextPath()%>/resources/dist/img/user1-128x128.jpg" alt="User Image"> 
 						<span class="username">
-							<a href="#">${writer }</a>
+							<a href="#">${usecase.writer }</a>
 						</span>
-						<span class="description">작성날짜</span>
+						<span class="description"><fmt:formatDate pattern="yyyy-MM-dd" value="${usecase.indate}" /></span>
 					</div>
+					</c:forEach>
+					</c:if>
+					<c:if test="${empty usecaseList }" >
+					<div class="user-block">
+						<h3>작성 정보가 존재하지 않습니다.</h3>
+					</div>
+					</c:if>
 					<!-- /.작성자 정보 -->
 					
 					<!-- 유즈케이스 등록창 버튼 -->
@@ -42,26 +54,29 @@
 				<!-- /.box-header -->
 				
 				<!-- 사진 뷰 -->
+				<c:if test="${!empty imageUrl }" >
 				<div class="box-body">
-					<img class="img-responsive pad" src="<%=request.getContextPath()%>/resources/dist/img/photo2.png" alt="Photo">
+					<img src="<spring:url value='/ucImage${imageUrl}'/>" width="100%" />
 				</div>
+				</c:if>
+				<c:if test="${empty imageUrl }" >
+				
+				</c:if>
 				<!-- /.사진 뷰 -->
 				
 				<!-- 댓글 시작 -->
-				<div class="box-footer box-comments">
+				<%-- <div class="box-footer box-comments">
 					<div class="box-comment">
-						<!-- User image -->
-						<img class="img-circle img-sm"
-							src="<%=request.getContextPath()%>/resources/dist/img/user3-128x128.jpg"
-							alt="User Image">
+						<!-- 댓글을 등록한 사람 프로필사진 -->
+						<img class="img-circle img-sm" src="<%=request.getContextPath()%>/resources/dist/img/user3-128x128.jpg" alt="User Image">
 
 						<div class="comment-text">
-							<span class="username"> Maria Gonzales(작성자 이름) <span
-								class="text-muted pull-right">8:03 PM Today(작성시간)</span>
+							<span class="username"> Maria Gonzales
+								<span class="text-muted pull-right">8:03 PM Today</span>
 							</span>
-							<!-- /.username -->
+							<!-- /.댓글작성자 이름 -->
 							It is a long established fact that a reader will be distracted by
-							the readable content of a page when looking at its layout.(작성내용)
+							the readable content of a page when looking at its layout.
 						</div>
 						<!-- /.comment-text -->
 					</div>
@@ -70,19 +85,17 @@
 					<!-- /.box-footer -->
 					<div class="box-footer">
 						<form action="#" method="post">
-							<img class="img-responsive img-circle img-sm"
-								src="<%=request.getContextPath()%>/resources/dist/img/user4-128x128.jpg"
-								alt="Alt Text">
+							<img class="img-responsive img-circle img-sm" src="<%=request.getContextPath()%>/resources/dist/img/user4-128x128.jpg" alt="Alt Text">
 							<!-- .img-push is used to add margin to elements next to floating images -->
 							<div class="img-push">
-								<input type="text" class="form-control input-sm"
-									placeholder="Press enter to post comment">
+								<input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
 							</div>
 						</form>
 					</div>
 					<!-- /.box-footer -->
 				</div>
-				<!-- /.box -->
+				<!-- /.댓글 끝 --> --%>
+				
 			</div>
 			<!-- /.col -->
 		</div>
@@ -99,8 +112,8 @@
 					<h4 class="modal-title">Use-Case Create</h4>
 				</div>
 				<div class="modal-body">
-					<form action="registerUsecase" method="POST">
-						<input type="hidden" name="writer" value="${ loginUser.name }">
+					<form action="register" method="POST" role="form">
+						<input type="hidden" name="writer" value="${loginUser.id }">
 						<label class="control-label">File Upload</label>
                         <div class="fileDrop" style="width: 100%; height: 100px; border: 1px dotted gray; background-color: lightslategray; margin: auto;">
                         </div>
@@ -108,7 +121,8 @@
 				</div>
 
 				<div class="modal-footer">
-					<button type="button" id="create_btn" class="btn btn-primary">Save</button>
+					<ul class="mailbox-attachments clearfix uploadedList"></ul>
+					<button type="submit" id="submitBtn" class="btn btn-primary">Save</button>
 					<button type="button" id="cancel_btn" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
 				</div>
 			</div>
@@ -119,10 +133,10 @@
 	<!-- /.modal -->
 
 
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script id="templateAttach" type="text/x-handlebars-template">
-<li style="width:10%;font-size:0.8em;position:relative;">
+<li style="width:30%;font-size:0.8em; text-align:center; position:relative;">
 	<a href="{{fullName}}" class="btn btn-default btn-xs pull-right delbtn"
 	   style="position:absolute;right:0;top:0;padding:0;" >
 		<i class="fa fa-fw fa-remove"></i>
@@ -133,6 +147,21 @@
 	  <a href="{{getLink}}" class="mailbox-attachment-name thumbnail">{{fileName}}</a>     
     </div>
 </li>
+</script>
+<script>
+
+var pjNum=${logonProject.pjNum};
+var template=Handlebars.compile($('#templateAttach').html());
+
+
+$.getJSON("getAttach/"+pjNum,function(list){
+	$(list).each(function(){
+		var fileInfo=getFileInfo(this,"<%=request.getContextPath()%>");
+		var html=template(fileInfo);
+		$('.uploadedList').append(html);
+		
+	});
+});
 </script>
 <script>
 var template=Handlebars.compile($('#templateAttach').html());
@@ -166,6 +195,10 @@ $('.fileDrop').on('drop',function(event){
 				var fileInfo=getUploadFileInfo(data,"<%=request.getContextPath()%>");
 				var html=template(fileInfo);
 				$(".uploadedList").append(html);
+				$('.fileDrop').hide();
+			},
+			error : function(error){
+				alert('통신 오류가 발생하였습니다. 잠시후 다시 시도해주시기 바랍니다. 증상이 지속될 경우 자세한 사항은 관리자에게 문의 바랍니다.');
 			}
 		});
 	}
@@ -190,7 +223,7 @@ function getUploadFileInfo(fullName,contextPath){
 	}
 	
 	
-	fileName=fileLink.substr(fileLink.indexOf("$$")+1);
+	fileName=fileLink.substr(fileLink.indexOf("$$")+2);
 	
 	return {fileName:fileName,imgsrc:imgsrc,getLink:getLink,fullName:fullName};
 	
@@ -215,34 +248,36 @@ $('.uploadedList').on('click','.thumbnail',function(e){
 	form.submit();
 });
 </script>
-   
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
 var form = $('form[role="form"]');
+
 $("button[type='submit']").on("click", function(e){
    e.preventDefault();
-     
+   
    $(".uploadedList .delbtn").each(function(i, obj){
       var fullName=$(this).attr('href');
-      var uuid="";
+      var uuuid="";
       var fileName="";
+      var writer = "${loginUser.id}";
       if(checkImageType(fullName)){
-         uuid=fullName.substring(14).split('$$')[0];
+         uuuid=fullName.substring(14).split('$$')[0];
          fileName=fullName.substring(14).split('$$')[1];
          fileType="1";
       }else{
-         uuid=fullName.substring(12).split('$$')[0];
+         uuuid=fullName.substring(12).split('$$')[0];
          fileName=fullName.substring(12).split('$$')[1];
          fileType="0";
       }
       
       var uploadPath=fullName.substring(0,12).replace(/\//g,"\\");
             
-      var input1=$('<input>').attr('type','hidden').attr('name','attachList['+i+'].uuid').val(uuid);
+      var input1=$('<input>').attr('type','hidden').attr('name','attachList['+i+'].uuuid').val(uuuid);
       var input2=$('<input>').attr('type','hidden').attr('name','attachList['+i+'].fileName').val(fileName);
       var input3=$('<input>').attr('type','hidden').attr('name','attachList['+i+'].fileType').val(fileType);
-      var input4=$('<input>').attr('type','hidden').attr('name','attachList['+i+'].uploadPath').val(uploadPath);
-      
-      form.append(input1).append(input2).append(input3).append(input4);
+      var input4=$('<input>').attr('type','hidden').attr('name','attachList['+i+'].savePath').val(uploadPath);
+      var input5=$('<input>').attr('type','hidden').attr('name','attachList['+i+'].writer').val(writer);
+      form.append(input1).append(input2).append(input3).append(input4).append(input5);
    });
    
    form.submit();
@@ -250,22 +285,21 @@ $("button[type='submit']").on("click", function(e){
 });
 
 $('.uploadedList').on('click','.delbtn',function(event){
-   event.preventDefault();
-   var that=$(this);
-   
-   $.ajax({
-      url:'<%=request.getContextPath()%>/deleteFile',
-         type : 'post',
-         data : {
-            fileName : $(this).attr('href')
-         },
-         success : function(result) {
-            if (result == 'deleted') {
-               that.parent('li').remove();
-            }
-         }
-      });
-   });
+	event.preventDefault();
+	var that=$(this);
+	
+	$.ajax({
+		url:'<%=request.getContextPath()%>/deleteFile',
+		type:'post',
+		data:{fileName:$(this).attr('href')},
+		success:function(result){
+			if(result=='deleted'){
+				that.parent('li').remove();
+				$('.fileDrop').show();
+			}
+		}
+	});
+});
 </script>
 
 </body>

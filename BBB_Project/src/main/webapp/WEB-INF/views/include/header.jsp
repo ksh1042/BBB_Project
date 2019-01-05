@@ -350,7 +350,7 @@
             <li><a href="/project/requirement"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
             <li><a href="<%=request.getContextPath()%>/project/unitwork/list"><i class="fa fa-circle-o"></i>단위업무 정의서</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i>간트차트</a></li>
-            <li><a href="<%=request.getContextPath()%>/project/listUsecase"><i class="fa fa-circle-o"></i>use-case</a></li>
+            <li><a href="<%=request.getContextPath()%>/project/usecase/view"><i class="fa fa-circle-o"></i>use-case</a></li>
           </ul>
         </li>
         
@@ -366,27 +366,12 @@
           </ul>
         </li>
         
-        
-		
-		<c:choose>
-		<c:when test="${logonProject.fNum != 0 }">
-			<li>
-				<a href="<%=request.getContextPath() %>/project/finance/list?fNum=${logonProject.fNum}">
-					<i class="fa fa-link"></i> 
-					<span>예산관리</span> 
-				</a>
-			</li>
-		</c:when>
-		<c:otherwise>
-			<li><a href="<%=request.getContextPath() %>/project/finance/create" > <i class="fa fa-link"></i>
-					<span>예산관리</span>
-			</a></li>
-		</c:otherwise>
-		</c:choose>
-	
-
-
-
+		<li>
+			<a href="<%=request.getContextPath() %>/project/finance/list?fNum=${logonProject.fNum}">
+				<i class="fa fa-link"></i> 
+				<span>예산관리</span> 
+			</a>
+		</li>
 
 		<li>
            <a href="#">

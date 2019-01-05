@@ -20,21 +20,23 @@ public class UseCaseServiceImpl implements UseCaseService {
 	}
 
 	@Override
-	public void delete(String uUuid) throws SQLException {
-		usecaseDAO.deleteUseCase(uUuid);
+	public void delete(String uuuid) throws SQLException {
+		usecaseDAO.deleteUseCase(uuuid);
 
 	}
 
 	@Override
-	public UseCaseVO read(String uUuid) throws SQLException {
-		UseCaseVO usecase = (UseCaseVO)usecaseDAO.selectUseCaseByuUuid(uUuid);
+	public UseCaseVO read(String uuuid) throws SQLException {
+		UseCaseVO usecase = (UseCaseVO)usecaseDAO.getPhoto(uuuid);
 		return usecase;
 	}
 
 	@Override
-	public List<UseCaseVO> readList(String uUuid) throws SQLException {
-		List<UseCaseVO> usecaseList = usecaseDAO.selectUseCaseByuUuid(uUuid);
+	public List<UseCaseVO> readList(String uuuid) throws SQLException {
+		List<UseCaseVO> usecaseList = usecaseDAO.selectUseCaseByuUuid(uuuid);
 		return usecaseList;
 	}
+	
+
 
 }

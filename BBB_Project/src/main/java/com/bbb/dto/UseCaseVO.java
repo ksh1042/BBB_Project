@@ -1,50 +1,74 @@
 package com.bbb.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class UseCaseVO {
 	
-	private String uUuid;
+	private String uuuid;
 	private String fileName;
 	private String savePath;
+	private String writer;
 	private Date indate;
-	private String content;
 	
-	public String getuUuid() {
-		return uUuid;
+	private List<UseCaseVO> attachList=new ArrayList<UseCaseVO>();
+
+	public String getUuuid() {
+		return uuuid;
 	}
-	public void setuUuid(String uUuid) {
-		this.uUuid = uUuid;
+
+	public void setUuuid(String uuuid) {
+		this.uuuid = uuuid;
 	}
+
 	public String getFileName() {
 		return fileName;
 	}
+
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
+
 	public String getSavePath() {
 		return savePath;
 	}
+
 	public void setSavePath(String savePath) {
 		this.savePath = savePath;
 	}
+
+	public String getWriter() {
+		return writer;
+	}
+
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+
 	public Date getIndate() {
 		return indate;
 	}
+
 	public void setIndate(Date indate) {
 		this.indate = indate;
 	}
-	public String getContent() {
-		return content;
+
+	public List<UseCaseVO> getAttachList() {
+		return attachList;
 	}
-	public void setContent(String content) {
-		this.content = content;
+
+	public void setAttachList(List<UseCaseVO> attachList) {
+		this.attachList = attachList;
 	}
+
 	@Override
 	public String toString() {
-		return "UseCaseVO [uUuid=" + uUuid + ", fileName=" + fileName + ", savePath=" + savePath + ", indate=" + indate
-				+ ", content=" + content + "]";
+		return "UseCaseVO [uuuid=" + uuuid + ", fileName=" + fileName + ", savePath=" + savePath + ", writer=" + writer
+				+ ", indate=" + indate + ", attachList=" + attachList + "]";
 	}
+
 	
+
 	
 }

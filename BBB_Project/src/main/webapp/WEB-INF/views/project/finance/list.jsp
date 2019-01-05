@@ -17,9 +17,16 @@
 			<span class="info-box-text">예산 잔액</span>
 			<button style="float: right;" type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-finance">예산입력</button>
 			<span class="info-box-number">
+				<c:if test="${financeTotal != 0 }" >
 				<h3>
 					<fmt:formatNumber pattern="###,###" value="${financeTotal }" /><small> won</small>
 				</h3>
+				</c:if>
+				<c:if test="${financeTotal == 0 }" >
+				<h3>
+					등록된 예산정보가 존재하지 않습니다.
+				</h3>
+				</c:if>
 			</span>
 		</div>
 	</div>
@@ -43,7 +50,7 @@
 			<div class="col-md-12">
 				<!-- The time line -->
 				<ul class="timeline">
-				
+					<c:if test="${!empty financeRegList}" >
 						<c:forEach var="detailList" items="${financeRegList}">
 							<!-- timeline time label -->
 							<li class="time-label" style="margin-top: 10px;">
@@ -111,15 +118,16 @@
 							&nbsp;	
 						</c:forEach>
 						<li><i class="fa fa-clock-o bg-gray"></i></li>
+					</c:if>
 				
 				</ul>
-		<%-- 		<c:if test="${empty financeDetailList}">
+				<c:if test="${empty financeDetailList}">
 					<tr>
 						<td style="text-align: center;" colspan="5">
 						등록된 예산정보가 존재하지않습니다.
 						</td>
 					</tr>
-				</c:if> --%>
+				</c:if>
 			</div>
 			<!-- /.col -->
 		</div>

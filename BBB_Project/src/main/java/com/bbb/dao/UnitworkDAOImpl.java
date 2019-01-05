@@ -1,10 +1,14 @@
 package com.bbb.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
+import com.bbb.controller.Criteria;
 import com.bbb.dto.UnitworkHistVO;
 import com.bbb.dto.UnitworkVO;
 
@@ -21,8 +25,17 @@ public class UnitworkDAOImpl implements UnitworkDAO {
 	}
 
 	@Override
-	public List<UnitworkHistVO> selectUnitworkHistoryByRdNum(int udNum) throws SQLException {
-		return session.selectList("Unitwork.selectUnitworkHistoryByRdNum", udNum);
+	public List<UnitworkHistVO> selectUnitworkHistoryByRdNum(Criteria cri, int udNum) throws SQLException {
+		int offset = cri.getPageStartRowNum();
+		int limit = cri.getPerPageNum();
+		RowBounds bound = new RowBounds(offset, limit);
+		
+		return session.selectList("Unitwork.selectUnitworkHistoryByRdNum", udNum, bound);
+	}
+	
+	@Override
+	public int selectUnitworkHistoryCountByRdNum(int udNum) throws SQLException {
+		return session.selectOne("Unitwork.selectUnitworkHistoryCountByRdNum", udNum);
 	}
 
 	@Override
@@ -54,8 +67,10 @@ public class UnitworkDAOImpl implements UnitworkDAO {
 	}
 
 	@Override
-	public void deleteUDD(UnitworkVO unit) throws SQLException {
-		session.update("Unitwork.deleteUDD", unit);
+	public void deleteUDD(int udNum) throws SQLException {
+		session.update("Unitwork.deleteUDD", udNum);
 	}
+
+	
 
 }

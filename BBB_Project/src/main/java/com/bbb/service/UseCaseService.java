@@ -9,23 +9,11 @@ public interface UseCaseService {
 	
 	void create(UseCaseVO usecase) throws SQLException;
 	
-	void delete(String uUuid) throws SQLException;
+	void delete(String uuuid) throws SQLException;
 	
-	UseCaseVO read(String uUuid) throws SQLException;
+	UseCaseVO read(String uuuid) throws SQLException;
 	
-	List<UseCaseVO> readList(String uUuid) throws SQLException;
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	List<UseCaseVO> readList(String uuuid) throws SQLException;
+
 	
 }

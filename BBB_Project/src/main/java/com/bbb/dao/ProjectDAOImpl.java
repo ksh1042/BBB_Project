@@ -92,6 +92,12 @@ public class ProjectDAOImpl implements ProjectDAO{
 		
 	}
 
+	@Override
+	public void insertUsecase(ProjectVO project) throws SQLException {
+		session.update("Project.updateUseCase", project);
+		
+	}
+
 	
 
 	

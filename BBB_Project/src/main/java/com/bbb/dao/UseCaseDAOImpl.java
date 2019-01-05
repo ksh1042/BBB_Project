@@ -20,15 +20,21 @@ public class UseCaseDAOImpl implements UseCaseDAO {
 	}
 
 	@Override
-	public void deleteUseCase(String uUuid) throws SQLException {
-		session.update("UseCase.deleteUseCase", uUuid);
+	public void deleteUseCase(String uuuid) throws SQLException {
+		session.update("UseCase.deleteUseCase", uuuid);
 
 	}
 
 	@Override
-	public List<UseCaseVO> selectUseCaseByuUuid(String uUuid) throws SQLException {
-		List<UseCaseVO> usecaseList = session.selectList("UseCase.selectUseCaseByuUuid", uUuid);
+	public List<UseCaseVO> selectUseCaseByuUuid(String uuuid) throws SQLException {
+		List<UseCaseVO> usecaseList = session.selectList("UseCase.selectUseCaseByuUuid", uuuid);
 		return usecaseList;
 	}
+	@Override
+	public UseCaseVO getPhoto(String uuuid) throws SQLException {
+		UseCaseVO usecase = session.selectOne("UseCase.selectUseCaseByuUuid", uuuid);
+	    return usecase;
+	}
+
 
 }

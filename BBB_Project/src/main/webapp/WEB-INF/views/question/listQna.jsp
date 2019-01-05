@@ -58,7 +58,6 @@
 							<th>제목</th>
 							<th>작성자</th>
 							<th>등록일</th>
-							<th style="width: 40px">VIEW</th>
 						</tr>
 						
 						<c:if test="${!empty listQna }">
@@ -76,9 +75,6 @@
 								<td>
 									<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${qna.indate}" />
 								</td>
-								<td>
-									<span class="badge bg-red">${qna.viewcnt }</span>
-								</td>
 							</tr>
 						</c:forEach>
 						</c:if>
@@ -94,7 +90,9 @@
 
 				<!-- 페이지번호 -->
 				<div class="box-footer clearfix">
+				<sec:authorize access="hasAuthority('ROLE_USER')">
 				<button id='newBtn' class="btn btn-primary" onclick="javascript:location.href='registerQna';">New QnA</button>
+				</sec:authorize>
 					<ul class="pagination link pagination-sm no-margin pull-right">
 						<c:if test="${pageMaker.prev}">
 							<li><a href="${pageMaker.startPage - 1}">&laquo;</a></li>

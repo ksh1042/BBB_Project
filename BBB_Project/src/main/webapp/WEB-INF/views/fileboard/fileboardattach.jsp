@@ -6,6 +6,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
+
 <script id="templateAttach" type="text/x-handlebars-template">
 <li style="width:10%;font-size:0.8em;position:relative;">
 	<a href="{{fullName}}" class="btn btn-default btn-xs pull-right delbtn"
@@ -35,8 +36,8 @@ $('.fileDrop').on('drop',function(event){
 	
 	for(var file of files){	
 		
-		if(file.size>1024*1024*20){
-			alert("파일 용량이 20MB를 초과하였습니다.");
+		if(file.size>1024*1024*5){
+			alert("파일 용량이 5MB를 초과하였습니다.");
 			return false;
 		}
 		
@@ -101,3 +102,15 @@ $('.uploadedList').on('click','.thumbnail',function(e){
 	form.submit();
 });
 </script>
+
+
+
+
+
+
+
+
+
+
+
+

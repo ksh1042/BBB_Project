@@ -3,6 +3,7 @@ package com.bbb.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.bbb.controller.Criteria;
 import com.bbb.dao.ProjectPartakeDAO;
 import com.bbb.dao.RequirementDAO;
 import com.bbb.dao.UnitworkDAO;
@@ -34,30 +35,35 @@ public class UnitworkServiceImpl implements UnitworkService {
 	}
 
 	@Override
-	public List<UnitworkHistVO> readUnitworkHistoryList(int udNum) throws SQLException {
-		return unitworkDAO.selectUnitworkHistoryByRdNum(udNum);
+	public List<UnitworkHistVO> readUnitworkHistoryList(Criteria cri, int udNum) throws SQLException {
+		return unitworkDAO.selectUnitworkHistoryByRdNum(cri, udNum);
 	}
 
 
+	@Override
+	public int readUnitworkHistoryCount(int udNum) throws SQLException {
+		return unitworkDAO.selectUnitworkHistoryCountByRdNum(udNum);
+	}
+	
+	
 	@Override
 	public void createUD(UnitworkVO unit) throws SQLException {
 		unitworkDAO.insertUD(unit);
 	}
-
+	
 	@Override
-	public void insertUDD(UnitworkVO unit, UnitworkHistVO unitHist) throws SQLException {
-		unitworkDAO.insertUDD(unit);
+	public void updateUDD(List<UnitworkVO> unitList, UnitworkHistVO unitHist, int udNum) throws SQLException {
+		unitworkDAO.deleteUDD(udNum);
+		for(UnitworkVO unit : unitList){
+			unit.setUdNum(udNum);
+			unitworkDAO.insertUDD(unit);
+		}
 		unitworkDAO.insertUDH(unitHist);
 	}
-
+	
 	@Override
-	public void updateUDD(UnitworkVO unit) throws SQLException {
-		
-	}
-
-	@Override
-	public void deleteUDD(UnitworkVO unit) throws SQLException {
-		// TODO Auto-generated method stub
+	public void deleteUDD(int udNum) throws SQLException {
+		unitworkDAO.deleteUDD(udNum);
 
 	}
 
@@ -70,5 +76,9 @@ public class UnitworkServiceImpl implements UnitworkService {
 	public List<RequirementVO> readRequirementList(int rdNum) throws SQLException {
 		return requirementDAO.selectRequirementListById(rdNum);
 	}
+
+	
+
+	
 
 }

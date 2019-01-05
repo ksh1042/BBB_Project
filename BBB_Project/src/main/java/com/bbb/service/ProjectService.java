@@ -29,5 +29,6 @@ public interface ProjectService {
 	public String readVerifyProjectName(String name) throws SQLException;
 	
 	public void createFnum(int pjNum, int fNum) throws SQLException;
-
+	
+	public void insertUsecase(ProjectVO project) throws SQLException;
 }

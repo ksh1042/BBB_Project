@@ -115,6 +115,12 @@ public class ProjectServiceImpl implements ProjectService{
 		
 	}
 
+	@Override
+	public void insertUsecase(ProjectVO project) throws SQLException {
+		projectDAO.insertUsecase(project);
+		
+	}
+
 	
 
 	

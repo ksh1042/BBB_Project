@@ -9,6 +9,9 @@
 		th {
 			text-align: center;
 		}
+		tr.even td {
+			background-color: : #FAFAFA;
+		}
 	</style>
 </head>
 <body>
@@ -27,7 +30,10 @@
 				<div class="box-header">
 					<h3 class="box-title">단위업무 리스트</h3>
 					<form id="frm" method="post">
-						<button type="button" class="btn btn-warning" onclick="modify_go();" style="float:right;">수정</button>
+						<div style="float:right;">
+							<button type="button" class="btn btn-primary" onclick="hist_go();">수정 이력</button>
+							<button type="button" class="btn btn-warning" onclick="modify_go();" style="margin-left:20px;">수정</button>						
+						</div>
 					</form>
 				</div>
 				<!-- /.box-header -->
@@ -80,20 +86,21 @@
 											aria-label="CSS grade: activate to sort column ascending">예상Step수</th>
 									</tr>
 									<c:if test="${ empty unitList }">
-										<tr role="row" class="odd"><td colspan="11">표시할 내용이 없습니다</td></tr>
+										<tr role="row" class="odd"><td colspan="11" style="text-align:center;">표시할 내용이 없습니다</td></tr>
 									</c:if>
 									<c:forEach var="unit" items="${ unitList }" varStatus="stat">
 										<tr role="row" class="${ (stat.count mod 2)==0 ? 'even':'odd' }">
 											<td>${ stat.count }</td>
 											<td>${ unit.udId }</td>
 											<td>${ unit.udName }</td>
-											<td><a href="#">${ unit.rdId }</a></td>
+											<td><a href="${ unit.rdId }">${ unit.rdId }</a></td>
 											<td>${ unit.rdName }</td>
-											<td>${ unit.udManager }</td>
-											<td><fmt:formatDate value="${ unit.extDate }" pattern="yyyy-MM-dd"/></td>
-											<td><fmt:formatDate value="${ unit.intDate }" pattern="yyyy-MM-dd"/></td>
-											<td><fmt:formatDate value="${ unit.pdDate }" pattern="yyyy-MM-dd"/></td>
-											<td><fmt:formatDate value="${ unit.devDate }" pattern="yyyy-MM-dd"/></td>
+											<td><a class="postboxLink" href="${ unit.udManager }">${ unit.udManager }</a></td>
+											<fmt:parseDate value="19600101" pattern="yyyyMMdd" var="checkDate" />
+											<td><fmt:formatDate value="${ unit.extDate > checkDate ? unit.extDate : '' }" pattern="yyyy-MM-dd"/></td>
+											<td><fmt:formatDate value="${ unit.intDate > checkDate ? unit.extDate : '' }" pattern="yyyy-MM-dd"/></td>
+											<td><fmt:formatDate value="${ unit.pdDate > checkDate ? unit.extDate : '' }" pattern="yyyy-MM-dd"/></td>
+											<td><fmt:formatDate value="${ unit.devDate > checkDate ? unit.extDate : '' }" pattern="yyyy-MM-dd"/></td>
 											<td>${ unit.estmate }</td>
 										</tr>
 									</c:forEach>
@@ -128,8 +135,16 @@
 	</section>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script>
+		$('a.postboxLink').on('click', function(e) {
+			e.preventDefault();
+			var url = "<%=request.getContextPath()%>/postbox/list?id="+$(this).attr('href');
+			window.open(url,"_blank_1","toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=900, height=800, top=300, left=300, ");
+		});
 		function modify_go() {
 			frm.submit();
+		}
+		function hist_go() {
+			location.href = '<%= request.getContextPath()%>/project/unitwork/history';
 		}
 	</script>
 </body>

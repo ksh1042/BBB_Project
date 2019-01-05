@@ -29,20 +29,6 @@ public class FinanceController {
 	@Autowired
 	private FinanceService financeService;
 	
-
-	
-	@RequestMapping(value="/create", method=RequestMethod.GET)
-	public void createFinanceGET() throws Exception{
-		
-	}
-	@RequestMapping(value="/create", method=RequestMethod.POST)
-	public String createFinancePOST(int pjNum, HttpServletRequest request) throws Exception{
-
-		int fNum = financeService.createFinance(pjNum);
-		
-	return "redirect:/project/finance/list?fNum"+fNum;
-	}
-	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public void financeList(Model model, HttpServletRequest request) throws Exception{
 		
@@ -51,25 +37,24 @@ public class FinanceController {
 		ProjectVO project = (ProjectVO)session.getAttribute("logonProject");
 		
 		int fNum = project.getfNum();
-		int total = financeService.createTotal(fNum);
-		
-		List<FinanceDetailVO> detailList = financeService.readFinanceDetailList(fNum);
-		List<FinanceDetailVO> regList = financeService.readRegdateByFnum(fNum);
-
-		System.out.println(detailList);
-		model.addAttribute("financeDetailList",detailList);
-		model.addAttribute("financeRegList", regList);
-		model.addAttribute("financeTotal", total);
-
-
-		
+		if(fNum == 0){
+			
+		}else{
+			int total = financeService.createTotal(fNum);
+			
+			List<FinanceDetailVO> detailList = financeService.readFinanceDetailList(fNum);
+			List<FinanceDetailVO> regList = financeService.readRegdateByFnum(fNum);
+			
+			System.out.println(detailList);
+			model.addAttribute("financeDetailList",detailList);
+			model.addAttribute("financeRegList", regList);
+			model.addAttribute("financeTotal", total);
+			
+		}	
 	}
 	
 	@RequestMapping(value="/register",method=RequestMethod.GET)
-	public void registerFinanceGET()throws Exception{
-		
-	}
-	
+	public void registerFinanceGET()throws Exception{}
 	
 	@RequestMapping(value="/register",method=RequestMethod.POST)
 	@ResponseBody
