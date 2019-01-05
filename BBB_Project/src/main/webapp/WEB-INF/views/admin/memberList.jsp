@@ -80,6 +80,7 @@
 									<div>
 									&nbsp;<button type="button" class="btn btn-info"  onclick="submit_go('${member.id}');">인증</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<button type="button" class="btn btn-danger"  onclick="cancel_go('${member.id}');">취소</button>
+									
 									</div>
 								</td>
 						</c:forEach>

@@ -6,11 +6,18 @@ import java.util.List;
 import com.bbb.controller.Criteria;
 import com.bbb.controller.SearchCriteria;
 import com.bbb.dao.BoardDAO;
+import com.bbb.dao.BoardNoticeDAO;
+import com.bbb.dto.BoardNoticeVO;
 import com.bbb.dto.BoardVO;
 
 public class BoardServiceImpl implements BoardService {
 
 	private BoardDAO boardDAO;
+	
+	private BoardNoticeDAO noticeDAO;
+	public void setBoardNoticeDAO(BoardNoticeDAO noticeDAO){
+		this.noticeDAO=noticeDAO;
+	}
 
 	public void setBoardDAO(BoardDAO boardDAO) {
 		this.boardDAO = boardDAO;
@@ -68,4 +75,12 @@ public class BoardServiceImpl implements BoardService {
 		int count = boardDAO.selectSearchBoardCount(cri);
 		return count;
 	}
+
+	@Override
+	public void createnotice(BoardVO board, BoardNoticeVO notice) throws SQLException {
+		boardDAO.insertBoard(board);
+		noticeDAO.insertBoardNotice(notice);
+		
+	}
+	
 }

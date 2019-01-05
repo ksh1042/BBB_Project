@@ -91,6 +91,7 @@
 		p:unitworkDAO-ref="unitworkDAO"
 		p:projectPartakeDAO-ref="projectPartakeDAO"
 		p:requirementDAO-ref="requirementDAO"/>
+	
 	<bean id="boardDAO" class="com.bbb.dao.BoardDAOImpl"
 		p:session-ref="sqlSession" />
 	<bean id="boardAttachDAO" class="com.bbb.dao.BoardAttachDAOImpl"
@@ -115,6 +116,15 @@
 	<bean id="replyService"
 		class="com.bbb.service.ReplyServiceImpl"
 		p:replyDAO-ref="replyDAO"
+	/>
+	
+	<bean id="boardnoticeDAO"
+		class="com.bbb.dao.BoardNoticeDAOImpl"
+		p:sqlSession-ref="sqlSession"
+	/>
+	<bean id="boardnoticeService"
+		class="com.bbb.service.BoardNoticeServiceImpl"
+		p:boardNoticeDAO-ref="boardnoticeDAO"
 	/>
 		
 </beans>

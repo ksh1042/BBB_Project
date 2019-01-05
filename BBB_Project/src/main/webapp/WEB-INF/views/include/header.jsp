@@ -335,7 +335,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<%=request.getContextPath()%>/fileboard/fileboardlist"><i class="fa fa-circle-o"></i>자료실</a></li>
-            <li><a href="<%=request.getContextPath()%>/notice/listPage"><i class="fa fa-circle-o"></i>공지사항</a></li>
+            <li><a href="<%=request.getContextPath()%>/boardnotice/listPage"><i class="fa fa-circle-o"></i>공지사항</a></li>
             <li><a href="<%=request.getContextPath()%>/board/listPage"><i class="fa fa-circle-o"></i>자유게시판</a></li>
           </ul>
         </li>

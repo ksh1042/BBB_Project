@@ -25,7 +25,7 @@ public class NoticeController {
 	@RequestMapping(value="/listPage", method=RequestMethod.GET)
 	public void listPage(@ModelAttribute("cri")SearchCriteria cri, Model model) throws Exception{
 	
-		List<NoticeVO> noticeList = service.listSearch(cri);
+		List<NoticeVO> noticeList = service.readlistSearch(cri);
 		model.addAttribute("noticeList",noticeList);
 		
 		PageMaker pageMaker = new PageMaker();
@@ -63,7 +63,7 @@ public class NoticeController {
 		
 		notice.setExpireDate(new Date());
 		
-		service.modify(notice);
+		service.update(notice);
 		
 		rttr.addAttribute("page",cri.getPage());
 		rttr.addAttribute("perPageNum",cri.getPerPageNum());
@@ -78,7 +78,7 @@ public class NoticeController {
 	@RequestMapping(value="/removePage",method=RequestMethod.POST)
 	public String removcePage(int nNum, SearchCriteria cri, RedirectAttributes rttr) throws Exception{
 		
-		service.remove(nNum);
+		service.delete(nNum);
 		
 		rttr.addAttribute("page",cri.getPage());
 		rttr.addAttribute("perPageNum",cri.getPerPageNum());

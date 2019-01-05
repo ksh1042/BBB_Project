@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <head>
-	<title>자유게시판</title>
+	<title>공지사항</title>
 </head>
 
 <body>
@@ -24,10 +24,10 @@
         <!-- general form elements -->
         <div class="box box-primary">
         <div class="box-header">
-          <h3 class="box-title">READ BOARD</h3>
+          <h3 class="box-title">READ BOARDNOTICE</h3>
         </div><!-- /.box-header -->
 
- <form role="form" action="modifyPage" method="post">
+ <form role="form" action="modifyPage">
     
     <input type='hidden' name='bNum' value ="${board.bNum}">
     <input type='hidden' name='pjNum' value ="${board.pjNum}">
@@ -54,7 +54,6 @@
         value="${board.writer}" readonly="readonly">
     </div>
   </div><!-- /.box-body -->
-<form role="form" action="" method="post">
   <div class="box-footer">
   	<sec:authorize access="hasAuthority('ROLE_USER')">
   	<c:if test="${loginUser.id eq board.writer }">
@@ -64,7 +63,6 @@
     </sec:authorize>
    		<button type="submit" id="listBtn" class="btn btn-primary">LIST</button>
   </div>
-  </form>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
@@ -82,6 +80,7 @@ $("#modifyBtn").on("click", function(){
 
 $("#removeBtn").on("click", function(){
 	formObj.attr("action", "removePage");
+	formObj.attr("method", "POST");		
 	formObj.submit();
 });
 

@@ -6,7 +6,7 @@
    
 	<update id="insertBoard">
 		insert into tbl_board(bnum,pjnum,title,content,writer,kind)
-		values(bnum_seq.nextval,#{pjNum},#{title},#{content},#{writer},#{kind})
+		values(bnum_seq.nextval,#{pjNum},#{title},#{content},#{writer},1)
 	</update>
 	
 	<update id="updateBoard">
@@ -36,20 +36,13 @@
 				<if test="searchType == 'w'.toString()">
 					and writer like '%'||#{keyword}||'%'
 				</if>
-				<if test="searchType == 'tw'.toString()">
-					and (
-					title like '%'||#{keyword}||'%'
-					or
-					writer like '%'||#{keyword}||'%'
-					)
-				</if>
 	</sql>
 	<select id="selectSearchBoardList" resultType="board">
 		<![CDATA[select *
 		from tbl_board
 		where bnum >0
 		]]>
-		and pjnum=${pjNum}
+		and pjnum=${pjNum} and kind = 1
 		<include refid="search" ></include>
 		order by bnum desc
 	</select>

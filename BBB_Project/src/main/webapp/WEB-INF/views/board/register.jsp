@@ -14,15 +14,9 @@
 				</div>
 				<!-- /.box-header -->
 <form role="form" method="post" action="register">
+<input type="hidden"
+				name='pjNum' value="${logonProject.pjNum }"class="form-control" placeholder="Project 번호를 입력해주세요">
 <table border="1">
-		
-		<div class="form-group">
-			<label for="exampleInputEmail1">PROJECT NO</label> 
-			<input type="number"
-				name='pjNum' class="form-control" placeholder="Project 번호를 입력해주세요">
-			<span class="help-block" id="pjNumHelp"></span>
-			<span class="glyphicon glyphicon-pencil form-control-feedback" id="fNameIcon"></span>
-		</div>
 		<div class="form-group">
 			<label for="exampleInputEmail1">Title</label> 
 			<input type="text"
@@ -68,30 +62,7 @@ var pjNumFlag = false;
 var titleFlag = false;
 
 /* 유효성검사 */
-$('input[name="pjNum"]').on('blur',function(e){
-	$(this).css({borderColor : 'red'});
-	var pjNum = $(this).val();
-	
-	if(pjNum == null || pjNum == ''){
-		$('#pjNumHelp').css({color:'red'});
-		$('#pjNumHelp').html('프로젝트 번호를 입력하세요.');
-		$(this).focus();
-		return;
-	}
-	if(pjNum.length > 20){
-		$('#pjNumHelp').css({color:'red'});
-		$('#pjNumHelp').html('프로젝트 번호는 20자를 넘지 않습니다.');
-		$(this).focus();
-		return;
-	}else{
-		$(this).css({ borderColor : 'green'});
-		$('span#pjNumHelp').html('');
-		pjNumFlag = true;
-	}
-	
-	/* 유효성 ajax */
-	verifyCheck();
-});
+
 $('input[name="title"]').on('blur',function(e){
 	$(this).css({borderColor : 'red'});
 	var title = $(this).val();
@@ -118,13 +89,6 @@ $('input[name="title"]').on('blur',function(e){
 
 /* 버튼 */
 $('#create_btn').on('click',function(e){
-	if(!pjNumFlag){
-		$('button#create_btn').prop('disable',true);
-		$('span#pjNumHelp').css({color:'red', fontWeight :'bold'});
-		$('span#pjNumHelp').html('');
-		$('input[name=pjNum]').css({borderColor:'red'});
-		return;
-	}
 	if(!titleFlag){
 		$('button#create_btn').prop('disable',true);
 		$('span#titleHelp').css({color:'red', fontWeight :'bold'});
@@ -163,18 +127,7 @@ $("#list_btn").on("click", function(){
 	location.href="<%=request.getContextPath()%>/board/listPage"
 });
 function verifyCheck() {
-	if(!pjNumFlag) {
-			$('button#create_btn').prop('disabled', true);
-			$('span#pjNumHelp').css({
-				color : 'red',
-				fontWeight : 'bold'
-			});
-			$('span#pjNumHelp').html('');
-			$('input[name=]').css({
-				borderColor : 'red'
-			});
-			return;
-		}
+	
 	if(!titleFlag) {
 		$('button#create_btn').prop('disabled', true);
 		$('span#titleHelp').css({
