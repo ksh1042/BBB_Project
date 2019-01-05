@@ -52,6 +52,9 @@
     <!-- Logo -->
     <a href="/main/" class="logo">
       <span class="logo-lg"><b>${logonProject.name }</b></span>
+    <sec:authorize access="hasAuthority('ROLE_ADMIN')">
+      <span class="logo-lg"><b>관리자 페이지</b></span>
+	</sec:authorize>
     </a>
 
     <!-- Header Navbar -->
@@ -293,6 +296,7 @@
       </div>
 
       <!-- search form (Optional) -->
+      <sec:authorize access="hasAuthority('ROLE_USER')">
       <form action="<%=request.getContextPath()%>/main/searchPList" method="get" class="sidebar-form">
         <div class="input-group">
           <input type="text" id="keywordInput" name="keyword" class="form-control" placeholder="프로젝트명 검색">
@@ -302,11 +306,12 @@
             </span>
         </div>
       </form>
+      </sec:authorize>
       <!-- /.search form -->
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">HEADER</li>
+        <li class="header">Menu</li>
         <!-- Optionally, you can add icons to the links -->
         <sec:authorize access="hasAuthority('ROLE_USER')">
         <li class="treeview">
