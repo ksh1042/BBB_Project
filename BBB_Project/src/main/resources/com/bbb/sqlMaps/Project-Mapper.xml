@@ -24,6 +24,11 @@
 		values(#{pjNum}, #{id}, 0)
 	</update>
 	
+	<update id="JoinCancelProject">
+		delete from tbl_project_partake
+		where id=#{id} and pjnum = #{pjNum}
+	</update>
+	
 	<select id="selectProjectList" resultType="project">
 		select *
 		from tbl_project

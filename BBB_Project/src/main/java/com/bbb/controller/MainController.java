@@ -111,6 +111,21 @@ public class MainController {
 		return entity;
 	}
 	
+	@RequestMapping(value="/joinCancel", method=RequestMethod.POST)
+	public ResponseEntity<String> cancelJoinProject(@RequestBody ProjectPartakeVO takeVO){
+		ResponseEntity<String> entity = null;
+
+		try {
+				projectService.cancelJoinProject(takeVO);
+				entity=new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+				entity=new ResponseEntity<String>(e1.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+			
+		return entity;
+	}
+	
 	@RequestMapping("/mainForm")
 	public String mainForm() throws Exception{
 		return "/main/main";

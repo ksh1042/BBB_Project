@@ -32,7 +32,7 @@
 				      				<td rowspan="2"><input class="join" id="${ProjectVO.pjNum }" type="button" value="참여중" disabled="disabled"></td>
 				      			</c:if>
 					        	<c:if test="${PartakeVO.assignYn eq 0}">
-				      				<td rowspan="2"><input class="join" id="${ProjectVO.pjNum }" type="button" value="신청중" disabled="disabled"></td>
+				      				<td rowspan="2"><input class="cancel" id="${ProjectVO.pjNum }" type="button" value="신청중"></td>
 				      			</c:if>
 				      			<c:if test="${PartakeVO.assignYn eq 2 }">
 			      					<td rowspan="2"><input class="join" id="${ProjectVO.pjNum }" type="button" value="신청하기" ></td>
@@ -107,6 +107,36 @@
 				alert("신청이실패했습니다. 잠시후 다시 시도해주세요.");
 			}
 		});
+	});
+	
+	$('.cancel').on('click', function(){
+		if(confirm("신청을 취소하시겠습니까?") == true){
+				var form = $(this).attr('id');
+				$.ajax({
+					type:"post",
+					url:"<%=request.getContextPath()%>/main/joinCancel",
+					data:JSON.stringify({
+						"id":id,
+						"pjNum":form,
+					}),
+					headers:{
+						"Content-Type":"application/json",
+						"X-HTTP-Method-Override":"post"
+					},
+					success:function(data){
+						if(data="SUCCESS"){
+							alert('신청이 취소되었습니다.');
+						}
+						
+						location.reload();
+					},
+					error:function(error){
+						alert("취소가 실패했습니다. 잠시후 다시 시도해주세요.");
+					}
+				});
+		}else{
+			return;
+		}
 	});
 	
 $(".link li a").on("click", function(event){

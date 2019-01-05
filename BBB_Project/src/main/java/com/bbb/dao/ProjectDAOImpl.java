@@ -44,7 +44,13 @@ public class ProjectDAOImpl implements ProjectDAO{
 	@Override
 	public void searchProjectJoin(ProjectPartakeVO takeVO) throws SQLException {
 		session.insert("Project.ProjectSearchJoin", takeVO);
-	}	
+	}
+	
+	@Override
+	public void joinCancelProject(ProjectPartakeVO takeVO) throws SQLException {
+		session.update("Project.JoinCancelProject", takeVO);
+	}
+
 	
 	// 내가 참여하고있는 프로젝트를 찾아오기 위해 DB에 등록된 Project의 모든 리스트를 가져온다.
 	@Override
@@ -87,6 +93,7 @@ public class ProjectDAOImpl implements ProjectDAO{
 		session.update("Project.deletePlan", pjNum);
 	}
 
+	
 	
 
 	

@@ -45,7 +45,12 @@ public class ProjectServiceImpl implements ProjectService{
 	public void joinProject(ProjectPartakeVO takeVO) throws Exception {
 		projectDAO.searchProjectJoin(takeVO);
 		
-	}	
+	}
+	
+	@Override
+	public void cancelJoinProject(ProjectPartakeVO takeVO) throws Exception {
+		projectDAO.joinCancelProject(takeVO);
+	}
 	
 	// 내가 참여하고있는 프로젝트 목록을 가져오기 위한 비교
 	@Override
@@ -113,6 +118,8 @@ public class ProjectServiceImpl implements ProjectService{
 	public void deletePlan(int pjNum) throws SQLException {
 		projectDAO.deletePlan(pjNum);
 	}
+
+	
 
 	
 
