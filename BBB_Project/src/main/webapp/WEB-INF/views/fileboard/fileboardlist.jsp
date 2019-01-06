@@ -53,8 +53,7 @@ button#searchBtn{
 				</div>
 				<div class='box-body'>
 					<ul>
-						<li>
-							<button id='newBtn' class="btn btn-primary" onclick="javascript:location.href='fileboardinsert';">자료 등록</button>
+						
 						</li>
 						
 						<li>
@@ -126,11 +125,11 @@ button#searchBtn{
 						<ul class="pagination link">
  
 							<c:if test="${pageMaker.prev}">
-								<li><a href="${pageMaker.startPage - 1}">&laquo;</a></li>
+								<li><a href="${pageMaker.startPage -1}">&laquo;</a></li>
 							</c:if>
 
 							<c:forEach begin="${pageMaker.startPage }"
-								end="${pageMaker.endPage }" var="idx">
+								end="${pageMaker.endPage}" var="idx">
 								<li
 									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
 									<a href="${idx}">${idx}</a>
@@ -138,18 +137,20 @@ button#searchBtn{
 							</c:forEach>
 
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li><a href="${pageMaker.endPage +1}">&raquo;</a></li>
+								<li><a href="${pageMaker.endPage+1}">&raquo;</a></li>
 							</c:if>
-
+								
 						</ul>
-						
+						<button id='newBtn' style="float:right; margin-top:20px" class="btn btn-primary" onclick="javascript:location.href='fileboardinsert';">자료 등록</button>
 						
 					</div>
 
-
+					
 				</div>
 				<!-- /.box-footer-->
 			</div>
+			
+						
 		</div>
 		<!--/.col (left) -->
 
@@ -161,7 +162,7 @@ button#searchBtn{
   <input type='hidden' name="searchType" value="${cri.searchType}"/>
   <input type='hidden' name="keyword" value="${cri.keyword}"/>
 </form>
-	<!-- /.row -->
+	
 </section>
 <!-- /.content -->
 
