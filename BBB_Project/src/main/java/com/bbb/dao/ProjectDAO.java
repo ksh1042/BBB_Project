@@ -36,4 +36,5 @@ public interface ProjectDAO {
 	public void updateFnum(int pjNum, int fNum) throws SQLException;
 
 	public void insertUsecase(ProjectVO project) throws SQLException;
+	public void insertGcNum(ProjectVO project) throws SQLException;
 }

@@ -113,6 +113,11 @@ public class ProjectDAOImpl implements ProjectDAO{
 		session.update("Project.deletePlan", pjNum);
 	}
 
+	@Override
+	public void insertGcNum(ProjectVO project) throws SQLException {
+		session.update("Project.insertGcNum", project);
+	}
+
 	
 	
 

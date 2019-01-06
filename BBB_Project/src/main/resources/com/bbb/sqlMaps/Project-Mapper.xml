@@ -82,7 +82,11 @@
 		set udNum = #{udNum}
 		WHERE pjNum = #{pjNum}
 	</update>
-
+	<update id="insertGcNum" parameterType="project">
+		UPDATE tbl_project
+		SET gcNum = #{gcNum}
+		WHERE pjNum = #{pjNum}
+	</update>
 </mapper>
 
 

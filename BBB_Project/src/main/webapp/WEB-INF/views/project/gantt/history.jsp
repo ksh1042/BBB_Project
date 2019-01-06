@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<body>
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="dec" uri="http://www.opensymphony.com/sitemesh/decorator" %>
+
+<body> 
 	<section class="content-header">
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">단위업무 수정이력</h1>
+					<h1 class="m-0 text-dark">간트차트 수정이력</h1>
 				</div>
 			</div>
 		</div>
@@ -28,7 +30,7 @@
 							</tr>
 							<c:if test="">
 							</c:if>
-							<c:forEach var="hist" items="${ unitHistList }">
+							<c:forEach var="hist" items="${ ganttHistList }">
 								<tr>
 									<td>${ hist.rownum }</td>
 									<td>${ hist.comm }</td>
@@ -62,6 +64,8 @@
 				</div>
 			</div>
 		</div>
+	</section>
+	<section class="content-footer">
 	</section>
 	<form id="jobForm">
 		<input type='hidden' name="page" value="${pageMaker.cri.page}" /> <input
