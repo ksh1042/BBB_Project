@@ -59,4 +59,22 @@ public class IssueDAOImpl implements IssueDAO{
 		return issue;
 	}
 
+	@Override
+	public void modifyIssue(IssueVO issue) throws SQLException {
+		session.update("Issue.updateIssue", issue);
+		
+	}
+
+	@Override
+	public void modifyIssueClose(int iNum) throws SQLException {
+		session.update("Issue.updateIssueClose",iNum);
+		
+	}
+
+	@Override
+	public void modifyIssueOpen(int iNum) throws SQLException {
+		session.update("Issue.updateIssueOpen",iNum);
+		
+	}
+
 }

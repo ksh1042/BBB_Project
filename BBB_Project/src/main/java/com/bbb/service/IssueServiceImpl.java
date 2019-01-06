@@ -32,5 +32,23 @@ public class IssueServiceImpl implements IssueService{
 		IssueVO issue=issueDAO.selectIssueByINum(iNum);
 		return issue;
 	}
-	
+
+	@Override
+	public void updateIssue(IssueVO issue) throws Exception {
+		issueDAO.modifyIssue(issue);
+		
+	}
+
+	@Override
+	public void updateIssueClose(int iNum) throws Exception {
+		issueDAO.modifyIssueClose(iNum);
+		
+	}
+
+	@Override
+	public void updateIssueOpen(int iNum) throws Exception {
+		issueDAO.modifyIssueOpen(iNum);
+		
+	}
+
 }

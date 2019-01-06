@@ -44,6 +44,7 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public void insertMember(MemberVO member) throws SQLException {
 		session.update("Member.insertMember",member);
+		session.update("Member.insertAuthority",member);
 
 	}
 

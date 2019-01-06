@@ -24,12 +24,12 @@
 	</sql>
 	
 	<select id="selectSearchIssueList" resultType="issue">
-		select * 
-		from tbl_issue
-		where inum is not null
-		and pjnum=#{pjNum}
+		SELECT rownum, inum, title, content, writer, indate, updatedate, openyn, pjNum
+		FROM TBL_ISSUE   
+		WHERE pjNum = #{pjNum}
+		and inum is not null
 		<include refid="search"></include>
-		order by inum desc
+		ORDER BY rownum desc
 	</select>
 	
 	<select id="selectSearchIssueCount" resultType="int">
@@ -52,5 +52,24 @@
 		from tbl_issue
 		where inum=#{iNum}
 	</select>
+	
+	<update id="updateIssue">
+		update tbl_issue
+		set title=#{title}, content=#{content}, updatedate=sysdate
+		where inum=#{iNum}
+	</update>
+	
+	<update id="updateIssueClose">
+		update tbl_issue
+		set openyn=1
+		where inum=#{iNum}	
+	</update>
+	<update id="updateIssueOpen">
+		update tbl_issue
+		set openyn=0
+		where inum=#{iNum}	
+	</update>
+	
+	
 
 </mapper>

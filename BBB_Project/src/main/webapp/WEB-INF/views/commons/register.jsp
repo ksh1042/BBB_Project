@@ -32,6 +32,15 @@
   <![endif]-->
 
 <!-- Google Font -->
+
+<style>
+.inputPhone{
+	width:95.4px;
+	height:34px;
+	border: 1px solid #CFCFCF;
+}
+
+</style>
 </head>
 
 <body class="hold-transition register-page">
@@ -47,13 +56,12 @@
 			<form action="register" method="post" name="registerForm" id="registerForm" > <!--enctype="multipart/form-data"  -->
 				<div>
 				<img class="profile-user-img img-responsive img-circle" src="/resources/images/profile.png" alt="User profile picture" id="profile" onclick="profile_go();"><br/>
-				<input type="file" name="image" id="uploadProfile" style="display:none;"/>
+				<input type="file" name="image" id="uploadProfile" style="display:none;">
 				</div>
 				<div class="form-group has-feedback">
-					<input type="text" name="id" class="form-control" placeholder="아이디"
-						onblur="checkId();" id="id"> <span
-						class="glyphicon glyphicon-log-in form-control-feedback"></span> <label
-						id="idState" style="font-size: 0.8em;"></label>
+					<input type="text" name="id" class="form-control" placeholder="아이디" onblur="checkId();" id="id"> 
+					<span class="glyphicon glyphicon-log-in form-control-feedback"></span> 
+					<label id="idState" style="font-size: 0.8em;"></label>
 				</div>
 				<div class="form-group has-feedback">
 					<input type="password" class="form-control" id="pwd" name="pwd"
@@ -68,14 +76,24 @@
 					<label id="emailState" style="font-size: 0.8em;"></label>
 				</div>
 				<div class="form-group has-feedback">
-					<input type="text" name="name" class="form-control"
-						placeholder="이름"> <span
-						class="glyphicon glyphicon-user form-control-feedback"></span>
+					<input type="text" onblur="checkName_go()" id="name" name="name" class="form-control"	placeholder="이름"> 
+					<span class="glyphicon glyphicon-user form-control-feedback"></span>
+					<label id="nameState" style="font-size: 0.8em;"></label>
 				</div>
-				<div class="form-group has-feedback">
-					<input type="text" name="phone" class="form-control"
-						placeholder="핸드폰"> <span
-						class="glyphicon glyphicon-phone form-control-feedback"></span>
+				<div class="form-group has-feedback"  oninput="checkPhone_go()">
+					<select class="inputPhone" id="phone1">
+						<option value="">::선택::</option>
+					    <option value="011">011</option>
+					    <option value="016">016</option>
+					    <option value="017">017</option>
+					    <option value="019">019</option>
+					    <option value="010">010</option>
+					</select>&nbsp;-&nbsp;
+					<input class="inputPhone" type="text" id="phone2" name="phone2" maxLength="4" placeholder="  4자리" required="required">&nbsp;-&nbsp;
+					<input class="inputPhone" type="text" id="phone3" name="phone3" maxLength="4" placeholder="  4자리">
+					<span class="glyphicon glyphicon-phone form-control-feedback"></span>
+					<label id="phoneState" style="font-size: 0.8em;"></label>
+					<input type="hidden" name="phone">
 				</div>
 				<div class="row">
 					<div class="col-xs-8">
@@ -105,48 +123,23 @@
 	<!-- iCheck -->
 	<script src="/resources/plugins/iCheck/icheck.min.js"></script>
 
-	<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
-
-	<script type="text/javascript">
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+<script type="text/javascript">
 	 
-	function register_go() {
-		if($("#idState").css("color")=="rgb(67, 116, 217)"){
-			if($("#pwdState").css("color")=="rgb(67, 116, 217)"){
-				if($("#emailState").css("color")=="rgb(67, 116, 217)"){
-					document.registerForm.submit();
-				}else{
-					alert("이메일이 존재합니다.이메일을 다시 입력해주세요.");
-				}
-				
-			}else{
-				alert("패스워드는 영문(대소문자구분),숫자,특수문자(~!@#$%^&*()-_? 만 허용)를 혼용하여 입력해주세요.");
-			}
-		}else{
-			alert("아이디가 존재합니다.다시 입력해주세요.");
-		}
+	function login_go(){
+		location.href="/commons/loginForm";
 	};
-		
-	function checkPwd() {
-			var UserPassword = $("#pwd").val();
-	
-			if (UserPassword.length < 8 || UserPassword.length > 16){
-				$("#pwdState").text("패스워드는  8~15자를 입력해주세요.");
-				$("#pwdState").css("color","#F15F5F");
-			}else{
-				if (!UserPassword
-						.match(/([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~,-])|([!,@,#,$,%,^,&,*,?,_,~,-].*[a-zA-Z0-9])/)) {
-					$("#pwdState").text("패스워드는 영문(대소문자구분),숫자,특수문자(~!@#$%^&*()-_? 만 허용)를 혼용하여 입력해주세요.");
-					$("#pwdState").css("color","#F15F5F");
-				}else{
-					$("#pwdState").text("사용가능한 패스워드입니다.");
-					$("#pwdState").css("color","#4374D9");
-				}
-			}
-		};
-		
+	 
 	function checkId(){
-		   var userid =  $("#id").val();
-	        $.ajax({
+
+		var userid =  $("#id").val();
+		
+		if (userid.length > 25){
+			$("#idState").text("아이디는 25자 이하로 입력해주세요.");
+			$("#idState").css("color","#F15F5F");
+		}else{
+
+			$.ajax({
 	            async: true,
 	            type : 'POST',
 	            url:'idCheck',
@@ -167,38 +160,129 @@
 	                alert("아이디를 입력해주세요.");
 	            }
 	        });
+		}
 	};	
+		
+	function checkPwd() {
+			var UserPassword = $("#pwd").val();
+	
+			if (UserPassword.length < 8 || UserPassword.length > 16){
+				$("#pwdState").text("패스워드는  8~15자를 입력해주세요.");
+				$("#pwdState").css("color","#F15F5F");
+			}else{
+				if (!UserPassword
+						.match(/([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~,-])|([!,@,#,$,%,^,&,*,?,_,~,-].*[a-zA-Z0-9])/)) {
+					$("#pwdState").text("패스워드는 영문(대소문자구분),숫자,특수문자(~!@#$%^&*()-_? 만 허용)를 혼용하여 입력해주세요.");
+					$("#pwdState").css("color","#F15F5F");
+				}else{
+					$("#pwdState").text("사용가능한 패스워드입니다.");
+					$("#pwdState").css("color","#4374D9");
+				}
+			}
+		};
+		
+	
 
 	function checkEmail(){
 		
         var userEmail =  $("#email").val(); 
-        $.ajax({
-            async: true,
-            type : 'POST',
-            url:'emailCheck',
-            data : userEmail,
-            dataType : "json",
-            contentType: "application/json; charset=UTF-8",
-            success : function(data) {
-            	if (data.cnt > 0) {
-            		$("#emailState").text("이메일이 존재합니다.");
-            		$("#emailState").css("color","#F15F5F");
-                } else {
-                	$("#emailState").text("사용가능한 이메일입니다.");
-                	$("#emailState").css("color","#4374D9");
-                }
-            },
-            error : function(error) {
-                
-                alert("이메일을 입력해주세요.");
-            }
-        });
+        
+        if(!userEmail.match(/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/)){
+        	$("#emailState").text("잘못된 이메일 형식입니다.");
+    		$("#emailState").css("color","#F15F5F");
+        }else{
+	        $.ajax({
+	            async: true,
+	            type : 'POST',
+	            url:'emailCheck',
+	            data : userEmail,
+	            dataType : "json",
+	            contentType: "application/json; charset=UTF-8",
+	            success : function(data) {
+	            	if (data.cnt > 0) {
+	            		$("#emailState").text("이메일이 존재합니다.");
+	            		$("#emailState").css("color","#F15F5F");
+	                } else {
+	                	$("#emailState").text("사용가능한 이메일입니다.");
+	                	$("#emailState").css("color","#4374D9");
+	                }
+	            },
+	            error : function(error) {
+	                
+	                alert("이메일을 입력해주세요.");
+	            }
+	        });
+        }
+        
 	};
 	
-	function login_go(){
-		location.href="/commons/loginForm";
-	};
+	function checkName_go(){
+
+		var inputName = $("#name").val();
+		
+		if (inputName.length > 25 || inputName.length < 1){
+			$("#nameState").text("이름은 25자리 이하로  입력해주세요.");
+			$("#nameState").css("color","#F15F5F");
+		}else{
+			$("#nameState").text("사용가능한 이름입니다.");
+			$("#nameState").css("color","#4374D9");
+		}
+		
+	}
 	
+	function checkPhone_go(){
+		
+		var phone1 = $("#phone1 option:selected").val();
+		var phone2 = $("#phone2").val();
+		var phone3 = $("#phone3").val();
+		
+		if ( phone1 == "") {
+			$("#phoneState").text("휴대폰 번호를 선택해주세요.");
+			$("#phoneState").css("color","#F15F5F");
+		}else{
+			if (phone2 == ""|| phone3 == "" || !phone2.match(/^[0-9]*$/) || !phone3.match(/^[0-9]*$/)){
+				$("#phoneState").text("휴대폰 번호는 숫자로만 입력해주세요.");
+				$("#phoneState").css("color","#F15F5F");
+			}else{
+				$("#phoneState").text("사용가능한 휴대폰 번호 입니다.");
+				$("#phoneState").css("color","#4374D9");
+			}
+		}
+
+		
+	}
+
+	function register_go() {
+		
+		var phone1 = $("#phone1 option:selected").text();
+		var phone2 = $("input[name=phone2]").val();
+		var phone3 = $("input[name=phone3]").val();
+		var phone = phone1+"-"+phone2+"-"+phone3;
+		$("input[name=phone]").val(phone);
+		
+		if($("#idState").css("color")=="rgb(67, 116, 217)"){
+			if($("#pwdState").css("color")=="rgb(67, 116, 217)"){
+				if($("#emailState").css("color")=="rgb(67, 116, 217)"){
+					if($("#nameState").css("color")=="rgb(67, 116, 217)"){
+					  if ($("#phoneState").css("color")=="rgb(67, 116, 217)") {
+							document.registerForm.submit();
+					  }else{
+						  alert("휴대폰 번호를 다시 확인해주세요.");
+					  }
+				}else{
+					alert("이름을 25자리 이하로 입력해주세요.");
+				}
+				
+			}else{
+				alert("이메일을 다시 확인해주세요.");
+			}
+		}else{
+			alert("패스워드는 영문(대소문자구분),숫자,특수문자(~!@#$%^&*()-_? 만 허용)를 혼용하여 입력해주세요.");
+		}
+	}else{
+		alert("아이디를 다시 확인해주세요.");
+	}
+}
 	<%-- function profile_go(){
 		$("#uploadProfile").click();
 		
@@ -229,8 +313,6 @@
 			});
 		});
 	}; --%>
-	 
-  
   
 </script>
 

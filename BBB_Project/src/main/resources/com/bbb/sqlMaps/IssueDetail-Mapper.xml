@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="IssueDetail">
+	
+	<select id="selectIssueDetailList" resultType="issueDetail">
+		select *
+		from tbl_issue_detail
+		where inum=#{iNum}
+		order by idnum asc
+	</select>
+	
+	<select id="countIssueDetail" resultType="int">
+		select count(idnum) 
+		from tbl_issue_detail
+		where inum=#{iNum}
+	</select>
+	
+	<update id="insertIssueDetail" >
+		insert into tbl_issue_detail(idnum,inum,content,writer)
+		values(idnum_seq.nextval,#{iNum},#{content},#{writer})
+	</update>
+	
+	<update id="updateIssueReply">
+		update tbl_issue_detail
+		set content=#{content},	updatedate=sysdate
+		where idnum=#{idNum}		
+	</update>
+	
+	<update id="deleteReply">
+		delete from tbl_issue_reply
+		where idnum=#{idNum}		
+	</update>
+	
+</mapper>

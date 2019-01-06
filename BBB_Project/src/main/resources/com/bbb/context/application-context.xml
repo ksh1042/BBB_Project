@@ -57,6 +57,14 @@
 		  class="com.bbb.service.IssueServiceImpl"
 		  p:issueDAO-ref="issueDAO"
 		  />  
+	<bean id="issueDetailDAO"
+	      class="com.bbb.dao.IssueDetailDAOImpl"
+	      p:session-ref="sqlSession" 
+	      />
+	<bean id="issueDetailService"
+		  class="com.bbb.service.IssueDetailServiceImpl"
+		  p:issueDetailDAO-ref="issueDetailDAO"
+		  />	  
 	<bean id="financeDAO"
 		  class="com.bbb.dao.FinanceDAOImpl"
 		  p:session-ref="sqlSession"

@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.bbb.controller.Criteria;
 import com.bbb.dto.IssueVO;
-import com.bbb.dto.QnaVO;
 
 public interface IssueDAO {
 
@@ -15,4 +14,8 @@ public interface IssueDAO {
 	int getQnaSeqNextValue() throws SQLException;
 	void insertIssue(IssueVO issue) throws SQLException; 
 	IssueVO selectIssueByINum(int iNum)throws SQLException;
+	void modifyIssue(IssueVO issue) throws SQLException; 
+	void modifyIssueClose(int iNum) throws SQLException;
+	void modifyIssueOpen(int iNum) throws SQLException;
+	
 }
