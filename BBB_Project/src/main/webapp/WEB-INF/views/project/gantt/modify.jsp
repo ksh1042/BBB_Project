@@ -44,73 +44,77 @@ td.gantt-cell {
 		</div>
 	</section>
 	<section class="content">
-		<div class="col-xs-9">
-			<div class="box">
-				<div class="box-header">
-					<h3 class="box-title">간트차트</h3>
-					<form id="frm" method="post">
-						<div id="btn-custom" style="float: right;">
-							<label class="control-label validateAlertMsg hidden"></label>
-							<button type="button" class="btn btn-warning"
-								onclick="hist_go();">뒤로</button>
-							<button type="submit" class="btn btn-primary"
-								style="margin-left: 20px; margin-right: 20px;">수정</button>
-						</div>
-					</form>
-				</div>
-				<!-- /.box-header -->
-				<div class="box-body">
-					<div id="example2_wrapper"
-						class="dataTables_wrapper form-inline dt-bootstrap">
-						<div class="row">
-							<div class="col-sm-6"></div>
-							<div class="col-sm-6"></div>
-						</div>
-						<div class="row">
-							<div class="col-sm-12">
-								<table id="tbl" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
-									<tr>
-										<th>요구사항명</th>
-										<th>단위업무ID</th>
-										<th>단위업무명</th>
-										<th>담당자</th>
-										<th>시작일</th>
-										<th>종료일</th>
-									</tr>
-									<c:forEach var="gantt" items="${ ganttList }">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+						<h3 class="box-title">간트차트</h3>
+						<form id="frm" method="post">
+							<div id="btn-custom" style="float: right;">
+								<label class="control-label validateAlertMsg hidden"></label>
+								<button type="button" class="btn btn-warning"
+									onclick="hist_go();">뒤로</button>
+								<button type="submit" class="btn btn-primary"
+									style="margin-left: 20px; margin-right: 20px;">수정</button>
+							</div>
+						</form>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<div id="example2_wrapper"
+							class="dataTables_wrapper form-inline dt-bootstrap">
+							<div class="row">
+								<div class="col-sm-6"></div>
+								<div class="col-sm-6"></div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<table id="tbl" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
 										<tr>
-											<td>
-												<input type="hidden" name="uddNum" value="${ gantt.uddNum }">
-												${ gantt.rdName }
-											</td>
-											<td>${ gantt.udId }</td>
-											<td>${ gantt.udName }</td>
-											<td>${ gantt.udManager }</td>
-											<td><input type="date" class="form-control" name="startDate" value='<fmt:formatDate value="${ gantt.startDate }" pattern="yyyy-MM-dd"/>' ></td>
-											<td><input type="date" class="form-control" name="endDate" value='<fmt:formatDate value="${ gantt.endDate }" pattern="yyyy-MM-dd"/>' ></td>
+											<th>요구사항명</th>
+											<th>단위업무ID</th>
+											<th>단위업무명</th>
+											<th>담당자</th>
+											<th>진행도</th>
+											<th>시작일</th>
+											<th>종료일</th>
 										</tr>
-									</c:forEach>
-								</table>
+										<c:forEach var="gantt" items="${ ganttList }">
+											<tr>
+												<td>
+													<input type="hidden" name="uddNum" value="${ gantt.uddNum }">
+													${ gantt.rdName }
+												</td>
+												<td>${ gantt.udId }</td>
+												<td>${ gantt.udName }</td>
+												<td>${ gantt.udManager }</td>
+												<td><input type="text" class="form-control" name="percentage" value="${ gantt.percentage }" size="1"></td>
+												<td><input type="date" class="form-control" name="startDate" value='<fmt:formatDate value="${ gantt.startDate }" pattern="yyyy-MM-dd"/>' ></td>
+												<td><input type="date" class="form-control" name="endDate" value='<fmt:formatDate value="${ gantt.endDate }" pattern="yyyy-MM-dd"/>' ></td>
+											</tr>
+										</c:forEach>
+									</table>
+								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-5">
-								<div class="dataTables_info" id="example2_info" role="status"
-									aria-live="polite">Showing <b>${ f:length(ganttList) }</b> entries</div>
+							<div class="row">
+								<div class="col-sm-5">
+									<div class="dataTables_info" id="example2_info" role="status"
+										aria-live="polite">Showing <b>${ f:length(ganttList) }</b> entries</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<!-- /.box-body -->
-				<div class="box-footer">
-					<div class="form-group">
-						<label>*코멘트</label>
-						<textarea class="form-control" name="comm" style="resize:none;" placeholder="수정사항 내용 및 설명을 입력하세요..."></textarea>
+					<!-- /.box-body -->
+					<div class="box-footer">
+						<div class="form-group">
+							<label>*코멘트</label>
+							<textarea class="form-control" name="comm" style="resize:none;" placeholder="수정사항 내용 및 설명을 입력하세요..."></textarea>
+						</div>
 					</div>
 				</div>
+				<!-- /.box -->
+				
 			</div>
-			<!-- /.box -->
-			
 		</div>
 		<input id="pjStartDate" type="hidden" value='<fmt:formatDate value="${ logonProject.startDate }" pattern="yyyy-MM-dd"/>'>
 		<input id="pjEndDate" type="hidden" value='<fmt:formatDate value="${ logonProject.endDate }" pattern="yyyy-MM-dd"/>'>
@@ -145,6 +149,24 @@ td.gantt-cell {
 			}
 		});
 		// allDateEach-verify.end
+		// ---------------------------------------------------------------------------------
+		// percentage-verify.start
+		$('input[name=percentage]').on('blur', function(e){
+			var perVal= $(this).val();
+			var pattern = /[^0-9]/;
+			
+			if($(this).val().match(pattern) || $(this).val() == ''){		// is not number
+				$('.validateAlertMsg').html(errorIcon + ' 0~100 사이의 숫자를 입력해주세요 ');
+				$('.validateAlertMsg').removeClass('hidden red orange');
+				$('.validateAlertMsg').addClass('red');
+				$(this).val('0').focus();
+				$(this).addClass('redError');
+			}else {
+				$('.validateAlertMsg').html('');
+				$(this).removeClass('redError');
+			}
+		});
+		// percentage-verify.end
 		// ---------------------------------------------------------------------------------
 		// submit.start
 		$('button[type=submit]').on('click', function(e){
@@ -246,6 +268,7 @@ td.gantt-cell {
 				for(var i=0; i<document.getElementsByName('uddNum').length; i++){
 					temp = {
 						uddNum : document.getElementsByName('uddNum')[i].value,
+						percentage : document.getElementsByName('percentage')[i].value,
 						startDate : document.getElementsByName('startDate')[i].value,
 						endDate : document.getElementsByName('endDate')[i].value,
 					}

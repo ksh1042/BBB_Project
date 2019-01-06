@@ -16,6 +16,7 @@
 		SELECT *
 		FROM view_gantt_unitwork
 		WHERE gcNum=#{gcNum}
+		ORDER BY startDate ASC
 	</select>
 	<select id="selectMinStartDateByGcNum" parameterType="int" resultType="date">
 		SELECT min(startDate)
@@ -49,9 +50,21 @@
 	</update>
 	<update id="updateGCD" parameterType="gantt">
 		UPDATE tbl_gantt_chart_detail
-		SET startDate=#{startDate}, endDate=#{endDate}
+		SET percentage=#{percentage}, startDate=#{startDate}, endDate=#{endDate}
 		WHERE uddNum=#{uddNum}
 	</update>
+	
+	<select id="selectGanttHistList" parameterType="int" resultType="ganttHist">
+		SELECT rownum, gcNum, updateDate, comm
+		FROM tbl_gantt_chart_history
+		WHERE gcNum=#{gcNum}
+		ORDER BY rownum DESC
+	</select>
+	<select id="selectGanttHistListCount" parameterType="int" resultType="int">
+		SELECT count(*)
+		FROM tbl_gantt_chart_history
+		WHERE gcNum=#{gcNum}
+	</select>
 </mapper>
 
 

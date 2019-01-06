@@ -67,6 +67,7 @@
 		<input type='hidden' name="page" value="${pageMaker.cri.page}" /> <input
 			type='hidden' name="perPageNum" value="${pageMaker.cri.perPageNum}" />
 	</form>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script>
 		$(".link li a").on("click", function(event) {
 			event.preventDefault();

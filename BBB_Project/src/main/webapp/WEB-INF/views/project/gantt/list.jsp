@@ -19,6 +19,9 @@ td.gantt-cell {
 	width: 20px;
 	background-color: #AA8888;
 }
+#chart_div>div>div>svg>g text:hover  {
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -40,8 +43,10 @@ td.gantt-cell {
 						<div id="btn-custom" style="float: right;">
 							<button type="button" class="btn btn-primary"
 								onclick="hist_go();">수정 이력</button>
-							<button type="submit" class="btn btn-warning"
-								style="margin-left: 20px; margin-right: 20px;">수정</button>
+							<c:if test="${ logonProject.creator eq loginUser.id }">
+								<button type="submit" class="btn btn-warning"
+									style="margin-left: 20px; margin-right: 20px;">수정</button>
+							</c:if>
 						</div>
 					</form>
 				</div>
@@ -86,20 +91,6 @@ td.gantt-cell {
 		google.charts.setOnLoadCallback(drawChart);
 
 		function drawChart() {
-			/* var ganttList = new Array();
-			var temp;
-			<c:forEach var="gantt" items="${ ganttList }">
-			temp = {		
-				gcNum : ${ gantt.gcNum },
-				uddNum : ${ gantt.uddNum },
-				udId : '${ gantt.udId }',
-				udName : '${ gantt.udName }',
-				startDate : Date(),
-				endDate : Date(<fmt:formatDate value="${gantt.endDate}" pattern="yyyy,MM,dd"/>),
-				percentage : ${ gantt.percentage }
-			};
-			ganttList.push(temp);
-			</c:forEach> */
 			
 			var data = new google.visualization.DataTable();
 			
@@ -111,16 +102,7 @@ td.gantt-cell {
 		    data.addColumn('number', 'Duration');
 		    data.addColumn('number', 'Percent Complete');
 		    data.addColumn('string', 'Dependencies');
-		    
-			/* 
-			data.addColumn('number', 'Task ID');
-			data.addColumn('number', 'Task Name');
-			data.addColumn('string', 'Resource');
-			data.addColumn('number', 'Duration');
-			data.addColumn('number', 'Percent Complete');
-			data.addColumn('string', 'Dependencies');
-			 */
-			 
+		   
 			
 			data.addRows([
 				<c:forEach var="gantt" items="${ganttList}">
@@ -137,50 +119,12 @@ td.gantt-cell {
 				],
 				</c:forEach>
 			]);
-			//awlefwaoifnawefbwelafubwaeilfbwaelfbawfjawebfliawebf
-			 //data.addRow( [ganttList[0].udId, ganttList[0].udName, ganttList[0].startDate, ganttList[0].endDate] );
-			/* data.addRows([
-					[ '2014Spring', 'Spring 2014', 'spring',
-							new Date(2014, 2, 22), new Date(2014, 5, 20), null,
-							100, null ],
-					[ '2014Summer', 'Summer 2014', 'summer',
-							new Date(2014, 5, 21), new Date(2014, 8, 20), null,
-							100, null ],
-					[ '2014Autumn', 'Autumn 2014', 'autumn',
-							new Date(2014, 8, 21), new Date(2014, 11, 20),
-							null, 100, null ],
-					[ '2014Winter', 'Winter 2014', 'winter',
-							new Date(2014, 11, 21), new Date(2015, 2, 21),
-							null, 100, null ],
-					[ '2015Spring', 'Spring 2015', 'spring',
-							new Date(2015, 2, 22), new Date(2015, 5, 20), null,
-							50, null ],
-					[ '2015Summer', 'Summer 2015', 'summer',
-							new Date(2015, 5, 21), new Date(2015, 8, 20), null,
-							0, null ],
-					[ '2015Autumn', 'Autumn 2015', 'autumn',
-							new Date(2015, 8, 21), new Date(2015, 11, 20),
-							null, 0, null ],
-					[ '2015Winter', 'Winter 2015', 'winter',
-							new Date(2015, 11, 21), new Date(2016, 2, 21),
-							null, 0, null ],
-					[ 'Football', 'Football Season', 'sports',
-							new Date(2014, 8, 4), new Date(2015, 1, 1), null,
-							100, null ],
-					[ 'Baseball', 'Baseball Season', 'sports',
-							new Date(2015, 2, 31), new Date(2015, 9, 20), null,
-							14, null ],
-					[ 'Basketball', 'Basketball Season', 'sports',
-							new Date(2014, 9, 28), new Date(2015, 5, 20), null,
-							86, null ],
-					[ 'Hockey', 'Hockey Season', 'sports',
-							new Date(2014, 9, 8), new Date(2015, 5, 21), null,
-							89, null ] ]); */
-
+			var parentDiv = $('#chart_div').parent();
 			var options = {
-				height : 400,
+				height : 40*${ fn:length( ganttList ) } + 50,
+				width : parentDiv.width(),
 				gantt : {
-					trackHeight : 30
+					trackHeight : 40
 				}
 			};
 

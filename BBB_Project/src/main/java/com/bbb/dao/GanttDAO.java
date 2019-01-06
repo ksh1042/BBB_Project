@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+import com.bbb.controller.Criteria;
 import com.bbb.dto.GanttHistVO;
 import com.bbb.dto.GanttVO;
 
@@ -18,4 +19,6 @@ public interface GanttDAO {
 	public void insertGanttDetail(GanttVO gantt) throws SQLException;
 	public void insertGanttHistory(GanttHistVO ganttHist) throws SQLException;
 	public void updateGanttDetail(GanttVO gantt) throws SQLException;
+	public List<GanttHistVO> selectGanttHist(Criteria cri, int gcNum) throws SQLException;
+	public int selectGanttHistCount(int gcNum) throws SQLException;
 }

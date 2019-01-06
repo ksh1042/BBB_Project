@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bbb.dto.GanttHistVO;
 import com.bbb.dto.GanttVO;
 import com.bbb.dto.ProjectVO;
+import com.bbb.dto.UnitworkHistVO;
 import com.bbb.service.GanttService;
 import com.bbb.service.UnitworkService;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -74,5 +75,18 @@ public class GanttController {
 			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return entity;
+	}
+	@RequestMapping(value="/history", method=RequestMethod.GET)
+	public void historyListGET(Criteria cri, HttpSession session, Model model) throws Exception {
+		ProjectVO selectProject = (ProjectVO)session.getAttribute("logonProject");
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount( ganttService.readUnitworkHistoryCount( selectProject.getGcNum() ) );
+		
+		List<GanttHistVO> ganttHistList = ganttService.readUnitworkHistoryList(cri, selectProject.getGcNum() );
+		
+		model.addAttribute("ganttHistList", ganttHistList);
+		model.addAttribute("pageMaker", pageMaker);
 	}
 }

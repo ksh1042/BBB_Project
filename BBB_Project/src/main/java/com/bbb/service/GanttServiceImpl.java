@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+import com.bbb.controller.Criteria;
 import com.bbb.dao.GanttDAO;
 import com.bbb.dao.ProjectDAO;
 import com.bbb.dto.GanttHistVO;
@@ -37,6 +38,16 @@ public class GanttServiceImpl implements GanttService {
 			ganttDAO.updateGanttDetail(gantt);
 		}
 		ganttDAO.insertGanttHistory(ganttHist);
+	}
+
+	@Override
+	public List<GanttHistVO> readUnitworkHistoryList(Criteria cri, int gcNum) throws SQLException {
+		return ganttDAO.selectGanttHist(cri, gcNum);
+	}
+
+	@Override
+	public int readUnitworkHistoryCount(int gcNum) throws SQLException {
+		return ganttDAO.selectGanttHistCount(gcNum);
 	}
 
 }

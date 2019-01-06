@@ -4,8 +4,10 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
+import com.bbb.controller.Criteria;
 import com.bbb.dto.GanttHistVO;
 import com.bbb.dto.GanttVO;
 
@@ -63,6 +65,18 @@ public class GanttDAOImpl implements GanttDAO {
 	@Override
 	public void updateGanttDetail(GanttVO gantt) throws SQLException {
 		session.update("Gantt.updateGCD", gantt);
+	}
+	@Override
+	public List<GanttHistVO> selectGanttHist(Criteria cri, int gcNum) throws SQLException {
+		int offset = cri.getPageStartRowNum();
+		int limit = cri.getPerPageNum();
+		RowBounds bound = new RowBounds(offset, limit);
+		
+		return session.selectList("Gantt.selectGanttHistList", gcNum, bound);
+	}
+	@Override
+	public int selectGanttHistCount(int gcNum) throws SQLException {
+		return session.selectOne("Gantt.selectGanttHistListCount", gcNum);
 	}
 
 }
