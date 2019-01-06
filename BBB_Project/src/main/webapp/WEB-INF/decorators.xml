@@ -18,7 +18,6 @@
 	
 	<decorator name="admin" page="decorator.jsp">		
 		<pattern>/admin/**</pattern>
-		<pattern>/question/**</pattern>
 	</decorator>
 	
 	<decorator name="plan" page="decorator.jsp">		
@@ -34,4 +33,9 @@
 	<decorator name="board" page="decorator.jsp">		
 		<pattern>/board/**</pattern>
 	</decorator>
+	
+	<decorator name="question" page="maindecorator.jsp">		
+		<pattern>/question/**</pattern>
+	</decorator>
+	
 </decorators>
