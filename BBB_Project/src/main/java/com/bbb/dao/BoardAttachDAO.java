@@ -14,4 +14,5 @@ public interface BoardAttachDAO {
 	public List<BoardAttachVO> selectAttachesBybNum(int bNum)throws SQLException;
 
 	public void deleteAllAttach(int bNum)throws SQLException;
+
 }

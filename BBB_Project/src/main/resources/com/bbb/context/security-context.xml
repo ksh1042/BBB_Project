@@ -31,8 +31,12 @@
 		
 		<intercept-url pattern="/project/my*" access="isAuthenticated()" />
 		<intercept-url pattern="/project/*" access="isAuthenticated()" />
+		<intercept-url pattern="/finance/*" access="isAuthenticated()" />
+		<intercept-url pattern="/board/**" access="isAuthenticated()" />
+		<intercept-url pattern="/notice/**" access="isAuthenticated()" />
 		<intercept-url pattern="/admin/**" access="hasAuthority('ROLE_ADMIN')" />
 		<intercept-url pattern="/question/**" access="permitAll" />
+		
 		
 		<!--  
 		anonymous() 인증되지 않은 사용자가 접근 가능
@@ -65,7 +69,6 @@
 	</http>
 	
 	<beans:bean id="loginSuccessSecurityHandler"
-
 		class="com.bbb.security.LoginSuccessSecurityHandler"
 		p:defaultTargetUrl="/main" />
 	<beans:bean id="loginFailureSecurityHandler"

@@ -1,7 +1,9 @@
 package com.bbb.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -15,6 +17,11 @@ public class ProjectDAOImpl implements ProjectDAO{
 	private SqlSession session;
 	public void setSqlSession(SqlSession session) {
 		this.session = session;
+	}
+	
+	@Override
+	public int pjNumSeq() throws SQLException {
+		return session.selectOne("Project.pjNumSeq");
 	}
 	
 	@Override
@@ -52,6 +59,11 @@ public class ProjectDAOImpl implements ProjectDAO{
 	}
 
 	@Override
+	public void insertProjectake(ProjectPartakeVO takeVO) throws SQLException {
+		session.update("Project.insertProjectake", takeVO);
+	}
+	
+	@Override
 	public String verifyProjectName(String name) throws SQLException {
 		return session.selectOne("Project.verifyProjectName", name);
 	}
@@ -61,5 +73,15 @@ public class ProjectDAOImpl implements ProjectDAO{
 		ProjectVO project = session.selectOne("Project.selectProjectByPjNum", pjNum);
 		return project;
 	}
+
+	@Override
+	public void insertPlan(ProjectVO project) throws SQLException {
+		session.update("Project.updateProjectPlan",project);
+	}
+
+	
+
+	
+
 
 }

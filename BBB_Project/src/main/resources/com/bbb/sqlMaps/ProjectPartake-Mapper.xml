@@ -15,5 +15,10 @@
 		where id=#{id}
 	</select>
 	
+	<select id="selectBindingMember" parameterType="int" resultType="projectPartake">
+  		SELECT *
+  		FROM tbl_project_partake
+  		where pjNum=#{pjNum}
+   </select>
 	
 </mapper>

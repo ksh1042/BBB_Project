@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="projectPlan">
+
+	<update id="insertPlan">
+		insert into tbl_plan(puuid, filename, savepath)
+		values(#{puuid}, #{fileName}, #{savePath})
+	</update>
+	
+	<select id="getPlanByPuuid" resultType="projectPlan">
+		select *
+		from tbl_plan
+		where puuid = #{puuid}
+	</select>
+	
+</mapper>

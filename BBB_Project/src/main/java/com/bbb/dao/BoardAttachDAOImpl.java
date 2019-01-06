@@ -16,14 +16,11 @@ public class BoardAttachDAOImpl implements BoardAttachDAO {
 	
 	private final String namespace = "BoardAttachMapper";
 	
-	
-	
-	
 	@Override
 	public void insertAttach(BoardAttachVO attach) throws SQLException {
 		session.update(namespace+".insertAttach",attach);
 	}
-
+	
 	@Override
 	public void deleteAttach(String uuid) throws SQLException {
 		session.update(namespace+".deleteAttach",uuid);
@@ -35,7 +32,7 @@ public class BoardAttachDAOImpl implements BoardAttachDAO {
 				session.selectList(namespace+".selectAttachBybNum",bNum);
 		return attachList;
 	}
-
+	
 	@Override
 	public void deleteAllAttach(int bNum) throws SQLException {
 		session.update(namespace+".deleteAllAttach",bNum);

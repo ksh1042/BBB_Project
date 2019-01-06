@@ -136,14 +136,20 @@ public class MainController {
 	public ResponseEntity<String> addProject(@RequestBody ProjectVO project, HttpServletRequest request) throws Exception {
 		ResponseEntity<String> entity = null;
 		
-		
-		
+		int pjNum = projectService.getSeq();
+		ProjectPartakeVO takeVO = new ProjectPartakeVO();
 		try{
+			project.setPjNum(pjNum);
 			projectService.addProject(project);
+			takeVO.setPjNum(pjNum);
+			takeVO.setId(project.getCreator());
+			projectService.addProjectake(takeVO);
+						
 			entity = new ResponseEntity<String>(HttpStatus.OK);
 		}catch(SQLException e){
 			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+		
 		
 		return entity;
 	}
