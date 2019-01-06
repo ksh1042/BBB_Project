@@ -52,27 +52,20 @@ public class ProjectServiceImpl implements ProjectService{
 		projectDAO.joinCancelProject(takeVO);
 	}
 	
-	// 내가 참여하고있는 프로젝트 목록을 가져오기 위한 비교
 	@Override
-	public List<ProjectVO> readMyProjectList(String id) throws SQLException {
-		
-		// 내가 참여하고있는 프로젝트의 리스트를 pjNum으로 비교하기 위하여 사용
-		List<Integer> myPartakeList = projectPartakeDAO.selectProjectPartakeList(id);
+	public List<ProjectVO> readMyProjectList() throws SQLException {
 		// DB에 저장되어있는 모든 프로젝트 목록
 		List<ProjectVO> projectList = projectDAO.selectProjectList();
-		// pjNum으로 비교한 값을 저장하기 위한 배열
-		List<ProjectVO> myProjectList = new ArrayList<ProjectVO>();
 		
-		for(ProjectVO project : projectList){
-			for(int myPartake : myPartakeList){
-				if(project.getPjNum() == myPartake){
-					myProjectList.add(project);
-				}
-			}
-		}
-		
-		return myProjectList;
-		
+		return projectList;
+	}
+	
+	@Override
+	public List<Integer> readMyProjectListCount(String id) throws SQLException {
+		// 내가 참여하고있는 프로젝트의 리스트를 pjNum으로 비교하기 위한 pjNum배열
+		List<Integer> myPartakeList = projectPartakeDAO.selectProjectPartakeList(id);
+				
+		return myPartakeList;
 	}
 
 	@Override
@@ -130,6 +123,8 @@ public class ProjectServiceImpl implements ProjectService{
 		projectDAO.insertUsecase(project);
 		
 	}
+
+	
 
 	
 

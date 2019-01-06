@@ -138,7 +138,29 @@ public class MainController {
 		HttpSession session=request.getSession();
 		//로그인 유저의 아이디
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
-		model.addAttribute("myPartakeList",projectService.readMyProjectList(loginUser.getId()));
+		String id = loginUser.getId();
+		// 참여 또는 신청중인 프로젝트 리스트
+		List<ProjectPartakeVO> myPartakeList = projectService.getBindingProject(id);
+		// 비교하기 위한 모든 프로젝트 리스트
+		List<ProjectVO> projectList = projectService.readMyProjectList();
+		// pjNum으로 비교한 현재 참여중인 프로젝트 리스트
+		List<ProjectVO> myProjectList = new ArrayList<ProjectVO>();
+		// pjNum으로 비교한 현재 신청중인 프로젝트 리스트
+		List<ProjectVO> bindProjectList = new ArrayList<ProjectVO>();
+				
+		for(ProjectVO project : projectList){
+			for(ProjectPartakeVO myPartake : myPartakeList){
+				if(project.getPjNum() == myPartake.getPjNum()){
+					if(myPartake.getAssignYn() == 1){
+						myProjectList.add(project);
+					}else{
+						bindProjectList.add(project);
+					}
+				}
+			}
+		}
+		model.addAttribute("myPartakeList",myProjectList);
+		model.addAttribute("bindProject", bindProjectList);
 	}
 	
 	@RequestMapping(value="/addProject", method=RequestMethod.GET)

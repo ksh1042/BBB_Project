@@ -18,7 +18,8 @@ public interface ProjectService {
 	public void cancelJoinProject(ProjectPartakeVO takeVO) throws Exception;
 	
 	// 프로젝트VO의 모든 정보를 가져와서 비교할때 쓰려고 가져옴 ㅅㅂ
-	List<ProjectVO> readMyProjectList(String id) throws SQLException;
+	List<ProjectVO> readMyProjectList() throws SQLException;
+	
 	List<ProjectPartakeVO> getBindingProject(String id) throws SQLException;
 	// 어드민에서 프로젝트 관리를 위해 사용
 	List<ProjectVO> allProjectList() throws SQLException;
