@@ -10,10 +10,12 @@ import javax.annotation.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bbb.dto.ReplyVO;
 import com.bbb.service.ReplyService;
@@ -26,7 +28,10 @@ public class ReplyController {
 	private ReplyService service;
 	
 	@RequestMapping(value="/all/{bNum}", method=RequestMethod.GET)
-	public ResponseEntity<List<ReplyVO>> list(@PathVariable("bNum") int bNum) throws Exception{
+	public ResponseEntity<List<ReplyVO>> list( @PathVariable("bNum") int bNum) throws Exception{
+
+		
+		
 		List<ReplyVO> replyList = service.getReplyList(bNum);
 		
 		ResponseEntity<List<ReplyVO>> entity = new ResponseEntity<List<ReplyVO>>(replyList,HttpStatus.OK);
@@ -48,7 +53,9 @@ public class ReplyController {
 	}
 	
 	@RequestMapping(value="/{bNum}/{page}",method = RequestMethod.GET)
+	@ResponseBody
 	public ResponseEntity<Map<String, Object>>listPage(@PathVariable("bNum") int bNum, @PathVariable("page") int page) throws Exception{
+		
 		ResponseEntity<Map<String,Object>> entity = null;
 		
 		Criteria cri = new Criteria();
@@ -63,8 +70,8 @@ public class ReplyController {
 		map.put("pageMaker", pageMaker);
 		
 		try{
-			List<ReplyVO> replyList = service.getReplyList(bNum,cri);
-			map.put("list", replyList);
+			List<ReplyVO> List = service.getReplyList(bNum,cri);
+			map.put("list", List);
 			entity = new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
 		}catch(SQLException e){
 			e.printStackTrace();

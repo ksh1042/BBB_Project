@@ -78,7 +78,7 @@ button#searchBtn{
 					</tr>
 						<c:if test="${!empty boardnoticeList }">
 						<c:forEach items="${boardnoticeList}" var="boardnotice">
-							<tr>
+							<tr background="red">
 								<td style="text-align: center;">${boardnotice.bNum}</td>
 								<td style="text-align: center;"><a
 									href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&bNum=${boardnotice.bNum}'>

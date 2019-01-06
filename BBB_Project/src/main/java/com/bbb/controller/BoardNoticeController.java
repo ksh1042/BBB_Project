@@ -115,9 +115,10 @@ public class BoardNoticeController {
 	
 	@RequestMapping(value="/modifyPage",method=RequestMethod.GET)
 	public void modifyPage(@ModelAttribute("cri")SearchCriteria cri, int bNum, Model model) throws Exception{
-		
+		BoardNoticeVO notice = (BoardNoticeVO)service.readBoardNoticeByBnum(bNum);
 		BoardVO board = (BoardVO)service.readBoardByBnum(bNum);
-		model.addAttribute("boardnotice",board);
+		model.addAttribute("boardnotice",notice);
+		model.addAttribute("board",board);
 		
 	}
 	

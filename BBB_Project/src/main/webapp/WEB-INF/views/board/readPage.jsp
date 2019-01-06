@@ -102,7 +102,7 @@ $("#listBtn").on("click", function(){
 								</div>
 								<div class="box-body">
 									<label for="exampleInputEmail1">Writer</label> 
-									<input class="form-control" readonly value="${loginUser.id}" type="text"  id="newReplyWriter">
+									<input class="form-control" readonly value="${loginUser.id}" type="text" name="writer"  id="newReplyWriter">
 									<span class="glyphicon glyphicon-pencil form-control-feedback" id="pNameIcon"></span> 
 									<label for="exampleInputEmail1">Reply Text</label> 
 									<input class="form-control" type="text" placeholder="REPLY TEXT" id="newReplyText">
@@ -150,13 +150,12 @@ $("#listBtn").on("click", function(){
 									</p>
 								</div>
 								<div class="modal-footer">
-									<sec:authorize access="hasAuthority('ROLE_USER')">
-  									<c:if test="${loginUser.id eq reply.writer }">
 											<button type="button" class="btn btn-info" id="replyModBtn">Modify</button>
 											<button type="button" class="btn btn-danger" id="replyDelBtn">DELETE</button>
-									</c:if>
-									</sec:authorize>
 									
+									
+								
+
 									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 								</div>
 							</div>
@@ -216,8 +215,10 @@ $("#listBtn").on("click", function(){
  <div class="timeline-item" >
   <span class="time">
     <i class="fa fa-clock-o"></i>{{prettifyDate indate}}
+	{{#if ${loginUser.id eq replyList.writer}}}
 		<a class="btn btn-primary btn-xs" id="modifyReplyBtn"
 	    data-toggle="modal" data-target="#modifyModal">Modify</a>
+	{{/if}}
   </span>
   <h3 class="timeline-header"><strong>{{rNum}}</strong> -{{writer}}</h3>
   <div class="timeline-body">{{content}} </div>		
