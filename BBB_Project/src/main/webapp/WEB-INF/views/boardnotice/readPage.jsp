@@ -29,7 +29,7 @@
 
  <form role="form" action="modifyPage" method="post">
     
-    <input type='hidden' name='nNum' value ="${board.nNum}">
+    <input type='hidden' name='bNum' value ="${board.bNum}">
     <input type='hidden' name='page' value ="${cri.page}">
     <input type='hidden' name='perPageNum' value ="${cri.perPageNum}">
     
@@ -49,12 +49,15 @@
     </div>
   </div><!-- /.box-body -->
 
-  <div class="box-footer" style="float: right";>
+  <div class="box-footer" style="float: right;">
     <button type="submit" id="listBtn" class="btn btn-primary">LIST</button>&nbsp;
-  	<sec:authorize access="hasAuthority('ROLE_MANAGER')">
+  <sec:authorize access="hasAuthority('ROLE_USER')">
+  <c:if test="${loginUser.id eq logonProject.creator }">
 	    <button type="submit" id="modifyBtn" class="btn btn-warning">Modify</button>&nbsp;
 	    <button type="submit" id="removeBtn" class="btn btn-danger">REMOVE</button>
-	</sec:authorize>
+  </c:if>
+  </sec:authorize>
+  
   </div>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>

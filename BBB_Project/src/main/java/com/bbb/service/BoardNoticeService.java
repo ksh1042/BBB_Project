@@ -13,12 +13,14 @@ public interface BoardNoticeService {
 	BoardNoticeVO read(int bNum)throws SQLException;
 	
 	BoardNoticeVO readBoardNoticeByBnum(int bNum) throws SQLException;
+	
+	BoardVO readBoardByBnum(int bNum)throws SQLException;
  	
 	void createNotice(BoardNoticeVO notice) throws SQLException;
 	
 	void create(BoardVO board) throws SQLException;
 	
-	void updateNotice(BoardNoticeVO notice) throws SQLException;
+	void update(BoardVO board)throws SQLException;
 	
 	void delete(int bNum)throws SQLException;
 	

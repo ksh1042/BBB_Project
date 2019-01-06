@@ -74,13 +74,14 @@ button#searchBtn{
 						<tr>
 							<th style="width: 10px; text-align: center;">BNO</th>
 							<th style="text-align: center;">NOTICE DATE</th>
+							
 					</tr>
 						<c:if test="${!empty boardnoticeList }">
 						<c:forEach items="${boardnoticeList}" var="boardnotice">
 							<tr>
-								<td style="text-align: center";>${boardnotice.bNum}</td>
-								<td style="text-align: center";><a
-									href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&nNum=${boardnotice.bNum}'>
+								<td style="text-align: center;">${boardnotice.bNum}</td>
+								<td style="text-align: center;"><a
+									href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&bNum=${boardnotice.bNum}'>
 										<fmt:formatDate pattern="yyyy-MM-dd"
 										value="${boardnotice.noticeDate}" /></a></td>
 							</tr>
@@ -99,13 +100,14 @@ button#searchBtn{
 						<tr>
 							<th style="width: 10px; text-align: center;">BNO</th>
 							<th style="text-align: center;">NOTICE DATE</th>
+							
 					</tr>
 						<c:if test="${!empty boardnoticeList }">
 						<c:forEach items="${boardnoticeList}" var="boardnotice">
 							<tr>
-								<td style="text-align: center";>${boardnotice.bNum}</td>
-								<td style="text-align: center";><a
-									href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&nNum=${boardnotice.bNum}'>
+								<td style="text-align: center;">${boardnotice.bNum}</td>
+								<td style="text-align: center;"><a
+									href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&bNum=${boardnotice.bNum}'>
 										<fmt:formatDate pattern="yyyy-MM-dd"
 										value="${boardnotice.noticeDate}" /></a></td>
 							</tr>
@@ -124,8 +126,10 @@ button#searchBtn{
 
 				<div class="box-footer">
 					<div style="float:right;">
-							<sec:authorize access="hasAuthority('ROLE_MANAGER')">
+							<sec:authorize access="hasAuthority('ROLE_USER')">
+							<c:if test="${loginUser.id eq logonProject.creator }">
 							<button id='newNtn' class="btn btn-primary" onclick="javascript:location.href='register';">New Notice</button>
+							</c:if>
 							</sec:authorize>
 					</div>
 					<div class="text-center">

@@ -20,7 +20,7 @@ public interface BoardNoticeDAO {
 	
 	BoardNoticeVO selectBoardNoticeByBnum(int bNum)throws SQLException;
 	
-	void updateBoardNotice(BoardNoticeVO notice)throws SQLException;
+	void updateBoard(BoardVO board)throws SQLException;
 	
 	void deleteBoardNotice(int bNum)throws SQLException;
 	

@@ -19,9 +19,9 @@
    	from dual
    </select>
    
-   <update id="updateBoardNotice">
-   		update tbl_board_notice
-   		set noticedate=#{noticeDate}
+   <update id="updateBoard">
+   		update tbl_board
+   		set title=#{title},content=#{content}
    		where bnum=#{bNum}
    </update>
 

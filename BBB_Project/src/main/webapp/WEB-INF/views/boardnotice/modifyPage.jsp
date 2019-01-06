@@ -57,7 +57,6 @@
 				
 				<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 				<script>
-				<script>
 				var titleFlag = false;
 				
 				$('input[name="title"]').on('blur',function(e){
@@ -120,10 +119,6 @@
 					$('button#saveBtn').prop('disabled',false);
 				}
 			</script>
-
-
-
-
 		</div>
 		<!-- /.box -->
 	</div>

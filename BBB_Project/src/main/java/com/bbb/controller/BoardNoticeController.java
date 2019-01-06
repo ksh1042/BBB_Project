@@ -86,18 +86,19 @@ public class BoardNoticeController {
 	}
 	
 	@RequestMapping(value="/readPage",method=RequestMethod.GET)
-	public void readPage(@ModelAttribute("cri") SearchCriteria cri, int bNum, Model model,HttpServletRequest request)throws Exception{
+	public void readPage(@ModelAttribute("cri") SearchCriteria cri, int bNum, Model model, HttpServletRequest request)throws Exception{
+		System.out.println(bNum);
 		HttpSession session = request.getSession();
 		ProjectVO project = (ProjectVO)session.getAttribute("logonProject");
 		cri.setPjNum(project.getPjNum());
 		
-		BoardVO board = (BoardVO)session.getAttribute("bNum");
-		bNum = service.readBoardNoticebNum();
-		BoardNoticeVO boardnotice = service.readBoardNoticeByBnum(bNum);
-		model.addAttribute("boardnotice",boardnotice);
+		BoardVO board = (BoardVO)service.readBoardByBnum(bNum);
+		BoardNoticeVO notice = (BoardNoticeVO)service.readBoardNoticeByBnum(bNum);
+		model.addAttribute("board",board);
+		model.addAttribute("boardnotice",notice);
 	}
 	
-	@RequestMapping(value="/remove",method=RequestMethod.POST)
+	@RequestMapping(value="/removePage",method=RequestMethod.POST)
 	public String removdPOST(SearchCriteria cri, int bNum, BoardVO board, BoardNoticeVO notice, RedirectAttributes rttr) throws Exception{
 
 		service.delete(bNum);
@@ -112,16 +113,18 @@ public class BoardNoticeController {
 		return "redirect:/boardnotice/listPage";
 	}
 	
-	@RequestMapping(value="/modify",method=RequestMethod.GET)
+	@RequestMapping(value="/modifyPage",method=RequestMethod.GET)
 	public void modifyPage(@ModelAttribute("cri")SearchCriteria cri, int bNum, Model model) throws Exception{
-		BoardNoticeVO boardnotice = service.readBoardNoticeByBnum(bNum);
-		model.addAttribute("boardnotice",boardnotice);
+		
+		BoardVO board = (BoardVO)service.readBoardByBnum(bNum);
+		model.addAttribute("boardnotice",board);
+		
 	}
 	
-	@RequestMapping(value="/modify",method=RequestMethod.POST)
-	public String modifyPagePOST(@RequestBody BoardNoticeVO notice, SearchCriteria cri, RedirectAttributes rttr) throws Exception{
+	@RequestMapping(value="/modifyPage",method=RequestMethod.POST)
+	public String modifyPagePOST(BoardNoticeVO notice, BoardVO board, SearchCriteria cri, RedirectAttributes rttr) throws Exception{
 		
-		service.updateNotice(notice);
+		service.update(board);
 		
 		rttr.addAttribute("page",cri.getPage());
 		rttr.addAttribute("perPageNum",cri.getPerPageNum());

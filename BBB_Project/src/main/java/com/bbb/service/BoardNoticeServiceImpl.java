@@ -27,11 +27,6 @@ public class BoardNoticeServiceImpl implements BoardNoticeService {
 		
 	}
 	@Override
-	public void updateNotice(BoardNoticeVO notice) throws SQLException {
-		boardnoticeDAO.updateBoardNotice(notice);
-		
-	}
-	@Override
 	public void delete(int bNum) throws SQLException {
 		boardnoticeDAO.deleteBoardNotice(bNum);
 		
@@ -97,6 +92,18 @@ public class BoardNoticeServiceImpl implements BoardNoticeService {
 	public int readBoardNoticebNum() throws SQLException {
 		int bNum = boardnoticeDAO.selectBoardNoticebNum();
 		return bNum;
+	}
+
+	@Override
+	public BoardVO readBoardByBnum(int bNum) throws SQLException {
+		BoardVO board = boardnoticeDAO.selectBoardByBnum(bNum);
+		return board;
+	}
+
+	@Override
+	public void update(BoardVO board) throws SQLException {
+		boardnoticeDAO.updateBoard(board);
+		
 	}
 	
 

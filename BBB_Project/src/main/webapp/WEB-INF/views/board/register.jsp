@@ -113,7 +113,7 @@ $('#create_btn').on('click',function(e){
 			"X-HTTP-Method-Override":"post"
 		},
 		success : function(data){
-			alert('공지글이 등록 되었습니다.');
+			alert('게시글이 등록 되었습니다.');
 			location.href="<%=request.getContextPath()%>/board/listPage"
 		},
 		error : function(error) {

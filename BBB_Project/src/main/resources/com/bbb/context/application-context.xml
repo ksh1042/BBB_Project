@@ -122,6 +122,7 @@
 		class="com.bbb.dao.BoardNoticeDAOImpl"
 		p:sqlSession-ref="sqlSession"
 	/>
+	
 	<bean id="boardnoticeService"
 		class="com.bbb.service.BoardNoticeServiceImpl"
 		p:boardNoticeDAO-ref="boardnoticeDAO"

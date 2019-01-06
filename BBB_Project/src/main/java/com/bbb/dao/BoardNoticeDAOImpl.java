@@ -34,11 +34,6 @@ public class BoardNoticeDAOImpl implements BoardNoticeDAO {
 		return bNum;
 	}
 	@Override
-	public void updateBoardNotice(BoardNoticeVO notice) throws SQLException {
-		session.update("BoardNotice.updateBoardNotice",notice);
-		
-	}
-	@Override
 	public void deleteBoardNotice(int bNum) throws SQLException {
 		session.update("BoardNotice.deleteBoardNotice",bNum);
 		
@@ -93,7 +88,7 @@ public class BoardNoticeDAOImpl implements BoardNoticeDAO {
 
 	@Override
 	public BoardVO selectBoardByBnum(int bNum) throws SQLException {
-		BoardVO board = (BoardVO)session.selectOne("BoardNotice.selctBoardByBnum",bNum);
+		BoardVO board = (BoardVO)session.selectOne("BoardNotice.selectBoardByBnum",bNum);
 		return board;
 	}
 
@@ -107,6 +102,12 @@ public class BoardNoticeDAOImpl implements BoardNoticeDAO {
 	public int selectSearchBoardNoticeCount(SearchCriteria cri) throws SQLException {
 		int rowCount = session.selectOne("BoardNotice.selectSearchBoardNoticeCount",cri);
 		return rowCount;
+	}
+
+	@Override
+	public void updateBoard(BoardVO board) throws SQLException {
+		session.update("BoardNotice.updateBoard",board);
+		
 	}
 	
 	
