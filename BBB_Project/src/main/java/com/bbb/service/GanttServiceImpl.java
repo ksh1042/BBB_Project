@@ -2,9 +2,12 @@ package com.bbb.service;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
+import com.bbb.dao.GanttDAO;
 import com.bbb.dao.ProjectDAO;
-import com.bbb.dto.ProjectVO;
+import com.bbb.dto.GanttHistVO;
+import com.bbb.dto.GanttVO;
 
 public class GanttServiceImpl implements GanttService {
 
@@ -14,15 +17,26 @@ public class GanttServiceImpl implements GanttService {
 		this.projectDAO = projectDAO;
 	}
 	
+	private GanttDAO ganttDAO;
+	public void setGanttDAO(GanttDAO ganttDAO) {
+		this.ganttDAO = ganttDAO;
+	}
+
 	@Override
-	public long getMinusDateCount(int pjNum) throws SQLException {
-		ProjectVO project = projectDAO.getProjectMain(pjNum);
-		Date start = project.getStartDate();
-		Date end = project.getEndDate();
-		
-		long minusValue = end.getTime() - start.getTime();
-		long result = minusValue / (24 * 60 * 60 * 1000) ;
-		return result;
+	public List<GanttVO> readGanttList(int gcNum) throws SQLException {
+		return ganttDAO.selectGanttList(gcNum);
+	}
+	@Override
+	public Date readMinDate(int gcNum) throws SQLException {
+		return ganttDAO.selectMinStartDate(gcNum);
+	}
+
+	@Override
+	public void updateGCD(List<GanttVO> ganttList, GanttHistVO ganttHist) throws SQLException {
+		for(GanttVO gantt : ganttList){
+			ganttDAO.updateGanttDetail(gantt);
+		}
+		ganttDAO.insertGanttHistory(ganttHist);
 	}
 
 }

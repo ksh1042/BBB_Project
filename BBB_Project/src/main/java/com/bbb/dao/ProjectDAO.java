@@ -33,4 +33,5 @@ public interface ProjectDAO {
 	public ProjectVO getProjectMain(int pjNum) throws SQLException;
 	
 	public void insertUdNum(ProjectVO project) throws SQLException;
+	public void insertGcNum(ProjectVO project) throws SQLException;
 }

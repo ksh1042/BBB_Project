@@ -351,12 +351,12 @@
 									<c:if test="${ logonProject.creator eq loginUser.id }">
 										<c:if test="${ logonProject.gcNum == 0 }">
 											<a
-												href="<%=request.getContextPath()%>/project/unitwork/create">
+												href="<%=request.getContextPath()%>/project/gantt/create">
 												<i class="fa fa-circle-o"></i>간트차트 생성
 											</a>
 										</c:if>
 										<c:if test="${ logonProject.gcNum != 0 }">
-											<a href="<%=request.getContextPath()%>/project/unitwork/list">
+											<a href="<%=request.getContextPath()%>/project/gantt/list">
 												<i class="fa fa-circle-o"></i>간트차트
 											</a>
 										</c:if>
@@ -366,7 +366,7 @@
 											</a>
 										</c:if>
 										<c:if test="${ logonProject.gcNum != 0 }">
-											<a href="<%=request.getContextPath()%>/project/unitwork/list">
+											<a href="<%=request.getContextPath()%>/project/gantt/list">
 												<i class="fa fa-circle-o"></i>간트차트
 											</a>
 										</c:if>

@@ -1,13 +1,18 @@
 package com.bbb.service;
 
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.bbb.controller.Criteria;
+import com.bbb.dao.GanttDAO;
 import com.bbb.dao.ProjectDAO;
 import com.bbb.dao.ProjectPartakeDAO;
 import com.bbb.dao.RequirementDAO;
 import com.bbb.dao.UnitworkDAO;
+import com.bbb.dto.GanttVO;
 import com.bbb.dto.ProjectPartakeVO;
 import com.bbb.dto.ProjectVO;
 import com.bbb.dto.RequirementVO;
@@ -36,6 +41,11 @@ public class UnitworkServiceImpl implements UnitworkService {
 		this.projectDAO = projectDAO;
 	}
 	
+	private GanttDAO ganttDAO;
+	public void setGanttDAO(GanttDAO ganttDAO){
+		this.ganttDAO = ganttDAO;
+	}
+	
 	@Override
 	public List<UnitworkVO> readUnitworkList(int udNum) throws SQLException {
 		return unitworkDAO.selectUnitworkListByRdNum(udNum);
@@ -54,13 +64,22 @@ public class UnitworkServiceImpl implements UnitworkService {
 	
 	
 	@Override
-	public int createUD(ProjectVO project) throws SQLException {
+	public Map<String, Integer> createUD(ProjectVO project) throws SQLException {
 		int udNum = unitworkDAO.selectUdNumSeqNextval();
-		unitworkDAO.insertUD(udNum);
-		project.setUdNum(udNum);
-		projectDAO.insertUdNum(project);
+		int gcNum = ganttDAO.selectGcNumSeqNextval();
 		
-		return udNum;
+		unitworkDAO.insertUD(udNum);
+		ganttDAO.createGanttChart(gcNum);
+		project.setUdNum(udNum);
+		project.setGcNum(gcNum);
+		projectDAO.insertUdNum(project);
+		projectDAO.insertGcNum(project);
+		
+		Map<String, Integer> returnMap = new HashMap<String, Integer>();
+		returnMap.put("udNum", udNum);
+		returnMap.put("gcNum", gcNum);
+		
+		return returnMap;
 	}
 	
 
@@ -74,29 +93,32 @@ public class UnitworkServiceImpl implements UnitworkService {
 		return requirementDAO.selectRequirementListById(rdNum);
 	}
 	
+
 	@Override
-	public void deleteUDDbyUddNum(List<Integer> uddNumList) throws SQLException {
-		
-		for(int uddNum : uddNumList){
+	public void updateUDD(List<UnitworkVO> updateList, List<UnitworkVO> createList, List<Integer> removeList,
+			ProjectVO project) throws SQLException {
+		for(int uddNum : removeList){
+			ganttDAO.deleteGanttDetailByUddNum(uddNum);
 			unitworkDAO.deleteUDD(uddNum);
 		}
-		
-	}
-
-	@Override
-	public void updateUDDbyList(List<UnitworkVO> unitList) throws SQLException {
-		for(UnitworkVO unit : unitList){
+		for(UnitworkVO unit : updateList){
 			unitworkDAO.updateUDD(unit);
 		}
-	}
-
-	@Override
-	public void createUDDbyList(List<UnitworkVO> unitList, int udNum) throws SQLException {
-		for(UnitworkVO unit : unitList){
+		for(UnitworkVO unit : createList){
+			
 			int uddNum = unitworkDAO.selectUddNumSeqNextval();
 			unit.setUddNum(uddNum);
-			unit.setUdNum(udNum);
+			unit.setUdNum(project.getUdNum());
+			
+			GanttVO gantt = new GanttVO();
+			gantt.setGcNum(project.getGcNum());
+			gantt.setUddNum(uddNum);
+			gantt.setStartDate(project.getStartDate());
+			gantt.setEndDate(project.getStartDate());
+			
+			
 			unitworkDAO.insertUDD(unit);
+			ganttDAO.insertGanttDetail(gantt);
 		}
 	}
 	

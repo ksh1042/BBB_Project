@@ -39,9 +39,12 @@ public class UnitworkController {
 	public String unitworkRegist(HttpSession session) throws Exception {
 		ProjectVO selectProject = (ProjectVO)session.getAttribute("logonProject");
 		
-		int udNum = unitworkService.createUD(selectProject);
+		Map<String, Integer> numberMap = unitworkService.createUD(selectProject);
 		
-		selectProject.setUdNum(udNum);
+		selectProject.setUdNum(numberMap.get("udNum"));
+		selectProject.setUdNum(numberMap.get("gcNum"));
+		
+		session.setAttribute("logonProject", selectProject);
 		
 		return "redirect:list";
 	}
@@ -98,10 +101,6 @@ public class UnitworkController {
 			}
 		}
 		
-		System.out.println("unitList : " + unitList);
-		System.out.println("createList : " + createList);
-		System.out.println("removeUddNumList : " + removeUddNumList);
-		System.out.println("comm : " + comm);
 		
 		try{
 			UnitworkHistVO unitHist = new UnitworkHistVO();
@@ -109,9 +108,7 @@ public class UnitworkController {
 			unitHist.setComm( comm );
 			unitHist.setUpdateDate( new Date() );
 			
-			unitworkService.deleteUDDbyUddNum(removeUddNumList);		// JSP에서 삭제된 리스트를 삭제하고
-			unitworkService.updateUDDbyList(unitList);					// 기존의 데이터를 갱신하고
-			unitworkService.createUDDbyList(createList, selectProject.getUdNum());				// 새로 들어온 데이터를 입력한다.
+			unitworkService.updateUDD(unitList, createList, removeUddNumList, selectProject);
 			
 			
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
@@ -119,18 +116,6 @@ public class UnitworkController {
 			e.printStackTrace();
 			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		/*
-		try{
-			UnitworkHistVO unitHist = new UnitworkHistVO();
-			unitHist.setUdNum( selectProject.getUdNum() );
-			unitHist.setUpdateDate(new Date());
-			unitHist.setComm(comm);
-			unitworkService.updateUDD(unitList, unitHist, selectProject.getUdNum());
-			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-		}catch(Exception e){
-			e.printStackTrace();
-			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}*/
 		return entity;
 	}
 	

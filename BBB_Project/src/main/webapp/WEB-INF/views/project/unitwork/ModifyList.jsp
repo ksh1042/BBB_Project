@@ -295,14 +295,18 @@
 			$.ajax({
 				url : '<%=request.getContextPath()%>/project/unitwork/update',
 				type : 'POST',
-				data : JSON.stringify( { unitList : data, comm : $('textarea[name=comm]').val(), removeUddNumList : removeUddNumList } ),
+				data : JSON.stringify({ 
+					unitList : data, 
+					comm : $('textarea[name=comm]').val(), 
+					removeUddNumList : removeUddNumList 
+				}),
 				headers:{
 					"Content-Type":"application/json;charset=utf8",
 					"X-HTTP-Method-Override":"post"
 				},
 		        success : function(data){
 					if(data == 'SUCCESS'){
-						alert('업데이트 성공!');
+						alert('수정되었습니다');
 						location.href='<%=request.getContextPath()%>/project/unitwork/list';
 					}
 				},
