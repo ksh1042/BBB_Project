@@ -15,20 +15,20 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">QnA 검색</h3>
+					<h3 class="box-title">검색</h3>
 					<div class="box-tools">
 						<div class="input-group input-group-sm" >
 							<div>
 								<form action="listQna">
-									<select name="searchType">
+									<select name="searchType" >
 										<option value="" ${cri.searchType==null?'selected':'' }>----</option>
 										<option value="t" ${cri.searchType eq 't'?'selected':'' }>Title</option>
 										<option value="w" ${cri.searchType eq 'w'?'selected':'' }>Writer</option>
-										<option value="tc" ${cri.searchType eq 'tw'?'selected':'' }>Title + Writer</option>
+										<option value="tc" ${cri.searchType eq 'tw'?'selected':'' }>All</option>
 									</select>
 									<input type="text" name="keyword" value="${pageMaker.cri.keyword }">
 									<button type="submit" >
-										<i class="fa fa-search" ></i>
+										<i class="fa fa-search"></i>
 									</button>
 								</form>
 							</div>
@@ -54,9 +54,9 @@
 					<table class="table table-bordered">
 						<tr>
 							<th>#</th>
-							<th>문의번호</th>
+							<th class="hidden-xs">문의번호</th>
 							<th>제목</th>
-							<th>작성자</th>
+							<th class="hidden-xs">작성자</th>
 							<th>등록일</th>
 						</tr>
 						
@@ -65,13 +65,13 @@
 
 							<tr>
 								<td>${status.count }</td>
-								<td>${qna.qaNum}</td>
+								<td class="hidden-xs">${qna.qaNum}</td>
 								<td>
 									<a href='readQna${pageMaker.makeSearch(pageMaker.cri.page) }&qaNum=${qna.qaNum}'>
 										${qna.title}
 									</a>
 								</td>
-								<td>${qna.writer}</td>
+								<td class="hidden-xs">${qna.writer}</td>
 								<td>
 									<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${qna.indate}" />
 								</td>

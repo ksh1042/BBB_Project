@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="decorator"
-	uri="http://www.opensymphony.com/sitemesh/decorator"%>
+<%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%
 	response.setHeader("Pragma", "No-cache");
 	response.setHeader("Cache-Control", "no-cache");
@@ -44,22 +44,30 @@
 <decorator:head />
 </head>
 
-<body class="hold-transition skin-blue layout-top-nav">
+<body class="hold-transition skin-blue layout-boxed layout-top-nav">
 	<div class="wrapper">
 	<%@ include file="/WEB-INF/views/commons/include/emailyn.jsp" %>
 		<header class="main-header">
 			
 			<nav class="navbar navbar-static-top" role="navigation">
 		
+	           	<sec:authorize access="hasAuthority('ROLE_USER')">
 				<a href="<%= request.getContextPath() %>/main/myPartakeList" class="logo">
 	           		<span class="logo-lg"><b>Project List</b></span>
 				</a>
-						
+				</sec:authorize>
+				<sec:authorize access="hasAuthority('ROLE_ADMIN')">
+				<a href="<%= request.getContextPath() %>/admin/mainForm" class="logo">
+      				<span class="logo-lg"><b>관리자 페이지</b></span>
+				</a>
+				</sec:authorize>	
+				
 				<div class="navbar-custom-menu">
 					<!-- TODO --- header 우측 메뉴바 -->
 					<ul class="nav navbar-nav">
 						
 						<!-- 프로젝트 검색 -->
+						<sec:authorize access="hasAuthority('ROLE_USER')">
 						<li class="hidden-xs">
 							<form class="navbar-form" role="search">
 		
@@ -74,6 +82,7 @@
 			
 							</form>
 						</li>
+						</sec:authorize>
 					
 						<!-- 사서함 버튼 -->
 						<li>
@@ -88,6 +97,7 @@
 						</li>
 						
 						 <!-- Domain Menu -->
+						<sec:authorize access="hasAuthority('ROLE_USER')">
 						<li class="dropdown notifications-menu">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
 								<i class="fa fa-gear"></i> 
@@ -111,6 +121,7 @@
 								<li class="footer"></li>
 							</ul>
 						</li>
+						</sec:authorize>
 						
 						<!-- Usermenu  -->
 						<li class="dropdown user user-menu">
@@ -151,6 +162,14 @@
 								</li>
 							</ul>
 						</li>
+						
+						<!-- 관리자 Control Sidebar Toggle Button -->
+          				<sec:authorize access="hasAuthority('ROLE_ADMIN')">
+				          <li>
+				            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+				          </li>
+				         </sec:authorize>
+						
 					</ul>
 					
 				</div>

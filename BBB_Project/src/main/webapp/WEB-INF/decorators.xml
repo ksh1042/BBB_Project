@@ -16,7 +16,7 @@
 		<pattern>/postbox/**</pattern>
 	</decorator>
 	
-	<decorator name="admin" page="decorator.jsp">		
+	<decorator name="admin" page="maindecorator.jsp">		
 		<pattern>/admin/**</pattern>
 	</decorator>
 	
@@ -26,7 +26,7 @@
 	<decorator name="fileboard" page="decorator.jsp">		
 		<pattern>/fileboard/**</pattern>
 	</decorator>
-	<decorator name="notice" page="decorator.jsp">		
+	<decorator name="notice" page="maindecorator.jsp">		
 		<pattern>/notice/**</pattern>
 	</decorator>
 	
