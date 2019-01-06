@@ -62,7 +62,7 @@
 							
 							<c:if test="${!empty listIssue }">
 							<c:forEach var="issue" items="${listIssue }">
-	
+								<c:if test="${loginUser.id eq issue.writer }">
 								<tr>
 									<td>${issue.rowNum}</td>
 									<td style="display:none;">${issue.iNum}</td>
@@ -84,6 +84,7 @@
 										</c:if>
 									</td>
 								</tr>
+								</c:if>
 							</c:forEach>
 							</c:if>
 							<c:if test="${empty listIssue }">
@@ -98,11 +99,9 @@
 	
 					<!-- 페이지번호 -->
 					<div class="box-footer clearfix">
-						<form action="myList" method="get">
 						<div style="float:left;margin-left:20px;">
-							<button type="submit" class="btn btn-primary">내 이슈</button>
+							<button type="button" class="btn btn-primary">내 이슈</button>
 						</div>
-						</form>
 						<div style="float:right;margin-right:10px;">
 							<button id='newBtn' class="btn btn-primary" onclick="registerIssue_go()">이슈 등록</button>
 						</div><br/>
@@ -179,6 +178,7 @@
 					   +"&keyword="
 					   +$('#keywordInput').val();
 	});
+
 
 
 

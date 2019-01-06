@@ -28,12 +28,6 @@
 <script src="<%=request.getContextPath()%>/resources/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<%=request.getContextPath()%>/resources/dist/js/adminlte.min.js"></script>
-<<<<<<< HEAD
-
-
-=======
-
->>>>>>> refs/remotes/origin/choi2
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->

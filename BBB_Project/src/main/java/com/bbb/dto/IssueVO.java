@@ -12,6 +12,7 @@ public class IssueVO {
 	private String writer;
 	private Date indate;
 	private Date updateDate;
+	private int rowNum;
 	
 	public int getiNum() {
 		return iNum;
@@ -61,11 +62,18 @@ public class IssueVO {
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
+	public int getRowNum() {
+		return rowNum;
+	}
+	public void setRowNum(int rowNum) {
+		this.rowNum = rowNum;
+	}
 	
 	@Override
 	public String toString() {
 		return "IssueVO [iNum=" + iNum + ", pjNum=" + pjNum + ", openyn=" + openyn + ", title=" + title + ", content="
-				+ content + ", writer=" + writer + ", indate=" + indate + ", updateDate=" + updateDate + "]";
+				+ content + ", writer=" + writer + ", indate=" + indate + ", updateDate=" + updateDate + ", rowNum="
+				+ rowNum + "]";
 	}
 	
 	

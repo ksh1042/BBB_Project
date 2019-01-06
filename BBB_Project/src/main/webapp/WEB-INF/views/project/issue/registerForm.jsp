@@ -35,7 +35,7 @@
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">내용</label>
-						<textarea id="content" class="form-control" name="content" rows="3" placeholder="내용을 작성하세요"></textarea>
+						<textarea id="content" class="form-control" name="content"  placeholder="내용을 작성하세요"></textarea>
 					</div>
 				</div>
 				<!-- /.box-body -->
@@ -65,14 +65,53 @@
 		<!-- /.content -->
 	      	
       
-      </section>	
-	</div>
+      </section>
+      </div>
+      
+   <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery-ui.min.js"></script>   
+   <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
+   <script src="<%=request.getContextPath()%>/resources/SE2/js/HuskyEZCreator.js"></script>
+   <script type="text/javascript">
+
+   var oEditors = []; // 개발되어 있는 소스에 맞추느라, 전역변수로 사용하였지만, 지역변수로 사용해도 전혀 무관 함.
+
+   // Editor Setting
+   nhn.husky.EZCreator.createInIFrame({
+   oAppRef : oEditors, // 전역변수 명과 동일해야 함.
+   elPlaceHolder : "content", // 에디터가 그려질 textarea ID 값과 동일 해야 함.
+   sSkinURI : "<%=request.getContextPath()%>/resources/SE2/SmartEditor2Skin.html", // Editor HTML
+   fCreator : "createSEditor2", // SE2BasicCreator.js 메소드명이니 변경 금지 X
+   htParams : {
+      
+      fOnBeforeUnload : function(){},
+      // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+      bUseToolbar : true,
+      // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+      bUseVerticalResizer : true,
+      // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+      bUseModeChanger : true, 
+   }
+   });
+
+  /*  $('#submitBtn').on('click',function(e){
+	   var form = $('form[role="form"]');
+	   
+	   // id가 smarteditor인 textarea에 에디터에서 대입         
+	   oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+	   
+	   form.submit();
+	      });
+         
+       */
+   </script>	
+	
 
 
 
 <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
 <script>
 	function register_go(){
+		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 		document.registerIssueForm.submit();
 	}
 </script>
