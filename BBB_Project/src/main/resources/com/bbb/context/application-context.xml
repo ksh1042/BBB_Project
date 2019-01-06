@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>	
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
@@ -8,135 +8,79 @@
 
 	<bean id="memberService" class="com.bbb.service.MemberServiceImpl"
 		p:memberDAO-ref="memberDAO" />
-	<bean id="mailNotifier"
-	  class="com.bbb.mail.MimeAttachNotifier"
-	  p:mailSender-ref="mailSender" />
+	<bean id="mailNotifier" class="com.bbb.mail.MimeAttachNotifier"
+		p:mailSender-ref="mailSender" />
 	<bean id="postboxDAO" class="com.bbb.dao.PostboxDAOImpl"
 		p:sqlSession-ref="sqlSession" />
-		
+
 	<bean id="postboxService" class="com.bbb.service.PostboxServiceImpl"
 		p:postboxDAO-ref="postboxDAO" />
-		
-	<bean id="projectDAO"
-	      class="com.bbb.dao.ProjectDAOImpl"
-		  p:sqlSession-ref="sqlSession"/>
-		  
-	<bean id="projectPartakeDAO" 
-		  class="com.bbb.dao.ProjectPartakeDAOImpl"
-		  p:sqlSession-ref="sqlSession"
-		  />
-	
-	<bean id="projectService" 
-		  class="com.bbb.service.ProjectServiceImpl"
-		  p:projectDAO-ref="projectDAO"
-		  p:projectPartakeDAO-ref="projectPartakeDAO"
-		  />
-	<bean id="qnaDAO"
-	      class="com.bbb.dao.QnaDAOImpl"
-	      p:session-ref="sqlSession"
-	      />
-	<bean id="qnaService"
-		  class="com.bbb.service.QnaServiceImpl"
-		  p:qnaDAO-ref="qnaDAO"
-		  />
-	<bean id="qnaReplyDAO"
-	      class="com.bbb.dao.QnaReplyDAOImpl"
-	      p:session-ref="sqlSession" 
-	      />
-	<bean id="qnaReplyService"
-		  class="com.bbb.service.QnaReplyServiceImpl"
-		  p:qnaReplyDAO-ref="qnaReplyDAO"
-		  />
-	<bean id="issueDAO"
-	      class="com.bbb.dao.IssueDAOImpl"
-	      p:session-ref="sqlSession"
-	      />
-	<bean id="issueService"
-		  class="com.bbb.service.IssueServiceImpl"
-		  p:issueDAO-ref="issueDAO"
-		  />  
-	<bean id="financeDAO"
-		  class="com.bbb.dao.FinanceDAOImpl"
-		  p:session-ref="sqlSession"
-		  />
-	<bean id="financeDetailDAO"
-	 	  class="com.bbb.dao.FinanceDetailDAOImpl"
-	 	  p:session-ref="sqlSession"
-	 	  />
-	<bean id="financeService"
-		  class="com.bbb.service.FinanceServiceImpl"
-		  p:financeDAO-ref="financeDAO"
-		  p:financeDetailDAO-ref="financeDetailDAO"
-		  p:projectDAO-ref="projectDAO"
-		  />
-	<bean id="projectPlanDAO"
-		  class="com.bbb.dao.ProjectPlanDAOImpl"
-		  p:sqlSession-ref="sqlSession"
-		  />
-	<bean id="projectPlanService"
-		  class="com.bbb.service.ProjectPlanServiceImpl"
-		  p:projectDAO-ref="projectPlanDAO"
-		  />
-		  
-	<bean id="requirementDAO"
-		class="com.bbb.dao.RequirementDAOImpl"
+	<bean id="projectDAO" class="com.bbb.dao.ProjectDAOImpl"
 		p:sqlSession-ref="sqlSession" />
-		
-	<bean id="unitworkDAO"
-		class="com.bbb.dao.UnitworkDAOImpl"
-		p:sqlSession-ref="sqlSession"/>
-	<bean id="unitworkService"
-		class="com.bbb.service.UnitworkServiceImpl"
-		p:unitworkDAO-ref="unitworkDAO"
-		p:projectPartakeDAO-ref="projectPartakeDAO"
-		p:requirementDAO-ref="requirementDAO"
+
+	<bean id="projectPartakeDAO" class="com.bbb.dao.ProjectPartakeDAOImpl"
+		p:sqlSession-ref="sqlSession" />
+
+	<bean id="projectService" class="com.bbb.service.ProjectServiceImpl"
+		p:projectDAO-ref="projectDAO" p:projectPartakeDAO-ref="projectPartakeDAO" />
+	<bean id="qnaDAO" class="com.bbb.dao.QnaDAOImpl" p:session-ref="sqlSession" />
+	<bean id="qnaService" class="com.bbb.service.QnaServiceImpl"
+		p:qnaDAO-ref="qnaDAO" />
+	<bean id="qnaReplyDAO" class="com.bbb.dao.QnaReplyDAOImpl"
+		p:session-ref="sqlSession" />
+	<bean id="qnaReplyService" class="com.bbb.service.QnaReplyServiceImpl"
+		p:qnaReplyDAO-ref="qnaReplyDAO" />
+	<bean id="issueDAO" class="com.bbb.dao.IssueDAOImpl"
+		p:session-ref="sqlSession" />
+	<bean id="issueService" class="com.bbb.service.IssueServiceImpl"
+		p:issueDAO-ref="issueDAO" />
+	<bean id="financeDAO" class="com.bbb.dao.FinanceDAOImpl"
+		p:session-ref="sqlSession" />
+	<bean id="financeDetailDAO" class="com.bbb.dao.FinanceDetailDAOImpl"
+		p:session-ref="sqlSession" />
+	<bean id="financeService" class="com.bbb.service.FinanceServiceImpl"
+		p:financeDAO-ref="financeDAO" p:financeDetailDAO-ref="financeDetailDAO"
 		p:projectDAO-ref="projectDAO" />
+	<bean id="projectPlanDAO" class="com.bbb.dao.ProjectPlanDAOImpl"
+		p:sqlSession-ref="sqlSession" />
+	<bean id="projectPlanService" class="com.bbb.service.ProjectPlanServiceImpl"
+		p:projectDAO-ref="projectPlanDAO" />
+	<bean id="requirementDAO" class="com.bbb.dao.RequirementDAOImpl"
+		p:sqlSession-ref="sqlSession" />
+
+	<bean id="unitworkDAO" class="com.bbb.dao.UnitworkDAOImpl"
+		p:sqlSession-ref="sqlSession" />
+	<bean id="unitworkService" class="com.bbb.service.UnitworkServiceImpl"
+		p:unitworkDAO-ref="unitworkDAO" p:projectPartakeDAO-ref="projectPartakeDAO"
+		p:requirementDAO-ref="requirementDAO" p:projectDAO-ref="projectDAO" />
 	<bean id="boardDAO" class="com.bbb.dao.BoardDAOImpl"
 		p:session-ref="sqlSession" />
 	<bean id="boardAttachDAO" class="com.bbb.dao.BoardAttachDAOImpl"
 		p:session-ref="sqlSession" />
-	
-	<bean id="noticeDAO"
-		class="com.bbb.dao.NoticeDAOImpl"
-		p:session-ref="sqlSession"
-	/>
-	<bean id="noticeService"
-		class="com.bbb.service.NoticeServiceImpl"
-		p:noticeDAO-ref="noticeDAO"
-	/>
-	<bean id="replyDAO"
-		class="com.bbb.dao.ReplyDAOImpl"
-		p:sqlSession-ref="sqlSession"
-	/>
-	
-	<bean id="replyService"
-		class="com.bbb.service.ReplyServiceImpl"
-		p:replyDAO-ref="replyDAO"
-	/>
-	
-	<bean id="usecaseDAO"
-		  class="com.bbb.dao.UseCaseDAOImpl"
-		  p:session-ref="sqlSession"
-		  />
-		  
-	<bean id="usecaseService"
-		  class="com.bbb.service.UseCaseServiceImpl"
-		  p:useCaseDAO-ref="usecaseDAO"
-		  />
+
+	<bean id="noticeDAO" class="com.bbb.dao.NoticeDAOImpl"
+		p:session-ref="sqlSession" />
+	<bean id="noticeService" class="com.bbb.service.NoticeServiceImpl"
+		p:noticeDAO-ref="noticeDAO" />
+	<bean id="replyDAO" class="com.bbb.dao.ReplyDAOImpl"
+		p:sqlSession-ref="sqlSession" />
+
+	<bean id="replyService" class="com.bbb.service.ReplyServiceImpl"
+		p:replyDAO-ref="replyDAO" />
+
+	<bean id="usecaseDAO" class="com.bbb.dao.UseCaseDAOImpl"
+		p:session-ref="sqlSession" />
+
+	<bean id="usecaseService" class="com.bbb.service.UseCaseServiceImpl"
+		p:useCaseDAO-ref="usecaseDAO" />
 
 	<bean id="fileboardService" class="com.bbb.service.FileBoardServiceImpl"
+		p:boardDAO-ref="boardDAO" p:attachDAO-ref="boardAttachDAO" />
 
-		p:boardDAO-ref="boardDAO"
-		p:attachDAO-ref="boardAttachDAO"
-
-	/>
-	
-	<bean id="requireService"
-		class="com.bbb.service.RequirementServiceImpl"
-		p:requirementDAO-ref="requirementDAO"
-	/>
-	
 	<bean id="boardService" class="com.bbb.service.BoardServiceImpl"
-		  p:boardDAO-ref="boardDAO" />
+		p:boardDAO-ref="boardDAO" />
+		
+	<bean id="requireService" class="com.bbb.service.RequirementServiceImpl"
+		p:requirementDAO-ref="requirementDAO" />
 
 </beans>

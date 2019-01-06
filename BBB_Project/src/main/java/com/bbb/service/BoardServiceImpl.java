@@ -87,8 +87,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int readSearchBoardCount(SearchCriteria cri) throws Exception {
-		int count = boardDAO.selectSearchBoardListCount(cri);
+	public int readSearchBoardCount(SearchCriteria cri,int pjNum) throws Exception {
+		int count = boardDAO.selectSearchBoardListCount(cri , pjNum);
 		return count;
 	}
 

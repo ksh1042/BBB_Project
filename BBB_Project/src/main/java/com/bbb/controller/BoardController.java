@@ -32,7 +32,7 @@ public class BoardController {
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(service.readSearchBoardCount(cri));
+		pageMaker.setTotalCount(service.readSearchBoardCount(cri,pjNum));
 		model.addAttribute(pageMaker);
 	}
 	
