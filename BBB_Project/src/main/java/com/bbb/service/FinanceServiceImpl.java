@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.bbb.dao.FinanceDAO;
 import com.bbb.dao.FinanceDetailDAO;
+import com.bbb.dao.ProjectDAO;
 import com.bbb.dto.FinanceDetailVO;
 import com.bbb.dto.FinanceVO;
 
@@ -19,6 +20,13 @@ public class FinanceServiceImpl implements FinanceService {
 	public void setFinanceDAO(FinanceDAO financeDAO){
 		this.financeDAO = financeDAO;
 	}
+	
+	private ProjectDAO projectDAO;
+	public void setProjectDAO(ProjectDAO projectDAO){
+		this.projectDAO = projectDAO;
+	}
+	
+
 	@Override
 	public void create(FinanceDetailVO financeDetail) throws SQLException {
 		financeDetailDAO.insertFinanceDetail(financeDetail);
@@ -26,9 +34,10 @@ public class FinanceServiceImpl implements FinanceService {
 	}
 	@Override
 	public int createTotal(int fNum) throws SQLException {
-		int plus = financeDetailDAO.selectFinanceDetailByPricePlus(fNum);
-		int minus = financeDetailDAO.selectFinanceDetailByPriceMinus(fNum);
-		int total = plus-minus;
+		int total = (financeDetailDAO.selectFinanceDetailByPricePlus(fNum)) - (financeDetailDAO.selectFinanceDetailByPriceMinus(fNum));
+		System.out.println(total);
+		financeDAO.updateFinanceTotal(fNum, total);
+		
 		return total;
 	}
 	@Override
@@ -43,8 +52,8 @@ public class FinanceServiceImpl implements FinanceService {
 	}
 	
 	@Override
-	public List<FinanceVO> readFinanceList() throws SQLException {
-		List<FinanceVO> financeList = financeDAO.selectFinanceList();
+	public List<FinanceVO> readFinanceList(int fNum) throws SQLException {
+		List<FinanceVO> financeList = financeDAO.selectFinanceList(fNum);
 		return financeList;
 	}
 	@Override
@@ -57,7 +66,15 @@ public class FinanceServiceImpl implements FinanceService {
 		List<FinanceDetailVO> financeDetailRegList = financeDetailDAO.selectRegdateByFnum(fNum);
 		return financeDetailRegList;
 	}
-
-	
+	@Override
+	public int createFinance(int pjNum) throws SQLException {
+		int fNum = financeDAO.getFinanceSeqNextValue();
+		financeDAO.insertFinance(fNum);
+		System.out.println(fNum);
+		System.out.println(pjNum);
+		projectDAO.updateFnum(pjNum, fNum);
+		
+		return fNum;		
+	}
 	
 }
