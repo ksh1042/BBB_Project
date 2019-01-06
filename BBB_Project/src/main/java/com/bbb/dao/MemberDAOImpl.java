@@ -1,5 +1,6 @@
 package com.bbb.dao;
 
+import java.lang.reflect.Member;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -55,6 +56,9 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public void deleteMember(String id) throws SQLException {
+		session.update("ProjectPartake.deleteProjectPartakeById",id);
+		session.update("Postbox.deletePostboxById",id);
+		session.update("Member.deleteAuthorities",id);
 		session.update("Member.deleteMember",id);
 
 	}
@@ -91,6 +95,12 @@ public class MemberDAOImpl implements MemberDAO {
 	public void updateEmailynById(String id) throws SQLException {
 		session.update("Member.updateEmailyn", id);
 	}
+
+	@Override
+	public void removeEmailynById(String id) throws SQLException {
+		session.update("Member.removeEmailynById",id);
+	}
+	
 
 
 

@@ -35,6 +35,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void modify(MemberVO member) throws SQLException {
 		memberDAO.updateMember(member);
+		
 
 	}
 
@@ -74,6 +75,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void updateAssignEmail(String id) throws SQLException {
 		memberDAO.updateEmailynById(id);
+	}
+
+	@Override
+	public void removeEmailyn(String id) throws SQLException {
+		memberDAO.removeEmailynById(id);
+		
 	}
 
 

@@ -34,4 +34,9 @@
 	<decorator name="board" page="decorator.jsp">		
 		<pattern>/board/**</pattern>
 	</decorator>
+	
+	<decorator name="boardnotice" page="decorator.jsp">		
+		<pattern>/boardnotice/**</pattern>
+	</decorator>
+	
 </decorators>

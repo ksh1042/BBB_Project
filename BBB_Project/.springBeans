@@ -12,9 +12,12 @@
 		<config>src/main/resources/com/bbb/context/application-context.xml</config>
 		<config>src/main/resources/com/bbb/context/aspects-context.xml</config>
 <<<<<<< HEAD
+<<<<<<< HEAD
 		<config>src/main/resources/com/bbb/context/mail-context.xml</config>
 =======
 >>>>>>> refs/remotes/origin/develop
+=======
+>>>>>>> refs/remotes/origin/choi2
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

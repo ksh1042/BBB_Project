@@ -29,7 +29,7 @@
 
  <form role="form" action="modifyPage" method="post">
     
-    <input type='hidden' name='nNum' value ="${notice.nNum}">
+    <input type='hidden' name='bNum' value ="${board.bNum}">
     <input type='hidden' name='page' value ="${cri.page}">
     <input type='hidden' name='perPageNum' value ="${cri.perPageNum}">
     
@@ -39,22 +39,25 @@
     <div class="form-group">
       <label for="exampleInputEmail1">Title</label>
       <input type="text" name='title' class="form-control" 
-         value="${notice.title}" readonly="readonly">
+         value="${board.title}" readonly="readonly">
       <span class="glyphicon glyphicon-ok form-control-feedback" id="okIcon"></span>
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Content</label>
       <textarea class="form-control"  name="content" rows="3" 
-      readonly="readonly">${notice.content}</textarea>
+      readonly="readonly">${board.content}</textarea>
     </div>
   </div><!-- /.box-body -->
 
-  <div class="box-footer" style="float: right";>
+  <div class="box-footer" style="float: right;">
     <button type="submit" id="listBtn" class="btn btn-primary">LIST</button>&nbsp;
-  	<sec:authorize access="hasAuthority('ROLE_ADMIN')">
+  <sec:authorize access="hasAuthority('ROLE_USER')">
+  <c:if test="${loginUser.id eq logonProject.creator }">
 	    <button type="submit" id="modifyBtn" class="btn btn-warning">Modify</button>&nbsp;
 	    <button type="submit" id="removeBtn" class="btn btn-danger">REMOVE</button>
-	</sec:authorize>
+  </c:if>
+  </sec:authorize>
+  
   </div>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>

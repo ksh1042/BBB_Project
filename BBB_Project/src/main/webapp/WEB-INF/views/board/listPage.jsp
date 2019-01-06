@@ -10,8 +10,7 @@
 <style>
 button#searchBtn{	
 	width:27px;
-	height:27px;
-	background-image:url('<%=request.getContextPath()%>/resources/dist/img/search.png');	
+	height:27px;	
 	background-position:center;
 	background-size:contain;	
 	background-color:white;	
@@ -54,10 +53,15 @@ button#searchBtn{
 				<div class='box-body'>
 					<ul>
 						<li>
-							<button id='newBtn' class="btn btn-primary" onclick="javascript:location.href='register';">New Board</button>
+							<div></div>	
 						</li>
 						<li>
+<<<<<<< HEAD
 							<form action="listPage" >
+=======
+						<form action="listPage">
+						 <span class="glyphicon glyphicon-th-list form-control-feedback" id="listIcon"></span>
+>>>>>>> refs/remotes/origin/choi2
 							<select name="searchType">
 								<option value="" ${cri.searchType==null?'selected':'' }>
 								------</option>
@@ -66,43 +70,50 @@ button#searchBtn{
 								<option value="w" ${cri.searchType eq 'w'?'selected':'' }>
 								Writer</option>
 							</select>
+<<<<<<< HEAD
 							<input id="keywordInput" name="keyword" type="text"  value="${pageMaker.cri.keyword}"/>
 							<button id="searchBtn" ></button>
 							</form>
+=======
+							<input id="keywordInput"
+								   name="keyword"
+								   type="text"  value="${pageMaker.cri.keyword}"/>
+							<button id="searchBtn" type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+						</form>
+>>>>>>> refs/remotes/origin/choi2
 						</li>
 					</ul>
 				</div>
 			</div>
 			<div class="box">
 				<div class="box-header with-border">
+					
 					<h3 class="box-title">LIST PAGING</h3>
 				</div>
 				<div class="box-body">
 					<table class="table table-bordered" border="1">
 						<tr>
-							<th style="width: 10px">BNO</th>
-							<th style="width: 10px">PROJECT NO</th>
-							<th>TITLE</th>
-							<th>WRITER</th>
-							<th>INDATE</th>
-							<th>UPDATE DATE</th>
-							<th style="width: 40px">COUNT</th>
+							<th style="width: 10px; text-align: center";>BNO</th>
+							<th style="text-align: center";>TITLE</th>
+							<th style="text-align: center";>WRITER</th>
+							<th style="text-align: center";>INDATE</th>
+							<th style="text-align: center";>UPDATE DATE</th>
+							<th style="width: 40px; text-align: center";>COUNT</th>
 					</tr>
 						<c:if test="${!empty boardList }">
 						<c:forEach items="${boardList}" var="board">
 
 							<tr>
-								<td>${board.bNum}</td>
-								<td>${board.pjNum }</td>
-								<td><a
+								<td style="text-align: center";>${board.bNum}</td>
+								<td style="text-align: center";><a
 									href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&bNum=${board.bNum}'>
 										${board.title}</a></td>
-								<td>${board.writer}</td>
-								<td><fmt:formatDate pattern="yyyy-MM-dd"
+								<td style="text-align: center";>${board.writer}</td>
+								<td style="text-align: center";><fmt:formatDate pattern="yyyy-MM-dd"
 										value="${board.inDate}" /></td>
-								<td><fmt:formatDate pattern="yyyy-MM-dd"
+								<td style="text-align: center";><fmt:formatDate pattern="yyyy-MM-dd"
 										value="${board.updateDate}" /></td>
-								<td><span class="badge bg-red">${board.count }</span></td>
+								<td style="text-align: center";><span class="badge bg-red">${board.count }</span></td>
 							</tr>
 
 						</c:forEach>
@@ -113,13 +124,15 @@ button#searchBtn{
 							</tr>
 						</c:if>
 						
-
 					</table>
 				</div>
 				<!-- /.box-body -->
 
 
 				<div class="box-footer">
+					<div style="float:right";>
+					<button id='newBtn' class="btn btn-primary" onclick="javascript:location.href='register';" >New Board</button>
+					</div>
 					<div class="text-center">
 						<ul class="pagination link pagination-sm no-margin pull-right">
  
@@ -169,7 +182,6 @@ button#searchBtn{
 <script>
 		
 	$(".link li a").on("click", function(event){
-		
 		event.preventDefault(); 
 		
 		var targetPage = $(this).attr("href");
@@ -178,6 +190,7 @@ button#searchBtn{
 		jobForm.find("[name='page']").val(targetPage);
 		jobForm.attr("action","listPage").attr("method", "get");		
 		jobForm.submit();
+		
 	});
 	
 	$('#searchBtn').on('click',function(){

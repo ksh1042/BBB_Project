@@ -29,4 +29,6 @@ public interface MemberService {
 	public void updateAssignEmail(String id) throws SQLException;
 	
 	void modifyEmail(MemberVO member)throws SQLException;
+	
+	void removeEmailyn(String id) throws SQLException;
 }

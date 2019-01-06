@@ -21,30 +21,23 @@
 			<span class="help-block" id="titleHelp"></span>
 			<span class="glyphicon glyphicon-pencil form-control-feedback" id="fNameIcon"></span>
 		</div>
+		
 		<div class="form-group">
 			<label for="exampleInputPassword1">Content</label>
 			<textarea class="form-control" name="content" rows="3"
 				placeholder="Enter ..."></textarea>
 		</div>
+		
 		<div class="form-group">
-			<label for="control-label">INDATE</label> 
-			<input class="form-control" type="date" name="inDate"/>
-			<span class="help-block" id="inDateHelp"></span><br/>
+			<label for="exampleInputEmail1">Writer</label> 
+			<input readonly	type="text" name="writer" class="form-control"
+					value="${loginUser.id}">
 		</div>
+		
 		<div class="form-group">
-			<label for="control-lable">EXPIREDATE</label> 
-			<input class="form-control" type="date" name="expireDate"/>
-			<span class="help-block" id="expireDateHelp"></span> <br/>
-		</div>
-		<div class="form-group">
-			<label for="exampleInputEmail1">KIND</label>
-			<select name="kind">
-				<option value="3" selected>기본</option>
-				<option value="0">이슈</option>
-				<option value="1">이벤트</option>
-				<option value="2">점검</option>
-			</select> 
-			
+			<label for="control-label">NOTICEDATE</label> 
+			<input class="form-control" type="date" name="noticeDate"/>
+			<span class="help-block" id="noticeDateHelp"></span><br/>
 		</div>
 	</div>
 	<!-- /.box-body -->
@@ -67,8 +60,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
 var titleFlag = false;
-var inDateFlag = false;
-var expireDateFlag = false;
+var noticeDateFlag = false;
 
 /* 유효성 검사*/
 
@@ -100,71 +92,31 @@ $('input[name="title"]').on('blur',function(e){
 });
 
 //공지 시작일, 마감일 유효성처리
-var inDate;
-var expireDate;
-var inDateNumber;
-var expireDateNumber;
-$('input[name=inDate]').on('blur',function(e){
-	// alert($('input[name=inDate]').val());
+var noticeDate;
+
+var noticeDateNumber;
+
+$('input[name=noticeDate]').on('blur',function(e){
+	// alert($('input[name=noticeDate]').val());
 	// alert(new Date().toISOString('yyyy-MM-dd').substr(0,10));
 	if($(this).val() == null || $(this).val() == ''){
-		$('span#inDate').css({color : 'red', fontWeight : 'bold'});
-		$('span#inDate').html('공지 시작일을 입력해주세요.');
-		$('input[name=inDate]').css({borderColor : 'red'});
+		$('span#noticeDate').css({color : 'red', fontWeight : 'bold'});
+		$('span#noticeDate').html('공지일을 입력해주세요.');
+		$('input[name=noticeDate]').css({borderColor : 'red'});
 		return;
-	}
-	inDate = $(this).val().split("-");
-	inDateNumber = parseInt(inDate[0]+(inDate[1])+inDate[2]);
-	inDate = $(this).val();
+}else{
+	$(this).css({borderColor : 'green'});
+	$('span#noticeDateHelp').html('');
+	noticeDateFlag = true;
+}
+
+	noticeDate = $(this).val().split("-");
+	noticeDateNumber = parseInt(noticeDate[0]+(noticeDate[1])+noticeDate[2]);
+	noticeDate = $(this).val();
 	
-	if(inDate == null || inDate == ''){
-		$(this).css({borderColor : 'red'});
-		$('span#inDateHelp').css({ color : 'red', fontWeight : 'bold' });
-		$('span#inDateHelp').html('공지 시작일보다 빠를 수 없습니다.');
-		inDateFlag = false;
-		return;
-	}else{
-		$(this).css({borderColor : 'green'});
-		$('span#inDateHelp').html('');
-		inDateFlag = true;
-	}
 	verifyCheck();
 });
 
-$('input[name=expireDate]').on('blur', function(e){
-	if(inDate == null || inDate == '' ){
-		$(this).val('');
-		$('span#expireDateHelp').css({color : 'red', fontWeight : 'bold' });
-		$('span#expireDateHelp').html('공지 시작일을 먼저 입력해주세요');
-		$('input[name=inDate]').css({borderColor: 'red'});
-		expireDateFlag = false;
-		return;
-	}
-	if($(this).val() == null || $(this).val() == ''){
-		$('span#expireDateHelp').css({ color : 'red', fontWeight : 'bold'});
-		$('span#expireDateHepl').html('공지 마감일을 입력해주세요.');
-		$('input[name=expireDate]').css({borderColor : 'red'});
-		expireDateFlag = false;
-		return;
-	}
-	expireDate = $(this).val().split('-');
-	expireDateNumber = parseInt(expireDate[0]+(expireDate[1])+expireDate[2]);
-	expireDate = $(this).val();
-	
-	if(expireDateNumber < inDateNumber){
-		$('span#expireDateHelp').css({color : 'red', fontWeight : 'bold'});
-		$('span#expireDateHelp').html('공지 마감일이 시작일보다 빠를 수 없습니다.');
-		$('input[name=expireDate]').css({borderColor : 'red'});
-		expireDateFlag = false;
-		$(this).val('');
-		return;
-	} else{
-		$('input[name=expireDate]').css({borderColor : 'green'});
-		$('span#expireDateHelp').html('');
-		expireDateFlag = true;
-	}
-	verifyCheck();
-});
 	//공지 시작일, 마감일 유효성 처리
 
 /* 버튼 */
@@ -177,29 +129,23 @@ $('#create_btn').on('click',function(e){
 		return;
 	}
 
-	if(!inDateFlag){
+	if(!noticeDateFlag){
 		$('button#create_btn').prop('disable',true);
-		$('span#inDateHelp').css({color:'red',fontWeight : 'bold'});
-		$('span#inDateHelp').html('');
+		$('span#noticeDateHelp').css({color:'red',fontWeight : 'bold'});
+		$('span#noticeDateHelp').html('');
 		$('input[name=inDate]').css({borderColor : 'red'});
 		return;
 	}	
-	if(!expireDateFlag){
-		$('button#create_btn').prop('disabled',true);
-		$('span#expireDateHelp').css({color:'red',fontWeight : 'bold'});
-		$('span#expireDateHelp').html('');
-		$('input[name=expireDate]').css({borderColor : 'red'});
-	}
+	
 	var json = {
 			title : $('input[name="title"]').val(),
 			content : $('textarea[name="content"]').val(),
-			inDate : $('input[name="inDate"]').val(),
-			expireDate : $('input[name="expireDate"]').val(),
-			kind : $('select[name="kind"]').val()
+			writer : $('input[name="writer"]').val(),
+			noticeDate : $('input[name="noticeDate"]').val(),
 	}
 	
 	$.ajax({
-		url : '<%=request.getContextPath()%>/notice/register',
+		url : '<%=request.getContextPath()%>/boardnotice/register',
 		method : 'POST',
 		data : JSON.stringify(json),
 		headers:{
@@ -208,7 +154,7 @@ $('#create_btn').on('click',function(e){
 		},
 		success : function(data){
 			alert('공지글이 등록 되었습니다.');
-			location.href="<%=request.getContextPath()%>/notice/listPage"
+			location.href="<%=request.getContextPath()%>/boardnotice/listPage"
 		},
 		error : function(error) {
 			alert('서버 내부오류가 발생했습니다. 자세한 사항은 관리자에게 문의 바랍니다.');
@@ -217,7 +163,7 @@ $('#create_btn').on('click',function(e){
 });
 	
 	$('#list_btn').on('click',function(e){
-		close();
+		location.href="<%=request.getContextPath()%>/boardnotice/listPage";
 	});
 	
 	function verifyCheck() {
@@ -234,31 +180,19 @@ $('#create_btn').on('click',function(e){
 			return;
 		}
 		
-		if(!inDateFlag){
+		if(!noticeDateFlag){
 			$('button#create_btn').prop('disabled',true);
-			$('span#inDateHelp').css({
+			$('span#noticeDateHelp').css({
 				color:'red',
 				fontWeight:'bold'
 			});
-			$('span#inDateHelp').html('');
-			$('input[name=inDate]').css({
+			$('span#noticeDateHelp').html('');
+			$('input[name=noticeDate]').css({
 				borderColor : 'red'
 			});
 			return;
 		}
-		if(!expireDateFlag){
-			$('button#create_btn').prop('disabled',true);
-			$('span#expireDateHelp').css({
-				color:'red',
-				fontWeight:'bold'
-			});
-			$('span#expireDateHelp').html('');
-			$('input[name=expireDate]').css({
-				borderColor : 'red'
-			});
-			return;
-			
-		}
+		
 		$('button#create_btn').prop('disabled',false);
 	}
 	

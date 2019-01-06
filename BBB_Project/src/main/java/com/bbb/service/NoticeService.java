@@ -15,14 +15,16 @@ public interface NoticeService {
 	
 	public NoticeVO readByNnum(int nNum) throws SQLException;
 	
-	public void modify(NoticeVO notice) throws SQLException;
+	public void update(NoticeVO notice) throws SQLException;
 	
-	public void remove(int nNum) throws SQLException;
+	public void delete(int nNum) throws SQLException;
 	
-	List<NoticeVO> listAll() throws SQLException;
+	List<NoticeVO> readlistAll() throws SQLException;
 	
-	List<NoticeVO> listSearch(SearchCriteria cri) throws SQLException;
+	List<NoticeVO> readlistSearch(SearchCriteria cri) throws SQLException;
 	
-	List<NoticeVO> listCriteria(Criteria cri)throws SQLException;
+	List<NoticeVO> readlistCriteria(Criteria cri)throws SQLException;
+	
+	int readSearchNoticeCount(SearchCriteria cri)throws SQLException;
 	
 }

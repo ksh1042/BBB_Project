@@ -6,14 +6,31 @@ import java.util.List;
 
 public class BoardVO {
 	
+	// 게시판 번호
 	private int bNum;
+	
+	// 프로젝트 번호
 	private int pjNum;
+	
+	// 게시글 제목
 	private String title;
-	private String writer;
+	
+	// 게시글 내용
 	private String content;
+	
+	// 게시글 작성자
+	private String writer;
+	
+	// 게시글 등록일
 	private Date inDate;
+	
+	//게시글 수정일
 	private Date updateDate;
+	
+	//글 구분
 	private int kind;
+	
+	//조회수
 	private int count;
 	
 	private List<BoardAttachVO> attachList=new ArrayList<BoardAttachVO>();
@@ -42,20 +59,20 @@ public class BoardVO {
 		this.title = title;
 	}
 
-	public String getWriter() {
-		return writer;
-	}
-
-	public void setWriter(String writer) {
-		this.writer = writer;
-	}
-
 	public String getContent() {
 		return content;
 	}
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getWriter() {
+		return writer;
+	}
+
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
 
 	public Date getInDate() {
@@ -100,14 +117,13 @@ public class BoardVO {
 
 	@Override
 	public String toString() {
-		return "BoardVO [bNum=" + bNum + ", pjNum=" + pjNum + ", title=" + title + ", writer=" + writer + ", content="
-				+ content + ", inDate=" + inDate + ", updateDate=" + updateDate + ", kind=" + kind + ", count=" + count
+		return "BoardVO [bNum=" + bNum + ", pjNum=" + pjNum + ", title=" + title + ", content=" + content + ", writer="
+				+ writer + ", inDate=" + inDate + ", updateDate=" + updateDate + ", kind=" + kind + ", count=" + count
 				+ ", attachList=" + attachList + "]";
 	}
-
+	
+	
+	
+	
 	
 }
-	
-	
-	
-

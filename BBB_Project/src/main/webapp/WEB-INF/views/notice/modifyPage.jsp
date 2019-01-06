@@ -34,6 +34,8 @@
 						<div class="form-group">
 							<label for="exampleInputEmail1">Title</label> 
 							<input type="text" name='title' class="form-control" value="${notice.title}">
+							<span class="help-block" id="titleHelp"></span>
+							<span class="glyphicon glyphicon-pencil form-control-feedback" id="fNameIcon"></span>
 						</div>
 						
 						<div class="form-group">
@@ -50,17 +52,68 @@
 				
 				<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 				<script>
+					var titleFlag = false;
+					
+					$('input[name="title"]').on('blur',function(e){
+						$(this).css({borderColor : 'red'});
+						var title = $(this).val();
+						
+						if(title == null || title == ''){
+							$('#titleHelp').css({color:'red'});
+							$('#titleHelp').html('제목을 입력하세요.');
+							$(this).focus();
+							return;
+						}
+						if(title.length > 20){
+							$('#titleHelp').css({color:'red'});
+							$('#titleHelp').html('제목은 20자를 넘지 않습니다.');
+							$(this).focus();
+							return;
+						}else{
+							$(this).css({borderColor : 'green'});
+							$('span#titleHelp').html('');
+							titleFlag = true;
+						}
+						
+						verifyCheck();
+					});
+					
+				
 					var formObj = $("form[role='form']");
 
 					console.log(formObj);
 
-					$("#listBtn").on("click",function() {
+					$("#cancelBtn").on("click",function() {
 						self.location = "listPage?page=${cri.page}&perPageNum=${cri.perPageNum}";
 					});
 
 					$("#saveBtn").on("click", function() {
+						if(!titleFlag){
+							$('button#saveBtn').prop('disable',true);
+							$('span#titleHelp').css({color:'red',fontWeight:'bold'});
+							$('span#titleHelp').html('');
+							$('input[name=title]').css({borderColor:'red'});
+							return;
+						}
 						formObj.submit();
 					});
+					
+					function verifyCheck(){
+						if(!titleFlag){
+							$('button#saveBtn').prop('disabled',true);
+							$('span#titleHelp').css({
+								color:'red',
+								fontWeight:'bold'
+							});
+							$('span#titleHelp').html('');
+							$('input[name=]').css({
+								borderColor : 'red'
+							});
+							return;
+						}
+						$('button#saveBtn').prop('disabled',false);
+					}
+					
 				</script>
 
 

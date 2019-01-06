@@ -7,7 +7,7 @@
 
 
 <head>
-	<title>관리자 공지사항</title>
+	<title>공지사항</title>
 <style>
 
 button#searchBtn{	
@@ -50,24 +50,14 @@ button#searchBtn{
 			<!-- general form elements -->
 			<div class='box'>
 				<div class="box-header with-border">
-					<h3 class="box-title">관리자 공지사항</h3>
+					<h3 class="box-title">공지사항리스트</h3>
 				</div>
 				<div class='box-body'>
 					<ul>
-						<div></div>
+					<div></div>
 						<li>
 						<form action="listPage">
 						<span class="glyphicon glyphicon-th-list form-control-feedback" id="listIcon"></span>
-							<select name="searchType">
-								<option value="" ${cri.searchType==null?'selected':'' }>
-								------</option>
-								<option value="t" ${cri.searchType eq 't'?'selected':'' }>
-								Title</option>
-							</select>
-							<input id="keywordInput"
-								   name="keyword"
-								   type="text"  value="${pageMaker.cri.keyword}"/>
-							<button id="searchBtn" type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
 							</form>
 						</li>
 					</ul>
@@ -79,54 +69,68 @@ button#searchBtn{
 					<h3 class="box-title">LIST PAGING</h3>
 				</div>
 				<div class="box-body">
+					<c:if test="${sysdate>boardnotice.noticeDate }">
 					<table class="table table-bordered" border="1">
 						<tr>
-							<th style="width: 10px; text-align: center;">NNO</th>
-							<th style="text-align: center;">TITLE</th>
-							<th style="text-align: center;">INDATE</th>
-							<th style="text-align: center;">EXPIRE DATE</th>
-							<th style="text-align: center;">KIND</th>
-						</tr>
-						<c:if test="${!empty noticeList }">
-						<c:forEach items="${noticeList}" var="notice">
+							<th style="width: 10px; text-align: center;">BNO</th>
+							<th style="text-align: center;">NOTICE DATE</th>
+							
+					</tr>
+						<c:if test="${!empty boardnoticeList }">
+						<c:forEach items="${boardnoticeList}" var="boardnotice">
 							<tr>
-								<td style="text-align: center;">${notice.nNum}</td>
-								<td style="text-align: center;">
-								<a href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&nNum=${notice.nNum}'>${notice.title}</a></td>
-								<td style="text-align: center;">
-								<fmt:formatDate pattern="yyyy-MM-dd" value="${notice.inDate}" /></td>
-								<td style="text-align: center;">
-								<fmt:formatDate pattern="yyyy-MM-dd" value="${notice.expireDate}" /></td>
-								<c:if test="${notice.kind == 0}">
-								<td style="text-align: center; color: red;">이슈</td>
-								</c:if>
-								<c:if test="${notice.kind == 1}">
-								<td style="text-align: center; color: blue;">이벤트</td>
-								</c:if>
-								<c:if test="${notice.kind == 2}">
-								<td style="text-align: center; color: purple;">점검</td>
-								</c:if>
-								<c:if test="${notice.kind == 3}">
-								<td style="text-align: center;">기본</td>
-								</c:if>
+								<td style="text-align: center;">${boardnotice.bNum}</td>
+								<td style="text-align: center;"><a
+									href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&bNum=${boardnotice.bNum}'>
+										<fmt:formatDate pattern="yyyy-MM-dd"
+										value="${boardnotice.noticeDate}" /></a></td>
 							</tr>
 						</c:forEach>
 						</c:if>
-						<c:if test="${empty noticeList }">
+						<c:if test="${empty boardnoticeList }">
 							<tr>
-								<td style="text-align:center;" colspan="5">내용이 없습니다.</td>
+								<td style="text-align:center;" colspan="2">내용이 없습니다.</td>
+							</tr>
+						</c:if>
+
+					</table>
+					</c:if>
+					
+					<table class="table table-bordered" border="1">
+						<tr>
+							<th style="width: 10px; text-align: center;">BNO</th>
+							<th style="text-align: center;">NOTICE DATE</th>
+							
+					</tr>
+						<c:if test="${!empty boardnoticeList }">
+						<c:forEach items="${boardnoticeList}" var="boardnotice">
+							<tr>
+								<td style="text-align: center;">${boardnotice.bNum}</td>
+								<td style="text-align: center;"><a
+									href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&bNum=${boardnotice.bNum}'>
+										<fmt:formatDate pattern="yyyy-MM-dd"
+										value="${boardnotice.noticeDate}" /></a></td>
+							</tr>
+						</c:forEach>
+						</c:if>
+						<c:if test="${empty boardnoticeList }">
+							<tr>
+								<td style="text-align:center;" colspan="2">내용이 없습니다.</td>
 							</tr>
 						</c:if>
 
 					</table>
 				</div>
-				<!-- box-body -->
+				<!-- /.box-body -->
+
 
 				<div class="box-footer">
 					<div style="float:right;">
-						<sec:authorize access="hasAuthority('ROLE_ADMIN')">
+							<sec:authorize access="hasAuthority('ROLE_USER')">
+							<c:if test="${loginUser.id eq logonProject.creator }">
 							<button id='newNtn' class="btn btn-primary" onclick="javascript:location.href='register';">New Notice</button>
-						</sec:authorize>
+							</c:if>
+							</sec:authorize>
 					</div>
 					<div class="text-center">
 						<ul class="pagination link">
@@ -186,15 +190,6 @@ button#searchBtn{
 		jobForm.find("[name='page']").val(targetPage);
 		jobForm.attr("action","listPage").attr("method", "get");		
 		jobForm.submit();
-	});
-	
-	$('#searchBtn').on('click',function(){
-		self.location="listPage"
-					   +"${pageMaker.makeQuery(1)}"
-					   +"&searchType="
-					   +$("select option:selected").val()
-					   +"&keyword="
-					   +$('#keywordInput').val();
 	});
 </script>
 

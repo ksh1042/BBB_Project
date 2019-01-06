@@ -53,6 +53,7 @@
 	<bean id="unitworkService" class="com.bbb.service.UnitworkServiceImpl"
 		p:unitworkDAO-ref="unitworkDAO" p:projectPartakeDAO-ref="projectPartakeDAO"
 		p:requirementDAO-ref="requirementDAO" p:projectDAO-ref="projectDAO" />
+	
 	<bean id="boardDAO" class="com.bbb.dao.BoardDAOImpl"
 		p:session-ref="sqlSession" />
 	<bean id="boardAttachDAO" class="com.bbb.dao.BoardAttachDAOImpl"

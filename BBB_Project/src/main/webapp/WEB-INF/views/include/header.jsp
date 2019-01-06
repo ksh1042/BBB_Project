@@ -421,9 +421,15 @@
               </span>
           </a>
           <ul class="treeview-menu">
+<<<<<<< HEAD
             <li><a href="<%=request.getContextPath()%>/fileboard/fileboardlist"><i class="fa fa-circle-o"></i>자료실</a></li>
             <li><a href="<%=request.getContextPath()%>/notice/listPage"><i class="fa fa-circle-o"></i>공지사항</a></li>
             <li><a href="<%=request.getContextPath()%>/board/listPage"><i class="fa fa-circle-o"></i>자유게시판</a></li>
+=======
+            <li><a href="<%=request.getContextPath()%>/fileboard/fileboardlist"><i class="fa fa-circle-o"></i>자료실</a></li>
+            <li><a href="<%=request.getContextPath()%>/boardnotice/listPage"><i class="fa fa-circle-o"></i>공지사항</a></li>
+            <li><a href="<%=request.getContextPath()%>/board/listPage"><i class="fa fa-circle-o"></i>자유게시판</a></li>
+>>>>>>> refs/remotes/origin/choi2
           </ul>
         </li>
         
@@ -439,13 +445,13 @@
         
         <sec:authorize access="hasAuthority('ROLE_ADMIN')">
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>관리자 게시판</span>
+          <a href="<%=request.getContextPath()%>/notice/listPage"><i class="fa fa-link"></i><span>관리자 게시판</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>공지사항</a></li>
+            <li><a href="<%=request.getContextPath()%>/notice/listPage"><i class="fa fa-circle-o"></i>공지사항</a></li>
             <li><a href="<%=request.getContextPath()%>/question/listQna"><i class="fa fa-circle-o"></i>QnA</a></li>
             <li><a href="<%=request.getContextPath()%>/admin/memberList"><i class="fa fa-circle-o"></i>회원관리</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i>프로젝트 관리</a></li>
