@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 
 <script>
@@ -58,8 +59,10 @@
  <div class="timeline-item" >
   <span class="time">
     <i class="fa fa-clock-o"></i>{{prettifyDate indate}}
+<sec:authorize access="hasAuthority('ROLE_ADMIN')">
 	 <a class="btn btn-primary btn-xs" id="modifyReplyBtn"
 	    data-toggle="modal" data-target="#modifyModal">Modify</a>
+</sec:authorize>
   </span>
   <h3 class="timeline-header"><strong>{{qarNum}}</strong> -{{writer}}</h3>
   <div class="timeline-body">{{rContent}} </div>

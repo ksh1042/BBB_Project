@@ -43,7 +43,7 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
         <decorator:head />
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue layout-boxed sidebar-mini">
 <div class="wrapper">
 	<%@ include file="/WEB-INF/views/commons/include/emailyn.jsp" %>
   <!-- Main Header -->
@@ -52,9 +52,6 @@
     <!-- Logo -->
     <a href="/main/" class="logo">
       <span class="logo-lg"><b>${logonProject.name }</b></span>
-    <sec:authorize access="hasAuthority('ROLE_ADMIN')">
-      <span class="logo-lg"><b>관리자 페이지</b></span>
-	</sec:authorize>
     </a>
 
     <!-- Header Navbar -->
@@ -182,14 +179,8 @@
               </li>
             </ul>
           </li>
+
           
-          <!-- ------------------------------------------------- -->
-          <!-- Control Sidebar Toggle Button -->
-          <sec:authorize access="hasAuthority('ROLE_ADMIN')">
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
-          </sec:authorize>
         </ul>
       </div>
     </nav>
@@ -421,15 +412,9 @@
               </span>
           </a>
           <ul class="treeview-menu">
-<<<<<<< HEAD
-            <li><a href="<%=request.getContextPath()%>/fileboard/fileboardlist"><i class="fa fa-circle-o"></i>자료실</a></li>
-            <li><a href="<%=request.getContextPath()%>/notice/listPage"><i class="fa fa-circle-o"></i>공지사항</a></li>
-            <li><a href="<%=request.getContextPath()%>/board/listPage"><i class="fa fa-circle-o"></i>자유게시판</a></li>
-=======
             <li><a href="<%=request.getContextPath()%>/fileboard/fileboardlist"><i class="fa fa-circle-o"></i>자료실</a></li>
             <li><a href="<%=request.getContextPath()%>/boardnotice/listPage"><i class="fa fa-circle-o"></i>공지사항</a></li>
             <li><a href="<%=request.getContextPath()%>/board/listPage"><i class="fa fa-circle-o"></i>자유게시판</a></li>
->>>>>>> refs/remotes/origin/choi2
           </ul>
         </li>
         
@@ -443,21 +428,7 @@
         
         </sec:authorize>
         
-        <sec:authorize access="hasAuthority('ROLE_ADMIN')">
-        <li class="treeview">
-          <a href="<%=request.getContextPath()%>/notice/listPage"><i class="fa fa-link"></i><span>관리자 게시판</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<%=request.getContextPath()%>/notice/listPage"><i class="fa fa-circle-o"></i>공지사항</a></li>
-            <li><a href="<%=request.getContextPath()%>/question/listQna"><i class="fa fa-circle-o"></i>QnA</a></li>
-            <li><a href="<%=request.getContextPath()%>/admin/memberList"><i class="fa fa-circle-o"></i>회원관리</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>프로젝트 관리</a></li>
-          </ul>
-        </li>
-        </sec:authorize>
+
       </ul>
       <!-- /.sidebar-menu -->
     </section>
