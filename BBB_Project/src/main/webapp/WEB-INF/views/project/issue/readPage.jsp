@@ -178,9 +178,8 @@ hr {
 	
 	
 </script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.js"></script>
-	<script id="template" type="text/x-handlebars-template">
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.js"></script>
+<script id="template" type="text/x-handlebars-template">
 
 	{{#each .}}
 
@@ -231,8 +230,7 @@ hr {
 </script>
 <script id="modifyTemplate" type="text/x-handlebars-template">
 
-{{#each .}}
-
+	{{#each .}}
 	  <li class="issueDetailList" data-idNum={{idNum}}>
          <i class="fa fa-comments bg-yellow"></i>
 
@@ -241,16 +239,16 @@ hr {
 
            <h3 class="timeline-header"><strong>{{writer}}</strong></h3>
 			<input type="hidden"  class="writerInput" value="{{writer}}"/>
+
+			<input type="hidden" id="detailIdNum"  value="{{idNum}}"/>	
 			<input type="hidden"  value="{{iNum}}"/>
            <div class="timeline-body div-detail">
-			 <textArea>
-				{{content}}
-			 </textArea>
+			 <textArea style="width: 984px; height: 100px; id="newDetailContent" >{{content}}</textArea>
       	   </div>
 			<div id="issueDetailModifyBtnDiv">
 				<div class="timeline-footer" style="height: 50px;" id="detailModifyBtn">
-					<button class="btn btn-primary btn-xs btn-modify" style="padding:5px 10px 5px 10px;margin-left:910px;" onclick="">수정완료</button>
-					<button class="btn btn-primary btn-xs btn-modify" style="padding:5px 10px 5px 10px;margin-left:910px;" onclick="getPage('<%=request.getContextPath()%>/project/issueDetail/all/{{iNum}}');">수정취소</button>
+					<button class="btn btn-primary btn-xs btn-modify" style="padding:5px 10px 5px 10px;margin-left:885px;" onclick="getPage('<%=request.getContextPath()%>/project/issueDetail/all/{{iNum}}');">취소</button>
+					<button type="button" class="btn btn-primary btn-xs btn-modify" style="padding:5px 10px 5px 10px;float:right;margin-right:10px;" onclick="modifyDetail({{idNum}});">수정완료</button>
 		  		 </div>
 			</div>
          </div>
@@ -258,8 +256,8 @@ hr {
 	{{/each}}
 
 </script>
-	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-	<script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
 	
 	var closeForm = $("form[name='closeForm']");
 	
@@ -359,5 +357,29 @@ hr {
 				printModifyData(idNum, data, $('#issueDetailDiv'), $('#template'), $('#template2'), $('#modifyTemplate'));
 			});
 		}
-	</script>
+		
+		function modifyDetail(idNum) {
+			var newDetailContent = $('textArea').val();
+			var url = "<%=request.getContextPath()%>/project/issueDetail/modify?newDetailContent=" + newDetailContent + "&idNum=" + idNum;
+			$.ajax({
+			      method:'get',
+			      url:url,
+			       headers:{
+			         "Content-Type":"application/json",
+			         "X-HTTP-Method-Override":"GET"
+			      },
+			      dataType:'text',
+			      success:function(result){
+			         if(result=="SUCCESS"){
+			            alert("이슈가 수정되었습니다.");
+			            getPage("<%=request.getContextPath()%>/project/issueDetail/all/"+iNum);
+			        
+			         }
+			      },
+			      error:function(error){
+			         alert("이슈 수정에 실패했습니다.");
+			      }
+		   });
+		}
+</script>
 </body>
