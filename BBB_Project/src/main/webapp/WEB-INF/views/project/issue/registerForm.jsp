@@ -4,7 +4,7 @@
 
 <body>
 
-	<div class="container">
+	<div class="container" style="width:950px;">
       <section class="content-header" style="cursor:pointer;" onclick="javascript:location.href='<%=request.getContextPath()%>/project/issue/list';">
 			<h3>이슈 게시판</h3>
       </section>
@@ -68,10 +68,10 @@
       </section>
       </div>
       
-   <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery-ui.min.js"></script>   
-   <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
-   <script src="<%=request.getContextPath()%>/resources/SE2/js/HuskyEZCreator.js"></script>
-   <script type="text/javascript">
+<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery-ui.min.js"></script>   
+<script src="<%=request.getContextPath()%>/resources/SE2/js/HuskyEZCreator.js"></script>
+<script type="text/javascript">
 
    var oEditors = []; // 개발되어 있는 소스에 맞추느라, 전역변수로 사용하였지만, 지역변수로 사용해도 전혀 무관 함.
 
@@ -103,7 +103,7 @@
 	      });
          
        */
-   </script>	
+</script>	
 	
 
 

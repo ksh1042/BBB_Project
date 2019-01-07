@@ -95,9 +95,9 @@
 					<!-- /.col -->
 				</div>
 			</form>
-
-			 <a href="findIdPwd">I forgot my id/password.</a><br>
-  			 <a href="register" class="text-center">Register a new membership</a>
+			<br/>
+			<a href="<%=request.getContextPath() %>/commons/findId"> 아이디 찾기 </a><a href="findIdPwd">/ 패스워드 찾기</a>
+  			<a href="register" class="text-center" style="float:right;">회원가입</a>
 
 		</div>
 		<!-- /.login-box-body -->

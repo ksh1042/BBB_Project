@@ -14,8 +14,7 @@
 <link rel="stylesheet"
 	href="/resources/bootstrap/dist/css/bootstrap.min.css">
 <!-- Font Awesome -->
-<link rel="stylesheet"
-	href="/resources/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/resources/font-awesome/css/font-awesome.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet"
 	href="/resources/Ionicons/css/ionicons.min.css">
@@ -32,6 +31,7 @@
   <![endif]-->
 
 <!-- Google Font -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
 <style>
 .inputPhone{
@@ -44,14 +44,13 @@
 </head>
 
 <body class="hold-transition register-page">
-	<div class="register-box">
-		<div class="register-logo">
-			<a href="loginForm"><b>Sign Up</b></a>
+	<div class="login-box">
+		<div class="login-logo">
+			<b>Project</b>Management
 		</div>
 
 		<div class="register-box-body">
-			<p class="login-box-msg" style="font-size: 11pt;">Try PMS right
-				now !</p>
+			<p class="login-box-msg" style="font-size: 15pt;font-bold:2em;">회원가입</p>
 
 			<form action="register" method="post" name="registerForm" id="registerForm" > <!--enctype="multipart/form-data"  -->
 				<div>
@@ -104,7 +103,7 @@
 						<button type="button" class="btn btn-primary btn-flat"
 							onclick="login_go()" style="margin-left:20px;padding-left:20px;padding-right:20px;">취소</button>
 						<button type="button" class="btn btn-primary btn-flat"
-							onclick="register_go()"style="margin-left:55px;">회원가입</button>
+							onclick="register_go()"style="margin-left:55px;">가입하기</button>
 					
 					</div>
 					<!-- /.col -->

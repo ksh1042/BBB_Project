@@ -12,7 +12,7 @@ hr {
 	border-bottom: 1px solid #F6F6F6;
 }
 </style>
-	<div class="container">
+	<div class="container" style="width:950px;">
 		<section class="content-header" style="cursor: pointer;"
 			onclick="javascript:location.href='<%=request.getContextPath()%>/project/issue/list';">
 			<h3>이슈 게시판</h3>
@@ -28,7 +28,7 @@ hr {
 				<input type='hidden' name='keyword' value="${cri.keyword}">
 			</form>
 			<!-- row -->
-			<div class="row">
+			<div class="row" >
 				<div class="col-md-12">
 					<!-- The time line -->
 					<h4>
@@ -110,19 +110,18 @@ hr {
 					<!-- /.box-header -->
 					<div class="box-body">
 						<div class="form-group">
-							<textArea class="form-control"
-								style="width: 1081px; height: 100px;" placeholder="이슈를 남기세요."
-								id="newIssueDetailContent"></textArea>
+							<textArea class="form-control" style="resize:none;"
+								placeholder="이슈를 남기세요."
+								id="newIssueDetailContent" cols="10" rows="4"></textArea>
 						</div>
 					</div>
 					<!-- /.box-body -->
 					<div class="box-footer">
+						<button type="button" class="btn btn-primary pull-right" style="float:right;margin-left:10px;" onclick="addIssueDetail_go()">등록</button>
 						<c:if test="${loginUser.id eq issue.writer }">
 							<button type="button" id="closeBtn" class="btn btn-default"
-								style="margin-left: 930px;">이슈 닫기</button>
+								style="float:right;">이슈 닫기</button>
 						</c:if>
-						<button type="button" class="btn btn-primary pull-right"
-							onclick="addIssueDetail_go()">등록</button>
 						<form name="closeForm">
 							<input type='hidden' name='iNum' value="${issue.iNum}">
 						</form>
@@ -197,8 +196,8 @@ hr {
       	   </div>
 			<div id="issueDetailModifyBtnDiv">
 				<div class="timeline-footer" style="height: 50px;" id="detailModifyBtn">
-					<button class="btn btn-primary btn-xs btn-modify" style="padding:5px 10px 5px 10px;margin-left:910px;" onclick="detailModify({{idNum}}, '<%=request.getContextPath()%>/project/issueDetail/all/{{iNum}}');">수정</button>
 					<button class="btn btn-primary btn-xs btn-modify" style="padding:5px 10px 5px 10px;float:right;margin-right:10px;">삭제</button>
+					<button class="btn btn-primary btn-xs btn-modify" style="padding:5px 10px 5px 10px;float:right;margin-right:10px;" onclick="detailModify({{idNum}}, '<%=request.getContextPath()%>/project/issueDetail/all/{{iNum}}');">수정</button>
 		  		 </div>
 			</div>
          </div>
@@ -243,12 +242,12 @@ hr {
 			<input type="hidden" id="detailIdNum"  value="{{idNum}}"/>	
 			<input type="hidden"  value="{{iNum}}"/>
            <div class="timeline-body div-detail">
-			 <textArea style="width: 984px; height: 100px; id="newDetailContent" >{{content}}</textArea>
+			 <textArea style="resize:none;" id="newDetailContent" cols="118" rows="4">{{content}}</textArea>
       	   </div>
 			<div id="issueDetailModifyBtnDiv">
 				<div class="timeline-footer" style="height: 50px;" id="detailModifyBtn">
-					<button class="btn btn-primary btn-xs btn-modify" style="padding:5px 10px 5px 10px;margin-left:885px;" onclick="getPage('<%=request.getContextPath()%>/project/issueDetail/all/{{iNum}}');">취소</button>
-					<button type="button" class="btn btn-primary btn-xs btn-modify" style="padding:5px 10px 5px 10px;float:right;margin-right:10px;" onclick="modifyDetail({{idNum}});">수정완료</button>
+					<button type="button" class="btn btn-primary btn-xs btn-modify" style="padding:5px 10px 5px 10px;float:right;margin-right:10px;margin-left:10px;" onclick="modifyDetail({{idNum}});">수정완료</button>
+					<button class="btn btn-primary btn-xs btn-modify" style="padding:5px 10px 5px 10px;float:right;" onclick="getPage('<%=request.getContextPath()%>/project/issueDetail/all/{{iNum}}');">취소</button>
 		  		 </div>
 			</div>
          </div>
@@ -262,15 +261,21 @@ hr {
 	var closeForm = $("form[name='closeForm']");
 	
 	$("#closeBtn").on("click", function() {
-		confirm("이슈를 닫으시겠습니까?");
-		closeForm.attr("action", "close");
-		closeForm.attr("method", "post");
-		closeForm.submit();
+		if(confirm("이슈를 닫으시겠습니까?")){
+			closeForm.attr("action", "close");
+			closeForm.attr("method", "post");
+			closeForm.submit();
+		}else{
+			return;
+		}
 	});
 	
 	$("#openBtn").on("click", function() {
-		confirm("이슈를 열으시겠습니까?");
-		document.openIssueForm.submit();
+		if(confirm("이슈를 열으시겠습니까?")){
+			document.openIssueForm.submit();
+		}else{
+			return;
+		}
 	});
 	
 	var formObj = $("form[role='form']");

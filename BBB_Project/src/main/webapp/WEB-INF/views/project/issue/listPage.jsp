@@ -23,7 +23,7 @@
 </section>
  
       
-      <section class="content">
+      <section class="content" style="width:950px;">
 		<!-- QnA 리스트 -->
 		<div class="row">
 			<!-- <div class="col-md-6"> -->

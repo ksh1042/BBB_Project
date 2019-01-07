@@ -32,12 +32,14 @@
   <![endif]-->
 
 <!-- Google Font -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
 </head>
 
 <body class="hold-transition register-page">
 	<div class="register-box">
-		<div class="register-logo">
-			<a href="loginForm"><b>Forgot password?</b></a>
+		<div class="login-logo">
+			<b>Project</b>Management
 		</div>
 		
 		<div class="box box-primary">
@@ -49,22 +51,21 @@
             <form action="findPwd" method="post" name="findPwdForm" >
               <div class="box-body">
               	<div class="form-group">
-                  <label for="exampleInputEmail1">ID</label>
+                  <label for="exampleInputEmail1">아이디</label>
                   <input type="text" class="form-control" id="exampleInputEmail1" placeholder="아이디"  name="id" required>
-                  <p style="font-size:9pt;">아이디를 잊어 버린 경우, 아이디를 <a href="<%=request.getContextPath() %>/commons/findId">찾아 볼 수 있습니다.</a></p>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Name</label>
+                  <label for="exampleInputEmail1">이름</label>
                   <input type="text" class="form-control" id="exampleInputEmail1" placeholder="이름"  name="name" required>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Email address</label>
-                  <input type="email" class="form-control"  placeholder="이메일" id="email" name="email" required><br/>
+                  <label for="exampleInputPassword1">이메일</label>
+                  <input type="email" class="form-control"  placeholder="이메일 주소" id="email" name="email" required><br/>
                   <button type="button" onclick="getEmailCode()">인증코드받기</button><br/>
                 </div>
                   <div class="form-group">
-                  <label for="exampleInputPassword1">Authentication code</label>
-                  <input type="text" class="form-control"  placeholder="인증코드" name="emailCode" id="emailCode" disabled="disabled">
+                  <label for="exampleInputPassword1">인증코드</label>
+                  <input type="text" class="form-control"  placeholder="인증코드를 입력하세요" name="emailCode" id="emailCode" disabled="disabled">
                 </div>
               </div>
               <!-- /.box-body -->

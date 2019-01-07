@@ -11,7 +11,7 @@
 }
 </style>
 
-	<div class="container">
+	<div class="container"  style="width:950px;">
       <section class="content-header" style="cursor:pointer;" onclick="javascript:location.href='<%=request.getContextPath()%>/project/issue/list';">
 			<h3>이슈 게시판</h3>
       </section>
