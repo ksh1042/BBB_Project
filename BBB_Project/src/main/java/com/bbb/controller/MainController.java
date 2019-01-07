@@ -90,7 +90,6 @@ public class MainController {
 		pageMaker.setTotalCount(totalCount);
 		model.addAttribute("searchPList",searchPList);
 		model.addAttribute("pageMaker",pageMaker);
-		model.addAttribute("loginUser",loginUser);
 		model.addAttribute("bindList",bindList);
 		
 	}

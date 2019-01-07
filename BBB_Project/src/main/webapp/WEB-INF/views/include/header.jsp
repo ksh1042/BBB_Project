@@ -92,9 +92,12 @@
                 <!-- Inner Menu: contains the notifications -->
                 <ul class="menu">
                   <li><!-- start notification -->
+                  <div style="width:50px; height:50px;">
                     <a href="#">
+                    <button style="width:5px; height:5px;"type="button" value="수락"></button>
                       <i class="fa fa-users text-aqua"></i> 5 new members joined today
                     </a>
+                  </div>
                   </li>
                   <!-- end notification -->
                 </ul>
@@ -318,7 +321,7 @@
                   <li><a href="/plan/registerPlan"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
                </c:if>
                <c:if test="${!empty logonProject.puuid }">
-                  <li><a href="" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+                  <li><a href="/plan/modifyPlan"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
                </c:if>
            </c:when>
             <c:otherwise>
@@ -349,53 +352,53 @@
                </c:otherwise>
             </c:choose>
             <li><c:if test="${ logonProject.creator eq loginUser.id }">
-										<c:if test="${ logonProject.udNum == 0 }">
-											<a
-												href="<%=request.getContextPath()%>/project/unitwork/create">
-												<i class="fa fa-circle-o"></i>단위업무 생성
-											</a>
-										</c:if>
-										<c:if test="${ logonProject.udNum != 0 }">
-											<a href="<%=request.getContextPath()%>/project/unitwork/list">
-												<i class="fa fa-circle-o"></i>단위업무 정의서
-											</a>
-										</c:if>
-									</c:if> <c:if test="${ logonProject.creator != loginUser.id }">
-										<c:if test="${ logonProject.udNum == 0 }">
-											<a href="empty"> <i class="fa fa-circle-o"></i>단위업무 정의서
-											</a>
-										</c:if>
-										<c:if test="${ logonProject.udNum != 0 }">
-											<a href="<%=request.getContextPath()%>/project/unitwork/list">
-												<i class="fa fa-circle-o"></i>단위업무 정의서
-											</a>
-										</c:if>
-									</c:if></li>
-								<li>
-									<c:if test="${ logonProject.creator eq loginUser.id }">
-										<c:if test="${ logonProject.gcNum == 0 }">
-											<a
-												href="<%=request.getContextPath()%>/project/gantt/create">
-												<i class="fa fa-circle-o"></i>간트차트 생성
-											</a>
-										</c:if>
-										<c:if test="${ logonProject.gcNum != 0 }">
-											<a href="<%=request.getContextPath()%>/project/gantt/list">
-												<i class="fa fa-circle-o"></i>간트차트
-											</a>
-										</c:if>
-									</c:if> <c:if test="${ logonProject.creator != loginUser.id }">
-										<c:if test="${ logonProject.gcNum == 0 }">
-											<a href="empty"> <i class="fa fa-circle-o"></i>간트차트
-											</a>
-										</c:if>
-										<c:if test="${ logonProject.gcNum != 0 }">
-											<a href="<%=request.getContextPath()%>/project/gantt/list">
-												<i class="fa fa-circle-o"></i>간트차트
-											</a>
-										</c:if>
-									</c:if>
-								</li>
+						<c:if test="${ logonProject.udNum == 0 }">
+							<a
+								href="<%=request.getContextPath()%>/project/unitwork/create">
+								<i class="fa fa-circle-o"></i>단위업무 생성
+							</a>
+						</c:if>
+						<c:if test="${ logonProject.udNum != 0 }">
+							<a href="<%=request.getContextPath()%>/project/unitwork/list">
+								<i class="fa fa-circle-o"></i>단위업무 정의서
+							</a>
+						</c:if>
+					</c:if> <c:if test="${ logonProject.creator != loginUser.id }">
+						<c:if test="${ logonProject.udNum == 0 }">
+							<a href="empty"> <i class="fa fa-circle-o"></i>단위업무 정의서
+							</a>
+						</c:if>
+						<c:if test="${ logonProject.udNum != 0 }">
+							<a href="<%=request.getContextPath()%>/project/unitwork/list">
+								<i class="fa fa-circle-o"></i>단위업무 정의서
+							</a>
+						</c:if>
+					</c:if></li>
+				<li>
+					<c:if test="${ logonProject.creator eq loginUser.id }">
+						<c:if test="${ logonProject.gcNum == 0 }">
+							<a
+								href="<%=request.getContextPath()%>/project/gantt/create">
+								<i class="fa fa-circle-o"></i>간트차트 생성
+							</a>
+						</c:if>
+						<c:if test="${ logonProject.gcNum != 0 }">
+							<a href="<%=request.getContextPath()%>/project/gantt/list">
+								<i class="fa fa-circle-o"></i>간트차트
+							</a>
+						</c:if>
+					</c:if> <c:if test="${ logonProject.creator != loginUser.id }">
+						<c:if test="${ logonProject.gcNum == 0 }">
+							<a href="empty"> <i class="fa fa-circle-o"></i>간트차트
+							</a>
+						</c:if>
+						<c:if test="${ logonProject.gcNum != 0 }">
+							<a href="<%=request.getContextPath()%>/project/gantt/list">
+								<i class="fa fa-circle-o"></i>간트차트
+							</a>
+						</c:if>
+					</c:if>
+				</li>
             <li><a href="<%=request.getContextPath()%>/project/usecase/view"><i class="fa fa-circle-o"></i>U-C Diagram</a></li>
           </ul>
         </li>
