@@ -59,14 +59,6 @@ public class ProjectServiceImpl implements ProjectService{
 		
 		return projectList;
 	}
-	
-	@Override
-	public List<Integer> readMyProjectListCount(String id) throws SQLException {
-		// 내가 참여하고있는 프로젝트의 리스트를 pjNum으로 비교하기 위한 pjNum배열
-		List<Integer> myPartakeList = projectPartakeDAO.selectProjectPartakeList(id);
-				
-		return myPartakeList;
-	}
 
 	@Override
 	public List<ProjectPartakeVO> getBindingProject(String id) throws SQLException {

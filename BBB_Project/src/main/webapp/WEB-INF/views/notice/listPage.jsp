@@ -2,17 +2,17 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 
 
 <head>
-	<title>공지사항</title>
+	<title>관리자 공지사항</title>
 <style>
 
 button#searchBtn{	
 	width:27px;
-	height:27px;
-	background-image:url('<%=request.getContextPath()%>/resources/dist/img/search.png');	
+	height:27px;	
 	background-position:center;
 	background-size:contain;	
 	background-color:white;	
@@ -50,69 +50,66 @@ button#searchBtn{
 			<!-- general form elements -->
 			<div class='box'>
 				<div class="box-header with-border">
-					<h3 class="box-title">Notice List</h3>
+					<h3 class="box-title">관리자 공지사항</h3>
 				</div>
 				<div class='box-body'>
 					<ul>
+						<div></div>
 						<li>
-							<button id='newNtn' class="btn btn-primary" onclick="javascript:location.href='register';">New Notice</button>
-						</li>
-						<li>
+						<form action="listPage">
+						<span class="glyphicon glyphicon-th-list form-control-feedback" id="listIcon"></span>
 							<select name="searchType">
 								<option value="" ${cri.searchType==null?'selected':'' }>
 								------</option>
 								<option value="t" ${cri.searchType eq 't'?'selected':'' }>
 								Title</option>
-								<option value="k" ${cri.searchType eq 'k'?'selected':'' }>
-								Kind</option>
 							</select>
 							<input id="keywordInput"
 								   name="keyword"
 								   type="text"  value="${pageMaker.cri.keyword}"/>
-							<button id="searchBtn" ></button>
+							<button id="searchBtn" type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+							</form>
 						</li>
 					</ul>
 				</div>
 			</div>
 			<div class="box">
 				<div class="box-header with-border">
+					
 					<h3 class="box-title">LIST PAGING</h3>
 				</div>
 				<div class="box-body">
 					<table class="table table-bordered" border="1">
 						<tr>
-							<th style="width: 10px">NNO</th>
-							<th>TITLE</th>
-							<th>INDATE</th>
-							<th>EXPIRE DATE</th>
-							<th>KIND</th>
-					</tr>
+							<th style="width: 10px; text-align: center;">NNO</th>
+							<th style="text-align: center;">TITLE</th>
+							<th style="text-align: center;">INDATE</th>
+							<th style="text-align: center;">EXPIRE DATE</th>
+							<th style="text-align: center;">KIND</th>
+						</tr>
 						<c:if test="${!empty noticeList }">
 						<c:forEach items="${noticeList}" var="notice">
-
 							<tr>
-								<td>${notice.nNum}</td>
-								<td><a
-									href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&nNum=${notice.nNum}'>
-										${notice.title}</a></td>
-								<td><fmt:formatDate pattern="yyyy-MM-dd"
-										value="${notice.indate}" /></td>
-								<td><fmt:formatDate pattern="yyyy-MM-dd"
-										value="${notice.expireDate}" /></td>
+								<td style="text-align: center;">${notice.nNum}</td>
+								<td style="text-align: center;">
+								<a href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&nNum=${notice.nNum}'>${notice.title}</a></td>
+								<td style="text-align: center;">
+								<fmt:formatDate pattern="yyyy-MM-dd" value="${notice.inDate}" /></td>
+								<td style="text-align: center;">
+								<fmt:formatDate pattern="yyyy-MM-dd" value="${notice.expireDate}" /></td>
 								<c:if test="${notice.kind == 0}">
-								<td>이슈</td>
+								<td style="text-align: center; color: red;">이슈</td>
 								</c:if>
 								<c:if test="${notice.kind == 1}">
-								<td>이벤트</td>
+								<td style="text-align: center; color: blue;">이벤트</td>
 								</c:if>
 								<c:if test="${notice.kind == 2}">
-								<td>점검</td>
+								<td style="text-align: center; color: purple;">점검</td>
 								</c:if>
 								<c:if test="${notice.kind == 3}">
-								<td>기본</td>
+								<td style="text-align: center;">기본</td>
 								</c:if>
 							</tr>
-
 						</c:forEach>
 						</c:if>
 						<c:if test="${empty noticeList }">
@@ -123,10 +120,14 @@ button#searchBtn{
 
 					</table>
 				</div>
-				<!-- /.box-body -->
-
+				<!-- box-body -->
 
 				<div class="box-footer">
+					<div style="float:right;">
+						<sec:authorize access="hasAuthority('ROLE_ADMIN')">
+							<button id='newNtn' class="btn btn-primary" onclick="javascript:location.href='register';">New Notice</button>
+						</sec:authorize>
+					</div>
 					<div class="text-center">
 						<ul class="pagination link">
  

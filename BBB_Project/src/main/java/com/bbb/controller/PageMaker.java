@@ -5,12 +5,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 public class PageMaker {
 	private int totalCount;
-
 	private int startPage;
 	private int endPage;
 	private boolean prev;
 	private boolean next;
-
 	private int displayPageNum = 10; // 페이지 번호 개수
 
 	private Criteria cri;
@@ -69,7 +67,7 @@ public class PageMaker {
 
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
-
+		
 		calcData();
 	}
 

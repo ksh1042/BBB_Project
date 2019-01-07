@@ -87,6 +87,11 @@ public class ProjectDAOImpl implements ProjectDAO{
 	}
 
 	@Override
+	public void insertUdNum(ProjectVO project) throws SQLException {
+		session.update("Project.insertUdNum", project);
+	}
+		
+	@Override
 	public void updateFnum(int pjNum, int fNum) throws SQLException {
 		
 		Map<String, Integer> map = new HashMap<String, Integer>();
@@ -94,8 +99,6 @@ public class ProjectDAOImpl implements ProjectDAO{
 		map.put("pjNum", pjNum);
 	
 		session.update("Project.updateFnum", map);
-		
-		
 		
 	}
 
@@ -105,11 +108,14 @@ public class ProjectDAOImpl implements ProjectDAO{
 		
 	}
 
-	
-
 	@Override
 	public void deletePlan(int pjNum) throws SQLException {
 		session.update("Project.deletePlan", pjNum);
+	}
+
+	@Override
+	public void insertGcNum(ProjectVO project) throws SQLException {
+		session.update("Project.insertGcNum", project);
 	}
 
 	

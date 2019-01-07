@@ -56,8 +56,6 @@
 		order by qanum desc
 	</select>
 	
-	
-		
 	<update id="increaseViewCnt">
 		update tbl_question set viewcnt=viewcnt+1
 		where

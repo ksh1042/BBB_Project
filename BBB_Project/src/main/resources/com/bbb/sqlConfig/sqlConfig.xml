@@ -15,6 +15,7 @@
 		<typeAlias type="com.bbb.dto.QnaVO" alias="question"/>
 		<typeAlias type="com.bbb.dto.QnaReplyVO" alias="questionReply"/>
 		<typeAlias type="com.bbb.dto.IssueVO" alias="issue"/>
+		<typeAlias type="com.bbb.dto.IssueDetailVO" alias="issueDetail"/>
 		<typeAlias type="com.bbb.dto.PostboxVO" alias="post" />
 		<typeAlias type="com.bbb.dto.FinanceVO" alias="finance"/>
 		<typeAlias type="com.bbb.dto.FinanceDetailVO" alias="financeDetail"/>
@@ -27,5 +28,8 @@
   		<typeAlias type="com.bbb.dto.BoardAttachVO" alias="Attach"/>
 		<typeAlias type="com.bbb.dto.ReplyVO" alias="Reply"/>
 		<typeAlias type="com.bbb.dto.UseCaseVO" alias="UseCase" />
+		<typeAlias type="com.bbb.dto.BoardNoticeVO" alias="boardnotice"/>
+		<typeAlias type="com.bbb.dto.GanttVO" alias="gantt"/>
+		<typeAlias type="com.bbb.dto.GanttHistVO" alias="ganttHist"/>
 	</typeAliases>
 </configuration>

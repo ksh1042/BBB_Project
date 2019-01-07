@@ -14,21 +14,19 @@
 				</div>
 				<!-- /.box-header -->
 <form role="form" method="post" action="register">
+<input type="hidden"
+				name='pjNum' value="${logonProject.pjNum }"class="form-control" placeholder="Project 번호를 입력해주세요">
 <table border="1">
-		
-		<div class="form-group">
-			<label for="exampleInputEmail1">PROJECT NO</label> 
-			<input type="text"
-				name='pjNum' class="form-control" placeholder="Enter Title">
-		</div>
 		<div class="form-group">
 			<label for="exampleInputEmail1">Title</label> 
 			<input type="text"
 				name='title' class="form-control" placeholder="Enter Title">
+			<span class="help-block" id="titleHelp"></span>
+			<span class="glyphicon glyphicon-pencil form-control-feedback" id="fNameIcon"></span>
 		</div>
 		<div class="form-group">
 			<label for="exampleInputPassword1">Content</label>
-			<textarea class="form-control" name="content" rows="3"
+			<textarea class="form-control" id="content" name="content" rows="3"
 				placeholder="Enter ..."></textarea>
 		</div>
 		<div class="form-group">
@@ -41,7 +39,8 @@
 	</table>
 
 	<div class="box-footer">
-		<button type="submit" class="btn btn-primary">Submit</button>
+		<button type="button" id="create_btn" class="btn btn-primary">Submit</button>&nbsp;
+		<button type="button" id="list_btn" class="btn btn-primary">LIST</button>
 	</div>
 </form>
 
@@ -55,6 +54,95 @@
 </section>
 <!-- /.content -->
 </div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<script>
+var pjNumFlag = false;
+var titleFlag = false;
+
+/* 유효성검사 */
+
+$('input[name="title"]').on('blur',function(e){
+	$(this).css({borderColor : 'red'});
+	var title = $(this).val();
+	
+	if(title == null || title == ''){
+		$('#titleHelp').css({color:'red'});
+		$('#titleHelp').html('제목을 입력하지 않으셨습니다.');
+		$(this).focus();
+		return;
+	}
+	if(title.length > 75){
+		$('#titleHelp').css({color:'red'});
+		$('#titleHelp').html('제목명은 75자를 넘을 수 없습니다.');
+		$(this).focus();
+		return;
+	}else{
+		$(this).css({ borderColor : 'green'});
+		$('span#titleHelp').html('');
+		titleFlag = true;
+	}
+	/* 유효성 ajax */
+	verifyCheck();
+});
+
+/* 버튼 */
+$('#create_btn').on('click',function(e){
+	if(!titleFlag){
+		$('button#create_btn').prop('disable',true);
+		$('span#titleHelp').css({color:'red', fontWeight :'bold'});
+		$('span#titleHelp').html('');
+		$('input[name=title]').css({borderColor:'red'});
+		return;
+	}
+	
+	var json = {
+			pjNum : $('input[name="pjNum"]').val(),
+			title : $('input[name="title"]').val(),
+			content : $('textarea[name="content"]').val(),
+			writer : $('input[name=writer]').val()
+	}
+	
+	$.ajax({
+		url : '<%=request.getContextPath()%>/board/register',
+		method : 'POST',
+		data : JSON.stringify(json),
+		headers:{
+			"Content-Type":"application/json",
+			"X-HTTP-Method-Override":"post"
+		},
+		success : function(data){
+			alert('게시글이 등록 되었습니다.');
+			location.href="<%=request.getContextPath()%>/board/listPage"
+		},
+		error : function(error) {
+			alert('서버 내부오류가 발생했습니다. 자세한 사항은 관리자에게 문의 바랍니다.');
+		}
+		});
+});
+
+
+$("#list_btn").on("click", function(){
+	location.href="<%=request.getContextPath()%>/board/listPage"
+});
+function verifyCheck() {
+	
+	if(!titleFlag) {
+		$('button#create_btn').prop('disabled', true);
+		$('span#titleHelp').css({
+			color : 'red',
+			fontWeight : 'bold'
+		});
+		$('span#titleHelp').html('');
+		$('input[name=]').css({
+			borderColor : 'red'
+		});
+		return;
+	}
+	$('button#create_btn').prop('disabled',false);
+}
+</script>
 <!-- /.content-wrapper -->
 
 </body>

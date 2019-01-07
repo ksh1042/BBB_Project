@@ -2,9 +2,11 @@ package com.bbb.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.bbb.controller.Criteria;
 import com.bbb.dto.ProjectPartakeVO;
+import com.bbb.dto.ProjectVO;
 import com.bbb.dto.RequirementVO;
 import com.bbb.dto.UnitworkHistVO;
 import com.bbb.dto.UnitworkVO;
@@ -17,7 +19,7 @@ public interface UnitworkService {
 	
 	public int readUnitworkHistoryCount(int udNum) throws SQLException;
 	
-	public void createUD(UnitworkVO unit) throws SQLException;
-	public void updateUDD(List<UnitworkVO> unitList, UnitworkHistVO unitHist, int udNum) throws SQLException;
-	public void deleteUDD(int udNum) throws SQLException;
+	public Map<String, Integer> createUD(ProjectVO project) throws SQLException;
+	public void updateUDD(List<UnitworkVO> updateList, List<UnitworkVO> createList, List<Integer> removeList, ProjectVO project) throws SQLException;
+	
 }

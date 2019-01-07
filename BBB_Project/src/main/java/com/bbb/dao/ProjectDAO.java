@@ -32,7 +32,9 @@ public interface ProjectDAO {
 
 	public ProjectVO getProjectMain(int pjNum) throws SQLException;
 	
+	public void insertUdNum(ProjectVO project) throws SQLException;
 	public void updateFnum(int pjNum, int fNum) throws SQLException;
 
 	public void insertUsecase(ProjectVO project) throws SQLException;
+	public void insertGcNum(ProjectVO project) throws SQLException;
 }

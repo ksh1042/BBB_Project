@@ -43,18 +43,15 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
         <decorator:head />
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue layout-boxed sidebar-mini">
 <div class="wrapper">
-	<%@ include file="/WEB-INF/views/commons/include/emailyn.jsp" %>
+   <%@ include file="/WEB-INF/views/commons/include/emailyn.jsp" %>
   <!-- Main Header -->
   <header class="main-header">
 
     <!-- Logo -->
     <a href="/main/" class="logo">
       <span class="logo-lg"><b>${logonProject.name }</b></span>
-    <sec:authorize access="hasAuthority('ROLE_ADMIN')">
-      <span class="logo-lg"><b>관리자 페이지</b></span>
-	</sec:authorize>
     </a>
 
     <!-- Header Navbar -->
@@ -71,12 +68,12 @@
           <li class="dropdown messages-menu">
             <!-- Menu toggle button -->
             <a href="#" onclick="postbox_go();">
-	            <script>
-		            function postbox_go(){
-		            	var url="/postbox/list?id=${ loginUser.id }";
-		            	window.open( url, "_blank_1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=900, height=800, top=300, left=300, ");	            	
-		            }
-	            </script>
+               <script>
+                  function postbox_go(){
+                     var url="/postbox/list?id=${ loginUser.id }";
+                     window.open( url, "_blank_1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=900, height=800, top=300, left=300, ");                  
+                  }
+               </script>
             <i class="fa fa-envelope-o"></i>
             </a>
           </li>
@@ -136,7 +133,7 @@
               
           <!-- ----------------상단 헤더 사용자 정보창 ----------------- -->
           <!-- User Account Menu -->
-      		<li class="dropdown user user-menu">
+            <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
@@ -174,22 +171,16 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-					<button id="profileBtn" type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#modal-default">내정보</button>
-				</div>
+               <button id="profileBtn" type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#modal-default">내정보</button>
+            </div>
                 <div class="pull-right">
                   <a href="<%= request.getContextPath() %>/commons/logout" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
           </li>
+
           
-          <!-- ------------------------------------------------- -->
-          <!-- Control Sidebar Toggle Button -->
-          <sec:authorize access="hasAuthority('ROLE_ADMIN')">
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
-          </sec:authorize>
         </ul>
       </div>
     </nav>
@@ -197,83 +188,83 @@
 
 <!-- 마이페이지 modal -->
 <form action="/main/mypage/modify" method="post" name="mypageForm">
-	<div class="modal fade in" id="modal-default" style="display: none; padding-right: 16px; height: auto;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-					<h4 class="modal-title">내 정보</h4>
-				</div>
+   <div class="modal fade in" id="modal-default" style="display: none; padding-right: 16px; height: auto;">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+               </button>
+               <h4 class="modal-title">내 정보</h4>
+            </div>
 
-				<div class="modal-body">
-					<div class="box-body">
-					
-						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" name="id" readonly value="${loginUser.id }" /><br />
-							</div>
-						</div>
-						
-						<div class="form-group">
-							<label for="inputPassword3" class="col-sm-2 control-label">패스워드</label>
-							<div class="col-sm-10">
-								<!-- <input type="password" class="form-control" id="inputPassword3" placeholder="Password"> -->
-								<button type="button" class="btn btn-block btn-warning" style="width: 150px;" onclick="location.href='<%=request.getContextPath()%>/main/mypage/resetPwd'">패스워드 변경</button>
-								<br/>
-							</div>
-						</div>
+            <div class="modal-body">
+               <div class="box-body">
+               
+                  <div class="form-group">
+                     <label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
+                     <div class="col-sm-10">
+                        <input type="text" class="form-control" name="id" readonly value="${loginUser.id }" /><br />
+                     </div>
+                  </div>
+                  
+                  <div class="form-group">
+                     <label for="inputPassword3" class="col-sm-2 control-label">패스워드</label>
+                     <div class="col-sm-10">
+                        <!-- <input type="password" class="form-control" id="inputPassword3" placeholder="Password"> -->
+                        <button type="button" class="btn btn-block btn-warning" style="width: 150px;" onclick="location.href='<%=request.getContextPath()%>/main/mypage/resetPwd'">패스워드 변경</button>
+                        <br/>
+                     </div>
+                  </div>
 
-						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-2 control-label">이름</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" name="name" value="${loginUser.name }" />
-								<br />
-							</div>
-						</div>
+                  <div class="form-group">
+                     <label for="inputEmail3" class="col-sm-2 control-label">이름</label>
+                     <div class="col-sm-10">
+                        <input type="text" class="form-control" name="name" value="${loginUser.name }" />
+                        <br />
+                     </div>
+                  </div>
 
-						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-2 control-label">이메일</label>
-							<div class="col-sm-10">
-								<input type="email" class="form-control" name="email" readonly
-									value="${loginUser.email }" style="margin-bottom: 10px;" />
-								<button type="button" class="btn btn-block btn-warning" style="width: 150px;" onclick="location.href='<%=request.getContextPath()%>/main/mypage/resetEmail'">이메일 변경</button>
-								<br />
-							</div>
-						</div>
+                  <div class="form-group">
+                     <label for="inputEmail3" class="col-sm-2 control-label">이메일</label>
+                     <div class="col-sm-10">
+                        <input type="email" class="form-control" name="email" readonly
+                           value="${loginUser.email }" style="margin-bottom: 10px;" />
+                        <button type="button" class="btn btn-block btn-warning" style="width: 150px;" onclick="location.href='<%=request.getContextPath()%>/main/mypage/resetEmail'">이메일 변경</button>
+                        <br />
+                     </div>
+                  </div>
 
-						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-2 control-label">핸드폰</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" name="phone" value="${loginUser.phone }">
-							</div>
-						</div>
+                  <div class="form-group">
+                     <label for="inputEmail3" class="col-sm-2 control-label">핸드폰</label>
+                     <div class="col-sm-10">
+                        <input type="text" class="form-control" name="phone" value="${loginUser.phone }">
+                     </div>
+                  </div>
 
-						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10"></div>
-						</div>
-					</div>
-				</div>
+                  <div class="form-group">
+                     <div class="col-sm-offset-2 col-sm-10"></div>
+                  </div>
+               </div>
+            </div>
 
-				<div class="modal-footer">
-					<button onclick="profileModify_go(); " type="button"
-						class="btn btn-primary">수정</button>
-				</div>
-				
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
-	</div>
+            <div class="modal-footer">
+               <button onclick="profileModify_go(); " type="button"
+                  class="btn btn-primary">수정</button>
+            </div>
+            
+         </div>
+         <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+   </div>
 </form>
 
 <script>
-	function profileModify_go() {
-		document.mypageForm.submit();
-		alert("회원정보가 수정되었습니다.");
-	}
+   function profileModify_go() {
+      document.mypageForm.submit();
+      alert("회원정보가 수정되었습니다.");
+   }
 </script>
 <!-- /.마이페이지 modal -->
 
@@ -321,44 +312,90 @@
               </span>
           </a>
           <ul class="treeview-menu">
-          	<c:choose>
-	          	<c:when test="${loginUser.id eq logonProject.creator }">
-		          	<c:if test="${empty logonProject.puuid }">
-		            	<li><a href="/plan/registerPlan"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
-		            </c:if>
-		            <c:if test="${!empty logonProject.puuid }">
-		            	<li><a href="/plan/modifyPlan?puuid=${logonProject.puuid }"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
-		            </c:if>
-		        </c:when>
-	            <c:otherwise>
-	            	<c:if test="${empty logonProject.puuid }">
-	            		<li><a href="empty"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
-	            	</c:if>
-	            	<c:if test="${!empty logonProject.puuid }">
-	            		<li><a href="/plan/viewPlan" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
-	            	</c:if>
-	            </c:otherwise>
+             <c:choose>
+             <c:when test="${loginUser.id eq logonProject.creator }">
+                <c:if test="${empty logonProject.puuid }">
+                  <li><a href="/plan/registerPlan"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+               </c:if>
+               <c:if test="${!empty logonProject.puuid }">
+                  <li><a href="" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+               </c:if>
+           </c:when>
+            <c:otherwise>
+               <c:if test="${empty logonProject.puuid }">
+                  <li><a href="empty"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+               </c:if>
+               <c:if test="${!empty logonProject.puuid }">
+                  <li><a href="/plan/viewPlan" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+               </c:if>
+            </c:otherwise>
             </c:choose>
             <c:choose>
-	            <c:when test="${loginUser.id eq logonProject.creator }">
-	            	<c:if test="${logonProject.rdNum eq 0 }">
-	            		<li><a href="/project/requirement/create"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
-	            	</c:if>
-	            	<c:if test="${logonProject.rdNum ne 0 }">
-	            		<li><a href="/project/requirement/list"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
-	            	</c:if>
-	            </c:when>
-	            <c:otherwise>
-	            	<c:if test="${logonProject.rdNum eq 0 }">
-	            		<li><a href="empty"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
-	            	</c:if>
-	            	<c:if test="${logonProject.rdNum ne 0 }">
-	            		<li><a href="/project/requirement/list"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
-	            	</c:if>
-	            </c:otherwise>
+               <c:when test="${loginUser.id eq logonProject.creator }">
+                  <c:if test="${logonProject.rdNum eq 0 }">
+                     <li><a href="/project/requirement/create"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
+                  </c:if>
+                  <c:if test="${logonProject.rdNum ne 0 }">
+                     <li><a href="/project/requirement/list"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
+                  </c:if>
+               </c:when>
+               <c:otherwise>
+                  <c:if test="${logonProject.rdNum eq 0 }">
+                     <li><a href="empty"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
+                  </c:if>
+                  <c:if test="${logonProject.rdNum ne 0 }">
+                     <li><a href="/project/requirement/list"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
+                  </c:if>
+               </c:otherwise>
             </c:choose>
-            <li><a href="<%=request.getContextPath()%>/project/unitwork/list"><i class="fa fa-circle-o"></i>단위업무 정의서</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>간트차트</a></li>
+            <li><c:if test="${ logonProject.creator eq loginUser.id }">
+										<c:if test="${ logonProject.udNum == 0 }">
+											<a
+												href="<%=request.getContextPath()%>/project/unitwork/create">
+												<i class="fa fa-circle-o"></i>단위업무 생성
+											</a>
+										</c:if>
+										<c:if test="${ logonProject.udNum != 0 }">
+											<a href="<%=request.getContextPath()%>/project/unitwork/list">
+												<i class="fa fa-circle-o"></i>단위업무 정의서
+											</a>
+										</c:if>
+									</c:if> <c:if test="${ logonProject.creator != loginUser.id }">
+										<c:if test="${ logonProject.udNum == 0 }">
+											<a href="empty"> <i class="fa fa-circle-o"></i>단위업무 정의서
+											</a>
+										</c:if>
+										<c:if test="${ logonProject.udNum != 0 }">
+											<a href="<%=request.getContextPath()%>/project/unitwork/list">
+												<i class="fa fa-circle-o"></i>단위업무 정의서
+											</a>
+										</c:if>
+									</c:if></li>
+								<li>
+									<c:if test="${ logonProject.creator eq loginUser.id }">
+										<c:if test="${ logonProject.gcNum == 0 }">
+											<a
+												href="<%=request.getContextPath()%>/project/gantt/create">
+												<i class="fa fa-circle-o"></i>간트차트 생성
+											</a>
+										</c:if>
+										<c:if test="${ logonProject.gcNum != 0 }">
+											<a href="<%=request.getContextPath()%>/project/gantt/list">
+												<i class="fa fa-circle-o"></i>간트차트
+											</a>
+										</c:if>
+									</c:if> <c:if test="${ logonProject.creator != loginUser.id }">
+										<c:if test="${ logonProject.gcNum == 0 }">
+											<a href="empty"> <i class="fa fa-circle-o"></i>간트차트
+											</a>
+										</c:if>
+										<c:if test="${ logonProject.gcNum != 0 }">
+											<a href="<%=request.getContextPath()%>/project/gantt/list">
+												<i class="fa fa-circle-o"></i>간트차트
+											</a>
+										</c:if>
+									</c:if>
+								</li>
             <li><a href="<%=request.getContextPath()%>/project/usecase/view"><i class="fa fa-circle-o"></i>U-C Diagram</a></li>
           </ul>
         </li>
@@ -375,14 +412,14 @@
           </ul>
         </li> -->
         
-		<li>
-			<a href="<%=request.getContextPath() %>/project/finance/list?fNum=${logonProject.fNum}">
-				<i class="fa fa-link"></i> 
-				<span>예산관리</span> 
-			</a>
-		</li>
+      <li>
+         <a href="<%=request.getContextPath() %>/project/finance/list?fNum=${logonProject.fNum}">
+            <i class="fa fa-link"></i> 
+            <span>예산관리</span> 
+         </a>
+      </li>
 
-		<li>
+      <li>
            <a href="#">
               <i class="fa fa-link"></i> 
               <span>캘린더</span>
@@ -397,7 +434,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<%=request.getContextPath()%>/fileboard/fileboardlist"><i class="fa fa-circle-o"></i>자료실</a></li>
-            <li><a href="<%=request.getContextPath()%>/notice/listPage"><i class="fa fa-circle-o"></i>공지사항</a></li>
+            <li><a href="<%=request.getContextPath()%>/boardnotice/listPage"><i class="fa fa-circle-o"></i>공지사항</a></li>
             <li><a href="<%=request.getContextPath()%>/board/listPage"><i class="fa fa-circle-o"></i>자유게시판</a></li>
           </ul>
         </li>
@@ -412,21 +449,6 @@
         
         </sec:authorize>
         
-        <sec:authorize access="hasAuthority('ROLE_ADMIN')">
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>관리자 게시판</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>공지사항</a></li>
-            <li><a href="<%=request.getContextPath()%>/question/listQna"><i class="fa fa-circle-o"></i>QnA</a></li>
-            <li><a href="<%=request.getContextPath()%>/admin/memberList"><i class="fa fa-circle-o"></i>회원관리</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>프로젝트 관리</a></li>
-          </ul>
-        </li>
-        </sec:authorize>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
@@ -434,10 +456,10 @@
   </aside>
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
   <script>
-  	$("a[href='empty']").on("click",function(e){
-  		e.preventDefault();
-  		alert("아직 계획서가 등록되지 않았습니다.");
-  	});
+     $("a[href='empty']").on("click",function(e){
+        e.preventDefault();
+        alert("아직 계획서가 등록되지 않았습니다.");
+     });
   </script>
   <body>
   <!-- Content Wrapper. Contains page content -->

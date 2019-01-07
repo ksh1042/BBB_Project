@@ -1,6 +1,8 @@
 package com.bbb.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +34,20 @@ public class UnitworkController {
 	
 	@Autowired
 	private UnitworkService unitworkService;
+	
+	@RequestMapping(value="/create", method=RequestMethod.GET)
+	public String unitworkRegist(HttpSession session) throws Exception {
+		ProjectVO selectProject = (ProjectVO)session.getAttribute("logonProject");
+		
+		Map<String, Integer> numberMap = unitworkService.createUD(selectProject);
+		
+		selectProject.setUdNum(numberMap.get("udNum"));
+		selectProject.setUdNum(numberMap.get("gcNum"));
+		
+		session.setAttribute("logonProject", selectProject);
+		
+		return "redirect:list";
+	}
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public void unitworkListGET(HttpServletRequest request, Model model) throws Exception {
@@ -66,20 +82,35 @@ public class UnitworkController {
 		ObjectMapper mapper = new ObjectMapper();
 		List<UnitworkVO> unitList = mapper.convertValue(paramMap.get("unitList"), new TypeReference<List<UnitworkVO>>() {
 		});
+		List<Integer> removeUddNumList = mapper.convertValue(paramMap.get("removeUddNumList"), new TypeReference<List<Integer>>() {
+		});
 		String comm = (String)paramMap.get("comm");
 		
 		for(int i=0; i<unitList.size(); i++){
 			unitList.get(i).setUdNum( selectProject.getUdNum() );
 		}
-		System.out.println("unitList : " + unitList);
-		System.out.println("comm : " + comm);
+		
+		List<UnitworkVO> createList = new ArrayList<UnitworkVO>();
+		
+		Iterator<UnitworkVO> it = unitList.iterator();
+		while( it.hasNext() ){
+			UnitworkVO unit = it.next();
+			if(unit.getUddNum() <= 0){
+				createList.add(unit);
+				it.remove();
+			}
+		}
+		
 		
 		try{
 			UnitworkHistVO unitHist = new UnitworkHistVO();
 			unitHist.setUdNum( selectProject.getUdNum() );
-			unitHist.setUpdateDate(new Date());
-			unitHist.setComm(comm);
-			unitworkService.updateUDD(unitList, unitHist, selectProject.getUdNum());
+			unitHist.setComm( comm );
+			unitHist.setUpdateDate( new Date() );
+			
+			unitworkService.updateUDD(unitList, createList, removeUddNumList, selectProject);
+			
+			
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		}catch(Exception e){
 			e.printStackTrace();

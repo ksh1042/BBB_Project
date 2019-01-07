@@ -24,7 +24,7 @@
         <!-- general form elements -->
         <div class="box box-primary">
         <div class="box-header">
-          <h3 class="box-title">READ NOTICE</h3>
+          <h3 class="box-title">공지글 상세보기</h3>
         </div><!-- /.box-header -->
 
  <form role="form" action="modifyPage" method="post">
@@ -40,6 +40,7 @@
       <label for="exampleInputEmail1">Title</label>
       <input type="text" name='title' class="form-control" 
          value="${notice.title}" readonly="readonly">
+      <span class="glyphicon glyphicon-ok form-control-feedback" id="okIcon"></span>
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Content</label>
@@ -48,10 +49,10 @@
     </div>
   </div><!-- /.box-body -->
 
-  <div class="box-footer">
-    <button type="submit" id="listBtn" class="btn btn-primary">LIST</button>
-  	<sec:authorize access="hasAuthority('ROLE_MANAGER')">
-	    <button type="submit" id="modifyBtn" class="btn btn-warning">Modify</button>
+  <div class="box-footer" style="float: right";>
+    <button type="submit" id="listBtn" class="btn btn-primary">LIST</button>&nbsp;
+  	<sec:authorize access="hasAuthority('ROLE_ADMIN')">
+	    <button type="submit" id="modifyBtn" class="btn btn-warning">Modify</button>&nbsp;
 	    <button type="submit" id="removeBtn" class="btn btn-danger">REMOVE</button>
 	</sec:authorize>
   </div>

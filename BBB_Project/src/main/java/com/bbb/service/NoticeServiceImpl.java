@@ -21,12 +21,12 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public void modify(NoticeVO notice) throws SQLException {
+	public void update(NoticeVO notice) throws SQLException {
 		dao.updateNotice(notice);
 	}
 
 	@Override
-	public void remove(int nNum) throws SQLException {
+	public void delete(int nNum) throws SQLException {
 		dao.deleteNotice(nNum);
 	}
 
@@ -44,21 +44,27 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public List<NoticeVO> listAll() throws SQLException {
+	public List<NoticeVO> readlistAll() throws SQLException {
 		List<NoticeVO> noticeList = dao.selectNoticeAll();
 		return noticeList;
 	}
 
 	@Override
-	public List<NoticeVO> listSearch(SearchCriteria cri) throws SQLException {
+	public List<NoticeVO> readlistSearch(SearchCriteria cri) throws SQLException {
 		List<NoticeVO> noticeList = dao.selectSearchNoticeList(cri);
 		return noticeList;
 	}
 
 	@Override
-	public List<NoticeVO> listCriteria(Criteria cri) throws SQLException {
+	public List<NoticeVO> readlistCriteria(Criteria cri) throws SQLException {
 		List<NoticeVO> noticeList = dao.selectNoticeCriteria(cri);
 		return noticeList;
+	}
+
+	@Override
+	public int readSearchNoticeCount(SearchCriteria cri) throws SQLException {
+		int count = dao.selectSearchNoticeCount(cri);
+		return count;
 	}
 
 }

@@ -38,14 +38,14 @@ public class FileBoardServiceImpl implements FileBoardService {
 
 	@Override
 	public BoardVO read(int bNum) throws Exception {
-		BoardVO board=boardDAO.selectBoardBybNum(bNum);
-		boardDAO.increaseViewcnt(bNum);
+		BoardVO board=boardDAO.selectBoardByBnum(bNum);
+		boardDAO.increaseCount(bNum);
 		return board;
 	}
 
 	@Override
 	public BoardVO readBybNum(int bNum) throws Exception {
-		BoardVO board=boardDAO.selectBoardBybNum(bNum);
+		BoardVO board=boardDAO.selectBoardByBnum(bNum);
 		
 		return board;
 	}
@@ -89,8 +89,8 @@ public class FileBoardServiceImpl implements FileBoardService {
 	}
 
 	@Override
-	public int readSearchBoardCount(SearchCriteria cri) throws Exception {
-		int count = boardDAO.selectSearchBoardListCount(cri);
+	public int readSearchBoardCount(SearchCriteria cri, int pjNum) throws Exception {
+		int count = boardDAO.selectSearchBoardListCount(cri,pjNum);
 		return count;
 	}
 
