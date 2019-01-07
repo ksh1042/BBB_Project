@@ -9,12 +9,13 @@ public class NoticeVO {
 	//제목
 	private String content;
 	//내용
-	private Date indate;
+	private Date inDate;
 	//작성일
 	private Date expireDate;
 	//공지만료일
 	private int kind;
 	//공지구분
+	
 	public int getnNum() {
 		return nNum;
 	}
@@ -33,11 +34,11 @@ public class NoticeVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getIndate() {
-		return indate;
+	public Date getInDate() {
+		return inDate;
 	}
-	public void setIndate(Date indate) {
-		this.indate = indate;
+	public void setInDate(Date inDate) {
+		this.inDate = inDate;
 	}
 	public Date getExpireDate() {
 		return expireDate;
@@ -54,9 +55,12 @@ public class NoticeVO {
 	
 	@Override
 	public String toString() {
-		return "Notice [nNum=" + nNum + ", title=" + title + ", content=" + content + ", indate=" + indate
+		return "NoticeVO [nNum=" + nNum + ", title=" + title + ", content=" + content + ", inDate=" + inDate
 				+ ", expireDate=" + expireDate + ", kind=" + kind + "]";
 	}
+	
+	
+	
 	
 	
 	

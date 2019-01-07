@@ -10,28 +10,17 @@
 		<config>src/main/resources/com/bbb/context/servlet-context.xml</config>
 		<config>src/main/resources/com/bbb/context/root-context.xml</config>
 		<config>src/main/resources/com/bbb/context/application-context.xml</config>
-<<<<<<< HEAD
-		<config>src/main/resources/com/bbb/context/aop-context.xml</config>
-=======
-		<config>src/main/resources/com/bbb/context/security-context.xml</config>
 		<config>src/main/resources/com/bbb/context/aspects-context.xml</config>
->>>>>>> refs/remotes/origin/choi
+<<<<<<< HEAD
+<<<<<<< HEAD
+		<config>src/main/resources/com/bbb/context/mail-context.xml</config>
+=======
+>>>>>>> refs/remotes/origin/develop
+=======
+>>>>>>> refs/remotes/origin/choi2
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
 	<configSets>
-		<configSet>
-			<name><![CDATA[set]]></name>
-			<allowBeanDefinitionOverriding>true</allowBeanDefinitionOverriding>
-			<incomplete>false</incomplete>
-			<configs>
-				<config>src/main/resources/com/bbb/context/application-context.xml</config>
-				<config>src/main/resources/com/bbb/context/root-context.xml</config>
-				<config>src/main/resources/com/bbb/context/security-context.xml</config>
-				<config>src/main/resources/com/bbb/context/servlet-context.xml</config>
-			</configs>
-			<profiles>
-			</profiles>
-		</configSet>
 	</configSets>
 </beansProjectDescription>

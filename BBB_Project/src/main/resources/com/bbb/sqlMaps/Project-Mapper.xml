@@ -18,10 +18,15 @@
 		select count(*) from tbl_project
 		where name like '%'||#{keyword}||'%'
 	</select>
-	   
+	
 	<update id="ProjectSearchJoin">
 		insert into tbl_project_partake(pjNum, id, assignyn)
 		values(#{pjNum}, #{id}, 0)
+	</update>
+	
+	<update id="JoinCancelProject">
+		delete from tbl_project_partake
+		where id=#{id} and pjnum = #{pjNum}
 	</update>
 	
 	<select id="selectProjectList" resultType="project">
@@ -55,6 +60,32 @@
 		update tbl_project
 		set puuid = #{puuid}
 		where pjnum = #{pjNum}
+	</update>
+	<update id="deletePlan">
+		update tbl_project
+		set puuid = null
+	</update>
+	
+	<update id="updateUseCase">
+		update tbl_project
+		set uuuid = #{uuuid}
+		where pjnum = #{pjNum}
+	</update>
+	
+	<update id="updateFnum" >
+		update tbl_project
+		set fnum = #{fNum}
+		where pjnum = #{pjNum}
+	</update>
+	<update id="insertUdNum" parameterType="project">
+		UPDATE tbl_project
+		set udNum = #{udNum}
+		WHERE pjNum = #{pjNum}
+	</update>
+	<update id="insertGcNum" parameterType="project">
+		UPDATE tbl_project
+		SET gcNum = #{gcNum}
+		WHERE pjNum = #{pjNum}
 	</update>
 </mapper>
 

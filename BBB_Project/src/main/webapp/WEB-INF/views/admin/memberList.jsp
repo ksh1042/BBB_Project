@@ -6,15 +6,28 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <body>
+<section class="content-header">
+		<h1>Member List</h1>
+		<ol class="breadcrumb">
+			<li><a href="<%=request.getContextPath()%>/admin/mainForm">
+				<i class="fa fa-dashboard"></i>main</a>
+			</li>
+			<li class="active">member list</li>
+		</ol>
+</section>
+
 <!-- Main content -->
 <section class="content">
 
-	<!-- 회원 검색창 -->
+
+
+	<!-- 회원 리스트 -->
 	<div class="row">
+		<!-- <div class="col-md-6"> -->
 		<div class="col-xs-12">
 			<div class="box">
-				<div class="box-header">
-					<h3 class="box-title">회원검색</h3>
+				<div class="box-header with-border">
+					<h3 class="box-title"></h3>
 					<div class="box-tools">
 						<div class="input-group input-group-sm" >
 							<div>
@@ -29,57 +42,41 @@
 									<option value="e"
 										${pageMaker.cri.searchType eq 'e' ? 'selected':'' }>이메일</option>
 								</select>
-
-								
-									<input type="text" name="keyword" value="${pageMaker.cri.keyword }">
-									<button type="submit">
-										<i class="fa fa-search" ></i>
-									</button>
-	
+								<input type="text" name="keyword" value="${pageMaker.cri.keyword }">
+								<button type="submit"><i class="fa fa-search" ></i></button>
 							</form>
 							</div>
 							<hr/>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
-	<!-- /회원검색 끝 -->
-
-	<!-- 회원 리스트 -->
-	<div class="row">
-		<!-- <div class="col-md-6"> -->
-		<div class="col-xs-12">
-			<div class="box">
-				<div class="box-header with-border">
-					<h3 class="box-title">Member List</h3>
-				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
 					<table class="table table-bordered">
 						<tr>
-							<th>#</th>
-							<th>ID</th>
-							<th>NAME</th>
-							<th>E-mail</th>
-							<th>가입일</th>
-							<th>관리</th>
+							<th style="text-align: center;">#</th>
+							<th style="text-align: center;">ID</th>
+							<th class="hidden-xs" style="text-align: center;">NAME</th>
+							<th class="hidden-xs" style="text-align: center;">E-mail</th>
+							<th class="hidden-xs" style="text-align: center;">가입일</th>
+							<th style="text-align: center;">이메일인증</th>
 						</tr>
 
 						<c:forEach var="member" items="${memberList }" varStatus="status">
 
 							<tr>
-								<td>${status.count }</td>
-								<td>${member.id}</td>
-								<td>${member.name}</td>
-								<td>${member.email}</td>
+								<td style="text-align: center;">${status.count }</td>
+								<td style="text-align: center;">${member.id}</td>
+								<td class="hidden-xs" style="text-align: center;">${member.name}</td>
+								<td class="hidden-xs" style="text-align: center;">${member.email}</td>
 								
-								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${member.indate}" /></td>
-								<td style="width: 120px;">
-									<button type="button" onclick="modify_go(${member.id});">수정</button>
-									&nbsp;
-									<button type="button" onclick="remove_go(${member.id});">삭제</button>
+								<td class="hidden-xs" style="text-align: center;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${member.indate}" /></td>
+								<td style="width: 150px;">
+									<div>
+									&nbsp;<button type="button" class="btn btn-info"  onclick="submit_go('${member.id}');">인증</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<button type="button" class="btn btn-danger"  onclick="cancel_go('${member.id}');">취소</button>
+									
+									</div>
 								</td>
 						</c:forEach>
 					</table>
@@ -88,11 +85,14 @@
 				<!-- / 나의 참여목록 리스트 테이블 끝 -->
 
 				<!-- 페이지번호 -->
-				<div class="box-footer clearfix">
-					<ul class="pagination link pagination-sm no-margin pull-right">
+				<div class="box-footer">
+					<div class="text-center">
+					<ul class="pagination link">
+						
 						<c:if test="${pageMaker.prev}">
 							<li><a href="${pageMaker.startPage - 1}">&laquo;</a></li>
 						</c:if>
+						
 						<c:forEach begin="${pageMaker.startPage }"
 							end="${pageMaker.endPage }" var="idx">
 							<li
@@ -100,10 +100,15 @@
 								<a href="${idx}">${idx}</a>
 							</li>
 						</c:forEach>
+						
 						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 							<li><a href="${pageMaker.endPage +1}">&raquo;</a></li>
 						</c:if>
+						
 					</ul>
+					
+					</div>
+					
 				</div>
 				<!-- 페이지 번호 끝 -->
 
@@ -130,18 +135,38 @@
 <script>
 	$(".link li a").on("click", function(event){
 		event.preventDefault();
+		
 		var targetPage = $(this).attr("href");
+		
 		var jobForm = $("#jobForm");
 		jobForm.find("[name='page']").val(targetPage);
 		jobForm.attr("action", "memberList").attr("method","get");
 		jobForm.submit();
 	});
 	
-	function modify_go(id){
+	function submit_go(id){
+		var jobForm = $("#jobForm");
 		
+		var input = $('<input>').attr({
+			name : 'id',
+			value : id
+		});
+		jobForm.append(input);
+		jobForm.attr("action","cancel").attr("method","post");
+		jobForm.submit();
+		alert('인증을 허가했습니다.');
 	}
-	
-	function remove_go(id){
+	function cancel_go(id){
+		var jobForm = $('#jobForm');
+		
+		var input = $('<input>').attr({
+			name : 'id',
+			value : id
+		});
+		jobForm.append(input);
+		jobForm.attr("action","submit").attr("method","post");
+		jobForm.submit();
+		alert('인증을 취소했습니다.');
 		
 	}
 </script>

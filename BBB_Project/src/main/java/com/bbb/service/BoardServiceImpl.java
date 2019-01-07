@@ -1,100 +1,97 @@
 package com.bbb.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.bbb.controller.Criteria;
 import com.bbb.controller.SearchCriteria;
-import com.bbb.dao.BoardAttachDAO;
 import com.bbb.dao.BoardDAO;
-import com.bbb.dto.BoardAttachVO;
+import com.bbb.dao.BoardNoticeDAO;
+import com.bbb.dto.BoardNoticeVO;
 import com.bbb.dto.BoardVO;
 
 public class BoardServiceImpl implements BoardService {
 
 	private BoardDAO boardDAO;
-	public void setBoardDAO(BoardDAO boardDAO){
-		this.boardDAO=boardDAO;
+	
+	private BoardNoticeDAO noticeDAO;
+	public void setBoardNoticeDAO(BoardNoticeDAO noticeDAO){
+		this.noticeDAO=noticeDAO;
 	}
-	private BoardAttachDAO attachDAO;
-	public void setAttachDAO(BoardAttachDAO attachDAO){
-		this.attachDAO=attachDAO;
+
+	public void setBoardDAO(BoardDAO boardDAO) {
+		this.boardDAO = boardDAO;
 	}
+
 	@Override
-	public void create(BoardVO board) throws Exception {
-		int bNum = boardDAO.getSeqNextvalue();
-		board.setbNum(bNum);
+	public void create(BoardVO board) throws SQLException {
 		boardDAO.insertBoard(board);
-		
-		List<BoardAttachVO> attachList=board.getAttachList();
-		for(BoardAttachVO attach : attachList){
-			attach.setbNum(bNum);
-			System.out.println(attach);
-			attachDAO.insertAttach(attach);
-		}
-
 	}
 
 	@Override
-	public BoardVO read(int bNum) throws Exception {
-		BoardVO board=boardDAO.selectBoardBybNum(bNum);
-		boardDAO.increaseViewcnt(bNum);
+	public BoardVO read(int bNum) throws SQLException {
+		BoardVO board = boardDAO.selectBoardByBnum(bNum);
+		boardDAO.increaseCount(bNum);
 		return board;
 	}
 
 	@Override
-	public BoardVO readBybNum(int bNum) throws Exception {
-		BoardVO board=boardDAO.selectBoardBybNum(bNum);
-		
-		return board;
-	}
-	@Override
-	public void update(BoardVO board) throws Exception {
-		int bNum = board.getbNum();
-		
+	public void update(BoardVO board) throws SQLException {
 		boardDAO.updateBoard(board);
-		attachDAO.deleteAllAttach(bNum);
 		
-		for(BoardAttachVO attach : board.getAttachList()){
-			attach.setbNum(bNum);
-			attachDAO.insertAttach(attach);
-		}
-
 	}
 
 	@Override
-	public void delete(int bNum) throws Exception {
+	public void delete(int bNum) throws SQLException {
 		boardDAO.deleteBoard(bNum);
-
 	}
 
 	@Override
-	public List<BoardVO> readListAll() throws Exception {
-		List<BoardVO> boardList= boardDAO.selectBoardAll();
+	public List<BoardVO> readListAll() throws SQLException {
+		List<BoardVO> boardList = boardDAO.selectBoardAll();
 		return boardList;
 	}
 
 	@Override
-	public List<BoardVO> readListCriteria(Criteria cri) throws Exception {
+	public List<BoardVO> readListCriteria(Criteria cri) throws SQLException {
 		List<BoardVO> boardList = boardDAO.selectBoardCriteria(cri);
 		return boardList;
 	}
 
 	@Override
-	public List<BoardVO> readListSearch(SearchCriteria cri) throws Exception {
-		List<BoardVO> boardList=boardDAO.selectSearchBoardList(cri);
-		
+	public List<BoardVO> readListSearch(SearchCriteria cri, int pjNum) throws Exception {
+		List<BoardVO> boardList=boardDAO.selectSearchBoardList(cri, pjNum);
+		return boardList;
+	}
+	
+	@Override
+	public List<BoardVO> readlistSearch(SearchCriteria cri) throws SQLException {
+		List<BoardVO> boardList = boardDAO.selectSearchBoardList(cri);
 		return boardList;
 	}
 
 	@Override
-	public int readSearchBoardCount(SearchCriteria cri) throws Exception {
-		int count = boardDAO.selectSearchBoardListCount(cri);
+	public int readSearchBoardCount(SearchCriteria cri,int pjNum) throws Exception {
+		int count = boardDAO.selectSearchBoardListCount(cri , pjNum);
+		return count;
+	}
+	@Override
+	public int readSearchBoardCount(SearchCriteria cri) throws SQLException {
+		int count = boardDAO.selectSearchBoardCount(cri);
 		return count;
 	}
 
 	@Override
-	public List<BoardAttachVO> getAttach(int bNum) throws Exception {
-		List<BoardAttachVO> attachList=attachDAO.selectAttachesBybNum(bNum);
-		return attachList;
+	public void createnotice(BoardVO board, BoardNoticeVO notice) throws SQLException {
+		boardDAO.insertBoard(board);
+		noticeDAO.insertBoardNotice(notice);
+		
 	}
+
+	@Override
+	public BoardVO readBybNum(int bNum) throws Exception {
+		BoardVO board = boardDAO.selectBoardByBnum(bNum);
+		return board;
+	}
+	
 }

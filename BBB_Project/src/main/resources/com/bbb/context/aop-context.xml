@@ -20,7 +20,7 @@
 	</advice>
 	
 	<aop:config>
-		<aop:pointcut expression="execution(public * com.spring.service..*(..))"
+		<aop:pointcut expression="execution(public * com.bbb.service..*(..))"
 					  id="servicePublicMethod"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="servicePublicMethod"/>
 	</aop:config>

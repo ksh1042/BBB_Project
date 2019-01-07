@@ -5,51 +5,58 @@
 <mapper namespace="Notice">
    
    <update id="insertNotice">
-	   	insert into tbl_notice(nNum,title,content,kind)
-	   	values(nNum_seq.nextval,#{title},#{content},#{kind})
+	   	insert into tbl_notice(nNum,title,content,inDate,expireDate,kind)
+	   	values(nNum_seq.nextval,#{title},#{content},#{inDate},#{expireDate},#{kind})
    </update>
    <update id="updateNotice">
 	   	update
 	   	tbl_notice set 
 	   	title=#{title},content=#{content},expiredate=#{expireDate}
-	   	where nNum=#{nNum}
+	   	where nnum=#{nNum}
    </update>
    <update id="deleteNotice">
 	   	delete
 	   	from tbl_notice
-	   	where nNum=#{nNum}
+	   	where nnum=#{nNum}
    </update>
    
    <sql id="search">
    	<if test="searchType == 't'.toString()">
    		and title like '%'||#{keyword}||'%'
    	</if>
-   	<if test="searchType == 'k'.toString()">
-   		and kind like '%'||#{keyword}||'%'
-   	</if>
    </sql>
    
    <select id="selectNoticeByNnum" resultType="notice">
 	   	select *
 	   	from tbl_notice
-	   	where nNum=#{nNum}
+	   	where nnum=#{nNum}
    </select>
 
+   <select id="selectSearchNoticeCount" resultType="int">
+   	<![CDATA[
+		select count(*)
+		from tbl_notice
+		where nnum >0
+		]]>
+		<include refid="search"></include>
+   </select>
+   
    <select id="selectSearchNoticeList" resultType="notice">
    	<![CDATA[
    		select *
    		from tbl_notice
-   		where nNum>0
+   		where nnum>0
    	]]>
    	<include refid="search"></include>
-   	order by nNum desc
+   	order by nnum desc
    </select>
    
-   <select id="selectBoardAll" resultType="notice">
+   <select id="selectNoticeAll" resultType="notice">
 	   	select *
 	   	from tbl_notice
-	   	order by nnum desc, indate desc
+	   	order by nnum desc, inDate desc
    </select>
+   
 
 </mapper>
 

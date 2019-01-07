@@ -2,49 +2,61 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Unitwork">
-	<!-- view 권한 풀리면 주석해제. -->
-	<!-- <select id="selectUnitworkListByRdNum" parameterType="int" resultType="unitwork">
-		SELECT *
-		FROM view_unitwork_definition
-		WHERE udid=#{udid}
-	</select> -->
 	
-	<!-- view 권한 풀리면 삭제 -->
 	<select id="selectUnitworkListByRdNum" parameterType="int" resultType="unitwork">
-		SELECT tud.udnum as udNum, tud.indate as indate, udid, udname, rdid, rdname, udmanager, extdate, intdate, pddate, devdate, estmate
-		FROM tbl_unitwork_definition tud, tbl_unitwork_definition_detail tudd, tbl_project tp
-		WHERE tp.udNum=#{udNum} AND tp.udNum = tud.udNum AND tud.udNum = tudd.udNum
-	</select>
-	<select id="selectUnitworkHistoryByRdNum" parameterType="int" resultType="unitworkHist">
 		SELECT *
+		FROM view_requirement_unitwork
+		WHERE udNum=#{udNum}
+	</select>
+	<select id="selectUnitworkCountByRdNum" parameterType="int" resultType="int">
+		SELECT count(*)
+		FROM view_requirement_unitwork
+		WHERE udNum=#{udNum}
+	</select>
+	
+	<select id="selectUnitworkHistoryByRdNum" parameterType="int" resultType="unitworkHist">
+		SELECT rownum, udNum, updateDate, comm
+		FROM tbl_unitwork_definition_hist
+		WHERE udNum=#{udNum}
+		ORDER BY rownum DESC
+	</select>
+	<select id="selectUnitworkHistoryCountByRdNum" parameterType="int" resultType="int">
+		SELECT count(*)
 		FROM tbl_unitwork_definition_hist
 		WHERE udNum=#{udNum}
 	</select>
+	
+	
 	<select id="selectUdNum" resultType="int">
 		SELECT udNum_seq.nextval
 		FROM dual
 	</select>
+	<select id="selectUddNum" resultType="int">
+		SELECT uddNum_seq.nextval
+		FROM dual
+	</select>
+	
+	
 	<update id="insertUD" parameterType="int">
 		INSERT INTO tbl_unitwork_definition(udNum)
 		VALUES(#{udNum})
 	</update>
-	<update id="insertUDD" parameterType="unitwork">
-		INSERT INTO tbl_unitwork_definition_detail(udNum, udId, udName, rdId, rdName, udManager, extDate, intDate, pdDate, devDate, extmate)
-		VALUES(#{udNum}, #{udId}, #{udName}, #{rdId}, #{rdName}, #{udManager}, #{extDate}, #{intDate}, #{pdDate}, #{devDate}, #{extmate})
-	</update>
-	<update id="insertUDH" parameterType="unitworkHist">
-		INSERT INTO tbl_unitwork_definition_hist(udNum, comm)
-		VALUES(#{udNum}, #{comm})
-	</update>
-	<update id="updateUDD" parameterType="unitworkHist">
-		UPDATE tbl_unitwork_definition
-		SET udId=#{udId}, udName=#{udName}, rdId=#{rdId}, rdName=#{rdName}, udManager=#{udManager}, extDate=#{extDate}, intDate=#{intDate}, pdDate=#{pdDate}, devDate=#{devDate}, extmate=#{extmate}
-		WHERE udNum=#{udNum} 
-	</update>
-	<update id="deleteUDD" parameterType="unitwork">
+	
+	<update id="deleteUDD" parameterType="int">
 		DELETE FROM tbl_unitwork_definition_detail
-		WHERE udNum=#{udNum} AND udId=#{udId}
+		WHERE uddNum=#{uddNum}
 	</update>
+	
+	<update id="updateUDD" parameterType="unitwork">
+		UPDATE tbl_unitwork_definition_detail
+		SET rddNum=#{rddNum}, udId=#{udId}, udName=#{udName}, udManager=#{udManager}, extDate=#{extDate}, intDate=#{intDate}, pdDate=#{pdDate}, devDate=#{devDate}, estmate=#{estmate}
+		WHERE uddNum=#{uddNum}
+	</update>
+	<update id="insertUDD" parameterType="unitwork">
+		INSERT INTO tbl_unitwork_definition_detail(uddNum, udNum, rddNum, udId, udName, udManager, extDate, intDate, pdDate, devDate, estmate)
+		VALUES(#{uddNum}, #{udNum}, #{rddNum}, #{udId}, #{udName}, #{udManager}, #{extDate}, #{intDate}, #{pdDate}, #{devDate}, #{estmate})
+	</update>
+	
 	
 </mapper>
 

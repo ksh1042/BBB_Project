@@ -27,5 +27,9 @@
 		<typeAlias type="com.bbb.dto.BoardVO" alias="board"/>
   		<typeAlias type="com.bbb.dto.BoardAttachVO" alias="Attach"/>
 		<typeAlias type="com.bbb.dto.ReplyVO" alias="Reply"/>
+		<typeAlias type="com.bbb.dto.UseCaseVO" alias="UseCase" />
+		<typeAlias type="com.bbb.dto.BoardNoticeVO" alias="boardnotice"/>
+		<typeAlias type="com.bbb.dto.GanttVO" alias="gantt"/>
+		<typeAlias type="com.bbb.dto.GanttHistVO" alias="ganttHist"/>
 	</typeAliases>
 </configuration>

@@ -1,11 +1,11 @@
 package com.bbb.controller;
 
 import java.io.File;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,7 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.bbb.dto.BoardAttachVO;
 import com.bbb.dto.BoardVO;
 import com.bbb.dto.ProjectVO;
-import com.bbb.service.BoardService;
+import com.bbb.service.FileBoardService;
 import com.bbb.utils.MediaUtils;
 
 @Controller
@@ -31,20 +32,21 @@ public class FileBoardController {
 	
 		
 	@Autowired
-	private BoardService service;
+	private FileBoardService service;
+	
+	
 	
 	@RequestMapping(value="/fileboardlist",method=RequestMethod.GET)
 	public void listPage(@ModelAttribute("cri")SearchCriteria cri,
-						 Model model) throws Exception{
-		List<BoardVO> boardList=service.readListSearch(cri);
+						 Model model, HttpSession session) throws Exception{
+		int pjNum= ((ProjectVO)(session.getAttribute("logonProject"))).getPjNum();
+		List<BoardVO> boardList=service.listSearch(cri,pjNum);
 		model.addAttribute("list",boardList);
 		
 		PageMaker pageMaker=new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(service.readSearchBoardCount(cri));
+		pageMaker.setTotalCount(service.readSearchBoardCount(cri, pjNum));
 		model.addAttribute(pageMaker);
-		
-		
 	}
 	
 	@RequestMapping(value="/fileboardinsert",method=RequestMethod.GET)
@@ -52,7 +54,7 @@ public class FileBoardController {
 	
 	
 	@RequestMapping(value="/fileboardinsert",method=RequestMethod.POST)
-	public String registerPOST(BoardVO board,RedirectAttributes rtts,HttpServletRequest request)
+	public String registerPOST( BoardVO board,RedirectAttributes rtts,HttpServletRequest request)
 								throws Exception{
 		ProjectVO project  = (ProjectVO)request.getSession().getAttribute("logonProject");
 		int pjNum=project.getPjNum();
@@ -86,7 +88,7 @@ public class FileBoardController {
 								RedirectAttributes rttr)
 									throws Exception{
 		
-		
+		if(oldAttach != null){
 		String[] fileNames=oldAttach.split(",");
 		for(String fileName : fileNames){
 			String formatName=fileName.substring(fileName.lastIndexOf(".")+1);
@@ -99,9 +101,9 @@ public class FileBoardController {
 					.delete();			
 			}
 			new File(uploadPath+fileName.replace('/', File.separatorChar)).delete();
+			}
 		}
 		
-		board.setUpdateDate(new Date());
 		
 		service.update(board);
 		

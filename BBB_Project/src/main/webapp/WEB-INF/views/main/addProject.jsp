@@ -18,6 +18,7 @@
  </style>
 </head>
 <body>
+	<div class="row" >
 	<div class="wrapperAddProject">
 		<div class="addProjectDiv">
 			<section class="content-header">
@@ -73,7 +74,7 @@
 			</section>
 		</div>
 	</div>
-	
+	</div>
 	
 	<!-- content.end -->
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Gantt">
+
+	<select id="selectGcNumSeqNextval" resultType="int">
+		SELECT gcNum_seq.nextval
+		FROM dual
+	</select>
+	<update id="insertGC" parameterType="int">
+		INSERT INTO tbl_gantt_chart(gcNum)
+		VALUES(#{gcNum})
+	</update>
+	
+	<select id="selectGanttListByGcNum" resultType="gantt">
+		SELECT *
+		FROM view_gantt_unitwork
+		WHERE gcNum=#{gcNum}
+		ORDER BY startDate ASC
+	</select>
+	<select id="selectMinStartDateByGcNum" parameterType="int" resultType="date">
+		SELECT min(startDate)
+		FROM view_gantt_unitwork
+		WHERE gcNum=#{gcNum}
+	</select>
+	
+	<update id="updateGanttDateByUddNum" parameterType="gantt">
+		UPDATE tbl_gantt_chart_detail
+		SET startDate=#{startDate}, endDate=#{endDate}
+		WHERE uddNum=#{uddNum}
+	</update>
+	<update id="updateGanttPercentageByUddNum" parameterType="gantt">
+		UPDATE tbl_gantt_chart_detail
+		SET percentage=#{percentage}
+		WHERE uddNum=#{uddNum}
+	</update>
+	
+	<update id="insertGCD" parameterType="gantt">
+		INSERT INTO tbl_gantt_chart_detail(uddNum, gcNum, startDate, endDate)
+		VALUES(#{uddNum}, #{gcNum}, #{startDate}, #{endDate})
+	</update>
+	<update id="deleteGCD" parameterType="int">
+		DELETE FROM tbl_gantt_chart_detail
+		WHERE uddNum=#{uddNum}
+	</update>
+	
+	<update id="insertGCH" parameterType="ganttHist">
+		INSERT INTO tbl_gantt_chart_history(gcNum, updateDate, comm)
+		VALUES(#{gcNum}, #{updateDate}, #{comm})
+	</update>
+	<update id="updateGCD" parameterType="gantt">
+		UPDATE tbl_gantt_chart_detail
+		SET percentage=#{percentage}, startDate=#{startDate}, endDate=#{endDate}
+		WHERE uddNum=#{uddNum}
+	</update>
+	
+	<select id="selectGanttHistList" parameterType="int" resultType="ganttHist">
+		SELECT rownum, gcNum, updateDate, comm
+		FROM tbl_gantt_chart_history
+		WHERE gcNum=#{gcNum}
+		ORDER BY rownum DESC
+	</select>
+	<select id="selectGanttHistListCount" parameterType="int" resultType="int">
+		SELECT count(*)
+		FROM tbl_gantt_chart_history
+		WHERE gcNum=#{gcNum}
+	</select>
+</mapper>
+
+
+
+
+
+
+   

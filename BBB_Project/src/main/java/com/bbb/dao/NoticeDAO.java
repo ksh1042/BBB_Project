@@ -25,5 +25,7 @@ public interface NoticeDAO {
 	
 	public List<NoticeVO> selectNoticeAll () throws SQLException;
 	
+	int selectSearchNoticeCount(SearchCriteria cri)throws SQLException;
+	
 	
 }
