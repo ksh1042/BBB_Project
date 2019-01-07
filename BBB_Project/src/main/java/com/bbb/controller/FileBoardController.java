@@ -45,11 +45,8 @@ public class FileBoardController {
 		
 		PageMaker pageMaker=new PageMaker();
 		pageMaker.setCri(cri);
-		int totalCount = service.listAll().size();
-		pageMaker.setTotalCount(totalCount);
-		
-		model.addAttribute("list", boardList);
-		model.addAttribute("pageMaker", pageMaker);
+		pageMaker.setTotalCount(service.readSearchBoardCount(cri, pjNum));
+		model.addAttribute(pageMaker);
 	}
 	
 	@RequestMapping(value="/fileboardinsert",method=RequestMethod.GET)

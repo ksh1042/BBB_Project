@@ -4,88 +4,51 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-
-
-<head>
-	<title>관리자 공지사항</title>
-<style>
-
-button#searchBtn{	
-	width:27px;
-	height:27px;	
-	background-position:center;
-	background-size:contain;	
-	background-color:white;	
-	box-sizing:border-box;
-	padding:6px;
-	 
-}
-.box-body ul{
-	list-style:none;
-	overflow:hidden;
-}
-.box-body ul li{
-	height:40px;
-	line-height:20px;
-}
-.box-body ul li:nth-child(1){
-	float:left;
-}
-.box-body ul li:nth-child(2){
-	float:right;
-}
-.box-body ul li:nth-child(2)>input{
-	width:300px;
-}
-
-</style>
-</head>
-
 <body>
+
+<section class="content-header">
+		<h1>Notice</h1>
+		<ol class="breadcrumb">
+			<li><a href="<%=request.getContextPath()%>/admin/mainForm">
+				<i class="fa fa-dashboard"></i>main</a>
+			</li>
+			<li class="active">notice</li>
+		</ol>
+</section>
+
 <!-- Main content -->
 <section class="content">
 	<div class="row">
 		<!-- left column -->
 		<div class="col-md-12">
-			<!-- general form elements -->
-			<div class='box'>
-				<div class="box-header with-border">
-					<h3 class="box-title">관리자 공지사항</h3>
-				</div>
-				<div class='box-body'>
-					<ul>
-						<div></div>
-						<li>
-						<form action="listPage">
-						<span class="glyphicon glyphicon-th-list form-control-feedback" id="listIcon"></span>
-							<select name="searchType">
-								<option value="" ${cri.searchType==null?'selected':'' }>
-								------</option>
-								<option value="t" ${cri.searchType eq 't'?'selected':'' }>
-								Title</option>
-							</select>
-							<input id="keywordInput"
-								   name="keyword"
-								   type="text"  value="${pageMaker.cri.keyword}"/>
-							<button id="searchBtn" type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-							</form>
-						</li>
-					</ul>
-				</div>
-			</div>
+
 			<div class="box">
 				<div class="box-header with-border">
-					
-					<h3 class="box-title">LIST PAGING</h3>
+					<h3 class="box-title"></h3>
+					<div class="box-tools">
+						<div class="input-group input-group-sm" >
+							<div>
+								<form action="listPage">
+									<select name="searchType">
+										<option value="" ${cri.searchType==null?'selected':'' }>------</option>
+										<option value="t" ${cri.searchType eq 't'?'selected':'' }>Title</option>
+									</select>
+									<input id="keywordInput" name="keyword" type="text"  value="${pageMaker.cri.keyword}"/>
+									<button type="submit" ><i class="fa fa-search"></i></button>
+								</form>
+							</div>
+							<hr/>
+						</div>
+					</div>
 				</div>
 				<div class="box-body">
 					<table class="table table-bordered" border="1">
 						<tr>
-							<th style="width: 10px; text-align: center;">NNO</th>
+							<th style="width: 10px; text-align: center;">NO</th>
 							<th style="text-align: center;">TITLE</th>
 							<th style="text-align: center;">INDATE</th>
-							<th style="text-align: center;">EXPIRE DATE</th>
-							<th style="text-align: center;">KIND</th>
+							<th class="hidden-xs" style="text-align: center;">EXPIRE DATE</th>
+							<th class="hidden-xs" style="text-align: center;">KIND</th>
 						</tr>
 						<c:if test="${!empty noticeList }">
 						<c:forEach items="${noticeList}" var="notice">
@@ -93,9 +56,9 @@ button#searchBtn{
 								<td style="text-align: center;">${notice.nNum}</td>
 								<td style="text-align: center;">
 								<a href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&nNum=${notice.nNum}'>${notice.title}</a></td>
-								<td style="text-align: center;">
+								<td class="hidden-xs" style="text-align: center;">
 								<fmt:formatDate pattern="yyyy-MM-dd" value="${notice.inDate}" /></td>
-								<td style="text-align: center;">
+								<td class="hidden-xs" style="text-align: center;">
 								<fmt:formatDate pattern="yyyy-MM-dd" value="${notice.expireDate}" /></td>
 								<c:if test="${notice.kind == 0}">
 								<td style="text-align: center; color: red;">이슈</td>
@@ -123,40 +86,31 @@ button#searchBtn{
 				<!-- box-body -->
 
 				<div class="box-footer">
-					<div style="float:right;">
-						<sec:authorize access="hasAuthority('ROLE_ADMIN')">
-							<button id='newNtn' class="btn btn-primary" onclick="javascript:location.href='register';">New Notice</button>
-						</sec:authorize>
-					</div>
-					<div class="text-center">
+				
+					<div class="text-center" >
 						<ul class="pagination link">
- 
 							<c:if test="${pageMaker.prev}">
 								<li><a href="${pageMaker.startPage - 1}">&laquo;</a></li>
 							</c:if>
-
-							<c:forEach begin="${pageMaker.startPage }"
-								end="${pageMaker.endPage }" var="idx">
+							<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
 								<li
 									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
 									<a href="${idx}">${idx}</a>
 								</li>
 							</c:forEach>
-
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li><a
-									href="${pageMaker.endPage +1}">&raquo;</a></li>
+								<li><a href="${pageMaker.endPage +1}">&raquo;</a></li>
 							</c:if>
-
 						</ul>
-						
-						
+						<sec:authorize access="hasAuthority('ROLE_ADMIN')">
+						<button id='newNtn' style="float:right; margin-top:20px" class="btn btn-primary" onclick="javascript:location.href='register';">New Notice</button>
+						</sec:authorize>
 					</div>
-
-
 				</div>
 				<!-- /.box-footer-->
 			</div>
+			
+			
 		</div>
 		<!--/.col (left) -->
 
@@ -188,14 +142,7 @@ button#searchBtn{
 		jobForm.submit();
 	});
 	
-	$('#searchBtn').on('click',function(){
-		self.location="listPage"
-					   +"${pageMaker.makeQuery(1)}"
-					   +"&searchType="
-					   +$("select option:selected").val()
-					   +"&keyword="
-					   +$('#keywordInput').val();
-	});
+
 </script>
 
 

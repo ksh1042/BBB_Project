@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
@@ -31,21 +30,13 @@
         apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/dist/css/skins/skin-blue.min.css">
  
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
   <!-- Google Font -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-        <decorator:head />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <decorator:head />
 </head>
 <body class="hold-transition skin-blue layout-boxed sidebar-mini">
 <div class="wrapper">
-   <%@ include file="/WEB-INF/views/commons/include/emailyn.jsp" %>
+  <%@ include file="/WEB-INF/views/commons/include/emailyn.jsp" %>
   <!-- Main Header -->
   <header class="main-header">
 
@@ -108,10 +99,9 @@
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-gear"></i>
-              <span class="label label-warning">10</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 10 notifications</li>
+              <li class="header">Support PMS</li>
               <li>
                 <!-- Inner Menu: contains the notifications -->
                 <ul class="menu">
@@ -154,8 +144,9 @@
                   <small>Member since&nbsp; <fmt:formatDate pattern="yyyy-MM-dd" value="${loginUser.indate}" /></small>
                 </p>
               </li>
+              
               <!-- Menu Body -->
-           <!--    <li class="user-body">
+           	  <li class="user-body">
                 <div class="row">
                   <div class="col-xs-4 text-center">
                     <a href="#">Followers</a>
@@ -167,12 +158,13 @@
                     <a href="#">Friends</a>
                   </div>
                 </div>
-              </li> -->
+              </li>
+              
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-               <button id="profileBtn" type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#modal-default">내정보</button>
-            </div>
+               		<button id="profileBtn" type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#modal-default">내정보</button>
+            	</div>
                 <div class="pull-right">
                   <a href="<%= request.getContextPath() %>/commons/logout" class="btn btn-default btn-flat">Sign out</a>
                 </div>
@@ -303,164 +295,167 @@
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">Menu</li>
-        <!-- Optionally, you can add icons to the links -->
-        <sec:authorize access="hasAuthority('ROLE_USER')">
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>계획설계</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-             <c:choose>
-             <c:when test="${loginUser.id eq logonProject.creator }">
-                <c:if test="${empty logonProject.puuid }">
-                  <li><a href="/plan/registerPlan"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
-               </c:if>
-               <c:if test="${!empty logonProject.puuid }">
-                  <li><a href="" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
-               </c:if>
-           </c:when>
-            <c:otherwise>
-               <c:if test="${empty logonProject.puuid }">
-                  <li><a href="empty"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
-               </c:if>
-               <c:if test="${!empty logonProject.puuid }">
-                  <li><a href="/plan/viewPlan" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
-               </c:if>
-            </c:otherwise>
-            </c:choose>
-            <c:choose>
-               <c:when test="${loginUser.id eq logonProject.creator }">
-                  <c:if test="${logonProject.rdNum eq 0 }">
-                     <li><a href="/project/requirement/create"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
-                  </c:if>
-                  <c:if test="${logonProject.rdNum ne 0 }">
-                     <li><a href="/project/requirement/list"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
-                  </c:if>
-               </c:when>
-               <c:otherwise>
-                  <c:if test="${logonProject.rdNum eq 0 }">
-                     <li><a href="empty"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
-                  </c:if>
-                  <c:if test="${logonProject.rdNum ne 0 }">
-                     <li><a href="/project/requirement/list"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
-                  </c:if>
-               </c:otherwise>
-            </c:choose>
-            <li><c:if test="${ logonProject.creator eq loginUser.id }">
-										<c:if test="${ logonProject.udNum == 0 }">
-											<a
-												href="<%=request.getContextPath()%>/project/unitwork/create">
-												<i class="fa fa-circle-o"></i>단위업무 생성
-											</a>
-										</c:if>
-										<c:if test="${ logonProject.udNum != 0 }">
-											<a href="<%=request.getContextPath()%>/project/unitwork/list">
-												<i class="fa fa-circle-o"></i>단위업무 정의서
-											</a>
-										</c:if>
-									</c:if> <c:if test="${ logonProject.creator != loginUser.id }">
-										<c:if test="${ logonProject.udNum == 0 }">
-											<a href="empty"> <i class="fa fa-circle-o"></i>단위업무 정의서
-											</a>
-										</c:if>
-										<c:if test="${ logonProject.udNum != 0 }">
-											<a href="<%=request.getContextPath()%>/project/unitwork/list">
-												<i class="fa fa-circle-o"></i>단위업무 정의서
-											</a>
-										</c:if>
-									</c:if></li>
-								<li>
-									<c:if test="${ logonProject.creator eq loginUser.id }">
-										<c:if test="${ logonProject.gcNum == 0 }">
-											<a
-												href="<%=request.getContextPath()%>/project/gantt/create">
-												<i class="fa fa-circle-o"></i>간트차트 생성
-											</a>
-										</c:if>
-										<c:if test="${ logonProject.gcNum != 0 }">
-											<a href="<%=request.getContextPath()%>/project/gantt/list">
-												<i class="fa fa-circle-o"></i>간트차트
-											</a>
-										</c:if>
-									</c:if> <c:if test="${ logonProject.creator != loginUser.id }">
-										<c:if test="${ logonProject.gcNum == 0 }">
-											<a href="empty"> <i class="fa fa-circle-o"></i>간트차트
-											</a>
-										</c:if>
-										<c:if test="${ logonProject.gcNum != 0 }">
-											<a href="<%=request.getContextPath()%>/project/gantt/list">
-												<i class="fa fa-circle-o"></i>간트차트
-											</a>
-										</c:if>
-									</c:if>
-								</li>
-            <li><a href="<%=request.getContextPath()%>/project/usecase/view"><i class="fa fa-circle-o"></i>U-C Diagram</a></li>
-          </ul>
-        </li>
-        
-    <!--     <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>스마트 WIKI</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>Wiki</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>URL</a></li>
-          </ul>
-        </li> -->
-        
-      <li>
-         <a href="<%=request.getContextPath() %>/project/finance/list?fNum=${logonProject.fNum}">
-            <i class="fa fa-link"></i> 
-            <span>예산관리</span> 
-         </a>
-      </li>
+     	<!-- Optionally, you can add icons to the links -->
+		<sec:authorize access="hasAuthority('ROLE_USER')">
+			<li class="treeview">
+				<a href="#"><i class="fa fa-link"></i>
+					<span>계획설계</span> 
+						<span class="pull-right-container"> 
+						<i class="fa fa-angle-left pull-right"></i>
+					</span> 
+				</a>
+				<ul class="treeview-menu">
+					<c:choose>
+						<c:when test="${loginUser.id eq logonProject.creator }">
+							<c:if test="${empty logonProject.puuid }">
+								<li><a href="/plan/registerPlan"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+							</c:if>
+							<c:if test="${!empty logonProject.puuid }">
+								<li><a href="/plan/modifyPlan"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+							</c:if>
+						</c:when>
+						<c:otherwise>
+							<c:if test="${empty logonProject.puuid }">
+								<li><a href="empty"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+							</c:if>
+							<c:if test="${!empty logonProject.puuid }">
+								<li><a href="/plan/viewPlan" target="_blank"><i class="fa fa-circle-o"></i>프로젝트 계획서</a></li>
+							</c:if>
+						</c:otherwise>
+					</c:choose>
 
-      <li>
-           <a href="#">
-              <i class="fa fa-link"></i> 
-              <span>캘린더</span>
-           </a>
-        </li>
-        
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>게시판</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<%=request.getContextPath()%>/fileboard/fileboardlist"><i class="fa fa-circle-o"></i>자료실</a></li>
-            <li><a href="<%=request.getContextPath()%>/boardnotice/listPage"><i class="fa fa-circle-o"></i>공지사항</a></li>
-            <li><a href="<%=request.getContextPath()%>/board/listPage"><i class="fa fa-circle-o"></i>자유게시판</a></li>
-          </ul>
-        </li>
-        
-        
-         <li>
-           <a href="<%=request.getContextPath()%>/project/issue/list">
-              <i class="fa fa-link"></i> 
-              <span>ISSUE</span>
-           </a>
-        </li>
-        
-        </sec:authorize>
-        
-      </ul>
+					<c:choose>
+						<c:when test="${loginUser.id eq logonProject.creator }">
+							<c:if test="${logonProject.rdNum eq 0 }">
+								<li><a href="/project/requirement/create"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
+							</c:if>
+							<c:if test="${logonProject.rdNum ne 0 }">
+								<li><a href="/project/requirement/list"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
+							</c:if>
+						</c:when>
+						<c:otherwise>
+							<c:if test="${logonProject.rdNum eq 0 }">
+								<li><a href="empty"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
+							</c:if>
+							<c:if test="${logonProject.rdNum ne 0 }">
+								<li><a href="/project/requirement/list"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
+							</c:if>
+						</c:otherwise>
+					</c:choose>
+					
+					<li>
+						<c:if test="${ logonProject.creator eq loginUser.id }">
+							<c:if test="${ logonProject.udNum == 0 }">
+								<a href="<%=request.getContextPath()%>/project/unitwork/create">
+									<i class="fa fa-circle-o"></i>단위업무 생성
+								</a>
+							</c:if>
+							<c:if test="${ logonProject.udNum != 0 }">
+								<a href="<%=request.getContextPath()%>/project/unitwork/list">
+									<i class="fa fa-circle-o"></i>단위업무 정의서
+								</a>
+							</c:if>
+						</c:if> <c:if test="${ logonProject.creator != loginUser.id }">
+							<c:if test="${ logonProject.udNum == 0 }">
+								<a href="empty"> <i class="fa fa-circle-o"></i>단위업무 정의서
+								</a>
+							</c:if>
+							<c:if test="${ logonProject.udNum != 0 }">
+								<a href="<%=request.getContextPath()%>/project/unitwork/list">
+									<i class="fa fa-circle-o"></i>단위업무 정의서
+								</a>
+							</c:if>
+						</c:if>
+					</li>
+					
+					<li>
+						<c:if test="${ logonProject.creator eq loginUser.id }">
+							<c:if test="${ logonProject.gcNum == 0 }">
+								<a href="<%=request.getContextPath()%>/project/gantt/create">
+									<i class="fa fa-circle-o"></i>간트차트 생성
+								</a>
+							</c:if>
+							<c:if test="${ logonProject.gcNum != 0 }">
+								<a href="<%=request.getContextPath()%>/project/gantt/list">
+									<i class="fa fa-circle-o"></i>간트차트
+								</a>
+							</c:if>
+						</c:if> 
+						<c:if test="${ logonProject.creator != loginUser.id }">
+							<c:if test="${ logonProject.gcNum == 0 }">
+								<a href="empty"> <i class="fa fa-circle-o"></i>간트차트
+								</a>
+							</c:if>
+							<c:if test="${ logonProject.gcNum != 0 }">
+								<a href="<%=request.getContextPath()%>/project/gantt/list">
+									<i class="fa fa-circle-o"></i>간트차트
+								</a>
+							</c:if>
+						</c:if>
+					</li>
+					
+					<li>
+						<a href="<%=request.getContextPath()%>/project/usecase/view">
+						<i class="fa fa-circle-o"></i>U-C Diagram</a></li>
+				</ul>
+			</li>
+
+
+			<li>
+				<a href="<%=request.getContextPath() %>/project/finance/list?fNum=${logonProject.fNum}">
+					<i class="fa fa-link"></i> <span>예산관리</span>
+				</a>
+			</li>
+
+			<li>
+				<a href="#"> 
+					<i class="fa fa-link"></i><span>캘린더</span>
+				</a>
+			</li>
+
+			<li class="treeview">
+				<a href="#"><i class="fa fa-link"></i>
+					<span>게시판</span>
+					<span class="pull-right-container"> 
+					<i class="fa fa-angle-left pull-right"></i>
+					</span> 
+				</a>
+				<ul class="treeview-menu">
+					<li>
+						<a href="<%=request.getContextPath()%>/fileboard/fileboardlist">
+						<i class="fa fa-circle-o"></i>자료실</a>
+					</li>
+					<li>
+						<a href="<%=request.getContextPath()%>/boardnotice/listPage">
+						<i class="fa fa-circle-o"></i>공지사항</a>
+					</li>
+					<li>
+						<a href="<%=request.getContextPath()%>/board/listPage">
+						<i class="fa fa-circle-o"></i>자유게시판</a>
+					</li>
+				</ul>
+			</li>
+
+			<li>
+				<a href="<%=request.getContextPath()%>/project/issue/list"> 
+					<i class="fa fa-link"></i><span>ISSUE</span>
+				</a>
+			</li>
+
+		</sec:authorize>
+
+	</ul>
       <!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
   </aside>
-  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-  <script>
-     $("a[href='empty']").on("click",function(e){
-        e.preventDefault();
-        alert("아직 계획서가 등록되지 않았습니다.");
-     });
-  </script>
-  <body>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+	$("a[href='empty']").on("click", function(e) {
+		e.preventDefault();
+		alert("아직 계획서가 등록되지 않았습니다.");
+	});
+</script>
+<body>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

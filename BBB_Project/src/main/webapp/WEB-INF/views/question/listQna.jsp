@@ -8,14 +8,24 @@
 
 <body>
 <!-- Main content -->
+<section class="content-header">
+		<h1>QnA</h1>
+		<ol class="breadcrumb">
+			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
+				<i class="fa fa-dashboard"></i>Home</a>
+			</li>
+			<li class="active">QnA</li>
+		</ol>
+</section>
 <section class="content">
 
-	<!-- QnA 검색창 -->
+	<!-- QnA 리스트 -->
 	<div class="row">
+		<!-- <div class="col-md-6"> -->
 		<div class="col-xs-12">
 			<div class="box">
-				<div class="box-header">
-					<h3 class="box-title">검색</h3>
+				<div class="box-header with-border">
+					<h3 class="box-title"></h3>
 					<div class="box-tools">
 						<div class="input-group input-group-sm" >
 							<div>
@@ -35,19 +45,6 @@
 							<hr/>
 						</div>
 					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- /검색 끝 -->
-
-	<!-- QnA 리스트 -->
-	<div class="row">
-		<!-- <div class="col-md-6"> -->
-		<div class="col-xs-12">
-			<div class="box">
-				<div class="box-header with-border">
-					<h3 class="box-title">QnA List</h3>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -89,11 +86,8 @@
 				
 
 				<!-- 페이지번호 -->
-				<div class="box-footer clearfix">
-				<sec:authorize access="hasAuthority('ROLE_USER')">
-				<button id='newBtn' class="btn btn-primary" onclick="javascript:location.href='registerQna';">New QnA</button>
-				</sec:authorize>
-					<ul class="pagination link pagination-sm no-margin pull-right">
+				<div class="box-footer clearfix text-center">
+					<ul class="pagination link">
 						<c:if test="${pageMaker.prev}">
 							<li><a href="${pageMaker.startPage - 1}">&laquo;</a></li>
 						</c:if>
@@ -108,6 +102,9 @@
 							<li><a href="${pageMaker.endPage +1}">&raquo;</a></li>
 						</c:if>
 					</ul>
+					<sec:authorize access="hasAuthority('ROLE_USER')">
+					<button id='newBtn' style="float:right; margin-top:20px" class="btn btn-primary" onclick="javascript:location.href='registerQna';">New QnA</button>
+					</sec:authorize>
 				</div>
 				<!-- 페이지 번호 끝 -->
 
