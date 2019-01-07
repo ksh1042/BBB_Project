@@ -1,6 +1,7 @@
 package com.bbb.controller;
 
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -72,7 +73,7 @@ public class ProjectPlanController {
 		String savePath = plan.getSavePath().replace("\\", "/");
 		System.out.println(savePath);
 		String fullName = savePath+plan.getPuuid()+"$$"+plan.getFileName();
-		
+		fullName = URLEncoder.encode(fullName, "UTF-8");	
 		return "redirect:/displayFile?fileName="+fullName;
 	}
 	
