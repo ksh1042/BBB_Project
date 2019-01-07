@@ -37,12 +37,13 @@ public class BoardNoticeController {
 		HttpSession session = request.getSession();
 		ProjectVO project = (ProjectVO)session.getAttribute("logonProject");
 		cri.setPjNum(project.getPjNum());
-	
-		List<BoardNoticeVO> boardnoticeList = service.readNoticelistSearch(cri);	
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.readSearchBoardNoticeCount(cri));
+		List<BoardNoticeVO> boardnoticeList = service.readNoticelistSearch(cri);	
+		List<BoardVO> board =service.readlistSearch(cri);
+		model.addAttribute("board",board);
 		model.addAttribute("boardnoticeList",boardnoticeList);
 		model.addAttribute("pageMaker",pageMaker);
 	}
@@ -87,7 +88,6 @@ public class BoardNoticeController {
 	
 	@RequestMapping(value="/readPage",method=RequestMethod.GET)
 	public void readPage(@ModelAttribute("cri") SearchCriteria cri, int bNum, Model model, HttpServletRequest request)throws Exception{
-		System.out.println(bNum);
 		HttpSession session = request.getSession();
 		ProjectVO project = (ProjectVO)session.getAttribute("logonProject");
 		cri.setPjNum(project.getPjNum());

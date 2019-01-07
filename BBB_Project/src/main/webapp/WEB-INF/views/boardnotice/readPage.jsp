@@ -30,6 +30,7 @@
  <form role="form" action="modifyPage" method="post">
     
     <input type='hidden' name='bNum' value ="${board.bNum}">
+	<input type='hidden' name='pjNum' value ="${board.pjNum}">   
     <input type='hidden' name='page' value ="${cri.page}">
     <input type='hidden' name='perPageNum' value ="${cri.perPageNum}">
     
@@ -37,15 +38,20 @@
     
   <div class="box-body">
     <div class="form-group">
-      <label for="exampleInputEmail1">Title</label>
+      <label for="exampleInputEmail1">제목</label>
       <input type="text" name='title' class="form-control" 
          value="${board.title}" readonly="readonly">
       <span class="glyphicon glyphicon-ok form-control-feedback" id="okIcon"></span>
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Content</label>
+      <label for="exampleInputPassword1">내용</label>
       <textarea class="form-control"  name="content" rows="3" 
       readonly="readonly">${board.content}</textarea>
+    </div>
+     <div class="form-group">
+      <label for="exampleInputEmail1" >작성자</label>
+      <input type="text" name="writer" class="form-control" 
+        value="${board.writer}" readonly="readonly">
     </div>
   </div><!-- /.box-body -->
 

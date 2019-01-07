@@ -18,19 +18,19 @@
 				name='pjNum' value="${logonProject.pjNum }"class="form-control" placeholder="Project 번호를 입력해주세요">
 <table border="1">
 		<div class="form-group">
-			<label for="exampleInputEmail1">Title</label> 
+			<label for="exampleInputEmail1">제목</label> 
 			<input type="text"
 				name='title' class="form-control" placeholder="Enter Title">
 			<span class="help-block" id="titleHelp"></span>
 			<span class="glyphicon glyphicon-pencil form-control-feedback" id="fNameIcon"></span>
 		</div>
 		<div class="form-group">
-			<label for="exampleInputPassword1">Content</label>
+			<label for="exampleInputPassword1">내용</label>
 			<textarea class="form-control" id="content" name="content" rows="3"
 				placeholder="Enter ..."></textarea>
 		</div>
 		<div class="form-group">
-			<label for="exampleInputEmail1">Writer</label> 
+			<label for="exampleInputEmail1">작성자</label> 
 			<input type="text" readonly="readonly" value="${loginUser.id }"
 				name="writer" class="form-control" placeholder="Enter Writer">
 		</div>

@@ -12,7 +12,7 @@
 			<!-- general form elements -->
 			<div class="box box-primary">
 				<div class="box-header">
-					<h3 class="box-title">MODIFY BOARD</h3>
+					<h3 class="box-title">게시글 수정</h3>
 				</div>
 				<!-- /.box-header -->
 
@@ -26,28 +26,28 @@
 					<div class="box-body">
 
 						<div class="form-group">
-							<label for="exampleInputEmail1">BNO</label> 
+							<label for="exampleInputEmail1">글번호</label> 
 							<input type="text" name='bNum' class="form-control" value="${board.bNum}"
 								readonly="readonly">
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">PROJECT NO</label> 
+							<label for="exampleInputEmail1">프로젝트 번호</label> 
 							<input type="text" name='pjNum' class="form-control" value="${board.pjNum}"
 								readonly="readonly">
 						</div>
 
 						<div class="form-group">
-							<label for="exampleInputEmail1">Title</label> 
+							<label for="exampleInputEmail1">제목</label> 
 							<input type="text" name='title' class="form-control" value="${board.title}">
 							<span class="help-block" id="titleHelp"></span>
 							<span class="glyphicon glyphicon-pencil form-control-feedback" id="fNameIcon"></span>
 						</div>
 						<div class="form-group">
-							<label for="exampleInputPassword1">Content</label>
+							<label for="exampleInputPassword1">내용</label>
 							<textarea class="form-control" name="content" rows="3">${board.content}</textarea>
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Writer</label> 
+							<label for="exampleInputEmail1">작성자</label> 
 							<input readonly	type="text" name="writer" class="form-control"
 								value="${loginUser.id}">
 						</div>

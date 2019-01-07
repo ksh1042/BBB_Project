@@ -78,30 +78,30 @@ button#searchBtn{
 			<div class="box">
 				<div class="box-header with-border">
 					
-					<h3 class="box-title">LIST PAGING</h3>
+					<h3 class="box-title">게시판 페이지</h3>
 				</div>
 				<div class="box-body">
 					<table class="table table-bordered" border="1">
 						<tr>
-							<th style="width: 10px; text-align: center";>BNO</th>
-							<th style="text-align: center";>TITLE</th>
-							<th style="text-align: center";>WRITER</th>
-							<th style="text-align: center";>INDATE</th>
-							<th style="text-align: center";>UPDATE DATE</th>
-							<th style="width: 40px; text-align: center";>COUNT</th>
+							<th style="width: 30px; text-align: center";>글번호</th>
+							<th style="text-align: center"; width="30px">제목</th>
+							<th style="text-align: center"; width="50px">작성자</th>
+							<th style="text-align: center"; width="50px">작성일</th>
+							<th style="text-align: center"; width="50px">수정일</th>
+							<th style="width: 40px; text-align: center";>조회수</th>
 					</tr>
 						<c:if test="${!empty boardList }">
 						<c:forEach items="${boardList}" var="board">
 
 							<tr>
-								<td style="text-align: center";>${board.bNum}</td>
+								<td style="text-align: center"; >${board.bNum}</td>
 								<td style="text-align: center";><a
 									href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&bNum=${board.bNum}'>
 										${board.title}</a></td>
 								<td style="text-align: center";>${board.writer}</td>
-								<td style="text-align: center";><fmt:formatDate pattern="yyyy-MM-dd"
+								<td style="text-align: center"; ><fmt:formatDate pattern="yyyy-MM-dd"
 										value="${board.inDate}" /></td>
-								<td style="text-align: center";><fmt:formatDate pattern="yyyy-MM-dd"
+								<td style="text-align: center"; ><fmt:formatDate pattern="yyyy-MM-dd"
 										value="${board.updateDate}" /></td>
 								<td style="text-align: center";><span class="badge bg-red">${board.count }</span></td>
 							</tr>

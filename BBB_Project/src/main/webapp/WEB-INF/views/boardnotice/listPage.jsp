@@ -50,7 +50,7 @@ button#searchBtn{
 			<!-- general form elements -->
 			<div class='box'>
 				<div class="box-header with-border">
-					<h3 class="box-title">공지사항리스트</h3>
+					<h3 class="box-title">공지사항</h3>
 				</div>
 				<div class='box-body'>
 					<ul>
@@ -66,26 +66,34 @@ button#searchBtn{
 			<div class="box">
 				<div class="box-header with-border">
 					
-					<h3 class="box-title">LIST PAGING</h3>
+					<h3 class="box-title">공지사항리스트</h3>
 				</div>
 				<div class="box-body">
 					<c:if test="${sysdate>boardnotice.noticeDate }">
+					
 					<table class="table table-bordered" border="1">
 						<tr>
-							<th style="width: 10px; text-align: center;">BNO</th>
-							<th style="text-align: center;">NOTICE DATE</th>
-							
-					</tr>
+							<th style="width: 100px; text-align: center;">글번호</th>
+							<th style="text-align: center;" width="10px">제목</th>
+							<th style="text-align: center;" width="100px">공지일</th>
+						</tr>
+						
 						<c:if test="${!empty boardnoticeList }">
+						
 						<c:forEach items="${boardnoticeList}" var="boardnotice">
-							<tr background="red">
+							<tr>
 								<td style="text-align: center;">${boardnotice.bNum}</td>
+								<c:forEach items="${board }" var="board">
 								<td style="text-align: center;"><a
 									href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&bNum=${boardnotice.bNum}'>
-										<fmt:formatDate pattern="yyyy-MM-dd"
-										value="${boardnotice.noticeDate}" /></a></td>
+										${board.title }</a></td>
+								</c:forEach>
+								<td style="text-align: center;">
+								<fmt:formatDate pattern="yyyy-MM-dd" value="${boardnotice.noticeDate}" />
+								</td>
 							</tr>
 						</c:forEach>
+						 
 						</c:if>
 						<c:if test="${empty boardnoticeList }">
 							<tr>
@@ -98,20 +106,25 @@ button#searchBtn{
 					
 					<table class="table table-bordered" border="1">
 						<tr>
-							<th style="width: 10px; text-align: center;">BNO</th>
-							<th style="text-align: center;">NOTICE DATE</th>
+							<th style="width: 100px; text-align: center;">글번호</th>
+							<th style="text-align: center;" width="10px">제목</th>
+							<th style="text-align: center;" width="100px">공지일</th>
 							
 					</tr>
 						<c:if test="${!empty boardnoticeList }">
+						<c:forEach items="${board }" var="board">
 						<c:forEach items="${boardnoticeList}" var="boardnotice">
 							<tr>
 								<td style="text-align: center;">${boardnotice.bNum}</td>
 								<td style="text-align: center;"><a
 									href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&bNum=${boardnotice.bNum}'>
-										<fmt:formatDate pattern="yyyy-MM-dd"
-										value="${boardnotice.noticeDate}" /></a></td>
+										${board.title }</a></td>
+								<td style="text-align: center;">
+								<fmt:formatDate pattern="yyyy-MM-dd" value="${boardnotice.noticeDate}" />
+								</td>
 							</tr>
 						</c:forEach>
+					 	</c:forEach> 
 						</c:if>
 						<c:if test="${empty boardnoticeList }">
 							<tr>

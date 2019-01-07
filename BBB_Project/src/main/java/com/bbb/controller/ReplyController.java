@@ -28,12 +28,11 @@ public class ReplyController {
 	private ReplyService service;
 	
 	@RequestMapping(value="/all/{bNum}", method=RequestMethod.GET)
-	public ResponseEntity<List<ReplyVO>> list( @PathVariable("bNum") int bNum) throws Exception{
+	public ResponseEntity<List<ReplyVO>> list(@PathVariable("bNum") int bNum, Model model) throws Exception{
 
-		
-		
 		List<ReplyVO> replyList = service.getReplyList(bNum);
-		
+		model.addAttribute("replyList",replyList);
+
 		ResponseEntity<List<ReplyVO>> entity = new ResponseEntity<List<ReplyVO>>(replyList,HttpStatus.OK);
 			return entity;
 	}
@@ -54,7 +53,7 @@ public class ReplyController {
 	
 	@RequestMapping(value="/{bNum}/{page}",method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>>listPage(@PathVariable("bNum") int bNum, @PathVariable("page") int page) throws Exception{
+	public ResponseEntity<Map<String, Object>>listPage(@PathVariable("bNum") int bNum, @PathVariable("page") int page,Model model) throws Exception{
 		
 		ResponseEntity<Map<String,Object>> entity = null;
 		
@@ -72,6 +71,7 @@ public class ReplyController {
 		try{
 			List<ReplyVO> List = service.getReplyList(bNum,cri);
 			map.put("list", List);
+			model.addAttribute("list",List);
 			entity = new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
 		}catch(SQLException e){
 			e.printStackTrace();
