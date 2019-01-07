@@ -330,9 +330,72 @@
                </c:if>
             </c:otherwise>
             </c:choose>
-            <li><a href="/project/requirement"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
-            <li><a href="<%=request.getContextPath()%>/project/unitwork/list"><i class="fa fa-circle-o"></i>단위업무 정의서</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>간트차트</a></li>
+            <c:choose>
+               <c:when test="${loginUser.id eq logonProject.creator }">
+                  <c:if test="${logonProject.rdNum eq 0 }">
+                     <li><a href="/project/requirement/create"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
+                  </c:if>
+                  <c:if test="${logonProject.rdNum ne 0 }">
+                     <li><a href="/project/requirement/list"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
+                  </c:if>
+               </c:when>
+               <c:otherwise>
+                  <c:if test="${logonProject.rdNum eq 0 }">
+                     <li><a href="empty"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
+                  </c:if>
+                  <c:if test="${logonProject.rdNum ne 0 }">
+                     <li><a href="/project/requirement/list"><i class="fa fa-circle-o"></i>요구사항 정의서</a></li>
+                  </c:if>
+               </c:otherwise>
+            </c:choose>
+            <li><c:if test="${ logonProject.creator eq loginUser.id }">
+										<c:if test="${ logonProject.udNum == 0 }">
+											<a
+												href="<%=request.getContextPath()%>/project/unitwork/create">
+												<i class="fa fa-circle-o"></i>단위업무 생성
+											</a>
+										</c:if>
+										<c:if test="${ logonProject.udNum != 0 }">
+											<a href="<%=request.getContextPath()%>/project/unitwork/list">
+												<i class="fa fa-circle-o"></i>단위업무 정의서
+											</a>
+										</c:if>
+									</c:if> <c:if test="${ logonProject.creator != loginUser.id }">
+										<c:if test="${ logonProject.udNum == 0 }">
+											<a href="empty"> <i class="fa fa-circle-o"></i>단위업무 정의서
+											</a>
+										</c:if>
+										<c:if test="${ logonProject.udNum != 0 }">
+											<a href="<%=request.getContextPath()%>/project/unitwork/list">
+												<i class="fa fa-circle-o"></i>단위업무 정의서
+											</a>
+										</c:if>
+									</c:if></li>
+								<li>
+									<c:if test="${ logonProject.creator eq loginUser.id }">
+										<c:if test="${ logonProject.gcNum == 0 }">
+											<a
+												href="<%=request.getContextPath()%>/project/gantt/create">
+												<i class="fa fa-circle-o"></i>간트차트 생성
+											</a>
+										</c:if>
+										<c:if test="${ logonProject.gcNum != 0 }">
+											<a href="<%=request.getContextPath()%>/project/gantt/list">
+												<i class="fa fa-circle-o"></i>간트차트
+											</a>
+										</c:if>
+									</c:if> <c:if test="${ logonProject.creator != loginUser.id }">
+										<c:if test="${ logonProject.gcNum == 0 }">
+											<a href="empty"> <i class="fa fa-circle-o"></i>간트차트
+											</a>
+										</c:if>
+										<c:if test="${ logonProject.gcNum != 0 }">
+											<a href="<%=request.getContextPath()%>/project/gantt/list">
+												<i class="fa fa-circle-o"></i>간트차트
+											</a>
+										</c:if>
+									</c:if>
+								</li>
             <li><a href="<%=request.getContextPath()%>/project/usecase/view"><i class="fa fa-circle-o"></i>U-C Diagram</a></li>
           </ul>
         </li>
@@ -371,7 +434,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<%=request.getContextPath()%>/fileboard/fileboardlist"><i class="fa fa-circle-o"></i>자료실</a></li>
-            <li><a href="<%=request.getContextPath()%>/notice/listPage"><i class="fa fa-circle-o"></i>공지사항</a></li>
+            <li><a href="<%=request.getContextPath()%>/boardnotice/listPage"><i class="fa fa-circle-o"></i>공지사항</a></li>
             <li><a href="<%=request.getContextPath()%>/board/listPage"><i class="fa fa-circle-o"></i>자유게시판</a></li>
           </ul>
         </li>

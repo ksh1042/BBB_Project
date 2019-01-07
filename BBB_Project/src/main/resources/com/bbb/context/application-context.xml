@@ -81,23 +81,22 @@
 		p:boardDAO-ref="boardDAO" />
 
 	<bean id="requireService" class="com.bbb.service.RequirementServiceImpl"
-		p:requirementDAO-ref="requirementDAO" 
-		/>
-	
-	<bean id="ganttDAO" 
-		class="com.bbb.dao.GanttDAOImpl"
-		p:sqlSession-ref="sqlSession"/>
-		
-	<bean id="ganttService"
-		class="com.bbb.service.GanttServiceImpl"
-		p:projectDAO-ref="projectDAO"
+		p:requirementDAO-ref="requirementDAO" />
+
+	<bean id="ganttDAO" class="com.bbb.dao.GanttDAOImpl"
+		p:sqlSession-ref="sqlSession" />
+
+	<bean id="ganttService" class="com.bbb.service.GanttServiceImpl"
+		p:projectDAO-ref="projectDAO" p:ganttDAO-ref="ganttDAO" />
+
+	<bean id="unitworkService" class="com.bbb.service.UnitworkServiceImpl"
+		p:unitworkDAO-ref="unitworkDAO" p:projectPartakeDAO-ref="projectPartakeDAO"
+		p:requirementDAO-ref="requirementDAO" p:projectDAO-ref="projectDAO"
 		p:ganttDAO-ref="ganttDAO" />
-		
-	<bean id="unitworkService"
-		class="com.bbb.service.UnitworkServiceImpl"
-		p:unitworkDAO-ref="unitworkDAO"
-		p:projectPartakeDAO-ref="projectPartakeDAO"
-		p:requirementDAO-ref="requirementDAO"
-		p:projectDAO-ref="projectDAO"
-		p:ganttDAO-ref="ganttDAO" />
+
+	<bean id="boardnoticeDAO" class="com.bbb.dao.BoardNoticeDAOImpl"
+		p:sqlSession-ref="sqlSession" />
+
+	<bean id="boardnoticeService" class="com.bbb.service.BoardNoticeServiceImpl"
+		p:boardNoticeDAO-ref="boardnoticeDAO" />
 </beans>
