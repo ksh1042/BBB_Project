@@ -3,65 +3,63 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<head>
-	<title>자유게시판</title>
-</head>
 
 <body>
-<!-- Main content -->
-<!-- Content Header (Page header) -->
-<section class="content-header">
-  <h1>
-   상세페이지
-  </h1>
-</section>
+
+	<section class="content-header">
+ 		<h1>상세페이지</h1>
+	</section>
 
     <!-- Main content -->
-    <section class="content">
-      <div class="row">
-      <!-- left column -->
-      <div class="col-md-12">
-        <!-- general form elements -->
-        <div class="box box-primary">
-        <div class="box-header">
-          <h3 class="box-title">공지글 상세보기</h3>
-        </div><!-- /.box-header -->
+	<section class="content">
+		<div class="row">
+			<!-- left column -->
+			<div class="col-md-12">
+				<!-- general form elements -->
+				<div class="box box-primary">
+					<div class="box-header">
+						<h3 class="box-title">공지글 상세보기</h3>
+					</div>
+					<!-- /.box-header -->
 
- <form role="form" action="modifyPage" method="post">
-    
-    <input type='hidden' name='bNum' value ="${board.bNum}">
-    <input type='hidden' name='page' value ="${cri.page}">
-    <input type='hidden' name='perPageNum' value ="${cri.perPageNum}">
-    
- </form>   
-    
-  <div class="box-body">
-    <div class="form-group">
-      <label for="exampleInputEmail1">Title</label>
-      <input type="text" name='title' class="form-control" 
-         value="${board.title}" readonly="readonly">
-      <span class="glyphicon glyphicon-ok form-control-feedback" id="okIcon"></span>
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Content</label>
-      <textarea class="form-control"  name="content" rows="3" 
-      readonly="readonly">${board.content}</textarea>
-    </div>
-  </div><!-- /.box-body -->
+					<form role="form" action="modifyPage" method="post">
+						<input type='hidden' name='bNum' value="${board.bNum}"> 
+						<input type='hidden' name='pjNum' value="${board.pjNum}"> 
+						<input type='hidden' name='page' value="${cri.page}"> 
+						<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
+					</form>
 
-  <div class="box-footer" style="float: right;">
-    <button type="submit" id="listBtn" class="btn btn-primary">LIST</button>&nbsp;
-  <sec:authorize access="hasAuthority('ROLE_USER')">
-  <c:if test="${loginUser.id eq logonProject.creator }">
-	    <button type="submit" id="modifyBtn" class="btn btn-warning">Modify</button>&nbsp;
+					<div class="box-body">
+						<div class="form-group">
+							<label for="exampleInputEmail1">Title</label> 
+							<input type="text" name='title' class="form-control" value="${board.title}" readonly="readonly"> 
+							<span class="glyphicon glyphicon-ok form-control-feedback" id="okIcon"></span>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">Content</label>
+							<textarea class="form-control" name="content" rows="3" readonly="readonly">${board.content}</textarea>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Writer</label> 
+							<input type="text" name="writer" class="form-control" value="${board.writer}" readonly="readonly">
+						</div>
+					</div>
+					<!-- /.box-body -->
+
+					<div class="box-footer" style="float: right;">
+						<button type="submit" id="listBtn" class="btn btn-primary">LIST</button>
+						&nbsp;
+						<sec:authorize access="hasAuthority('ROLE_USER')">
+							<c:if test="${loginUser.id eq logonProject.creator }">
+								<button type="submit" id="modifyBtn" class="btn btn-warning">Modify</button>&nbsp;
 	    <button type="submit" id="removeBtn" class="btn btn-danger">REMOVE</button>
-  </c:if>
-  </sec:authorize>
-  
-  </div>
+							</c:if>
+						</sec:authorize>
 
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script>
+					</div>
+
+					<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+					<script>
 
 
 var formObj = $("form[role='form']");
@@ -89,13 +87,17 @@ $("#listBtn").on("click", function(){
 </script>
 
 
-  
-  
-        </div><!-- /.box -->
-      </div><!--/.col (left) -->
- 
-      </div>   <!-- /.row -->
-    </section><!-- /.content -->
+
+
+				</div>
+				<!-- /.box -->
+			</div>
+			<!--/.col (left) -->
+
+		</div>
+		<!-- /.row -->
+	</section>
+	<!-- /.content -->
     </div><!-- /.content-wrapper -->
     
 </body>

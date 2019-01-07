@@ -37,12 +37,12 @@
 <body class="hold-transition register-page">
 	<div class="register-box">
 		<div class="register-logo">
-			<a href="loginForm"><b>Forgot password?</b></a>
+			<a href="loginForm"><b>PASSWORD를 찾을 수 있습니다.</b></a>
 		</div>
 		
 		<div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">패스워드 찾기</h3>
+              <h3 class="box-title"></h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
@@ -51,19 +51,19 @@
               	<div class="form-group">
                   <label for="exampleInputEmail1">ID</label>
                   <input type="text" class="form-control" id="exampleInputEmail1" placeholder="아이디"  name="id" required>
-                  <p style="font-size:9pt;">아이디를 잊어 버린 경우, 아이디를 <a href="<%=request.getContextPath() %>/commons/findId">찾아 볼 수 있습니다.</a></p>
+                  <p style="font-size:9pt;">ID를 잊어 버린 경우, <a href="<%=request.getContextPath() %>/commons/findId">ID 찾기</a>를 누르세요!</p>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Name</label>
+                  <label for="exampleInputEmail1">가입 이름</label>
                   <input type="text" class="form-control" id="exampleInputEmail1" placeholder="이름"  name="name" required>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Email address</label>
+                  <label for="exampleInputPassword1">가입 Email 주소</label>
                   <input type="email" class="form-control"  placeholder="이메일" id="email" name="email" required><br/>
-                  <button type="button" onclick="getEmailCode()">인증코드받기</button><br/>
+                  <button type="button" onclick="getEmailCode()">인증Code 받기</button><br/>
                 </div>
                   <div class="form-group">
-                  <label for="exampleInputPassword1">Authentication code</label>
+                  <label for="exampleInputPassword1">인증 code</label>
                   <input type="text" class="form-control"  placeholder="인증코드" name="emailCode" id="emailCode" disabled="disabled">
                 </div>
               </div>
@@ -71,7 +71,7 @@
 
               <div class="box-footer" style="text-align: center;">
               <button type="button" class="btn btn-primary" onclick="back_go();" style="margin-left:20px;padding-left:27px;padding-right:27px;">취소</button>
-                <button type="button" class="btn btn-primary" style="margin-left:20px;" id="findButton" disabled="disabled" onclick="findPwd();">패스워드 재설정</button>
+                <button type="button" class="btn btn-primary" style="margin-left:20px;" id="findButton" disabled="disabled" onclick="findPwd();">PWD 재설정</button>
               </div>
               
             </form>
