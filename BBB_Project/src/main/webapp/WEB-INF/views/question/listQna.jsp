@@ -8,38 +8,16 @@
 
 <body>
 <!-- Main content -->
+<section class="content-header">
+		<h1>QnA</h1>
+		<ol class="breadcrumb">
+			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
+				<i class="fa fa-dashboard"></i>Home</a>
+			</li>
+			<li class="active">QnA</li>
+		</ol>
+</section>
 <section class="content">
-
-	<!-- QnA 검색창 -->
-	<div class="row">
-		<div class="col-xs-12">
-			<div class="box">
-				<div class="box-header">
-					<h3 class="box-title">QnA 검색</h3>
-					<div class="box-tools">
-						<div class="input-group input-group-sm" >
-							<div>
-								<form action="listQna">
-									<select name="searchType">
-										<option value="" ${cri.searchType==null?'selected':'' }>----</option>
-										<option value="t" ${cri.searchType eq 't'?'selected':'' }>Title</option>
-										<option value="w" ${cri.searchType eq 'w'?'selected':'' }>Writer</option>
-										<option value="tc" ${cri.searchType eq 'tw'?'selected':'' }>Tiltle + Writer</option>
-									</select>
-									<input type="text" name="keyword" value="${pageMaker.cri.keyword }">
-									<button type="submit" >
-										<i class="fa fa-search" ></i>
-									</button>
-								</form>
-							</div>
-							<hr/>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- /검색 끝 -->
 
 	<!-- QnA 리스트 -->
 	<div class="row">
@@ -47,18 +25,36 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header with-border">
-					<h3 class="box-title">QnA List</h3>
+					<h3 class="box-title"></h3>
+					<div class="box-tools">
+						<div class="input-group input-group-sm" >
+							<div>
+								<form action="listQna">
+									<select name="searchType" >
+										<option value="" ${cri.searchType==null?'selected':'' }>----</option>
+										<option value="t" ${cri.searchType eq 't'?'selected':'' }>Title</option>
+										<option value="w" ${cri.searchType eq 'w'?'selected':'' }>Writer</option>
+										<option value="tc" ${cri.searchType eq 'tw'?'selected':'' }>All</option>
+									</select>
+									<input type="text" name="keyword" value="${pageMaker.cri.keyword }">
+									<button type="submit" >
+										<i class="fa fa-search"></i>
+									</button>
+								</form>
+							</div>
+							<hr/>
+						</div>
+					</div>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
 					<table class="table table-bordered">
 						<tr>
 							<th>#</th>
-							<th>문의번호</th>
+							<th class="hidden-xs">문의번호</th>
 							<th>제목</th>
-							<th>작성자</th>
+							<th class="hidden-xs">작성자</th>
 							<th>등록일</th>
-							<th style="width: 40px">VIEW</th>
 						</tr>
 						
 						<c:if test="${!empty listQna }">
@@ -66,18 +62,15 @@
 
 							<tr>
 								<td>${status.count }</td>
-								<td>${qna.qaNum}</td>
+								<td class="hidden-xs">${qna.qaNum}</td>
 								<td>
 									<a href='readQna${pageMaker.makeSearch(pageMaker.cri.page) }&qaNum=${qna.qaNum}'>
 										${qna.title}
 									</a>
 								</td>
-								<td>${qna.writer}</td>
+								<td class="hidden-xs">${qna.writer}</td>
 								<td>
 									<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${qna.indate}" />
-								</td>
-								<td>
-									<span class="badge bg-red">${qna.viewcnt }</span>
 								</td>
 							</tr>
 						</c:forEach>
@@ -93,9 +86,8 @@
 				
 
 				<!-- 페이지번호 -->
-				<div class="box-footer clearfix">
-				<button id='newBtn' class="btn btn-primary" onclick="javascript:location.href='registerQna';">New QnA</button>
-					<ul class="pagination link pagination-sm no-margin pull-right">
+				<div class="box-footer clearfix text-center">
+					<ul class="pagination link">
 						<c:if test="${pageMaker.prev}">
 							<li><a href="${pageMaker.startPage - 1}">&laquo;</a></li>
 						</c:if>
@@ -110,6 +102,9 @@
 							<li><a href="${pageMaker.endPage +1}">&raquo;</a></li>
 						</c:if>
 					</ul>
+					<sec:authorize access="hasAuthority('ROLE_USER')">
+					<button id='newBtn' style="float:right; margin-top:20px" class="btn btn-primary" onclick="javascript:location.href='registerQna';">New QnA</button>
+					</sec:authorize>
 				</div>
 				<!-- 페이지 번호 끝 -->
 

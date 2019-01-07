@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.bbb.controller.SearchCriteria;
 import com.bbb.dto.ProjectPartakeVO;
+import com.bbb.dto.ProjectPlanVO;
 import com.bbb.dto.ProjectVO;
 
 public class ProjectDAOImpl implements ProjectDAO{
@@ -43,7 +44,13 @@ public class ProjectDAOImpl implements ProjectDAO{
 	@Override
 	public void searchProjectJoin(ProjectPartakeVO takeVO) throws SQLException {
 		session.insert("Project.ProjectSearchJoin", takeVO);
-	}	
+	}
+	
+	@Override
+	public void joinCancelProject(ProjectPartakeVO takeVO) throws SQLException {
+		session.update("Project.JoinCancelProject", takeVO);
+	}
+
 	
 	// 내가 참여하고있는 프로젝트를 찾아오기 위해 DB에 등록된 Project의 모든 리스트를 가져온다.
 	@Override
@@ -79,6 +86,39 @@ public class ProjectDAOImpl implements ProjectDAO{
 		session.update("Project.updateProjectPlan",project);
 	}
 
+	@Override
+	public void insertUdNum(ProjectVO project) throws SQLException {
+		session.update("Project.insertUdNum", project);
+	}
+		
+	@Override
+	public void updateFnum(int pjNum, int fNum) throws SQLException {
+		
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("fNum", fNum);
+		map.put("pjNum", pjNum);
+	
+		session.update("Project.updateFnum", map);
+		
+	}
+
+	@Override
+	public void insertUsecase(ProjectVO project) throws SQLException {
+		session.update("Project.updateUseCase", project);
+		
+	}
+
+	@Override
+	public void deletePlan(int pjNum) throws SQLException {
+		session.update("Project.deletePlan", pjNum);
+	}
+
+	@Override
+	public void insertGcNum(ProjectVO project) throws SQLException {
+		session.update("Project.insertGcNum", project);
+	}
+
+	
 	
 
 	

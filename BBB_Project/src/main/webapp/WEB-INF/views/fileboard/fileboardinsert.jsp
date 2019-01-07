@@ -25,29 +25,30 @@
 				<!-- general form elements -->
 				<div class="box box-primary">
 					<div class="box-header">
-						<h3 class="box-title">REGISTER BOARD</h3>
+						<h3 class="box-title">자료 등록</h3>
 					</div>
 					<!-- /.box-header -->
 
 					<form role="form" method="post" action="fileboardinsert">
 						<div class="box-body">
 							<div class="form-group">
-								<label for="exampleInputEmail1">Title</label> <input type="text"
+								<label for="exampleInputEmail1">제목</label> <input type="text"
 									name='title' class="form-control" placeholder="Enter Title">
+									<span class="help-block" id="titleHelp"></span>
 							</div>
 							<div class="form-group">
-								<label for="exampleInputPassword1">Content</label>
+								<label for="exampleInputPassword1">내용</label>
 								<textarea class="form-control" name="content" id="content" rows="10" cols="100"
 									placeholder="Enter ..."></textarea>
 							</div>
 							<div class="form-group">
-								<label for="exampleInputEmail1">Writer</label> <input
+								<label for="exampleInputEmail1">작성자</label> <input
 									type="text" readonly name="writer" class="form-control"
 									value="${loginUser.id }">
 							</div>
 
 							<div class="form-group">
-								<label>File DROP Here</label>
+								<label>파일을 드래그하세요.</label>
 								<div class="fileDrop"></div>
 							</div>
 						</div>
@@ -58,13 +59,15 @@
 								<hr />
 							</div>
 							<ul class="mailbox-attachments clearfix uploadedList"></ul>
-							<button type="submit" id="submitBtn" class="btn btn-primary">Submit</button>
+							<button type="submit" id="submitBtn" class="btn btn-primary">등록</button>
+							<button type="submit" id="list_Btn" class="btn btn-primary">취소</button>
 						</div>
 					</form>
 
 
 				</div>
 				<!-- /.box -->
+				
 			</div>
 			<!--/.col (left) -->
 
@@ -73,10 +76,13 @@
 	</section>
 	<!-- /.content -->
 
+	<!-- 에디터 시작 -->
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery-ui.min.js"></script>	
 	<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/SE2/js/HuskyEZCreator.js"></script>
 	<script type="text/javascript">
+	
 
 	
 	
@@ -109,9 +115,73 @@ $('#submitBtn').on('click',function(e){
 
 
 	</script>
+	<!-- 에디터 끝 -->
+	
 	<%@ include file="/WEB-INF/views/fileboard/fileboardattach.jsp"%>
 	
-	<script>
+<script>
+var titleFlag = false;
+
+$('input[name="title"]').on('blur',function(e){
+   $(this).css({borderColor : 'red'});
+   var title = $(this).val();
+   
+   if(title == null || title == ''){
+      $('#titleHelp').css({color:'red'});
+      $('#titleHelp').html('제목을 입력하세요.');
+      $(this).focus();
+      return;
+   }
+   if(title.length > 20){
+      $('#titleHelp').css({color:'red'});
+      $('#titleHelp').html('제목은 20자를 넘지 않습니다.');
+      $(this).focus();
+      return;
+   }else{
+      $(this).css({borderColor : 'green'});
+      $('span#titleHelp').html('');
+      titleFlag = true;
+   }
+   
+   verifyCheck();
+});
+
+
+var formObj = $("form[role='form']");
+
+console.log(formObj);
+
+$("#list_Btn").on("click",function() {
+   self.location = "fileboardlist?page=${cri.page}&perPageNum=${cri.perPageNum}";
+});
+
+$("#submitBtn").on("click", function() {
+   if(!titleFlag){
+      $('button#submitBtn').prop('disable',true);
+      $('span#titleHelp').css({color:'red',fontWeight:'bold'});
+      $('span#titleHelp').html('');
+      $('input[name=title]').css({borderColor:'red'});
+      return;
+   }
+   formObj.submit();
+});
+
+function verifyCheck(){
+   if(!titleFlag){
+      $('button#submitBtn').prop('disabled',true);
+      $('span#titleHelp').css({
+         color:'red',
+         fontWeight:'bold'
+      });
+      $('span#titleHelp').html('');
+      $('input[name=]').css({
+         borderColor : 'red'
+      });
+      return;
+   }
+   $('button#submitBtn').prop('disabled',false);
+}
+
 	var form = $('form[role="form"]');
 	$("button[type='submit']").on("click", function(e){
 		e.preventDefault();

@@ -45,29 +45,19 @@ public class ProjectServiceImpl implements ProjectService{
 	public void joinProject(ProjectPartakeVO takeVO) throws Exception {
 		projectDAO.searchProjectJoin(takeVO);
 		
-	}	
+	}
 	
-	// 내가 참여하고있는 프로젝트 목록을 가져오기 위한 비교
 	@Override
-	public List<ProjectVO> readMyProjectList(String id) throws SQLException {
-		
-		// 내가 참여하고있는 프로젝트의 리스트를 pjNum으로 비교하기 위하여 사용
-		List<Integer> myPartakeList = projectPartakeDAO.selectProjectPartakeList(id);
+	public void cancelJoinProject(ProjectPartakeVO takeVO) throws Exception {
+		projectDAO.joinCancelProject(takeVO);
+	}
+	
+	@Override
+	public List<ProjectVO> readMyProjectList() throws SQLException {
 		// DB에 저장되어있는 모든 프로젝트 목록
 		List<ProjectVO> projectList = projectDAO.selectProjectList();
-		// pjNum으로 비교한 값을 저장하기 위한 배열
-		List<ProjectVO> myProjectList = new ArrayList<ProjectVO>();
 		
-		for(ProjectVO project : projectList){
-			for(int myPartake : myPartakeList){
-				if(project.getPjNum() == myPartake){
-					myProjectList.add(project);
-				}
-			}
-		}
-		
-		return myProjectList;
-		
+		return projectList;
 	}
 
 	@Override
@@ -107,7 +97,28 @@ public class ProjectServiceImpl implements ProjectService{
 	@Override
 	public void insertPlan(ProjectVO project) throws SQLException {
 		projectDAO.insertPlan(project);
+	}	
+
+	@Override
+	public void deletePlan(int pjNum) throws SQLException {
+		projectDAO.deletePlan(pjNum);
 	}
+
+	@Override
+	public void createFnum(int pjNum, int fNum) throws SQLException {
+		projectDAO.updateFnum(pjNum, fNum);
+		
+	}
+
+	@Override
+	public void insertUsecase(ProjectVO project) throws SQLException {
+		projectDAO.insertUsecase(project);
+		
+	}
+
+	
+
+	
 
 	
 

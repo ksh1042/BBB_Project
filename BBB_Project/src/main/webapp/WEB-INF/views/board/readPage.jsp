@@ -57,11 +57,11 @@
   <div class="box-footer">
   	<sec:authorize access="hasAuthority('ROLE_USER')">
   	<c:if test="${loginUser.id eq board.writer }">
-    	<button type="submit" id="modifyBtn" class="btn btn-warning">Modify</button>&nbsp;
-    	<button type="submit" id="removeBtn" class="btn btn-danger">REMOVE</button>&nbsp;
+    	<button type="submit" id="modifyBtn" class="btn btn-warning">수정</button>&nbsp;
+    	<button type="submit" id="removeBtn" class="btn btn-danger">삭제</button>&nbsp;
     </c:if>
     </sec:authorize>
-   		<button type="submit" id="listBtn" class="btn btn-primary">LIST</button>
+   		<button type="submit" id="listBtn" class="btn btn-primary">취소</button>
   </div>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -110,7 +110,7 @@ $("#listBtn").on("click", function(){
 								</div>
 								<!-- /.box-body -->
 								<div class="box-footer">
-									<button type="button" class="btn btn-primary" id="replyAddBtn">ADD REPLY</button>
+									<button type="button" class="btn btn-primary" id="replyAddBtn">댓글 등록</button>
 								</div>
 							</div>
 
@@ -150,9 +150,9 @@ $("#listBtn").on("click", function(){
 									</p>
 								</div>
 								<div class="modal-footer">
-											<button type="button" class="btn btn-info" id="replyModBtn">Modify</button>
-											<button type="button" class="btn btn-danger" id="replyDelBtn">DELETE</button>
-											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+											<button type="button" class="btn btn-info" id="replyModBtn">수정</button>
+											<button type="button" class="btn btn-danger" id="replyDelBtn">삭제</button>
+											<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 								</div>
 							</div>
 						</div>

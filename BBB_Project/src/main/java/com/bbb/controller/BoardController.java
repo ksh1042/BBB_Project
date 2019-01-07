@@ -17,7 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bbb.dto.BoardVO;
 import com.bbb.dto.ProjectVO;
-import com.bbb.dto.ReplyVO;
 import com.bbb.service.BoardService;
 
 @Controller
@@ -61,7 +60,7 @@ public class BoardController {
 	@RequestMapping(value="/modifyPage",method=RequestMethod.GET)
 	public void modifyPage(@ModelAttribute("cri")SearchCriteria cri,
 							int bNum, Model model)throws Exception{
-		 BoardVO board=service.readByBnum(bNum);
+		 BoardVO board=service.readBybNum(bNum);
 		 model.addAttribute("board",board);
 	}
 

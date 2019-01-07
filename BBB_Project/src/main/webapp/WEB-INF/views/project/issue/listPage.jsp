@@ -11,10 +11,17 @@
 }
 </style>
 
-	<div class="container">
-      <section class="content-header" style="cursor:pointer;" onclick="javascript:location.href='<%=request.getContextPath()%>/project/issue/list';">
-			<h3>이슈 게시판</h3>
-      </section>
+<section class="content-header">
+		<h1>Issue Board</h1>
+		<ol class="breadcrumb">
+			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
+				<i class="fa fa-dashboard"></i>My Project</a>
+			</li>
+			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}"></a>${logonProject.name }</li>
+			<li class="active">issue</li>
+		</ol>
+</section>
+ 
       
       <section class="content">
 		<!-- QnA 리스트 -->
@@ -25,11 +32,11 @@
 					<div class="box-header">
 					</div>
 					<div class="box-header with-border">
-						<h3 class="box-title">&nbsp;이슈 리스트</h3>
+						<h3 class="box-title"></h3>
 							<div class="box-tools">
 								<div class="input-group input-group-sm" >
 										<form action="list" style="width:300px;">
-											<input type="hidden" name="pjNum" value="${logonProject.pjNum }"/>
+											<%-- <input type="hidden" name="pjNum" value="${logonProject.pjNum }"/> --%>
 											<div style="margin-top:5px;margin-left:35px;">
 											<select name="searchType">
 												<option value="" ${cri.searchType==null?'selected':'' }>----</option>
@@ -61,13 +68,13 @@
 							</tr>
 							
 							<c:if test="${!empty listIssue }">
-							<c:forEach var="issue" items="${listIssue }" varStatus="status">
+							<c:forEach var="issue" items="${listIssue }">
 	
 								<tr>
-									<td>${status.count }</td>
+									<td>${issue.rowNum}</td>
 									<td style="display:none;">${issue.iNum}</td>
 									<td>
-										<a href='readIssue${pageMaker.makeSearch(pageMaker.cri.page) }&bNum=${issue.iNum}'>
+										<a href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&iNum=${issue.iNum}'>
 											${issue.title}
 										</a>
 									</td>
@@ -98,12 +105,17 @@
 	
 					<!-- 페이지번호 -->
 					<div class="box-footer clearfix">
-						<div style="float:right;">
+						<form action="myList" method="get">
+						<div style="float:left;margin-left:20px;">
+							<button type="submit" class="btn btn-primary">내 이슈</button>
+						</div>
+						</form>
+						<div style="float:right;margin-right:10px;">
 							<button id='newBtn' class="btn btn-primary" onclick="registerIssue_go()">이슈 등록</button>
 						</div><br/>
 						<c:if test="${!empty listIssue }">
 							<div style="text-align:center;">
-							<ul class="pagination">
+							<ul class="pagination link">
 			                  	<c:if test="${pageMaker.prev}">
 									<li><a href="${pageMaker.startPage - 1}">&laquo;</a></li>
 								</c:if>
@@ -145,7 +157,7 @@
 	      	
       
       </section>	
-	</div>
+
 
 <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
 <script>
@@ -153,8 +165,27 @@
 		location.href="<%=request.getContextPath()%>/project/issue/register"
 		
 	}
-
-
+	
+	$(".link li a").on("click", function(event){
+		
+		event.preventDefault(); 
+		
+		var targetPage = $(this).attr("href");
+		
+		var jobForm = $("#jobForm");
+		jobForm.find("[name='page']").val(targetPage);
+		jobForm.attr("action","list").attr("method", "get");		
+		jobForm.submit();
+	});
+	
+	$('#searchBtn').on('click',function(){
+		self.location="listPage"
+					   +"${pageMaker.makeQuery(1)}"
+					   +"&searchType="
+					   +$("select option:selected").val()
+					   +"&keyword="
+					   +$('#keywordInput').val();
+	});
 
 
 

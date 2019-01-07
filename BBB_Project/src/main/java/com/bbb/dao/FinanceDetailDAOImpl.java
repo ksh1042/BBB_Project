@@ -14,10 +14,7 @@ public class FinanceDetailDAOImpl implements FinanceDetailDAO {
 		this.session = session;
 	}
 	
-	@Override
-	public int getFinanceDetailSeqNextValue() throws SQLException {
-		return session.selectOne("FinanceDetail.getFinanceDetailSeqNextValue");
-	}
+	
 	
 	@Override
 	public List<FinanceDetailVO> selectFinanceDetailList(int fNum) throws SQLException {
@@ -46,14 +43,24 @@ public class FinanceDetailDAOImpl implements FinanceDetailDAO {
 
 	@Override
 	public int selectFinanceDetailByPricePlus(int fNum) throws SQLException {
-		return session.selectOne("FinanceDetail.selectFinanceByPricePlus", fNum);
+		
+		if((session.selectOne("FinanceDetail.selectFinanceByPricePlus", fNum))==null){
+			return 0;
+		}else{
+			return session.selectOne("FinanceDetail.selectFinanceByPricePlus", fNum);
+		}
+		
 		
 	}
 
 	@Override
 	public int selectFinanceDetailByPriceMinus(int fNum) throws SQLException {
-		return session.selectOne("FinanceDetail.selectFinanceByPriceMinus", fNum);
 		
+		if(session.selectOne("FinanceDetail.selectFinanceByPriceMinus", fNum)==null){
+			return 0;
+		}else{
+			return session.selectOne("FinanceDetail.selectFinanceByPriceMinus", fNum);
+		}
 	}
 
 

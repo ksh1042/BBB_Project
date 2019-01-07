@@ -36,12 +36,6 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardVO readByBnum(int bNum) throws SQLException {
-		BoardVO board = boardDAO.selectBoardByBnum(bNum);
-		return board;
-	}
-
-	@Override
 	public void update(BoardVO board) throws SQLException {
 		boardDAO.updateBoard(board);
 		
@@ -53,23 +47,34 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> readlistAll() throws SQLException {
+	public List<BoardVO> readListAll() throws SQLException {
 		List<BoardVO> boardList = boardDAO.selectBoardAll();
 		return boardList;
 	}
 
 	@Override
-	public List<BoardVO> readlistCriteria(Criteria cri) throws SQLException {
+	public List<BoardVO> readListCriteria(Criteria cri) throws SQLException {
 		List<BoardVO> boardList = boardDAO.selectBoardCriteria(cri);
 		return boardList;
 	}
 
+	@Override
+	public List<BoardVO> readListSearch(SearchCriteria cri, int pjNum) throws Exception {
+		List<BoardVO> boardList=boardDAO.selectSearchBoardList(cri, pjNum);
+		return boardList;
+	}
+	
 	@Override
 	public List<BoardVO> readlistSearch(SearchCriteria cri) throws SQLException {
 		List<BoardVO> boardList = boardDAO.selectSearchBoardList(cri);
 		return boardList;
 	}
 
+	@Override
+	public int readSearchBoardCount(SearchCriteria cri,int pjNum) throws Exception {
+		int count = boardDAO.selectSearchBoardListCount(cri , pjNum);
+		return count;
+	}
 	@Override
 	public int readSearchBoardCount(SearchCriteria cri) throws SQLException {
 		int count = boardDAO.selectSearchBoardCount(cri);
@@ -81,6 +86,12 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.insertBoard(board);
 		noticeDAO.insertBoardNotice(notice);
 		
+	}
+
+	@Override
+	public BoardVO readBybNum(int bNum) throws Exception {
+		BoardVO board = boardDAO.selectBoardByBnum(bNum);
+		return board;
 	}
 	
 }

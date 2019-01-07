@@ -67,7 +67,7 @@ public class PageMaker {
 
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
-
+		
 		calcData();
 	}
 

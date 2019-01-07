@@ -2,8 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Member">
-
-
 	<select id="selectMemberById" resultType="member">
 		select * from
 		tbl_member
@@ -15,7 +13,8 @@
 		where id = #{id}
 	</select>
 	<select id="emailCheck" parameterType="str" resultType="int">
-		select COUNT(*) FROM tbl_member
+		select
+		COUNT(*) FROM tbl_member
 		where email = #{email}
 	</select>
 
@@ -33,14 +32,16 @@
 	<update id="deleteMember">
 		delete from tbl_member where id=#{id}
 	</update>
-	
 
+	<update id="insertAuthority">
+		insert into tbl_authorities(id,authority)
+		values(#{id},'ROLE_USER')
+	</update>
 	<update id="resetPwd" parameterType="member">
 		update
 		tbl_member
 		set
-		pwd =
-		#{pwd}
+		pwd = #{pwd}
 		where
 		id = #{id}
 	</update>
@@ -51,6 +52,7 @@
 		emailyn=1
 		WHERE id = #{id}
 	</update>
+
 
 	<select id="findID" parameterType="member" resultType="str">
 		select id
@@ -94,22 +96,20 @@
 		where id is not null
 		<include refid="search" />
 	</select>
-	
+
 	<select id="selectMemberListCount" resultType="int">
 		select count(*)
 		from tbl_member
 		where id is not null
 		<include refid="search" />
 	</select>
-	
+
 	<update id="removeEmailynById" parameterType="member">
 		UPDATE tbl_member
 		SET
 		emailyn=0
 		WHERE id = #{id}
 	</update>
-	
-	
 </mapper>
 
 

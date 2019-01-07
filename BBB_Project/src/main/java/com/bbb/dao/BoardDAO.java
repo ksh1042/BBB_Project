@@ -12,7 +12,9 @@ public interface BoardDAO {
 	void insertBoard(BoardVO board)throws SQLException;
 
 	BoardVO selectBoardByBnum(int bNum) throws SQLException;
-	
+
+	List<BoardVO> selectSearchBoardList(SearchCriteria cri , int pjNum) throws SQLException;
+
 	void updateBoard(BoardVO board)throws SQLException;
 	
 	void deleteBoard(int bNum)throws SQLException;
@@ -21,9 +23,13 @@ public interface BoardDAO {
 	
 	List<BoardVO> selectBoardCriteria(Criteria cri) throws SQLException;
 	
+	int selectSearchBoardListCount(SearchCriteria cri , int pjNum) throws SQLException;
+	
 	List<BoardVO> selectSearchBoardList(SearchCriteria cri)throws SQLException;
 	
 	int selectSearchBoardCount(SearchCriteria cri)throws SQLException;
 	
 	List<BoardVO> selectBoardAll() throws SQLException;
+	
+	public int getSeqNextvalue() throws SQLException;
 }

@@ -9,25 +9,23 @@ import com.bbb.dto.BoardNoticeVO;
 import com.bbb.dto.BoardVO;
 
 public interface BoardService {
-	
-	void create(BoardVO board) throws SQLException;
-	//작성
-	
-	public BoardVO read(int bNum)throws SQLException;
-	//조회
-	
-	public BoardVO readByBnum(int bNum)throws SQLException;
-	
-	
-	public void update(BoardVO board) throws SQLException;
-	//수정
-	
-	public void delete(int bNum) throws SQLException;
-	//삭제
-	
-	public List<BoardVO> readlistAll() throws SQLException;
-	
-	public List<BoardVO> readlistCriteria(Criteria cri) throws SQLException;
+	public void create(BoardVO board) throws Exception ;
+
+	public BoardVO read(int bNum) throws Exception;
+
+	public BoardVO readBybNum(int bNum) throws Exception;
+
+	public void update(BoardVO board) throws Exception;
+
+	public void delete(int bNum) throws Exception;
+
+	public List<BoardVO> readListAll() throws SQLException;
+
+	public List<BoardVO> readListCriteria(Criteria cri) throws Exception;
+
+	public List<BoardVO> readListSearch(SearchCriteria cri, int pjNum) throws Exception;
+
+	int readSearchBoardCount(SearchCriteria cri ,int pjNum) throws Exception;
 	
 	public List<BoardVO> readlistSearch(SearchCriteria cri) throws SQLException;
 	

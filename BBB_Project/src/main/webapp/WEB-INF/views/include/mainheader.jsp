@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="decorator"
-	uri="http://www.opensymphony.com/sitemesh/decorator"%>
+<%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%
 	response.setHeader("Pragma", "No-cache");
 	response.setHeader("Cache-Control", "no-cache");
@@ -31,6 +31,8 @@
 	        apply the skin class to the body tag so the changes take effect. -->
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/dist/css/skins/skin-blue.min.css">
 
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/dist/css/projectskin.css">
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -44,104 +46,136 @@
 <decorator:head />
 </head>
 
-<body class="hold-transition skin-blue layout-top-nav">
-	<%@ include file="/WEB-INF/views/commons/include/emailyn.jsp" %>
+<body class="hold-transition skin-blue layout-boxed layout-top-nav">
 	<div class="wrapper">
+	<%@ include file="/WEB-INF/views/commons/include/emailyn.jsp" %>
 		<header class="main-header">
-			<nav class="navbar navbar-static-top">
-				<div class="container">
-					<div class="navbar-header">
-						<a href="<%= request.getContextPath() %>/main/myPartakeList" class="navbar-brand"><b>PMS</b>&nbsp;Project</a>
-						<button type="button" class="navbar-toggle collapsed"
-							data-toggle="collapse" data-target="#navbar-collapse">
-							<i class="fa fa-bars"></i>
-						</button>
-					</div>
-
-					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse pull-left"
-						id="navbar-collapse">
-						<ul class="nav navbar-nav">
-							<li class="dropdown"><a href="<%= request.getContextPath() %>/main/myPartakeList">프로젝트 리스트 </a></li>
-						</ul>
+			
+			<nav class="navbar navbar-static-top" role="navigation">
+		
+	           	<sec:authorize access="hasAuthority('ROLE_USER')">
+				<a href="<%= request.getContextPath() %>/main/myPartakeList" class="logo">
+	           		<span class="logo-lg"><b>Project List</b></span>
+				</a>
+				</sec:authorize>
+				<sec:authorize access="hasAuthority('ROLE_ADMIN')">
+				<a href="<%= request.getContextPath() %>/admin/mainForm" class="logo">
+      				<span class="logo-lg"><b>관리자 페이지</b></span>
+				</a>
+				</sec:authorize>	
+				
+				<div class="navbar-custom-menu">
+					<!-- TODO --- header 우측 메뉴바 -->
+					<ul class="nav navbar-nav">
 						
-					</div>
-					<!-- /.navbar-collapse -->
-					<!-- Navbar Right Menu -->
-					<div class="navbar-custom-menu">
-						<!-- TODO --- header 우측 메뉴바 -->
-						<ul class="nav navbar-nav">
-							<li class="dropdown messages-menu">
-								<!-- Menu toggle button --> 
-								<a href="#" onclick="postbox_go();">
-									<script>
-										function postbox_go() {
-											var url = "/postbox/list?id=${ loginUser.id }";
-											window.open(url,"_blank_1","toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=900, height=800, top=300, left=300, ");
-										}
-									</script><i class="fa fa-envelope-o"></i><span class="label label-success"></span>
-								</a>
-							</li>
-							
-							<li>
-								<form class="navbar-form navbar-left" role="search">
-									<div class="form-group">
-										<input type="text" class="form-control" id="navbar-search-input"
-											placeholder="프로젝트 검색...">
-										<button type="button" class="btn btn-default" onclick="search_go();">검색</button>
-										<script>
-											function search_go(){
-												var keyword = $('input#navbar-search-input').val();
-												location.href='<%= request.getContextPath() %>/main/searchPList/?searchType=&keyword='+keyword;
-											}
-										</script>
+						<!-- 프로젝트 검색 -->
+						<sec:authorize access="hasAuthority('ROLE_USER')">
+						<li class="hidden-xs">
+							<form class="navbar-form" role="search">
+		
+								<input type="text" class="form-control" id="navbar-search-input" placeholder="search">
+								<button type="button" class="btn btn-default" onclick="search_go();"><i class="fa fa-search"></i></button>
+								<script>
+									function search_go(){
+										var keyword = $('input#navbar-search-input').val();
+										location.href='<%= request.getContextPath() %>/main/searchPList/?searchType=&keyword='+keyword;
+									}
+								</script>
+			
+							</form>
+						</li>
+						</sec:authorize>
+					
+						<!-- 사서함 버튼 -->
+						<li>
+							<a href="#" onclick="postbox_go();">
+								<script>
+									function postbox_go() {
+										var url = "/postbox/list?id=${ loginUser.id }";
+										window.open(url,"_blank_1","toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=900, height=800, top=300, left=300, ");
+									}
+								</script><i class="fa fa-envelope-o"></i><span class="label label-success"></span>
+							</a>
+						</li>
+						
+						 <!-- Domain Menu -->
+						<sec:authorize access="hasAuthority('ROLE_USER')">
+						<li class="dropdown notifications-menu">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+								<i class="fa fa-gear"></i> 
+							</a>
+							<ul class="dropdown-menu">
+								<li class="header">Support PMS</li>
+								<li>
+									<ul class="menu">
+										<li>
+											<a href="<%=request.getContextPath()%>/question/listQna"> 
+												<i class="glyphicon glyphicon-question-sign"></i>QnA
+											</a> 
+											<a href="<%=request.getContextPath()%>/notice/listPage">
+												<i class="glyphicon glyphicon-exclamation-sign"></i>Notice
+											</a>
+										</li>
+								
+									</ul>
+								</li>
+								<li class="footer"></li>
+							</ul>
+						</li>
+						</sec:authorize>
+						
+						<!-- Usermenu  -->
+						<li class="dropdown user user-menu">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+								<img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> 
+								<span class="hidden-xs">${loginUser.name } 님 환영합니다.</span>
+							</a>
+							<ul class="dropdown-menu">
+								<!-- User image -->
+
+								<li class="user-header">
+									<img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+									<p><strong>${loginUser.id }</strong>(${loginUser.name }) <small>Member since <fmt:formatDate value="${loginUser.indate }" pattern="yyyy-MM"/>
+									</small></p>
+								</li>
+								<!-- Menu Body -->
+								<!-- <li class="user-body">
+									<div class="row">
+										<div class="col-xs-4 text-center">
+											<a href="#">Followers</a>
+										</div>
+										<div class="col-xs-4 text-center">
+											<a href="#">Sales</a>
+										</div>
+										<div class="col-xs-4 text-center">
+											<a href="#">Friends</a>
+										</div>
+									</div> /.row
+								</li> -->
+								<!-- Menu Footer-->
+								<li class="user-footer">
+									<div class="pull-left">
+										<button id="profileBtn" type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#modal-default">내정보</button>
 									</div>
-								</form>
-							</li>
-							<!-- Usermenu  -->
-							<li class="dropdown user user-menu">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
-									<img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> 
-									<span class="hidden-xs">${loginUser.name } 님 환영합니다.</span>
-								</a>
-								<ul class="dropdown-menu">
-									<!-- User image -->
-
-									<li class="user-header">
-										<img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-										<p><strong>${loginUser.id }</strong>(${loginUser.name }) <small>Member since <fmt:formatDate value="${loginUser.indate }" pattern="yyyy-MM"/>
-										</small></p>
-									</li>
-									<!-- Menu Body -->
-									<!-- <li class="user-body">
-										<div class="row">
-											<div class="col-xs-4 text-center">
-												<a href="#">Followers</a>
-											</div>
-											<div class="col-xs-4 text-center">
-												<a href="#">Sales</a>
-											</div>
-											<div class="col-xs-4 text-center">
-												<a href="#">Friends</a>
-											</div>
-										</div> /.row
-									</li> -->
-									<!-- Menu Footer-->
-									<li class="user-footer">
-										<div class="pull-left">
-											<button id="profileBtn" type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#modal-default">내정보</button>
-										</div>
-										<div class="pull-right">
-											<a href="<%= request.getContextPath() %>/commons/logout" class="btn btn-default btn-flat">로그아웃</a>
-										</div>
-									</li>
-								</ul>
-							</li>
-						</ul>
+									<div class="pull-right">
+										<a href="<%= request.getContextPath() %>/commons/logout" class="btn btn-default btn-flat">로그아웃</a>
+									</div>
+								</li>
+							</ul>
+						</li>
 						
-					</div>
-					<!-- /.navbar-custom-menu -->
+						<!-- 관리자 Control Sidebar Toggle Button -->
+          				<sec:authorize access="hasAuthority('ROLE_ADMIN')">
+				          <li>
+				            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+				          </li>
+				         </sec:authorize>
+						
+					</ul>
+					
 				</div>
+				<!-- /.navbar-custom-menu -->
+			
 				<!-- /.container-fluid -->
 			</nav>
 		</header>

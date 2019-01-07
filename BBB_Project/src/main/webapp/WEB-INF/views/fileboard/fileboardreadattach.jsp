@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.js"></script>
 <script id="templateAttach" type="text/x-handlebars-template">
 <li style="width:10%;font-size:0.8em;" data-src="{{fullName}}">	
     <div class="mailbox-attachment-info">
@@ -36,15 +36,15 @@ function getFileInfo(attachJson,contextPath){
 	var fullName;
 	if(attachJson.fileType=="1"){
 		fullName=attachJson.uploadPath.replace(/\\/g,"/")
-				 +"s_"+attachJson.uUid+"$$"+attachJson.fileName;
+				 +"s_"+attachJson.uuid+"$$"+attachJson.fileName;
 		imgsrc=contextPath+"/displayFile?fileName="+fullName;				
 	}else{
 		fullName=attachJson.uploadPath.replace(/\\/g,"/")
-				 +attachJson.uUid+"$$"+attachJson.fileName;
+				 +attachJson.uuid+"$$"+attachJson.fileName;
 		imgsrc=contextPath+"/resources/dist/img/file.png";		
 	}
 	getLink=attachJson.uploadPath.replace(/\\/g,"/")
-		    +attachJson.uUid+"$$"+attachJson.fileName;
+		    +attachJson.uuid+"$$"+attachJson.fileName;
 	fileName=attachJson.fileName;
 	
 	return {fileName:fileName,imgsrc:imgsrc,getLink:getLink,fullName:fullName};
