@@ -8,32 +8,33 @@
 	<style>
 		th {
 			text-align: center;
+			white-space: nowrap;
+			background-color: #FAFAFA;
 		}
-		tr.even td {
-			background-color: : #FAFAFA;
+		td {
+			white-space: nowrap;
 		}
 	</style>
 </head>
 <body>
 	<section class="content-header">
-		<div class="container-fluid">
-			<div class="row mb-2">
-				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">단위업무 정의목록</h1>
-				</div>
-			</div>
-		</div>
+		<h1>단위업무 정의서</h1>
+		<ol class="breadcrumb">
+			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
+				<i class="fa fa-dashboard"></i>My Project</a>
+			</li>
+			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}">${logonProject.name }</a></li>
+			<li class="active"><a href="list">단위업무 정의서</a></li>
+		</ol>
 	</section>
-	<section class="content">
+	<br/>
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
 					<h3 class="box-title">단위업무 리스트</h3>
+					<button type="button" class="btn btn-primary" onclick="hist_go();" style="margin-left:20px;float:right;">수정 이력</button>
+					<button type="button" class="btn btn-warning" onclick="modify_go();" style="margin-left:20px; float:right;">수정</button>		
 					<form id="frm" method="post">
-						<div style="float:right;">
-							<button type="button" class="btn btn-primary" onclick="hist_go();">수정 이력</button>
-							<button type="button" class="btn btn-warning" onclick="modify_go();" style="margin-left:20px;">수정</button>						
-						</div>
 					</form>
 				</div>
 				<!-- /.box-header -->
@@ -60,9 +61,6 @@
 										<th class="sorting" tabindex="0" aria-controls="example2"
 											rowspan="1" colspan="1"
 											aria-label="Platform(s): activate to sort column ascending">단위업무명</th>
-										<th class="sorting" tabindex="0" aria-controls="example2"
-											rowspan="1" colspan="1"
-											aria-label="Engine version: activate to sort column ascending">요구사항ID</th>
 										<th class="sorting" tabindex="0" aria-controls="example2"
 											rowspan="1" colspan="1"
 											aria-label="CSS grade: activate to sort column ascending">요구사항명</th>
@@ -93,8 +91,7 @@
 											<td>${ stat.count }</td>
 											<td>${ unit.udId }</td>
 											<td>${ unit.udName }</td>
-											<td><a href="${ unit.rdId }">${ unit.rdId }</a></td>
-											<td>${ unit.rdName }</td>
+											<td><a href="<%=request.getContextPath()%>/project/requirement/list" title="${ unit.rdName }">${ unit.rdId }</a></td>
 											<td><a class="postboxLink" href="${ unit.udManager }">${ unit.udManager }</a></td>
 											<fmt:parseDate value="19600101" pattern="yyyyMMdd" var="checkDate" />
 											<td><fmt:formatDate value="${ unit.extDate > checkDate ? unit.extDate : '' }" pattern="yyyy-MM-dd"/></td>
