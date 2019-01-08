@@ -69,6 +69,12 @@
 						id="pwdState" style="font-size: 0.8em;"></label>
 				</div>
 				<div class="form-group has-feedback">
+				<input type="password" class="form-control" id="pwd2" oninput="checkRePwd();"
+					placeholder="패스워드 재입력" > <span
+					class="glyphicon glyphicon-lock form-control-feedback"></span> <label
+					id="pwd2State" style="font-size: 0.8em;"></label>
+				</div>
+				<div class="form-group has-feedback">
 					<input type="email" name="email" class="form-control"
 						placeholder="이메일" oninput="checkEmail();" id="email"> <span
 						class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -132,6 +138,7 @@
 	function checkId(){
 
 		var userid =  $("#id").val();
+		var UserPassword = $("#pwd").val();
 		
 		if (userid.length > 25){
 			$("#idState").text("아이디는 25자 이하로 입력해주세요.");
@@ -150,35 +157,62 @@
 	            		$("#idState").text("아이디가 존재합니다.");
 						$("#idState").css("color","#F15F5F");
 	                } else {
-	                	$("#idState").text("사용가능한 아이디입니다.");
-	                	$("#idState").css("color","#4374D9");
+	                	if(userid == UserPassword){
+							$("#idState").text("아이디와 패스워드는 동일할 수 없습니다.");
+							$("#idState").css("color","#F15F5F");						
+						}else{
+		                	$("#idState").text("사용가능한 아이디입니다.");
+		                	$("#idState").css("color","#4374D9");
+	                	}
 	                }
 	            },
 	            error : function(error) {
 	                
 	                alert("아이디를 입력해주세요.");
 	            }
+	            
 	        });
 		}
 	};	
 		
 	function checkPwd() {
+			
+			var userid =  $("#id").val();
 			var UserPassword = $("#pwd").val();
 	
 			if (UserPassword.length < 8 || UserPassword.length > 16){
 				$("#pwdState").text("패스워드는  8~15자를 입력해주세요.");
 				$("#pwdState").css("color","#F15F5F");
 			}else{
-				if (!UserPassword
-						.match(/([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~,-])|([!,@,#,$,%,^,&,*,?,_,~,-].*[a-zA-Z0-9])/)) {
+				if (!UserPassword.match(/([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~,-])|([!,@,#,$,%,^,&,*,?,_,~,-].*[a-zA-Z0-9])/)) {
 					$("#pwdState").text("패스워드는 영문(대소문자구분),숫자,특수문자(~!@#$%^&*()-_? 만 허용)를 혼용하여 입력해주세요.");
 					$("#pwdState").css("color","#F15F5F");
 				}else{
-					$("#pwdState").text("사용가능한 패스워드입니다.");
-					$("#pwdState").css("color","#4374D9");
+					if(userid == UserPassword){
+						$("#pwdState").text("패스워드와 아이디는 동일할 수 없습니다.");
+						$("#pwdState").css("color","#F15F5F");						
+					}else{
+						$("#pwdState").text("사용가능한 패스워드입니다.");
+						$("#pwdState").css("color","#4374D9");
+					}
 				}
 			}
 		};
+		
+	function checkRePwd() {
+			
+			var UserPassword = $("#pwd").val();
+			var UserPassword2 = $("#pwd2").val();
+	
+			if(UserPassword != UserPassword2){
+				$("#pwd2State").text("패스워드가 동일하지 않습니다.");
+				$("#pwd2State").css("color","#F15F5F");						
+			}else{
+				$("#pwd2State").text("패스워드가 동일합니다.");
+				$("#pwd2State").css("color","#4374D9");
+			}
+			
+		}
 		
 	
 
@@ -242,9 +276,15 @@
 			if (phone2 == ""|| phone3 == "" || !phone2.match(/^[0-9]*$/) || !phone3.match(/^[0-9]*$/)){
 				$("#phoneState").text("휴대폰 번호는 숫자로만 입력해주세요.");
 				$("#phoneState").css("color","#F15F5F");
+				
 			}else{
-				$("#phoneState").text("사용가능한 휴대폰 번호 입니다.");
-				$("#phoneState").css("color","#4374D9");
+				if (phone3.length < 4){
+					$("#phoneState").text("휴대폰 번호 4자리를 입력해주세요.");
+					$("#phoneState").css("color","#F15F5F");			
+				}else{
+					$("#phoneState").text("사용가능한 휴대폰 번호 입니다.");
+					$("#phoneState").css("color","#4374D9");
+				}
 			}
 		}
 
@@ -261,26 +301,29 @@
 		
 		if($("#idState").css("color")=="rgb(67, 116, 217)"){
 			if($("#pwdState").css("color")=="rgb(67, 116, 217)"){
-				if($("#emailState").css("color")=="rgb(67, 116, 217)"){
-					if($("#nameState").css("color")=="rgb(67, 116, 217)"){
-					  if ($("#phoneState").css("color")=="rgb(67, 116, 217)") {
-							document.registerForm.submit();
-					  }else{
-						  alert("휴대폰 번호를 다시 확인해주세요.");
-					  }
+				if($("#pwd2State").css("color")=="rgb(67, 116, 217)"){
+					if($("#emailState").css("color")=="rgb(67, 116, 217)"){
+						if($("#nameState").css("color")=="rgb(67, 116, 217)"){
+						  if ($("#phoneState").css("color")=="rgb(67, 116, 217)") {
+								document.registerForm.submit();
+						  }else{
+							  alert("휴대폰 번호를 다시 확인해주세요.");
+						  }
+						}else{
+							alert("이름을 25자리 이하로 입력해주세요.");
+						}
+					}else{
+						alert("이메일을 다시 확인해주세요.");
+					}
 				}else{
-					alert("이름을 25자리 이하로 입력해주세요.");
+					alert("패스워드가 동일하지 않습니다.");
 				}
-				
 			}else{
-				alert("이메일을 다시 확인해주세요.");
+				alert("패스워드는 영문(대소문자구분),숫자,특수문자(~!@#$%^&*()-_? 만 허용)를 혼용하여 입력해주세요.");
 			}
 		}else{
-			alert("패스워드는 영문(대소문자구분),숫자,특수문자(~!@#$%^&*()-_? 만 허용)를 혼용하여 입력해주세요.");
+			alert("아이디를 다시 확인해주세요.");
 		}
-	}else{
-		alert("아이디를 다시 확인해주세요.");
-	}
 }
 	<%-- function profile_go(){
 		$("#uploadProfile").click();
