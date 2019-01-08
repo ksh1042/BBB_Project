@@ -63,7 +63,7 @@
 		</div>
 		<!-- /.login-logo -->
 		<div class="login-box-body">
-			<p class="login-box-msg">Sign in to start your session</p>
+			<p class="login-box-msg">환영합니다! 로그인 정보를 입력하세요</p>
 
 
 			<form role="form"
@@ -83,14 +83,14 @@
 				<div class="row">
 					<div class="col-xs-8">
 						<div class="checkbox icheck">
-							<label> <input type="checkbox"> Remember Me
+							<label> <input type="checkbox"> ID 기억하기
 							</label>
 						</div>
 					</div>
 					<!-- /.col -->
 					<div class="col-xs-4">
 						<button type="button" onclick="login_go();"
-							class="btn btn-primary btn-block btn-flat">Sign In</button>
+							class="btn btn-primary btn-block btn-flat">로그인</button>
 					</div>
 					<!-- /.col -->
 				</div>

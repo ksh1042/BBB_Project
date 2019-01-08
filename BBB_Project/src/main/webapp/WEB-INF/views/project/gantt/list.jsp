@@ -25,6 +25,7 @@ td.gantt-cell {
 </style>
 </head>
 <body>
+<div class="row" >
 	<section class="content-header">
 		<div class="container-fluid">
 			<div class="row mb-2">
@@ -71,6 +72,7 @@ td.gantt-cell {
 		</div>
 
 	</section>
+	</div>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script>
 		$('a.postboxLink').on('click', function(e) {

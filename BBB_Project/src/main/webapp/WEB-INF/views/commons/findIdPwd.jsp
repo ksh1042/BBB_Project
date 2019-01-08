@@ -42,6 +42,9 @@
 		</div>
 		
 		<div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"></h3>
+            </div>
             <!-- /.box-header -->
             <!-- form start -->
             <form action="showId" method="post" name="findIDForm">
@@ -64,7 +67,7 @@
 
               <div class="box-footer" style="text-align:center;">
                 <button type="button" class="btn btn-primary" onclick="back_go();" style="margin-left:18px;padding-left:20px;padding-right:20px;">취소</button>
-                <button type="button" class="btn btn-primary"  style="margin-left:63px;" id="findButton" disabled="disabled" onclick="findID();">아이디 찾기</button>
+                <button type="button" class="btn btn-primary"  style="margin-left:63px;" id="findButton" disabled="disabled" onclick="findID();">ID 찾기</button>
               </div>
               
             </form>
