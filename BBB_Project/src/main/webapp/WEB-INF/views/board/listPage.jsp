@@ -75,9 +75,9 @@
 				
 				<div class="box-body">
 					<table class="table table-bordered" border="1">
-						<tr>
+						<tr style="background: #088A4B">
 
-							<th style="width: 30px; text-align: center";>글번호</th>
+							<th style="width: 30px; text-align: center";>번호</th>
 							<th style="text-align: center"; width="30px">제목</th>
 							<th style="text-align: center"; width="50px">작성자</th>
 							<th style="text-align: center"; width="50px">작성일</th>
