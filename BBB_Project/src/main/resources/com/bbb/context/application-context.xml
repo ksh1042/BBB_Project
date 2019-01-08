@@ -99,4 +99,9 @@
 
 	<bean id="boardnoticeService" class="com.bbb.service.BoardNoticeServiceImpl"
 		p:boardNoticeDAO-ref="boardnoticeDAO" />
+		
+	<bean id="usecaseReplyDAO" 
+		  class="com.bbb.dao.UseCaseReplyDAOImpl"
+		  p:sqlSession-ref="sqlSession" />
+			
 </beans>

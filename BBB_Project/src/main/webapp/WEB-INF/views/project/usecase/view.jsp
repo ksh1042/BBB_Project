@@ -65,7 +65,7 @@
 				<!-- /.사진 뷰 -->
 				
 				<!-- 댓글 시작 -->
-				<%-- <div class="box-footer box-comments">
+				<div class="box-footer box-comments">
 					<div class="box-comment">
 						<!-- 댓글을 등록한 사람 프로필사진 -->
 						<img class="img-circle img-sm" src="<%=request.getContextPath()%>/resources/dist/img/user3-128x128.jpg" alt="User Image">
@@ -94,7 +94,7 @@
 					</div>
 					<!-- /.box-footer -->
 				</div>
-				<!-- /.댓글 끝 --> --%>
+				<!-- /.댓글 끝 --> 
 				
 			</div>
 			<!-- /.col -->

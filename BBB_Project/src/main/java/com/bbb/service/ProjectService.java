@@ -17,7 +17,7 @@ public interface ProjectService {
 	public void joinProject(ProjectPartakeVO takeVO) throws Exception;
 	public void cancelJoinProject(ProjectPartakeVO takeVO) throws Exception;
 	
-	// 프로젝트VO의 모든 정보를 가져와서 비교할때 쓰려고 가져옴 ㅅㅂ
+	// 프로젝트VO의 모든 정보를 가져와서 비교할때 쓰려고 가져옴 
 	List<ProjectVO> readMyProjectList() throws SQLException;
 	
 	List<ProjectPartakeVO> getBindingProject(String id) throws SQLException;

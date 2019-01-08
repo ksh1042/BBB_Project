@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UseCaseReply">
+
+	<select id="selectReplyList" resultType="usecaseReply">
+		select *
+		from tbl_usecase_reply
+		where uuuid=#{uuuid}
+		order by urnum desc
+	</select>
+	<select id="countReply" resultType="int">
+		select count(urnum) 
+		from tbl_usecase_reply
+		where urnum=#{urNum}
+	</select>
+	
+	<update id="insertReply" >
+		insert into tbl_usecase_reply(urnum,uuuid,content,writer)
+		values(urnum_seq.nextval,#{uuuid},#{content},#{writer})
+	</update>
+	
+	<update id="updateReply">
+		update tbl_usecase_reply
+		set 
+		content=#{content},
+		indate=sysdate
+		where urnum=#{urNum}		
+	</update>
+	
+	<update id="deleteReply">
+		delete from tbl_usecase_reply
+		where urnum=#{urNum}		
+	</update>
+	
+
+</mapper>
