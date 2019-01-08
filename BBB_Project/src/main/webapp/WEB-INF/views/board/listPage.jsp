@@ -8,16 +8,7 @@
 <head>
 	<title>자유게시판</title>
 <style>
-button#searchBtn{	
-	width:27px;
-	height:27px;	
-	background-position:center;
-	background-size:contain;	
-	background-color:white;	
-	box-sizing:border-box;
-	padding:6px;
-	 
-}
+
 .box-body ul{
 	list-style:none;
 	overflow:hidden;
@@ -40,80 +31,68 @@ button#searchBtn{
 </head>
 
 <body>
+
+<section class="content-header">
+		<h1>Bulletin Board</h1>
+		<ol class="breadcrumb">
+			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
+				<i class="fa fa-dashboard"></i>My Project</a>
+			</li>
+			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}"></a>${logonProject.name }</li>
+			<li class="active">bulletin board</li>
+		</ol>
+</section>
 <!-- Main content -->
 <section class="content">
 	<div class="row">
 		<!-- left column -->
 		<div class="col-md-12">
-			<!-- general form elements -->
-			<div class='box'>
-				<div class="box-header with-border">
-					<h3 class="box-title">게시판리스트</h3>
-				</div>
-				<div class='box-body'>
-					<ul>
-						<li>
-							<div></div>	
-						</li>
-						<li>
-<<<<<<< HEAD
-							<form action="listPage" >
-=======
-						<form action="listPage">
-						 <span class="glyphicon glyphicon-th-list form-control-feedback" id="listIcon"></span>
->>>>>>> refs/remotes/origin/choi2
-							<select name="searchType">
-								<option value="" ${cri.searchType==null?'selected':'' }>
-								------</option>
-								<option value="t" ${cri.searchType eq 't'?'selected':'' }>
-								Title</option>
-								<option value="w" ${cri.searchType eq 'w'?'selected':'' }>
-								Writer</option>
-							</select>
-<<<<<<< HEAD
-							<input id="keywordInput" name="keyword" type="text"  value="${pageMaker.cri.keyword}"/>
-							<button id="searchBtn" ></button>
-							</form>
-=======
-							<input id="keywordInput"
-								   name="keyword"
-								   type="text"  value="${pageMaker.cri.keyword}"/>
-							<button id="searchBtn" type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-						</form>
->>>>>>> refs/remotes/origin/choi2
-						</li>
-					</ul>
-				</div>
-			</div>
 			<div class="box">
 				<div class="box-header with-border">
-					
-					<h3 class="box-title">LIST PAGING</h3>
+					<h3 class="box-title"></h3>
+					<div class="box-tools">
+						<div class="input-group input-group-sm" >
+							<form action="listPage">
+								<select name="searchType">
+									<option value="" ${cri.searchType==null?'selected':'' }>
+									------</option>
+									<option value="t" ${cri.searchType eq 't'?'selected':'' }>
+									Title</option>
+									<option value="w" ${cri.searchType eq 'w'?'selected':'' }>
+									Writer</option>
+								</select>
+								<input id="keyword" name="keyword" type="text" value="${pageMaker.cri.keyword}"/>
+								<button id="searchBtn" type="submit" ><i class="fa fa-search"></i></button>
+							</form>
+						</div>
+					</div>
 				</div>
+				
 				<div class="box-body">
 					<table class="table table-bordered" border="1">
 						<tr>
-							<th style="width: 10px; text-align: center";>BNO</th>
-							<th style="text-align: center";>TITLE</th>
-							<th style="text-align: center";>WRITER</th>
-							<th style="text-align: center";>INDATE</th>
-							<th style="text-align: center";>UPDATE DATE</th>
-							<th style="width: 40px; text-align: center";>COUNT</th>
+							<th style="width: 10px; text-align: center;">BNO</th>
+							<th style="text-align: center;">TITLE</th>
+							<th style="text-align: center;">WRITER</th>
+							<th class="hidden-xs" style="text-align: center;">INDATE</th>
+							<th class="hidden-xs" style="text-align: center;">UPDATE DATE</th>
+							<th class="hidden-xs" style="width: 40px; text-align: center;">COUNT</th>
 					</tr>
 						<c:if test="${!empty boardList }">
 						<c:forEach items="${boardList}" var="board">
 
 							<tr>
-								<td style="text-align: center";>${board.bNum}</td>
-								<td style="text-align: center";><a
-									href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&bNum=${board.bNum}'>
-										${board.title}</a></td>
-								<td style="text-align: center";>${board.writer}</td>
-								<td style="text-align: center";><fmt:formatDate pattern="yyyy-MM-dd"
-										value="${board.inDate}" /></td>
-								<td style="text-align: center";><fmt:formatDate pattern="yyyy-MM-dd"
-										value="${board.updateDate}" /></td>
-								<td style="text-align: center";><span class="badge bg-red">${board.count }</span></td>
+								<td style="text-align: center;">${board.bNum}</td>
+								<td style="text-align: center;">
+								<a href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&bNum=${board.bNum}'>${board.title}</a></td>
+								<td style="text-align: center;">${board.writer}</td>
+								<td class="hidden-xs" style="text-align: center;">
+									<fmt:formatDate pattern="yyyy-MM-dd" value="${board.inDate}" />
+								</td>
+								<td class="hidden-xs" style="text-align: center;"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.updateDate}" /></td>
+								<td class="hidden-xs" style="text-align: center;">
+									<span class="badge bg-red">${board.count }</span>
+								</td>
 							</tr>
 
 						</c:forEach>
@@ -129,31 +108,29 @@ button#searchBtn{
 				<!-- /.box-body -->
 
 
-				<div class="box-footer">
-					<div style="float:right";>
-					<button id='newBtn' class="btn btn-primary" onclick="javascript:location.href='register';" >New Board</button>
-					</div>
-					<div class="text-center">
-						<ul class="pagination link pagination-sm no-margin pull-right">
- 
-							<c:if test="${pageMaker.prev}">
-								<li><a href="${pageMaker.startPage - 1}">&laquo;</a></li>
-							</c:if>
+				<div class="box-footer text-center">
+					<ul class="pagination link">
+						<c:if test="${pageMaker.prev}">
+							<li><a href="${pageMaker.startPage - 1}">&laquo;</a></li>
+						</c:if>
 
-							<c:forEach begin="${pageMaker.startPage }"
-								end="${pageMaker.endPage }" var="idx">
-								<li
-									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-									<a href="${idx}">${idx}</a>
-								</li>
-							</c:forEach>
+						<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+							<li
+								<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+								<a href="${idx}">${idx}</a>
+							</li>
+						</c:forEach>
 
-							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li><a
-									href="${pageMaker.endPage +1}">&raquo;</a></li>
-							</c:if>
+						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+							<li>
+								<a href="${pageMaker.endPage +1}">&raquo;</a>
+							</li>
+						</c:if>
 
-						</ul>
+					</ul>
+					
+					<button id='newBtn' style="float:right; margin-top:20px" class="btn btn-primary" onclick="javascript:location.href='register';" >New Board</button>
+				
 						
 						
 					</div>

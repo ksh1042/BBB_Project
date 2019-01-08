@@ -4,61 +4,32 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-
-<head>
-	<title>자료실</title>
-<style>
-button#searchBtn{	
-	width:27px;
-	height:27px;
-	background-image:url('<%=request.getContextPath()%>/resources/dist/img/search.png');	
-	background-position:center;
-	background-size:contain;	
-	background-color:white;	
-	box-sizing:border-box;
-	padding:6px;
-	 
-}
-.box-body ul{
-	list-style:none;
-	overflow:hidden;
-}
-.box-body ul li{
-	height:40px;
-	line-height:20px;
-}
-.box-body ul li:nth-child(1){
-	float:left;
-}
-.box-body ul li:nth-child(2){
-	float:right;
-}
-.box-body ul li:nth-child(2)>input{
-	width:300px;
-}
-
-</style>
-</head>
-
 <body>
+
+<section class="content-header">
+		<h1>File Board</h1>
+		<ol class="breadcrumb">
+			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
+				<i class="fa fa-dashboard"></i>My Project</a>
+			</li>
+			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}"></a>${logonProject.name }</li>
+			<li class="active">자료실</li>
+		</ol>
+</section>
+
 <!-- Main content -->
 <section class="content">
 	<div class="row">
 		<!-- left column -->
-		<div class="col-md-12">
-			<!-- general form elements -->
-			<div class='box'>
+		<div class="col-xs-12">
+		
+			<div class="box">
 				<div class="box-header with-border">
-					<h3 class="box-title">자료실</h3>
-				</div>
-				<div class='box-body'>
-					<ul>
-						
-						</li>
-						
-						<li>
-						
-													<select name="searchType">
+					<h3 class="box-title"></h3>
+					<div class="box-tools">
+					<div class="input-group input-group-sm" >
+							<div>
+							<select name="searchType">
 								<option value="" ${pageMaker.cri.searchType==null?'selected':'' }>
 								------</option>
 								<option value="t" ${pageMaker.cri.searchType eq 't'?'selected':'' }>
@@ -67,22 +38,13 @@ button#searchBtn{
 								내용</option>
 								<option value="w" ${pageMaker.cri.searchType eq 'w'?'selected':'' }>
 								작성자</option>
-								
 							</select>
-							
-							<input id="keyword"
-								   name="keyword"
-								   type="text" value="${pageMaker.cri.keyword}"/>
-							
+							<input id="keyword" name="keyword" type="text" value="${pageMaker.cri.keyword}"/>
 							<button id="searchBtn" ><i class="fa fa-search" ></i></button>
+							</div>
+							</div>
+							</div>
 							
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="box">
-				<div class="box-header with-border">
-					<h3 class="box-title"></h3>
 				</div>
 				<div class="box-body">
 					<table class="table table-bordered">
@@ -90,8 +52,8 @@ button#searchBtn{
 							<th>번호</th>
 							<th>제목</th>
 							<th>작성자</th>
-							<th>등록일</th>
-							<th>조회수</th>
+							<th class="hidden-xs">등록일</th>
+							<th class="hidden-xs">조회수</th>
 						</tr>
 						<c:if test="${!empty list }">
 						<c:forEach items="${list}" var="boardVO">
@@ -102,9 +64,9 @@ button#searchBtn{
 									href='fileboardread${pageMaker.makeSearch(pageMaker.cri.page) }&bNum=${boardVO.bNum}'>
 										${boardVO.title}</a></td>
 								<td>${boardVO.writer}</td>
-								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+								<td class="hidden-xs"><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 										value="${boardVO.inDate}" /></td>
-								<td><span class="badge bg-red">${boardVO.count }</span></td>
+								<td class="hidden-xs"><span class="badge bg-red">${boardVO.count }</span></td>
 							</tr>
 
 						</c:forEach>
@@ -159,8 +121,8 @@ button#searchBtn{
 <form id="jobForm">
   <input type='hidden' name="page" value="${pageMaker.cri.page}"/>
   <input type='hidden' name="perPageNum" value="${pageMaker.cri.perPageNum}"/>
-  <input type='hidden' name="searchType" value="${cri.searchType}"/>
-  <input type='hidden' name="keyword" value="${cri.keyword}"/>
+  <input type='hidden' name="searchType" value="${pageMaker.cri.searchType}"/>
+  <input type='hidden' name="keyword" value="${pageMaker.cri.keyword}"/>
 </form>
 	
 </section>

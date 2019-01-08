@@ -25,4 +25,9 @@
 		delete from tbl_project_partake where id=#{id}
 	</update>
 	
+	<select id="selectJoinList" resultType="projectPartake">
+		select *
+		from tbl_project_partake
+		where pjnum = #{pjNum} and assignyn = 0
+	</select>
 </mapper>

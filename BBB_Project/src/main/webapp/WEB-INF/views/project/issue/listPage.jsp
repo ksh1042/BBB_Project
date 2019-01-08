@@ -11,10 +11,17 @@
 }
 </style>
 
-	<div class="container">
-      <section class="content-header" style="cursor:pointer;" onclick="javascript:location.href='<%=request.getContextPath()%>/project/issue/list';">
-			<h3>이슈 게시판</h3>
-      </section>
+<section class="content-header">
+		<h1>Issue Board</h1>
+		<ol class="breadcrumb">
+			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
+				<i class="fa fa-dashboard"></i>My Project</a>
+			</li>
+			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}"></a>${logonProject.name }</li>
+			<li class="active">issue</li>
+		</ol>
+</section>
+ 
       
       <section class="content">
 		<!-- QnA 리스트 -->
@@ -25,7 +32,7 @@
 					<div class="box-header">
 					</div>
 					<div class="box-header with-border">
-						<h3 class="box-title">&nbsp;이슈 리스트</h3>
+						<h3 class="box-title"></h3>
 							<div class="box-tools">
 								<div class="input-group input-group-sm" >
 										<form action="list" style="width:300px;">
@@ -150,7 +157,7 @@
 	      	
       
       </section>	
-	</div>
+
 
 <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
 <script>

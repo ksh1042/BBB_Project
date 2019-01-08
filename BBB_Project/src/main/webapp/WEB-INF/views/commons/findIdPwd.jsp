@@ -37,28 +37,28 @@
 <body class="hold-transition register-page">
 	<div class="register-box">
 		<div class="register-logo">
-			<a href="loginForm"><b>Forgot id?</b></a>
+			<a href="loginForm"><b>ID를 찾을 수 있습니다.</b></a>
 		</div>
 		
 		<div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">아이디 찾기</h3>
+              <h3 class="box-title"></h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
             <form action="showId" method="post" name="findIDForm">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Name</label>
+                  <label for="exampleInputEmail1">가입 이름</label>
                   <input type="text" class="form-control" id="exampleInputEmail1" placeholder="이름"  name="name" required>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Email address</label>
+                  <label for="exampleInputPassword1">가입 Email 주소</label>
                   <input type="email" class="form-control"  placeholder="이메일" id="email" name="email" required><br/>
                   <button type="button" onclick="getEmailCode()">인증코드받기</button><br/>
                 </div>
                   <div class="form-group">
-                  <label for="exampleInputPassword1">Verification code</label>
+                  <label for="exampleInputPassword1">인증 code</label>
                   <input type="text" class="form-control"  placeholder="인증코드" name="emailCode" id="emailCode" disabled="disabled">
                 </div>
               </div>
@@ -66,7 +66,7 @@
 
               <div class="box-footer" style="text-align:center;">
                 <button type="button" class="btn btn-primary" onclick="back_go();" style="margin-left:18px;padding-left:20px;padding-right:20px;">취소</button>
-                <button type="button" class="btn btn-primary"  style="margin-left:63px;" id="findButton" disabled="disabled" onclick="findID();">아이디 찾기</button>
+                <button type="button" class="btn btn-primary"  style="margin-left:63px;" id="findButton" disabled="disabled" onclick="findID();">ID 찾기</button>
               </div>
               
             </form>

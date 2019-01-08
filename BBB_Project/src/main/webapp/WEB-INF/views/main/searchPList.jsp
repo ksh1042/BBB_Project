@@ -10,7 +10,7 @@
 		<h3 class="box-title">LIST PAGING</h3>
 	</div>
 <div class="container">
-
+	<div>
       <table class="searchResult">
       	
 	    <c:if test="${empty searchPList }">
@@ -48,6 +48,7 @@
 	    </c:forEach>
 	    </c:if>
       </table>
+    </div>
 </div>
     <div class="box-footer">
 		<div class="text-center">

@@ -104,10 +104,9 @@
 						<li class="dropdown notifications-menu">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
 								<i class="fa fa-gear"></i> 
-								<span class="label label-warning">10</span>
 							</a>
 							<ul class="dropdown-menu">
-								<li class="header">You have 10 notifications</li>
+								<li class="header">Support PMS</li>
 								<li>
 									<ul class="menu">
 										<li>

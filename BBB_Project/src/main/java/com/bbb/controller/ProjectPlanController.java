@@ -75,7 +75,8 @@ public class ProjectPlanController {
 		String savePath = plan.getSavePath().replace("\\", "/");
 		System.out.println(savePath);
 		String fullName = savePath+plan.getPuuid()+"$$"+plan.getFileName();
-		fullName = URLEncoder.encode(fullName, "UTF-8");
+		
+		fullName = URLEncoder.encode(fullName, "UTF-8");	
 		return "redirect:/displayFile?fileName="+fullName;
 	}
 	
