@@ -12,6 +12,7 @@
 %>
 <!DOCTYPE html>
 <html>
+<link rel="shortcut icon" href="http://example.com/favicon.ico">
 <head>
 <meta charset="UTF-8">
 <title><decorator:title default="내 사서함"></decorator:title></title>
