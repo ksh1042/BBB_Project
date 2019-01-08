@@ -50,6 +50,8 @@
     <select id="selectSearchBoardList" resultType="board">
    	select *
    	from tbl_board
+   	where kind = 0
+   	and pjnum=${pjNum}
    </select>
    
    <select id="selectSearchBoardNoticeList" resultType="boardnotice">
@@ -61,6 +63,7 @@
    <select id="selectSearchBoardCount" resultType="int">
    		select count(*)
    		from tbl_board
+   		where pjnum=${pjNum}
    </select>
    
    <select id="selectSearchBoardNoticeCount" resultType="int">

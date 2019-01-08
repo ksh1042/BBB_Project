@@ -51,8 +51,8 @@
 					<!-- /.box-body -->
 				</form>
 				<div class="box-footer">
-					<button type="submit" id="saveBtn" class="btn btn-warning">SAVE</button>
-					<button type="submit" id="cancelBtn" class="btn btn-primary">CANCEL</button>
+					<button type="submit" id="saveBtn" class="btn btn-warning">등록</button>
+					<button type="submit" id="cancelBtn" class="btn btn-primary">취소</button>
 				</div>
 				
 				<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>

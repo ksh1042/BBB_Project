@@ -105,7 +105,7 @@ $("#listBtn").on("click", function(){
 									<input class="form-control" readonly value="${loginUser.id}" type="text" name="writer"  id="newReplyWriter">
 									<span class="glyphicon glyphicon-pencil form-control-feedback" id="pNameIcon"></span> 
 									<label for="exampleInputEmail1">댓글내용</label> 
-									<input class="form-control" type="text" placeholder="REPLY TEXT" id="newReplyText">
+									<input class="form-control" type="text" placeholder="댓글을 입력하세요.." id="newReplyText">
 
 								</div>
 								<!-- /.box-body -->

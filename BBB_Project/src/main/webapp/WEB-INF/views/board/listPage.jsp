@@ -36,7 +36,7 @@
 		<h1>자유게시판</h1>
 		<ol class="breadcrumb">
 			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
-				<i class="fa fa-dashboard"></i>My Project</a>
+				<i class="fa fa-dashboard"></i>참여프로젝트</a>
 			</li>
 			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}"></a>${logonProject.name }</li>
 			<li class="active">자유게시판</li>

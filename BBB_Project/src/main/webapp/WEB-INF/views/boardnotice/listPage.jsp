@@ -10,7 +10,7 @@
 		<h1>공지사항</h1>
 		<ol class="breadcrumb">
 			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
-				<i class="fa fa-dashboard"></i>My Project</a>
+				<i class="fa fa-dashboard"></i>참여프로젝트</a>
 			</li>
 			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}"></a>${logonProject.name }</li>
 			<li class="active">공지사항</li>
@@ -38,7 +38,7 @@
 						</tr>
 						
 						<c:if test="${!empty boardnoticeList }">
-						
+						<c:forEach items="${board }" var="board">
 						<c:forEach items="${boardnoticeList}" var="boardnotice">
 							<tr>
 								<td style="text-align: center;">${boardnotice.bNum}</td>
@@ -51,6 +51,7 @@
 								<fmt:formatDate pattern="yyyy-MM-dd" value="${boardnotice.noticeDate}" />
 								</td>
 							</tr>
+						</c:forEach> 
 						</c:forEach>
 						 
 						</c:if>
