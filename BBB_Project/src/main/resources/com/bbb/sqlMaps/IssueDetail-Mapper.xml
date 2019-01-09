@@ -17,8 +17,8 @@
 	</select>
 	
 	<update id="insertIssueDetail" >
-		insert into tbl_issue_detail(idnum,inum,content,writer)
-		values(idnum_seq.nextval,#{iNum},#{content},#{writer})
+		insert into tbl_issue_detail(idnum,inum,content,writer,deleteyn)
+		values(idnum_seq.nextval,#{iNum},#{content},#{writer},0)
 	</update>
 	
 	<update id="updateIssueReply">
@@ -28,7 +28,8 @@
 	</update>
 	
 	<update id="deleteReply">
-		delete from tbl_issue_reply
+		update tbl_issue_detail
+		set deleteyn=1
 		where idnum=#{idNum}		
 	</update>
 	

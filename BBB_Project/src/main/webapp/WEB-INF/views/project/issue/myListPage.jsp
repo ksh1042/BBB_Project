@@ -158,11 +158,11 @@
 
 	</section>
 
-	<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
-	<script>
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+<script>
+
 	function registerIssue_go(){
-		location.href="<%=request.getContextPath()%>
-		/project/issue/register"
+		location.href="<%=request.getContextPath()%>/project/issue/register"
 
 		}
 

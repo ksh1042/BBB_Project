@@ -43,8 +43,7 @@
 							</div>
 							<div class="form-group">
 								<label for="exampleInputPassword1">내용</label>
-								<textarea id="content" class="form-control" class="summernote" rows="10"
-									placeholder="내용을 작성하세요"></textarea>
+								<textarea id="summernote" class="form-control" name="content" rows="10" placeholder="내용을 작성하세요"></textarea>
 							</div>
 						</div>
 						<!-- /.box-body -->
@@ -78,13 +77,29 @@
 
 	</section>
 
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script> 
 <!-- include summernote css/js-->
-<link href="/summernote/summernote.css" rel="stylesheet">
-<script src="plugins/summernote/summernote.js"></script>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css" rel="stylesheet"> 
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
 <!-- summer note korean language pack -->
-<script src="plugins/summernote/lang/summernote-ko-KR.js"></script>
+<script src="/summernote/lang/summernote-ko-KR.js"></script>
 
-<script>
+<script type="text/javascript">
+
+	$(document).ready(function() {
+	     $('#summernote').summernote({
+	    	height: 300,          // 기본 높이값
+	 	    minHeight: null,      // 최소 높이값(null은 제한 없음)
+	 	    maxHeight: null,      // 최대 높이값(null은 제한 없음)
+	 	    focus: true,          // 페이지가 열릴때 포커스를 지정함
+	 	    lang: 'ko-KR'         // 한국어 지정(기본값은 en-US)
+	     });
+	});
+
+
 	function register_go() {
 		document.registerIssueForm.submit();
 	}

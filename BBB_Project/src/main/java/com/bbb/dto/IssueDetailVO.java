@@ -10,6 +10,7 @@ public class IssueDetailVO {
 	private Date indate;
 	private Date updateDate;
 	private int iNum;
+	private int deleteYn;
 	
 	public int getIdNum() {
 		return idNum;
@@ -47,12 +48,20 @@ public class IssueDetailVO {
 	public void setiNum(int iNum) {
 		this.iNum = iNum;
 	}
+	public int getDeleteYn() {
+		return deleteYn;
+	}
+	public void setDeleteYn(int deleteYn) {
+		this.deleteYn = deleteYn;
+	}
 	
 	@Override
 	public String toString() {
 		return "IssueDetailVO [idNum=" + idNum + ", writer=" + writer + ", content=" + content + ", indate=" + indate
-				+ ", updateDate=" + updateDate + ", iNum=" + iNum + "]";
+				+ ", updateDate=" + updateDate + ", iNum=" + iNum + ", deleteYn=" + deleteYn + "]";
 	}
+	
+	
 	
 	
 	

@@ -201,7 +201,7 @@ hr {
       	   </div>
 			<div id="issueDetailModifyBtnDiv">
 				<div class="timeline-footer" style="height: 50px;" id="detailModifyBtn">
-					<button class="btn btn-primary btn-xs btn-modify" style="padding:5px 10px 5px 10px;float:right;margin-right:10px;">삭제</button>
+					<button class="btn btn-primary btn-xs btn-modify" style="padding:5px 10px 5px 10px;float:right;margin-right:10px;" onclick="">삭제</button>
 					<button class="btn btn-primary btn-xs btn-modify" style="padding:5px 10px 5px 10px;float:right;margin-right:10px;" onclick="detailModify({{idNum}}, '<%=request.getContextPath()%>/project/issueDetail/all/{{iNum}}');">수정</button>
 		  		 </div>
 			</div>
@@ -382,9 +382,7 @@ hr {
 			      success:function(result){
 			         if(result=="SUCCESS"){
 			            alert("이슈가 수정되었습니다.");
-			            getPage("<%=request.getContextPath()%>
-		/project/issueDetail/all/"
-										+ iNum);
+			            getPage("<%=request.getContextPath()%>/project/issueDetail/all/"+ iNum);
 
 							}
 						},

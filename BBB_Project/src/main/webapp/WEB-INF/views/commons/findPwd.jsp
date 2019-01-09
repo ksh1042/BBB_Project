@@ -44,7 +44,7 @@
 		
 		<div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title"></h3>
+              <h3 class="box-title">패스워드 찾기</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
@@ -72,7 +72,7 @@
 
               <div class="box-footer" style="text-align: center;">
               <button type="button" class="btn btn-primary" onclick="back_go();" style="margin-left:20px;padding-left:27px;padding-right:27px;">취소</button>
-                <button type="button" class="btn btn-primary" style="margin-left:20px;" id="findButton" disabled="disabled" onclick="findPwd();">PWD 재설정</button>
+                <button type="button" class="btn btn-primary" style="margin-left:20px;" id="findButton" disabled="disabled" onclick="findPwd();">패스워드 재설정</button>
               </div>
               
             </form>

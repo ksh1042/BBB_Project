@@ -73,6 +73,20 @@ public class IssueDetailController {
 		
 	}
 	
+	@RequestMapping(value="/{idNum}",method=RequestMethod.POST)
+	public ResponseEntity<String> removeIssueDetail(int idNum) throws Exception{
+		
+		ResponseEntity<String> entity=null;
+		try{
+			service.deleteIssueDetail(idNum);
+			entity=new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
+		}catch(SQLException e){
+			e.printStackTrace();
+			entity=new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return entity;
+	}
 
    
    
