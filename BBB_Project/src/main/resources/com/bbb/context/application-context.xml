@@ -103,5 +103,9 @@
 	<bean id="usecaseReplyDAO" 
 		  class="com.bbb.dao.UseCaseReplyDAOImpl"
 		  p:sqlSession-ref="sqlSession" />
+		  
+	<bean id="usecaseReplyService"
+		  class="com.bbb.service.UseCaseReplyServiceImpl"
+		  p:useCaseReplyDAO-ref="usecaseReplyDAO" />
 			
 </beans>

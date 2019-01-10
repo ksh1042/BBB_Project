@@ -16,26 +16,32 @@ public class UseCaseReplyDAOImpl implements UseCaseReplyDAO {
 	
 	@Override
 	public List<UseCaseReplyVO> selectReplyList(String uuuid) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<UseCaseReplyVO> usecaseReply = session.selectList("UseCaseReply.selectReplyList", uuuid);
+		return usecaseReply;
 	}
 
 	@Override
 	public void insertReply(UseCaseReplyVO reply) throws SQLException {
-		// TODO Auto-generated method stub
+		session.update("UseCaseReply.insertReply", reply);
 
 	}
 
 	@Override
 	public void updateReply(UseCaseReplyVO reply) throws SQLException {
-		// TODO Auto-generated method stub
+		session.update("UseCaseReply.updateReply", reply);
 
 	}
 
 	@Override
 	public void deleteReply(int urNum) throws SQLException {
-		// TODO Auto-generated method stub
+		session.update("UseCaseReply.deleteReply", urNum);
 
+	}
+
+	@Override
+	public int getUseCaseReplySeqNextValue() throws SQLException {
+		int urNum = session.selectOne("UseCaseReply.getUseCaseReplySeqNextValue");
+		return urNum;
 	}
 
 }

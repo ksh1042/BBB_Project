@@ -17,5 +17,7 @@ public interface UseCaseReplyDAO {
 	
 	void deleteReply(int urNum) throws SQLException;
 	
+	int getUseCaseReplySeqNextValue() throws SQLException;
 
+	
 }

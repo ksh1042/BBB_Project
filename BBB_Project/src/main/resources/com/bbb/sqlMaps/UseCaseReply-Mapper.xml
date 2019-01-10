@@ -9,6 +9,13 @@
 		where uuuid=#{uuuid}
 		order by urnum desc
 	</select>
+	
+	<select id="selectReplyListByUrNum">
+		select *
+		from tbl_usecase_reply
+		where urnum=#{urNum}
+	</select>
+	
 	<select id="countReply" resultType="int">
 		select count(urnum) 
 		from tbl_usecase_reply
@@ -33,5 +40,8 @@
 		where urnum=#{urNum}		
 	</update>
 	
+	<select id="getUseCaseReplySeqNextValue" resultType="int">
+		select urnum_seq.nextval from dual
+	</select>
 
 </mapper>
