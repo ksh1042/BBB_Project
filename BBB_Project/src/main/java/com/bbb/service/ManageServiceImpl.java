@@ -18,4 +18,10 @@ public class ManageServiceImpl implements ManageService {
 		return joinList;
 	}
 
+	@Override
+	public List<ProjectPartakeVO> teamMemberList(int pjNum) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
