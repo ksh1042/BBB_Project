@@ -66,36 +66,39 @@
 				
 				<!-- 댓글 시작 -->
 				<div class="box-footer box-comments">
+					<c:if test="${!empty replyList }" >
+					<c:forEach var="reply" items="${replyList }">
 					<div class="box-comment">
 						<!-- 댓글을 등록한 사람 프로필사진 -->
 						<img class="img-circle img-sm" src="<%=request.getContextPath()%>/resources/dist/img/user3-128x128.jpg" alt="User Image">
 
 						<div class="comment-text">
-							<span class="username"> Maria Gonzales
-								<span class="text-muted pull-right">8:03 PM Today</span>
+							<span class="username"> ${reply.writer}
+								<span class="text-muted pull-right"><fmt:formatDate pattern="hh:MM a yyyy-MM-dd" value="${reply.indate}" /></span>
 							</span>
 							<!-- /.댓글작성자 이름 -->
-							It is a long established fact that a reader will be distracted by
-							the readable content of a page when looking at its layout.
+							${reply.content }
 						</div>
 						<!-- /.comment-text -->
 					</div>
+					</c:forEach>
+					</c:if>
 					<!-- /.box-comment -->
 
 					<!-- /.box-footer -->
 					<div class="box-footer">
-						<form action="#" method="post">
+						<form action="registerReply" method="post">
 							<img class="img-responsive img-circle img-sm" src="<%=request.getContextPath()%>/resources/dist/img/user4-128x128.jpg" alt="Alt Text">
 							<!-- .img-push is used to add margin to elements next to floating images -->
 							<div class="img-push">
-								<input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+								<input type="hidden" name="writer" value="${loginUser.id }">
+								<input type="text" name="content" class="form-control input-sm" placeholder="Press enter to post comment">
 							</div>
 						</form>
 					</div>
 					<!-- /.box-footer -->
 				</div>
 				<!-- /.댓글 끝 --> 
-				
 			</div>
 			<!-- /.col -->
 		</div>

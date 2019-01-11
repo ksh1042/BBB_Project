@@ -1,6 +1,7 @@
 package com.bbb.controller;
 
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,16 +9,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bbb.dto.ProjectVO;
+import com.bbb.dto.UseCaseReplyVO;
 import com.bbb.dto.UseCaseVO;
 import com.bbb.service.ProjectService;
+import com.bbb.service.UseCaseReplyService;
 import com.bbb.service.UseCaseService;
 
 @Controller
@@ -29,6 +35,9 @@ public class UseCaseController {
 	
 	@Autowired
 	private ProjectService projectService;
+	
+	@Autowired
+	private UseCaseReplyService usecaseReplyService;
 	
 	@RequestMapping(value="/view", method=RequestMethod.GET)
 	public void view(Model model, HttpSession session, HttpServletRequest request) throws Exception{
@@ -44,8 +53,10 @@ public class UseCaseController {
 			String fullName = savePath+usecase.getUuuid()+"$$"+usecase.getFileName();
 			System.out.println(fullName);
 			List<UseCaseVO> usecaseList = usecaseService.readList(uuuid);
+			List<UseCaseReplyVO> replyList = usecaseReplyService.readReplyList(uuuid);
 			model.addAttribute("usecaseList", usecaseList);
 			model.addAttribute("imageUrl", fullName);
+			model.addAttribute("replyList", replyList);
 
 		}
 		
@@ -84,6 +95,29 @@ public class UseCaseController {
 	    return usecaseService.readList(uuuid);
 	}
 	
+	@RequestMapping(value="registerReply", method=RequestMethod.GET)
+	public void registerReplyGET() throws Exception{}
 
+	@RequestMapping(value="registerReply", method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> registerReplyPOST(@RequestBody UseCaseReplyVO usecaseReplyVO, HttpServletRequest request,HttpServletResponse response) throws Exception{
+		
+		ResponseEntity<String> entity = null;
+		HttpSession session = request.getSession();
+		ProjectVO project = (ProjectVO)session.getAttribute("logonProject");
+		
+		String uuuid = project.getUuuid();
+		UseCaseReplyVO reply = new UseCaseReplyVO();
+		try {
+			usecaseReplyVO.setUuuid(uuuid);
+			usecaseReplyService.createReply(usecaseReplyVO);
+			
+			
+		}catch(SQLException e) {
+			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return entity;
+	}
 
 }

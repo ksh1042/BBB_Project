@@ -1,10 +1,13 @@
 package com.bbb.dto;
 
+import java.util.Date;
+
 public class UseCaseReplyVO {
 	private int urNum;
 	private String uuuid;
 	private String writer;
 	private String content;
+	private Date indate;
 	public int getUrNum() {
 		return urNum;
 	}
@@ -29,11 +32,18 @@ public class UseCaseReplyVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	public Date getIndate() {
+		return indate;
+	}
+	public void setIndate(Date indate) {
+		this.indate = indate;
+	}
 	@Override
 	public String toString() {
 		return "UseCaseReplyVO [urNum=" + urNum + ", uuuid=" + uuuid + ", writer=" + writer + ", content=" + content
-				+ "]";
+				+ ", indate=" + indate + "]";
 	}
+	
 	
 	
 }
