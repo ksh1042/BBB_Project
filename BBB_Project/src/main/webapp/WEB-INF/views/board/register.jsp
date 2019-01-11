@@ -73,9 +73,9 @@ $('input[name="title"]').on('blur',function(e){
 		$(this).focus();
 		return;
 	}
-	if(title.length > 75){
+	if(title.length > 20){
 		$('#titleHelp').css({color:'red'});
-		$('#titleHelp').html('제목명은 75자를 넘을 수 없습니다.');
+		$('#titleHelp').html('제목명은 20자를 넘을 수 없습니다.');
 		$(this).focus();
 		return;
 	}else{
@@ -123,7 +123,7 @@ $('#create_btn').on('click',function(e){
 });
 
 
-$("#list_btn").on("click", function(){
+$('#list_btn').on('click', function(){
 	location.href="<%=request.getContextPath()%>/board/listPage"
 });
 function verifyCheck() {
