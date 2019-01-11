@@ -25,11 +25,11 @@
 	
 	<select id="selectSearchIssueList" resultType="issue">
 		SELECT rownum, inum, title, content, writer, indate, updatedate, openyn, pjNum
-		FROM TBL_ISSUE   
-		WHERE pjNum = #{pjNum}
-		and inum is not null
+		FROM (select * from tbl_issue where pjnum = #{pjNum} order by indate asc)
+		where inum is not null
 		<include refid="search"></include>
-		ORDER BY rownum desc
+		order by rownum desc
+		
 	</select>
 	
 	<select id="selectSearchIssueCount" resultType="int">
