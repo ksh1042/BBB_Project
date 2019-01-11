@@ -50,19 +50,26 @@ public class UnitworkController {
 	}
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public void unitworkListGET(HttpServletRequest request, Model model) throws Exception {
+	public void unitworkListGET(SearchCriteria cri, HttpServletRequest request, Model model) throws Exception {
 		ProjectVO selectProject = (ProjectVO)request.getSession().getAttribute("logonProject");
 		int udNum = selectProject.getUdNum();
-		List<UnitworkVO> unitList = unitworkService.readUnitworkList(udNum);
+		PageMaker pageMaker = new PageMaker();
+		cri.setPerPageNum(15);
+		pageMaker.setCri(cri);
+		int totalCount = unitworkService.readUnitworkCount( cri, udNum );
+		pageMaker.setTotalCount(totalCount);
+		
+		List<UnitworkVO> unitList = unitworkService.readUnitworkList(cri, udNum);
+		
 		model.addAttribute("unitList", unitList);
+		model.addAttribute("pageMaker", pageMaker);
 	}
 	
 	@RequestMapping(value="/list", method=RequestMethod.POST)
 	public String unitworkListPOST(HttpServletRequest request, Model model) throws Exception {
 		ProjectVO selectProject = (ProjectVO)request.getSession().getAttribute("logonProject");
 		int udNum = selectProject.getUdNum();
-		
-		List<UnitworkVO> unitList = unitworkService.readUnitworkList(udNum);
+		List<UnitworkVO> unitList = unitworkService.readUnitworkList(null, udNum);
 		List<ProjectPartakeVO> partakeList = unitworkService.readBindingMemberList(selectProject.getPjNum());
 		List<RequirementVO> requireList = unitworkService.readRequirementList(selectProject.getRdNum());
 		
@@ -101,14 +108,13 @@ public class UnitworkController {
 			}
 		}
 		
-		
 		try{
 			UnitworkHistVO unitHist = new UnitworkHistVO();
 			unitHist.setUdNum( selectProject.getUdNum() );
 			unitHist.setComm( comm );
 			unitHist.setUpdateDate( new Date() );
 			
-			unitworkService.updateUDD(unitList, createList, removeUddNumList, selectProject);
+			unitworkService.updateUDD(unitList, createList, removeUddNumList, unitHist, selectProject);
 			
 			
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
@@ -120,14 +126,15 @@ public class UnitworkController {
 	}
 	
 	@RequestMapping(value="/history", method=RequestMethod.GET)
-	public void historyListGET(Criteria cri, HttpSession session, Model model) throws Exception {
+	public void historyListGET(SearchCriteria cri, HttpSession session, Model model) throws Exception {
 		ProjectVO selectProject = (ProjectVO)session.getAttribute("logonProject");
-		
+		int udNum = selectProject.getUdNum();
+		cri.setPerPageNum(15);
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount( unitworkService.readUnitworkHistoryCount( selectProject.getUdNum() ) );
+		pageMaker.setTotalCount( unitworkService.readUnitworkHistoryCount( cri, udNum ) );
 		
-		List<UnitworkHistVO> unitHistList = unitworkService.readUnitworkHistoryList( cri, selectProject.getUdNum() );
+		List<UnitworkHistVO> unitHistList = unitworkService.readUnitworkHistoryList( cri, udNum );
 		
 		model.addAttribute("unitHistList", unitHistList);
 		model.addAttribute("pageMaker", pageMaker);

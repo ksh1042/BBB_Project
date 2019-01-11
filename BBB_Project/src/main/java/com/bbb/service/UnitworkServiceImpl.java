@@ -1,7 +1,6 @@
 package com.bbb.service;
 
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,19 +46,28 @@ public class UnitworkServiceImpl implements UnitworkService {
 	}
 	
 	@Override
-	public List<UnitworkVO> readUnitworkList(int udNum) throws SQLException {
-		return unitworkDAO.selectUnitworkListByRdNum(udNum);
+	public List<UnitworkVO> readUnitworkList(Criteria cri, int udNum) throws SQLException {
+		List<UnitworkVO> unitworkList = null;
+		if( cri == null){
+			unitworkList = unitworkDAO.selectUnitworkListByRdNumAll(udNum);
+		} else {
+			unitworkList = unitworkDAO.selectUnitworkListByRdNum(cri, udNum);
+		}
+		return unitworkList;
 	}
 
 	@Override
 	public List<UnitworkHistVO> readUnitworkHistoryList(Criteria cri, int udNum) throws SQLException {
 		return unitworkDAO.selectUnitworkHistoryByRdNum(cri, udNum);
 	}
-
-
+	
 	@Override
-	public int readUnitworkHistoryCount(int udNum) throws SQLException {
-		return unitworkDAO.selectUnitworkHistoryCountByRdNum(udNum);
+	public int readUnitworkCount(Criteria cri, int udNum) throws SQLException {
+		return unitworkDAO.selectUnitworkCountByRdNum(cri, udNum);
+	}
+	@Override
+	public int readUnitworkHistoryCount(Criteria cri, int udNum) throws SQLException {
+		return unitworkDAO.selectUnitworkHistoryCountByRdNum(cri, udNum);
 	}
 	
 	
@@ -95,7 +103,7 @@ public class UnitworkServiceImpl implements UnitworkService {
 	
 
 	@Override
-	public void updateUDD(List<UnitworkVO> updateList, List<UnitworkVO> createList, List<Integer> removeList,
+	public void updateUDD(List<UnitworkVO> updateList, List<UnitworkVO> createList, List<Integer> removeList, UnitworkHistVO hist,
 			ProjectVO project) throws SQLException {
 		for(int uddNum : removeList){
 			ganttDAO.deleteGanttDetailByUddNum(uddNum);
@@ -120,7 +128,10 @@ public class UnitworkServiceImpl implements UnitworkService {
 			unitworkDAO.insertUDD(unit);
 			ganttDAO.insertGanttDetail(gantt);
 		}
+		unitworkDAO.insertUDH(hist);
+		
 	}
+
 	
 
 }
