@@ -1,6 +1,7 @@
 package com.bbb.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,8 +20,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bbb.dto.MemberVO;
 import com.bbb.dto.ProjectPartakeVO;
 import com.bbb.dto.ProjectVO;
+import com.bbb.dto.UnitworkVO;
 import com.bbb.service.ManageService;
 import com.bbb.service.MemberService;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 @RequestMapping("project/manage")
@@ -33,15 +38,20 @@ public class managementController {
 	
 	//신청
 	@RequestMapping(value="/member",method = RequestMethod.GET)
-	public void manageMember(HttpServletRequest request, Model model) throws Exception{
+	public void manageMember(@ModelAttribute("cri")SearchCriteria cri,HttpServletRequest request, Model model) throws Exception{
 		HttpSession session = request.getSession();
 		ProjectVO logon = (ProjectVO)session.getAttribute("logonProject");
 		int pjNum = logon.getPjNum();
 		String id = logon.getCreator();
+		PageMaker pageMaker = new PageMaker();
 		
-		List<MemberVO> teamMemberList = service.teamMemberList(pjNum,id);
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.teamMemberCount(pjNum, id, cri));
+		
+		List<MemberVO> teamMemberList = service.teamMemberList(pjNum,id,cri);
 		
 		model.addAttribute("teamMemberList", teamMemberList);
+		model.addAttribute("pageMaker",pageMaker);
 	}
 	
 	
@@ -76,11 +86,19 @@ public class managementController {
 	//프로젝트 참여 수락
 	@RequestMapping(value="applyMember", method=RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<String> applyMember(@RequestBody ProjectPartakeVO partake) throws Exception{
+	public ResponseEntity<String> applyMember(@RequestBody Map<String,Object> applyList, HttpServletRequest request) throws Exception{
 		
 		ResponseEntity<String> entity = null;
+		HttpSession session = request.getSession();
+		ProjectVO project = (ProjectVO)session.getAttribute("logonProject");
+		int pjNum = project.getPjNum();
+		ObjectMapper mapper = new ObjectMapper();
+		List<String> applylist = mapper.convertValue(applyList.get("applyList"), new TypeReference<List<String>>() {});
+		
 		try{
-			service.applyMember(partake);
+		for(String applyMember : applylist){
+			service.applyMember(applyMember,pjNum);
+		}
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		}catch(Exception e){
 			e.printStackTrace();
@@ -93,11 +111,18 @@ public class managementController {
 	//프로젝트 참여 거절
 	@RequestMapping(value="refuseMember", method=RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<String> refuseMember(@RequestBody ProjectPartakeVO partake) throws Exception{
+	public ResponseEntity<String> refuseMember(@RequestBody Map<String,Object> applyList,HttpServletRequest request) throws Exception{
 		
 		ResponseEntity<String> entity = null;
+		HttpSession session = request.getSession();
+		ProjectVO project = (ProjectVO)session.getAttribute("logonProject");
+		int pjNum = project.getPjNum();
+		ObjectMapper mapper = new ObjectMapper();
+		List<String> applylist = mapper.convertValue(applyList.get("applyList"), new TypeReference<List<String>>() {});
 		try{
-			service.refuseMember(partake);
+			for(String applyMember : applylist){
+				service.refuseMember(applyMember,pjNum);
+			}
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		}catch(Exception e){
 			e.printStackTrace();

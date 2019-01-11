@@ -5,7 +5,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
+<head>
+<style>
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  padding: 3px;
+  vertical-align: middle;
+}
+</style>
+</head>
 <body>
 <section class="content-header">
 		<h1>신청받은 멤버관리</h1>
@@ -27,22 +36,22 @@
           <div class="box">
             <!-- /.box-header -->
             <div class="box-body">
-              <table class="table table-bordered">
+              <table class="table joinTable table-bordered">
                 <tr>
                   <th>#</th>
                   <th>ID</th>
                   <th class="hidden-xs">이름</th>
                   <th style="width:10%;">E-mail</th>
-                  <th style="width:30%;">수락/거절</th>
+                  <th style="width:30%;">선택</th>
                 </tr>
 				<c:if test="${empty joinList}">
 					<tr class="joinList">	
-						<td colspan="4">현재 신청온 회원이 없습니다.</td>
+						<td colspan="4" style="text-align:center;">현재 신청온 회원이 없습니다.</td>
 					</tr>
 				</c:if>
 				
 				<c:forEach var="joinList" items="${joinList }" varStatus="num">
-					<tr class="joinList">
+					<tr class="joinList" style="line-height:15px; padding:3px; ">
 		             	<td>${num.index+1 }</td>
 		                <td>
 			                <a href="<%=request.getContextPath() %>/project/main?pjNum=${partake.pjNum}">
@@ -51,18 +60,18 @@
 		                </td>
 		                <td class="hidden-xs">${joinList.name }</td>
 		                <td>${joinList.email }</td>
-		                <td><button type="button" class="btn btn-block btn-primary apply" id="${partake.id }style="float:left;width:100px;margin-right:25px;">수락</button>
-		                	<button type="button" class="btn btn-block btn-danger refuse" id="${partake.id }style="margin-top:0;float:left;width:100px;">거절</button></td>
+		                <td><input type="checkbox" id="idList" name="" value="${joinList.id }" style="width:25px; height:25px;"/></td>
 	                </tr>
 				</c:forEach>
 						  
               </table>
+		          <button type="button" class="btn btn-block btn-danger refuse" id="${partake.id }"style="margin-top:15px;float:right;width:100px;margin-right:0px;">거절</button>
+                  <button type="button" class="btn btn-block btn-primary apply" id="${partake.id }"style="width:100px;float:right;margin-top:15px;margin-right:25px;">수락</button>
               
             </div>
             
             <!-- /.box-body -->
             <!-- / 나의 참여목록 리스트 테이블 끝 -->
-                  
           </div>
           <!-- /.box -->
           
@@ -82,15 +91,24 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script>
 		var pjNum = ${logonProject.pjNum};
+		var applyList = new Array();
 		$('.apply').on('click', function(){
+			$('input[type=checkbox]').each(function(){
+				if($(this).is(':checked')){
+					var temp = $(this).val();
+					applyList.push(temp);
+				}
+			});
+			if(applyList[0] == null){
+				alert('선택된 회원이 없습니다.');
+				return;
+			}
 			if(confirm("프로젝트 참여를 수락하시겠습니까?") == true){
-					var id = $(this).attr('id');
 					$.ajax({
 						type:"post",
 						url:"<%=request.getContextPath()%>/project/manage/applyMember",
 						data:JSON.stringify({
-							"id" : id,
-							"pjNum" : pjNum
+							applyList : applyList
 						}),
 						headers:{
 							"Content-Type":"application/json",
@@ -114,14 +132,22 @@
 		
 		var pjNum = ${logonProject.pjNum};
 		$('.refuse').on('click', function(){
+			$('input[type=checkbox]').each(function(){
+				if($(this).is(':checked')){
+					var temp = $(this).val();
+					applyList.push(temp);
+				}
+			});
+			if(applyList[0]==null){
+				alert('선택된 회원이 없습니다.');
+				return;
+			}
 			if(confirm("프로젝트 참여를 거절하시겠습니까?") == true){
-					var id = $(this).attr('id');
 					$.ajax({
 						type:"post",
 						url:"<%=request.getContextPath()%>/project/manage/refuseMember",
 						data:JSON.stringify({
-							"id" : id,
-							"pjNum" : pjNum
+							applyList : applyList
 						}),
 						headers:{
 							"Content-Type":"application/json",

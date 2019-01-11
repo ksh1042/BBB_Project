@@ -110,18 +110,6 @@
 		emailyn=0
 		WHERE id = #{id}
 	</update>
-	
-	<select id="selectJoinList" parameterType="int" resultType="member">
-		select id, name, email
-		from view_crew
-		where pjnum = #{pjNum} and assignyn = 0
-	</select>
-	
-	<select id="selectTeamMemberList" resultType="member">
-		select id, name, email
-		from view_crew
-		where id not in(#{id}) and pjnum = #{pjNum} and assignyn = 1
-	</select>
 </mapper>
 
 

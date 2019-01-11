@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.bbb.controller.SearchCriteria;
 import com.bbb.dto.MemberVO;
 import com.bbb.dto.ProjectPartakeVO;
 
@@ -19,30 +20,49 @@ public class ManageDAOImpl implements ManageDAO {
 	
 	@Override
 	public List<MemberVO> getJoinList(int pjNum) throws SQLException {
-		return session.selectList("Member.selectJoinList",pjNum);
+		return session.selectList("Management.selectJoinList",pjNum);
 	}
 
 	@Override
-	public List<MemberVO> getTeamMember(int pjNum, String id) throws SQLException {
+	public List<MemberVO> getTeamMember(int pjNum, String id, SearchCriteria cri) throws SQLException {
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyword", cri.getKeyword());
+		map.put("searchType", cri.getSearchType());
 		map.put("id", id);
 		map.put("pjNum", pjNum);
-		return session.selectList("Member.selectTeamMemberList", map);
+		return session.selectList("Management.selectTeamMemberList", map);
 	}
 
+	@Override
+	public int getTeamMemberCount(int pjNum, String id, SearchCriteria cri) throws SQLException {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyword", cri.getKeyword());
+		map.put("searchType", cri.getSearchType());
+		map.put("id", id);
+		map.put("pjNum", pjNum);
+		return session.selectOne("Management.TeamMemberListCount",map);
+	}
+	
 	@Override
 	public void fireMember(ProjectPartakeVO partake) throws SQLException {
 		session.update("ProjectPartake.fireMember", partake);
 	}
 
 	@Override
-	public void applyMember(ProjectPartakeVO partake) throws SQLException {
-		session.update("Management.applyMember", partake);
+	public void applyMember(String id,int pjNum) throws SQLException {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("pjNum", pjNum);
+		session.update("Management.applyMember", map);
 	}
 
 	@Override
-	public void refuseMember(ProjectPartakeVO partake) throws SQLException {
-		session.update("Management.refuseMember", partake);
+	public void refuseMember(String id,int pjNum) throws SQLException {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("pjNum", pjNum);
+		session.update("Management.refuseMember", map);
 	}
+
 
 }

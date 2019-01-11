@@ -2,6 +2,7 @@ package com.bbb.service;
 
 import java.util.List;
 
+import com.bbb.controller.SearchCriteria;
 import com.bbb.dao.ManageDAO;
 import com.bbb.dao.MemberDAO;
 import com.bbb.dto.MemberVO;
@@ -26,24 +27,30 @@ public class ManageServiceImpl implements ManageService {
 	}
 
 	@Override
-	public List<MemberVO> teamMemberList(int pjNum, String id) throws Exception {
-		List<MemberVO> teamMemList = manageDao.getTeamMember(pjNum, id);
+	public List<MemberVO> teamMemberList(int pjNum, String id, SearchCriteria cri) throws Exception {
+		List<MemberVO> teamMemList = manageDao.getTeamMember(pjNum, id, cri);
 		return teamMemList;
 	}
 
+	@Override
+	public int teamMemberCount(int pjNum, String id, SearchCriteria cri) throws Exception {
+		return manageDao.getTeamMemberCount(pjNum, id, cri);
+	}
+	
 	@Override
 	public void fireMember(ProjectPartakeVO partake) throws Exception {
 		manageDao.fireMember(partake);
 	}
 
 	@Override
-	public void applyMember(ProjectPartakeVO partake) throws Exception {
-		manageDao.applyMember(partake);
+	public void applyMember(String id,int pjNum) throws Exception {
+		manageDao.applyMember(id,pjNum);
 	}
 
 	@Override
-	public void refuseMember(ProjectPartakeVO partake) throws Exception {
-		manageDao.refuseMember(partake);
+	public void refuseMember(String id,int pjNum) throws Exception {
+		manageDao.refuseMember(id,pjNum);
 	}
+
 
 }

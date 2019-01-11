@@ -2,16 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Management">	
+
 	<select id="selectJoinList" parameterType="int" resultType="member">
 		select id, name, email
 		from view_crew
 		where pjnum = #{pjNum} and assignyn = 0
 	</select>
 	
+	<sql id="search">
+		<if test="searchType == 'id'.toString()">
+			and id like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'nm'.toString()">
+			and name like '%'||#{keyword}||'%'
+		</if>
+		<if test="searchType == 'em'.toString()">
+			and email like '%'||#{keyword}||'%'
+		</if>
+		
+	</sql>
+	
 	<select id="selectTeamMemberList" resultType="member">
 		select id, name, email
 		from view_crew
 		where id not in(#{id}) and pjnum = #{pjNum} and assignyn = 1
+		<include refid="search"></include>
+	</select>
+	
+	<select id="TeamMemberListCount" resultType="int">
+		select count(*)
+		from view_crew
+		where id not in(#{id}) and pjnum = #{pjNum} and assignyn = 1
+		<include refid="search"></include>
 	</select>
 	
 	<update id="applyMember">

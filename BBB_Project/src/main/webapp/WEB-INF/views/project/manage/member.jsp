@@ -26,8 +26,9 @@
         <div class="col-xs-12">
           <div class="box">
            <div class="col-sm-6 searchDiv" style="width:100%;">
+                    <form action="member">                       
                   <div class="input-group input-group-sm" style="position:relative;float:right; margin-right:0;width:50%;">
-                     <span class="input-group-btn">                        
+                     <span class="input-group-btn"> 
                         <select class="form-control" name="searchType" style="height:30px; width: 105px; font-size:11px;">
                            <option value="" selected>전체</option>
                            <option value="id">아이디</option>
@@ -35,11 +36,12 @@
                            <option value="em">이메일</option>
                         </select>   
                      </span>
-                     <input type="text" class="form-control" value="${ pageMaker.cri.keyword }"> 
+                     <input type="text" name="keyword" class="form-control" value="${ pageMaker.cri.keyword }"> 
                      <span class="input-group-btn">
-                        <button type="button" class="btn btn-default btn-flat" onclick="search_go();">검색</button>
+                        <button type="submit" class="btn btn-default btn-flat">검색</button>
                      </span>
                   </div>
+                     </form>
                </div>
             
             <!-- /.box-header -->
@@ -54,9 +56,16 @@
                 </tr>
              	
 				<c:if test="${empty teamMemberList }">
+					<c:if test="${!empty cri.keyword }">
 					<tr class="teamMemberList">
-						<td colspan="4">현재 진행중인 프로젝트가 없습니다.</td>
+						<td colspan="5">검색된 팀원이 없습니다.</td>
 					</tr>
+					</c:if>
+					<c:if test="${empty cri.keyword }">
+					<tr class="teamMemberList">
+						<td colspan="5">참여중인 팀원이 없습니다.</td>
+					</tr>
+					</c:if>
 				</c:if>
 				
 				<c:forEach var="memberList" items="${teamMemberList }" varStatus="num">
@@ -92,9 +101,6 @@
 								<li><a href="${pageMaker.endPage +1}">&raquo;</a></li>
 							</c:if>
 						</ul>
-						<sec:authorize access="hasAuthority('ROLE_ADMIN')">
-						<button id='newNtn' style="float:right; margin-top:20px" class="btn btn-primary" onclick="javascript:location.href='register';">New Notice</button>
-						</sec:authorize>
 					</div>
 				</div>
           </div>
@@ -107,7 +113,12 @@
       <!-- /.box -->
     </section>
     <!-- /.content -->
-    
+    <form id="jobForm">
+			  <input type='hidden' name="page" value="${pageMaker.cri.page}"/>
+			  <input type='hidden' name="perPageNum" value="${pageMaker.cri.perPageNum}"/>
+			  <input type='hidden' name="keyword" value="${cri.keyword}"/>
+			  <input type="hidden" name="searchType" value="${cri.searchType }" />
+		</form>
 	
 	<!-- content.end -->
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -141,6 +152,18 @@
 			}else{
 				return;
 			}
+		});
+		
+		$(".link li a").on("click", function(event){
+			
+			event.preventDefault(); 
+			
+			var targetPage = $(this).attr("href");
+			
+			var jobForm = $("#jobForm");
+			jobForm.find("[name='page']").val(targetPage);
+			jobForm.attr("action","member").attr("method", "get");		
+			jobForm.submit();
 		});
 		
 	</script>
