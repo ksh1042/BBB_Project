@@ -32,7 +32,7 @@
 #bindList{
 	display:none;
 }
-#selected{
-	
-}
+#selected>button{
+	background-color : #d2d6de;
+	}
 

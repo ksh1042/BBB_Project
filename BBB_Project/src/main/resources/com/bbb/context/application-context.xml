@@ -105,5 +105,6 @@
 		/>
 	<bean id="manageService" class="com.bbb.service.ManageServiceImpl"
 		p:manageDAO-ref="manageDAO"
+		p:memberDAO-ref="memberDAO"
 		/>
 </beans>

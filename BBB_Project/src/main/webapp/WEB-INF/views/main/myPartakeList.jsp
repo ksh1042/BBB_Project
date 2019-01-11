@@ -66,13 +66,13 @@
             <div class="box-header with-border">
             	<div class="select-list inv">
             		<ul class="select">
-            			<li class="div" id="selected" style="width:100px;">
-            				<button type="button"  class="btn btn-block btn-default">My PMS</button>
+            			<li class="div" id="selected" style="width:140px;">
+            				<button type="button"  class="btn btn-block btn-default">참여중인 프로젝트</button>
             			</li>
             			<li style="width:3px;">
             			</li>
-            			<li class="add" style="width:100px;">
-            				<button type="button"  class="btn btn-block btn-default">Request PMS</button>
+            			<li class="add" style="width:140px;">
+            				<button type="button"  class="btn btn-block btn-default">신청중인 프로젝트</button>
             			</li>
             		</ul>
               	</div>
