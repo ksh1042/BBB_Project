@@ -63,25 +63,26 @@
 				
 				</c:if>
 				<!-- /.사진 뷰 -->
-				
 				<!-- 댓글 시작 -->
-				<div class="box-footer box-comments">
+				<c:if test="${!empty usecaseList }" >
+				<div class="box-footer box-comments" >
 					<c:if test="${!empty replyList }" >
-					<c:forEach var="reply" items="${replyList }">
-					<div class="box-comment">
-						<!-- 댓글을 등록한 사람 프로필사진 -->
-						<img class="img-circle img-sm" src="<%=request.getContextPath()%>/resources/dist/img/user3-128x128.jpg" alt="User Image">
-
-						<div class="comment-text">
-							<span class="username"> ${reply.writer}
-								<span class="text-muted pull-right"><fmt:formatDate pattern="hh:MM a yyyy-MM-dd" value="${reply.indate}" /></span>
-							</span>
-							<!-- /.댓글작성자 이름 -->
-							${reply.content }
-						</div>
-						<!-- /.comment-text -->
-					</div>
-					</c:forEach>
+						<c:forEach var="reply" items="${replyList }">
+							<div class="box-comment">
+								<!-- 댓글을 등록한 사람 프로필사진 -->
+								<img class="img-circle img-sm" src="<%=request.getContextPath()%>/resources/dist/img/user3-128x128.jpg" alt="User Image">
+		
+								<div class="comment-text">
+									<span class="username">
+										<span class="user" >${reply.writer}</span>
+										<span class="text-muted pull-right"><fmt:formatDate pattern="hh:MM a yyyy-MM-dd" value="${reply.indate}" /></span>
+									</span>
+									<!-- /.댓글작성자 이름 -->
+									${reply.content }
+								</div>
+								<!-- /.comment-text -->
+							</div>
+						</c:forEach>
 					</c:if>
 					<!-- /.box-comment -->
 
@@ -98,6 +99,7 @@
 					</div>
 					<!-- /.box-footer -->
 				</div>
+				</c:if>
 				<!-- /.댓글 끝 --> 
 			</div>
 			<!-- /.col -->
@@ -302,6 +304,18 @@ $('.uploadedList').on('click','.delbtn',function(event){
 			}
 		}
 	});
+});
+
+$('.box-comment').on('click', function(e){
+	
+	var writer = $(this).children('div.comment-text').children('span.username').children('span.user').html();
+	var id = '${loginUser.id}';
+
+	if(writer == id){
+		alert("삭제하시겠습니까?");
+	}else{
+		alert("권한이 없습니다");
+	}
 });
 </script>
 

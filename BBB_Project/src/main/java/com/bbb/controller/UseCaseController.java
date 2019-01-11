@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bbb.dto.ProjectVO;
+import com.bbb.dto.QnaVO;
 import com.bbb.dto.UseCaseReplyVO;
 import com.bbb.dto.UseCaseVO;
 import com.bbb.service.ProjectService;
@@ -99,25 +101,22 @@ public class UseCaseController {
 	public void registerReplyGET() throws Exception{}
 
 	@RequestMapping(value="registerReply", method=RequestMethod.POST)
-	@ResponseBody
-	public ResponseEntity<String> registerReplyPOST(@RequestBody UseCaseReplyVO usecaseReplyVO, HttpServletRequest request,HttpServletResponse response) throws Exception{
+	public String registerReplyPOST(UseCaseReplyVO usecaseReplyVO, RedirectAttributes rttr, HttpServletRequest request,HttpServletResponse response) throws Exception{
 		
-		ResponseEntity<String> entity = null;
 		HttpSession session = request.getSession();
 		ProjectVO project = (ProjectVO)session.getAttribute("logonProject");
-		
+	
 		String uuuid = project.getUuuid();
-		UseCaseReplyVO reply = new UseCaseReplyVO();
-		try {
-			usecaseReplyVO.setUuuid(uuuid);
-			usecaseReplyService.createReply(usecaseReplyVO);
-			
-			
-		}catch(SQLException e) {
-			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
 		
-		return entity;
+		usecaseReplyVO.setUuuid(uuuid);
+		usecaseReplyService.createReply(usecaseReplyVO);
+		
+		rttr.addFlashAttribute("msg","SUCCESS");
+
+		return "redirect:/project/usecase/view";
+		
 	}
+	
+
 
 }
