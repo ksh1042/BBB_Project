@@ -2,7 +2,6 @@ package com.bbb.service;
 
 import java.util.List;
 
-import com.bbb.controller.Criteria;
 import com.bbb.dao.IssueDetailDAO;
 import com.bbb.dto.IssueDetailVO;
 
@@ -37,16 +36,6 @@ public class IssueDetailServiceImpl implements IssueDetailService {
 		
 	}
 
-	@Override
-	public List<IssueDetailVO> getIssueDetailListPage(int iNum, Criteria cri) throws Exception {
-		List<IssueDetailVO> issueDetailList=issueDetailDAO.selectIssueDetailListPage(iNum, cri);
-		return issueDetailList;
-	}
-
-	@Override
-	public int countIssueDetail(int iNum) throws Exception {
-		int count=issueDetailDAO.countIssueDetail(iNum);
-		return count;
-	}
+	
 
 }

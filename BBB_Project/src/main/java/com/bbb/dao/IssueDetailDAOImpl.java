@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.bbb.controller.Criteria;
 import com.bbb.dto.IssueDetailVO;
 
 public class IssueDetailDAOImpl implements IssueDetailDAO {
@@ -23,32 +22,26 @@ public class IssueDetailDAOImpl implements IssueDetailDAO {
 
 	@Override
 	public void insertIssueDetail(IssueDetailVO issueDetail) throws SQLException {
-		session.update("insertIssueDetail",issueDetail);
+		session.update("IssueDetail.insertIssueDetail",issueDetail);
 		
 	}
 
 	@Override
 	public void updateIssueDetail(IssueDetailVO issueDetail) throws SQLException {
-		session.update("updateIssueReply",issueDetail);
+		session.update("IssueDetail.updateIssueReply",issueDetail);
 		
 	}
 
 	@Override
 	public void deleteIssueDetail(int idNum) throws SQLException {
-		session.update("deleteReply",idNum);
+		session.update("IssueDetail.deleteReply",idNum);
 		
 	}
 
-	@Override
-	public List<IssueDetailVO> selectIssueDetailListPage(int iNum, Criteria cri) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public int countIssueDetail(int iNum) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
+
+
+	
 
 }

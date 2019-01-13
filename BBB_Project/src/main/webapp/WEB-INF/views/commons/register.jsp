@@ -52,9 +52,9 @@
 		<div class="register-box-body">
 			<p class="login-box-msg" style="font-size: 15pt;font-bold:2em;">회원가입</p>
 
-			<form action="register" method="post" name="registerForm" id="registerForm" > <!--enctype="multipart/form-data"  -->
+			<form action="register" method="post" name="registerForm" id="registerForm" enctype="multipart/form-data"> 
 				<div>
-					<img class="profile-user-img img-responsive img-circle" src="/resources/images/profile.png" alt="User profile picture" id="profile" onclick="profile_go();"><br/>
+					<img class="profile-user-img img-responsive img-circle" style="cursor:pointer;" src="/resources/images/profile.png" alt="User profile picture" id="profile" onclick="profile_go();"><br/>
 					<input type="file" name="image" id="uploadProfile" style="display:none;">
 				</div>
 				<div class="form-group has-feedback">
@@ -325,7 +325,7 @@
 			alert("아이디를 다시 확인해주세요.");
 		}
 }
-	<%-- function profile_go(){
+	function profile_go(){
 		$("#uploadProfile").click();
 		
 		$("#uploadProfile").change(function(){
@@ -354,7 +354,7 @@
 				
 			});
 		});
-	}; --%>
+	};
   
 </script>
 

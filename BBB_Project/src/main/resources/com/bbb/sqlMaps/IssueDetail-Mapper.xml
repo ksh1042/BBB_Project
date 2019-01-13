@@ -29,7 +29,7 @@
 	
 	<update id="deleteReply">
 		update tbl_issue_detail
-		set deleteyn=1
+		set deleteYn=1
 		where idnum=#{idNum}		
 	</update>
 	

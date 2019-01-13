@@ -98,7 +98,7 @@ public class CommonController {
 	
 	@RequestMapping("/findIdPwd")
 	public String findIdPwdForm() throws Exception{
-		return "commons/findPwd"; //우선 패스워드 찾기로 이동후 원할시 아이디 찾기도 가능.
+		return "commons/findPwd"; 
 	}
 	
 	@RequestMapping("/findId")
