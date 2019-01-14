@@ -30,4 +30,9 @@
 		where id = #{id} and pjnum = #{pjNum}
 	</update>
 	
+	<update id="leaveProject">
+		delete from tbl_project_partake
+		where id=#{id} and pjnum = #{pjNum}
+	</update>
+	
 </mapper>
