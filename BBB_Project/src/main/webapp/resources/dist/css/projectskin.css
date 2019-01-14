@@ -35,4 +35,17 @@
 #selected>button{
 	background-color : #d2d6de;
 	}
+.horizon{
+	color:red;
+	
+}
+.searchResult{
+	margin-left:10px;
+}
+.button{
+	margin:0;
+	padding:0;
+}
+
+
 

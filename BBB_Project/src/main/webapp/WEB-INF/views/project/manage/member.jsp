@@ -25,7 +25,7 @@
         <!-- <div class="col-md-6"> -->
         <div class="col-xs-12">
           <div class="box">
-           <div class="col-sm-6 searchDiv" style="width:100%;">
+           <div class="col-sm-6 searchDiv" style="width:100%; padding:10px">
                     <form action="member">                       
                   <div class="input-group input-group-sm" style="position:relative;float:right; margin-right:0;width:50%;">
                      <span class="input-group-btn"> 

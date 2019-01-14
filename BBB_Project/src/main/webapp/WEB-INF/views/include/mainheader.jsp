@@ -72,14 +72,19 @@
 						<!-- 프로젝트 검색 -->
 						<sec:authorize access="hasAuthority('ROLE_USER')">
 						<li class="hidden-xs">
-							<form class="navbar-form" role="search">
+							<form action="searchPList" class="navbar-form" onsubmit="return check()">
 		
-								<input type="text" class="form-control" id="navbar-search-input" placeholder="search">
-								<button type="button" class="btn btn-default" onclick="search_go();"><i class="fa fa-search"></i></button>
+								<input type="text" class="form-control" name="keyword" id="navbar-search-input" placeholder="search">
+								<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+								
+								<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 								<script>
-									function search_go(){
-										var keyword = $('input#navbar-search-input').val();
-										location.href='<%= request.getContextPath() %>/main/searchPList/?searchType=&keyword='+keyword;
+									function check(){
+										if($('input[name=keyword]').val()==''){
+											alert("검색할 키워드를 입력해주세요.");
+											$('input[name=keyword]').focus();
+											return false;
+										}
 									}
 								</script>
 			

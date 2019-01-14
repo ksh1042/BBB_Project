@@ -46,7 +46,7 @@
                 </tr>
 				<c:if test="${empty joinList}">
 					<tr class="joinList">	
-						<td colspan="4" style="text-align:center;">현재 신청온 회원이 없습니다.</td>
+						<td colspan="5" style="text-align:center;">현재 신청온 회원이 없습니다.</td>
 					</tr>
 				</c:if>
 				

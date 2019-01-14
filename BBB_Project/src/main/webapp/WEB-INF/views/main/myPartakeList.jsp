@@ -105,7 +105,7 @@
 	                  	</a>
 	                  </td>
 	                  <td class="hidden-xs">${partake.creator}</td>
-	                  <td><button type="button" disabled="disabled" class="btn btn-block btn-success">참여중</button></td>
+	                  <td><button type="button" id="leave" class="btn btn-block btn-success">탈퇴</button></td>
                 	</tr>
 				</c:forEach>
 				
@@ -124,7 +124,7 @@
 			                </a>
 		                </td>
 		                <td class="hidden-xs">${bindProject.creator}</td>
-		                <td><button type="button" class="btn btn-block btn-warning cancel" id="${bindProject.pjNum }">신청중</button></td>
+		                <td><button type="button" class="btn btn-block btn-warning cancel" id="${bindProject.pjNum }">신청취소</button></td>
 	                </tr>
 				</c:forEach>
 						  

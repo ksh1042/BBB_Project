@@ -443,9 +443,10 @@
 				</a>
 			</li>
 			
+			<c:if test="${loginUser.id eq logonProject.creator }">
 			<li class="treeview">
 				<a href="#"><i class="fa fa-link"></i>
-					<span>관리</span>
+					<span>팀 관리</span>
 					<span class="pull-right-container"> 
 					<i class="fa fa-angle-left pull-right"></i>
 					</span> 
@@ -461,10 +462,11 @@
 					</li>
 					<li>
 						<a href="<%=request.getContextPath()%>/boardnotice/listPage">
-						<i class="fa fa-circle-o"></i>호고곡</a>
+						<i class="fa fa-circle-o"></i>프로젝트 수정</a>
 					</li>
 				</ul>
 			</li>
+			</c:if>
 		</sec:authorize>
 
 	</ul>
@@ -478,6 +480,13 @@
 		e.preventDefault();
 		alert("아직 계획서가 등록되지 않았습니다.");
 	});
+	
+	$("button[type=submit]").on("click", function(e){
+		if($("input[type=keyword]").val()==''){
+			alert("검색할 키워드를 입력해주세요.");
+			return;
+		}
+	})
 </script>
 <body>
   <!-- Content Wrapper. Contains page content -->
