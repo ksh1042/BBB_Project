@@ -74,6 +74,13 @@ public class ProjectController {
 		
 	}
 	
+	@RequestMapping(value="/modify", method=RequestMethod.GET)
+	public void modifyGET(HttpSession session) throws Exception {
+		ProjectVO selectProject = (ProjectVO)session.getAttribute("logonProject");
+		
+		
+	}
+	
 
 	
 
