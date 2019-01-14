@@ -29,6 +29,7 @@
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/dist/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/dist/css/projectskin.css">
  
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -441,7 +442,31 @@
 					<i class="fa fa-link"></i><span>ISSUE</span>
 				</a>
 			</li>
-
+			
+			<c:if test="${loginUser.id eq logonProject.creator }">
+			<li class="treeview">
+				<a href="#"><i class="fa fa-link"></i>
+					<span>팀 관리</span>
+					<span class="pull-right-container"> 
+					<i class="fa fa-angle-left pull-right"></i>
+					</span> 
+				</a>
+				<ul class="treeview-menu">
+					<li>
+						<a href="<%=request.getContextPath()%>/project/manage/member">
+						<i class="fa fa-circle-o"></i>참여중인 멤버관리</a>
+					</li>
+					<li>
+						<a href="<%=request.getContextPath()%>/project/manage/joinMember">
+						<i class="fa fa-circle-o"></i>참여신청 관리</a>
+					</li>
+					<li>
+						<a href="<%=request.getContextPath()%>/boardnotice/listPage">
+						<i class="fa fa-circle-o"></i>프로젝트 수정</a>
+					</li>
+				</ul>
+			</li>
+			</c:if>
 		</sec:authorize>
 
 	</ul>
@@ -455,6 +480,13 @@
 		e.preventDefault();
 		alert("아직 계획서가 등록되지 않았습니다.");
 	});
+	
+	$("button[type=submit]").on("click", function(e){
+		if($("input[type=keyword]").val()==''){
+			alert("검색할 키워드를 입력해주세요.");
+			return;
+		}
+	})
 </script>
 <body>
   <!-- Content Wrapper. Contains page content -->

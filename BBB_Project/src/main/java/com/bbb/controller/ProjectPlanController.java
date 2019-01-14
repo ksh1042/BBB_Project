@@ -39,7 +39,8 @@ public class ProjectPlanController {
 	@RequestMapping(value="/registerPlan", method=RequestMethod.POST)
 	public void projectPlanPOST(ProjectPlanVO planVO, RedirectAttributes rtts, HttpServletRequest request,HttpServletResponse response) throws Exception{
 		HttpSession session = request.getSession();
-		
+		response.setHeader("Content-Type", "text/html;charset=utf-8");
+		request.setCharacterEncoding("utf-8");
 		ProjectVO project = (ProjectVO)session.getAttribute("logonProject");
 		int pjNum = project.getPjNum();
 		List<ProjectPlanVO> attachList = planVO.getAttachList();
@@ -66,13 +67,15 @@ public class ProjectPlanController {
 	}
 	
 	@RequestMapping(value="/viewPlan", method=RequestMethod.GET)
-	public String viewPlan(HttpServletRequest request) throws Exception{
+	public String viewPlan(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		HttpSession session = request.getSession();
 		ProjectVO project = (ProjectVO)session.getAttribute("logonProject");
 		ProjectPlanVO plan = pservice.getPlan(project.getPuuid());
+		
 		String savePath = plan.getSavePath().replace("\\", "/");
 		System.out.println(savePath);
 		String fullName = savePath+plan.getPuuid()+"$$"+plan.getFileName();
+		
 		fullName = URLEncoder.encode(fullName, "UTF-8");	
 		return "redirect:/displayFile?fileName="+fullName;
 	}
@@ -104,8 +107,8 @@ public class ProjectPlanController {
 		}
 		rtts.addFlashAttribute("msg","SUCCESS");
 		
-		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
+		response.setCharacterEncoding("utf-8");
 		out.write("<script>");
 		out.write("alert('계획서가 수정되었습니다.');");
 		out.write("location.href = '/project/main?pjNum="+pjNum+"';");

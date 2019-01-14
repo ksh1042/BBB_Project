@@ -25,4 +25,9 @@
 		delete from tbl_project_partake where id=#{id}
 	</update>
 	
+	<update id="fireMember">
+		delete from tbl_project_partake
+		where id = #{id} and pjnum = #{pjNum}
+	</update>
+	
 </mapper>

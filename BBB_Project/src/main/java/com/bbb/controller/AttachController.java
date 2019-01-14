@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -48,9 +50,8 @@ public class AttachController {
 	}
 	
 	@RequestMapping(value="/displayFile",method=RequestMethod.GET)
-	public ResponseEntity<byte[]> displayFile(String fileName)
+	public ResponseEntity<byte[]> displayFile(String fileName, HttpServletRequest request, HttpServletResponse response)
 										throws Exception{
-		
 		InputStream in=null;
 		ResponseEntity<byte[]> entity=null;
 		
@@ -60,7 +61,6 @@ public class AttachController {
 			String formatName=fileName.substring(fileName.lastIndexOf(".")+1);
 			MediaType mType=MediaUtils.getMediaType(formatName);
 			HttpHeaders headers=new HttpHeaders();
-			
 			fileName=fileName.replace('/', File.separatorChar);
 			in=new FileInputStream(uploadPath+fileName);
 			

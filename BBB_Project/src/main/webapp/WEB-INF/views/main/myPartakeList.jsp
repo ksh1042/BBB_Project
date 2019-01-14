@@ -66,21 +66,15 @@
             <div class="box-header with-border">
             	<div class="select-list inv">
             		<ul class="select">
-            			<li class="div" id="selected" style="width:100px;">
-            				<button type="button"  class="btn btn-block btn-default">My PMS</button>
+            			<li class="div" id="selected" style="width:140px;">
+            				<button type="button"  class="btn btn-block btn-default">참여중인 프로젝트</button>
             			</li>
             			<li style="width:3px;">
             			</li>
-            			<li class="add" style="width:100px;">
-            				<button type="button"  class="btn btn-block btn-default">Request PMS</button>
+            			<li class="add" style="width:140px;">
+            				<button type="button"  class="btn btn-block btn-default">신청중인 프로젝트</button>
             			</li>
             		</ul>
-            		<!-- <div class="sibal saekki">
-            	  		참여중인 프로젝트
-              		</div>
-	              	<div class="sibal">
-        	      		신청중인 프로젝트
-    	          	</div> -->
               	</div>
             </div>
             
@@ -96,12 +90,14 @@
                 
                 
              	
-				<c:forEach var="partake" items="${myPartakeList }" varStatus="num">
-				<tr class="partakeList">
-					<c:if test="${empty myPartakeList }">
+				<c:if test="${empty myPartakeList }">
+					<tr class="partakeList">
 						<td colspan="4">현재 진행중인 프로젝트가 없습니다.</td>
-					</c:if>
-					<c:if test="${!empty myPartakeList }">
+					</tr>
+				</c:if>
+				
+				<c:forEach var="partake" items="${myPartakeList }" varStatus="num">
+					<tr class="partakeList">
 	             	  <td>${num.index+1 }</td>
 	                  <td>
 	                  	<a href="<%=request.getContextPath() %>/project/main?pjNum=${partake.pjNum}">
@@ -109,19 +105,18 @@
 	                  	</a>
 	                  </td>
 	                  <td class="hidden-xs">${partake.creator}</td>
-	                  <td><button type="button" disabled="disabled" class="btn btn-block btn-success">참여중</button></td>
-                	</c:if>
-                </tr>
+	                  <td><button type="button" id="leave" class="btn btn-block btn-success">탈퇴</button></td>
+                	</tr>
 				</c:forEach>
 				
-				<c:forEach var="bindProject" items="${bindProject }" varStatus="num">
-					<c:if test="${empty bindProject }">
-						<tr>
-						<td colspan='4'>현재 신청중인 프로젝트가 없습니다.</td>
-						</tr>
-					</c:if>
-					<c:if test="${!empty bindProject }">
+				<c:if test="${empty bindProject}">
 					<tr class="bindList" id="bindList">	
+						<td colspan="4">현재 신청중인 프로젝트가 없습니다.</td>
+					</tr>
+				</c:if>
+				
+				<c:forEach var="bindProject" items="${bindProject }" varStatus="num">
+					<tr class="bindList" id="bindList">
 		             	<td>${num.index+1 }</td>
 		                <td>
 			                <a href="<%=request.getContextPath() %>/project/main?pjNum=${partake.pjNum}">
@@ -129,9 +124,8 @@
 			                </a>
 		                </td>
 		                <td class="hidden-xs">${bindProject.creator}</td>
-		                <td><button type="button" class="btn btn-block btn-warning cancel" id="${bindProject.pjNum }">신청중</button></td>
+		                <td><button type="button" class="btn btn-block btn-warning cancel" id="${bindProject.pjNum }">신청취소</button></td>
 	                </tr>
-	                </c:if>
 				</c:forEach>
 						  
               </table>
