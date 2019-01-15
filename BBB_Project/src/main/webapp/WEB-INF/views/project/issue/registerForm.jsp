@@ -77,18 +77,18 @@
 	</section>
 
 <!-- include libraries(jQuery, bootstrap) -->
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.2.1.js"></script> 
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script> 
+<!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-<!-- include summernote css/js-->
+include summernote css/js
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet"> 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
-<!-- summer note korean language pack -->
+summer note korean language pack
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/lang/summernote-ko-KR.js"></script>
-
+ -->
 <script type="text/javascript">
 
-	$(document).ready(function() {
+/* 	$(document).ready(function() {
 	     $('#summernote').summernote({
 	    	height: 300,          // 기본 높이값
 	 	    minHeight: null,      // 최소 높이값(null은 제한 없음)
@@ -97,7 +97,7 @@
 	 	    lang: 'ko-KR'         // 한국어 지정(기본값은 en-US)
 	     });
 	});
-
+ */
 
 	function register_go() {
 		document.registerIssueForm.submit();

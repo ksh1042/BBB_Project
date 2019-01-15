@@ -1,10 +1,12 @@
 package com.bbb.controller;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,11 +15,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bbb.dto.MemberVO;
@@ -33,7 +37,9 @@ public class CommonController {
 	
 	@Autowired
 	private MimeAttachNotifier notifier;
-	
+
+	@Resource(name="uploadProfile")
+	String uploadProfile;
 
 	@RequestMapping("/loginForm")
 	public String loginForm() throws Exception {
@@ -46,7 +52,12 @@ public class CommonController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String register(MemberVO member, RedirectAttributes rttr) throws Exception {
+	public String register(MultipartFile file,MemberVO member, RedirectAttributes rttr) throws Exception {
+		
+		String savedName=file.getOriginalFilename();
+		File target = new File(uploadProfile,savedName);
+		
+		FileCopyUtils.copy(file.getBytes(), target);
 		
 		service.register(member);
 		rttr.addFlashAttribute("newMember", member.getName());
@@ -67,11 +78,6 @@ public class CommonController {
 		out.flush();
 		out.close();
 	}
-	
-	/*	@RequestMapping(value="/uploadProfile",method=RequestMethod.POST,produces="text/plain;charset=utf-8")
-	@ResponseBody
-	public void uploadProfile*/ //프로필사진
-	
 	
 	@RequestMapping(value="/idCheck")
     @ResponseBody
