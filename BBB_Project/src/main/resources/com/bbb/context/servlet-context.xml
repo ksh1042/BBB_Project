@@ -19,7 +19,7 @@
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/SE2/**" location="/SE2/"/>
 	<resources mapping="/ucImage/**" location="file:///c:/upload/"/>
-	<resources mapping="/profileImage/**" location="file:///c:/upload/profile"/>
+	<resources mapping="/profile/**" location="file:///c:/upload/profile/"/>
 	<resources mapping="/favicon.ico" location="/favicon.ico" />
 	<resources mapping="/summernote/**" location="/resources/summernote/" />
 	
