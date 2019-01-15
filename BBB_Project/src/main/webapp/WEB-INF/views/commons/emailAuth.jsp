@@ -61,12 +61,12 @@
 					</div>
 					<!-- /.col -->
 					<div class="box-footer" style="text-align:center;">
-						<button type="button" class="btn btn-warning btn-flat"
-							onclick="reissue_go();" style="margin-left:20px;padding-left:20px;padding-right:20px;">코드 재발급</button>
-						<button type="button" class="btn btn-warning btn-flat"
-							onclick="logout_go();" style="margin-left:20px;padding-left:20px;padding-right:20px;">로그아웃</button>
-						<button type="button" class="btn btn-primary btn-flat"
-							onclick="confirm_go();"style="margin-left:55px;">확인</button>
+						<button type="button" class="btn btn-warning btn-sm"
+							onclick="logout_go();">로그아웃</button>
+						<button type="button" class="btn btn-warning btn-sm"
+							onclick="reissue_go();">코드 재발급</button>
+						<button type="button" class="btn btn-primary btn-sm"
+							onclick="confirm_go();" style="margin-left:10px;">확인</button>
 					
 					</div>
 					<!-- /.col -->

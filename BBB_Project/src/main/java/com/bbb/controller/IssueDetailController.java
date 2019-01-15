@@ -1,5 +1,6 @@
 package com.bbb.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bbb.dto.IssueDetailVO;
@@ -51,6 +53,40 @@ public class IssueDetailController {
 		return entity;
 	}
 	
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	public ResponseEntity<String> updateIssueDetail( int idNum, String newDetailContent) throws Exception {
+		ResponseEntity<String> entity = null;
+
+		IssueDetailVO issueDetail = new IssueDetailVO();
+		
+		issueDetail.setIdNum(idNum);
+		issueDetail.setContent(newDetailContent);
+		try {
+			service.updateIssueDetail(issueDetail);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		return entity;
+		
+	}
+	
+	@RequestMapping(value="/{idNum}",method=RequestMethod.POST)
+	public ResponseEntity<String> removeIssueDetail(int idNum) throws Exception{
+		
+		ResponseEntity<String> entity=null;
+		try{
+			service.deleteIssueDetail(idNum);
+			entity=new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
+		}catch(SQLException e){
+			e.printStackTrace();
+			entity=new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return entity;
+	}
 
    
    

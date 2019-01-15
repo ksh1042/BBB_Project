@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class UnitworkVO {
 	
+	private int			rownum;
 	// tb_requirement_definition
 	private int			udNum;					// 단위업무 문서 ID
 	private Date		indate;					// 단위업무 문서 생성일
@@ -20,6 +21,12 @@ public class UnitworkVO {
 	private Date		pdDate;					// 프로그램 설계 완료일자
 	private Date 		devDate;				// 개발 완료일자
 	private int 		estmate;				// 예상 Step 수
+	public int getRownum() {
+		return rownum;
+	}
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
 	public int getUdNum() {
 		return udNum;
 	}
@@ -106,11 +113,10 @@ public class UnitworkVO {
 	}
 	@Override
 	public String toString() {
-		return "UnitworkVO [udNum=" + udNum + ", indate=" + indate + ", uddNum=" + uddNum + ", rddNum=" + rddNum
-				+ ", udId=" + udId + ", udName=" + udName + ", rdId=" + rdId + ", rdName=" + rdName + ", udManager="
-				+ udManager + ", extDate=" + extDate + ", intDate=" + intDate + ", pdDate=" + pdDate + ", devDate="
-				+ devDate + ", estmate=" + estmate + "]";
+		return "UnitworkVO [rownum=" + rownum + ", udNum=" + udNum + ", indate=" + indate + ", uddNum=" + uddNum
+				+ ", rddNum=" + rddNum + ", udId=" + udId + ", udName=" + udName + ", rdId=" + rdId + ", rdName="
+				+ rdName + ", udManager=" + udManager + ", extDate=" + extDate + ", intDate=" + intDate + ", pdDate="
+				+ pdDate + ", devDate=" + devDate + ", estmate=" + estmate + "]";
 	}
-	
 	
 }

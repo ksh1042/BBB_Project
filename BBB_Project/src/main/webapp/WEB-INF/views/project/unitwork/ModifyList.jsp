@@ -7,45 +7,60 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
 <head>
 	<style>
+		div.scrollable {
+			height : 590px;
+			overflow:scroll;
+			overflow-x:auto;
+			overflow-y:scroll;
+		}
+		table { 
+			
+		}
 		th {
 			text-align: center;
+			background-color : #F1F1F1;
 		}
 		.validateAlert {
 			border-color: red;
+		}
+		input.form-control, select.form-control {
+			border : 0;
+		}
+		td:hover {
+			cursor : wait;
 		}
 	</style>
 </head>
 <body>
 	<section class="content-header">
-		<div class="container-fluid">
-			<div class="row mb-2">
-				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">단위업무 정의목록</h1>
-				</div>
-			</div>
-		</div>
+		<h1>단위업무 정의서</h1>
+		<ol class="breadcrumb">
+			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
+				<i class="fa fa-dashboard"></i>My Project</a>
+			</li>
+			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}">${logonProject.name }</a></li>
+			<li class="active"><a href="list">단위업무 정의서</a></li>
+			<li class="active"><a href="#">수정</a></li>
+		</ol>
 	</section>
 	<section class="content">
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">단위업무 리스트</h3>
-					<span style="float:right;">
-						<label class="control-label validateAlertMsg red hidden" style="color:red;"></label>
-						<button type="button" class="btn btn-alert" onclick="back_go();" style="margin-left:20px;">뒤로</button>
-						<button type="button" class="btn btn-primary" onclick="submit_go();" style="margin-left:20px;">완료</button>
-					</span>
-				</div>
+						<div class="col-sm-4">
+							<h3 class="box-title">단위업무 수정</h3>
+						</div>
+						<div class="col-sm-8">
+							<label class="control-label validateAlertMsg red hidden" style="color:red; float:right;"></label>
+						</div>
+						<form id="frm" method="post"></form>
+					</div>
 				<!-- /.box-header -->
 				<div class="box-body">
 					<div id="example2_wrapper"
 						class="dataTables_wrapper form-inline dt-bootstrap">
 						<div class="row">
-							<div class="col-sm-6"></div>
-							<div class="col-sm-6"></div>
-						</div>
-						<div class="row" style="overflow:scroll;overflow-y:hidden;">
-							<div class="col-sm-12">
+							<div class="col-sm-12 scrollable">
 								<form id="frm" method="POST">
 									<table id="udList"
 										class="table table-bordered table-hover dataTable" role="grid"
@@ -110,7 +125,7 @@
 													</select>
 												</td>	
 												<td>	<!-- 요구사항 명 -->	
-													<input type="text" name="rdName" class="form-control" value="${ unit.rdName }" readonly>
+													<input type="text" name="rdName" class="form-control" value="${ unit.rdName }" title="${ unit.rdName }" readonly>
 												</td>
 												<td>
 													<select name="udManager" class="form-control">
@@ -149,20 +164,29 @@
 								</form>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-sm-5">
-								<div class="dataTables_info" id="example2_info" role="status"
-									aria-live="polite">Showing <b id="entryCount">${ f:length(unitList) }</b> entries</div>
-							</div>
-						</div>
 					</div>
 				</div>
 				<!-- /.box-body -->
 				
 				<div class="box-footer">
-					<div class="form-group">
-						<label>*코멘트</label>
-						<textarea class="form-control" name="comm" style="resize:none;" placeholder="수정사항 내용 및 설명을 입력하세요..."></textarea>
+					<div class="col-sm-9">					
+						<div class="form-group">
+							<label>*코멘트</label>
+							<textarea class="form-control" name="comm" style="resize:none;" placeholder="수정사항 내용 및 설명을 입력하세요..."></textarea>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="row">
+							<div class="dataTables_info" id="example2_info" role="status" aria-live="polite">
+								<span style="float:right;">
+									Showing <b id="entryCount">${ f:length(unitList) }</b> entries<br>
+								</span>
+							</div>
+						</div>
+						<div class="row" style="margin-top:25px;">
+							<button type="button" class="btn btn-primary" onclick="submit_go();" style="margin-left:20px; float:right;">완료</button>
+							<button type="button" class="btn btn-alert" onclick="back_go();" style="margin-left:20px; float:right;">뒤로</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -349,6 +373,7 @@
 			var temp = targetSelect.val();
 			
 			$(this).parent().next().children('input').val(temp);
+			$(this).parent().next().children('input').attr('title', temp);
 			
 			// rdId 아이템 선택을 통한  rddNum 자동선택 
 			targetSelect = $('select[name=rddNumT]');
