@@ -19,10 +19,73 @@
 		where pjNum = #{pjNum}
 	</update>
 	
+	<sql id="searchList">
+		<if test="cri.searchType != null">
+			<if test="cri.searchType == 'ri'.toString()">
+				AND rdId LIKE '%'||#{cri.keyword}||'%'
+			</if>
+			<if test="cri.searchType == 'rn'.toString()">
+				AND rdName LIKE '%'||#{cri.keyword}||'%'
+			</if>
+			<if test="cri.searchType == 'rc'.toString()">
+				AND rdcontent LIKE '%'||#{cri.keyword}||'%'
+			</if>
+			<if test="cri.searchType == 'ry'.toString()">
+				AND acceptyn = #{cri.keyword}
+			</if>
+			<if test="cri.searchType == 'in'.toString()">
+				AND interf LIKE '%'||#{cri.keyword}||'%'
+			</if>
+			<if test="cri.searchType == 'all'.toString()">
+				AND (rdId LIKE '%'||#{cri.keyword}||'%'
+				OR rdName LIKE '%'||#{cri.keyword}||'%'
+				OR acceptyn #{cri.keyword}
+				OR interf LIKE '%'||#{cri.keyword}||'%'
+				OR rdContent LIKE '%'||#{cri.keyword}||'%')
+			</if>
+		</if>
+	</sql>
+	<sql id="searchHistList">
+		<if test="SearchType != null">
+			<if test="SearchType == 'co'.toString()">
+				AND comm LIKE '%'||#{keyword}||'%'
+			</if>
+		</if>
+	</sql>
+	
 	<select id="selectRequirementListByRdNum" parameterType="int" resultType="Requirement">
 		select *
 		from tbl_requirement_dfntn_detail
 		where rdNum = #{rdNum}
+		<include refid="searchList" />
+	</select>
+	
+	<select id="selectRequirementListByRdNumCount" resultType="int">
+		select count(*)
+		from tbl_requirement_dfntn_detail
+		where rdNum = #{rdNum}
+		<include refid="searchList" />
+	</select>
+	
+	<select id="selectRequirementListAll" parameterType="int" resultType="Requirement">
+		select *
+		from tbl_requirement_dfntn_detail
+		where rdNum = #{rdNum}
+	</select>
+	
+	<select id="getReqHistory" resultType="RequirementHist">
+		select rownum, rdNum, updateDate, comm
+		from tbl_requirement_dfntn_hstr
+		where rdNum = #{rdNum}
+		<include refid="searchHistList" />
+		order by rownum desc
+	</select>
+	
+	<select id="getReqHistoryCount" resultType="int">
+		select count(*)
+		from tbl_requirement_dfntn_hstr
+		where rdNum = #{rdNum}
+		<include refid="searchHistList" />
 	</select>
 	
 	<insert id="createRequirementRdNum" parameterType="int">

@@ -105,7 +105,7 @@
 	                  	</a>
 	                  </td>
 	                  <td class="hidden-xs">${partake.creator}</td>
-	                  <td><button type="button" id="leave" class="btn btn-block btn-success">탈퇴</button></td>
+	                  <td><button type="button" class="btn btn-block btn-success">참여중</button></td>
                 	</tr>
 				</c:forEach>
 				
@@ -208,6 +208,9 @@
 		var pNameFlag = false;
 		var startDateFlag = false;
 		var endDateFlag = false;
+		var leaveFlag = false;
+		
+		
 		/* 유효성  */
 		$('input[name="pName"]').on('blur', function(e){
 			$(this).css({ borderColor : 'red' });
@@ -405,7 +408,6 @@
 			}
 			$('button#create_btn').prop('disabled', false);
 		}
-		
 	</script>
     
 

@@ -64,5 +64,23 @@ public class ManageDAOImpl implements ManageDAO {
 		session.update("Management.refuseMember", map);
 	}
 
+	@Override
+	public List<ProjectPartakeVO> getInviteMember(SearchCriteria cri, int pjNum) throws SQLException {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyword", cri.getKeyword());
+		map.put("SearchType", cri.getSearchType());
+		map.put("pjNum", pjNum);
+		return session.selectList("ProjectPartake.getSearchMemberList",map);
+	}
+
+	@Override
+	public int getInviteMemberCount(SearchCriteria cri, int pjNum) throws SQLException {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyword", cri.getKeyword());
+		map.put("SearchType", cri.getSearchType());
+		map.put("pjNum", pjNum);
+		return session.selectOne("ProjectPartake.getSearchMemberListCount",map);
+	}
+
 
 }

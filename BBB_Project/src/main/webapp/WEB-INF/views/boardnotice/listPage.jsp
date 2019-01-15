@@ -21,10 +21,6 @@
 		<div class="col-md-12">
 			<!-- general form elements -->
 			<div class="box">
-				<div class="box-header with-border">
-					
-					<h3 class="box-title">공지사항리스트</h3>
-				</div>
 				<div class="box-body">
 					
 					<table class="table table-bordered" border="1">

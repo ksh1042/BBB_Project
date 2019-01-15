@@ -15,4 +15,7 @@ public interface ManageDAO {
 	public void fireMember(ProjectPartakeVO partake) throws SQLException;
 	public void applyMember(String id,int pjNum) throws SQLException;
 	public void refuseMember(String id,int pjNum) throws SQLException;
+	
+	public List<ProjectPartakeVO> getInviteMember(SearchCriteria cri, int pjNum) throws SQLException;
+	public int getInviteMemberCount(SearchCriteria cri, int pjNum) throws SQLException;
 }

@@ -1,5 +1,6 @@
 package com.bbb.controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,8 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -72,6 +76,19 @@ public class ProjectController {
 	@RequestMapping(value="/listUsecase", method=RequestMethod.GET)
 	public void getUsecase() throws Exception{
 		
+	}
+	
+	@RequestMapping(value="/leaveProject", method=RequestMethod.POST)
+	public ResponseEntity<String> leaveProject(@RequestBody ProjectPartakeVO partake) throws Exception{
+	ResponseEntity<String> entity = null;
+	try{
+		service.leaveProject(partake);
+					
+		entity = new ResponseEntity<String>(HttpStatus.OK);
+	}catch(SQLException e){
+		entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	return entity;
 	}
 	
 

@@ -23,25 +23,22 @@
 
 
 	<section class="content">
-		<!-- QnA 리스트 -->
 		<div class="row">
-			<!-- <div class="col-md-6"> -->
 			<div class="col-xs-12">
 				<div class="box">
-					<div class="box-header"></div>
 					<div class="box-header with-border">
 						<h3 class="box-title"></h3>
 						<div class="box-tools">
 							<div class="input-group input-group-sm">
+								<div>
 								<form action="list" style="width: 300px;">
-									<%-- <input type="hidden" name="pjNum" value="${logonProject.pjNum }"/> --%>
+			
 									<div style="margin-top: 5px; margin-left: 35px;">
 										<select name="searchType">
 											<option value="" ${cri.searchType==null?'selected':'' }>----</option>
 											<option value="t" ${cri.searchType eq 't'?'selected':'' }>제목</option>
 											<option value="w" ${cri.searchType eq 'w'?'selected':'' }>작성자</option>
-											<option value="tc" ${cri.searchType eq 'tw'?'selected':'' }>제목
-												+ 작성자</option>
+											<option value="tc" ${cri.searchType eq 'tw'?'selected':'' }>제목  + 작성자</option>
 										</select>
 									</div>
 									<div class="input-group input-group-sm"
@@ -56,7 +53,7 @@
 										</div>
 									</div>
 								</form>
-								<hr />
+								</div>
 							</div>
 						</div>
 					</div>
@@ -67,8 +64,8 @@
 								<th class="textAlign">번호</th>
 								<th class="textAlign">제목</th>
 								<th class="textAlign">작성자</th>
-								<th class="textAlign">등록일</th>
-								<th class="textAlign">열림/닫힘</th>
+								<th class="textAlign hidden-xs">등록일</th>
+								<th class="textAlign hidden-xs">열림/닫힘</th>
 							</tr>
 
 							<c:if test="${!empty listIssue }">
@@ -81,9 +78,9 @@
 											href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&iNum=${issue.iNum}'>
 												${issue.title} </a></td>
 										<td>${issue.writer}</td>
-										<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+										<td class="hidden-xs"><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 												value="${issue.indate}" /></td>
-										<td><c:if test="${issue.openyn eq 0 }">
+										<td class="hidden-xs"><c:if test="${issue.openyn eq 0 }">
 												<span>열림</span>
 											</c:if> <c:if test="${issue.openyn eq 1}">
 												<span>닫힘</span>

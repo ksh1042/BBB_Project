@@ -26,6 +26,7 @@ public interface ProjectDAO {
 	
 	public void insertProject(ProjectVO project) throws SQLException;
 	public void insertProjectake(ProjectPartakeVO takeVO) throws SQLException;
+	public void leaveProject(ProjectPartakeVO takeVO) throws SQLException;
 	public String verifyProjectName(String name) throws SQLException;
 	
 	public void deletePlan(int pjNum) throws SQLException;
