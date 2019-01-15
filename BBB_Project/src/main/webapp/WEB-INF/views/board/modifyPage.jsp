@@ -92,11 +92,11 @@
 
 					console.log(formObj);
 
-					$("#cancelBtn").on("click",function() {
+					$('#cancelBtn').on("click",function() {
 						self.location = "listPage?page=${cri.page}&perPageNum=${cri.perPageNum}";
 					});
 
-					$("#saveBtn").on("click", function() {
+					$('#saveBtn').on("click", function() {
 						if(!titleFlag){
 							$('button#saveBtn').prop('disable',true);
 							$('span#titleHelp').css({color:'red',fontWeight:'bold'});
