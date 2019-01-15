@@ -20,7 +20,7 @@
 	<resources  mapping="/SE2/**" location="/SE2/"/>
 	<resources mapping="/ucImage/**" location="file:///c:/upload/"/>
 	<resources mapping="/profile/**" location="file:///c:/upload/profile/"/>
-	<resources mapping="/favicon.ico" location="/favicon.ico" />
+
 	<resources mapping="/summernote/**" location="/resources/summernote/" />
 	
 	<beans:bean id="multipartResolver"
