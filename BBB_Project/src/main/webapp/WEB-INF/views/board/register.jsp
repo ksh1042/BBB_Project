@@ -18,29 +18,29 @@
 				name='pjNum' value="${logonProject.pjNum }"class="form-control" placeholder="Project 번호를 입력해주세요">
 <table border="1">
 		<div class="form-group">
-			<label for="exampleInputEmail1">Title</label> 
+			<label for="exampleInputEmail1">제목</label> 
 			<input type="text"
-				name='title' class="form-control" placeholder="Enter Title">
+				name='title' class="form-control" placeholder="제목을 입력하세요..">
 			<span class="help-block" id="titleHelp"></span>
 			<span class="glyphicon glyphicon-pencil form-control-feedback" id="fNameIcon"></span>
 		</div>
 		<div class="form-group">
-			<label for="exampleInputPassword1">Content</label>
+			<label for="exampleInputPassword1">내용</label>
 			<textarea class="form-control" id="content" name="content" rows="3"
-				placeholder="Enter ..."></textarea>
+				placeholder="내용을 입력하세요.."></textarea>
 		</div>
 		<div class="form-group">
-			<label for="exampleInputEmail1">Writer</label> 
+			<label for="exampleInputEmail1">작성자</label> 
 			<input type="text" readonly="readonly" value="${loginUser.id }"
-				name="writer" class="form-control" placeholder="Enter Writer">
+				name="writer" class="form-control">
 		</div>
 	</div>
 	<!-- /.box-body -->
 	</table>
 
 	<div class="box-footer">
-		<button type="button" id="create_btn" class="btn btn-primary">Submit</button>&nbsp;
-		<button type="button" id="list_btn" class="btn btn-primary">LIST</button>
+		<button type="button" id="create_btn" class="btn btn-primary">등록</button>&nbsp;
+		<button type="button" id="list_btn" class="btn btn-primary">취소</button>
 	</div>
 </form>
 
@@ -73,9 +73,9 @@ $('input[name="title"]').on('blur',function(e){
 		$(this).focus();
 		return;
 	}
-	if(title.length > 75){
+	if(title.length > 20){
 		$('#titleHelp').css({color:'red'});
-		$('#titleHelp').html('제목명은 75자를 넘을 수 없습니다.');
+		$('#titleHelp').html('제목명은 20자를 넘을 수 없습니다.');
 		$(this).focus();
 		return;
 	}else{
@@ -123,7 +123,7 @@ $('#create_btn').on('click',function(e){
 });
 
 
-$("#list_btn").on("click", function(){
+$('#list_btn').on('click', function(){
 	location.href="<%=request.getContextPath()%>/board/listPage"
 });
 function verifyCheck() {

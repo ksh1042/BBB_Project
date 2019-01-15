@@ -33,13 +33,13 @@
 <body>
 
 <section class="content-header">
-		<h1>Bulletin Board</h1>
+		<h1>자유게시판</h1>
 		<ol class="breadcrumb">
 			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
-				<i class="fa fa-dashboard"></i>My Project</a>
+				<i class="fa fa-dashboard"></i>참여프로젝트</a>
 			</li>
 			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}"></a>${logonProject.name }</li>
-			<li class="active">bulletin board</li>
+			<li class="active">자유게시판</li>
 		</ol>
 </section>
 <!-- Main content -->
@@ -49,6 +49,10 @@
 		<div class="col-md-12">
 			<div class="box">
 				<div class="box-header with-border">
+
+					
+					<h3 class="box-title">게시판 페이지</h3>
+
 					<h3 class="box-title"></h3>
 					<div class="box-tools">
 						<div class="input-group input-group-sm" >
@@ -57,30 +61,32 @@
 									<option value="" ${cri.searchType==null?'selected':'' }>
 									------</option>
 									<option value="t" ${cri.searchType eq 't'?'selected':'' }>
-									Title</option>
+									제목</option>
 									<option value="w" ${cri.searchType eq 'w'?'selected':'' }>
-									Writer</option>
+									작성자</option>
 								</select>
 								<input id="keyword" name="keyword" type="text" value="${pageMaker.cri.keyword}"/>
 								<button id="searchBtn" type="submit" ><i class="fa fa-search"></i></button>
 							</form>
 						</div>
 					</div>
+
 				</div>
 				
 				<div class="box-body">
 					<table class="table table-bordered" border="1">
-						<tr>
-							<th style="width: 10px; text-align: center;">BNO</th>
-							<th style="text-align: center;">TITLE</th>
-							<th style="text-align: center;">WRITER</th>
-							<th class="hidden-xs" style="text-align: center;">INDATE</th>
-							<th class="hidden-xs" style="text-align: center;">UPDATE DATE</th>
-							<th class="hidden-xs" style="width: 40px; text-align: center;">COUNT</th>
+						<tr style="background: #088A4B">
+
+							<th style="width: 30px; text-align: center";>번호</th>
+							<th style="text-align: center"; width="30px">제목</th>
+							<th style="text-align: center"; width="50px">작성자</th>
+							<th style="text-align: center"; width="50px">작성일</th>
+							<th style="text-align: center"; width="50px">수정일</th>
+							<th style="width: 40px; text-align: center";>조회수</th>
+
 					</tr>
 						<c:if test="${!empty boardList }">
 						<c:forEach items="${boardList}" var="board">
-
 							<tr>
 								<td style="text-align: center;">${board.bNum}</td>
 								<td style="text-align: center;">
@@ -129,7 +135,7 @@
 
 					</ul>
 					
-					<button id='newBtn' style="float:right; margin-top:20px" class="btn btn-primary" onclick="javascript:location.href='register';" >New Board</button>
+					<button id='newBtn' style="float:right; margin-top:20px" class="btn btn-primary" onclick="javascript:location.href='register';" >게시글 작성</button>
 				
 						
 						

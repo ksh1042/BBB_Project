@@ -16,26 +16,26 @@
 <form role="form" method="post" action="register">
 <table border="1">
 		<div class="form-group">
-			<label for="exampleInputEmail1">Title</label> 
+			<label for="exampleInputEmail1">제목</label> 
 			<input type="text" name="title" class="form-control" placeholder="Enter Title">
 			<span class="help-block" id="titleHelp"></span>
 			<span class="glyphicon glyphicon-pencil form-control-feedback" id="fNameIcon"></span>
 		</div>
 		
 		<div class="form-group">
-			<label for="exampleInputPassword1">Content</label>
+			<label for="exampleInputPassword1">내용</label>
 			<textarea class="form-control" name="content" rows="3"
 				placeholder="Enter ..."></textarea>
 		</div>
 		
 		<div class="form-group">
-			<label for="exampleInputEmail1">Writer</label> 
+			<label for="exampleInputEmail1">작성자</label> 
 			<input readonly	type="text" name="writer" class="form-control"
 					value="${loginUser.id}">
 		</div>
 		
 		<div class="form-group">
-			<label for="control-label">NOTICEDATE</label> 
+			<label for="control-label">공지일</label> 
 			<input class="form-control" type="date" name="noticeDate"/>
 			<span class="help-block" id="noticeDateHelp"></span><br/>
 		</div>

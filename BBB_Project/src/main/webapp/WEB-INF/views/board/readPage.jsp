@@ -24,7 +24,7 @@
         <!-- general form elements -->
         <div class="box box-primary">
         <div class="box-header">
-          <h3 class="box-title">READ BOARDNOTICE</h3>
+          <h3 class="box-title">${board.bNum}번 게시글</h3>
         </div><!-- /.box-header -->
 
  <form role="form" action="modifyPage">
@@ -38,18 +38,18 @@
     
   <div class="box-body">
     <div class="form-group">
-      <label for="exampleInputEmail1">Title</label>
+      <label for="exampleInputEmail1">제목</label>
       <input type="text" name='title' class="form-control" 
          value="${board.title}" readonly="readonly">
       <span class="glyphicon glyphicon-ok form-control-feedback" id="okIcon"></span>
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Content</label>
-      <textarea class="form-control"  name="content" rows="3" 
+      <label for="exampleInputPassword1">내용</label>
+      <textarea class="form-control" name="content" rows="3" 
       readonly="readonly">${board.content}</textarea>
     </div>
     <div class="form-group">
-      <label for="exampleInputEmail1" >Writer</label>
+      <label for="exampleInputEmail1" >작성자</label>
       <input type="text" name="writer" class="form-control" 
         value="${board.writer}" readonly="readonly">
     </div>
@@ -57,11 +57,11 @@
   <div class="box-footer">
   	<sec:authorize access="hasAuthority('ROLE_USER')">
   	<c:if test="${loginUser.id eq board.writer }">
-    	<button type="submit" id="modifyBtn" class="btn btn-warning">Modify</button>&nbsp;
-    	<button type="submit" id="removeBtn" class="btn btn-danger">REMOVE</button>&nbsp;
+    	<button type="submit" id="modifyBtn" class="btn btn-warning">수정</button>&nbsp;
+    	<button type="submit" id="removeBtn" class="btn btn-danger">삭제</button>&nbsp;
     </c:if>
     </sec:authorize>
-   		<button type="submit" id="listBtn" class="btn btn-primary">LIST</button>
+   		<button type="submit" id="listBtn" class="btn btn-primary">취소</button>
   </div>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -98,19 +98,19 @@ $("#listBtn").on("click", function(){
 
 							<div class="box box-success">
 								<div class="box-header">
-									<h3 class="box-title">ADD NEW REPLY</h3>
+									<h3 class="box-title">댓글 작성</h3>
 								</div>
 								<div class="box-body">
-									<label for="exampleInputEmail1">Writer</label> 
-									<input class="form-control" readonly value="${loginUser.id}" type="text"  id="newReplyWriter">
+									<label for="exampleInputEmail1">작성자</label> 
+									<input class="form-control" readonly value="${loginUser.id}" type="text" name="writer"  id="newReplyWriter">
 									<span class="glyphicon glyphicon-pencil form-control-feedback" id="pNameIcon"></span> 
-									<label for="exampleInputEmail1">Reply Text</label> 
-									<input class="form-control" type="text" placeholder="REPLY TEXT" id="newReplyText">
+									<label for="exampleInputEmail1">댓글내용</label> 
+									<input class="form-control" type="text" placeholder="댓글을 입력하세요.." id="newReplyText">
 
 								</div>
 								<!-- /.box-body -->
 								<div class="box-footer">
-									<button type="button" class="btn btn-primary" id="replyAddBtn">ADD REPLY</button>
+									<button type="button" class="btn btn-primary" id="replyAddBtn">댓글 등록</button>
 								</div>
 							</div>
 
@@ -119,7 +119,7 @@ $("#listBtn").on("click", function(){
 							<ul class="timeline">
 								<!-- timeline time label -->
 								<li class="time-label" id="repliesDiv">
-									<span class="bg-green"> Replies List </span>
+									<span class="bg-green"> 댓글리스트 </span>
 								</li>
 							</ul>
 
@@ -150,14 +150,9 @@ $("#listBtn").on("click", function(){
 									</p>
 								</div>
 								<div class="modal-footer">
-									<sec:authorize access="hasAuthority('ROLE_USER')">
-  									<c:if test="${loginUser.id eq reply.writer }">
-											<button type="button" class="btn btn-info" id="replyModBtn">Modify</button>
-											<button type="button" class="btn btn-danger" id="replyDelBtn">DELETE</button>
-									</c:if>
-									</sec:authorize>
-									
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+											<button type="button" class="btn btn-info" id="replyModBtn">수정</button>
+											<button type="button" class="btn btn-danger" id="replyDelBtn">삭제</button>
+											<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 								</div>
 							</div>
 						</div>
@@ -216,8 +211,10 @@ $("#listBtn").on("click", function(){
  <div class="timeline-item" >
   <span class="time">
     <i class="fa fa-clock-o"></i>{{prettifyDate indate}}
+	{{#if ${loginUser.id eq list.writer}}}
 		<a class="btn btn-primary btn-xs" id="modifyReplyBtn"
 	    data-toggle="modal" data-target="#modifyModal">Modify</a>
+	{{/if}}
   </span>
   <h3 class="timeline-header"><strong>{{rNum}}</strong> -{{writer}}</h3>
   <div class="timeline-body">{{content}} </div>		
