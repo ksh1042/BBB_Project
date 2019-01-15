@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.bbb.controller.SearchCriteria;
 import com.bbb.dto.ProjectPartakeVO;
-import com.bbb.dto.ProjectPlanVO;
 import com.bbb.dto.ProjectVO;
 
 public interface ProjectService {
