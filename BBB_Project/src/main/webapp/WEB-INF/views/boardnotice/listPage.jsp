@@ -30,7 +30,7 @@
 				<div class="box-body">
 					
 					<table class="table table-bordered" border="1">
-						<tr style="background: #088A4B">
+						<tr>
 							<th style="width: 100px; text-align: center;">번호</th>
 							<th style="text-align: center;" width="10px">제목</th>
 							<th style="text-align: center;" width="100px">공지일</th>
@@ -40,8 +40,8 @@
 						<c:forEach items="${board }" var="board">
 						<c:forEach items="${boardnoticeList}" var="boardnotice">
 						<c:if test="${board.bNum eq boardnotice.bNum }">
-							<tr style="background: #DF0101">
-								<c:if test="${sysdate gt boardnotice.noticeDate }"></c:if>
+							<tr>
+								<c:if test="${board.inDate gt boardnotice.noticeDate }">
 								<td style="text-align: center;">${boardnotice.bNum}</td>
 								<td style="text-align: center;"><a
 									href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&bNum=${boardnotice.bNum}'>
@@ -49,6 +49,17 @@
 								<td style="text-align: center;">
 								<fmt:formatDate pattern="yyyy-MM-dd" value="${boardnotice.noticeDate}" />
 								</td>
+								</c:if>
+								
+								<c:if test="${boardnotice.noticeDate gt board.inDate }">
+								<td style="text-align: center;">${boardnotice.bNum}</td>
+								<td style="text-align: center;"><a
+									href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&bNum=${boardnotice.bNum}'>
+										${board.title }</a></td>
+								<td style="text-align: center;">
+								<fmt:formatDate pattern="yyyy-MM-dd" value="${boardnotice.noticeDate}" />
+								</td>
+								</c:if>
 							</tr>
 						</c:if>
 						</c:forEach>
