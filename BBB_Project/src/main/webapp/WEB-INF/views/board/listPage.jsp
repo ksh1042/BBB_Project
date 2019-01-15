@@ -3,43 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
-
-<head>
-	<title>자유게시판</title>
-<style>
-
-.box-body ul{
-	list-style:none;
-	overflow:hidden;
-}
-.box-body ul li{
-	height:40px;
-	line-height:20px;
-}
-.box-body ul li:nth-child(1){
-	float:left;
-}
-.box-body ul li:nth-child(2){
-	float:right;
-}
-.box-body ul li:nth-child(2)>input{
-	width:300px;
-}
-
-</style>
-</head>
-
 <body>
 
 <section class="content-header">
 		<h1>자유게시판</h1>
 		<ol class="breadcrumb">
-			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
-				<i class="fa fa-dashboard"></i>참여프로젝트</a>
-			</li>
-			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}"></a>${logonProject.name }</li>
-			<li class="active">자유게시판</li>
+			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}">
+				<i class="fa fa-dashboard">&nbsp;&nbsp;&nbsp;${logonProject.name }</i></a></li>
+			<li class="active">게시판</li>
 		</ol>
 </section>
 <!-- Main content -->
@@ -49,9 +20,6 @@
 		<div class="col-md-12">
 			<div class="box">
 				<div class="box-header with-border">
-
-					
-					<h3 class="box-title">게시판 페이지</h3>
 
 					<h3 class="box-title"></h3>
 					<div class="box-tools">
@@ -77,12 +45,12 @@
 					<table class="table table-bordered" border="1">
 						<tr>
 
-							<th style="width: 30px; text-align: center";>번호</th>
-							<th style="text-align: center"; width="30px">제목</th>
-							<th style="text-align: center"; width="50px">작성자</th>
-							<th style="text-align: center"; width="50px">작성일</th>
-							<th style="text-align: center"; width="50px">수정일</th>
-							<th style="width: 40px; text-align: center";>조회수</th>
+							<th style="width: 30px; text-align: center;">번호</th>
+							<th style="text-align: center;" width="30px">제목</th>
+							<th style="text-align: center;" width="50px">작성자</th>
+							<th style="text-align: center;" width="50px" class="hidden-xs">작성일</th>
+							<th style="text-align: center;" width="50px" class="hidden-xs">수정일</th>
+							<th style="width: 40px; text-align: center;" class="hidden-xs">조회수</th>
 
 					</tr>
 						<c:if test="${!empty boardList }">

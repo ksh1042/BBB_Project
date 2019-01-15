@@ -13,36 +13,38 @@
 					<h3 class="box-title">게시글 작성</h3>
 				</div>
 				<!-- /.box-header -->
-<form role="form" method="post" action="register">
-<input type="hidden"
-				name='pjNum' value="${logonProject.pjNum }"class="form-control" placeholder="Project 번호를 입력해주세요">
-<table border="1">
-		<div class="form-group">
-			<label for="exampleInputEmail1">제목</label> 
-			<input type="text"
-				name='title' class="form-control" placeholder="제목을 입력하세요..">
-			<span class="help-block" id="titleHelp"></span>
-			<span class="glyphicon glyphicon-pencil form-control-feedback" id="fNameIcon"></span>
-		</div>
-		<div class="form-group">
-			<label for="exampleInputPassword1">내용</label>
-			<textarea class="form-control" id="content" name="content" rows="3"
-				placeholder="내용을 입력하세요.."></textarea>
-		</div>
-		<div class="form-group">
-			<label for="exampleInputEmail1">작성자</label> 
-			<input type="text" readonly="readonly" value="${loginUser.id }"
-				name="writer" class="form-control">
-		</div>
-	</div>
+				<form role="form" method="post" action="register">
+					<div class="box-body" >
+						<input type="hidden" name='pjNum' value="${logonProject.pjNum }" class="form-control">
+						
+						<div class="form-group">
+							<label for="exampleInputEmail1">제목</label> 
+							<input type="text" name='title' class="form-control" placeholder="제목을 입력하세요..">
+							<span class="help-block" id="titleHelp"></span>
+							<span class="glyphicon glyphicon-pencil form-control-feedback" id="fNameIcon"></span>
+						</div>
+						
+						<div class="form-group">
+							<label for="exampleInputPassword1">내용</label>
+							<textarea class="form-control" id="content" name="content" rows="3"
+								placeholder="내용을 입력하세요.."></textarea>
+						</div>
+						
+						<div class="form-group">
+							<label for="exampleInputEmail1">작성자</label> 
+							<input type="text" readonly="readonly" value="${loginUser.id }"
+								name="writer" class="form-control">
+						</div>
+					</div>
+				
 	<!-- /.box-body -->
-	</table>
 
-	<div class="box-footer">
-		<button type="button" id="create_btn" class="btn btn-primary">등록</button>&nbsp;
-		<button type="button" id="list_btn" class="btn btn-primary">취소</button>
-	</div>
-</form>
+					<div class="box-footer">
+						<button type="button" id="create_btn" class="btn btn-primary">등록</button>&nbsp;
+						<button type="button" id="list_btn" class="btn btn-primary">취소</button>
+					</div>
+
+			</form>
 
 			</div>
 			<!-- /.box -->
@@ -53,7 +55,7 @@
 	<!-- /.row -->
 </section>
 <!-- /.content -->
-</div>
+
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 

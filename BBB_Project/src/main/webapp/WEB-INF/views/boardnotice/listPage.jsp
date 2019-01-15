@@ -9,10 +9,8 @@
 <section class="content-header">
 		<h1>공지사항</h1>
 		<ol class="breadcrumb">
-			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
-				<i class="fa fa-dashboard"></i>참여프로젝트</a>
-			</li>
-			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}"></a>${logonProject.name }</li>
+			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}">
+				<i class="fa fa-dashboard">&nbsp;&nbsp;&nbsp;${logonProject.name }</i></a></li>
 			<li class="active">공지사항</li>
 		</ol>
 </section>
@@ -31,9 +29,9 @@
 					
 					<table class="table table-bordered" border="1">
 						<tr>
-							<th style="width: 100px; text-align: center;">번호</th>
-							<th style="text-align: center;" width="10px">제목</th>
-							<th style="text-align: center;" width="100px">공지일</th>
+							<th style="text-align: center;" width="10%">번호</th>
+							<th style="text-align: center;" width="50%">제목</th>
+							<th style="text-align: center;" width="10%">공지일</th>
 							
 						</tr>
 						<c:if test="${!empty boardnoticeList }">

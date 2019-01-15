@@ -7,12 +7,10 @@
 <body>
 
 <section class="content-header">
-		<h1>File Board</h1>
+		<h1>자료실</h1>
 		<ol class="breadcrumb">
-			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
-				<i class="fa fa-dashboard"></i>My Project</a>
-			</li>
-			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}"></a>${logonProject.name }</li>
+			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}">
+				<i class="fa fa-dashboard">&nbsp;&nbsp;&nbsp;${logonProject.name }</i></a></li>
 			<li class="active">자료실</li>
 		</ol>
 </section>

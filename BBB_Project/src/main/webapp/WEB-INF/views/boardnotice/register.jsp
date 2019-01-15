@@ -13,42 +13,41 @@
 					<h3 class="box-title">공지사항 작성</h3>
 				</div>
 				<!-- /.box-header -->
-<form role="form" method="post" action="register">
-<table border="1">
-		<div class="form-group">
-			<label for="exampleInputEmail1">제목</label> 
-			<input type="text" name="title" class="form-control" placeholder="Enter Title">
-			<span class="help-block" id="titleHelp"></span>
-			<span class="glyphicon glyphicon-pencil form-control-feedback" id="fNameIcon"></span>
-		</div>
-		
-		<div class="form-group">
-			<label for="exampleInputPassword1">내용</label>
-			<textarea class="form-control" name="content" rows="3"
-				placeholder="Enter ..."></textarea>
-		</div>
-		
-		<div class="form-group">
-			<label for="exampleInputEmail1">작성자</label> 
-			<input readonly	type="text" name="writer" class="form-control"
-					value="${loginUser.id}">
-		</div>
-		
-		<div class="form-group">
-			<label for="control-label">공지일</label> 
-			<input class="form-control" type="date" name="noticeDate"/>
-			<span class="help-block" id="noticeDateHelp"></span><br/>
-		</div>
-	</div>
-	<!-- /.box-body -->
-	</table>
+				<form role="form" method="post" action="register">
+					<div class="box-body">
+						<div class="form-group">
+							<label for="exampleInputEmail1">제목</label> 
+							<input type="text" name="title" class="form-control" placeholder="Enter Title">
+							<span class="help-block" id="titleHelp"></span>
+							<span class="glyphicon glyphicon-pencil form-control-feedback" id="fNameIcon"></span>
+						</div>
+			
+						<div class="form-group">
+							<label for="exampleInputPassword1">내용</label>
+							<textarea class="form-control" name="content" rows="3"
+								placeholder="Enter ..."></textarea>
+						</div>
+			
+						<div class="form-group">
+							<label for="exampleInputEmail1">작성자</label> 
+							<input readonly	type="text" name="writer" class="form-control"
+									value="${loginUser.id}">
+						</div>
+			
+						<div class="form-group">
+							<label for="control-label">공지일</label> 
+							<input class="form-control" type="date" name="noticeDate"/>
+							<span class="help-block" id="noticeDateHelp"></span><br/>
+						</div>
+					</div>
+					<!-- /.box-body -->
 
-	<div class="box-footer">
-		<button type="button" id="create_btn" class="btn btn-primary">Submit</button>
-		<button type="button" id="list_btn" class="btn btn-primary">LIST</button>
-		
-	</div>
-</form>
+
+					<div class="box-footer">
+						<button type="button" id="create_btn" class="btn btn-primary">Submit</button>
+						<button type="button" id="list_btn" class="btn btn-primary">LIST</button>
+					</div>
+			</form>
 
 			</div>
 			<!-- /.box -->
