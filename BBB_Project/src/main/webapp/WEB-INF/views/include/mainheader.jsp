@@ -56,7 +56,7 @@
 		
 	           	<sec:authorize access="hasAuthority('ROLE_USER')">
 				<a href="<%= request.getContextPath() %>/main/myPartakeList" class="logo">
-	           		<span class="logo-lg"><b>Project List</b></span>
+	           		<span class="logo-lg"><b>프로젝트 목록</b></span>
 				</a>
 				</sec:authorize>
 				<sec:authorize access="hasAuthority('ROLE_ADMIN')">
