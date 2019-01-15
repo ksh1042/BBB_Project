@@ -4,6 +4,7 @@
 <%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%
 	response.setHeader("Pragma", "No-cache");
 	response.setHeader("Cache-Control", "no-cache");
@@ -201,12 +202,12 @@
 	             
 	              <div class="modal-body" >
 					<div class="box-body">
-						<%-- <div class="form-group" >
+						<div class="form-group" >
 		
 		                  <div class="col-sm-10">
-		                    <img class="profile-user-img img-responsive img-circle" style="cursor:pointer;"src="<spring:url value='/profileImage${loginUser.image}'/>"/><br/>
+		                    <img src="<spring:url value='/profile/${loginUser.image}'/>" class="profile-user-img img-responsive img-circle" style="cursor:pointer;" width="10%"/><br/>
 		                  </div>
-		                </div> --%>
+		                </div>
 					
 		                <div class="form-group" >
 		                  <label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
