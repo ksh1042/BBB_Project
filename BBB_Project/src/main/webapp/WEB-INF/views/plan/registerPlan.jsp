@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("UTF-8"); %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <head>
 	<style>
@@ -85,6 +86,10 @@
 		var form = $('form[role="form"]');
 		$("button[type='submit']").on("click", function(e){
 			e.preventDefault();
+			if($('.uploadedList').find('li')){
+				alert("업로드예정인 계획서가 없습니다.");
+				return;
+			}
 			/* alert("submit"); */
 			$(".uploadedList .delbtn").each(function(i, obj){
 				var fullName=$(this).attr('href');

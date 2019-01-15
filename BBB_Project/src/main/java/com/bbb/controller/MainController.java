@@ -60,6 +60,7 @@ public class MainController {
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
+		cri.setPerPageNum(5);
 		
 		HttpSession session = request.getSession();
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
@@ -90,7 +91,6 @@ public class MainController {
 		pageMaker.setTotalCount(totalCount);
 		model.addAttribute("searchPList",searchPList);
 		model.addAttribute("pageMaker",pageMaker);
-		model.addAttribute("loginUser",loginUser);
 		model.addAttribute("bindList",bindList);
 		
 	}

@@ -9,6 +9,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.bbb.controller.Criteria;
+import com.bbb.controller.SearchCriteria;
 import com.bbb.dto.UnitworkHistVO;
 import com.bbb.dto.UnitworkVO;
 
@@ -20,8 +21,15 @@ public class UnitworkDAOImpl implements UnitworkDAO {
 	}
 	
 	@Override
-	public List<UnitworkVO> selectUnitworkListByRdNum(int udNum) throws SQLException {
-		return session.selectList("Unitwork.selectUnitworkListByRdNum", udNum);
+	public List<UnitworkVO> selectUnitworkListByRdNum(Criteria cri, int udNum) throws SQLException {
+		int offset = cri.getPageStartRowNum();
+		int limit = cri.getPerPageNum();
+		RowBounds bound = new RowBounds(offset, limit);
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("cri", (SearchCriteria)cri);
+		paramMap.put("udNum", udNum);
+		return session.selectList("Unitwork.selectUnitworkListByRdNum", paramMap, bound);
 	}
 
 	@Override
@@ -30,12 +38,19 @@ public class UnitworkDAOImpl implements UnitworkDAO {
 		int limit = cri.getPerPageNum();
 		RowBounds bound = new RowBounds(offset, limit);
 		
-		return session.selectList("Unitwork.selectUnitworkHistoryByRdNum", udNum, bound);
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("cri", (SearchCriteria)cri);
+		paramMap.put("udNum", udNum);
+		
+		return session.selectList("Unitwork.selectUnitworkHistoryByRdNum", paramMap, bound);
 	}
 	
 	@Override
-	public int selectUnitworkHistoryCountByRdNum(int udNum) throws SQLException {
-		return session.selectOne("Unitwork.selectUnitworkHistoryCountByRdNum", udNum);
+	public int selectUnitworkHistoryCountByRdNum(Criteria cri, int udNum) throws SQLException {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("cri", (SearchCriteria)cri);
+		paramMap.put("udNum", udNum);
+		return session.selectOne("Unitwork.selectUnitworkHistoryCountByRdNum", paramMap);
 	}
 
 	@Override
@@ -66,6 +81,25 @@ public class UnitworkDAOImpl implements UnitworkDAO {
 	@Override
 	public void insertUDD(UnitworkVO unit) throws SQLException {
 		session.update("Unitwork.insertUDD", unit);
+		
+	}
+
+	@Override
+	public int selectUnitworkCountByRdNum(Criteria cri, int udNum) throws SQLException {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("cri", (SearchCriteria)cri);
+		paramMap.put("udNum", udNum);
+		return session.selectOne("Unitwork.selectUnitworkCountByRdNum", paramMap);
+	}
+
+	@Override
+	public List<UnitworkVO> selectUnitworkListByRdNumAll(int udNum) throws SQLException {
+		return session.selectList("Unitwork.selectUnitworkListByRdNumAll", udNum);
+	}
+
+	@Override
+	public void insertUDH(UnitworkHistVO hist) throws SQLException {
+		session.update("Unitwork.insertUDH", hist);
 		
 	}
 
