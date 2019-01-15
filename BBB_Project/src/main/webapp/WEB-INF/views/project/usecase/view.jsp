@@ -73,6 +73,7 @@
 								<img class="img-circle img-sm" src="<%=request.getContextPath()%>/resources/dist/img/user3-128x128.jpg" alt="User Image">
 		
 								<div class="comment-text">
+									<input type="hidden" class="urNum" value="${reply.urNum }" >
 									<span class="username">
 										<span class="user" >${reply.writer}</span>
 										<span class="text-muted pull-right"><fmt:formatDate pattern="hh:MM a yyyy-MM-dd" value="${reply.indate}" /></span>
@@ -136,8 +137,7 @@
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal -->
-
-
+	
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script id="templateAttach" type="text/x-handlebars-template">
@@ -289,7 +289,7 @@ $("button[type='submit']").on("click", function(e){
    
 });
 
-$('.uploadedList').on('click','.delbtn',function(event){
+<%-- $('.uploadedList').on('click','.delbtn',function(event){
 	event.preventDefault();
 	var that=$(this);
 	
@@ -305,14 +305,23 @@ $('.uploadedList').on('click','.delbtn',function(event){
 		}
 	});
 });
-
+ --%>
 $('.box-comment').on('click', function(e){
 	
 	var writer = $(this).children('div.comment-text').children('span.username').children('span.user').html();
 	var id = '${loginUser.id}';
+	var urNum = $(this).children('div.comment-text').children('input.urNum').val();
+	
 
 	if(writer == id){
-		alert("삭제하시겠습니까?");
+		if(confirm("삭제하시겠습니까?")== true){
+			$.ajax({
+				url:"<%=request.getContextPath() %>/project/usecase/deleteReply",
+				type:"post",
+				data:{"urNum":urNum}
+			});
+		location.reload();
+		}
 	}else{
 		alert("권한이 없습니다");
 	}
