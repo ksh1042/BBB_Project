@@ -43,11 +43,11 @@
                   <div class="input-group input-group-sm">
                      <span class="input-group-btn">                        
                         <select class="form-control" name="searchType" style="height:30px; width: 105px; font-size:11px;">
-                           <option value="" selected>전체</option>
+                           <option value="all" selected>전체</option>
                            <option value="ri">요구사항ID</option>
                            <option value="rn">요구사항명</option>
                            <option value="rc">요구사항내용</option>
-                           <option value="ri">인터페이스</option>
+                           <option value="in">인터페이스</option>
                            <option value="ry">수용여부</option>
                         </select>   
                      </span>
@@ -191,7 +191,7 @@
          
          var jobForm = $("#jobForm");
           jobForm.find("[name='page']").val(targetPage);
-         jobForm.attr("action","search").attr("method", "get");      
+         jobForm.attr("action","").attr("method", "get");      
          jobForm.submit();
       });
       // page-nav.end
@@ -209,7 +209,7 @@
          frm.submit();
       }
       function hist_go() {
-         location.href = '<%= request.getContextPath()%>/project/unitwork/history';
+         location.href = '<%= request.getContextPath()%>/project/requirement/history';
       }
       // location-href.end
       // ---------------------------------------------------------------------------------

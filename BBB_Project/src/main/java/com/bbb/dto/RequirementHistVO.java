@@ -4,13 +4,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class RequirementHistVO {	
+public class RequirementHistVO {
+	private int 	rownum;
 	private int 	rdNum;			// 요구사항 문서 ID
 	private Date 	updateDate;		// 요구사항 문서 수정 발생일
 	private String 	comm;			// 요구사항 문서 변경내용 요약
 	private List<RequirementVO> requireList = new ArrayList<RequirementVO>();
 	private List<Integer> deleteList = new ArrayList<Integer>();
 	
+	public int getRownum() {
+		return rownum;
+	}
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
 	public List<Integer> getDeleteList() {
 		return deleteList;
 	}
@@ -43,8 +50,9 @@ public class RequirementHistVO {
 	}
 	@Override
 	public String toString() {
-		return "RequirementHistVO [rdNum=" + rdNum + ", updateDate=" + updateDate + ", comm=" + comm + ", requireList="
-				+ requireList + "]";
+		return "RequirementHistVO [rownum=" + rownum + ", rdNum=" + rdNum + ", updateDate=" + updateDate + ", comm="
+				+ comm + ", requireList=" + requireList + ", deleteList=" + deleteList + "]";
 	}
+	
 	
 }

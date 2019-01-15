@@ -1,5 +1,6 @@
 package com.bbb.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bbb.dto.MemberVO;
 import com.bbb.dto.ProjectPartakeVO;
 import com.bbb.dto.ProjectVO;
-import com.bbb.dto.UnitworkVO;
 import com.bbb.service.ManageService;
 import com.bbb.service.MemberService;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -130,6 +130,29 @@ public class managementController {
 		}
 		
 		return entity;
+	}
+	
+	@RequestMapping(value="inviteMember", method=RequestMethod.GET)
+	public void inviteMember(@ModelAttribute SearchCriteria cri,Model model,HttpServletRequest request) throws Exception{
+		PageMaker pageMaker = new PageMaker();
+		HttpSession session = request.getSession();
+		ProjectVO project = (ProjectVO)session.getAttribute("logonProject");
+		int pjNum = project.getPjNum();
+		
+		if(cri.getKeyword() == ""){
+			if(cri.getSearchType() == ""){
+				List<ProjectPartakeVO> inviteList = new ArrayList<ProjectPartakeVO>();
+				model.addAttribute(inviteList);
+			}
+		}else{
+			pageMaker.setCri(cri);
+			pageMaker.setTotalCount(service.getSearchListCount(cri,pjNum));
+			List<ProjectPartakeVO> inviteList = service.getSearchList(cri,pjNum);
+			model.addAttribute(inviteList);
+			model.addAttribute(pageMaker);
+		}
+		
+		
 	}
 	
 }

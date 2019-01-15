@@ -35,4 +35,6 @@
 		where id=#{id} and pjnum = #{pjNum}
 	</update>
 	
+	
+	
 </mapper>

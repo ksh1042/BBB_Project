@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bbb.dto.ProjectVO;
 import com.bbb.dto.RequirementHistVO;
 import com.bbb.dto.RequirementVO;
+import com.bbb.dto.UnitworkHistVO;
 import com.bbb.service.RequirementService;
 
 @Controller
@@ -40,13 +42,17 @@ public class RequireController {
 	}
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public void requireListGET(HttpServletRequest request, Model model) throws Exception{
+	public void requireListGET(SearchCriteria cri, HttpServletRequest request, Model model) throws Exception{
 		HttpSession session = request.getSession();
 		ProjectVO logonProject = (ProjectVO)session.getAttribute("logonProject");
 		int rdNum = logonProject.getRdNum();
-		List<RequirementVO> reqList = service.selectReqList(rdNum);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.selectReqListCount(cri,rdNum));
+		List<RequirementVO> reqList = service.selectReqList(cri,rdNum);
 		
 		model.addAttribute("requireList",reqList);
+		model.addAttribute("pageMaker",pageMaker);
 	}
 	
 	@RequestMapping(value="/list", method=RequestMethod.POST)
@@ -54,7 +60,7 @@ public class RequireController {
 		HttpSession session = request.getSession();
 		ProjectVO logonProject = (ProjectVO)session.getAttribute("logonProject");
 		int rdNum = logonProject.getRdNum();
-		List<RequirementVO> reqList = service.selectReqList(rdNum);
+		List<RequirementVO> reqList = service.selectReqList(null,rdNum);
 		
 		model.addAttribute("requireList",reqList);
 		
@@ -101,6 +107,20 @@ public class RequireController {
 			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return entity;
+	}
+	
+	@RequestMapping(value="/history", method=RequestMethod.GET)
+	public void historyListGET(SearchCriteria cri, HttpSession session, Model model) throws Exception {
+		ProjectVO selectProject = (ProjectVO)session.getAttribute("logonProject");
+		int rdNum = selectProject.getRdNum();
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.getRequireHistoryCount(cri, rdNum));
+		
+		List<RequirementHistVO> reqHistList = service.getRequireHistory(cri, rdNum);
+		
+		model.addAttribute("reqHistList", reqHistList);
+		model.addAttribute("pageMaker", pageMaker);
 	}
 	
 }
