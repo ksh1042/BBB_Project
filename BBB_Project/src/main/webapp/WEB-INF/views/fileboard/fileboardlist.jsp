@@ -55,9 +55,9 @@
 							<th class="hidden-xs">등록일</th>
 							<th class="hidden-xs">조회수</th>
 						</tr>
-						<c:if test="${!empty list }">
+						<c:if test="${!empty list}">
 						<c:forEach items="${list}" var="boardVO">
-
+							<c:if test="${boardVO.kind ==2 }" >
 							<tr>
 								<td>${boardVO.bNum}</td>
 								<td><a
@@ -68,7 +68,7 @@
 										value="${boardVO.inDate}" /></td>
 								<td class="hidden-xs"><span class="badge bg-red">${boardVO.count }</span></td>
 							</tr>
-
+							</c:if>
 						</c:forEach>
 						</c:if>
 						<c:if test="${empty list }">
