@@ -43,7 +43,7 @@
 							</div>
 							<div class="form-group">
 								<label for="exampleInputPassword1">내용</label>
-								<textarea id="summernote" class="form-control" name="content" rows="10" placeholder="내용을 작성하세요"></textarea>
+								<textarea class="form-control" name="content" id="summernote" rows="10" placeholder="내용을 작성하세요"></textarea>
 							</div>
 						</div>
 						<!-- /.box-body -->
@@ -74,18 +74,17 @@
 
 		<!-- /.content -->
 
-
 	</section>
 
 <!-- include libraries(jQuery, bootstrap) -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script> 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-<script src="https://code.jquery.com/jquery-2.2.4.js"></script> 
 <!-- include summernote css/js-->
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css" rel="stylesheet"> 
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet"> 
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
 <!-- summer note korean language pack -->
-<script src="/summernote/lang/summernote-ko-KR.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/lang/summernote-ko-KR.js"></script>
 
 <script type="text/javascript">
 
