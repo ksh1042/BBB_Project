@@ -4,10 +4,18 @@
 
 <body>
 
-	<div class="container">
-      <section class="content-header" style="cursor:pointer;" onclick="javascript:location.href='<%=request.getContextPath()%>/project/issue/list';">
-			<h3>이슈 게시판</h3>
-      </section>
+	<section class="content-header">
+		<h1 style="cursor: pointer;"
+			onclick="javascript:location.href='<%=request.getContextPath()%>/project/issue/list';">이슈 게시판</h1>
+		<ol class="breadcrumb">
+			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
+					<i class="fa fa-dashboard"></i>내 프로젝트
+			</a></li>
+			<li><a href="<%=request.getContextPath()%>/project/main?pjNum=${logonProject.pjNum}">${logonProject.name }</a></li>
+			<li class="active"><a href="<%=request.getContextPath()%>/project/issue/list">이슈 리스트</a></li>
+			<li class="active">${issue.title }</li>
+		</ol>
+	</section>
       
       <section class="content">
 		<!-- QnA 리스트 -->
@@ -67,7 +75,6 @@
 	      	
       
       </section>	
-	</div>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>

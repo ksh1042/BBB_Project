@@ -13,7 +13,6 @@
 		이름 : <input type="text" name="name" value="${loginUser.name }"/><br/>
 		이메일 : <input type="email" name="email" value="${loginUser.email }"/><br/>
 		핸드폰 : <input type="text" name="phone" value="${loginUser.phone }"/><br/> 
-
 	</form>
 </body>
 </html>

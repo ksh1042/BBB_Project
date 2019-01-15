@@ -19,6 +19,7 @@
 	<resources  mapping="/resources/**" location="/resources/"/>
 	<resources  mapping="/SE2/**" location="/SE2/"/>
 	<resources mapping="/ucImage/**" location="file:///c:/upload/"/>
+	<resources mapping="/profileImage/**" location="file:///c:/upload/profile"/>
 	<resources mapping="/favicon.ico" location="/favicon.ico" />
 	<resources mapping="/summernote/**" location="/resources/summernote/" />
 	
@@ -34,6 +35,9 @@
 	
 	<beans:bean id="uploadPath" class="java.lang.String">
 		<beans:constructor-arg value="c:\\upload" />
+	</beans:bean>
+	<beans:bean id="uploadProfile" class="java.lang.String">
+		<beans:constructor-arg value="c:\\upload\profile" />
 	</beans:bean>
 	
 	<context:component-scan base-package="com.bbb.controller" />

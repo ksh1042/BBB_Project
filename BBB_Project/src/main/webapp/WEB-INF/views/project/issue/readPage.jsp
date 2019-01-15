@@ -142,7 +142,6 @@ hr {
 	</section>
 
 <script>
-
 	var iNum=${issue.iNum};
 	
 	function addIssueDetail_go(){
@@ -332,7 +331,7 @@ hr {
 	var formObj = $("form[role='form']");
 	
 	$("#issueModifyBtn").on("click", function() {
-		$("#detailBlock").disabled();
+		//$("#detailBlock").disabled();
 		formObj.attr("action", "modifyPage");
 		formObj.attr("method", "get");
 		formObj.submit();

@@ -55,7 +55,7 @@
 			<form action="register" method="post" name="registerForm" id="registerForm" enctype="multipart/form-data"> 
 				<div>
 					<img class="profile-user-img img-responsive img-circle" style="cursor:pointer;" src="/resources/images/profile.png" alt="User profile picture" id="profile" onclick="profile_go();"><br/>
-					<input type="file" name="image" id="uploadProfile" style="display:none;">
+					<input type="file" name="file" id="uploadProfile" style="display:none;">
 				</div>
 				<div class="form-group has-feedback">
 					<input type="text" name="id" class="form-control" placeholder="아이디" onblur="checkId();" id="id"> 
@@ -136,7 +136,9 @@
 	};
 	 
 	function checkId(){
-
+		//var url = $("#uploadProfile").val();
+		//var fileName = url.substring( url.lastIndexOf('/')+1, url.length());
+		
 		var userid =  $("#id").val();
 		var UserPassword = $("#pwd").val();
 		
@@ -299,13 +301,26 @@
 		var phone = phone1+"-"+phone2+"-"+phone3;
 		$("input[name=phone]").val(phone);
 		
+		var profileValue = $("#uploadProfile").val().split("\\");
+		var profileName ="";
+		if(profileValue == ""){
+			profileName = "profile.png";
+		}else{
+			profileName = profileValue[profileValue.length-1]; //파일명 추출
+			
+		}
+		
+		
+		var input1=$('<input>').attr('type','hidden').attr('name','image').val(profileName);
+		
 		if($("#idState").css("color")=="rgb(67, 116, 217)"){
 			if($("#pwdState").css("color")=="rgb(67, 116, 217)"){
 				if($("#pwd2State").css("color")=="rgb(67, 116, 217)"){
 					if($("#emailState").css("color")=="rgb(67, 116, 217)"){
 						if($("#nameState").css("color")=="rgb(67, 116, 217)"){
 						  if ($("#phoneState").css("color")=="rgb(67, 116, 217)") {
-								document.registerForm.submit();
+							  $('form#registerForm').append(input1);
+							  document.registerForm.submit();
 						  }else{
 							  alert("휴대폰 번호를 다시 확인해주세요.");
 						  }
@@ -326,6 +341,31 @@
 		}
 }
 	function profile_go(){
+		
+		$("#uploadProfile").click();
+		
+		function readURL(input) {
+			 
+		    if (input.files && input.files[0]) {
+		        var reader = new FileReader();
+		 
+		        reader.onload = function (e) {
+		            $('#profile').attr('src', e.target.result);
+		        }
+		 
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+		 
+		$("#uploadProfile").change(function(){
+		    readURL(this);
+		});
+		
+	}
+	
+		
+	
+	<%-- function profile_go(){
 		$("#uploadProfile").click();
 		
 		$("#uploadProfile").change(function(){
@@ -354,7 +394,7 @@
 				
 			});
 		});
-	};
+	}; --%>
   
 </script>
 
