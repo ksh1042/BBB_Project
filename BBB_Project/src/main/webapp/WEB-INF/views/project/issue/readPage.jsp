@@ -385,28 +385,37 @@ hr {
 			});
 		}
 
-		var printModifyData=function(idNum,replyArr,target,templateObject, templateObject2, ModifyTemplateObject){
+		var printModifyData=function(idNum,replyArr,target,templateObject, templateObject2, ModifyTemplateObject,deleteTemplateObject){
 			
 			   var template=Handlebars.compile(templateObject.html());
 			   var template2=Handlebars.compile(templateObject2.html());
 			   var modifyTemplate = Handlebars.compile(ModifyTemplateObject.html());
+			   var deleteTemplate=Handlebars.compile(deleteTemplateObject.html());
 			   var tempReplyArr = new Array();
 		 	   var html = "";
 			   $.each(replyArr,function(index,item){
-				   if(idNum == item.idNum){
+				   if(item.deleteYn == 1){
 					   tempReplyArr.push(item);
-					   html += modifyTemplate(tempReplyArr);
+					   html += deleteTemplate(tempReplyArr);
 					   tempReplyArr.pop();
 				   }else{
-					   if(item.writer == '${loginUser.id }'){
+					   if(idNum == item.idNum && item.deleteYn == 0){
 						   tempReplyArr.push(item);
-						   html += template(tempReplyArr);
+						   html += modifyTemplate(tempReplyArr);
+						   tempReplyArr.pop();
 					   }else{
-						   tempReplyArr.push(item);
-						   html += template2(tempReplyArr);
+						   if(item.writer == '${loginUser.id }'){
+							   tempReplyArr.push(item);
+							   html += template(tempReplyArr);
+							  
+						   }else{
+							   tempReplyArr.push(item);
+							   html += template2(tempReplyArr);
+						   }
+						   tempReplyArr.pop();
 					   }
-					   tempReplyArr.pop();
 				   }
+				   
 			   });
 			  
 			   $('.issueDetailList').remove();
@@ -415,7 +424,7 @@ hr {
 		
 		function detailModify(idNum, pageInfo) {
 			$.getJSON(pageInfo, function(data) {
-				printModifyData(idNum, data, $('#issueDetailDiv'), $('#template'), $('#template2'), $('#modifyTemplate'));
+				printModifyData(idNum, data, $('#issueDetailDiv'), $('#template'), $('#template2'), $('#modifyTemplate'),$('#deleteIssueDetail'));
 			});
 		}
 		

@@ -54,7 +54,7 @@
 
 			<form action="register" method="post" name="registerForm" id="registerForm" enctype="multipart/form-data"> 
 				<div>
-					<img class="profile-user-img img-responsive img-circle" style="cursor:pointer;" src="/resources/images/profile.png" alt="User profile picture" id="profile" onclick="profile_go();"><br/>
+					<img class="profile-user-img img-circle" style="cursor:pointer;display:block;width:120px;height:120px;" src="/resources/images/profile.png" alt="User profile picture" id="profile" onclick="profile_go();"><br/>
 					<input type="file" name="file" id="uploadProfile" style="display:none;">
 				</div>
 				<div class="form-group has-feedback">
@@ -309,7 +309,6 @@
 			profileName = profileValue[profileValue.length-1]; //파일명 추출
 			
 		}
-		
 		
 		var input1=$('<input>').attr('type','hidden').attr('name','image').val(profileName);
 		
