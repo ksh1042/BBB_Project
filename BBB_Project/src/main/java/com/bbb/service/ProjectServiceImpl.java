@@ -120,6 +120,9 @@ public class ProjectServiceImpl implements ProjectService{
 	public void updateProject(ProjectVO project) throws SQLException {
 		projectDAO.updateProject(project);
 	}
+	public void leaveProject(ProjectPartakeVO takeVO) throws SQLException {
+		projectDAO.leaveProject(takeVO);
+	}
 
 	
 

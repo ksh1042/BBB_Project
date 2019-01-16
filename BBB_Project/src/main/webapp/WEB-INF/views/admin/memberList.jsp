@@ -54,28 +54,26 @@
 				<div class="box-body">
 					<table class="table table-bordered">
 						<tr>
-							<th style="text-align: center;">#</th>
-							<th style="text-align: center;">ID</th>
-							<th class="hidden-xs" style="text-align: center;">NAME</th>
-							<th class="hidden-xs" style="text-align: center;">E-mail</th>
-							<th class="hidden-xs" style="text-align: center;">가입일</th>
+							<th style="text-align: center;" width="200px">#</th>
+							<th style="text-align: center;" width="180px">ID</th>
+							<th style="text-align: center;">NAME</th>
+							<th style="text-align: center;" width="200px">E-mail</th>
+							<th style="text-align: center;" width="400px">가입일</th>
 							<th style="text-align: center;">이메일인증</th>
 						</tr>
 
 						<c:forEach var="member" items="${memberList }" varStatus="status">
 
 							<tr>
-								<td style="text-align: center;">${status.count }</td>
-								<td style="text-align: center;">${member.id}</td>
-								<td class="hidden-xs" style="text-align: center;">${member.name}</td>
-								<td class="hidden-xs" style="text-align: center;">${member.email}</td>
-								
-								<td class="hidden-xs" style="text-align: center;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${member.indate}" /></td>
+								<td style="text-align: center;" width="200px">${status.count }</td>
+								<td style="text-align: center;" width="180px">${member.id}</td>
+								<td style="text-align: center;" width="200px">${member.name}</td>
+								<td style="text-align: center;">${member.email}</td>
+								<td class="hidden-xs" width="400px" style="text-align: center;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${member.indate}" /></td>
 								<td style="width: 150px;">
 									<div>
-									&nbsp;<button type="button" class="btn btn-info"  onclick="submit_go('${member.id}');">인증</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;<button type="button" class="btn btn-info"  onclick="submit_go('${member.id}');">인증</button>
 									<button type="button" class="btn btn-danger"  onclick="cancel_go('${member.id}');">취소</button>
-									
 									</div>
 								</td>
 						</c:forEach>

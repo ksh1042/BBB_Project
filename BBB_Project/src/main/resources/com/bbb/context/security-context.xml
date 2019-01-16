@@ -8,6 +8,7 @@
 
 
 	<http pattern="/resources/**" security="none" />
+	<http pattern="/favicon.ico" security="none" />
 	
 	<authentication-manager id="memberAuthManager">
 		<authentication-provider>
@@ -28,7 +29,6 @@
 		<access-denied-handler error-page="/security/accessDenied" />
 		<intercept-url pattern="/commons/**" access="permitAll" />
 		<intercept-url pattern="/**" access="isAuthenticated()" />
-		<intercept-url pattern="/favicon.ico" access="isAuthenticated()" />
 		
 		<intercept-url pattern="/project/my*" access="hasAuthority('ROLE_USER')" />
 		<intercept-url pattern="/project/*" access="hasAuthority('ROLE_USER')" />

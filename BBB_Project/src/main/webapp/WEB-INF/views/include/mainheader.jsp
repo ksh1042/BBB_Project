@@ -4,6 +4,8 @@
 <%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	response.setHeader("Pragma", "No-cache");
 	response.setHeader("Cache-Control", "no-cache");
@@ -45,6 +47,12 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 <decorator:head />
+<style>
+.profile-change{
+width:150px;
+height:150px;
+}
+</style>
 </head>
 
 <body class="hold-transition skin-blue layout-boxed layout-top-nav">
@@ -56,7 +64,7 @@
 		
 	           	<sec:authorize access="hasAuthority('ROLE_USER')">
 				<a href="<%= request.getContextPath() %>/main/myPartakeList" class="logo">
-	           		<span class="logo-lg"><b>Project List</b></span>
+	           		<span class="logo-lg"><b>프로젝트 목록</b></span>
 				</a>
 				</sec:authorize>
 				<sec:authorize access="hasAuthority('ROLE_ADMIN')">
@@ -104,6 +112,36 @@
 							</a>
 						</li>
 						
+					<!-- 알림 Menu -->
+			          <li class="dropdown notifications-menu">
+			            <!-- Menu toggle button -->
+			            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			              <i class="fa fa-bell-o"></i>
+			              <span class="label label-warning">10</span>
+			            </a>
+			            <ul class="dropdown-menu">
+			              <li class="header">You have 10 notifications</li>
+			              <li>
+			                <!-- Inner Menu: contains the notifications -->
+			                <ul class="menu">
+			                  <!-- 새로운 내용 -->
+			                  <li>
+			                    <a href="#">
+			                      <i class="fa fa-users text-aqua"></i>초대가 온 프로젝트명
+			                    </a>
+			                  </li>
+			                  <li>
+			                  	  <div>
+			                      <button type="button" class="btn btn-block btn-success" style="float:left; margin-left:10px; width:40%;">수락</button>
+			                      <button type="button" class="btn btn-block btn-danger" style="float:right; margin-right:10px; width:40%; margin-top:0;">거절</button>
+			                  	  </div>
+			                  </li>
+			                  <!-- end notification -->
+			                </ul>
+			              </li>
+			              <li class="footer"><a href="#">View all</a></li>
+			            </ul>
+			          </li>
 						 <!-- Domain Menu -->
 						<sec:authorize access="hasAuthority('ROLE_USER')">
 						<li class="dropdown notifications-menu">
@@ -133,14 +171,24 @@
 						<!-- Usermenu  -->
 						<li class="dropdown user user-menu">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
-								<img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> 
+								<c:if test="${loginUser.image ne null }">
+			                    	<img src="<spring:url value='/profile/${loginUser.image}'/>" class="user-image" alt="User Image"/>
+			                    </c:if>
+			                    <c:if test="${loginUser.image eq null }">
+			                    	<img src="/resources/images/profile.png" class="user-image" alt="User Image"/>
+			                    </c:if>
 								<span class="hidden-xs">${loginUser.name } 님 환영합니다.</span>
 							</a>
 							<ul class="dropdown-menu">
 								<!-- User image -->
 
 								<li class="user-header">
-									<img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+									<c:if test="${loginUser.image ne null }">
+			                    		<img src="<spring:url value='/profile/${loginUser.image}'/>" class="img-circle"  alt="User Image"/>
+				                    </c:if>
+				                    <c:if test="${loginUser.image eq null }">
+				                    	<img src="/resources/images/profile.png" class="img-circle"  alt="User Image"/>
+				                    </c:if>
 									<p><strong>${loginUser.id }</strong>(${loginUser.name }) <small>Member since <fmt:formatDate value="${loginUser.indate }" pattern="yyyy-MM"/>
 									</small></p>
 								</li>
@@ -189,7 +237,7 @@
 			<!-- Content Wrapper. Contains page content -->
 			
 	              
-            <form action="/main/mypage/modify" method="post" name="mypageForm">
+            <form action="/main/mypage/modify" method="post" name="mypageForm" id="mypageForm" enctype="multipart/form-data">
 			<div class="modal fade in" id="modal-default" style="display: none; padding-right: 16px;height: auto;">
 	          <div class="modal-dialog">
 	            <div class="modal-content">
@@ -201,6 +249,24 @@
 	             
 	              <div class="modal-body" >
 					<div class="box-body">
+					
+						<div class="form-group" >
+							<c:if test="${loginUser.image ne null }">
+		                    	<img src="<spring:url value='/profile/${loginUser.image}'/>" class="profile-user-img img-circle profile-change" style="cursor:pointer;display: block;" onclick="profile_go();"/><br/>
+		                    </c:if>
+		                    <c:if test="${loginUser.image eq null }">
+		                    	<img src="/resources/images/profile.png" class="profile-user-img img-circle profile-change" style="cursor:pointer;display: block;" onclick="profile_go();"/><br/>
+		                    </c:if>
+		                    <input type="file" name="file" id="uploadProfile" style="display:none;">
+		                </div>
+		                
+		                <div class="form-group" >
+		                	<label for="inputEmail3" class="col-sm-2 control-label">이미지</label>
+			                <div class="col-sm-10">
+			                    <button type="button" class="btn btn-block btn-warning" style="width:150px;">기본 이미지 변경</button><br/>
+							</div>
+						</div>			
+							
 		                <div class="form-group" >
 		                  <label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
 		
@@ -260,11 +326,47 @@
 	          <!-- /.modal-dialog -->
 	        </div>
 	        </form>
-        
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script>
         	function profileModify_go(){
+        		
+        		var profileValue = $("#uploadProfile").val().split("\\");
+        		var profileName ="";
+        		if(profileValue == ""){
+        			profileName = "profile.png";
+        		}else{
+        			profileName = profileValue[profileValue.length-1]; //파일명 추출
+        			
+        		}
+        		
+        		var input1=$('<input>').attr('type','hidden').attr('name','image').val(profileName);
+        		
+        		$('form#mypageForm').append(input1);
         		document.mypageForm.submit();
         		alert("회원정보가 수정되었습니다.");
+        	}
+        	
+        	function profile_go(){
+        		
+        		$("#uploadProfile").click();
+        		
+        		function readURL(input) {
+        			 
+        		    if (input.files && input.files[0]) {
+        		        var reader = new FileReader();
+        		 
+        		        reader.onload = function (e) {
+        		            $('.profile-change').attr('src', e.target.result);
+        		        }
+        		 
+        		        reader.readAsDataURL(input.files[0]);
+        		    }
+        		}
+        		 
+        		$("#uploadProfile").change(function(){
+        		    readURL(this);
+        		});
+        		
         	}
         </script>
       

@@ -1,5 +1,6 @@
 package com.bbb.controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,23 +25,23 @@ import com.bbb.service.ProjectService;
 @Controller
 @RequestMapping("/project")
 public class ProjectController {
-	
+
 	@Autowired
 	private ProjectService service;
-	
-	@RequestMapping(value="/test", method=RequestMethod.GET)
-	public void test(){
-		
-	}	
-	
-	//branch lee
+
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public void test() {
+
+	}
+
+	// branch lee
 	// 로그인 후 나의 프로젝트 참여 목록을 보여준다.
-	@RequestMapping(value="/myPartakeList", method=RequestMethod.GET)
-	public void partakeList(Model model, HttpServletRequest request) throws Exception{
-		
-		HttpSession session=request.getSession();
-		//로그인 유저의 아이디
-		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
+	@RequestMapping(value = "/myPartakeList", method = RequestMethod.GET)
+	public void partakeList(Model model, HttpServletRequest request) throws Exception {
+
+		HttpSession session = request.getSession();
+		// 로그인 유저의 아이디
+		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
 		String id = loginUser.getId();
 		// 참여 또는 신청중인 프로젝트 리스트
 		List<ProjectPartakeVO> myPartakeList = service.getBindingProject(id);
@@ -50,99 +51,85 @@ public class ProjectController {
 		List<ProjectVO> myProjectList = new ArrayList<ProjectVO>();
 		// pjNum으로 비교한 현재 신청중인 프로젝트 리스트
 		List<ProjectVO> bindProjectList = new ArrayList<ProjectVO>();
-				
-		for(ProjectVO project : projectList){
-			for(ProjectPartakeVO myPartake : myPartakeList){
-				if(project.getPjNum() == myPartake.getPjNum()){
-					if(myPartake.getAssignYn() == 1){
+
+		for (ProjectVO project : projectList) {
+			for (ProjectPartakeVO myPartake : myPartakeList) {
+				if (project.getPjNum() == myPartake.getPjNum()) {
+					if (myPartake.getAssignYn() == 1) {
 						myProjectList.add(project);
-					}else{
+					} else {
 						bindProjectList.add(project);
 					}
 				}
 			}
 		}
-		model.addAttribute("myPartakeList",myProjectList);
+		model.addAttribute("myPartakeList", myProjectList);
 		model.addAttribute("bindProject", bindProjectList);
 	}
-	
-	@RequestMapping(value="/main", method=RequestMethod.GET)
-	public void projectMain(int pjNum, HttpServletRequest request) throws Exception{
+
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public void projectMain(int pjNum, HttpServletRequest request) throws Exception {
 		ProjectVO project = service.projectMain(pjNum);
 		request.getSession().setAttribute("logonProject", project);
 		System.out.println(project.toString());
 	}
-	
-	@RequestMapping(value="/listUsecase", method=RequestMethod.GET)
-	public void getUsecase() throws Exception{
-		
+
+	@RequestMapping(value = "/listUsecase", method = RequestMethod.GET)
+	public void getUsecase() throws Exception {
+
 	}
-	
-	@RequestMapping(value="/modify", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public void modifyGET(HttpSession session) throws Exception {
-		ProjectVO selectProject = (ProjectVO)session.getAttribute("logonProject");
-		
-		
+		ProjectVO selectProject = (ProjectVO) session.getAttribute("logonProject");
+
 	}
-	
-	@RequestMapping(value="/modify", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<String> modifyPOST(@RequestBody ProjectVO project) throws Exception {
 		ResponseEntity<String> entity = null;
-		
+
 		System.out.println("Receive Project : " + project);
-		
-		try{
+
+		try {
 			service.updateProject(project);
 			entity = new ResponseEntity<String>(HttpStatus.OK);
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
+
 		return entity;
 	}
-	
-	@RequestMapping(value="/delete", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<String> deletePOST(HttpSession session) throws Exception{
+	public ResponseEntity<String> deletePOST(HttpSession session) throws Exception {
 		ResponseEntity<String> entity = null;
-		ProjectVO selectProject = (ProjectVO)session.getAttribute("logonProject");
-		try{
-			
+		ProjectVO selectProject = (ProjectVO) session.getAttribute("logonProject");
+		try {
+
 			entity = new ResponseEntity<String>(HttpStatus.OK);
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
+
 		return entity;
 	}
-	
 
-	
+	@RequestMapping(value = "/leaveProject", method = RequestMethod.POST)
+	public ResponseEntity<String> leaveProject(@RequestBody ProjectPartakeVO partake) throws Exception {
+		ResponseEntity<String> entity = null;
+		try {
+			service.leaveProject(partake);
 
-	
+			entity = new ResponseEntity<String>(HttpStatus.OK);
+		} catch (SQLException e) {
+			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return entity;
+	}
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

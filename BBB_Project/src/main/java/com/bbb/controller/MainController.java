@@ -1,11 +1,13 @@
 package com.bbb.controller;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,11 +17,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bbb.dto.MemberVO;
 import com.bbb.dto.ProjectPartakeVO;
@@ -40,6 +44,9 @@ public class MainController {
 	
 	@Autowired
 	private MimeAttachNotifier notifier;
+	
+	@Resource(name="uploadProfile")
+	String uploadProfile;
 	
 	@RequestMapping(value="" ,method=RequestMethod.GET)
 	public String memberTurningPoint(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -192,7 +199,12 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/mypage/modify",method=RequestMethod.POST)
-	public String mypageModify(MemberVO member, HttpServletRequest request)throws Exception{
+	public String mypageModify(MultipartFile file,MemberVO member, HttpServletRequest request)throws Exception{
+		
+		String savedName=file.getOriginalFilename();
+		File target = new File(uploadProfile,savedName);
+		
+		FileCopyUtils.copy(file.getBytes(), target);
 		
 		service.modify(member);
 		MemberVO loginUser=service.getMemberById(member.getId());
@@ -248,6 +260,7 @@ public class MainController {
 		
 		return "redirect:/main/myPartakeList";
 	}
+	
 	
 	
 	

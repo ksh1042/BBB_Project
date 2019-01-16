@@ -125,8 +125,10 @@ public class ProjectDAOImpl implements ProjectDAO{
 
 	@Override
 	public void deleteProject(ProjectVO project) throws SQLException {
-		
-		
+	
+	}
+	public void leaveProject(ProjectPartakeVO takeVO) throws SQLException {
+		session.update("ProjectPartake.leaveProject", takeVO);
 	}
 
 	

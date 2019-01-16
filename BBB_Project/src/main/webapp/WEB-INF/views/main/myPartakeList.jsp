@@ -105,7 +105,7 @@
 	                  	</a>
 	                  </td>
 	                  <td class="hidden-xs">${partake.creator}</td>
-	                  <td><button type="button" id="leave" class="btn btn-block btn-success">탈퇴</button></td>
+	                  <td><button type="button" class="btn btn-block btn-success">참여중</button></td>
                 	</tr>
 				</c:forEach>
 				
@@ -162,7 +162,7 @@
 					<form action="" method="POST">			
 						<input type="hidden" name="creator" value="${ loginUser.id }">
 						<label class="control-label">프로젝트 이름</label>
-						<input class="form-control " type="text" name="name" placeholder="프로젝트 이름">
+						<input class="form-control " type="text" name="pName" placeholder="프로젝트 이름">
 						<span class="help-block" id="pNameHelp"><i class=""></i></span>
 						<span class="glyphicon glyphicon-pencil form-control-feedback" id="pjNameIcon"></span><br/>
 						<label class="control-label">프로젝트 설명</label>
@@ -196,7 +196,7 @@
 				<div class="modal-footer">
 					<!-- 프로젝트 기간.end -->
 					<button type="button" id="create_btn" class="btn btn-block btn-success btn-lg" disabled>생성</button>
-					<button type="button" id="cancel_btn" class="btn btn-block btn-danger btn-lg">취소</button>
+					<button type="button" id="cancel_btn" class="btn btn-block btn-danger btn-lg" data-dismiss="modal">취소</button>
 				</div>
 		</div>
 	</div>
@@ -208,8 +208,11 @@
 		var pNameFlag = false;
 		var startDateFlag = false;
 		var endDateFlag = false;
+		var leaveFlag = false;
+		
+		
 		/* 유효성  */
-		$('input[name="name"]').on('blur', function(e){
+		$('input[name="pName"]').on('blur', function(e){
 			$(this).css({ borderColor : 'red' });
 			var pName = $(this).val();
 			
@@ -231,7 +234,7 @@
 				type : 'GET',
 				success : function(data){
 					if(data=='OK'){
-						$('input[name="name"]').css({ borderColor : 'green' });
+						$('input[name="pName"]').css({ borderColor : 'green' });
 						$('#pNameHelp').css({ color : 'green', fontWeight : 'bold' });
 						$('#pNameHelp').html('사용 가능한 프로젝트명입니다.');
 						$('span#pjNameIcon').removeClass('glyphicon-ok');
@@ -351,7 +354,7 @@
 				return;
 			}
 			var json = {
-					name : $('input[name=name]').val(),
+					name : $('input[name=pName]').val(),
 					disc : $('textarea[name=disc]').val(),
 					creator : $('input[name=creator]').val(),
 					visibility : $('input[name=visibility]:checked').val(),
@@ -376,8 +379,9 @@
 				}
 			});
 		});
+		
 		$('#cancel_btn').on('click', function(e){
-			history.go(-1);
+			close();
 		});
 		
 		function verifyCheck(){
@@ -404,7 +408,6 @@
 			}
 			$('button#create_btn').prop('disabled', false);
 		}
-		
 	</script>
     
 

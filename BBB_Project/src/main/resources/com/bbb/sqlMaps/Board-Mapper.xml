@@ -46,7 +46,7 @@
 		from tbl_board
 		where bnum >0
 		]]>
-		and pjnum=${pjNum} and kind = 1
+		and pjnum=#{pjNum} and kind = 1
 		<include refid="search" ></include>
 		order by bnum desc
 	</select>
@@ -56,7 +56,7 @@
 		from tbl_board
 		where bnum >0
 		]]>
-		and pjnum=${pjNum}
+		and pjnum=#{pjNum} and kind = 1
 		<include refid="search"></include>
 	</select>
 	

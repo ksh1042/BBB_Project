@@ -12,12 +12,12 @@
 </style>
 
 	<section class="content-header">
-		<h1 style="cursor: pointer;" onclick="javascript:location.href='<%=request.getContextPath()%>/project/issue/list';">이슈 게시판</h1>
+		<h1 style="cursor: pointer;" onclick="javascript:location.href='<%=request.getContextPath()%>/project/issue/list';">이슈</h1>
 		<ol class="breadcrumb">
-			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
-					<i class="fa fa-dashboard"></i>내 프로젝트</a></li>
-			<li><a href="<%=request.getContextPath()%>/project/main?pjNum=${logonProject.pjNum}">${logonProject.name }</a></li>
-			<li class="active"><a href="<%=request.getContextPath()%>/project/issue/list">내 이슈리스트</a></li>
+			<li><a href="<%=request.getContextPath()%>/project/main?pjNum=${logonProject.pjNum}">
+					<i class="fa fa-dashboard"></i>${logonProject.name }</a></li>
+			<li class="active"><a href="<%=request.getContextPath()%>/project/issue/list">이슈</a></li>
+			<li class="active">내 이슈 목록</li>
 		</ol>
 	</section>
 

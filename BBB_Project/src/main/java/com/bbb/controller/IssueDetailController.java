@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bbb.dto.IssueDetailVO;
 import com.bbb.service.IssueDetailService;
@@ -73,13 +75,14 @@ public class IssueDetailController {
 		
 	}
 	
-	@RequestMapping(value="/{idNum}",method=RequestMethod.POST)
-	public ResponseEntity<String> removeIssueDetail(int idNum) throws Exception{
+	@RequestMapping(value="/remove",method=RequestMethod.POST)
+	public ResponseEntity<String> removeIssueDetail(@RequestParam int idNum) throws Exception{
 		
 		ResponseEntity<String> entity=null;
+		
 		try{
 			service.deleteIssueDetail(idNum);
-			entity=new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
+			entity=new ResponseEntity<String>("success",HttpStatus.OK);
 		}catch(SQLException e){
 			e.printStackTrace();
 			entity=new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);

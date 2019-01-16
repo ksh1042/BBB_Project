@@ -71,7 +71,7 @@
           </li>
           <!-- /.사서함 버튼 -->
 
-          <!-- Notifications Menu -->
+          <!-- 알림 Menu -->
           <li class="dropdown notifications-menu">
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -83,10 +83,17 @@
               <li>
                 <!-- Inner Menu: contains the notifications -->
                 <ul class="menu">
-                  <li><!-- start notification -->
+                  <!-- 새로운 내용 -->
+                  <li>
                     <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                      <i class="fa fa-users text-aqua"></i>초대가 온 프로젝트명
                     </a>
+                  </li>
+                  <li>
+                  	  <div>
+                      <button type="button" class="btn btn-block btn-success" style="float:left; margin-left:10px; width:40%;">수락</button>
+                      <button type="button" class="btn btn-block btn-danger" style="float:right; margin-right:10px; width:40%; margin-top:0;">거절</button>
+                  	  </div>
                   </li>
                   <!-- end notification -->
                 </ul>
@@ -443,6 +450,14 @@
 				</a>
 			</li>
 			
+			<c:if test="${loginUser.id ne logonProject.creator}">
+				<li>
+					<a href="#" class="leave" data-toggle="modal" data-target="#modal-leaveProject">
+						<i class="fa fa-link" data-toggle="modal" data-target="#modal-leaveProject"></i> <span>프로젝트 탈퇴</span>
+					</a>
+				</li>
+			</c:if>
+			
 			<c:if test="${loginUser.id eq logonProject.creator }">
 			<li class="treeview">
 				<a href="#"><i class="fa fa-link"></i>
@@ -463,6 +478,10 @@
 					<li>
 						<a href="<%=request.getContextPath()%>/project/modify">
 						<i class="fa fa-circle-o"></i>프로젝트 수정</a>
+					</li>
+					<li>
+						<a href="<%=request.getContextPath()%>/project/manage/inviteMember">
+						<i class="fa fa-circle-o"></i>프로젝트 초대</a>
 					</li>
 				</ul>
 			</li>
@@ -486,8 +505,88 @@
 			alert("검색할 키워드를 입력해주세요.");
 			return;
 		}
-	})
+	});
+	
+		
 </script>
 <body>
+<div class="modal fade" id="modal-leaveProject">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">프로젝트 탈퇴</h4>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" name="id" value="${ loginUser.id }">
+					<label class="control-label">해당 프로젝트에서 탈퇴하시려면 '탈퇴'를 입력해주세요.</label>
+					<input class="form-control" type="text" name="leave" placeholder="탈퇴">
+					<span class="help-block" id="pNameHelp"><i class=""></i></span>
+					<span class="glyphicon glyphicon-pencil form-control-feedback" id="pjNameIcon"></span><br/>
+				</div>
+				<div class="modal-footer">
+					<!-- 프로젝트 기간.end -->
+					<button type="button" id="leave_btn" class="btn btn-block btn-success btn-lg" disabled>탈 퇴</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script>
+	$('.leave').on("click", function(e){
+		e.preventDefault();
+	});
+	
+	var lText = '';
+	var pjNum = ${logonProject.pjNum};
+	var id = '${loginUser.id}';
+	
+	$('input[name=leave]').on('blur', function(e){
+		$(this).css({ borderColor : 'red' });
+		lText = $(this).val();
+		
+		if(lText == null || lText == ''){
+			$('#pNameHelp').css({ color : 'red' });
+			$(this).focus();
+			$('button#leave_btn').prop('disabled', true);
+			return;
+		}
+		if(lText == '탈퇴'){
+			$(this).css({ borderColor : 'green' });
+			$('#pNameHelp').css({ color : 'green', fontWeight : 'bold' });
+			$('button#leave_btn').prop('disabled', false);
+		}
+	});
+		
+		$('#leave_btn').on('click', function(e){
+			if(lText != "탈퇴"){
+				$('#pNameHelp').css({ color : 'red' });
+				$('input[name=leave]').focus();
+				$('button#leave_btn').prop('disabled', true);
+				return;
+			}
+			$.ajax({
+				url : '<%=request.getContextPath()%>/project/leaveProject',
+				method : 'POST',
+				data : JSON.stringify({
+					'id': id,
+					'pjNum':pjNum
+				}),
+				headers:{
+					"Content-Type":"application/json",
+					"X-HTTP-Method-Override":"post"
+				},
+				success : function(data){
+					alert('프로젝트에서 탈퇴했습니다.');
+					location.href="<%= request.getContextPath()%>/main/myPartakeList"
+				},
+				error : function(error){
+					alert('서버 내부오류가 발생했습니다. 자세한 사항은 관리자에게 문의바랍니다.');
+				}
+			});
+		});
+	</script>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

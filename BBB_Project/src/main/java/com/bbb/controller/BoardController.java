@@ -85,7 +85,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/removePage",method=RequestMethod.POST)
-	public String removePage(int bNum,SearchCriteria cri,
+	public String removePage(int bNum, SearchCriteria cri,
 							RedirectAttributes rttr)
 							throws Exception{
 		service.delete(bNum);

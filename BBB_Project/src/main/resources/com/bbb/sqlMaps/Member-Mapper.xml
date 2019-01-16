@@ -19,13 +19,13 @@
 	</select>
 
 	<update id="insertMember">
-		insert into tbl_member(id,pwd,name,phone,email)
-		values(#{id},#{pwd},#{name},#{phone},#{email})
+		insert into tbl_member(id,pwd,name,phone,email,image)
+		values(#{id},#{pwd},#{name},#{phone},#{email},#{image})
 	</update>
 
 	<update id="updateMember">
 		update tbl_member set
-		name=#{name},phone=#{phone}
+		name=#{name},phone=#{phone},image=#{image}
 		where id=#{id}
 	</update>
 
