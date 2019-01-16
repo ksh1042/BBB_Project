@@ -21,23 +21,22 @@
    </style>
 </head>
 <body>
-   <section class="content-header">
-      <h1>요구사항 정의서</h1>
-      <ol class="breadcrumb">
-         <li><a href="<%=request.getContextPath()%>/main/myPartakeList">
-            <i class="fa fa-dashboard"></i>My Project</a>
-         </li>
-         <li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}">${logonProject.name }</a></li>
-         <li class="active"><a href="list">요구사항 정의서</a></li>
-      </ol>
-   </section>
-   <br/>
+	<section class="content-header">
+		<h1 style="cursor: pointer;"onclick="javascript:location.href='<%=request.getContextPath()%>/project/requirement/list';">요구사항 정의서</h1>
+		<ol class="breadcrumb">
+			<li><a href="<%=request.getContextPath()%>/project/main?pjNum=${logonProject.pjNum}">
+			<i class="fa fa-dashboard"></i>${logonProject.name }</a></li>
+			<li class="active"><a href="<%=request.getContextPath()%>/project/requirement/list">요구사항 정의서</a></li>
+		</ol>
+	</section>
+
+  
    <section class="content">
-      <div class="col-xs-12">
+      <div>
          <div class="box">
             <div class="box-header">
                <div class="col-sm-6">
-                  <h3 class="box-title">요구사항 리스트</h3>
+                  <h3 class="box-title"></h3>
                </div>
                <div class="col-sm-6 searchDiv">
                   <div class="input-group input-group-sm">
@@ -74,30 +73,30 @@
                            class="table table-bordered table-hover dataTable" role="grid"
                            aria-describedby="example2_info">
                            <tr>
-                           	 <th class="sorting" tabindex="0" aria-controls="example2"
+                           	 <th class="sorting hidden-xs" tabindex="0" aria-controls="example2"
                                  rowspan="1" colspan="1"
                                  aria-label="Rendering engine: activate to sort column ascending">프로젝트 명</th>
-                                  <th class="sorting" tabindex="0" aria-controls="example2"
+                                  <th class="sorting hidden-xs" tabindex="0" aria-controls="example2"
                                  rowspan="1" colspan="2"
                                  aria-label="Rendering engine: activate to sort column ascending">${logonProject.name }</th>
-                                  <th class="sorting" tabindex="0" aria-controls="example2"
+                                  <th class="sorting hidden-xs" tabindex="0" aria-controls="example2"
                                  rowspan="1" colspan="1"
                                  aria-label="Rendering engine: activate to sort column ascending">작성일</th>
-                                  <th class="sorting" tabindex="0" aria-controls="example2"
+                                  <th class="sorting hidden-xs" tabindex="0" aria-controls="example2"
                                  rowspan="1" colspan="2"
                                  aria-label="Rendering engine: activate to sort column ascending"></th>
-                                  <th class="sorting" tabindex="0" aria-controls="example2"
+                                  <th class="sorting hidden-xs" tabindex="0" aria-controls="example2"
                                  rowspan="1" colspan="1"
                                  aria-label="Rendering engine: activate to sort column ascending">작성자</th>
-                                  <th class="sorting" tabindex="0" aria-controls="example2"
+                                  <th class="sorting hidden-xs" tabindex="0" aria-controls="example2"
                                  rowspan="1" colspan="1"
                                  aria-label="Rendering engine: activate to sort column ascending">${logonProject.creator }</th>
                            </tr>
                            <tr role="row">
                               <th class="sorting" tabindex="0" aria-controls="example2"
                                  rowspan="1" colspan="1"
-                                 aria-label="Rendering engine: activate to sort column ascending">번호</th>
-                              <th class="sorting_desc" tabindex="0" aria-controls="example2"
+                                 aria-label="Rendering engine: activate to sort column ascending">#</th>
+                              <th class="sorting_desc hidden-xs" tabindex="0" aria-controls="example2"
                                  rowspan="1" colspan="1"
                                  aria-label="Browser: activate to sort column ascending"
                                  aria-sort="descending">요구사항 ID</th>
@@ -107,16 +106,16 @@
                               <th class="sorting" tabindex="0" aria-controls="example2"
                                  rowspan="1" colspan="1"
                                  aria-label="CSS grade: activate to sort column ascending">요구사항 내용</th>
-                              <th class="sorting" tabindex="0" aria-controls="example2"
+                              <th class="sorting hidden-xs" tabindex="0" aria-controls="example2"
                                  rowspan="1" colspan="1"
                                  aria-label="CSS grade: activate to sort column ascending">인터페이스</th>
-                                 <th class="sorting" tabindex="0" aria-controls="example2"
+                                 <th class="sorting hidden-xs" tabindex="0" aria-controls="example2"
                                  rowspan="1" colspan="1"
                                  aria-label="CSS grade: activate to sort column ascending">제한사항<br>(규정/법률)</th>
-                                 <th class="sorting" tabindex="0" aria-controls="example2"
+                                 <th class="sorting hidden-xs" tabindex="0" aria-controls="example2"
                                  rowspan="1" colspan="1"
                                  aria-label="CSS grade: activate to sort column ascending">수용여부</th>
-                                 <th class="sorting" tabindex="0" aria-controls="example2"
+                                 <th class="sorting hidden-xs" tabindex="0" aria-controls="example2"
                                  rowspan="1" colspan="1"
                                  aria-label="CSS grade: activate to sort column ascending">담당자</th>
                            </tr>
@@ -126,13 +125,13 @@
                            <c:forEach var="require" items="${ requireList }" varStatus="stat">
                               <tr role="row" class="${ (stat.count mod 2)==0 ? 'even':'odd' }">
                                  <td>${ stat.count }</td>
-                                 <td>${ require.rdId }</td>
+                                 <td class="hidden-xs">${ require.rdId }</td>
                                  <td>${ require.rdName }</td>
                                  <td>${ require.rdContent }</td>
-                                 <td>${ require.limit }</td>
-                                 <td>${ require.interf }</td>
-                                 <td>${ require.acceptyn }</td>
-                                 <td><a class="postboxLink" href="${ require.manager }">${ require.manager }</a></td>
+                                 <td class="hidden-xs">${ require.limit }</td>
+                                 <td class="hidden-xs">${ require.interf }</td>
+                                 <td class="hidden-xs">${ require.acceptyn }</td>
+                                 <td class="hidden-xs"><a class="postboxLink" href="${ require.manager }">${ require.manager }</a></td>
                                  
                               </tr>
                            </c:forEach>
