@@ -37,4 +37,7 @@ public interface ProjectDAO {
 
 	public void insertUsecase(ProjectVO project) throws SQLException;
 	public void insertGcNum(ProjectVO project) throws SQLException;
+	
+	public void updateProject(ProjectVO project) throws SQLException;
+	public void deleteProject(ProjectVO project) throws SQLException;
 }

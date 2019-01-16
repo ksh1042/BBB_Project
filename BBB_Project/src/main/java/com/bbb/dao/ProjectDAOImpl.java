@@ -118,6 +118,17 @@ public class ProjectDAOImpl implements ProjectDAO{
 		session.update("Project.insertGcNum", project);
 	}
 
+	@Override
+	public void updateProject(ProjectVO project) throws SQLException {
+		session.update("Project.updateProject", project);
+	}
+
+	@Override
+	public void deleteProject(ProjectVO project) throws SQLException {
+		
+		
+	}
+
 	
 	
 

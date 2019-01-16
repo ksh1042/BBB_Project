@@ -116,6 +116,11 @@ public class ProjectServiceImpl implements ProjectService{
 		
 	}
 
+	@Override
+	public void updateProject(ProjectVO project) throws SQLException {
+		projectDAO.updateProject(project);
+	}
+
 	
 
 	
