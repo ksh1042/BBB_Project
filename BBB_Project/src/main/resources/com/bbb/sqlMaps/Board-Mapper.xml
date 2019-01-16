@@ -4,9 +4,14 @@
 
 <mapper namespace="Board">
    
+   	<select id="getSeqNextvalue" resultType="int">
+		select board_seq.nextval from dual
+	
+	</select>
+	
 	<update id="insertBoard">
 		insert into tbl_board(bnum,pjnum,title,content,writer,kind)
-		values(bnum_seq.nextval,#{pjNum},#{title},#{content},#{writer},1)
+		values(#{bNum},#{pjNum},#{title},#{content},#{writer},#{kind})
 	</update>
 	
 	<update id="updateBoard">
