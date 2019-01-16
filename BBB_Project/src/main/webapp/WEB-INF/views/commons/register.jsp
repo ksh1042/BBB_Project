@@ -55,7 +55,7 @@
 			<form action="register" method="post" name="registerForm" id="registerForm" enctype="multipart/form-data"> 
 				<div>
 					<img class="profile-user-img img-circle" style="cursor:pointer;display:block;width:120px;height:120px;" src="/resources/images/profile.png" alt="User profile picture" id="profile" onclick="profile_go();"><br/>
-					<input type="file" name="file" id="uploadProfile" style="display:none;">
+					<input type="file" name="file" accept="image/jpeg, image/png, image/jpg" id="uploadProfile" style="display:none;">
 				</div>
 				<div class="form-group has-feedback">
 					<input type="text" name="id" class="form-control" placeholder="아이디" onblur="checkId();" id="id"> 
