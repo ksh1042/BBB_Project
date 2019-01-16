@@ -71,7 +71,7 @@
           </li>
           <!-- /.사서함 버튼 -->
 
-          <!-- Notifications Menu -->
+          <!-- 알림 Menu -->
           <li class="dropdown notifications-menu">
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -83,10 +83,17 @@
               <li>
                 <!-- Inner Menu: contains the notifications -->
                 <ul class="menu">
-                  <li><!-- start notification -->
+                  <!-- 새로운 내용 -->
+                  <li>
                     <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                      <i class="fa fa-users text-aqua"></i>초대가 온 프로젝트명
                     </a>
+                  </li>
+                  <li>
+                  	  <div>
+                      <button type="button" class="btn btn-block btn-success" style="float:left; margin-left:10px; width:40%;">수락</button>
+                      <button type="button" class="btn btn-block btn-danger" style="float:right; margin-right:10px; width:40%; margin-top:0;">거절</button>
+                  	  </div>
                   </li>
                   <!-- end notification -->
                 </ul>

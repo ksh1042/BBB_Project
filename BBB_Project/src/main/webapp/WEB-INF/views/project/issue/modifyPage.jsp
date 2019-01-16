@@ -6,13 +6,12 @@
 
 	<section class="content-header">
 		<h1 style="cursor: pointer;"
-			onclick="javascript:location.href='<%=request.getContextPath()%>/project/issue/list';">이슈 게시판</h1>
+			onclick="javascript:location.href='<%=request.getContextPath()%>/project/issue/list';">이슈</h1>
 		<ol class="breadcrumb">
-			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
-					<i class="fa fa-dashboard"></i>내 프로젝트
+			<li><a href="<%=request.getContextPath()%>/project/main?pjNum=${logonProject.pjNum}">
+					<i class="fa fa-dashboard"></i>${logonProject.name }
 			</a></li>
-			<li><a href="<%=request.getContextPath()%>/project/main?pjNum=${logonProject.pjNum}">${logonProject.name }</a></li>
-			<li class="active"><a href="<%=request.getContextPath()%>/project/issue/list">이슈 리스트</a></li>
+			<li class="active"><a href="<%=request.getContextPath()%>/project/issue/list">이슈</a></li>
 			<li class="active">${issue.title }</li>
 		</ol>
 	</section>

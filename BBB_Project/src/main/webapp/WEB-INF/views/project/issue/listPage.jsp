@@ -17,7 +17,7 @@
 			<li><a href="<%=request.getContextPath()%>/project/main?pjNum=${logonProject.pjNum}">
 			<i class="fa fa-dashboard"></i>
 			${logonProject.name }</a></li>
-			<li class="active"><a href="<%=request.getContextPath()%>/project/issue/list">이슈 리스트</a></li>
+			<li class="active"><a href="<%=request.getContextPath()%>/project/issue/list">이슈</a></li>
 		</ol>
 	</section>
 

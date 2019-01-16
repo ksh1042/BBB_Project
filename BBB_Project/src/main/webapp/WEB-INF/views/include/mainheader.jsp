@@ -112,6 +112,36 @@ height:150px;
 							</a>
 						</li>
 						
+					<!-- 알림 Menu -->
+			          <li class="dropdown notifications-menu">
+			            <!-- Menu toggle button -->
+			            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			              <i class="fa fa-bell-o"></i>
+			              <span class="label label-warning">10</span>
+			            </a>
+			            <ul class="dropdown-menu">
+			              <li class="header">You have 10 notifications</li>
+			              <li>
+			                <!-- Inner Menu: contains the notifications -->
+			                <ul class="menu">
+			                  <!-- 새로운 내용 -->
+			                  <li>
+			                    <a href="#">
+			                      <i class="fa fa-users text-aqua"></i>초대가 온 프로젝트명
+			                    </a>
+			                  </li>
+			                  <li>
+			                  	  <div>
+			                      <button type="button" class="btn btn-block btn-success" style="float:left; margin-left:10px; width:40%;">수락</button>
+			                      <button type="button" class="btn btn-block btn-danger" style="float:right; margin-right:10px; width:40%; margin-top:0;">거절</button>
+			                  	  </div>
+			                  </li>
+			                  <!-- end notification -->
+			                </ul>
+			              </li>
+			              <li class="footer"><a href="#">View all</a></li>
+			            </ul>
+			          </li>
 						 <!-- Domain Menu -->
 						<sec:authorize access="hasAuthority('ROLE_USER')">
 						<li class="dropdown notifications-menu">

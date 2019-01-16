@@ -14,22 +14,15 @@
 </head>
 <body>
 	<section class="content-header">
-		<div class="container-fluid">
-			<div class="row mb-2">
-				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">프로젝트 라이브러리 수정</h1>
-				</div>
-				<div class="col-sm-6">
-					<ol class="breadcrumb float-sm-left">
-						<li class="breadcrumb-item">
-							
-						</li>
-					</ol>
-				</div>
-				<!-- /.col -->
-			</div>
-		</div>
+		<h1 style="cursor: pointer;"onclick="javascript:location.href='<%=request.getContextPath()%>/project/issue/list';">프로젝트 계획서</h1>
+		<ol class="breadcrumb">
+			<li><a href="<%=request.getContextPath()%>/project/main?pjNum=${logonProject.pjNum}">
+			<i class="fa fa-dashboard"></i>
+			${logonProject.name }</a></li>
+			<li class="active"><a href="<%=request.getContextPath()%>/project/plan/modifyPlan">계획서</a></li>
+		</ol>
 	</section>
+
 	
 	<section class="content">
 		<div class="form-group has-feedback col-md-9" style="margin">
