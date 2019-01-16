@@ -29,6 +29,12 @@
 		where id=#{id}
 	</update>
 
+	<update id ="changeOriginProfile">
+		update tbl_member 
+		set image=''
+		where id=#{id}
+	</update>
+
 	<update id="deleteMember">
 		delete from tbl_member where id=#{id}
 	</update>

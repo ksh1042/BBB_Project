@@ -18,6 +18,8 @@ public interface MemberDAO {
 	
 	void updateMember(MemberVO member)throws SQLException;
 	
+	void updateOriginProfile(String id)throws SQLException;
+	
 	void deleteMember(String id)throws SQLException;
 	
 	int idCheck(String id)throws SQLException;
