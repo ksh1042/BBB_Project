@@ -5,6 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	response.setHeader("Pragma", "No-cache");
 	response.setHeader("Cache-Control", "no-cache");
@@ -45,6 +46,12 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 <decorator:head />
+<style>
+.profile-change{
+width:150px;
+height:150px;
+}
+</style>
 </head>
 
 <body class="hold-transition skin-blue layout-boxed layout-top-nav">
@@ -128,14 +135,24 @@
 						<!-- Usermenu  -->
 						<li class="dropdown user user-menu">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
-								<img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> 
+								<c:if test="${loginUser.image ne null }">
+			                    	<img src="<spring:url value='/profile/${loginUser.image}'/>" class="user-image" alt="User Image"/>
+			                    </c:if>
+			                    <c:if test="${loginUser.image eq null }">
+			                    	<img src="/resources/images/profile.png" class="user-image" alt="User Image"/>
+			                    </c:if>
 								<span class="hidden-xs">${loginUser.name } 님 환영합니다.</span>
 							</a>
 							<ul class="dropdown-menu">
 								<!-- User image -->
 
 								<li class="user-header">
-									<img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+									<c:if test="${loginUser.image ne null }">
+			                    		<img src="<spring:url value='/profile/${loginUser.image}'/>" class="img-circle"  alt="User Image"/>
+				                    </c:if>
+				                    <c:if test="${loginUser.image eq null }">
+				                    	<img src="/resources/images/profile.png" class="img-circle"  alt="User Image"/>
+				                    </c:if>
 									<p><strong>${loginUser.id }</strong>(${loginUser.name }) <small>Member since <fmt:formatDate value="${loginUser.indate }" pattern="yyyy-MM"/>
 									</small></p>
 								</li>
@@ -184,7 +201,7 @@
 			<!-- Content Wrapper. Contains page content -->
 			
 	              
-            <form action="/main/mypage/modify" method="post" name="mypageForm">
+            <form action="/main/mypage/modify" method="post" name="mypageForm" id="mypageForm" enctype="multipart/form-data">
 			<div class="modal fade in" id="modal-default" style="display: none; padding-right: 16px;height: auto;">
 	          <div class="modal-dialog">
 	            <div class="modal-content">
@@ -196,13 +213,24 @@
 	             
 	              <div class="modal-body" >
 					<div class="box-body">
-						<div class="form-group" >
-		
-		                  <div class="col-sm-10">
-		                    <img src="<spring:url value='/profile/${loginUser.image}'/>" class="profile-user-img img-responsive img-circle" style="cursor:pointer;" width="10%"/><br/>
-		                  </div>
-		                </div>
 					
+						<div class="form-group" >
+							<c:if test="${loginUser.image ne null }">
+		                    	<img src="<spring:url value='/profile/${loginUser.image}'/>" class="profile-user-img img-circle profile-change" style="cursor:pointer;display: block;" onclick="profile_go();"/><br/>
+		                    </c:if>
+		                    <c:if test="${loginUser.image eq null }">
+		                    	<img src="/resources/images/profile.png" class="profile-user-img img-circle profile-change" style="cursor:pointer;display: block;" onclick="profile_go();"/><br/>
+		                    </c:if>
+		                    <input type="file" name="file" id="uploadProfile" style="display:none;">
+		                </div>
+		                
+		                <div class="form-group" >
+		                	<label for="inputEmail3" class="col-sm-2 control-label">이미지</label>
+			                <div class="col-sm-10">
+			                    <button type="button" class="btn btn-block btn-warning" style="width:150px;">기본 이미지 변경</button><br/>
+							</div>
+						</div>			
+							
 		                <div class="form-group" >
 		                  <label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
 		
@@ -262,11 +290,47 @@
 	          <!-- /.modal-dialog -->
 	        </div>
 	        </form>
-        
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script>
         	function profileModify_go(){
+        		
+        		var profileValue = $("#uploadProfile").val().split("\\");
+        		var profileName ="";
+        		if(profileValue == ""){
+        			profileName = "profile.png";
+        		}else{
+        			profileName = profileValue[profileValue.length-1]; //파일명 추출
+        			
+        		}
+        		
+        		var input1=$('<input>').attr('type','hidden').attr('name','image').val(profileName);
+        		
+        		$('form#mypageForm').append(input1);
         		document.mypageForm.submit();
         		alert("회원정보가 수정되었습니다.");
+        	}
+        	
+        	function profile_go(){
+        		
+        		$("#uploadProfile").click();
+        		
+        		function readURL(input) {
+        			 
+        		    if (input.files && input.files[0]) {
+        		        var reader = new FileReader();
+        		 
+        		        reader.onload = function (e) {
+        		            $('.profile-change').attr('src', e.target.result);
+        		        }
+        		 
+        		        reader.readAsDataURL(input.files[0]);
+        		    }
+        		}
+        		 
+        		$("#uploadProfile").change(function(){
+        		    readURL(this);
+        		});
+        		
         	}
         </script>
       
