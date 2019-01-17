@@ -86,7 +86,7 @@
 		var form = $('form[role="form"]');
 		$("button[type='submit']").on("click", function(e){
 			e.preventDefault();
-			if($('.uploadedList').find('li')){
+			if(!$('.uploadedList').find('li')){
 				alert("업로드예정인 계획서가 없습니다.");
 				return;
 			}
@@ -151,10 +151,10 @@
 				alert('파일 업로드는 한 개만 가능합니다');
 				return;
 			}
-			/* if(extend != 'zip' && extend != 'ZIP'){
-				alert('zip 압축파일만 업로드가 가능합니다');
+			if(extend != 'pdf' && extend != 'PDF'){
+				alert('pdf파일만 업로드가 가능합니다');
 				return;
-			} */
+			}
 			
 			var formData = new FormData();
 			formData.append('file', files[0]);

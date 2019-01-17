@@ -2,18 +2,22 @@ package com.bbb.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import com.bbb.controller.Criteria;
 import com.bbb.controller.SearchCriteria;
 import com.bbb.dao.BoardAttachDAO;
-import com.bbb.dao.BoardDAO;
+import com.bbb.dao.FileboardDAO;
 import com.bbb.dto.BoardAttachVO;
 import com.bbb.dto.BoardVO;
 
+
 public class FileBoardServiceImpl implements FileBoardService {
 
-	private BoardDAO boardDAO;
-	public void setBoardDAO(BoardDAO boardDAO){
-		this.boardDAO=boardDAO;
+	private FileboardDAO fileboardDAO;
+	public void setFileBoardDAO(FileboardDAO fileboardDAO){
+		this.fileboardDAO=fileboardDAO;
 	}
 	private BoardAttachDAO attachDAO;
 	public void setAttachDAO(BoardAttachDAO attachDAO){
@@ -21,9 +25,9 @@ public class FileBoardServiceImpl implements FileBoardService {
 	}
 	@Override
 	public void create(BoardVO board) throws Exception {
-		int bNum = boardDAO.getSeqNextvalue();
+		int bNum = fileboardDAO.getSeqNextvalue();
 		board.setbNum(bNum);
-		boardDAO.insertBoard(board);
+		fileboardDAO.insertBoard(board);
 		
 		
 		List<BoardAttachVO> attachList=board.getAttachList();
@@ -38,14 +42,14 @@ public class FileBoardServiceImpl implements FileBoardService {
 
 	@Override
 	public BoardVO read(int bNum) throws Exception {
-		BoardVO board=boardDAO.selectBoardByBnum(bNum);
-		boardDAO.increaseCount(bNum);
+		BoardVO board=fileboardDAO.selectBoardByBnum(bNum);
+		fileboardDAO.increaseCount(bNum);
 		return board;
 	}
 
 	@Override
 	public BoardVO readBybNum(int bNum) throws Exception {
-		BoardVO board=boardDAO.selectBoardByBnum(bNum);
+		BoardVO board=fileboardDAO.selectBoardByBnum(bNum);
 		
 		return board;
 	}
@@ -53,7 +57,7 @@ public class FileBoardServiceImpl implements FileBoardService {
 	public void update(BoardVO board) throws Exception {
 		int bNum = board.getbNum();
 		
-		boardDAO.updateBoard(board);
+		fileboardDAO.updateBoard(board);
 		attachDAO.deleteAllAttach(bNum);
 		
 		for(BoardAttachVO attach : board.getAttachList()){
@@ -65,32 +69,32 @@ public class FileBoardServiceImpl implements FileBoardService {
 
 	@Override
 	public void delete(int bNum) throws Exception {
-		boardDAO.deleteBoard(bNum);
+		fileboardDAO.deleteBoard(bNum);
 
 	}
 
 	@Override
 	public List<BoardVO> listAll() throws Exception {
-		List<BoardVO> boardList= boardDAO.selectBoardAll();
+		List<BoardVO> boardList= fileboardDAO.selectBoardAll();
 		return boardList;
 	}
 
 	@Override
 	public List<BoardVO> listCriteria(Criteria cri) throws Exception {
-		List<BoardVO> boardList = boardDAO.selectBoardCriteria(cri);
+		List<BoardVO> boardList = fileboardDAO.selectBoardCriteria(cri);
 		return boardList;
 	}
 
 	@Override
 	public List<BoardVO> listSearch(SearchCriteria cri,int pjNum) throws Exception {
-		List<BoardVO> boardList=boardDAO.selectSearchBoardList(cri,pjNum);
+		List<BoardVO> boardList=fileboardDAO.selectSearchBoardList(cri,pjNum);
 		
 		return boardList;
 	}
 
 	@Override
 	public int readSearchBoardCount(SearchCriteria cri, int pjNum) throws Exception {
-		int count = boardDAO.selectSearchBoardListCount(cri,pjNum);
+		int count = fileboardDAO.selectSearchBoardListCount(cri,pjNum);
 		return count;
 	}
 

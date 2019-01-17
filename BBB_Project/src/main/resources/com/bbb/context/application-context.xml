@@ -73,10 +73,14 @@
 
 	<bean id="usecaseService" class="com.bbb.service.UseCaseServiceImpl"
 		p:useCaseDAO-ref="usecaseDAO" />
-
-	<bean id="fileboardService" class="com.bbb.service.FileBoardServiceImpl"
-		p:boardDAO-ref="boardDAO" p:attachDAO-ref="boardAttachDAO" />
-
+	
+	<bean id="fileboardDAO"
+        class="com.bbb.dao.FileboardDAOImpl"
+         p:session-ref="sqlSession" />
+   
+    <bean id="FileBoardService" class="com.bbb.service.FileBoardServiceImpl"
+      p:fileBoardDAO-ref="fileboardDAO" p:attachDAO-ref="boardAttachDAO"  />
+      
 	<bean id="boardService" class="com.bbb.service.BoardServiceImpl"
 		p:boardDAO-ref="boardDAO" />
 
@@ -117,7 +121,6 @@
 	<bean id="usecaseReplyService"
 		  class="com.bbb.service.UseCaseReplyServiceImpl"
 		  p:useCaseReplyDAO-ref="usecaseReplyDAO" />
-			
-
+		
 </beans>
 

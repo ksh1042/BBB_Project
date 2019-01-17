@@ -4,6 +4,10 @@
 
 <mapper namespace="Board">
    
+   	<select id="getSeqNextvalue" resultType="int">
+   		SELECT board_seq.nextval
+   		FROM dual
+   	</select>
 	<update id="insertBoard">
 		insert into tbl_board(bnum,pjnum,title,content,writer,kind)
 		values(bnum_seq.nextval,#{pjNum},#{title},#{content},#{writer},1)
@@ -67,7 +71,11 @@
 		from tbl_board
 		order by bnum desc, indate desc		
 	</select>
-	  
+	 
+	 <update id="deleteBoardAll">
+	 	DELETE FROM tbl_board
+	 	WHERE pjNum=#{pjNum}
+	 </update>
 
 </mapper>
 

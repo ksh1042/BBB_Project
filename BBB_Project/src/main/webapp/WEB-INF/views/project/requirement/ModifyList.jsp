@@ -16,15 +16,17 @@
 </head>
 <body>
 	<section class="content-header">
-		<div class="container-fluid">
-			<div class="row mb-2">
-				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">요구사항 정의목록</h1>
-				</div>
-			</div>
-		</div>
+		<h1 style="cursor: pointer;"onclick="javascript:location.href='<%=request.getContextPath()%>/project/requirement/list';">요구사항 정의서</h1>
+		<ol class="breadcrumb">
+			<li><a href="<%=request.getContextPath()%>/project/main?pjNum=${logonProject.pjNum}">
+			<i class="fa fa-dashboard"></i>${logonProject.name }</a></li>
+			<li class="active"><a href="<%=request.getContextPath()%>/project/requirement/list">요구사항 정의서</a></li>
+			<li class="active">수정 페이지</a></li>
+		</ol>
 	</section>
+	
 	<section class="content">
+		<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
@@ -121,6 +123,7 @@
 				</div>
 			</div>
 			<!-- /.box -->
+		</div>
 		</div>
 	</section>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>

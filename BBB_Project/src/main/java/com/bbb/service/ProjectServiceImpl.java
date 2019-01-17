@@ -117,10 +117,19 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 
 	@Override
+	public void updateProject(ProjectVO project) throws SQLException {
+		projectDAO.updateProject(project);
+	}
 	public void leaveProject(ProjectPartakeVO takeVO) throws SQLException {
 		projectDAO.leaveProject(takeVO);
 	}
 
+	@Override
+	public void deleteProject(int pjNum) throws SQLException {
+		projectDAO.deleteProject(pjNum);
+	}
+
+	
 	@Override
 	public List<ProjectVO> getInvitedList(String id) throws SQLException {
 		return projectDAO.getInvitedList(id);
@@ -135,9 +144,6 @@ public class ProjectServiceImpl implements ProjectService{
 	public void refuseInvite(ProjectPartakeVO partake) throws SQLException {
 		projectDAO.refuseInvite(partake);
 	}
-
-	
-
 	
 
 	

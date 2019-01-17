@@ -17,7 +17,6 @@
 			background-color : #F1F1F1;
 		}
 		div.scrollable {
-			min-height: 634px;
 			overflow:scroll;
 			overflow-x:auto;
 			overflow-y:hidden;
@@ -32,12 +31,15 @@
 	    }
 		table tr>td:nth-child(1), table tr>th:nth-child(1) {
 	      width : 10%;
+	      text-align: center;
 	    }
 	    table tr>td:nth-child(2), table tr>th:nth-child(2) {
-	      width : 70%;
+	      width : 60%;
+	      text-align: center;
 	    }
 	    table tr>td:nth-child(3), table tr>th:nth-child(3) {
-	      width : 20%;
+	      width : 30%;
+	      text-align: center;
 	    }
 	</style>
 </head>
@@ -45,10 +47,7 @@
 	<section class="content-header">
 		<h1>요구사항 정의서</h1>
 		<ol class="breadcrumb">
-			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
-				<i class="fa fa-dashboard"></i>My Project</a>
-			</li>
-			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}">${logonProject.name }</a></li>
+			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}"><i class="fa fa-dashboard"></i>${logonProject.name }</a></li>
 			<li class="active"><a href="list">요구사항 정의서</a></li>
 			<li class="active"><a href="history">수정이력</a></li>
 		</ol>
@@ -78,8 +77,7 @@
 						<form id="frm" method="post"></form>
 					</div>
 					<div class="box-body">
-						<div id="example2_wrapper"
-							class="dataTables_wrapper form-inline dt-bootstrap">
+						<div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 							<div class="row">
 								<div class="col-sm-6"></div>
 								<div class="col-sm-6"></div>

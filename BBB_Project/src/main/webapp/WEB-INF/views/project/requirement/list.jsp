@@ -6,19 +6,66 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
 <head>
    <style>
-      th {
-         text-align: center;
-         background-color : #F1F1F1;
-      }
-      td {
-         white-space: nowrap;
-      }
-      tbody tr:NTH-CHILD(2n+1)>td {
-         background-color : #F1F1F1;
-      }
-      
-      
-   </style>
+			th {
+				text-align: center;
+				background-color : #F1F1F1;
+			}
+			td {
+				white-space: nowrap;
+			}
+			tbody tr:NTH-CHILD(2n+1)>td {
+				background-color : #F1F1F1;
+			}
+		div.scrollable {
+			overflow:scroll;
+			overflow-x:auto;
+			overflow-y:hidden;
+		}
+		table {
+			width : 930px;
+			table-layout: fixed;
+		}
+		table td{
+	      overflow: hidden;
+	      white-space: nowrap;
+	      text-overflow: ellipsis;
+	    }
+	    table th{
+	      overflow: hidden;
+	      white-space: nowrap;
+	      text-overflow: ellipsis;
+	    }
+	    table tr>td:nth-child(1), table tr>th:nth-child(1) {
+	      width : 50px;
+	    }
+	    table tr>td:nth-child(2), table tr>th:nth-child(2) {
+	      width : 100px;
+	    }
+	    table tr>td:nth-child(3), table tr>th:nth-child(3) {
+	      width : 100px;
+	    }
+	    table tr>td:nth-child(4), table tr>th:nth-child(4) {
+	      width : 40%;
+	    }
+	    table tr>td:nth-child(5), table tr>th:nth-child(5) {
+	      width : 70px;
+	    }
+	    table tr>td:nth-child(6), table tr>th:nth-child(6) {
+	      width : 85px;
+	    }
+	    table tr>td:nth-child(7), table tr>th:nth-child(7) {
+	      width : 85px;
+	    }
+	    table tr>td:nth-child(8), table tr>th:nth-child(8) {
+	      width : 85px;
+	    }
+	    table tr>td:nth-child(9), table tr>th:nth-child(9) {
+	      width : 85px;
+	    }
+	    table tr>td:nth-child(10), table tr>th:nth-child(10) {
+	      width : 30px;
+	    }
+	</style>
 </head>
 <body>
 	<section class="content-header">
@@ -68,7 +115,7 @@
                      <div class="col-sm-6"></div>
                   </div>
                   <div class="row">
-                     <div class="col-sm-12">
+                     <div class="col-sm-12 scrollable">
                         <table id="example2"
                            class="table table-bordered table-hover dataTable" role="grid"
                            aria-describedby="example2_info">
@@ -76,16 +123,16 @@
                               <th class="sorting" tabindex="0" aria-controls="example2"
                                  rowspan="1" colspan="1"
                                  aria-label="Rendering engine: activate to sort column ascending">#</th>
-                              <th class="sorting_desc hidden-xs" tabindex="0" aria-controls="example2"
+                              <th class="sorting_desc" tabindex="0" aria-controls="example2"
                                  rowspan="1" colspan="1"
                                  aria-label="Browser: activate to sort column ascending"
-                                 aria-sort="descending">요구사항 ID</th>
+                                 aria-sort="descending">요구 ID</th>
                               <th class="sorting" tabindex="0" aria-controls="example2"
+                                 rowspan="1" colspan="1" style="text-overflow: ellipsis;"
+                                 aria-label="Platform(s): activate to sort column ascending">명칭</th>
+                              <th class="sorting hidden-xs" tabindex="0" aria-controls="example2"
                                  rowspan="1" colspan="1"
-                                 aria-label="Platform(s): activate to sort column ascending">요구사항 명</th>
-                              <th class="sorting" tabindex="0" aria-controls="example2"
-                                 rowspan="1" colspan="1"
-                                 aria-label="CSS grade: activate to sort column ascending">요구사항 내용</th>
+                                 aria-label="CSS grade: activate to sort column ascending">내용</th>
                               <th class="sorting hidden-xs" tabindex="0" aria-controls="example2"
                                  rowspan="1" colspan="1"
                                  aria-label="CSS grade: activate to sort column ascending">인터페이스</th>
@@ -105,9 +152,9 @@
                            <c:forEach var="require" items="${ requireList }" varStatus="stat">
                               <tr role="row" class="${ (stat.count mod 2)==0 ? 'even':'odd' }">
                                  <td>${ stat.count }</td>
-                                 <td class="hidden-xs">${ require.rdId }</td>
+                                 <td>${ require.rdId }</td>
                                  <td>${ require.rdName }</td>
-                                 <td>${ require.rdContent }</td>
+                                 <td class="hidden-xs">${ require.rdContent }</td>
                                  <td class="hidden-xs">${ require.limit }</td>
                                  <td class="hidden-xs">${ require.interf }</td>
                                  <td class="hidden-xs">${ require.acceptyn }</td>
@@ -145,6 +192,7 @@
                      <div class="col-sm-4">
                         <button type="button" class="btn btn-warning" onclick="modify_go();" style="margin-left:20px; float:right;">수정</button>      
                         <button type="button" class="btn btn-primary" onclick="hist_go();" style="margin-left:20px;float:right;">수정 이력</button>
+                        <button type="button" class="btn btn-success" id="exportExcel" style="margin-left:20px; float:right;">Excel 출력</button>
                      </div>
                   </div>
                </div>

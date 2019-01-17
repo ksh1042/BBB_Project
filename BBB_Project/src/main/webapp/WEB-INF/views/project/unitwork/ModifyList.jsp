@@ -35,15 +35,13 @@
 	<section class="content-header">
 		<h1>단위업무 정의서</h1>
 		<ol class="breadcrumb">
-			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
-				<i class="fa fa-dashboard"></i>My Project</a>
-			</li>
-			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}">${logonProject.name }</a></li>
+			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}"><i class="fa fa-dashboard"></i>${logonProject.name }</a></li>
 			<li class="active"><a href="list">단위업무 정의서</a></li>
 			<li class="active"><a href="#">수정</a></li>
 		</ol>
 	</section>
 	<section class="content">
+		<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
@@ -142,6 +140,12 @@
 												<td><input type="date" class="form-control" name="devDate" value='<fmt:formatDate value="${ unit.devDate > checkDate ? unit.devDate : '' }" pattern="yyyy-MM-dd"/>'></td>
 												<td><input type="text" class="form-control" name="estmate" value="${ unit.estmate }" size="1"></td>
 											</tr>
+											
+											
+										</c:forEach>
+										<!-- 단위업무 추가하기 -->
+										<tr class="addUdPoint">
+											<td colspan="11" style="font-weight:bold;"><a href="#" class="addRow"><span class="glyphicon glyphicon-plus-sign "></span>&nbsp;단위업무 행 추가</a></td>
 											<select name="rddNumT" class="form-control hidden">
 												<option value="${ unit.rddNum }" selected hidden>${ unit.rddNum }</option>
 												<c:forEach var="require" items="${ requireList }">
@@ -154,11 +158,6 @@
 													<option value="${ require.rdName }">${ require.rdName }</option>
 												</c:forEach>
 											</select>
-											
-										</c:forEach>
-										<!-- 단위업무 추가하기 -->
-										<tr class="addUdPoint">
-											<td colspan="11" style="font-weight:bold;"><a href="#" class="addRow"><span class="glyphicon glyphicon-plus-sign "></span>&nbsp;단위업무 행 추가</a></td>
 										</tr>
 									</table>
 								</form>
@@ -191,6 +190,7 @@
 				</div>
 			</div>
 			<!-- /.box -->
+		</div>
 		</div>
 	</section>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
@@ -371,7 +371,7 @@
 			$('option:eq('+selectedIndex+')', targetSelect).removeAttr('selected');	
 			$('option:eq('+selectedIndex+')', targetSelect).attr('selected','selected');
 			var temp = targetSelect.val();
-			
+	
 			$(this).parent().next().children('input').val(temp);
 			$(this).parent().next().children('input').attr('title', temp);
 			
@@ -381,7 +381,7 @@
 			$('option:eq('+selectedIndex+')', targetSelect).attr('selected','selected');
 			temp = targetSelect.val();
 			$(this).prev().val(temp);
-			
+
 		});
 		
 		function contains(data, keyword){

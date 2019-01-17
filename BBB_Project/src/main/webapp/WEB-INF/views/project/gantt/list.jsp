@@ -25,21 +25,21 @@ td.gantt-cell {
 </style>
 </head>
 <body>
-<div class="row" >
-	<section class="content-header">
-		<div class="container-fluid">
-			<div class="row mb-2">
-				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">간트차트 리스트</h1>
-				</div>
-			</div>
-		</div>
-	</section>
-	<section class="content">
+
+<section class="content-header">
+		<h1>간트차트</h1>
+		<ol class="breadcrumb">
+			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}">
+				<i class="fa fa-dashboard">&nbsp;&nbsp;&nbsp;${logonProject.name }</i></a></li>
+			<li class="active">간트차트</li>
+		</ol>
+</section>
+
+<section class="content">
+	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">간트차트</h3>
 					<form id="frm" method="post">
 						<div id="btn-custom" style="float: right;">
 							<button type="button" class="btn btn-primary"
@@ -56,23 +56,19 @@ td.gantt-cell {
 					<div id="chart_div"></div>
 					<div class="row">
 						<div class="col-sm-5">
-							<div class="dataTables_info" id="example2_info" role="status"
-								aria-live="polite">
+							<div class="dataTables_info" id="example2_info" role="status" aria-live="polite">
 								Showing <b>${ fn:length(ganttList) }</b> entries
 							</div>
 						</div>
 					</div>
 				</div>
 				<!-- /.box-body -->
-				
-				
 			</div>
 			<!-- /.box -->
-			
 		</div>
-
-	</section>
 	</div>
+</section>
+
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script>
 		$('a.postboxLink').on('click', function(e) {
@@ -84,8 +80,7 @@ td.gantt-cell {
 			location.href = '<%=request.getContextPath()%>/project/gantt/history';
 		}
 	</script>
-	<script type="text/javascript"
-		src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript">
 		google.charts.load('current', {
 			'packages' : [ 'gantt' ]

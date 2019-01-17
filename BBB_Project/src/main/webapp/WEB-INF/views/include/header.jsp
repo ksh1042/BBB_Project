@@ -83,10 +83,10 @@ height:150px;
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">0</span>
+              <span class="label label-warning inviteCount"></span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">프로젝트에 초대받은 목록</li>
+              <li class="header">프로젝트 초대 목록</li>
               <li>
                 <!-- Inner Menu: contains the notifications -->
                 <ul class="menu invitedList">
@@ -299,15 +299,17 @@ height:150px;
 </script>
  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script>
-        	var id = "${loginUser.id}";
-	        $.getJSON("/main/getInvite/"+id,function(list){
-				$(list).each(function(){
-					var invitedInfo=getInviteInfo(this,"<%=request.getContextPath()%>");
-					var html=template(invitedInfo);
-					$('.invitedList').append(html);
-					
-				});
-			});
+	        var id = "${loginUser.id}";
+	        var invitecount;
+	        $.getJSON("getInvite/"+id,function(list){
+	         $(list).each(function(){
+	            var invitedInfo=getInviteInfo(this,"<%=request.getContextPath()%>");
+	            var html=template(invitedInfo);
+	            $('.invitedList').append(html);
+	            invitecount++;
+	         });
+	         $('.inviteCount').append(invitecount);
+	      	});
 	        
 	        var template = Handlebars.compile($('#templateInvite').html());
         
@@ -439,18 +441,6 @@ height:150px;
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
 
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p>${loginUser.name}</p>
-          <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-        </div>
-      </div>
-
       <!-- search form (Optional) -->
       <sec:authorize access="hasAuthority('ROLE_USER')">
       <form action="<%=request.getContextPath()%>/main/searchPList" method="get" class="sidebar-form">
@@ -569,7 +559,7 @@ height:150px;
 					
 					<li>
 						<a href="<%=request.getContextPath()%>/project/usecase/view">
-						<i class="fa fa-circle-o"></i>U-C Diagram</a></li>
+						<i class="fa fa-circle-o"></i>유즈케이스</a></li>
 				</ul>
 			</li>
 
@@ -577,12 +567,6 @@ height:150px;
 			<li>
 				<a href="<%=request.getContextPath() %>/project/finance/list?fNum=${logonProject.fNum}">
 					<i class="fa fa-link"></i> <span>예산관리</span>
-				</a>
-			</li>
-
-			<li>
-				<a href="#"> 
-					<i class="fa fa-link"></i><span>캘린더</span>
 				</a>
 			</li>
 
@@ -608,10 +592,10 @@ height:150px;
 					</li>
 				</ul>
 			</li>
-
+			
 			<li>
 				<a href="<%=request.getContextPath()%>/project/issue/list"> 
-					<i class="fa fa-link"></i><span>ISSUE</span>
+					<i class="fa fa-link"></i> <span>이슈</span>
 				</a>
 			</li>
 			
@@ -626,7 +610,7 @@ height:150px;
 			<c:if test="${loginUser.id eq logonProject.creator }">
 			<li class="treeview">
 				<a href="#"><i class="fa fa-link"></i>
-					<span>팀 관리</span>
+					<span>관리</span>
 					<span class="pull-right-container"> 
 					<i class="fa fa-angle-left pull-right"></i>
 					</span> 
@@ -639,6 +623,10 @@ height:150px;
 					<li>
 						<a href="<%=request.getContextPath()%>/project/manage/joinMember">
 						<i class="fa fa-circle-o"></i>참여신청 관리</a>
+					</li>
+					<li>
+						<a href="<%=request.getContextPath()%>/project/modify">
+						<i class="fa fa-circle-o"></i>프로젝트 수정</a>
 					</li>
 					<li>
 						<a href="<%=request.getContextPath()%>/project/manage/inviteMember">

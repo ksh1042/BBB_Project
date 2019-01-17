@@ -26,14 +26,13 @@
 					<form action="member">
 						<div class="input-group input-group-sm"
 							style="position: relative; float: right; margin-right: 0; width: 50%;">
-							<span class="input-group-btn"> <select
-								class="form-control" name="searchType"
-								style="height: 30px; width: 105px; font-size: 11px;">
+							<span class="input-group-btn"> 
+								<select class="form-control" name="searchType" style="height: 30px; width: 105px; font-size: 11px;">
 									<option value="" selected>전체</option>
 									<option value="id">아이디</option>
 									<option value="nm">이름</option>
 									<option value="em">이메일</option>
-							</select>
+								</select>
 							</span> 
 							<input type="text" name="keyword" class="form-control" value="${ pageMaker.cri.keyword }"> 
 							<span class="input-group-btn">
@@ -46,14 +45,14 @@
 				</div>
 
 				<!-- /.box-header -->
-				<div class="box-body">
+				<div class="box-body text-center">
 					<table class="table table-bordered">
 						<tr>
-							<th>#</th>
-							<th>ID</th>
-							<th class="hidden-xs">이름</th>
-							<th style="width: 10%;">E-mail</th>
-							<th style="width: 30%;">팀원 관리</th>
+							<th style="text-align:center;">#</th>
+							<th style="text-align:center;">ID</th>
+							<th style="text-align:center;" class="hidden-xs">이름</th>
+							<th style="text-align:center;">E-mail</th>
+							<th style="width: 10%; text-align:center;">팀원 관리</th>
 						</tr>
 
 						<c:if test="${empty teamMemberList }">
@@ -78,9 +77,9 @@
 										${memberList.id} </a></td>
 								<td class="hidden-xs">${memberList.name }</td>
 								<td>${memberList.email}</td>
-								<td><button type="button"
+								<td class="text-center"><button type="button"
 										class="btn btn-block btn-danger fire"
-										style="width: 50%; height: 20px; line-height: 5px;"
+										style="height: 20px; line-height: 5px;"
 										id="${memberList.id }">탈퇴</button></td>
 							</tr>
 						</c:forEach>
@@ -127,40 +126,32 @@
 	<!-- content.end -->
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script>
-		var pjNum = $
-		{
-			logonProject.pjNum
-		};
-		$('.fire')
-				.on(
-						'click',
-						function() {
-							if (confirm("해당 회원을 탈퇴시키겠습니까?") == true) {
-								var id = $(this).attr('id');
-								$
-										.ajax({
-											type : "post",
-											url : "
-	<%=request.getContextPath()%>/project/manage/fireMember",
-						data:JSON.stringify({
-							"id" : id,
-							"pjNum" : pjNum
-						}),
-						headers:{
-							"Content-Type":"application/json",
-							"X-HTTP-Method-Override":"post"
-						},
-						success:function(data){
-							if(data="SUCCESS"){
-								alert(id+'회원이 프로젝트에서 탈퇴되었습니다.');
-							}
-							
-							location.reload();
-						},
-						error:function(error){
-							alert("회원의 탈퇴가 실패했습니다. 잠시후 다시 시도해주세요.");
+		var pjNum = ${logonProject.pjNum};
+		$('.fire').on('click',function(){
+			if (confirm("해당 회원을 탈퇴시키겠습니까?") == true) {
+				var id = $(this).attr('id');
+				$.ajax({
+					type : "post",
+					url : "<%=request.getContextPath()%>/project/manage/fireMember",
+					data:JSON.stringify({
+						"id" : id,
+						"pjNum" : pjNum
+					}),
+					headers:{
+						"Content-Type":"application/json",
+						"X-HTTP-Method-Override":"post"
+					},
+					success:function(data){
+						if(data="SUCCESS"){
+							alert(id+'회원이 프로젝트에서 탈퇴되었습니다.');
 						}
-					});
+						
+						location.reload();
+					},
+					error:function(error){
+						alert("회원의 탈퇴가 실패했습니다. 잠시후 다시 시도해주세요.");
+					}
+				});
 			}else{
 				return;
 			}
