@@ -7,12 +7,11 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 <body>
 	<section class="content-header">
-		<h1>Use Case Diagram</h1>
+		<h1>유즈케이스 다이어그램</h1>
 		<ol class="breadcrumb">
-			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
-				<i class="fa fa-dashboard"></i>My Project</a>
+			<li><a href="<%=request.getContextPath()%>/project/main?pjNum=${logonProject.pjNum}">
+				<i class="fa fa-dashboard"></i>${logonProject.name }</a>
 			</li>
-			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}"></a>${logonProject.name }</li>
 			<li class="active">use case</li>
 		</ol>
 	</section>
@@ -70,7 +69,7 @@
 						<c:forEach var="reply" items="${replyList }">
 							<div class="box-comment">
 								<!-- 댓글을 등록한 사람 프로필사진 -->
-								<img class="img-circle img-sm" src="<%=request.getContextPath()%>/resources/dist/img/user3-128x128.jpg" alt="User Image">
+								<img class="img-circle img-sm" src="<spring:url value='/profile/${reply.image}'/>" alt="User Image">
 		
 								<div class="comment-text">
 									<input type="hidden" class="urNum" value="${reply.urNum }" >
@@ -90,11 +89,12 @@
 					<!-- /.box-footer -->
 					<div class="box-footer">
 						<form action="registerReply" method="post">
-							<img class="img-responsive img-circle img-sm" src="<%=request.getContextPath()%>/resources/dist/img/user4-128x128.jpg" alt="Alt Text">
+							<img class="img-responsive img-circle img-sm" src="<spring:url value='/profile/${loginUser.image}'/>" alt="Alt Text">
 							<!-- .img-push is used to add margin to elements next to floating images -->
 							<div class="img-push">
 								<input type="hidden" name="writer" value="${loginUser.id }">
 								<input type="text" name="content" class="form-control input-sm" placeholder="Press enter to post comment">
+								<input type="hidden" name="image" value="${loginUser.image }">
 							</div>
 						</form>
 					</div>

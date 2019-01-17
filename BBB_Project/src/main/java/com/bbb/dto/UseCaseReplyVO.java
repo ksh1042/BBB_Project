@@ -8,6 +8,7 @@ public class UseCaseReplyVO {
 	private String writer;
 	private String content;
 	private Date indate;
+	private String image;
 	public int getUrNum() {
 		return urNum;
 	}
@@ -38,10 +39,16 @@ public class UseCaseReplyVO {
 	public void setIndate(Date indate) {
 		this.indate = indate;
 	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
 	@Override
 	public String toString() {
 		return "UseCaseReplyVO [urNum=" + urNum + ", uuuid=" + uuuid + ", writer=" + writer + ", content=" + content
-				+ ", indate=" + indate + "]";
+				+ ", indate=" + indate + ", image=" + image + "]";
 	}
 	
 	

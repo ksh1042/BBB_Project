@@ -4,6 +4,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%
    response.setHeader("Pragma", "No-cache");
    response.setHeader("Cache-Control", "no-cache");
@@ -34,6 +35,12 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <decorator:head />
+  <style>
+.profile-change{
+width:150px;
+height:150px;
+}
+</style>
 </head>
 <body class="hold-transition skin-blue layout-boxed sidebar-mini">
 <div class="wrapper">
@@ -135,7 +142,12 @@
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <c:if test="${loginUser.image ne null }">
+              	<img src="<spring:url value='/profile/${loginUser.image}'/>" class="user-image myOriginProfile" alt="User Image"/>
+              </c:if>
+              <c:if test="${loginUser.image eq null }">
+              	<img src="/resources/images/profile.png" class="user-image" alt="User Image"/>
+              </c:if>
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               
               <!-- 접속한 사람의 아이디 혹은 이름 노출 -->
@@ -146,14 +158,19 @@
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <c:if test="${loginUser.image ne null }">
+               		<img src="<spring:url value='/profile/${loginUser.image}'/>" class="img-circle myOriginProfile"  alt="User Image"/>
+                </c:if>
+                <c:if test="${empty loginUser.image }">
+                	<img src="/resources/images/profile.png" class="img-circle"  alt="User Image"/>
+                </c:if>
                 <p>
                   ${loginUser.name }
                   <small>Member since&nbsp; <fmt:formatDate pattern="yyyy-MM-dd" value="${loginUser.indate}" /></small>
                 </p>
               </li>
               
-              <!-- Menu Body -->
+          <!--     Menu Body
            	  <li class="user-body">
                 <div class="row">
                   <div class="col-xs-4 text-center">
@@ -166,7 +183,7 @@
                     <a href="#">Friends</a>
                   </div>
                 </div>
-              </li>
+              </li> -->
               
               <!-- Menu Footer-->
               <li class="user-footer">
@@ -187,85 +204,162 @@
   </header>
 
 <!-- 마이페이지 modal -->
-<form action="/main/mypage/modify" method="post" name="mypageForm">
-   <div class="modal fade in" id="modal-default" style="display: none; padding-right: 16px; height: auto;">
-      <div class="modal-dialog">
-         <div class="modal-content">
-            <div class="modal-header">
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-               </button>
-               <h4 class="modal-title">내 정보</h4>
-            </div>
+ <form action="/main/mypage/modify" method="post" name="mypageForm" id="mypageForm" enctype="multipart/form-data">
+			<div class="modal fade in" id="modal-default" style="display: none; padding-right: 16px;height: auto;">
+	          <div class="modal-dialog">
+	            <div class="modal-content">
+	              <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                  <span aria-hidden="true">×</span></button>
+	                <h4 class="modal-title">내 정보</h4>
+	              </div>
+	             
+	              <div class="modal-body" >
+					<div class="box-body">
+					
+						<div class="form-group" >
+							<c:if test="${loginUser.image ne null }">
+		                    	<img src="<spring:url value='/profile/${loginUser.image}'/>" class="profile-user-img img-circle profile-change myOriginProfile" style="cursor:pointer;display: block;" onclick="profile_go();"/><br/>
+		                    </c:if>
+		                    <c:if test="${loginUser.image eq null }">
+		                    	<img src="/resources/images/profile.png" class="profile-user-img img-circle profile-change " style="cursor:pointer;display: block;" onclick="profile_go();"/><br/>
+		                    </c:if>
+		                    <input type="file" name="file" accept="image/jpeg, image/png, image/jpg" id="uploadProfile" style="display:none;">
+		                </div>
+		                
+		                <div class="form-group" >
+		                	<label for="inputEmail3" class="col-sm-2 control-label">이미지</label>
+			                <div class="col-sm-10">
+			                    <button type="button" class="btn btn-block btn-warning" style="width:150px;" onclick="origin_change()">기본 이미지 변경</button><br/>
+							</div>
+						</div>			
+							
+		                <div class="form-group" >
+		                  <label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
+		
+		                  <div class="col-sm-10">
+		                    <input type="text" class="form-control"  name="id" readonly value="${loginUser.id }"/><br/>
+		                  </div>
+		                </div>
+		                
+		                <div class="form-group">
+		                  <label for="inputPassword3" class="col-sm-2 control-label">패스워드</label>
+		
+		                  <div class="col-sm-10">
+		                    <!-- <input type="password" class="form-control" id="inputPassword3" placeholder="Password"> -->
+		                    <button type="button" class="btn btn-block btn-warning" style="width:150px;" onclick="location.href='<%=request.getContextPath()%>/main/mypage/resetPwd'">패스워드 변경</button><br/>
+		                  </div>
+		                </div>
+		                
+		                 <div class="form-group">
+		                  <label for="inputEmail3" class="col-sm-2 control-label">이름</label>
+		
+		                  <div class="col-sm-10">
+		                    <input type="text" class="form-control" name="name" value="${loginUser.name }"/><br/>
+		                  </div>
+		                </div>
+		                
+		                 <div class="form-group">
+		                  <label for="inputEmail3" class="col-sm-2 control-label">이메일</label>
+		
+		                  <div class="col-sm-10" >
+		                    <input type="email" class="form-control"  name="email" readonly value="${loginUser.email }" style="margin-bottom:10px;"/>
+		                    <button type="button" class="btn btn-block btn-warning" style="width:150px;" onclick="location.href='<%=request.getContextPath()%>/main/mypage/resetEmail'">이메일 변경</button><br/>
+		                  </div>
+		                </div>
+		                
+		                 <div class="form-group">
+		                  <label for="inputEmail3" class="col-sm-2 control-label">핸드폰</label>
+		
+		                  <div class="col-sm-10">
+		                    <input type="text" class="form-control" name="phone"  value="${loginUser.phone }">
+		                  </div>
+		                </div>
+		                
+		                <div class="form-group">
+		                  <div class="col-sm-offset-2 col-sm-10">
+		                  </div>
+		                </div>
+		              </div>
+				       
+	              </div>
+	              
+	              <div class="modal-footer">
+	                <button onclick="profileModify_go(); "type="button" class="btn btn-primary">수정</button>
+	              </div>
+	            </div>
+	            <!-- /.modal-content -->
+	          </div>
+	          <!-- /.modal-dialog -->
+	        </div>
+	        </form>
 
-            <div class="modal-body">
-               <div class="box-body">
-               
-                  <div class="form-group">
-                     <label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
-                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="id" readonly value="${loginUser.id }" /><br />
-                     </div>
-                  </div>
-                  
-                  <div class="form-group">
-                     <label for="inputPassword3" class="col-sm-2 control-label">패스워드</label>
-                     <div class="col-sm-10">
-                        <!-- <input type="password" class="form-control" id="inputPassword3" placeholder="Password"> -->
-                        <button type="button" class="btn btn-block btn-warning" style="width: 150px;" onclick="location.href='<%=request.getContextPath()%>/main/mypage/resetPwd'">패스워드 변경</button>
-                        <br/>
-                     </div>
-                  </div>
-
-                  <div class="form-group">
-                     <label for="inputEmail3" class="col-sm-2 control-label">이름</label>
-                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="name" value="${loginUser.name }" />
-                        <br />
-                     </div>
-                  </div>
-
-                  <div class="form-group">
-                     <label for="inputEmail3" class="col-sm-2 control-label">이메일</label>
-                     <div class="col-sm-10">
-                        <input type="email" class="form-control" name="email" readonly
-                           value="${loginUser.email }" style="margin-bottom: 10px;" />
-                        <button type="button" class="btn btn-block btn-warning" style="width: 150px;" onclick="location.href='<%=request.getContextPath()%>/main/mypage/resetEmail'">이메일 변경</button>
-                        <br />
-                     </div>
-                  </div>
-
-                  <div class="form-group">
-                     <label for="inputEmail3" class="col-sm-2 control-label">핸드폰</label>
-                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="phone" value="${loginUser.phone }">
-                     </div>
-                  </div>
-
-                  <div class="form-group">
-                     <div class="col-sm-offset-2 col-sm-10"></div>
-                  </div>
-               </div>
-            </div>
-
-            <div class="modal-footer">
-               <button onclick="profileModify_go(); " type="button"
-                  class="btn btn-primary">수정</button>
-            </div>
-            
-         </div>
-         <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-   </div>
-</form>
-
-<script>
-   function profileModify_go() {
-      document.mypageForm.submit();
-      alert("회원정보가 수정되었습니다.");
-   }
-</script>
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script>
+        	function profileModify_go(){
+        		
+        		var profileValue = $("#uploadProfile").val().split("\\");
+        		var profileName ="";
+        		var origin ="";
+        		if(profileValue == ""){
+        			origin+="origin";
+        		}else{
+        			origin+="change";
+        			profileName = profileValue[profileValue.length-1]; //파일명 추출
+        			
+        		}
+        		
+        		var input1=$('<input>').attr('type','hidden').attr('name','image').val(profileName);
+        		var input2=$('<input>').attr('type','hidden').attr('name','origin').val(origin);
+        		
+        		$('form#mypageForm').append(input1).append(input2);
+        		document.mypageForm.submit();
+        		alert("회원정보가 수정되었습니다.");
+        	}
+        	
+        	function profile_go(){
+        		
+        		$("#uploadProfile").click();
+        		
+        		function readURL(input) {
+        			 
+        		    if (input.files && input.files[0]) {
+        		        var reader = new FileReader();
+        		 
+        		        reader.onload = function (e) {
+        		            $('.profile-change').attr('src', e.target.result);
+        		        }
+        		 
+        		        reader.readAsDataURL(input.files[0]);
+        		    }
+        		}
+        		 
+        		$("#uploadProfile").change(function(){
+        		    readURL(this);
+        		});
+        		
+        	}
+        	
+        	function origin_change(){
+        		var id = "${loginUser.id}";
+        		
+        		$.ajax({
+    				url:"<%=request.getContextPath()%>/main/mypage/changeOrigin",
+    				type:"post",
+    				data:{
+    					"id":id
+    				},
+    				success:function(data){
+    					if(data == "success"){
+    						$(".myOriginProfile").attr('src','/resources/images/profile.png');
+    					}
+    				},
+    				error:function(data){
+    					alert("이미지 변경에 실패했습니다.");
+    				}
+    			});	
+        	}
+        </script>
 <!-- /.마이페이지 modal -->
 
 <!-- Left side column. contains the logo and sidebar -->

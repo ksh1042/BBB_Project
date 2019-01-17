@@ -9,7 +9,6 @@
 
 	<http pattern="/resources/**" security="none" />
 	<http pattern="/favicon.ico" security="none" />
-	
 	<authentication-manager id="memberAuthManager">
 		<authentication-provider>
 			<jdbc-user-service data-source-ref="dataSource"

@@ -23,8 +23,8 @@
 	</select>
 	
 	<update id="insertReply" >
-		insert into tbl_usecase_reply(urnum,uuuid,content,writer)
-		values(urnum_seq.nextval,#{uuuid},#{content},#{writer})
+		insert into tbl_usecase_reply(urnum,uuuid,content,writer, image)
+		values(urnum_seq.nextval,#{uuuid},#{content},#{writer},#{image})
 	</update>
 	
 	<update id="updateReply">

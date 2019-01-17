@@ -16,6 +16,6 @@ public interface ManageDAO {
 	public void applyMember(String id,int pjNum) throws SQLException;
 	public void refuseMember(String id,int pjNum) throws SQLException;
 	
-	public List<ProjectPartakeVO> getInviteMember(SearchCriteria cri, int pjNum) throws SQLException;
-	public int getInviteMemberCount(SearchCriteria cri, int pjNum) throws SQLException;
+	public List<ProjectPartakeVO> getInviteMember(SearchCriteria cri, int pjNum,String id) throws SQLException;
+	public int getInviteMemberCount(SearchCriteria cri, int pjNum,String id) throws SQLException;
 }

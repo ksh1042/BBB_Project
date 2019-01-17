@@ -46,6 +46,37 @@
 		delete from tbl_project_partake
 		where pjnum = #{pjNum} and id=#{id}
 	</update>
+	<sql id="SearchType">
+		<if test="SearchType != null">
+			<if test="SearchType == 'id'.toString()">
+				AND id LIKE '%'||#{keyword}||'%'
+			</if>
+			<if test="SearchType == 'nm'.toString()">
+				AND name LIKE '%'||#{keyword}||'%'
+			</if>
+			<if test="SearchType == 'em'.toString()">
+				AND email LIKE '%'||#{keyword}||'%'
+			</if>
+			<if test="SearchType == 'All'.toString()">
+				AND (id LIKE '%'||#{keyword}||'%'
+				OR name LIKE '%'||#{keyword}||'%'
+				OR email LIKE '%'||#{keyword}||'%')
+			</if>
+		</if>
+	</sql>
+	<select id="getSearchMemberList" resultType="Member">
+		select *
+		from tbl_member
+		where id not in(#{id})
+		<include refid="SearchType" />
+	</select>
+	
+	<select id="getSearchMemberListCount" resultType="int">
+		select count(*)
+		from tbl_member
+		where id not in(#{id})
+		<include refid="SearchType" />
+	</select>
 </mapper>
 
 
