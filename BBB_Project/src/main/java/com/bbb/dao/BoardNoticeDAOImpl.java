@@ -58,7 +58,7 @@ public class BoardNoticeDAOImpl implements BoardNoticeDAO {
 		int limit = cri.getPerPageNum();
 		RowBounds rowBounds = new RowBounds(offset,limit);
 		
-		List<BoardVO> boardList = session.selectList("BoardNotice.selectSearchBoardList");
+		List<BoardVO> boardList = session.selectList("BoardNotice.selectSearchBoardList",cri,rowBounds);
 		return boardList;
 	}
 	@Override

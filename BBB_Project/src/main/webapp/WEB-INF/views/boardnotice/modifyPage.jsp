@@ -12,7 +12,7 @@
 			<!-- general form elements -->
 			<div class="box box-primary">
 				<div class="box-header">
-					<h3 class="box-title">MODIFY BOARDNOTICE</h3>
+					<h3 class="box-title">${boardnotice.bNum}번 공지수정</h3>
 				</div>
 				<!-- /.box-header -->
 
@@ -26,22 +26,22 @@
 					<div class="box-body">
 
 						<div class="form-group">
-							<label for="exampleInputEmail1">BNO</label> 
+							<label for="exampleInputEmail1">글번호</label> 
 							<input type="text" name='bNum' class="form-control" value="${boardnotice.bNum}"
 								readonly="readonly">
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Title</label> 
+							<label for="exampleInputEmail1">제목</label> 
 							<input type="text" name='title' class="form-control" value="${board.title}">
 							<span class="help-block" id="titleHelp"></span>
 							<span class="glyphicon glyphicon-pencil form-control-feedback" id="fNameIcon"></span>
 						</div>
 						<div class="form-group">
-							<label for="exampleInputPassword1">Content</label>
+							<label for="exampleInputPassword1">내용</label>
 							<textarea class="form-control" name="content" rows="3">${board.content}</textarea>
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Writer</label> 
+							<label for="exampleInputEmail1">작성자</label> 
 							<input readonly	type="text" name="writer" class="form-control"
 								value="${loginUser.id}">
 						</div>
@@ -51,8 +51,8 @@
 					<!-- /.box-body -->
 				</form>
 				<div class="box-footer">
-					<button type="submit" id="saveBtn" class="btn btn-warning">SAVE</button>
-					<button type="submit" id="cancelBtn" class="btn btn-primary">CANCEL</button>
+					<button type="submit" id="saveBtn" class="btn btn-warning">등록</button>
+					<button type="submit" id="cancelBtn" class="btn btn-primary">취소</button>
 				</div>
 				
 				<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>

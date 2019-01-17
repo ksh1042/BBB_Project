@@ -99,6 +99,7 @@
 
 	<bean id="boardnoticeService" class="com.bbb.service.BoardNoticeServiceImpl"
 		p:boardNoticeDAO-ref="boardnoticeDAO" />
+
 	
 	<bean id="manageDAO" class="com.bbb.dao.ManageDAOImpl"
 		p:sqlSession-ref="sqlSession"
@@ -107,4 +108,16 @@
 		p:manageDAO-ref="manageDAO"
 		p:memberDAO-ref="memberDAO"
 		/>
+
+		
+	<bean id="usecaseReplyDAO" 
+		  class="com.bbb.dao.UseCaseReplyDAOImpl"
+		  p:sqlSession-ref="sqlSession" />
+		  
+	<bean id="usecaseReplyService"
+		  class="com.bbb.service.UseCaseReplyServiceImpl"
+		  p:useCaseReplyDAO-ref="usecaseReplyDAO" />
+			
+
 </beans>
+

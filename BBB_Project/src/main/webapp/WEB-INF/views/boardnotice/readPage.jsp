@@ -31,28 +31,28 @@
 
 					<div class="box-body">
 						<div class="form-group">
-							<label for="exampleInputEmail1">Title</label> 
+							<label for="exampleInputEmail1">제목</label> 
 							<input type="text" name='title' class="form-control" value="${board.title}" readonly="readonly"> 
 							<span class="glyphicon glyphicon-ok form-control-feedback" id="okIcon"></span>
 						</div>
 						<div class="form-group">
-							<label for="exampleInputPassword1">Content</label>
+							<label for="exampleInputPassword1">내용</label>
 							<textarea class="form-control" name="content" rows="3" readonly="readonly">${board.content}</textarea>
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Writer</label> 
+							<label for="exampleInputEmail1">작성자</label> 
 							<input type="text" name="writer" class="form-control" value="${board.writer}" readonly="readonly">
 						</div>
 					</div>
 					<!-- /.box-body -->
 
 					<div class="box-footer" style="float: right;">
-						<button type="submit" id="listBtn" class="btn btn-primary">LIST</button>
+						<button type="submit" id="listBtn" class="btn btn-primary">취소</button>
 						&nbsp;
 						<sec:authorize access="hasAuthority('ROLE_USER')">
 							<c:if test="${loginUser.id eq logonProject.creator }">
-								<button type="submit" id="modifyBtn" class="btn btn-warning">Modify</button>&nbsp;
-	    <button type="submit" id="removeBtn" class="btn btn-danger">REMOVE</button>
+								<button type="submit" id="modifyBtn" class="btn btn-warning">수정</button>&nbsp;
+	    <button type="submit" id="removeBtn" class="btn btn-danger">삭제</button>
 							</c:if>
 						</sec:authorize>
 

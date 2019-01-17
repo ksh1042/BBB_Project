@@ -1,6 +1,5 @@
 package com.bbb.dao;
 
-import java.lang.reflect.Member;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -100,6 +99,13 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public void removeEmailynById(String id) throws SQLException {
 		session.update("Member.removeEmailynById",id);
+	}
+
+
+	@Override
+	public void updateOriginProfile(String id) throws SQLException {
+		session.update("Member.changeOriginProfile",id);
+		
 	}
 
 	

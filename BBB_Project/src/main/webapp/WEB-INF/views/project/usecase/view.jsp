@@ -7,12 +7,11 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 <body>
 	<section class="content-header">
-		<h1>Use Case Diagram</h1>
+		<h1>유즈케이스 다이어그램</h1>
 		<ol class="breadcrumb">
-			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
-				<i class="fa fa-dashboard"></i>My Project</a>
+			<li><a href="<%=request.getContextPath()%>/project/main?pjNum=${logonProject.pjNum}">
+				<i class="fa fa-dashboard"></i>${logonProject.name }</a>
 			</li>
-			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}"></a>${logonProject.name }</li>
 			<li class="active">use case</li>
 		</ol>
 	</section>
@@ -63,39 +62,46 @@
 				
 				</c:if>
 				<!-- /.사진 뷰 -->
-				
 				<!-- 댓글 시작 -->
-				<%-- <div class="box-footer box-comments">
-					<div class="box-comment">
-						<!-- 댓글을 등록한 사람 프로필사진 -->
-						<img class="img-circle img-sm" src="<%=request.getContextPath()%>/resources/dist/img/user3-128x128.jpg" alt="User Image">
-
-						<div class="comment-text">
-							<span class="username"> Maria Gonzales
-								<span class="text-muted pull-right">8:03 PM Today</span>
-							</span>
-							<!-- /.댓글작성자 이름 -->
-							It is a long established fact that a reader will be distracted by
-							the readable content of a page when looking at its layout.
-						</div>
-						<!-- /.comment-text -->
-					</div>
+				<c:if test="${!empty usecaseList }" >
+				<div class="box-footer box-comments" >
+					<c:if test="${!empty replyList }" >
+						<c:forEach var="reply" items="${replyList }">
+							<div class="box-comment">
+								<!-- 댓글을 등록한 사람 프로필사진 -->
+								<img class="img-circle img-sm" src="<spring:url value='/profile/${reply.image}'/>" alt="User Image">
+		
+								<div class="comment-text">
+									<input type="hidden" class="urNum" value="${reply.urNum }" >
+									<span class="username">
+										<span class="user" >${reply.writer}</span>
+										<span class="text-muted pull-right"><fmt:formatDate pattern="hh:MM a yyyy-MM-dd" value="${reply.indate}" /></span>
+									</span>
+									<!-- /.댓글작성자 이름 -->
+									${reply.content }
+								</div>
+								<!-- /.comment-text -->
+							</div>
+						</c:forEach>
+					</c:if>
 					<!-- /.box-comment -->
 
 					<!-- /.box-footer -->
 					<div class="box-footer">
-						<form action="#" method="post">
-							<img class="img-responsive img-circle img-sm" src="<%=request.getContextPath()%>/resources/dist/img/user4-128x128.jpg" alt="Alt Text">
+						<form action="registerReply" method="post">
+							<img class="img-responsive img-circle img-sm" src="<spring:url value='/profile/${loginUser.image}'/>" alt="Alt Text">
 							<!-- .img-push is used to add margin to elements next to floating images -->
 							<div class="img-push">
-								<input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+								<input type="hidden" name="writer" value="${loginUser.id }">
+								<input type="text" name="content" class="form-control input-sm" placeholder="Press enter to post comment">
+								<input type="hidden" name="image" value="${loginUser.image }">
 							</div>
 						</form>
 					</div>
 					<!-- /.box-footer -->
 				</div>
-				<!-- /.댓글 끝 --> --%>
-				
+				</c:if>
+				<!-- /.댓글 끝 --> 
 			</div>
 			<!-- /.col -->
 		</div>
@@ -131,8 +137,7 @@
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal -->
-
-
+	
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script id="templateAttach" type="text/x-handlebars-template">
@@ -284,7 +289,7 @@ $("button[type='submit']").on("click", function(e){
    
 });
 
-$('.uploadedList').on('click','.delbtn',function(event){
+<%-- $('.uploadedList').on('click','.delbtn',function(event){
 	event.preventDefault();
 	var that=$(this);
 	
@@ -299,6 +304,27 @@ $('.uploadedList').on('click','.delbtn',function(event){
 			}
 		}
 	});
+});
+ --%>
+$('.box-comment').on('click', function(e){
+	
+	var writer = $(this).children('div.comment-text').children('span.username').children('span.user').html();
+	var id = '${loginUser.id}';
+	var urNum = $(this).children('div.comment-text').children('input.urNum').val();
+	
+
+	if(writer == id){
+		if(confirm("삭제하시겠습니까?")== true){
+			$.ajax({
+				url:"<%=request.getContextPath() %>/project/usecase/deleteReply",
+				type:"post",
+				data:{"urNum":urNum}
+			});
+		location.reload();
+		}
+	}else{
+		alert("권한이 없습니다");
+	}
 });
 </script>
 

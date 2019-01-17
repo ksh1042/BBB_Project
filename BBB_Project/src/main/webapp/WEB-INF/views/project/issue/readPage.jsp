@@ -6,7 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <body>
-	<style>
+<style>
 hr {
 	border-top: 1px solid #BDBDBD;
 	border-bottom: 1px solid #F6F6F6;
@@ -17,11 +17,10 @@ hr {
 		<h1 style="cursor: pointer;"
 			onclick="javascript:location.href='<%=request.getContextPath()%>/project/issue/list';">이슈 게시판</h1>
 		<ol class="breadcrumb">
-			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
-					<i class="fa fa-dashboard"></i>내 프로젝트
+			<li><a href="<%=request.getContextPath()%>/project/main?pjNum=${logonProject.pjNum}">
+					<i class="fa fa-dashboard"></i>${logonProject.name }
 			</a></li>
-			<li><a href="<%=request.getContextPath()%>/project/main?pjNum=${logonProject.pjNum}">${logonProject.name }</a></li>
-			<li class="active"><a href="<%=request.getContextPath()%>/project/issue/list">이슈 리스트</a></li>
+			<li class="active"><a href="<%=request.getContextPath()%>/project/issue/list">이슈</a></li>
 			<li class="active">${issue.title }</li>
 		</ol>
 	</section>
@@ -142,7 +141,6 @@ hr {
 	</section>
 
 <script>
-
 	var iNum=${issue.iNum};
 	
 	function addIssueDetail_go(){
@@ -201,7 +199,7 @@ hr {
       	   </div>
 			<div id="issueDetailModifyBtnDiv">
 				<div class="timeline-footer" style="height: 50px;" id="detailModifyBtn">
-					<button class="btn btn-primary btn-xs btn-modify" style="padding:5px 10px 5px 10px;float:right;margin-right:10px;" onclick="">삭제</button>
+					<button class="btn btn-primary btn-xs btn-modify" style="padding:5px 10px 5px 10px;float:right;margin-right:10px;" onclick="issueDetail_delete({{idNum}})">삭제</button>
 					<button class="btn btn-primary btn-xs btn-modify" style="padding:5px 10px 5px 10px;float:right;margin-right:10px;" onclick="detailModify({{idNum}}, '<%=request.getContextPath()%>/project/issueDetail/all/{{iNum}}');">수정</button>
 		  		 </div>
 			</div>
@@ -211,7 +209,7 @@ hr {
 
 
 </script>
-	<script id="template2" type="text/x-handlebars-template">
+<script id="template2" type="text/x-handlebars-template">
 
 	{{#each .}}
 
@@ -232,7 +230,7 @@ hr {
 	{{/each}}
 
 </script>
-	<script id="modifyTemplate" type="text/x-handlebars-template">
+<script id="modifyTemplate" type="text/x-handlebars-template">
 
 	{{#each .}}
 	  <li class="issueDetailList" data-idNum={{idNum}}>
@@ -247,7 +245,7 @@ hr {
 			<input type="hidden" id="detailIdNum"  value="{{idNum}}"/>	
 			<input type="hidden"  value="{{iNum}}"/>
            <div class="timeline-body div-detail">
-			 <textArea style="resize:none;" id="newDetailContent" cols="118" rows="4">{{content}}</textArea>
+			 <textArea style="resize:none;" id="newDetailContent" cols="135" rows="4">{{content}}</textArea>
       	   </div>
 			<div id="issueDetailModifyBtnDiv">
 				<div class="timeline-footer" style="height: 50px;" id="detailModifyBtn">
@@ -258,13 +256,29 @@ hr {
          </div>
        </li>
 	{{/each}}
+</script>
+<script id="deleteIssueDetail" type="text/x-handlebars-template">
+
+	{{#each .}}
+
+	  <li class="issueDetailList" data-idNum={{idNum}}>
+         <i class="fa fa-comments bg-yellow"></i>
+			<div class="timeline-item">
+				<h3 class="timeline-header"><strong>{{writer}}</strong></h3>
+				<div class="timeline-body" style="text-align: center;">
+					<h5>
+						삭제된 내용입니다.
+					</h5>
+				</div>
+			</div>
+       </li>
+	{{/each}}
 
 </script>
-	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-	<script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
 	
 	var closeForm = $("form[name='closeForm']");
-	
 	$("#closeBtn").on("click", function() {
 		if(confirm("이슈를 닫으시겠습니까?")){
 			closeForm.attr("action", "close");
@@ -274,6 +288,36 @@ hr {
 			return;
 		}
 	});
+	
+	/* var deleteForm = $("form[name='deleteDetailForm']"); */
+	function issueDetail_delete(idNum){
+		
+		if(confirm("이슈를 삭제하시겠습니까?")){
+			<%-- deleteForm.attr("action", "<%=request.getContextPath()%>/project/issueDetail/remove");
+			deleteForm.attr("method", "post");
+			deleteForm.submit(); --%>
+			$.ajax({
+				url:"<%=request.getContextPath()%>/project/issueDetail/remove",
+				type:"post",
+				data:{
+					"idNum":idNum
+				},
+				success:function(data){
+					if(data == "success"){
+						alert("삭제되었습니다.");
+						getPage("<%=request.getContextPath()%>/project/issueDetail/all/" + iNum);
+					}
+				},
+				error:function(data){
+					alert("삭제에 실패했습니다.");
+				}
+			});	
+			
+		}else{
+			return;
+		}
+	}
+	
 	
 	$("#openBtn").on("click", function() {
 		if(confirm("이슈를 열으시겠습니까?")){
@@ -286,7 +330,7 @@ hr {
 	var formObj = $("form[role='form']");
 	
 	$("#issueModifyBtn").on("click", function() {
-		$("#detailBlock").disabled();
+		//$("#detailBlock").disabled();
 		formObj.attr("action", "modifyPage");
 		formObj.attr("method", "get");
 		formObj.submit();
@@ -302,19 +346,25 @@ hr {
 	   return year+"/"+month+"/"+date+" "+hour+":"+min;
 	});
 	
-	var printData=function(replyArr,target,templateObject, templateObject2){
+	var printData=function(replyArr,target,templateObject, templateObject2,deleteTemplateObject){
 		
 	   var template=Handlebars.compile(templateObject.html());
 	   var template2=Handlebars.compile(templateObject2.html());
+	   var deleteTemplate=Handlebars.compile(deleteTemplateObject.html());
 	   var tempReplyArr = new Array();
  	   var html = "";
 	   $.each(replyArr,function(index,item){
-		   if(item.writer == '${loginUser.id }'){
-			   tempReplyArr.push(item);
-			   html += template(tempReplyArr);
+		   if(item.deleteYn == 0){
+			   if(item.writer == '${loginUser.id }'){
+				   tempReplyArr.push(item);
+				   html += template(tempReplyArr);
+			   }else{
+				   tempReplyArr.push(item);
+				   html += template2(tempReplyArr);
+			   }
 		   }else{
 			   tempReplyArr.push(item);
-			   html += template2(tempReplyArr);
+			   html += deleteTemplate(tempReplyArr);
 		   }
 		   tempReplyArr.pop();
 	   });
@@ -330,32 +380,41 @@ hr {
 		function getPage(pageInfo) {
 			$.getJSON(pageInfo, function(data) {
 				printData(data, $('#issueDetailDiv'), $('#template'),
-						$('#template2'));
+						$('#template2'),$("#deleteIssueDetail"));
 			});
 		}
 
-		var printModifyData=function(idNum,replyArr,target,templateObject, templateObject2, ModifyTemplateObject){
+		var printModifyData=function(idNum,replyArr,target,templateObject, templateObject2, ModifyTemplateObject,deleteTemplateObject){
 			
 			   var template=Handlebars.compile(templateObject.html());
 			   var template2=Handlebars.compile(templateObject2.html());
 			   var modifyTemplate = Handlebars.compile(ModifyTemplateObject.html());
+			   var deleteTemplate=Handlebars.compile(deleteTemplateObject.html());
 			   var tempReplyArr = new Array();
 		 	   var html = "";
 			   $.each(replyArr,function(index,item){
-				   if(idNum == item.idNum){
+				   if(item.deleteYn == 1){
 					   tempReplyArr.push(item);
-					   html += modifyTemplate(tempReplyArr);
+					   html += deleteTemplate(tempReplyArr);
 					   tempReplyArr.pop();
 				   }else{
-					   if(item.writer == '${loginUser.id }'){
+					   if(idNum == item.idNum && item.deleteYn == 0){
 						   tempReplyArr.push(item);
-						   html += template(tempReplyArr);
+						   html += modifyTemplate(tempReplyArr);
+						   tempReplyArr.pop();
 					   }else{
-						   tempReplyArr.push(item);
-						   html += template2(tempReplyArr);
+						   if(item.writer == '${loginUser.id }'){
+							   tempReplyArr.push(item);
+							   html += template(tempReplyArr);
+							  
+						   }else{
+							   tempReplyArr.push(item);
+							   html += template2(tempReplyArr);
+						   }
+						   tempReplyArr.pop();
 					   }
-					   tempReplyArr.pop();
 				   }
+				   
 			   });
 			  
 			   $('.issueDetailList').remove();
@@ -364,7 +423,7 @@ hr {
 		
 		function detailModify(idNum, pageInfo) {
 			$.getJSON(pageInfo, function(data) {
-				printModifyData(idNum, data, $('#issueDetailDiv'), $('#template'), $('#template2'), $('#modifyTemplate'));
+				printModifyData(idNum, data, $('#issueDetailDiv'), $('#template'), $('#template2'), $('#modifyTemplate'),$('#deleteIssueDetail'));
 			});
 		}
 		

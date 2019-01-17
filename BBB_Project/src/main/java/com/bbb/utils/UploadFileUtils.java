@@ -14,8 +14,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.FileCopyUtils;
 
 public class UploadFileUtils {
-	private static final Logger logger=
-			LoggerFactory.getLogger(UploadFileUtils.class);
+	
+	private static final Logger logger=LoggerFactory.getLogger(UploadFileUtils.class);
 	
 	//uploadFile 저장
 	public static String uploadFile(String uploadPath,
@@ -105,6 +105,20 @@ public class UploadFileUtils {
 		return iconName.substring(uploadPath.length()).
 				replace(File.separatorChar, '/');
 	}		
+	
+	
+	
+	/* //uploadFile 저장
+	 public static void uploadProfile(String uploadProfile,String image,byte[] fileData)throws Exception{
+	      
+		  //저장
+		  File target = new File(uploadProfile,image);
+		  FileCopyUtils.copy(fileData, target);
+		  logger.info(target.getAbsolutePath());
+	      
+	      
+	      
+	   }*/
 }
 
 

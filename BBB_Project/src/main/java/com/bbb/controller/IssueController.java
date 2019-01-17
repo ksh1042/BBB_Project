@@ -63,12 +63,6 @@ public class IssueController {
 		pageMaker.setTotalCount(dao.selectSearchIssueListCount(cri,project.getPjNum()));
 		List<IssueVO> listIssue = service.getSearchIssueList(cri,project.getPjNum());
 	
-		/*List<String> writerList= new ArrayList<String>();
-		for(IssueVO issue : listIssue){
-			writerList.add(issue.getWriter());
-		}
-		
-		model.addAttribute("writerList",writerList);*/
 		model.addAttribute("listIssue", listIssue);
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("project",project.getPjNum());

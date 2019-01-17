@@ -31,5 +31,6 @@
 		<typeAlias type="com.bbb.dto.BoardNoticeVO" alias="boardnotice"/>
 		<typeAlias type="com.bbb.dto.GanttVO" alias="gantt"/>
 		<typeAlias type="com.bbb.dto.GanttHistVO" alias="ganttHist"/>
+		<typeAlias type="com.bbb.dto.UseCaseReplyVO" alias="UseCaseReply" />
 	</typeAliases>
 </configuration>

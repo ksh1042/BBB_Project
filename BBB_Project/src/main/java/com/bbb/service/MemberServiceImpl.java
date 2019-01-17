@@ -83,5 +83,11 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 
+	@Override
+	public void updateOriginProfile(String id) throws SQLException {
+		memberDAO.updateOriginProfile(id);
+		
+	}
+
 
 }

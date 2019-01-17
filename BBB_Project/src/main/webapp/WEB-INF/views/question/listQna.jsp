@@ -42,7 +42,6 @@
 									</button>
 								</form>
 							</div>
-							<hr/>
 						</div>
 					</div>
 				</div>

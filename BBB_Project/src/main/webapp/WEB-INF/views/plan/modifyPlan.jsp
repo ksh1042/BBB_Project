@@ -1,46 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
-<head>
-	<style>
-		.fileDrop{
-			width:80%;
-			height:100px;
-			border:1px dotted gray;
-			background-color:lightslategray;
-			margin:auto;
-		}
-	</style>
-</head>
+
 <body>
 	<section class="content-header">
-		<div class="container-fluid">
-			<div class="row mb-2">
-				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">프로젝트 라이브러리 수정</h1>
-				</div>
-				<div class="col-sm-6">
-					<ol class="breadcrumb float-sm-left">
-						<li class="breadcrumb-item">
-							
-						</li>
-					</ol>
-				</div>
-				<!-- /.col -->
-			</div>
-		</div>
+		<h1 style="cursor: pointer;"onclick="javascript:location.href='<%=request.getContextPath()%>/project/issue/list';">프로젝트 계획서</h1>
+		<ol class="breadcrumb">
+			<li><a href="<%=request.getContextPath()%>/project/main?pjNum=${logonProject.pjNum}">
+			<i class="fa fa-dashboard"></i>${logonProject.name }</a></li>
+			<li class="active"><a href="<%=request.getContextPath()%>/project/plan/modifyPlan">계획서</a></li>
+		</ol>
 	</section>
 	
 	<section class="content">
-		<div class="form-group has-feedback col-md-9" style="margin">
-			<div class="form-group">
-				<label class="control-label">파일 등록</label>
-			</div>
+	
+		<div class="callout callout-info">
+	        <h4>Tip!</h4>
+	        <p>아래의 박스에 파일을 드래그하여 올려주세요!&nbsp;&nbsp; 계획서 파일은 1개만 등록 가능하며 파일용량은 5MB로 제한합니다.</p>
+        </div>
+        
+		<div class="form-group has-feedback" style="margin">
 			<form role="form" method="post" action="modifyPlan">
 			<div class="form-group">
 				<div class="box">
-					<div class="box-body dropzone" style="text-align : center;">
-						<b>이 곳에 파일을 Drag & Drop 해 주세요</b>
+					<div class="box-body dropzone" style="text-align : center; width: 100%; height: 200px;  background-color: lightslategray; margin: auto;">
+						<b>계획서 파일 등록</b>
 					</div>
 					<div class="box-footer">
 						<ul class="mailbox-attachments clearfix uploadedList">

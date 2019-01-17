@@ -14,10 +14,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bbb.dto.ProjectVO;
+import com.bbb.dto.UseCaseReplyVO;
 import com.bbb.dto.UseCaseVO;
 import com.bbb.service.ProjectService;
+import com.bbb.service.UseCaseReplyService;
 import com.bbb.service.UseCaseService;
 
 @Controller
@@ -29,6 +32,9 @@ public class UseCaseController {
 	
 	@Autowired
 	private ProjectService projectService;
+	
+	@Autowired
+	private UseCaseReplyService usecaseReplyService;
 	
 	@RequestMapping(value="/view", method=RequestMethod.GET)
 	public void view(Model model, HttpSession session, HttpServletRequest request) throws Exception{
@@ -44,8 +50,10 @@ public class UseCaseController {
 			String fullName = savePath+usecase.getUuuid()+"$$"+usecase.getFileName();
 			System.out.println(fullName);
 			List<UseCaseVO> usecaseList = usecaseService.readList(uuuid);
+			List<UseCaseReplyVO> replyList = usecaseReplyService.readReplyList(uuuid);
 			model.addAttribute("usecaseList", usecaseList);
 			model.addAttribute("imageUrl", fullName);
+			model.addAttribute("replyList", replyList);
 
 		}
 		
@@ -82,6 +90,31 @@ public class UseCaseController {
 	public List<UseCaseVO> getAttach(@PathVariable("uuuid")String uuuid) throws Exception{
 	      
 	    return usecaseService.readList(uuuid);
+	}
+	
+	@RequestMapping(value="registerReply", method=RequestMethod.GET)
+	public void registerReplyGET() throws Exception{}
+
+	@RequestMapping(value="registerReply", method=RequestMethod.POST)
+	public String registerReplyPOST(UseCaseReplyVO usecaseReplyVO, RedirectAttributes rttr, HttpServletRequest request,HttpServletResponse response) throws Exception{
+		
+		HttpSession session = request.getSession();
+		ProjectVO project = (ProjectVO)session.getAttribute("logonProject");
+	
+		String uuuid = project.getUuuid();
+		
+		usecaseReplyVO.setUuuid(uuuid);
+		usecaseReplyService.createReply(usecaseReplyVO);
+		
+		rttr.addFlashAttribute("msg","SUCCESS");
+
+		return "redirect:/project/usecase/view";
+		
+	}
+	
+	@RequestMapping(value="deleteReply", method=RequestMethod.POST)
+	public void modifyReply(int urNum) throws Exception{
+		usecaseReplyService.deleteReply(urNum);
 	}
 	
 

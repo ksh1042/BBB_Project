@@ -7,12 +7,12 @@
 <body>
 
 <section class="content-header">
-		<h1>Notice</h1>
+		<h1>관리자게시판</h1>
 		<ol class="breadcrumb">
 			<li><a href="<%=request.getContextPath()%>/admin/mainForm">
 				<i class="fa fa-dashboard"></i>main</a>
 			</li>
-			<li class="active">notice</li>
+			<li class="active">관리자게시판</li>
 		</ol>
 </section>
 
@@ -31,7 +31,7 @@
 								<form action="listPage">
 									<select name="searchType">
 										<option value="" ${cri.searchType==null?'selected':'' }>------</option>
-										<option value="t" ${cri.searchType eq 't'?'selected':'' }>Title</option>
+										<option value="t" ${cri.searchType eq 't'?'selected':'' }>제목</option>
 									</select>
 									<input id="keywordInput" name="keyword" type="text"  value="${pageMaker.cri.keyword}"/>
 									<button type="submit" ><i class="fa fa-search"></i></button>
@@ -43,34 +43,34 @@
 				</div>
 				<div class="box-body">
 					<table class="table table-bordered" border="1">
-						<tr>
-							<th style="width: 10px; text-align: center;">NO</th>
-							<th style="text-align: center;">TITLE</th>
-							<th style="text-align: center;">INDATE</th>
-							<th class="hidden-xs" style="text-align: center;">EXPIRE DATE</th>
-							<th class="hidden-xs" style="text-align: center;">KIND</th>
+						<tr background="blue">
+							<th style="text-align: center;" width="20px" background="blue">번호</th>
+							<th style="text-align: center;" width="50px" background="blue">제목</th>
+							<th style="text-align: center;" width="50px" background="blue">등록일</th>
+							<th class="hidden-xs" style="text-align: center;" width="50px" background="blue">완료일</th>
+							<th class="hidden-xs" style="text-align: center;" width="20px" background="blue">글종류</th>
 						</tr>
 						<c:if test="${!empty noticeList }">
 						<c:forEach items="${noticeList}" var="notice">
 							<tr>
-								<td style="text-align: center;">${notice.nNum}</td>
-								<td style="text-align: center;">
+								<td style="text-align: center;"width="20px">${notice.nNum}</td>
+								<td style="text-align: center;" width="50px">
 								<a href='readPage${pageMaker.makeSearch(pageMaker.cri.page) }&nNum=${notice.nNum}'>${notice.title}</a></td>
-								<td class="hidden-xs" style="text-align: center;">
+								<td class="hidden-xs" style="text-align: center;" width="50px">
 								<fmt:formatDate pattern="yyyy-MM-dd" value="${notice.inDate}" /></td>
-								<td class="hidden-xs" style="text-align: center;">
+								<td class="hidden-xs" style="text-align: center;" width="50px">
 								<fmt:formatDate pattern="yyyy-MM-dd" value="${notice.expireDate}" /></td>
 								<c:if test="${notice.kind == 0}">
-								<td style="text-align: center; color: red;">이슈</td>
+								<td style="text-align: center; color: red;" width="20px">이슈</td>
 								</c:if>
 								<c:if test="${notice.kind == 1}">
-								<td style="text-align: center; color: blue;">이벤트</td>
+								<td style="text-align: center; color: blue;" width="20px">이벤트</td>
 								</c:if>
 								<c:if test="${notice.kind == 2}">
-								<td style="text-align: center; color: purple;">점검</td>
+								<td style="text-align: center; color: purple;" width="20px">점검</td>
 								</c:if>
 								<c:if test="${notice.kind == 3}">
-								<td style="text-align: center;">기본</td>
+								<td style="text-align: center;" width="20px">기본</td>
 								</c:if>
 							</tr>
 						</c:forEach>

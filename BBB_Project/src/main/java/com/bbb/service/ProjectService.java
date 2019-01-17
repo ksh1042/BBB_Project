@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.bbb.controller.SearchCriteria;
 import com.bbb.dto.ProjectPartakeVO;
-import com.bbb.dto.ProjectPlanVO;
 import com.bbb.dto.ProjectVO;
 
 public interface ProjectService {
@@ -17,6 +16,7 @@ public interface ProjectService {
 	public void joinProject(ProjectPartakeVO takeVO) throws Exception;
 	public void cancelJoinProject(ProjectPartakeVO takeVO) throws Exception;
 	
+
 	// 프로젝트VO의 모든 정보를 가져와서 비교할때 쓰려고 가져옴
 	List<ProjectVO> readMyProjectList() throws SQLException;
 	
