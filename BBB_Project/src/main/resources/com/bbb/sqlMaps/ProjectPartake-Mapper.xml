@@ -35,6 +35,17 @@
 		where id=#{id} and pjnum = #{pjNum}
 	</update>
 	
+	<update id="acceptInvite">
+		update tbl_project_partake
+		set assignyn = 1
+		where id=#{id} and pjnum=#{pjNum}
+	</update>
+	
+	<update id="refuseInvite">
+		delete from tbl_project_partake
+		where id=#{id} and pjnum=#{pjNum}
+	</update>
+	
 	
 	
 </mapper>

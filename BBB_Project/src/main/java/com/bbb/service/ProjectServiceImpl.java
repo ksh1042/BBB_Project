@@ -121,6 +121,21 @@ public class ProjectServiceImpl implements ProjectService{
 		projectDAO.leaveProject(takeVO);
 	}
 
+	@Override
+	public List<ProjectVO> getInvitedList(String id) throws SQLException {
+		return projectDAO.getInvitedList(id);
+	}
+
+	@Override
+	public void acceptInvite(ProjectPartakeVO partake) throws SQLException {
+		projectDAO.acceptInvite(partake);
+	}
+
+	@Override
+	public void refuseInvite(ProjectPartakeVO partake) throws SQLException {
+		projectDAO.refuseInvite(partake);
+	}
+
 	
 
 	

@@ -87,6 +87,12 @@
 		SET gcNum = #{gcNum}
 		WHERE pjNum = #{pjNum}
 	</update>
+	
+	<select id="getInvitedList" resultType="project">
+		select pjnum, name
+		from view_invitedlist
+		where id= #{id}
+	</select>
 </mapper>
 
 

@@ -12,9 +12,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bbb.dto.MemberVO;
 import com.bbb.dto.ProjectPartakeVO;
@@ -91,7 +93,32 @@ public class ProjectController {
 	return entity;
 	}
 	
-
+	@RequestMapping(value="/inviteAccept", method=RequestMethod.POST)
+	public ResponseEntity<String> accept(@RequestBody ProjectPartakeVO partake) throws Exception{
+		ResponseEntity<String> entity = null;
+		try{
+			service.acceptInvite(partake);
+						
+			entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
+		}catch(SQLException e){
+			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return entity;
+	}
+	
+	@RequestMapping(value="/inviteRefuse", method=RequestMethod.POST)
+	public ResponseEntity<String> refuse(@RequestBody ProjectPartakeVO partake) throws Exception{
+		ResponseEntity<String> entity = null;
+		try{
+			service.refuseInvite(partake);
+						
+			entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
+		}catch(SQLException e){
+			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return entity;
+	}
+	
 	
 
 	

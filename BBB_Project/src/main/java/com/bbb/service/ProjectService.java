@@ -36,4 +36,9 @@ public interface ProjectService {
 	public void createFnum(int pjNum, int fNum) throws SQLException;
 	
 	public void insertUsecase(ProjectVO project) throws SQLException;
+	
+	public List<ProjectVO> getInvitedList(String id) throws SQLException;
+	
+	public void acceptInvite(ProjectPartakeVO partake) throws SQLException;
+	public void refuseInvite(ProjectPartakeVO partake) throws SQLException;
 }
