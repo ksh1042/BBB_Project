@@ -371,7 +371,7 @@
 			$('option:eq('+selectedIndex+')', targetSelect).removeAttr('selected');	
 			$('option:eq('+selectedIndex+')', targetSelect).attr('selected','selected');
 			var temp = targetSelect.val();
-			alert('rdNameT : ' + temp);
+	
 			$(this).parent().next().children('input').val(temp);
 			$(this).parent().next().children('input').attr('title', temp);
 			
@@ -381,7 +381,7 @@
 			$('option:eq('+selectedIndex+')', targetSelect).attr('selected','selected');
 			temp = targetSelect.val();
 			$(this).prev().val(temp);
-			alert('rddNumT : ' + temp);
+
 		});
 		
 		function contains(data, keyword){

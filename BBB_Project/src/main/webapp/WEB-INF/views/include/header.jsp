@@ -83,10 +83,10 @@ height:150px;
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">0</span>
+              <span class="label label-warning inviteCount"></span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">프로젝트에 초대받은 목록</li>
+              <li class="header">프로젝트 초대 목록</li>
               <li>
                 <!-- Inner Menu: contains the notifications -->
                 <ul class="menu invitedList">
@@ -299,15 +299,17 @@ height:150px;
 </script>
  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script>
-        	var id = "${loginUser.id}";
-	        $.getJSON("/main/getInvite/"+id,function(list){
-				$(list).each(function(){
-					var invitedInfo=getInviteInfo(this,"<%=request.getContextPath()%>");
-					var html=template(invitedInfo);
-					$('.invitedList').append(html);
-					
-				});
-			});
+	        var id = "${loginUser.id}";
+	        var invitecount;
+	        $.getJSON("getInvite/"+id,function(list){
+	         $(list).each(function(){
+	            var invitedInfo=getInviteInfo(this,"<%=request.getContextPath()%>");
+	            var html=template(invitedInfo);
+	            $('.invitedList').append(html);
+	            invitecount++;
+	         });
+	         $('.inviteCount').append(invitecount);
+	      	});
 	        
 	        var template = Handlebars.compile($('#templateInvite').html());
         
@@ -438,18 +440,6 @@ height:150px;
 
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="<%=request.getContextPath()%>/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p>${loginUser.name}</p>
-          <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-        </div>
-      </div>
 
       <!-- search form (Optional) -->
       <sec:authorize access="hasAuthority('ROLE_USER')">

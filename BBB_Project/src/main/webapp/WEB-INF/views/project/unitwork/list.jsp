@@ -17,7 +17,6 @@
 				background-color : #F1F1F1;
 			}
 		div.scrollable {
-			min-height: 633px;
 			overflow:scroll;
 			overflow-x:auto;
 			overflow-y:hidden;
@@ -115,7 +114,7 @@
 							<div class="col-sm-6"></div>
 						</div>
 						<div class="row">
-							<div class="col-sm-12 scrollable">
+							<div class="col-sm-12 scrollable" id="exportTable">
 								<table id="example2"
 									class="table table-bordered table-hover dataTable" role="grid"
 									aria-describedby="example2_info">
@@ -200,6 +199,7 @@
 							<div class="col-sm-4">
 								<button type="button" class="btn btn-warning" onclick="modify_go();" style="margin-left:20px; float:right;">수정</button>		
 								<button type="button" class="btn btn-primary" onclick="hist_go();" style="margin-left:20px;float:right;">수정 이력</button>
+								<button type="button" class="btn btn-success" id="exportExcel" style="margin-left:20px; float:right;">Excel 출력</button>
 							</div>
 						</div>
 					</div>
@@ -254,5 +254,11 @@
 		}
 		// search.end
 		// ---------------------------------------------------------------------------------
+		// excel-export.start
+		$('button#exportExcel').click(function (e) {
+   			window.open('data:application/vnd.ms-excel,' + $('div#exportTable').html());
+    		e.preventDefault();
+		});
+		// excel-export.end
 	</script>
 </body>

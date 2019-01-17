@@ -38,11 +38,11 @@
             <div class="box-body">
               <table class="table joinTable table-bordered">
                 <tr>
-                  <th>#</th>
-                  <th>ID</th>
-                  <th class="hidden-xs">이름</th>
-                  <th style="width:10%;">E-mail</th>
-                  <th style="width:30%;">선택</th>
+                  <th style="text-align:center; width:30px;">#</th>
+                  <th style="text-align:center;">ID</th>
+                  <th class="hidden-xs" style="text-align:center;">이름</th>
+                  <th style="width:30%; text-align:center;">E-mail</th>
+                  <th style="width:50px; text-align:center;">선택</th>
                 </tr>
 				<c:if test="${empty joinList}">
 					<tr class="joinList">	
@@ -52,15 +52,15 @@
 				
 				<c:forEach var="joinList" items="${joinList }" varStatus="num">
 					<tr class="joinList" style="line-height:15px; padding:3px; ">
-		             	<td>${num.index+1 }</td>
-		                <td>
+		             	<td style="text-align:center;">${num.index+1 }</td>
+		                <td style="text-align:center;">
 			                <a href="<%=request.getContextPath() %>/project/main?pjNum=${partake.pjNum}">
 			                  		${joinList.id}
 			                </a>
 		                </td>
-		                <td class="hidden-xs">${joinList.name }</td>
-		                <td>${joinList.email }</td>
-		                <td><input type="checkbox" id="idList" name="" value="${joinList.id }" style="width:25px; height:25px;"/></td>
+		                <td style="text-align:center;" class="hidden-xs">${joinList.name }</td>
+		                <td style="text-align:center;">${joinList.email }</td>
+		                <td style="text-align:center;"><input type="checkbox" id="idList" name="" value="${joinList.id }" style="width:25px; height:25px;"/></td>
 	                </tr>
 				</c:forEach>
 						  

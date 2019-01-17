@@ -10,7 +10,7 @@
    	</select>
 	<update id="insertBoard">
 		insert into tbl_board(bnum,pjnum,title,content,writer,kind)
-		values(#{bNum},#{pjNum},#{title},#{content},#{writer},1)
+		values(bnum_seq.nextval,#{pjNum},#{title},#{content},#{writer},1)
 	</update>
 	
 	<update id="updateBoard">

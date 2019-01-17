@@ -117,10 +117,10 @@ height:150px;
 			            <!-- Menu toggle button -->
 			            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 			              <i class="fa fa-bell-o"></i>
-			              <span class="label label-warning">0</span>
+			              <span class="label label-warning inviteCount"></span>
 			            </a>
 			            <ul class="dropdown-menu">
-			              <li class="header">프로젝트에 초대받은 목록</li>
+			              <li class="header">프로젝트 초대 목록</li>
 			              <li>
 			                <!-- Inner Menu: contains the notifications -->
 			                <ul class="menu invitedList">
@@ -332,15 +332,17 @@ height:150px;
 </script>
  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script>
-        	var id = "${loginUser.id}";
+	        var id = "${loginUser.id}";
+	        var invitecount;
 	        $.getJSON("getInvite/"+id,function(list){
-				$(list).each(function(){
-					var invitedInfo=getInviteInfo(this,"<%=request.getContextPath()%>");
-					var html=template(invitedInfo);
-					$('.invitedList').append(html);
-					
-				});
-			});
+	         	$(list).each(function(){
+	            var invitedInfo=getInviteInfo(this,"<%=request.getContextPath()%>");
+	            var html=template(invitedInfo);
+	            $('.invitedList').append(html);
+	            invitecount++;
+	         	});
+	         	$('.inviteCount').append(invitecount);
+	      	});
 	        
 	        var template = Handlebars.compile($('#templateInvite').html());
         

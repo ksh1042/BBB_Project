@@ -103,7 +103,7 @@ $('#create_btn').on('click',function(e){
 			pjNum : $('input[name="pjNum"]').val(),
 			title : $('input[name="title"]').val(),
 			content : $('textarea[name="content"]').val(),
-			writer : $('input[name=writer]').val()
+			writer : $('input[name="writer"]').val()
 	}
 	
 	$.ajax({

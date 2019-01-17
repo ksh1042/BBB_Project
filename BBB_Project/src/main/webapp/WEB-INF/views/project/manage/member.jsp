@@ -126,40 +126,32 @@
 	<!-- content.end -->
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script>
-		var pjNum = $
-		{
-			logonProject.pjNum
-		};
-		$('.fire')
-				.on(
-						'click',
-						function() {
-							if (confirm("해당 회원을 탈퇴시키겠습니까?") == true) {
-								var id = $(this).attr('id');
-								$
-										.ajax({
-											type : "post",
-											url : "
-	<%=request.getContextPath()%>/project/manage/fireMember",
-						data:JSON.stringify({
-							"id" : id,
-							"pjNum" : pjNum
-						}),
-						headers:{
-							"Content-Type":"application/json",
-							"X-HTTP-Method-Override":"post"
-						},
-						success:function(data){
-							if(data="SUCCESS"){
-								alert(id+'회원이 프로젝트에서 탈퇴되었습니다.');
-							}
-							
-							location.reload();
-						},
-						error:function(error){
-							alert("회원의 탈퇴가 실패했습니다. 잠시후 다시 시도해주세요.");
+		var pjNum = ${logonProject.pjNum};
+		$('.fire').on('click',function(){
+			if (confirm("해당 회원을 탈퇴시키겠습니까?") == true) {
+				var id = $(this).attr('id');
+				$.ajax({
+					type : "post",
+					url : "<%=request.getContextPath()%>/project/manage/fireMember",
+					data:JSON.stringify({
+						"id" : id,
+						"pjNum" : pjNum
+					}),
+					headers:{
+						"Content-Type":"application/json",
+						"X-HTTP-Method-Override":"post"
+					},
+					success:function(data){
+						if(data="SUCCESS"){
+							alert(id+'회원이 프로젝트에서 탈퇴되었습니다.');
 						}
-					});
+						
+						location.reload();
+					},
+					error:function(error){
+						alert("회원의 탈퇴가 실패했습니다. 잠시후 다시 시도해주세요.");
+					}
+				});
 			}else{
 				return;
 			}

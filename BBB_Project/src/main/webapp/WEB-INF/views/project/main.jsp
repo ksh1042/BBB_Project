@@ -6,15 +6,13 @@
 <body>  
     <!-- Content Header (Page header) -->
 	<section class="content-header">
-		<h1>
-			${logonProject.name}
-		</h1>
 		<ol class="breadcrumb">
 			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}">
 				<i class="fa fa-dashboard">&nbsp;&nbsp;&nbsp;${logonProject.name }</i></a></li>
 			<li class="active">대시보드</li>
 		</ol>
 	</section>
+	<br/>
 	
 	<!-- 새로운 이슈 정보창 -->
     <section class="content">
