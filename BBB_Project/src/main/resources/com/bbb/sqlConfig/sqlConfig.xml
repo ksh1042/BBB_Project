@@ -24,7 +24,6 @@
 		<typeAlias type="com.bbb.dto.UnitworkHistVO" alias="unitworkHist"/>
 		<typeAlias type="com.bbb.dto.RequirementVO" alias="requirement" />
 		<typeAlias type="com.bbb.dto.RequirementHistVO" alias="requirementHist" />
-		<typeAlias type="com.bbb.dto.BoardVO" alias="board"/>
   		<typeAlias type="com.bbb.dto.BoardAttachVO" alias="Attach"/>
 		<typeAlias type="com.bbb.dto.ReplyVO" alias="Reply"/>
 		<typeAlias type="com.bbb.dto.UseCaseVO" alias="UseCase" />

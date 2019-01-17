@@ -33,13 +33,13 @@
 						<div class="box-body">
 							<div class="form-group">
 								<label for="exampleInputEmail1">제목</label> <input type="text"
-									name='title' class="form-control" placeholder="Enter Title">
+									name='title' class="form-control" placeholder="제목을 입력하세요">
 									<span class="help-block" id="titleHelp"></span>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputPassword1">내용</label>
-								<textarea class="form-control" name="content" id="content" rows="10" cols="100"
-									placeholder="Enter ..."></textarea>
+								<textarea class="form-control" name="content" id="contents" rows="10" cols="100"
+									placeholder="내용을 입력하세요 ..."></textarea>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputEmail1">작성자</label> <input
@@ -83,15 +83,12 @@
 	<script src="<%=request.getContextPath()%>/resources/SE2/js/HuskyEZCreator.js"></script>
 	<script type="text/javascript">
 	
-
-	
-	
 	var oEditors = []; /* 개발되어 있는 소스에 맞추느라, 전역변수로 사용하였지만, 지역변수로 사용해도 전혀 무관 함. */
 
 /* 	Editor Setting */
 	nhn.husky.EZCreator.createInIFrame({
 	oAppRef : oEditors, 
-	elPlaceHolder : "content",
+	elPlaceHolder : "contents",
 	sSkinURI : "<%=request.getContextPath()%>/resources/SE2/SmartEditor2Skin.html", // Editor HTML
 	fCreator : "createSEditor2",
 	htParams : {
@@ -106,7 +103,7 @@ $('#submitBtn').on('click',function(e){
 	var form = $('form[role="form"]');
 	
 	// id가 smarteditor인 textarea에 에디터에서 대입			
-	oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+	oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
 	
 	form.submit();
 		});

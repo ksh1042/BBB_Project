@@ -7,11 +7,11 @@ import com.bbb.controller.Criteria;
 import com.bbb.controller.SearchCriteria;
 import com.bbb.dto.BoardVO;
 
-public interface BoardDAO {
+public interface FileboardDAO {
 	
 	void insertBoard(BoardVO board)throws SQLException;
-	
-	BoardVO selectBoardByBnum(int bNum) throws SQLException;
+
+	BoardVO selectBoardByBnum(int bNum) throws SQLException ;
 
 	List<BoardVO> selectSearchBoardList(SearchCriteria cri , int pjNum) throws SQLException;
 

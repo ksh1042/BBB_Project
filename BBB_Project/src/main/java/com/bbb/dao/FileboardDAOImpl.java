@@ -12,7 +12,7 @@ import com.bbb.controller.Criteria;
 import com.bbb.controller.SearchCriteria;
 import com.bbb.dto.BoardVO;
 
-public class BoardDAOImpl implements BoardDAO {
+public class FileboardDAOImpl implements FileboardDAO {
 
 	private SqlSession session;
 
@@ -22,30 +22,30 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public void insertBoard(BoardVO board) throws SQLException {
-		session.insert("Board.insertBoard",board);
+		session.insert("FileBoard.insertBoard",board);
 		
 	}
 
 	@Override
 	public BoardVO selectBoardByBnum(int bNum) throws SQLException {
-		BoardVO board = (BoardVO)session.selectOne("Board.selectBoardByBnum",bNum);
+		BoardVO board = (BoardVO)session.selectOne("FileBoard.selectBoardBybNum",bNum);
 		return board;
 	}
 
 	@Override
 	public void updateBoard(BoardVO board) throws SQLException {
-		session.update("Board.updateBoard",board);
+		session.update("FileBoard.updateBoard",board);
 		
 	}
 
 	@Override
 	public void deleteBoard(int bNum) throws SQLException {
-		session.update("Board.deleteBoard",bNum);
+		session.update("FileBoard.deleteBoard",bNum);
 	}
 
 	@Override
 	public void increaseCount(int bNum) throws SQLException {
-		session.update("Board.increaseCount",bNum);
+		session.update("FileBoard.increaseViewCnt",bNum);
 		
 	}
 
@@ -59,7 +59,7 @@ public class BoardDAOImpl implements BoardDAO {
 		paramMap.put("keyword", cri.getKeyword());
 		paramMap.put("pjNum", pjNum);
 		List<BoardVO> boardList=
-		session.selectList("Board.selectSearchBoardList",paramMap,rowBounds);
+		session.selectList("FileBoard.selectSearchBoardList",paramMap,rowBounds);
 		return boardList;
 	}
 	@Override
@@ -67,7 +67,7 @@ public class BoardDAOImpl implements BoardDAO {
 		int offset = cri.getPageStartRowNum();
 		int limit = cri.getPerPageNum();
 		RowBounds rowBounds = new RowBounds(offset,limit);
-		List<BoardVO> boardList = session.selectList("Board.selectSearchBoardList",cri,rowBounds);
+		List<BoardVO> boardList = session.selectList("FileBoard.selectSearchBoardList",cri,rowBounds);
 		return boardList;
 	}
 
@@ -77,14 +77,14 @@ public class BoardDAOImpl implements BoardDAO {
 		paramMap.put("cri", cri);
 		paramMap.put("pjNum", pjNum);
 		
-		int count = session.selectOne("Board.selectSearchBoardCount", paramMap);
+		int count = session.selectOne("FileBoard.selectSearchBoardCount", paramMap);
 		
 		return count;
 		
 	}
 	@Override
 	public List<BoardVO> selectBoardAll() throws SQLException {
-		List<BoardVO> boardList = session.selectList("Board.selectBoardAll");
+		List<BoardVO> boardList = session.selectList("FileBoard.selectBoardAll");
 		return boardList;
 	}
 
@@ -95,21 +95,19 @@ public class BoardDAOImpl implements BoardDAO {
 		
 		RowBounds bounds = new RowBounds(offset,limit);
 		
-		List<BoardVO> boardList = session.selectList("Board.selectBoardAll",null,bounds);
+		List<BoardVO> boardList = session.selectList("FileBoard.selectBoardAll",null,bounds);
 		
 		return boardList;
 	}
 
 	@Override
 	public int selectSearchBoardCount(SearchCriteria cri) throws SQLException {
-		int rowCount = session.selectOne("Board.selectSearchBoardCount",cri);
+		int rowCount = session.selectOne("FileBoard.selectSearchBoardCount",cri);
 		return rowCount;
 	}
 	@Override
 	public int getSeqNextvalue() throws SQLException {
-		return session.selectOne("Board.getSeqNextvalue");
+		return session.selectOne("FileBoard.getSeqNextvalue");
 	}
-
-	
 
 }
