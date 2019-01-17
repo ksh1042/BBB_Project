@@ -201,7 +201,7 @@ public class MainController {
 	
 	@RequestMapping(value="/mypage/modify",method=RequestMethod.POST)
 	public String mypageModify(MultipartFile file,MemberVO member, HttpServletRequest request,@RequestParam String origin)throws Exception{
-		if(origin == null){
+		if(origin.equals("change")){
 				String savedName=file.getOriginalFilename();
 				File target = new File(uploadProfile,savedName);
 				

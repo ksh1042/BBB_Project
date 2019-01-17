@@ -334,8 +334,9 @@ height:150px;
         		var profileName ="";
         		var origin ="";
         		if(profileValue == ""){
-        			origin+=profileName;
+        			origin+="origin";
         		}else{
+        			origin+="change";
         			profileName = profileValue[profileValue.length-1]; //파일명 추출
         			
         		}
