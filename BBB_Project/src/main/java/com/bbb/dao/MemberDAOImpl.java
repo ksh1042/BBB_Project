@@ -101,6 +101,13 @@ public class MemberDAOImpl implements MemberDAO {
 		session.update("Member.removeEmailynById",id);
 	}
 
+
+	@Override
+	public void updateOriginProfile(String id) throws SQLException {
+		session.update("Member.changeOriginProfile",id);
+		
+	}
+
 	
 
 

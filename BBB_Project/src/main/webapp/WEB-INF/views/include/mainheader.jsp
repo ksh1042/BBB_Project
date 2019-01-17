@@ -172,7 +172,7 @@ height:150px;
 						<li class="dropdown user user-menu">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
 								<c:if test="${loginUser.image ne null }">
-			                    	<img src="<spring:url value='/profile/${loginUser.image}'/>" class="user-image" alt="User Image"/>
+			                    	<img src="<spring:url value='/profile/${loginUser.image}'/>" class="user-image myOriginProfile" alt="User Image"/>
 			                    </c:if>
 			                    <c:if test="${loginUser.image eq null }">
 			                    	<img src="/resources/images/profile.png" class="user-image" alt="User Image"/>
@@ -184,9 +184,9 @@ height:150px;
 
 								<li class="user-header">
 									<c:if test="${loginUser.image ne null }">
-			                    		<img src="<spring:url value='/profile/${loginUser.image}'/>" class="img-circle"  alt="User Image"/>
+			                    		<img src="<spring:url value='/profile/${loginUser.image}'/>" class="img-circle myOriginProfile"  alt="User Image"/>
 				                    </c:if>
-				                    <c:if test="${loginUser.image eq null }">
+				                    <c:if test="${empty loginUser.image }">
 				                    	<img src="/resources/images/profile.png" class="img-circle"  alt="User Image"/>
 				                    </c:if>
 									<p><strong>${loginUser.id }</strong>(${loginUser.name }) <small>Member since <fmt:formatDate value="${loginUser.indate }" pattern="yyyy-MM"/>
@@ -252,18 +252,18 @@ height:150px;
 					
 						<div class="form-group" >
 							<c:if test="${loginUser.image ne null }">
-		                    	<img src="<spring:url value='/profile/${loginUser.image}'/>" class="profile-user-img img-circle profile-change" style="cursor:pointer;display: block;" onclick="profile_go();"/><br/>
+		                    	<img src="<spring:url value='/profile/${loginUser.image}'/>" class="profile-user-img img-circle profile-change myOriginProfile" style="cursor:pointer;display: block;" onclick="profile_go();"/><br/>
 		                    </c:if>
 		                    <c:if test="${loginUser.image eq null }">
-		                    	<img src="/resources/images/profile.png" class="profile-user-img img-circle profile-change" style="cursor:pointer;display: block;" onclick="profile_go();"/><br/>
+		                    	<img src="/resources/images/profile.png" class="profile-user-img img-circle profile-change " style="cursor:pointer;display: block;" onclick="profile_go();"/><br/>
 		                    </c:if>
-		                    <input type="file" name="file" id="uploadProfile" style="display:none;">
+		                    <input type="file" name="file" accept="image/jpeg, image/png, image/jpg" id="uploadProfile" style="display:none;">
 		                </div>
 		                
 		                <div class="form-group" >
 		                	<label for="inputEmail3" class="col-sm-2 control-label">이미지</label>
 			                <div class="col-sm-10">
-			                    <button type="button" class="btn btn-block btn-warning" style="width:150px;">기본 이미지 변경</button><br/>
+			                    <button type="button" class="btn btn-block btn-warning" style="width:150px;" onclick="origin_change()">기본 이미지 변경</button><br/>
 							</div>
 						</div>			
 							
@@ -332,16 +332,18 @@ height:150px;
         		
         		var profileValue = $("#uploadProfile").val().split("\\");
         		var profileName ="";
+        		var origin ="";
         		if(profileValue == ""){
-        			profileName = "profile.png";
+        			origin+=profileName;
         		}else{
         			profileName = profileValue[profileValue.length-1]; //파일명 추출
         			
         		}
         		
         		var input1=$('<input>').attr('type','hidden').attr('name','image').val(profileName);
+        		var input2=$('<input>').attr('type','hidden').attr('name','origin').val(origin);
         		
-        		$('form#mypageForm').append(input1);
+        		$('form#mypageForm').append(input1).append(input2);
         		document.mypageForm.submit();
         		alert("회원정보가 수정되었습니다.");
         	}
@@ -367,6 +369,26 @@ height:150px;
         		    readURL(this);
         		});
         		
+        	}
+        	
+        	function origin_change(){
+        		var id = "${loginUser.id}";
+        		
+        		$.ajax({
+    				url:"<%=request.getContextPath()%>/main/mypage/changeOrigin",
+    				type:"post",
+    				data:{
+    					"id":id
+    				},
+    				success:function(data){
+    					if(data == "success"){
+    						$(".myOriginProfile").attr('src','/resources/images/profile.png');
+    					}
+    				},
+    				error:function(data){
+    					alert("이미지 변경에 실패했습니다.");
+    				}
+    			});	
         	}
         </script>
       

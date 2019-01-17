@@ -16,6 +16,8 @@ public interface MemberService {
 	
 	void modify(MemberVO member)throws SQLException;
 	
+	void updateOriginProfile(String id)throws SQLException;
+	
 	void remove(String id)throws SQLException;
 	
 	int idCheckSer(String id)throws SQLException;

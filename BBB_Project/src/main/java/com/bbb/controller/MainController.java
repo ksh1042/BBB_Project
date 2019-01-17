@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -199,17 +200,40 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/mypage/modify",method=RequestMethod.POST)
-	public String mypageModify(MultipartFile file,MemberVO member, HttpServletRequest request)throws Exception{
-		
-		String savedName=file.getOriginalFilename();
-		File target = new File(uploadProfile,savedName);
-		
-		FileCopyUtils.copy(file.getBytes(), target);
+	public String mypageModify(MultipartFile file,MemberVO member, HttpServletRequest request,@RequestParam String origin)throws Exception{
+		if(origin == null){
+				String savedName=file.getOriginalFilename();
+				File target = new File(uploadProfile,savedName);
+				
+				FileCopyUtils.copy(file.getBytes(), target);
+			
+		}
 		
 		service.modify(member);
 		MemberVO loginUser=service.getMemberById(member.getId());
 		request.getSession().setAttribute("loginUser", loginUser);
 		return "redirect:/main/myPartakeList";
+	}
+	
+	@RequestMapping(value="/mypage/changeOrigin", method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> changeOrigin(@RequestParam String id,HttpSession session)throws Exception{
+		ResponseEntity<String> entity = null;
+		System.out.println("아이디 : " +id);
+		try {
+			service.updateOriginProfile(id);
+			MemberVO member = (MemberVO) session.getAttribute("loginUser");
+			System.out.println("member : "+member);
+			MemberVO loginUser=service.getMemberById(member.getId());
+			session.setAttribute("loginUser", loginUser);
+
+			entity=new ResponseEntity<String>("success",HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity=new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return entity;
 	}
 	
 	@RequestMapping("/mypage/resetPwd")

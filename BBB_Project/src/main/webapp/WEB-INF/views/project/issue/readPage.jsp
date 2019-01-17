@@ -6,7 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <body>
-	<style>
+<style>
 hr {
 	border-top: 1px solid #BDBDBD;
 	border-bottom: 1px solid #F6F6F6;
