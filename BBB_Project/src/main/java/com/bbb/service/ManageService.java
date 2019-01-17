@@ -21,6 +21,7 @@ public interface ManageService {
 	public void applyMember(String id,int pjNum) throws Exception;
 	public void refuseMember(String id,int pjNum) throws Exception;
 	
-	public List<ProjectPartakeVO> getSearchList(SearchCriteria cri,int pjNum,String id) throws Exception;
+	public List<MemberVO> getSearchList(SearchCriteria cri,int pjNum,String id) throws Exception;
 	public int getSearchListCount(SearchCriteria cri, int pjNum,String id) throws Exception;
+	public void inviteMember(ProjectPartakeVO invMember) throws Exception;
 }

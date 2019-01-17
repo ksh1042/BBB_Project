@@ -53,7 +53,7 @@ public class ManageServiceImpl implements ManageService {
 	}
 
 	@Override
-	public List<ProjectPartakeVO> getSearchList(SearchCriteria cri, int pjNum,String id) throws Exception {
+	public List<MemberVO> getSearchList(SearchCriteria cri, int pjNum,String id) throws Exception {
 		
 		return manageDao.getInviteMember(cri,pjNum,id);
 	}
@@ -62,6 +62,12 @@ public class ManageServiceImpl implements ManageService {
 	public int getSearchListCount(SearchCriteria cri, int pjNum,String id) throws Exception {
 
 		return manageDao.getInviteMemberCount(cri,pjNum,id);
+	}
+
+	@Override
+	public void inviteMember(ProjectPartakeVO invMember) throws Exception {
+		manageDao.memberInvite(invMember);
+		
 	}
 
 

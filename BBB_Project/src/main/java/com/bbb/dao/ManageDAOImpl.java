@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.bbb.controller.SearchCriteria;
@@ -65,13 +66,16 @@ public class ManageDAOImpl implements ManageDAO {
 	}
 
 	@Override
-	public List<ProjectPartakeVO> getInviteMember(SearchCriteria cri, int pjNum,String id) throws SQLException {
+	public List<MemberVO> getInviteMember(SearchCriteria cri, int pjNum,String id) throws SQLException {
+		int offset = cri.getPageStartRowNum();
+		int limit = cri.getPerPageNum();
+		RowBounds bound = new RowBounds(offset, limit);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyword", cri.getKeyword());
 		map.put("SearchType", cri.getSearchType());
 		map.put("pjNum", pjNum);
 		map.put("id", id);
-		return session.selectList("Management.getSearchMemberList",map);
+		return session.selectList("Management.getSearchMemberList",map, bound);
 	}
 
 	@Override
@@ -82,6 +86,11 @@ public class ManageDAOImpl implements ManageDAO {
 		map.put("pjNum", pjNum);
 		map.put("id", id);
 		return session.selectOne("Management.getSearchMemberListCount",map);
+	}
+
+	@Override
+	public void memberInvite(ProjectPartakeVO invMember) throws SQLException {
+		session.update("Management.memberInvite", invMember);
 	}
 
 
