@@ -142,26 +142,25 @@ public class managementController {
 		
 		if(cri.getKeyword() == null){
 			if(cri.getSearchType() == null){
-				List<ProjectPartakeVO> inviteList = new ArrayList<ProjectPartakeVO>();
+				List<MemberVO> inviteList = new ArrayList<MemberVO>();
 				model.addAttribute("inviteList",inviteList);
 			}
 		}else{
 			pageMaker.setCri(cri);
 			pageMaker.setTotalCount(service.getSearchListCount(cri,pjNum,id));
-			List<ProjectPartakeVO> inviteList = service.getSearchList(cri,pjNum,id);
+			List<MemberVO> inviteList = service.getSearchList(cri,pjNum,id);
 			model.addAttribute("inviteList",inviteList);
 			model.addAttribute("pageMaker", pageMaker);
 		}
 	}
 	
 	@RequestMapping(value="inviteMember", method=RequestMethod.POST)
-	public ResponseEntity<String> inviteMember(String id, HttpServletRequest request) throws Exception{
+	public ResponseEntity<String> inviteMember(@RequestBody ProjectPartakeVO invMember, HttpServletRequest request) throws Exception{
 		
 		ResponseEntity<String> entity = null;
-		
 		try{
-			
-		entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+			service.inviteMember(invMember);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		}catch(Exception e){
 		e.printStackTrace();
 		entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);

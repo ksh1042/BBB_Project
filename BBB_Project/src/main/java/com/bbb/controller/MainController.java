@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -285,6 +286,11 @@ public class MainController {
 		return "redirect:/main/myPartakeList";
 	}
 	
+	@RequestMapping(value="/getInvite/{id}",method=RequestMethod.GET)
+	@ResponseBody
+	public List<ProjectVO> getInvite(@PathVariable("id")String id) throws Exception{
+		return projectService.getInvitedList(id);
+	}
 	
 	
 	

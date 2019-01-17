@@ -77,6 +77,11 @@
 		where id not in(#{id})
 		<include refid="SearchType" />
 	</select>
+	
+	<update id="memberInvite">
+		insert into tbl_project_partake(id,pjnum,assignyn)
+		values(#{id},#{pjNum},3)
+	</update>
 </mapper>
 
 

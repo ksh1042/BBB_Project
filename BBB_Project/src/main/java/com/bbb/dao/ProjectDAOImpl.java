@@ -131,6 +131,21 @@ public class ProjectDAOImpl implements ProjectDAO{
 		session.update("ProjectPartake.leaveProject", takeVO);
 	}
 
+	@Override
+	public List<ProjectVO> getInvitedList(String id) throws SQLException {
+		return session.selectList("Project.getInvitedList",id);
+	}
+
+	@Override
+	public void acceptInvite(ProjectPartakeVO partake) throws SQLException {
+		session.update("ProjectPartake.acceptInvite", partake);
+	}
+
+	@Override
+	public void refuseInvite(ProjectPartakeVO partake) throws SQLException {
+		session.update("ProjectPartake.refuseInvite", partake);
+	}
+
 	
 	
 

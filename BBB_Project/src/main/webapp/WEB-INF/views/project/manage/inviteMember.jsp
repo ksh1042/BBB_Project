@@ -82,7 +82,7 @@
 	                  </td>
 	                  <td class="hidden-xs">${inviteList.name }</td>
 	                  <td>${inviteList.email}</td>
-	                  <td><button type="button" class="btn btn-block btn-success invite" style="width:100; height:20px; line-height:5px;"id="${memberList.id }">초대</button></td>
+	                  <td><button type="button" class="btn btn-block btn-success invite" style="width:100; height:20px; line-height:5px;"id="${inviteList.id }">초대</button></td>
                 	</tr>
 				</c:forEach>
               </table>
@@ -122,8 +122,8 @@
     <form id="jobForm">
 			  <input type='hidden' name="page" value="${pageMaker.cri.page}"/>
 			  <input type='hidden' name="perPageNum" value="${pageMaker.cri.perPageNum}"/>
-			  <input type='hidden' name="keyword" value="${cri.keyword}"/>
-			  <input type="hidden" name="searchType" value="${cri.searchType }" />
+			  <input type='hidden' name="keyword" value="${pageMaker.cri.keyword}"/>
+			  <input type="hidden" name="searchType" value="${pageMaker.cri.searchType }" />
 		</form>
 	
 	<!-- content.end -->
@@ -131,11 +131,11 @@
 	<script>
 		var pjNum = ${logonProject.pjNum};
 		$('.invite').on('click', function(){
-			if(confirm("해당 회원을 탈퇴시키겠습니까?") == true){
+			if(confirm("해당 회원을 초대 하시겠습니까?") == true){
 					var id = $(this).attr('id');
 					$.ajax({
 						type:"post",
-						url:"<%=request.getContextPath()%>/project/manage/fireMember",
+						url:"<%=request.getContextPath()%>/project/manage/inviteMember",
 						data:JSON.stringify({
 							"id" : id,
 							"pjNum" : pjNum
@@ -146,13 +146,13 @@
 						},
 						success:function(data){
 							if(data="SUCCESS"){
-								alert(id+'회원이 프로젝트에서 탈퇴되었습니다.');
+								alert(id+'회원을 초대했습니다.');
 							}
 							
 							location.reload();
 						},
 						error:function(error){
-							alert("회원의 탈퇴가 실패했습니다. 잠시후 다시 시도해주세요.");
+							alert("회원의 초대가 실패했습니다. 잠시후 다시 시도해주세요.");
 						}
 					});
 			}else{
@@ -168,7 +168,7 @@
 			
 			var jobForm = $("#jobForm");
 			jobForm.find("[name='page']").val(targetPage);
-			jobForm.attr("action","member").attr("method", "get");		
+			jobForm.attr("action","").attr("method", "get");		
 			jobForm.submit();
 		});
 		

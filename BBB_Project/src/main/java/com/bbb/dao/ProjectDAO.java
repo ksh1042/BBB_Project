@@ -41,4 +41,9 @@ public interface ProjectDAO {
 	
 	public void updateProject(ProjectVO project) throws SQLException;
 	public void deleteProject(int pjNum) throws SQLException;
+
+	public List<ProjectVO> getInvitedList(String id) throws SQLException;
+	
+	public void acceptInvite(ProjectPartakeVO partake) throws SQLException;
+	public void refuseInvite(ProjectPartakeVO partake) throws SQLException;
 }

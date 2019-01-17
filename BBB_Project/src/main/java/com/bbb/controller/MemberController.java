@@ -5,11 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bbb.dao.MemberDAO;
 import com.bbb.dto.MemberVO;
+import com.bbb.dto.ProjectPartakeVO;
 import com.bbb.service.MemberService;
 
 @Controller
@@ -71,6 +73,9 @@ public class MemberController {
 		List<MemberVO> memberList=service.getMemberList(cri);
 		model.addAttribute("memberList",memberList);	
 	}
+	
+	
+	
 	
 	
 	

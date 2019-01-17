@@ -83,25 +83,15 @@ height:150px;
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">10</span>
+              <span class="label label-warning">0</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 10 notifications</li>
+              <li class="header">프로젝트에 초대받은 목록</li>
               <li>
                 <!-- Inner Menu: contains the notifications -->
-                <ul class="menu">
+                <ul class="menu invitedList">
                   <!-- 새로운 내용 -->
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-aqua"></i>초대가 온 프로젝트명
-                    </a>
-                  </li>
-                  <li>
-                  	  <div>
-                      <button type="button" class="btn btn-block btn-success" style="float:left; margin-left:10px; width:40%;">수락</button>
-                      <button type="button" class="btn btn-block btn-danger" style="float:right; margin-right:10px; width:40%; margin-top:0;">거절</button>
-                  	  </div>
-                  </li>
+                  
                   <!-- end notification -->
                 </ul>
               </li>
@@ -293,9 +283,90 @@ height:150px;
 	          <!-- /.modal-dialog -->
 	        </div>
 	        </form>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<script id="templateInvite" type="text/x-handlebars-template">
+	<li id="{{pjNum}}">
+		<a href="#">
+			<i class="fa fa-users text-aqua"></i>{{proName}}
+		</a>
+	</li>
+	<li id="{{pjNum}}" class="btn btn-block btn-success inviteAccept" style="display:block; width:50%; height:100%; float:left;">
+		수락
+	</li>
+	<li id="{{pjNum}}" class="btn btn-block btn-danger inviteRefuse" style="display:block; width:50%; height:100%; float:left; margin-top:0;">
+		거절
+	</li>
+</script>
  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script>
+        	var id = "${loginUser.id}";
+	        $.getJSON("/main/getInvite/"+id,function(list){
+				$(list).each(function(){
+					var invitedInfo=getInviteInfo(this,"<%=request.getContextPath()%>");
+					var html=template(invitedInfo);
+					$('.invitedList').append(html);
+					
+				});
+			});
+	        
+	        var template = Handlebars.compile($('#templateInvite').html());
+        
+	        function getInviteInfo(inviteJson,contextPath){
+				var proName, pjNum;
+				proName = inviteJson.name;
+				pjNum = inviteJson.pjNum;
+				return {proName:proName, pjNum:pjNum};
+			}
+			
+	        $('.invitedList').on('click','.inviteAccept', function(){
+	        	var pjNum = $('.inviteAccept').attr("id");
+	        	$.ajax({
+    				url:"<%=request.getContextPath()%>/project/inviteAccept",
+    				type:"post",
+    				data:JSON.stringify({
+    					"id":id,
+    					"pjNum":pjNum
+    				}),
+    				headers:{
+    					"Content-Type":"application/json;charset=utf8",
+    					"X-HTTP-Method-Override":"post"
+    				},
+    				success:function(data){
+    					if(data == "SUCCESS"){
+    						alert("수락하셨습니다.");
+    					}
+						location.reload();
+    				},
+    				error:function(data){
+    					alert("수락에 실패했습니다.");
+    				}
+    			});	
+	        });
+	        
+	        $('.invitedList').on('click','.inviteRefuse', function(){
+	        	var pjNum = $('.inviteAccept').attr("id");
+	        	$.ajax({
+    				url:"<%=request.getContextPath()%>/project/inviteRefuse",
+    				type:"post",
+    				data:JSON.stringify({
+    					"id":id,
+    					"pjNum":pjNum
+    				}),
+    				headers:{
+    					"Content-Type":"application/json;charset=utf8",
+    					"X-HTTP-Method-Override":"post"
+    				},
+    				success:function(data){
+    					if(data == "SUCCESS"){
+    						alert("거절하셨습니다.");
+    					}
+						location.reload();
+    				},
+    				error:function(data){
+    					alert("거절에 실패했습니다.");
+    				}
+    			});	
+	        });
         	function profileModify_go(){
         		
         		var profileValue = $("#uploadProfile").val().split("\\");
