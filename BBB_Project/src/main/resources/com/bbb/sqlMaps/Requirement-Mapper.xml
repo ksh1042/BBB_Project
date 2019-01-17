@@ -31,7 +31,7 @@
 				AND rdcontent LIKE '%'||#{cri.keyword}||'%'
 			</if>
 			<if test="cri.searchType == 'ry'.toString()">
-				AND acceptyn = #{cri.keyword}
+				AND acceptyn LIKE '%'||#{cri.keyword}||'%'
 			</if>
 			<if test="cri.searchType == 'in'.toString()">
 				AND interf LIKE '%'||#{cri.keyword}||'%'
@@ -39,7 +39,7 @@
 			<if test="cri.searchType == 'all'.toString()">
 				AND (rdId LIKE '%'||#{cri.keyword}||'%'
 				OR rdName LIKE '%'||#{cri.keyword}||'%'
-				OR acceptyn #{cri.keyword}
+				OR acceptyn LIKE '%'||#{cri.keyword}||'%'
 				OR interf LIKE '%'||#{cri.keyword}||'%'
 				OR rdContent LIKE '%'||#{cri.keyword}||'%')
 			</if>
@@ -53,7 +53,7 @@
 		</if>
 	</sql>
 	
-	<select id="selectRequirementListByRdNum" parameterType="int" resultType="Requirement">
+	<select id="selectRequirementListByRdNum" resultType="Requirement">
 		select *
 		from tbl_requirement_dfntn_detail
 		where rdNum = #{rdNum}

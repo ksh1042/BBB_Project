@@ -31,6 +31,7 @@
 					<h3 class="box-title">요구사항 리스트</h3>
 					<span style="float:right;">
 						<label class="control-label validateAlertMsg red hidden" style="color:red;"></label>
+						<button type="button" class="btn btn-danger" onclick="list_go();" style="margin-left:20px;">취소</button>
 						<button type="button" class="btn btn-primary" onclick="submit_go();" style="margin-left:20px;">완료</button>
 					</span>
 				</div>
@@ -173,6 +174,10 @@
 		$('#rdList').on('change', 'select[name=rdId], select[name=rdName], select[name="manager"]', function(e){
 			$(this).removeClass('validateAlert');
 		});
+		
+		function list_go() {
+			history.go(-1); 
+		}
 		
 		function submit_go() {
 			var flag = true;

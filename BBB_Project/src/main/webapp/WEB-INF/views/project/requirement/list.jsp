@@ -50,7 +50,7 @@
                            <option value="ry">수용여부</option>
                         </select>   
                      </span>
-                     <input type="text" class="form-control" value="${ pageMaker.cri.keyword }"> 
+                     <input id="keyword" type="text" class="form-control" value="${ pageMaker.cri.keyword }"> 
                      <span class="input-group-btn">
                         <button type="button" class="btn btn-default btn-flat" onclick="search_go();">검색</button>
                      </span>
@@ -72,26 +72,6 @@
                         <table id="example2"
                            class="table table-bordered table-hover dataTable" role="grid"
                            aria-describedby="example2_info">
-                           <tr>
-                           	 <th class="sorting hidden-xs" tabindex="0" aria-controls="example2"
-                                 rowspan="1" colspan="1"
-                                 aria-label="Rendering engine: activate to sort column ascending">프로젝트 명</th>
-                                  <th class="sorting hidden-xs" tabindex="0" aria-controls="example2"
-                                 rowspan="1" colspan="2"
-                                 aria-label="Rendering engine: activate to sort column ascending">${logonProject.name }</th>
-                                  <th class="sorting hidden-xs" tabindex="0" aria-controls="example2"
-                                 rowspan="1" colspan="1"
-                                 aria-label="Rendering engine: activate to sort column ascending">작성일</th>
-                                  <th class="sorting hidden-xs" tabindex="0" aria-controls="example2"
-                                 rowspan="1" colspan="2"
-                                 aria-label="Rendering engine: activate to sort column ascending"></th>
-                                  <th class="sorting hidden-xs" tabindex="0" aria-controls="example2"
-                                 rowspan="1" colspan="1"
-                                 aria-label="Rendering engine: activate to sort column ascending">작성자</th>
-                                  <th class="sorting hidden-xs" tabindex="0" aria-controls="example2"
-                                 rowspan="1" colspan="1"
-                                 aria-label="Rendering engine: activate to sort column ascending">${logonProject.creator }</th>
-                           </tr>
                            <tr role="row">
                               <th class="sorting" tabindex="0" aria-controls="example2"
                                  rowspan="1" colspan="1"
@@ -214,7 +194,7 @@
       // ---------------------------------------------------------------------------------
       // search.start
       function search_go() {
-         $('#frm')
+    	  location.href = 'list?page=1&searchType='+$('select[name=searchType]').val()+'&keyword='+$('input#keyword').val();
       }
       // search.end
       // ---------------------------------------------------------------------------------
