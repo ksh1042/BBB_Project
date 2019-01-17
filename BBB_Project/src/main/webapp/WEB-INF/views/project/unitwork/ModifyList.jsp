@@ -142,6 +142,12 @@
 												<td><input type="date" class="form-control" name="devDate" value='<fmt:formatDate value="${ unit.devDate > checkDate ? unit.devDate : '' }" pattern="yyyy-MM-dd"/>'></td>
 												<td><input type="text" class="form-control" name="estmate" value="${ unit.estmate }" size="1"></td>
 											</tr>
+											
+											
+										</c:forEach>
+										<!-- 단위업무 추가하기 -->
+										<tr class="addUdPoint">
+											<td colspan="11" style="font-weight:bold;"><a href="#" class="addRow"><span class="glyphicon glyphicon-plus-sign "></span>&nbsp;단위업무 행 추가</a></td>
 											<select name="rddNumT" class="form-control hidden">
 												<option value="${ unit.rddNum }" selected hidden>${ unit.rddNum }</option>
 												<c:forEach var="require" items="${ requireList }">
@@ -154,11 +160,6 @@
 													<option value="${ require.rdName }">${ require.rdName }</option>
 												</c:forEach>
 											</select>
-											
-										</c:forEach>
-										<!-- 단위업무 추가하기 -->
-										<tr class="addUdPoint">
-											<td colspan="11" style="font-weight:bold;"><a href="#" class="addRow"><span class="glyphicon glyphicon-plus-sign "></span>&nbsp;단위업무 행 추가</a></td>
 										</tr>
 									</table>
 								</form>
@@ -371,7 +372,7 @@
 			$('option:eq('+selectedIndex+')', targetSelect).removeAttr('selected');	
 			$('option:eq('+selectedIndex+')', targetSelect).attr('selected','selected');
 			var temp = targetSelect.val();
-			
+			alert('rdNameT : ' + temp);
 			$(this).parent().next().children('input').val(temp);
 			$(this).parent().next().children('input').attr('title', temp);
 			
@@ -381,7 +382,7 @@
 			$('option:eq('+selectedIndex+')', targetSelect).attr('selected','selected');
 			temp = targetSelect.val();
 			$(this).prev().val(temp);
-			
+			alert('rddNumT : ' + temp);
 		});
 		
 		function contains(data, keyword){

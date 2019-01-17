@@ -87,6 +87,15 @@
 		SET gcNum = #{gcNum}
 		WHERE pjNum = #{pjNum}
 	</update>
+	<update id="updateProject" parameterType="project">
+		UPDATE tbl_project
+		SET disc=#{disc}, visibility=#{visibility}, startDate=#{startDate}, endDate=#{endDate}
+		WHERE pjNum = #{pjNum}
+	</update>
+	<update id="deleteProject" parameterType="int">
+		DELETE FROM tbl_project
+		WHERE pjNum=#{pjNum}
+	</update>
 </mapper>
 
 

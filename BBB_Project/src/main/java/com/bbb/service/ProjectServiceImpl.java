@@ -117,8 +117,16 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 
 	@Override
+	public void updateProject(ProjectVO project) throws SQLException {
+		projectDAO.updateProject(project);
+	}
 	public void leaveProject(ProjectPartakeVO takeVO) throws SQLException {
 		projectDAO.leaveProject(takeVO);
+	}
+
+	@Override
+	public void deleteProject(int pjNum) throws SQLException {
+		projectDAO.deleteProject(pjNum);
 	}
 
 	

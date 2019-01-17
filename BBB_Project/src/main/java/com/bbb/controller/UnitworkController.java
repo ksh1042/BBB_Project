@@ -24,6 +24,7 @@ import com.bbb.dto.ProjectVO;
 import com.bbb.dto.RequirementVO;
 import com.bbb.dto.UnitworkHistVO;
 import com.bbb.dto.UnitworkVO;
+import com.bbb.service.ProjectService;
 import com.bbb.service.UnitworkService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,6 +35,8 @@ public class UnitworkController {
 	
 	@Autowired
 	private UnitworkService unitworkService;
+	@Autowired
+	private ProjectService projectService;
 	
 	@RequestMapping(value="/create", method=RequestMethod.GET)
 	public String unitworkRegist(HttpSession session) throws Exception {

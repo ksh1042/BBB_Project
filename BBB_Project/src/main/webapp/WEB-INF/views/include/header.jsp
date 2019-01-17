@@ -570,6 +570,10 @@ height:150px;
 						<i class="fa fa-circle-o"></i>참여신청 관리</a>
 					</li>
 					<li>
+						<a href="<%=request.getContextPath()%>/project/modify">
+						<i class="fa fa-circle-o"></i>프로젝트 수정</a>
+					</li>
+					<li>
 						<a href="<%=request.getContextPath()%>/project/manage/inviteMember">
 						<i class="fa fa-circle-o"></i>프로젝트 초대</a>
 					</li>
