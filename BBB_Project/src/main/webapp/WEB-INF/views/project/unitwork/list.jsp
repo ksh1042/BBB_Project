@@ -72,20 +72,19 @@
 	<section class="content-header">
 		<h1>단위업무 정의서</h1>
 		<ol class="breadcrumb">
-			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
-				<i class="fa fa-dashboard"></i>My Project</a>
-			</li>
-			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}">${logonProject.name }</a></li>
+			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}"><i class="fa fa-dashboard"></i>${logonProject.name }</a></li>
 			<li class="active"><a href="list">단위업무 정의서</a></li>
 		</ol>
 	</section>
 	<br/>
+	
 	<section class="content">
-		<div class="col-xs-12">
+	<div class="row">
+		<div class="col-md-12">
 			<div class="box">
 				<div class="box-header">
 					<div class="col-sm-6">
-						<h3 class="box-title">단위업무 리스트</h3>
+						<h3 class="box-title"></h3>
 					</div>
 					<div class="col-sm-6 searchDiv">
 						<div class="input-group input-group-sm">
@@ -124,29 +123,29 @@
 										<th class="sorting" tabindex="0" aria-controls="example2"
 											rowspan="1" colspan="1"
 											aria-label="Rendering engine: activate to sort column ascending">번호</th>
-										<th class="sorting_desc" tabindex="0" aria-controls="example2"
+										<th class="sorting_desc hidden-xs" tabindex="0" aria-controls="example2"
 											rowspan="1" colspan="1"
 											aria-label="Browser: activate to sort column ascending"
 											aria-sort="descending">단위업무ID</th>
 										<th class="sorting" tabindex="0" aria-controls="example2"
 											rowspan="1" colspan="1"
 											aria-label="Platform(s): activate to sort column ascending">단위업무명</th>
-										<th class="sorting" tabindex="0" aria-controls="example2"
+										<th class="sorting hidden-xs" tabindex="0" aria-controls="example2"
 											rowspan="1" colspan="1"
 											aria-label="CSS grade: activate to sort column ascending">요구사항ID</th>
-										<th class="sorting" tabindex="0" aria-controls="example2"
+										<th class="sorting hidden-xs" tabindex="0" aria-controls="example2"
 											rowspan="1" colspan="1"
 											aria-label="CSS grade: activate to sort column ascending">담당자</th>
-											<th class="sorting" tabindex="0" aria-controls="example2"
+											<th class="sorting hidden-xs" tabindex="0" aria-controls="example2"
 											rowspan="1" colspan="1"
 											aria-label="CSS grade: activate to sort column ascending">외부설계<br>완료일자</th>
-											<th class="sorting" tabindex="0" aria-controls="example2"
+											<th class="sorting hidden-xs" tabindex="0" aria-controls="example2"
 											rowspan="1" colspan="1"
 											aria-label="CSS grade: activate to sort column ascending">내부설계<br>완료일자</th>
-											<th class="sorting" tabindex="0" aria-controls="example2"
+											<th class="sorting hidden-xs" tabindex="0" aria-controls="example2"
 											rowspan="1" colspan="1"
 											aria-label="CSS grade: activate to sort column ascending">프로그램설계<br>완료일자</th>
-											<th class="sorting" tabindex="0" aria-controls="example2"
+											<th class="sorting hidden-xs" tabindex="0" aria-controls="example2"
 											rowspan="1" colspan="1"
 											aria-label="CSS grade: activate to sort column ascending">개발<br>완료일자</th>
 											<th class="sorting" tabindex="0" aria-controls="example2"
@@ -159,15 +158,15 @@
 									<c:forEach var="unit" items="${ unitList }" varStatus="stat">
 										<tr role="row" class="${ (stat.count mod 2)==0 ? 'even':'odd' }">
 											<td>${ stat.count }</td>
-											<td>${ unit.udId }</td>
+											<td class="hidden-xs">${ unit.udId }</td>
 											<td title="${ unit.udName }">${ unit.udName }</td>
-											<td><a href="<%=request.getContextPath()%>/project/requirement/list" title="${ unit.rdName }">${ unit.rdId }</a></td>
-											<td><a class="postboxLink" href="${ unit.udManager }">${ unit.udManager }</a></td>
+											<td class="hidden-xs"><a href="<%=request.getContextPath()%>/project/requirement/list" title="${ unit.rdName }">${ unit.rdId }</a></td>
+											<td class="hidden-xs"><a class="postboxLink" href="${ unit.udManager }">${ unit.udManager }</a></td>
 											<fmt:parseDate value="19600101" pattern="yyyyMMdd" var="checkDate" />
-											<td><fmt:formatDate value="${ unit.extDate > checkDate ? unit.extDate : '' }" pattern="yyyy-MM-dd"/></td>
-											<td><fmt:formatDate value="${ unit.intDate > checkDate ? unit.extDate : '' }" pattern="yyyy-MM-dd"/></td>
-											<td><fmt:formatDate value="${ unit.pdDate > checkDate ? unit.extDate : '' }" pattern="yyyy-MM-dd"/></td>
-											<td><fmt:formatDate value="${ unit.devDate > checkDate ? unit.extDate : '' }" pattern="yyyy-MM-dd"/></td>
+											<td class="hidden-xs"><fmt:formatDate value="${ unit.extDate > checkDate ? unit.extDate : '' }" pattern="yyyy-MM-dd"/></td>
+											<td class="hidden-xs"><fmt:formatDate value="${ unit.intDate > checkDate ? unit.extDate : '' }" pattern="yyyy-MM-dd"/></td>
+											<td class="hidden-xs"><fmt:formatDate value="${ unit.pdDate > checkDate ? unit.extDate : '' }" pattern="yyyy-MM-dd"/></td>
+											<td class="hidden-xs"><fmt:formatDate value="${ unit.devDate > checkDate ? unit.extDate : '' }" pattern="yyyy-MM-dd"/></td>
 											<td>${ unit.estmate }</td>
 										</tr>
 									</c:forEach>
@@ -215,6 +214,7 @@
 		  <input type='hidden' name="searchType" value="${pageMaker.cri.searchType}"/>
 		  <input type='hidden' name="keyword" value="${pageMaker.cri.keyword}"/>
 		</form>
+	</div>
 	</section>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script>

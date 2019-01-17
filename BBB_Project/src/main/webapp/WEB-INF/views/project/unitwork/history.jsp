@@ -32,23 +32,23 @@
 	    }
 		table tr>td:nth-child(1), table tr>th:nth-child(1) {
 	      width : 10%;
+	      text-align : center;
 	    }
 	    table tr>td:nth-child(2), table tr>th:nth-child(2) {
-	      width : 70%;
+	      width : 60%;
+	      text-align : center;
 	    }
 	    table tr>td:nth-child(3), table tr>th:nth-child(3) {
-	      width : 20%;
+	      width : 30%;
+	      text-align : center;
 	    }
 	</style>
 </head>
 <body>
 	<section class="content-header">
-		<h1>단위업무 정의서</h1>
+		<h1>단위업무 정의서 수정 이력</h1>
 		<ol class="breadcrumb">
-			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
-				<i class="fa fa-dashboard"></i>My Project</a>
-			</li>
-			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}">${logonProject.name }</a></li>
+			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}"><i class="fa fa-dashboard"></i>${logonProject.name }</a></li>
 			<li class="active"><a href="list">단위업무 정의서</a></li>
 			<li class="active"><a href="history">수정이력</a></li>
 		</ol>
@@ -60,7 +60,7 @@
 				<div class="box">
 					<div class="box-header">
 						<div class="col-sm-6">
-							<h3 class="box-title">수정 이력</h3>
+							<h3 class="box-title"></h3>
 						</div>
 						<div class="col-sm-6 searchDiv">
 							<div class="input-group input-group-sm">

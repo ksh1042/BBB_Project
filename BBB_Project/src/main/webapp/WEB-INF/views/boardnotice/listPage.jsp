@@ -102,7 +102,6 @@
 		</div>
 		<!--/.col (left) -->
 
-	</div>
 	<!-- /.row -->
 </section>
 <!-- /.content -->

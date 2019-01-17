@@ -7,31 +7,33 @@
 
 <body> 
 	<section class="content-header">
-		<div class="container-fluid">
-			<div class="row mb-2">
-				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">간트차트 수정이력</h1>
-				</div>
-			</div>
-		</div>
+			<h1>간트차트 수정이력</h1>
+			<ol class="breadcrumb">
+				<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}">
+					<i class="fa fa-dashboard">&nbsp;&nbsp;&nbsp;${logonProject.name }</i></a></li>
+				<li class="active"><a href="<%=request.getContextPath() %>/project/gantt/list">간트차트</a></li>
+				<li class="active">수정 페이지</li>
+			</ol>
 	</section>
+	<br/>
+
 	<section class="content">
 		<div class="row">
-			<div class="col-md-9">
+			<div class="col-md-12">
 				<div class="box">
 					<div class="box-header"></div>
 					<div class="box-body">
 						<table class="table table-bordered table-hover dataTable"
 							role="grid" aria-describedby="example2_info">
 							<tr class="role">
-								<th>번호</th>
-								<th>코멘트</th>
-								<th>수정 발생일</th>
+								<th style="text-align:center;">번호</th>
+								<th style="text-align:center;">코멘트</th>
+								<th style="text-align:center;">수정 발생일</th>
 							</tr>
 							<c:if test="">
 							</c:if>
 							<c:forEach var="hist" items="${ ganttHistList }">
-								<tr>
+								<tr style="text-align:center;">
 									<td>${ hist.rownum }</td>
 									<td>${ hist.comm }</td>
 									<td><fmt:formatDate value="${ hist.updateDate }"
@@ -40,7 +42,7 @@
 							</c:forEach>
 						</table>
 					</div>
-					<div class="box-footer">
+					<div class="box-footer text-center">
 						<div class="row">
 							<ul class="pagination link pagination-sm no-margin center">
 								<c:if test="${pageMaker.prev}">
@@ -65,8 +67,7 @@
 			</div>
 		</div>
 	</section>
-	<section class="content-footer">
-	</section>
+
 	<form id="jobForm">
 		<input type='hidden' name="page" value="${pageMaker.cri.page}" /> <input
 			type='hidden' name="perPageNum" value="${pageMaker.cri.perPageNum}" />

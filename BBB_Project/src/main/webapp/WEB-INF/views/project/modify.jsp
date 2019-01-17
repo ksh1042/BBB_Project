@@ -20,11 +20,9 @@ label.lineHeight {
 	<section class="content-header">
 		<h1>프로젝트 수정</h1>
 		<ol class="breadcrumb">
-			<li><a href="<%=request.getContextPath()%>/main/myPartakeList">
-					<i class="fa fa-dashboard"></i>My Project
-			</a></li>
 			<li><a
-				href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}">${logonProject.name }</a></li>
+				href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}"><i class="fa fa-dashboard"></i>${logonProject.name }</a></li>
+			<li class="active"><a href="list">관리</a></li>
 			<li class="active"><a href="list">프로젝트 수정</a></li>
 		</ol>
 	</section>
@@ -32,6 +30,7 @@ label.lineHeight {
 	<section class="content">
 		<c:set var="originStartDate" value="${ logonProject.startDate }" scope="request"></c:set>
 		<c:set var="originEndDate" value="${ logonProject.endDate }" scope="request"></c:set>
+		<div class="row">
 		<div class="col-xs-12">
 			<div class="nav-tabs-custom">
 				<ul class="nav nav-tabs">
@@ -150,6 +149,7 @@ label.lineHeight {
 				</div>
 			</div>
 			<!-- /.box -->
+		</div>
 		</div>
 	</section>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>

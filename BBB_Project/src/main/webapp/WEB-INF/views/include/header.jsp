@@ -498,7 +498,7 @@ height:150px;
 					
 					<li>
 						<a href="<%=request.getContextPath()%>/project/usecase/view">
-						<i class="fa fa-circle-o"></i>U-C Diagram</a></li>
+						<i class="fa fa-circle-o"></i>유즈케이스</a></li>
 				</ul>
 			</li>
 
@@ -506,12 +506,6 @@ height:150px;
 			<li>
 				<a href="<%=request.getContextPath() %>/project/finance/list?fNum=${logonProject.fNum}">
 					<i class="fa fa-link"></i> <span>예산관리</span>
-				</a>
-			</li>
-
-			<li>
-				<a href="#"> 
-					<i class="fa fa-link"></i><span>캘린더</span>
 				</a>
 			</li>
 
@@ -537,10 +531,10 @@ height:150px;
 					</li>
 				</ul>
 			</li>
-
+			
 			<li>
 				<a href="<%=request.getContextPath()%>/project/issue/list"> 
-					<i class="fa fa-link"></i><span>ISSUE</span>
+					<i class="fa fa-link"></i> <span>이슈</span>
 				</a>
 			</li>
 			
@@ -555,7 +549,7 @@ height:150px;
 			<c:if test="${loginUser.id eq logonProject.creator }">
 			<li class="treeview">
 				<a href="#"><i class="fa fa-link"></i>
-					<span>팀 관리</span>
+					<span>관리</span>
 					<span class="pull-right-container"> 
 					<i class="fa fa-angle-left pull-right"></i>
 					</span> 

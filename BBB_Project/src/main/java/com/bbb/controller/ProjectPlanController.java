@@ -106,9 +106,9 @@ public class ProjectPlanController {
 			}
 		}
 		rtts.addFlashAttribute("msg","SUCCESS");
-		
+		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		response.setCharacterEncoding("utf-8");
+
 		out.write("<script>");
 		out.write("alert('계획서가 수정되었습니다.');");
 		out.write("location.href = '/project/main?pjNum="+pjNum+"';");
