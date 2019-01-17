@@ -576,6 +576,15 @@
 				}
 			});
 		});
+		
+		$.getJSON("getInvite/"+${logonProject.pjNum},function(list){
+			$(list).each(function(){
+				var fileInfo=getFileInfo(this,"<%=request.getContextPath()%>");
+				var html=template(fileInfo);
+				$('.uploadedList').append(html);
+				
+			});
+		});
 	</script>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
