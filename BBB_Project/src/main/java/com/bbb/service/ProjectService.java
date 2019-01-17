@@ -38,4 +38,5 @@ public interface ProjectService {
 	public void insertUsecase(ProjectVO project) throws SQLException;
 	
 	public void updateProject(ProjectVO project) throws SQLException;
+	public void deleteProject(int pjNum) throws SQLException;
 }

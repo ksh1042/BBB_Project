@@ -11,6 +11,9 @@ textarea {
 label.lineHeight {
 	line-height: 35px;
 }
+.errorRed {
+	border-color: red;
+}
 </style>
 </head>
 <body>
@@ -73,7 +76,7 @@ label.lineHeight {
 								<label for="inputExperience" class="col-sm-2 control-label">프로젝트 설명</label>
 
 								<div class="col-sm-10">
-									<textarea class="form-control" rows="15">${ logonProject.disc }</textarea>
+									<textarea class="form-control" name="disc" rows="15">${ logonProject.disc }</textarea>
 								</div>
 							</div>
 							<div class="form-group">
@@ -100,9 +103,13 @@ label.lineHeight {
 							</div>
 
 							<div class="form-group">
-								<div class="col-sm-offset-10 col-sm-2">
-									<button type="submit" class="btn btn-primary" style="float:right;" onclick="xxx">수정</button>
+								<div class="col-sm-7">
+									<label class="control-label red" id="alertMessage" style="margin-left: 15px; color:red;"></label>
+								</div>
+								<div class="col-sm-5">
+									<button type="submit" id="modifyProjectBtn" class="btn btn-primary" style="float:right;">수정</button>
 									<button type="submit" class="btn btn-default" style="float:right; margin-right:20px;">뒤로</button>
+									
 								</div>
 							</div>
 						</form>
@@ -130,7 +137,7 @@ label.lineHeight {
 		              			<div class="input-group">
 				              		<input class="form-control" type="text" name="deleteMessage" placeholder="삭제문구를 입력...">
 				              		<span class="input-group-btn">
-				                      <button type="button" class="btn btn-danger btn-flat">삭제</button>
+				                      <button type="button" id="deleteProjectBtn" class="btn btn-danger btn-flat">삭제</button>
 				                    </span>
 			              		</div>
 		              		</div>
@@ -147,5 +154,88 @@ label.lineHeight {
 	</section>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script>
+	
+		$('input, textarea').on('blur', function(e){
+			$(this).removeClass('errorRed');
+		});
+		
+		var deleteKeyword = '삭제하겠습니다';
+		var alertIcon = '<i class="fa fa-bell-o"></i>';				// 버튼 옆의 경고메세지 발생시 표현되는 벨 아이콘
+		
+		$('button#modifyProjectBtn').on('click', function(e){
+			if($('textarea[name=disc]').val() == ''){
+				$('textarea[name=disc]').addClass('errorRed');
+				$('label#alertMessage').html(alertIcon + '  프로젝트 설명을 입력하지 않으셨습니다');
+				return false;
+			}
+			if($('input[name=startDate]').val() == ''){
+				$('input[name=startDate]').addClass('errorRed');
+				$('label#alertMessage').html(alertIcon + '  프로젝트 시작일을 입력하지 않으셨습니다');
+				return false;
+			}
+			if($('input[name=endDate]').val() == ''){
+				$('input[name=endDate]').addClass('errorRed');
+				$('label#alertMessage').html(alertIcon + '  프로젝트 종료일을 입력하지 않으셨습니다');
+				return false;
+			}
+			
+			if( new Date($('input[name=startDate]').val()) > new Date($('input[name=endDate]').val()) ) {
+				$('input[name=endDate]').addClass('errorRed');
+				$('label#alertMessage').html(alertIcon + '  프로젝트 종료일이 프로젝트 시작일보다 빠를 수 없습니다');
+				return false;
+			}
+			
+			var jsonData = {
+				disc : $('textarea[name=disc]').val(),
+				visibility : $('input[name=visibility]:checked').val(),
+				startDate : $('input[name=startDate]').val(),
+				endDate : $('input[name=endDate]').val()
+			};
+			
+			
+			$.ajax({
+				url : '<%= request.getContextPath()%>/project/modify',
+				type : 'POST',
+				headers : {
+					"Content-Type":"application/json;charset=utf8",
+					"X-HTTP-Method-Override":"post"
+				},
+				data : JSON.stringify(jsonData),
+				success : function(data){
+					alert('프로젝트가 수정되었습니다.');
+					location.href = 'main?pjNum='+${logonProject.pjNum};
+				},
+				error : function(error){
+					alert('통신 오류가 발생하였습니다. 잠시후 다시 시도해주시기 바랍니다. 증상이 지속될 경우 자세한 사항은 관리자에게 문의 바랍니다.');
+				}
+				
+			});
+		});
+		// ------------------------------------------------------------------------------------------------------------------
+		// delete-Project.start
+		$('button#deleteProjectBtn').on('click', function(e){
+			if( $(this).parent().prev().val() == deleteKeyword ) {
+				
+				$.ajax({
+					url : 'delete',
+					type : 'post',
+					success : function(data){
+						if(data == 'SUCCESS'){
+							alert('프로젝트가 삭제되었습니다.');
+							location.href = '<%= request.getContextPath() %>/main/myPartakeList';
+						}
+					},
+					error : function(error){
+						alert('통신 오류가 발생하였습니다. 잠시후 다시 시도해주시기 바랍니다. 증상이 지속될 경우 자세한 사항은 관리자에게 문의 바랍니다.');
+					}
+				});
+				
+			} else {
+				alert('삭제 문구가 일치하지 않습니다. 다시 한번 확인해주시기 바랍니다.');
+				$('input[name=deleteMessage]').addClass('errorRed');
+			}
+		});
+		// delete-Project.end
+		// ------------------------------------------------------------------------------------------------------------------
 	</script>
 </body>

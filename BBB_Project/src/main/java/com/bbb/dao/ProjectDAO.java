@@ -40,5 +40,5 @@ public interface ProjectDAO {
 	public void insertGcNum(ProjectVO project) throws SQLException;
 	
 	public void updateProject(ProjectVO project) throws SQLException;
-	public void deleteProject(ProjectVO project) throws SQLException;
+	public void deleteProject(int pjNum) throws SQLException;
 }

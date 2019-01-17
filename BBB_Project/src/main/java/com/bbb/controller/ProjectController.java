@@ -87,14 +87,18 @@ public class ProjectController {
 
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<String> modifyPOST(@RequestBody ProjectVO project) throws Exception {
+	public ResponseEntity<String> modifyPOST(@RequestBody ProjectVO project, HttpSession session) throws Exception {
 		ResponseEntity<String> entity = null;
 
 		System.out.println("Receive Project : " + project);
-
+		
 		try {
+			ProjectVO selectProject = (ProjectVO)session.getAttribute("logonProject");
+			project.setPjNum( selectProject.getPjNum() );
 			service.updateProject(project);
-			entity = new ResponseEntity<String>(HttpStatus.OK);
+			
+			session.setAttribute("logonProject", service.projectMain( project.getPjNum() ) );
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -109,8 +113,8 @@ public class ProjectController {
 		ResponseEntity<String> entity = null;
 		ProjectVO selectProject = (ProjectVO) session.getAttribute("logonProject");
 		try {
-
-			entity = new ResponseEntity<String>(HttpStatus.OK);
+			service.deleteProject( selectProject.getPjNum() );
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
