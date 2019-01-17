@@ -133,26 +133,39 @@ public class managementController {
 	}
 	
 	@RequestMapping(value="inviteMember", method=RequestMethod.GET)
-	public void inviteMember(@ModelAttribute SearchCriteria cri,Model model,HttpServletRequest request) throws Exception{
+	public void inviteMember(SearchCriteria cri,Model model,HttpServletRequest request) throws Exception{
 		PageMaker pageMaker = new PageMaker();
 		HttpSession session = request.getSession();
 		ProjectVO project = (ProjectVO)session.getAttribute("logonProject");
 		int pjNum = project.getPjNum();
+		String id = project.getCreator();
 		
-		if(cri.getKeyword() == ""){
-			if(cri.getSearchType() == ""){
+		if(cri.getKeyword() == null){
+			if(cri.getSearchType() == null){
 				List<ProjectPartakeVO> inviteList = new ArrayList<ProjectPartakeVO>();
-				model.addAttribute(inviteList);
+				model.addAttribute("inviteList",inviteList);
 			}
 		}else{
 			pageMaker.setCri(cri);
-			pageMaker.setTotalCount(service.getSearchListCount(cri,pjNum));
-			List<ProjectPartakeVO> inviteList = service.getSearchList(cri,pjNum);
-			model.addAttribute(inviteList);
-			model.addAttribute(pageMaker);
+			pageMaker.setTotalCount(service.getSearchListCount(cri,pjNum,id));
+			List<ProjectPartakeVO> inviteList = service.getSearchList(cri,pjNum,id);
+			model.addAttribute("inviteList",inviteList);
+			model.addAttribute("pageMaker", pageMaker);
 		}
-		
-		
 	}
 	
+	@RequestMapping(value="inviteMember", method=RequestMethod.POST)
+	public ResponseEntity<String> inviteMember(String id, HttpServletRequest request) throws Exception{
+		
+		ResponseEntity<String> entity = null;
+		
+		try{
+			
+		entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		}catch(Exception e){
+		e.printStackTrace();
+		entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return entity;
+	}
 }

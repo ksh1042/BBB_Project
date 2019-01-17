@@ -53,15 +53,15 @@ public class ManageServiceImpl implements ManageService {
 	}
 
 	@Override
-	public List<ProjectPartakeVO> getSearchList(SearchCriteria cri, int pjNum) throws Exception {
+	public List<ProjectPartakeVO> getSearchList(SearchCriteria cri, int pjNum,String id) throws Exception {
 		
-		return manageDao.getInviteMember(cri,pjNum);
+		return manageDao.getInviteMember(cri,pjNum,id);
 	}
 
 	@Override
-	public int getSearchListCount(SearchCriteria cri, int pjNum) throws Exception {
+	public int getSearchListCount(SearchCriteria cri, int pjNum,String id) throws Exception {
 
-		return manageDao.getInviteMemberCount(cri,pjNum);
+		return manageDao.getInviteMemberCount(cri,pjNum,id);
 	}
 
 
