@@ -121,7 +121,8 @@ td.gantt-cell {
 				height : 40*${ fn:length( ganttList ) } + 50,
 				width : parentDiv.width(),
 				gantt : {
-					trackHeight : 40
+					barHeight : 15,
+					trackHeight : 25
 				}
 			};
 

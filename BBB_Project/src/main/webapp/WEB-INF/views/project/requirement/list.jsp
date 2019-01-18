@@ -65,6 +65,15 @@
 	    table tr>td:nth-child(10), table tr>th:nth-child(10) {
 	      width : 30px;
 	    }
+	    select{
+	    	width:80px; height:30px;
+	    }
+	    .rdcontent{
+	    	width:100%;
+	    	height:50px;
+	    	resize:none;
+	    }
+	    
 	</style>
 </head>
 <body>
@@ -97,7 +106,7 @@
                            <option value="ry">수용여부</option>
                         </select>   
                      </span>
-                     <input type="text" class="form-control" value="${ pageMaker.cri.keyword }"> 
+                     <input id="keyword" type="text" class="form-control" value="${ pageMaker.cri.keyword }"> 
                      <span class="input-group-btn">
                         <button type="button" class="btn btn-default btn-flat" onclick="search_go();">검색</button>
                      </span>
@@ -115,8 +124,8 @@
                      <div class="col-sm-6"></div>
                   </div>
                   <div class="row">
-                     <div class="col-sm-12 scrollable">
-                        <table id="example2"
+                     <div class="col-sm-12 scrollable" id="dvData">
+                        <table id="example2 "
                            class="table table-bordered table-hover dataTable" role="grid"
                            aria-describedby="example2_info">
                            <tr role="row">
@@ -168,7 +177,7 @@
                   <div class="row">
                      <div class="col-sm-4">
                         <div class="dataTables_info" id="example2_info" role="status"
-                           aria-live="polite">Showing <b>${ f:length(unitList) }</b> entries
+                           aria-live="polite">Showing <b>${ f:length(requireList) }</b> entries
                         </div>
                      </div>
                      <div class="col-sm-4 text-center">
@@ -190,9 +199,12 @@
                         </ul>
                      </div>
                      <div class="col-sm-4">
-                        <button type="button" class="btn btn-warning" onclick="modify_go();" style="margin-left:20px; float:right;">수정</button>      
+                     	<c:if test="${loginUser.id eq logonProject.creator }">
+                        	<button type="button" class="btn btn-warning" onclick="modify_go();" style="margin-left:20px; float:right;">수정</button>
+                        </c:if>      
                         <button type="button" class="btn btn-primary" onclick="hist_go();" style="margin-left:20px;float:right;">수정 이력</button>
-                        <button type="button" class="btn btn-success" id="exportExcel" style="margin-left:20px; float:right;">Excel 출력</button>
+                        <button type="button" class="btn btn-success" id="btnExport" style="margin-left:20px; float:right;">Excel 출력</button>
+                        <!-- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-createRequire" style="margin-left:20px; float:right;">작성</button> -->
                      </div>
                   </div>
                </div>
@@ -201,6 +213,67 @@
          </div>
          <!-- /.box -->
       </div>
+      
+      <div class="modal fade" id="modal-createRequire"> 
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">요구사항 작성</h4>
+				</div>
+				<div class="modal-body">
+				<form action="insertRequire" method="post" name="findIDForm">
+	                <div class="form-group">
+	                  <label for="exampleInputEmail1">요구사항 ID</label>
+	                  <input type="text" class="form-control" id="exampleInputEmail1" placeholder="요구사항 ID"  name="rdid" required>
+	                </div>
+	                <div class="form-group" style="margin:0;">
+	                  <label for="exampleInputPassword1">요구사항 명</label>
+	                  <input type="email" class="form-control"  placeholder="요구사항 명칭" id="email" name="rdName" required><br/>
+	                </div>
+	                <div class="form-group">
+	                  <label for="exampleInputPassword1">요구사항 내용</label>
+	                  <textarea class="form-control rdcontent"  placeholder="내용을 입력하세요." name="rdContent" id="rdContent"></textarea>
+              		</div>
+              		<div class="form-group">
+	                  <label for="exampleInputPassword1">인터페이스</label>
+	                  <input type="text" class="form-control"  placeholder="인터페이스" name="interf" id="interf">
+              		</div>
+              		<div class="form-group">
+	                  <label for="exampleInputPassword1">제한사항(규정/법률)</label>
+	                  <input type="text" class="form-control"  placeholder="제한사항" name="limit" id="limit">
+              		</div>
+              		<div class="form-group">
+	                	<label for="exampleInputPassword1">수용여부</label>
+	                	<select class="inputPhone" name="acceptyn" id="acceptyn">
+	                		<option value="" selected>---</option>
+							<option value="1">1(y)</option>
+					    	<option value="0">0(n)</option>
+						</select>
+              		</div>
+              		<div class="form-group">
+	                  <label for="exampleInputPassword1">담당자</label>
+	                  	<select class="inputPhone" name="acceptyn" id="acceptyn">
+	                  		<option value="" selected>---</option>
+							<c:forEach items="${bindMember }" var="bindMember">
+								<option value="${bindMember.id }">${bindMember.id }</option>
+							</c:forEach>
+						</select>
+              		</div>
+              <!-- /.box-body -->
+
+	              <div class="modal-footer" style="text-align:center;">
+	                <button type="button" class="btn btn-primary" onclick="back_go();" style="margin-left:18px;padding-left:20px;padding-right:20px;">취소</button>
+	                <button type="button" class="btn btn-primary"  style="margin-left:63px;" id="findButton" disabled="disabled" onclick="findID();">아이디 찾기</button>
+	              </div>
+              
+            	</form>
+				</div>
+			</div>
+		</div>
+	</div>
       <form id="jobForm">
         <input type='hidden' name="page" value="${pageMaker.cri.page}"/>
         <input type='hidden' name="perPageNum" value="${pageMaker.cri.perPageNum}"/>
@@ -210,6 +283,10 @@
    </section>
    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
    <script>
+   $("#btnExport").click(function (e) {
+	   	window.open('<%=request.getContextPath()%>/project/requirement/toExcel?rdNum=${logonProject.rdNum}');
+	    e.preventDefault();
+	});
       // ---------------------------------------------------------------------------------
       // page-nav.start
       $(".link li a").on("click", function(event){
@@ -242,7 +319,7 @@
       // ---------------------------------------------------------------------------------
       // search.start
       function search_go() {
-         $('#frm')
+    	  location.href = 'list?page=1&searchType='+$('select[name=searchType]').val()+'&keyword='+$('input#keyword').val();
       }
       // search.end
       // ---------------------------------------------------------------------------------

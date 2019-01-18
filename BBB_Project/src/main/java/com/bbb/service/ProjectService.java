@@ -44,5 +44,7 @@ public interface ProjectService {
 	
 	public void acceptInvite(ProjectPartakeVO partake) throws SQLException;
 	public void refuseInvite(ProjectPartakeVO partake) throws SQLException;
+	
+	public List<ProjectPartakeVO> selectPartList(int pjNum) throws SQLException;
 
 }

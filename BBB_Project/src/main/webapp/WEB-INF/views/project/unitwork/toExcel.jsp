@@ -1,9 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page trimDirectiveWhitespaces="true"%>
+<%@ page language="java" contentType="application/vnd.ms-excel;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%
+ response.setHeader("Content-Disposition","attachment;filename=requirementList.xls");
+ response.setHeader("Content-Description", "JSP Generated Data");
+%>
 <head>
 	<style>
 			th {
@@ -70,10 +72,6 @@
 <body>
 	<section class="content-header">
 		<h1>단위업무 정의서</h1>
-		<ol class="breadcrumb">
-			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}"><i class="fa fa-dashboard"></i>${logonProject.name }</a></li>
-			<li class="active"><a href="list">단위업무 정의서</a></li>
-		</ol>
 	</section>
 	<br/>
 	
@@ -85,24 +83,6 @@
 					<div class="col-sm-6">
 						<h3 class="box-title"></h3>
 					</div>
-					<div class="col-sm-6 searchDiv">
-						<div class="input-group input-group-sm">
-							<span class="input-group-btn">								
-								<select class="form-control" name="searchType" style="height:30px; width: 105px; font-size:11px;">
-									<option value="all" selected>전체</option>
-									<option value="ri">요구사항ID</option>
-									<option value="rn">요구사항명</option>
-									<option value="ui">단위업무ID</option>
-									<option value="un">단위업무명</option>
-								</select>	
-							</span>
-							<input type="text" id="keyword" class="form-control" value="${ pageMaker.cri.keyword }"> 
-							<span class="input-group-btn">
-								<button type="button" class="btn btn-default btn-flat" onclick="search_go();">검색</button>
-							</span>
-						</div>
-					</div>
-
 					<form id="frm" method="post"></form>
 				</div>
 				<!-- /.box-header -->
@@ -172,99 +152,14 @@
 								</table>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-sm-4">
-								<div class="dataTables_info" id="example2_info" role="status"
-									aria-live="polite">Showing <b>${ f:length(unitList) }</b> entries
-								</div>
-							</div>
-							<div class="col-sm-4 text-center">
-								<ul class="pagination link pagination-sm no-margin">
-									<c:if test="${pageMaker.prev}">
-											<li><a href="${pageMaker.startPage - 1}">&laquo;</a></li>
-									</c:if>
-			
-									<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-										<li
-											<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-											<a href="${idx}">${idx}</a>
-										</li>
-									</c:forEach>
-			
-									<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-										<li><a href="${pageMaker.endPage +1}">&raquo;</a></li>
-									</c:if>
-								</ul>
-							</div>
-							<div class="col-sm-4">
-								<button type="button" class="btn btn-warning" onclick="modify_go();" style="margin-left:20px; float:right;">수정</button>		
-								<button type="button" class="btn btn-primary" onclick="hist_go();" style="margin-left:20px;float:right;">수정 이력</button>
-								<button type="button" class="btn btn-success" id="btnExport" style="margin-left:20px; float:right;">Excel 출력</button>
-							</div>
-						</div>
 					</div>
 				</div>
 				<!-- /.box-body -->
 			</div>
 			<!-- /.box -->
 		</div>
-		<form id="jobForm">
-		  <input type='hidden' name="page" value="${pageMaker.cri.page}"/>
-		  <input type='hidden' name="perPageNum" value="${pageMaker.cri.perPageNum}"/>
-		  <input type='hidden' name="searchType" value="${pageMaker.cri.searchType}"/>
-		  <input type='hidden' name="keyword" value="${pageMaker.cri.keyword}"/>
-		</form>
+		
 	</div>
 	</section>
-	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-	<script>
-		//----------------------------------------------------------------------------------
-		// unit to excel
-	 	$("#btnExport").click(function (e) {
-		   	window.open('<%=request.getContextPath()%>/project/unitwork/toExcel?udNum=${logonProject.udNum}');
-		    e.preventDefault();
-		});
-		// ---------------------------------------------------------------------------------
-		// page-nav.start
-		$(".link li a").on("click", function(event){
-			event.preventDefault(); 
-			var targetPage = $(this).attr("href");
-			
-			var jobForm = $("#jobForm");
-	 		jobForm.find("[name='page']").val(targetPage);
-			jobForm.attr("action","").attr("method", "get");		
-			jobForm.submit();
-		});
-		// page-nav.end
-		// ---------------------------------------------------------------------------------
-		// open-postbox.satrt
-		$('a.postboxLink').on('click', function(e) {
-			e.preventDefault();
-			var url = "<%=request.getContextPath()%>/postbox/list?id="+$(this).attr('href');
-			window.open(url,"_blank_1","toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=900, height=800, top=300, left=300, ");
-		});
-		// open-postbox.end
-		// ---------------------------------------------------------------------------------
-		// location-href.start
-		function modify_go() {
-			frm.submit();
-		}
-		function hist_go() {
-			location.href = '<%= request.getContextPath()%>/project/unitwork/history';
-		}
-		// location-href.end
-		// ---------------------------------------------------------------------------------
-		// search.start
-		function search_go() {
-			location.href = 'list?page=1&searchType='+$('select[name=searchType]').val()+'&keyword='+$('input#keyword').val();
-		}
-		// search.end
-		// ---------------------------------------------------------------------------------
-		// excel-export.start
-		$('button#exportExcel').click(function (e) {
-   			window.open('data:application/vnd.ms-excel,' + $('div#exportTable').html());
-    		e.preventDefault();
-		});
-		// excel-export.end
-	</script>
+	
 </body>

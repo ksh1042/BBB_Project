@@ -13,61 +13,65 @@
 		<li class="active">프로젝트 검색</li>
 	</ol>
 </section>
-<br/>
-
 
 <section class="content">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="box">
-				<div class="box-header with-border text-center">
-				</div>
-				<table id="searchTable" style="width: 80%; margin-left: 15px; text-align:center;">
-					<c:if test="${empty searchPList }">
+				<div class="box-body text-center">
+					<table class="table table-bordered">
 						<tr>
-							<td colspan="3" ><h3>검색된 프로젝트가 없습니다.</h3></td>
+							<th style="width: 10px; text-align: center;">#</th>
+							<th style="width: 40%; text-align: center;">프로젝트명</th>
+							<th style="width: 20%; text-align: center;">개설자</th>
+							<th style="width: 40px; text-align: center;">개설일</th>
+							<th style="width:10%; text-align: center;">상태</th>
 						</tr>
-					</c:if>
-					<c:if test="${!empty searchPList }">
-						<c:forEach items="${searchPList }" var="ProjectVO">
+						<c:if test="${empty searchPList }">
 							<tr>
-								<td class="inner" style="font-size: x-large;">${ProjectVO.name }</td>
-								<td>${ProjectVO.creator }</td>
-								<c:forEach items="${bindList }" var="PartakeVO">
-									<c:if test="${PartakeVO.pjNum eq ProjectVO.pjNum }">
-										<c:if test="${PartakeVO.assignYn eq 1}">
-											<td rowspan="2" class="button" style="width: 50px;"><input
-												class="join btn btn-block btn-success"
-												id="${ProjectVO.pjNum }" type="button" value="참여중"
-												disabled="disabled" style="height: 55px; width: 100%;"></td>
-										</c:if>
-										<c:if test="${PartakeVO.assignYn eq 0}">
-											<td rowspan="2" class="button" style="width: 50px;"><input
-												class="cancel btn btn-block btn-warning"
-												id="${ProjectVO.pjNum }" type="button" value="신청중"
-												style="height: 55px; width: 100%;"></td>
-										</c:if>
-										<c:if test="${PartakeVO.assignYn eq 2 }">
-											<td rowspan="2" class="button" style="width: 50px;"><input
-												class="join btn btn-block btn-primary"
-												id="${ProjectVO.pjNum }" type="button" value="신청하기"
-												style="height: 55px; width: 100%;"></td>
-										</c:if>
-									</c:if>
-								</c:forEach>
+								<td colspan="3" ><h3>검색된 프로젝트가 없습니다.</h3></td>
 							</tr>
-							<tr style="border-bottom: 1px solid black; height: 50px;">
-								<td>${ProjectVO.disc }</td>
-								<td><fmt:formatDate value="${ProjectVO.indate }"
-										pattern="yyyy년MM월dd일" /> 생성</td>
-							</tr>
-						</c:forEach>
-					</c:if>
-				</table>
+						</c:if>
+						<c:if test="${!empty searchPList }">
+							<c:forEach items="${searchPList }" var="ProjectVO">
+								<tr>
+									<td></td>
+									<td>${ProjectVO.name }</td>
+									<td>${ProjectVO.creator }</td>
+									<td><fmt:formatDate value="${ProjectVO.indate }" pattern="yyyy년MM월dd일" /> 생성</td>
+									<c:forEach items="${bindList }" var="PartakeVO">
+										<c:if test="${PartakeVO.pjNum eq ProjectVO.pjNum }">
+											<c:if test="${PartakeVO.assignYn eq 1}">
+												<td rowspan="2" class="button" style="width: 50px;">
+													<input class="join btn btn-block btn-success" id="${ProjectVO.pjNum }" type="button" value="참여중" disabled="disabled" style="height: 55px; width: 100%;">
+												</td>
+											</c:if>
+											<c:if test="${PartakeVO.assignYn eq 0}">
+												<td rowspan="2" class="button" style="width: 50px;">
+													<input class="cancel btn btn-block btn-warning" id="${ProjectVO.pjNum }" type="button" value="신청중" style="height: 55px; width: 100%;">
+												</td>
+											</c:if>
+											<c:if test="${PartakeVO.assignYn eq 2 }">
+												<td rowspan="2" class="button" style="width: 50px;">
+													<input class="join btn btn-block btn-primary" id="${ProjectVO.pjNum }" type="button" value="신청하기">
+												</td>
+											</c:if>
+										</c:if>
+									</c:forEach>
+								</tr>
+								<table>
+									<tr style="text-align:center;">
+										<td>${ProjectVO.disc }</td>
+									</tr>
+								</table>
+							</c:forEach>
+						</c:if>
+					</table>
+				</div>
+				<!-- /.box-body -->
 				<div class="box-footer">
 					<div class="text-center">
-						<ul class="pagination link">
-
+						<ul class="pagination link pagination-sm no-margin">
 							<c:if test="${pageMaker.prev}">
 								<li><a href="${pageMaker.startPage - 1}">&laquo;</a></li>
 							</c:if>
@@ -79,7 +83,6 @@
 									<a href="${idx}">${idx}</a>
 								</li>
 							</c:forEach>
-
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 								<li><a href="${pageMaker.endPage +1}">&raquo;</a></li>
 							</c:if>
@@ -89,14 +92,13 @@
 			</div>
 		</div>
 	</div>
-
 </section>
-		<form id="jobForm">
-			  <input type='hidden' name="page" value="${pageMaker.cri.page}"/>
-			  <input type='hidden' name="perPageNum" value="${pageMaker.cri.perPageNum}"/>
-			  <input type='hidden' name="keyword" value="${cri.keyword}"/>
-		</form>
-		
+<form id="jobForm">
+	<input type='hidden' name="page" value="${pageMaker.cri.page}"/>
+	<input type='hidden' name="perPageNum" value="${pageMaker.cri.perPageNum}"/>
+	<input type='hidden' name="keyword" value="${cri.keyword}"/>
+</form>
+
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>

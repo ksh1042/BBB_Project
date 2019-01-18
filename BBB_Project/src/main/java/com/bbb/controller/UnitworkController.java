@@ -142,4 +142,10 @@ public class UnitworkController {
 		model.addAttribute("unitHistList", unitHistList);
 		model.addAttribute("pageMaker", pageMaker);
 	}
+	
+	@RequestMapping(value="/toExcel", method=RequestMethod.GET)
+	public void listToExcel(int udNum, Model model) throws Exception{
+		List<UnitworkVO> unitList = unitworkService.readUnitworkList(null, udNum);
+		model.addAttribute("unitList", unitList);
+	}
 }

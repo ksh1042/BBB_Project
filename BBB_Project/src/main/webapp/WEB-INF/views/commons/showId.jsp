@@ -32,7 +32,17 @@
   <![endif]-->
 
 <!-- Google Font -->
-
+<style>
+		html {
+         background-image: url("<%=request.getContextPath()%>/resources/images/background-img.jpg");
+      }
+      .register-page {
+         background : none;
+      }
+      div.register-logo{
+         color : white;
+      }
+	</style>
 <style>
 #divId{
 	border:1px solid #BDBDBD;
@@ -47,7 +57,7 @@
 <body class="hold-transition register-page">
 	<div class="register-box">
 		<div class="register-logo">
-			<a href="loginForm"><b>Forgot id?</b></a>
+			<a href="loginForm"><b>Project</b>Management</a>
 		</div>
 		
 		<div class="box box-primary">

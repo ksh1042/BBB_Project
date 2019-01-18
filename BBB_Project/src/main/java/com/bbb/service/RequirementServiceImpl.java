@@ -82,5 +82,10 @@ public class RequirementServiceImpl implements RequirementService {
 		return histCount;
 	}
 
+	@Override
+	public List<RequirementVO> selectReqListAll(int rdNum) throws Exception {
+		return reqDAO.selectRequirementListAll(rdNum);
+	}
+
 
 }

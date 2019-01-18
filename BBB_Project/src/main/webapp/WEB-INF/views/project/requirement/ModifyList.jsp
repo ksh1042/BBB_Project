@@ -6,11 +6,27 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
 <head>
 	<style>
+		div.scrollable {
+			height : 590px;
+			overflow:scroll;
+			overflow-x:auto;
+			overflow-y:scroll;
+		}
+		table { 
+			
+		}
 		th {
 			text-align: center;
+			background-color : #F1F1F1;
 		}
 		.validateAlert {
 			border-color: red;
+		}
+		input.form-control, select.form-control {
+			border : 0;
+		}
+		td:hover {
+			cursor : wait;
 		}
 	</style>
 </head>
@@ -21,7 +37,7 @@
 			<li><a href="<%=request.getContextPath()%>/project/main?pjNum=${logonProject.pjNum}">
 			<i class="fa fa-dashboard"></i>${logonProject.name }</a></li>
 			<li class="active"><a href="<%=request.getContextPath()%>/project/requirement/list">요구사항 정의서</a></li>
-			<li class="active">수정 페이지</a></li>
+			<li class="active">수정 페이지</li>
 		</ol>
 	</section>
 	
@@ -30,23 +46,20 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">요구사항 리스트</h3>
-					<span style="float:right;">
-						<label class="control-label validateAlertMsg red hidden" style="color:red;"></label>
-						<button type="button" class="btn btn-primary" onclick="submit_go();" style="margin-left:20px;">완료</button>
-					</span>
+					<div class="col-sm-4">
+						<h3 class="box-title">요구사항 리스트</h3>
+					</div>
+					<div class="col-sm-8">
+						<label class="control-label validateAlertMsg red hidden" style="color:red; float:right;"></label>
+					</div>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
 					<div id="example2_wrapper"
 						class="dataTables_wrapper form-inline dt-bootstrap">
 						<div class="row">
-							<div class="col-sm-6"></div>
-							<div class="col-sm-6"></div>
-						</div>
-					<form id="frm" method="POST">
-						<div class="row" style="overflow:scroll;overflow-y:hidden;">
-							<div class="col-sm-12">
+							<div class="col-sm-12 scrollable">
+								<form id="frm" method="POST">
 									<table id="rdList"
 										class="table table-bordered table-hover dataTable" role="grid"
 										aria-describedby="example2_info">
@@ -102,22 +115,31 @@
 										</tr>
 										
 									</table>
+							</form>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-sm-5">
-								<div class="dataTables_info" id="example2_info" role="status"
-									aria-live="polite">Showing <b>${ f:length(requireList) }</b> entries</div>
-							</div>
-						</div>
-					</form>
 					</div>
 				</div>
 				<!-- /.box-body -->
 				<div class="box-footer">
-					<div class="form-group">
-						<label>*코멘트</label>
-						<textarea class="form-control" name="comm" style="resize:none;" placeholder="수정사항 내용 및 설명을 입력하세요..."></textarea>
+					<div class="col-sm-9">
+						<div class="form-group">
+							<label>*코멘트</label>
+							<textarea class="form-control" name="comm" style="resize:none;" placeholder="수정사항 내용 및 설명을 입력하세요..."></textarea>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="row">
+							<div class="dataTables_info" id="example2_info" role="status" aria-live="polite">
+								<span style="float:right;">
+									Showing <b id="entryCount">${ f:length(requireList) }</b> entries<br>
+								</span>
+							</div>
+						</div>
+						<div class="row" style="margin-top:25px;">
+							<button type="button" class="btn btn-primary" onclick="submit_go();" style="margin-left:20px; float:right;">완료</button>
+							<button type="button" class="btn btn-alert" onclick="back_go();" style="margin-left:20px; float:right;">뒤로</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -142,11 +164,13 @@
 	<script>
 		var template = Handlebars.compile($('#templateList').html());
 		var errorIcon = '<i class="fa fa-times-circle-o"></i>';		// 버튼 옆의 에러메세지 발생시 표현되는 x 아이콘
+		var entryCount = document.getElementById('entryCount');
 		var delLine = [];
 			$('a.addRow').on('click', function(e){
 				var row = template();
 				//$('#udList tbody').append(row);
 				$('.addRdPoint').before(row);
+				$(entryCount).html(Number($(entryCount).html())+1);
 			});
 			$(document).on('click','a.deleteRow', function(e){
 				var del = $(this).prev().val();
@@ -154,6 +178,7 @@
 					delLine.push(del);
 				}
 				$(this).parent().parent().remove();
+				$(entryCount).html(Number($(entryCount).html())-1);
 				
 			});
 		
@@ -176,6 +201,10 @@
 		$('#rdList').on('change', 'select[name=rdId], select[name=rdName], select[name="manager"]', function(e){
 			$(this).removeClass('validateAlert');
 		});
+		
+		function back_go(){
+			history.go(-1);
+		}
 		
 		function submit_go() {
 			var flag = true;

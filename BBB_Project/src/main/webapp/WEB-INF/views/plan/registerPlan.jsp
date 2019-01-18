@@ -14,33 +14,27 @@
 	</style>
 </head>
 <body>
-	<section class="content-header">
-		<div class="container-fluid">
-			<div class="row mb-2">
-				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">프로젝트 라이브러리 등록</h1>
-				</div>
-				<div class="col-sm-6">
-					<ol class="breadcrumb float-sm-left">
-						<li class="breadcrumb-item">
-							
-						</li>
-					</ol>
-				</div>
-				<!-- /.col -->
-			</div>
-		</div>
-	</section>
+
+<section class="content-header">
+		<h1>계획서 등록</h1>
+		<ol class="breadcrumb">
+			<li><a href="<%=request.getContextPath() %>/project/main?pjNum=${logonProject.pjNum}">
+				<i class="fa fa-dashboard">&nbsp;&nbsp;&nbsp;${logonProject.name }</i></a></li>
+			<li class="active">계획서 등록</li>
+		</ol>
+</section>
+
 	
 	<section class="content">
-		<div class="form-group has-feedback col-md-9" style="margin">
+		<div class="row">
+		<div class="form-group has-feedback col-md-12">
 			<div class="form-group">
 				<label class="control-label">파일 등록</label>
 			</div>
 			<form role="form" method="post" action="registerPlan">
 			<div class="form-group">
 				<div class="box">
-					<div class="box-body dropzone" style="text-align : center;">
+					<div class="box-body dropzone" style="text-align : center; height: 300px;">
 						<b>이 곳에 파일을 Drag & Drop 해 주세요</b>
 					</div>
 					<div class="box-footer">
@@ -60,6 +54,7 @@
 				</div>
 			</div>
 			</form>
+		</div>
 		</div>
 	</section>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
@@ -145,7 +140,7 @@
 			e.preventDefault();
 
 			var files = e.originalEvent.dataTransfer.files;
-			/* var extend = files[0].name.substr(files[0].name.lastIndexOf('.')+1); */
+			var extend = files[0].name.substr(files[0].name.lastIndexOf('.')+1);
 			
 			if(files.length > 1){
 				alert('파일 업로드는 한 개만 가능합니다');
