@@ -144,6 +144,11 @@ public class ProjectServiceImpl implements ProjectService{
 	public void refuseInvite(ProjectPartakeVO partake) throws SQLException {
 		projectDAO.refuseInvite(partake);
 	}
+
+	@Override
+	public List<ProjectPartakeVO> selectPartList(int pjNum) throws SQLException {
+		return projectPartakeDAO.selectBindingMember(pjNum);
+	}
 	
 
 	

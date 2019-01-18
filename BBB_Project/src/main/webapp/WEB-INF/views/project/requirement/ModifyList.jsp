@@ -21,7 +21,7 @@
 			<li><a href="<%=request.getContextPath()%>/project/main?pjNum=${logonProject.pjNum}">
 			<i class="fa fa-dashboard"></i>${logonProject.name }</a></li>
 			<li class="active"><a href="<%=request.getContextPath()%>/project/requirement/list">요구사항 정의서</a></li>
-			<li class="active">수정 페이지</a></li>
+			<li class="active">수정 페이지</li>
 		</ol>
 	</section>
 	
@@ -34,7 +34,9 @@
 					<span style="float:right;">
 						<label class="control-label validateAlertMsg red hidden" style="color:red;"></label>
 						<button type="button" class="btn btn-danger" onclick="list_go();" style="margin-left:20px;">취소</button>
+						<c:if test="${loginUser.id eq logonProject.creator }">
 						<button type="button" class="btn btn-primary" onclick="submit_go();" style="margin-left:20px;">완료</button>
+						</c:if>
 					</span>
 				</div>
 				<!-- /.box-header -->

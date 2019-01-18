@@ -58,6 +58,7 @@
 		from tbl_requirement_dfntn_detail
 		where rdNum = #{rdNum}
 		<include refid="searchList" />
+		order by rdid desc
 	</select>
 	
 	<select id="selectRequirementListByRdNumCount" resultType="int">

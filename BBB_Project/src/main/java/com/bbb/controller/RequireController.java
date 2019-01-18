@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bbb.dto.ProjectPartakeVO;
 import com.bbb.dto.ProjectVO;
 import com.bbb.dto.RequirementHistVO;
 import com.bbb.dto.RequirementVO;
@@ -27,6 +28,9 @@ public class RequireController {
 	
 	@Autowired
 	private RequirementService service;
+	
+	@Autowired
+	private ProjectService pService;
 	
 	@RequestMapping(value="/create", method=RequestMethod.GET)
 	public String createRequire(HttpServletRequest request) throws Exception{
@@ -46,11 +50,13 @@ public class RequireController {
 		HttpSession session = request.getSession();
 		ProjectVO logonProject = (ProjectVO)session.getAttribute("logonProject");
 		int rdNum = logonProject.getRdNum();
+		int pjNum = logonProject.getPjNum();
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.selectReqListCount(cri,rdNum));
 		List<RequirementVO> reqList = service.selectReqList(cri,rdNum);
-		
+		List<ProjectPartakeVO> partList = pService.selectPartList(pjNum);
+		model.addAttribute("bindMember", partList);
 		model.addAttribute("requireList",reqList);
 		model.addAttribute("pageMaker",pageMaker);
 	}
@@ -121,6 +127,14 @@ public class RequireController {
 		
 		model.addAttribute("reqHistList", reqHistList);
 		model.addAttribute("pageMaker", pageMaker);
+	}
+	
+	@RequestMapping(value="/toExcel", method=RequestMethod.GET)
+	public void listToExcel(int rdNum, Model model) throws Exception{
+		SearchCriteria cri = new SearchCriteria();
+		List<RequirementVO> reqList = service.selectReqList(cri, rdNum);
+		
+		model.addAttribute("requireList", reqList);
 	}
 	
 }

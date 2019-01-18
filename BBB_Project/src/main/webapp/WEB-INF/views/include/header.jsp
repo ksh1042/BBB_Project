@@ -301,7 +301,7 @@ height:150px;
         <script>
 	        var id = "${loginUser.id}";
 	        var invitecount;
-	        $.getJSON("getInvite/"+id,function(list){
+	        $.getJSON("<%=request.getContextPath()%>/main/getInvite/"+id,function(list){
 	         $(list).each(function(){
 	            var invitedInfo=getInviteInfo(this,"<%=request.getContextPath()%>");
 	            var html=template(invitedInfo);
