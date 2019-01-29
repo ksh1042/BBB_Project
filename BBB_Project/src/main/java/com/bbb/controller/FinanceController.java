@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bbb.dto.FinanceDetailVO;
-import com.bbb.dto.FinanceVO;
 import com.bbb.dto.ProjectVO;
 import com.bbb.service.FinanceService;
 import com.bbb.service.ProjectService;
@@ -28,6 +27,10 @@ public class FinanceController {
 
 	@Autowired
 	private FinanceService financeService;
+	
+	@Autowired
+	private ProjectService projectService;
+	
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public void financeList(Model model, HttpServletRequest request) throws Exception{
@@ -62,24 +65,31 @@ public class FinanceController {
 		ResponseEntity<String> entity = null;
 		HttpSession session = request.getSession();
 		ProjectVO project = (ProjectVO)session.getAttribute("logonProject");
-		
+		int pjNum = project.getPjNum();
 		int fNum = project.getfNum();
-		FinanceDetailVO financeDetailVO = new FinanceDetailVO();
-		try{
-			finance.setfNum(fNum);
-			financeService.create(finance);
-			financeDetailVO.setfNum(fNum);
-			financeDetailVO.setTargetName(finance.getTargetName());
-			financeDetailVO.setContent(finance.getContent());
-			financeDetailVO.setRegDate(finance.getRegDate());
-			financeDetailVO.setPrice(finance.getPrice());
-			financeDetailVO.setDepositYn(finance.getDepositYn());
-			
-			entity = new ResponseEntity<String>(HttpStatus.OK);
-		}catch(SQLException e){
-			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+		if(fNum > 0) {
+			try{
+				finance.setfNum(fNum);
+				project.setfNum(fNum);
+				financeService.create(finance);
+				projectService.updateProject(project);
+				entity = new ResponseEntity<String>(HttpStatus.OK);
+			}catch(SQLException e){
+				entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		}else {
+			fNum = financeService.createFinance(pjNum);
+			try{
+				finance.setfNum(fNum);
+				project.setfNum(fNum);
+				financeService.create(finance);
+				projectService.updateProject(project);
+				entity = new ResponseEntity<String>(HttpStatus.OK);
+			}catch(SQLException e){
+				entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
 		}
-	
+		
 		return entity;
 	}
 	

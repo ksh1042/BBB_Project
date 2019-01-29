@@ -131,8 +131,8 @@ public class RequireController {
 	
 	@RequestMapping(value="/toExcel", method=RequestMethod.GET)
 	public void listToExcel(int rdNum, Model model) throws Exception{
-		SearchCriteria cri = new SearchCriteria();
-		List<RequirementVO> reqList = service.selectReqList(cri, rdNum);
+
+		List<RequirementVO> reqList = service.selectReqListAll(rdNum);
 		
 		model.addAttribute("requireList", reqList);
 	}

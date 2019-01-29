@@ -23,26 +23,6 @@
 		
 			<div class="box">
 				<div class="box-header with-border">
-					<h3 class="box-title"></h3>
-					<div class="box-tools">
-					<div class="input-group input-group-sm" >
-							<div>
-							<select name="searchType">
-								<option value="" ${pageMaker.cri.searchType==null?'selected':'' }>
-								------</option>
-								<option value="t" ${pageMaker.cri.searchType eq 't'?'selected':'' }>
-								제목</option>
-								<option value="c" ${pageMaker.cri.searchType eq 'c'?'selected':'' }>
-								내용</option>
-								<option value="w" ${pageMaker.cri.searchType eq 'w'?'selected':'' }>
-								작성자</option>
-							</select>
-							<input id="keyword" name="keyword" type="text" value="${pageMaker.cri.keyword}"/>
-							<button id="searchBtn" ><i class="fa fa-search" ></i></button>
-							</div>
-							</div>
-							</div>
-							
 				</div>
 				<div class="box-body">
 					<table class="table table-bordered">

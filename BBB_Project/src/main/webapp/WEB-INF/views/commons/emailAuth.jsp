@@ -32,6 +32,17 @@
   <![endif]-->
 
 <!-- Google Font -->
+	<style>
+		html {
+         background-image: url("<%=request.getContextPath()%>/resources/images/background-img.jpg");
+      }
+      .login-page {
+         background : none;
+      }
+      div.login-logo {
+         color : white;
+      }
+	</style>
 </head>
 
 <body class="hold-transition register-page">

@@ -26,6 +26,10 @@ public class FinanceServiceImpl implements FinanceService {
 		this.projectDAO = projectDAO;
 	}
 	
+	@Override
+	public int getSeq() throws SQLException{
+		return financeDAO.getFinanceSeqNextValue();
+	}
 
 	@Override
 	public void create(FinanceDetailVO financeDetail) throws SQLException {

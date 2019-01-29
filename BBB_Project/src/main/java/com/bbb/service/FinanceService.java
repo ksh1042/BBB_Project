@@ -12,6 +12,7 @@ public interface FinanceService {
 	
 	int createTotal(int fNum) throws SQLException;
 	
+	int getSeq() throws SQLException;
 	
 	List<FinanceDetailVO> readFinanceDetailList(int fNum) throws SQLException;
 

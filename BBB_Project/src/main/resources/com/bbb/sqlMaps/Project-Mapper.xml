@@ -77,6 +77,7 @@
 		set fnum = #{fNum}
 		where pjnum = #{pjNum}
 	</update>
+	
 	<update id="insertUdNum" parameterType="project">
 		UPDATE tbl_project
 		set udNum = #{udNum}

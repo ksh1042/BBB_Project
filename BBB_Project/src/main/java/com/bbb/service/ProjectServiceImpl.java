@@ -150,7 +150,6 @@ public class ProjectServiceImpl implements ProjectService{
 		return projectPartakeDAO.selectBindingMember(pjNum);
 	}
 	
-
 	
 
 	

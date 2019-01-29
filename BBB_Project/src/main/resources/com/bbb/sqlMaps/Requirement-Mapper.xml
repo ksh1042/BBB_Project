@@ -20,46 +20,46 @@
 	</update>
 	
 	<sql id="searchList">
-		<if test="cri.searchType != null">
-			<if test="cri.searchType == 'ri'.toString()">
-				AND rdId LIKE '%'||#{cri.keyword}||'%'
-			</if>
-			<if test="cri.searchType == 'rn'.toString()">
-				AND rdName LIKE '%'||#{cri.keyword}||'%'
-			</if>
-			<if test="cri.searchType == 'rc'.toString()">
-				AND rdcontent LIKE '%'||#{cri.keyword}||'%'
-			</if>
-			<if test="cri.searchType == 'ry'.toString()">
-				AND acceptyn LIKE '%'||#{cri.keyword}||'%'
-			</if>
-			<if test="cri.searchType == 'in'.toString()">
-				AND interf LIKE '%'||#{cri.keyword}||'%'
-			</if>
-			<if test="cri.searchType == 'all'.toString()">
-				AND (rdId LIKE '%'||#{cri.keyword}||'%'
-				OR rdName LIKE '%'||#{cri.keyword}||'%'
-				OR acceptyn LIKE '%'||#{cri.keyword}||'%'
-				OR interf LIKE '%'||#{cri.keyword}||'%'
-				OR rdContent LIKE '%'||#{cri.keyword}||'%')
-			</if>
-		</if>
-	</sql>
-	<sql id="searchHistList">
-		<if test="SearchType != null">
-			<if test="SearchType == 'co'.toString()">
-				AND comm LIKE '%'||#{keyword}||'%'
-			</if>
-		</if>
-	</sql>
-	
-	<select id="selectRequirementListByRdNum" resultType="Requirement">
-		select *
-		from tbl_requirement_dfntn_detail
-		where rdNum = #{rdNum}
-		<include refid="searchList" />
-		order by rdid desc
-	</select>
+      <if test="cri.searchType != null">
+         <if test="cri.searchType == 'ri'.toString()">
+            AND rdId LIKE '%'||#{cri.keyword}||'%'
+         </if>
+         <if test="cri.searchType == 'rn'.toString()">
+            AND rdName LIKE '%'||#{cri.keyword}||'%'
+         </if>
+         <if test="cri.searchType == 'rc'.toString()">
+            AND rdcontent LIKE '%'||#{cri.keyword}||'%'
+         </if>
+         <if test="cri.searchType == 'ry'.toString()">
+            AND acceptyn LIKE '%'||#{cri.keyword}||'%'
+         </if>
+         <if test="cri.searchType == 'in'.toString()">
+            AND interf LIKE '%'||#{cri.keyword}||'%'
+         </if>
+         <if test="cri.searchType == 'all'.toString()">
+            AND (rdId LIKE '%'||#{cri.keyword}||'%'
+            OR rdName LIKE '%'||#{cri.keyword}||'%'
+            OR acceptyn LIKE '%'||#{cri.keyword}||'%'
+            OR interf LIKE '%'||#{cri.keyword}||'%'
+            OR rdContent LIKE '%'||#{cri.keyword}||'%')
+         </if>
+      </if>
+   </sql>
+   <sql id="searchHistList">
+      <if test="SearchType != null">
+         <if test="SearchType == 'co'.toString()">
+            AND comm LIKE '%'||#{keyword}||'%'
+         </if>
+      </if>
+   </sql>
+   
+   <select id="selectRequirementListByRdNum" resultType="Requirement">
+      select *
+      from tbl_requirement_dfntn_detail
+      where rdNum = #{rdNum}
+      <include refid="searchList" />
+      order by rdid desc
+   </select>
 	
 	<select id="selectRequirementListByRdNumCount" resultType="int">
 		select count(*)

@@ -333,15 +333,17 @@ height:150px;
  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script>
 	        var id = "${loginUser.id}";
-	        var invitecount;
-	        $.getJSON("<%=request.getContextPath()%>/main/getInvite/"+id,function(list){
+	        var invitecount=0;
+	        $.getJSON("/main/getInvite/"+id,function(list){
 	         	$(list).each(function(){
 	            var invitedInfo=getInviteInfo(this,"<%=request.getContextPath()%>");
 	            var html=template(invitedInfo);
 	            $('.invitedList').append(html);
 	            invitecount++;
 	         	});
-	         	$('.inviteCount').append(invitecount);
+	         	if(invitecount > 0){
+		         	$('.inviteCount').append(invitecount);
+		         }
 	      	});
 	        
 	        var template = Handlebars.compile($('#templateInvite').html());

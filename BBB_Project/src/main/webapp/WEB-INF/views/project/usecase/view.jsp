@@ -29,7 +29,7 @@
 					<c:if test="${!empty usecaseList }" >
 					<c:forEach var="usecase" items="${usecaseList }">
 					<div class="user-block">
-						<img class="img-circle" src="<%=request.getContextPath()%>/resources/dist/img/user1-128x128.jpg" alt="User Image"> 
+						<img class="img-circle" src="<%=request.getContextPath()%>/resources/dist/img/${loginUser.id }.jpg" alt="User Image"> 
 						<span class="username">
 							<a href="#">${usecase.writer }</a>
 						</span>

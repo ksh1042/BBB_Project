@@ -18,6 +18,7 @@ public interface RequirementService {
 	public void updateRequirement(RequirementVO require) throws Exception;
 	public void insertRequireHist(RequirementHistVO reqHist) throws Exception;
 	public List<RequirementVO> selectReqList(Criteria cri,int rdNum) throws Exception;
+	public List<RequirementVO> selectReqListAll(int rdNum) throws Exception;
 	public int selectReqListCount(Criteria cri, int rdNum) throws Exception;
 	
 	public List<RequirementHistVO> getRequireHistory(SearchCriteria cri, int rdNum) throws Exception;
